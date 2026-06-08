@@ -1,0 +1,10 @@
+.env
+venv/
+__pycache__/
+*.pyc
+logs/
+webapp_logs/
+zip-test/
+*.zip
+*.bak_bodhi_stage2
+patch_*.py

@@ -1,0 +1,78 @@
+{
+  "version": "stage2_seed_001",
+  "purpose": "Controlled board knowledge used by Bodhi. This is not live inventory and must not be treated as availability.",
+  "rules": [
+    "Manufacturer descriptions should outrank reviews once added.",
+    "Reviews are supporting evidence only.",
+    "Bodhi must not invent board models outside this file until SQL catalogue integration is added.",
+    "Availability must come later from ManufacturerInventory and RetailerInventory."
+  ],
+  "boards": [
+    {
+      "brand": "Haydenshapes",
+      "model": "Hypto Krypto",
+      "category": "hybrid shortboard",
+      "ability_tags": ["intermediate", "advanced"],
+      "wave_tags": ["beach break", "point break", "2-4ft", "everyday surf"],
+      "feel_tags": ["paddles well", "easy speed", "forgiving", "stable"],
+      "goal_tags": ["paddle power", "speed", "catch more waves"],
+      "quivrr_summary": "A versatile hybrid style board for everyday surf where the surfer wants paddle power, speed and a forgiving platform.",
+      "trade_offs": "Not as precise as a narrow high performance shortboard in powerful surf."
+    },
+    {
+      "brand": "Lost",
+      "model": "RNF 96",
+      "category": "performance fish",
+      "ability_tags": ["intermediate", "advanced"],
+      "wave_tags": ["beach break", "point break", "small weak waves", "2-4ft"],
+      "feel_tags": ["easy speed", "loose", "fast", "flow"],
+      "goal_tags": ["speed", "fun", "catch more waves"],
+      "quivrr_summary": "A fast fish influenced board for surfers wanting speed and flow in everyday waves.",
+      "trade_offs": "Less vertical and less precise than a performance shortboard."
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Red Baron",
+      "category": "fish",
+      "ability_tags": ["intermediate", "advanced"],
+      "wave_tags": ["beach break", "small weak waves", "1-4ft"],
+      "feel_tags": ["small wave speed", "easy speed", "forgiving", "loose"],
+      "goal_tags": ["speed", "paddle power", "fun"],
+      "quivrr_summary": "A small wave speed option for surfers who want glide and flow when the surf is softer.",
+      "trade_offs": "Not the best choice when the user wants maximum hold in steep powerful waves."
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Astro Pop",
+      "category": "groveller",
+      "ability_tags": ["intermediate", "advanced"],
+      "wave_tags": ["beach break", "small weak waves", "2-4ft"],
+      "feel_tags": ["paddles well", "easy speed", "responsive"],
+      "goal_tags": ["paddle power", "speed", "turns"],
+      "quivrr_summary": "A user friendly small to medium wave board for surfers who still want the board to turn.",
+      "trade_offs": "Not a step up or heavy water board."
+    },
+    {
+      "brand": "Firewire",
+      "model": "Mashup",
+      "category": "hybrid shortboard",
+      "ability_tags": ["intermediate", "advanced"],
+      "wave_tags": ["beach break", "point break", "2-5ft"],
+      "feel_tags": ["easy speed", "responsive", "forgiving"],
+      "goal_tags": ["speed", "turns", "paddle power"],
+      "quivrr_summary": "A hybrid option that balances speed, paddle support and turning range.",
+      "trade_offs": "May not feel as traditional as a PU shortboard."
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "Happy Everyday",
+      "category": "everyday shortboard",
+      "ability_tags": ["intermediate", "advanced", "expert"],
+      "wave_tags": ["beach break", "point break", "2-5ft", "everyday surf"],
+      "feel_tags": ["responsive", "drive", "performance", "forgiving"],
+      "goal_tags": ["turns", "performance", "speed"],
+      "quivrr_summary": "An everyday shortboard style recommendation when the surfer wants performance without going too unforgiving.",
+      "trade_offs": "Less foam forward than fuller hybrid or fish designs."
+    }
+  ]
+}

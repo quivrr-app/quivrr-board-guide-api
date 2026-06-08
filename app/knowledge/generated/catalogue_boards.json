@@ -1,0 +1,6 @@
+{
+  "version": "placeholder_001",
+  "source": "future_export_from_quivrr_backend_sql",
+  "note": "This will later be generated from Brands, BoardModels and BoardSizes. Do not hand edit once SQL export exists.",
+  "boards": []
+}
