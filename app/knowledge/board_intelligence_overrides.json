@@ -1,0 +1,67 @@
+﻿{
+  "boards": [
+    {
+      "brand": "Haydenshapes",
+      "model": "Hypto Krypto",
+      "category": "hybrid shortboard",
+      "ability_tags": ["Beginner", "Intermediate", "Advanced"],
+      "wave_tags": ["Beach Break", "Point Break", "Reef Break"],
+      "feel_tags": ["paddle power", "easy speed", "responsive", "everyday"],
+      "manual_note": "One board quiver style hybrid. Not primarily a step up even though it can handle stronger surf."
+    },
+    {
+      "brand": "Firewire",
+      "model": "Dominator 2.0",
+      "category": "hybrid shortboard",
+      "ability_tags": ["Intermediate", "Advanced"],
+      "wave_tags": ["Beach Break", "Point Break"],
+      "feel_tags": ["paddle power", "easy speed", "responsive", "everyday"],
+      "manual_note": "Everyday hybrid shortboard with a wide range, not primarily a step up."
+    },
+    {
+      "brand": "Chilli",
+      "model": "Rare Bird EVO",
+      "category": "hybrid shortboard",
+      "ability_tags": ["Intermediate", "Advanced"],
+      "wave_tags": ["Beach Break", "Point Break"],
+      "feel_tags": ["paddle power", "easy speed", "responsive", "everyday"],
+      "manual_note": "All round daily driver style performance hybrid."
+    },
+    {
+      "brand": "Chilli",
+      "model": "Rare Bird EVO TT",
+      "category": "hybrid shortboard",
+      "ability_tags": ["Intermediate", "Advanced"],
+      "wave_tags": ["Beach Break", "Point Break"],
+      "feel_tags": ["paddle power", "easy speed", "responsive", "everyday"],
+      "manual_note": "Twin tech variant of all round daily driver style performance hybrid."
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "happy-everyday",
+      "category": "everyday shortboard",
+      "ability_tags": ["Intermediate", "Advanced"],
+      "wave_tags": ["Beach Break", "Point Break"],
+      "feel_tags": ["easy speed", "responsive", "everyday"],
+      "manual_note": "Everyday shortboard intended to add range below a high performance shortboard."
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Astro Pop",
+      "category": "groveller",
+      "ability_tags": ["Intermediate", "Advanced"],
+      "wave_tags": ["Beach Break"],
+      "feel_tags": ["paddle power", "easy speed", "small wave", "responsive"],
+      "manual_note": "Small wave groveller and easy speed option."
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Astro Pop XL",
+      "category": "groveller",
+      "ability_tags": ["Beginner", "Intermediate"],
+      "wave_tags": ["Beach Break"],
+      "feel_tags": ["paddle power", "easy speed", "small wave", "forgiving"],
+      "manual_note": "Higher foam small wave groveller option."
+    }
+  ]
+}
