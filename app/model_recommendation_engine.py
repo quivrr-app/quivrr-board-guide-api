@@ -5,6 +5,7 @@ from app.models import RiderProfile, SuggestedBoard
 
 
 INTELLIGENCE_PATH = Path(__file__).parent / "knowledge" / "board_intelligence.json"
+CANONICAL_PROFILES_PATH = Path(__file__).parent / "knowledge" / "generated" / "canonical_board_profiles.json"
 
 
 def _load_board_intelligence() -> list[dict]:
@@ -23,11 +24,155 @@ def _load_board_intelligence() -> list[dict]:
     return boards
 
 
+def _load_canonical_profiles() -> list[dict]:
+    if not CANONICAL_PROFILES_PATH.exists():
+        return []
+
+    try:
+        data = json.loads(CANONICAL_PROFILES_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return []
+
+    if not isinstance(data, list):
+        return []
+
+    return data
+
+
 def _normalise(value: str | None) -> str:
     return (value or "").strip().lower()
 
 
-def _score_board(board: dict, profile: RiderProfile) -> tuple[float, list[str]]:
+def _profile_target_volume(profile: RiderProfile) -> tuple[float | None, float | None]:
+    if not profile.weight_kg:
+        return None, None
+
+    goal = _normalise(profile.goal)
+    ability = _normalise(profile.ability)
+
+    low_factor = 0.40
+    high_factor = 0.44
+
+    if any(token in goal for token in ["paddle", "catch", "easy", "small", "soft"]):
+        low_factor = 0.41
+        high_factor = 0.46
+
+    if any(token in goal for token in ["performance", "turn", "responsive"]):
+        high_factor = min(high_factor, 0.44)
+
+    if "beginner" in ability:
+        low_factor = max(low_factor, 0.48)
+        high_factor = max(high_factor, 0.55)
+
+    low = round(profile.weight_kg * low_factor, 1)
+    high = round(profile.weight_kg * high_factor, 1)
+
+    return low, high
+
+
+def _profile_volume_mid(profile: RiderProfile) -> float | None:
+    low, high = _profile_target_volume(profile)
+    if low is None or high is None:
+        return None
+    return round((low + high) / 2, 1)
+
+
+def _canonical_volume_stats(board: dict) -> tuple[float | None, float | None, float | None]:
+    volumes = []
+
+    for size in board.get("sizes", []):
+        volume = size.get("volume_litres")
+        try:
+            if volume is not None:
+                volumes.append(float(volume))
+        except (TypeError, ValueError):
+            continue
+
+    if not volumes:
+        return None, None, None
+
+    return min(volumes), max(volumes), round(sum(volumes) / len(volumes), 1)
+
+
+def _description_blob(board: dict) -> str:
+    values = [
+        board.get("category"),
+        board.get("description"),
+        board.get("model"),
+        board.get("model_family"),
+    ]
+    return " ".join(_normalise(str(value)) for value in values if value)
+
+
+def _score_canonical_board(board: dict, profile: RiderProfile) -> tuple[float, list[str], str | None]:
+    score = 0.0
+    reasons = []
+
+    ability = _normalise(profile.ability)
+    wave_type = _normalise(profile.wave_type)
+    goal = _normalise(profile.goal)
+    wave_size = _normalise(profile.wave_size)
+
+    text = _description_blob(board)
+    category = _normalise(board.get("category"))
+    construction = _normalise(board.get("construction"))
+
+    volume_low, volume_high, volume_avg = _canonical_volume_stats(board)
+    target_mid = _profile_volume_mid(profile)
+
+    if target_mid is not None and volume_low is not None and volume_high is not None:
+        if volume_low <= target_mid <= volume_high:
+            score += 4.0
+            reasons.append("has sizes near your target volume")
+        else:
+            distance = min(abs(target_mid - volume_low), abs(target_mid - volume_high))
+            if distance <= 2.0:
+                score += 2.0
+                reasons.append("has sizes close to your target volume")
+
+    if any(token in goal for token in ["paddle", "catch", "easy", "small", "soft"]):
+        if any(token in text for token in ["groveller", "small wave", "easy", "paddle", "forgiving", "foam", "speed", "fish", "hybrid"]):
+            score += 3.0
+            reasons.append("supports paddle power and easier wave entry")
+
+    if any(token in goal for token in ["turn", "responsive", "performance"]):
+        if any(token in text for token in ["performance", "responsive", "drive", "rail", "shortboard", "everyday"]):
+            score += 2.0
+            reasons.append("still keeps a performance shortboard feel")
+
+    if "beach" in wave_type:
+        if any(token in text for token in ["beach", "everyday", "small wave", "groveller", "hybrid", "fish", "pocket", "speed"]):
+            score += 2.0
+            reasons.append("makes sense for beach break conditions")
+
+    if any(token in wave_type for token in ["reef", "point"]):
+        if any(token in text for token in ["reef", "point", "step up", "hold", "drive", "barrel"]):
+            score += 2.0
+            reasons.append(f"has design cues for {profile.wave_type.lower()}")
+
+    if "intermediate" in ability:
+        if not any(token in text for token in ["pro level", "elite", "expert only"]):
+            score += 1.0
+            reasons.append("does not look too specialist for an intermediate surfer")
+
+    if any(token in wave_size for token in ["2", "3", "4", "small"]):
+        if any(token in text for token in ["small wave", "everyday", "groveller", "hybrid", "fish"]):
+            score += 1.5
+
+    if construction in ["softboard", "foamie"]:
+        score -= 2.0
+
+    description = board.get("description")
+    if description:
+        score += 0.5
+
+    if not reasons and board.get("description"):
+        reasons.append("matches based on manufacturer board profile data")
+
+    return score, reasons, description
+
+
+def _score_seeded_board(board: dict, profile: RiderProfile) -> tuple[float, list[str]]:
     score = 0.0
     reasons = []
 
@@ -79,35 +224,65 @@ def _score_board(board: dict, profile: RiderProfile) -> tuple[float, list[str]]:
     return score, reasons
 
 
+def _dedupe_suggestions(scored: list[tuple[float, dict, list[str], str]]) -> list[tuple[float, dict, list[str], str]]:
+    seen = set()
+    output = []
+
+    for score, board, reasons, source in scored:
+        key = (
+            _normalise(board.get("brand")),
+            _normalise(board.get("model")),
+        )
+
+        if key in seen:
+            continue
+
+        seen.add(key)
+        output.append((score, board, reasons, source))
+
+    return output
+
+
 def recommend_models(profile: RiderProfile, limit: int = 4) -> list[SuggestedBoard]:
-    boards = _load_board_intelligence()
     scored = []
 
-    for board in boards:
+    for board in _load_canonical_profiles():
         if not board.get("brand") or not board.get("model"):
             continue
 
-        score, reasons = _score_board(board, profile)
+        score, reasons, description = _score_canonical_board(board, profile)
         if score <= 0:
             continue
 
-        scored.append((score, board, reasons))
+        scored.append((score, board, reasons, "quivrr_canonical_catalogue"))
+
+    for board in _load_board_intelligence():
+        if not board.get("brand") or not board.get("model"):
+            continue
+
+        score, reasons = _score_seeded_board(board, profile)
+        if score <= 0:
+            continue
+
+        scored.append((score + 1.0, board, reasons, "quivrr_curated_board_intelligence"))
 
     scored.sort(key=lambda row: row[0], reverse=True)
+    scored = _dedupe_suggestions(scored)
 
     suggestions = []
-    for score, board, reasons in scored[:limit]:
-        confidence = min(round(score / 7.0, 2), 0.95)
-        why = "; ".join(dict.fromkeys(reasons[:3])) or board.get("quivrr_summary") or "Fits the selected rider profile."
+    for score, board, reasons, source in scored[:limit]:
+        confidence = min(round(score / 12.0, 2), 0.96)
+        why = "; ".join(dict.fromkeys(reasons[:3])) or "Fits the selected rider profile."
 
         suggestions.append(
             SuggestedBoard(
                 brand=board["brand"],
                 model=board["model"],
-                category=board.get("category", "Surfboard"),
+                category=board.get("category") or "Surfboard",
                 confidence=confidence,
                 why_it_fits=why,
                 trade_offs=board.get("trade_offs"),
+                source=source,
             )
         )
 
@@ -130,7 +305,8 @@ def build_recommendation_context(suggested_boards: list[SuggestedBoard]) -> str:
         lines.append(
             f"- {board.brand} {board.model}: {board.category}. "
             f"Why: {board.why_it_fits}. "
-            f"Trade offs: {board.trade_offs or 'Not specified.'}"
+            f"Trade offs: {board.trade_offs or 'Not specified.'}. "
+            f"Source: {board.source}."
         )
 
     return "\n".join(lines)
