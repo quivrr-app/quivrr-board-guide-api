@@ -5,6 +5,7 @@ from app.models import RiderProfile, SuggestedBoard
 
 
 INTELLIGENCE_PATH = Path(__file__).parent / "knowledge" / "board_intelligence.json"
+GENERATED_INTELLIGENCE_PATH = Path(__file__).parent / "knowledge" / "generated" / "board_intelligence_generated.json"
 CANONICAL_PROFILES_PATH = Path(__file__).parent / "knowledge" / "generated" / "canonical_board_profiles.json"
 
 
@@ -14,6 +15,22 @@ def _load_board_intelligence() -> list[dict]:
 
     try:
         data = json.loads(INTELLIGENCE_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return []
+
+    boards = data.get("boards", [])
+    if not isinstance(boards, list):
+        return []
+
+    return boards
+
+
+def _load_generated_intelligence() -> list[dict]:
+    if not GENERATED_INTELLIGENCE_PATH.exists():
+        return []
+
+    try:
+        data = json.loads(GENERATED_INTELLIGENCE_PATH.read_text(encoding="utf-8-sig"))
     except json.JSONDecodeError:
         return []
 
@@ -243,18 +260,91 @@ def _dedupe_suggestions(scored: list[tuple[float, dict, list[str], str]]) -> lis
     return output
 
 
+def _volume_range_stats(board: dict) -> tuple[float | None, float | None]:
+    volume_range = board.get("volume_range") or {}
+
+    try:
+        low = volume_range.get("min")
+        high = volume_range.get("max")
+        if low is None or high is None:
+            return None, None
+        return float(low), float(high)
+    except (TypeError, ValueError, AttributeError):
+        return None, None
+
+
+def _score_generated_board(board: dict, profile: RiderProfile) -> tuple[float, list[str]]:
+    score, reasons = _score_seeded_board(board, profile)
+
+    category = _normalise(board.get("category"))
+    target_mid = _profile_volume_mid(profile)
+    volume_low, volume_high = _volume_range_stats(board)
+
+    if category in ["hybrid shortboard", "groveller", "everyday shortboard", "performance fish", "fish"]:
+        score += 2.5
+        reasons.append("matches the target board category")
+
+    if board.get("override_applied"):
+        score += 2.0
+        reasons.append("has Quivrr reviewed board intelligence")
+
+    if target_mid is not None and volume_low is not None and volume_high is not None:
+        if volume_low <= target_mid <= volume_high:
+            score += 2.0
+            reasons.append("has sizes near your target volume")
+        else:
+            distance = min(abs(target_mid - volume_low), abs(target_mid - volume_high))
+            if distance <= 2.0:
+                score += 1.0
+                reasons.append("has sizes close to your target volume")
+
+    if category in ["step up", "longboard"]:
+        score -= 3.0
+
+    return score, reasons
+
+
+def _brand_limited(scored: list[tuple[float, dict, list[str], str]], limit: int, per_brand_limit: int = 1) -> list[tuple[float, dict, list[str], str]]:
+    selected = []
+    brand_counts = {}
+
+    for row in scored:
+        _, board, _, _ = row
+        brand = _normalise(board.get("brand"))
+
+        if brand_counts.get(brand, 0) >= per_brand_limit:
+            continue
+
+        selected.append(row)
+        brand_counts[brand] = brand_counts.get(brand, 0) + 1
+
+        if len(selected) >= limit:
+            return selected
+
+    for row in scored:
+        if row in selected:
+            continue
+
+        selected.append(row)
+        if len(selected) >= limit:
+            break
+
+    return selected
+
+
 def recommend_models(profile: RiderProfile, limit: int = 4) -> list[SuggestedBoard]:
     scored = []
+    generated_boards = _load_generated_intelligence()
 
-    for board in _load_canonical_profiles():
+    for board in generated_boards:
         if not board.get("brand") or not board.get("model"):
             continue
 
-        score, reasons, description = _score_canonical_board(board, profile)
+        score, reasons = _score_generated_board(board, profile)
         if score <= 0:
             continue
 
-        scored.append((score, board, reasons, "quivrr_canonical_catalogue"))
+        scored.append((score, board, reasons, "quivrr_generated_board_intelligence"))
 
     for board in _load_board_intelligence():
         if not board.get("brand") or not board.get("model"):
@@ -264,15 +354,27 @@ def recommend_models(profile: RiderProfile, limit: int = 4) -> list[SuggestedBoa
         if score <= 0:
             continue
 
-        scored.append((score + 1.0, board, reasons, "quivrr_curated_board_intelligence"))
+        scored.append((score + 3.0, board, reasons, "quivrr_curated_board_intelligence"))
+
+    if not generated_boards:
+        for board in _load_canonical_profiles():
+            if not board.get("brand") or not board.get("model"):
+                continue
+
+            score, reasons, description = _score_canonical_board(board, profile)
+            if score <= 0:
+                continue
+
+            scored.append((score, board, reasons, "quivrr_canonical_catalogue"))
 
     scored.sort(key=lambda row: row[0], reverse=True)
     scored = _dedupe_suggestions(scored)
+    scored = _brand_limited(scored, limit=limit, per_brand_limit=1)
 
     suggestions = []
     for score, board, reasons, source in scored[:limit]:
         confidence = min(round(score / 12.0, 2), 0.96)
-        why = "; ".join(dict.fromkeys(reasons[:3])) or "Fits the selected rider profile."
+        why = "; ".join(dict.fromkeys(reasons[:4])) or "Fits the selected rider profile."
 
         suggestions.append(
             SuggestedBoard(
@@ -287,7 +389,6 @@ def recommend_models(profile: RiderProfile, limit: int = 4) -> list[SuggestedBoa
         )
 
     return suggestions
-
 
 def build_recommendation_context(suggested_boards: list[SuggestedBoard]) -> str:
     if not suggested_boards:
