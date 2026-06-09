@@ -168,7 +168,7 @@ def build_recommendation(profile: RiderProfile) -> BoardRecommendation | None:
         length_range = "7'0 to 8'0"
     elif "paddle" in goal or "catch more waves" in goal:
         volume_low = round(weight * 0.40)
-        volume_high = round(weight * 0.48)
+        volume_high = round(weight * 0.44)
         category = "Hybrid shortboard, groveller or performance fish"
         length_range = "5'8 to 6'2"
     elif ability in ["advanced", "expert"]:
@@ -190,7 +190,7 @@ def build_recommendation(profile: RiderProfile) -> BoardRecommendation | None:
     return BoardRecommendation(
         board_category=category,
         suggested_length_range=length_range,
-        suggested_volume_range_litres=f"{volume_low}-{volume_high}L",
+        suggested_volume_range_litres=f"{volume_low} to {volume_high}L",
         construction_notes=construction_notes,
         why_it_fits=(
             "This gives you enough paddle support to catch more waves while keeping the board responsive enough to turn. "

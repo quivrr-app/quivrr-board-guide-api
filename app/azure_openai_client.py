@@ -1,6 +1,7 @@
-import os
+﻿import os
 from openai import AzureOpenAI
 
+from app.models import BoardRecommendation
 from app.prompts import BODHI_SYSTEM_PROMPT
 from app.text_cleaning import clean_llm_text
 
@@ -14,11 +15,34 @@ def is_azure_openai_configured() -> bool:
     ])
 
 
+def build_official_recommendation_context(recommendation: BoardRecommendation | None) -> str:
+    if recommendation is None:
+        return "Official Quivrr recommendation: not enough rider data yet."
+
+    return "\n".join([
+        "Official Quivrr recommendation:",
+        f"Board category: {recommendation.board_category}",
+        f"Suggested length range: {recommendation.suggested_length_range}",
+        f"Suggested volume range: {recommendation.suggested_volume_range_litres}",
+        f"Construction notes: {recommendation.construction_notes or 'Not specified.'}",
+        f"Why it fits: {recommendation.why_it_fits}",
+        f"Quivrr search direction: {recommendation.quivrr_search_direction}",
+        "",
+        "Instruction:",
+        "Use the official Quivrr recommendation exactly.",
+        "Do not widen or change the length range.",
+        "Do not widen or change the volume range.",
+        "Do not invent board models outside the controlled board model context.",
+        "Preserve the controlled board model ranking order exactly when listing suggested boards.",
+    ])
+
+
 def ask_bodhi(
     message: str,
     region: str | None = None,
     page_context: str | None = None,
     recommendation_context: str | None = None,
+    official_recommendation_context: str | None = None,
 ) -> str:
     client = AzureOpenAI(
         azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
@@ -31,6 +55,8 @@ def ask_bodhi(
         context.append(f"Region: {region}")
     if page_context:
         context.append(f"Page context: {page_context}")
+    if official_recommendation_context:
+        context.append(official_recommendation_context)
     if recommendation_context:
         context.append(recommendation_context)
 
@@ -42,7 +68,7 @@ def ask_bodhi(
             {"role": "system", "content": BODHI_SYSTEM_PROMPT},
             {"role": "user", "content": user_content},
         ],
-        temperature=0.35,
+        temperature=0.25,
         max_tokens=650,
     )
 

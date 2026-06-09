@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 
-from app.azure_openai_client import ask_bodhi, is_azure_openai_configured
+from app.azure_openai_client import ask_bodhi, build_official_recommendation_context, is_azure_openai_configured
 from app.model_recommendation_engine import build_recommendation_context, recommend_models
 from app.models import BoardGuideRequest, BoardGuideResponse
 from app.profile_engine import (
@@ -57,6 +57,7 @@ def board_guide_chat(request: BoardGuideRequest):
     recommendation = build_recommendation(profile)
     suggested_boards = recommend_models(profile)
     recommendation_context = build_recommendation_context(suggested_boards)
+    official_recommendation_context = build_official_recommendation_context(recommendation)
 
     if is_azure_openai_configured():
         reply = ask_bodhi(
@@ -64,6 +65,7 @@ def board_guide_chat(request: BoardGuideRequest):
             region=request.region,
             page_context=request.page_context,
             recommendation_context=recommendation_context,
+            official_recommendation_context=official_recommendation_context,
         )
         source = "azure_openai"
     else:
