@@ -1,0 +1,2279 @@
+{
+  "totalModels": 513,
+  "modelsClassified": 192,
+  "classificationCoveragePercent": 37.4,
+  "confidenceDistribution": {
+    "high": 38,
+    "medium": 155,
+    "low": 320,
+    "none": 0
+  },
+  "missingDescriptionCount": 84,
+  "missingDescriptions": [
+    {
+      "brand": "Album",
+      "model": "Bom Dia"
+    },
+    {
+      "brand": "Album",
+      "model": "D'boa"
+    },
+    {
+      "brand": "Album",
+      "model": "Delma"
+    },
+    {
+      "brand": "Album",
+      "model": "Insanity"
+    },
+    {
+      "brand": "Album",
+      "model": "Plasmic"
+    },
+    {
+      "brand": "Album",
+      "model": "ProtoAtypical"
+    },
+    {
+      "brand": "Album",
+      "model": "The End"
+    },
+    {
+      "brand": "Album",
+      "model": "Twinsman"
+    },
+    {
+      "brand": "Album",
+      "model": "VBSM"
+    },
+    {
+      "brand": "Album",
+      "model": "Veebee"
+    },
+    {
+      "brand": "Album",
+      "model": "Warp Twin"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Chemistry M Mix Surfboard"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Chemistry Pantera Rosa Surfboard"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Beausoleil"
+    },
+    {
+      "brand": "Christenson",
+      "model": "C-Bucket"
+    },
+    {
+      "brand": "Christenson",
+      "model": "C-Hag"
+    },
+    {
+      "brand": "Christenson",
+      "model": "C-Hawk"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Cafe Racer 2.0"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Carrera"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Chris Craft"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Easy Wind"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Hole Shot"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Huntsman"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Lane Splitter"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Nautilus"
+    },
+    {
+      "brand": "Christenson",
+      "model": "OP1"
+    },
+    {
+      "brand": "Christenson",
+      "model": "OP2"
+    },
+    {
+      "brand": "Christenson",
+      "model": "OP3"
+    },
+    {
+      "brand": "Christenson",
+      "model": "OP4"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Ocean Racer"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Osprey"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Scarlet Begonia"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Sicario"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Speed Master"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Sportsman"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Submariner"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Surfer Rosa"
+    },
+    {
+      "brand": "Christenson",
+      "model": "The Cliff"
+    },
+    {
+      "brand": "Christenson",
+      "model": "The Cliff Pintail"
+    },
+    {
+      "brand": "Christenson",
+      "model": "The Outlaw"
+    },
+    {
+      "brand": "Christenson",
+      "model": "The Wolverine"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Tradesman"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Ultra Tracker"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Waterlion"
+    },
+    {
+      "brand": "DHD",
+      "model": "Nexus EPS"
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Carny"
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Gherkin"
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Seahawk"
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Stilnox"
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Supercell"
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Thunderbird"
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "X-Wing"
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Zephyr"
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Big Baron Softboard"
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Golden Child"
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Golden Child Easy Rider"
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Golden Child Youth"
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Monsta"
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Monsta Easy Rider"
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Monsta Youth"
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Xero Gravity"
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Xero Gravity Easy Rider"
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Xero Gravity Youth"
+    },
+    {
+      "brand": "Lost",
+      "model": "Crowd Killer Round"
+    },
+    {
+      "brand": "Lost",
+      "model": "Party Crasher"
+    },
+    {
+      "brand": "Lost",
+      "model": "Puddle Jumper HP"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pegaso"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas All-Round Longboard"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Beachy Mood"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Easy Mood"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Fish"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Flying Diamond"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Hyperlink"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Magnetic"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Mustache"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Performance Mood"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Space Oddity"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Water Lion"
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Water Lion Ultra"
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Gremlin XL"
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Phantom XL"
+    },
+    {
+      "brand": "Rusty",
+      "model": "Express"
+    },
+    {
+      "brand": "Rusty",
+      "model": "Miso"
+    },
+    {
+      "brand": "Rusty",
+      "model": "Smoothie"
+    }
+  ],
+  "unclassifiedCount": 321,
+  "unclassifiedBoards": [
+    {
+      "brand": "Album",
+      "model": "Bom Dia",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Album",
+      "model": "D'boa",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Album",
+      "model": "Delma",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Album",
+      "model": "Disorder",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Album",
+      "model": "Fascination",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Album",
+      "model": "Insanity",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Album",
+      "model": "Plasmic",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Album",
+      "model": "Sunstone",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Album",
+      "model": "The End",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Album",
+      "model": "Twinsman",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Album",
+      "model": "VBSM",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Album",
+      "model": "Veebee",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Album",
+      "model": "Warp Twin",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "average-joe",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "better-everyday",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "big-happy",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "biscuit-bonzer",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bobby-quad",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bonzer-3d",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bonzer-shelter",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bunny-chow",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-2-pro",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-mid-twin",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-mid-twin-1",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-pro",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "dumpster-diver",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "dumpster-diver-2",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "febs-fish",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "fishbeard",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "free-scrubber-1",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "g-skate",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "girabbit",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "goldie",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "happy-traveler-1",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "high-5",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "hoglet",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "mavs-gun",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "neckbeard",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "neckbeard-2",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "neckbeard-3",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "og-flyer",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "pod-mod-1",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rocket-9",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rocket-wide",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rocket-wide-squash",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rook-15",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "sampler",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "semi-pro-12",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "t-low",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "the-new-flyer",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "the-proton",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "the-solution",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "the-water-hog",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "twin-fin",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "twin-pin",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "two-happy",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ultra-joe-1",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "weirdo-ripper",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "4x4",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Alchemist",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Alchemist Remix",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Beaker",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Beaker Comp",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Beer Fridge",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Boombastik",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Cassette Deck",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Chem Zen",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Chem ZenAgain",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Chemistry M Mix Surfboard",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Chemistry Pantera Rosa Surfboard",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Compression",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "D3",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Daisho",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Disk",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Disk 2",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Flash Point",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Holiday",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Liquid Sword",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Minion",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Nucleus",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Pool Toy",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "R2",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Solution",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Summertime Pt 2",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "The Zen4 Deluxe",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "The Zenith",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Zen 4",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Zen 4 1",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Zen3",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chilli",
+      "model": "A2",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chilli",
+      "model": "FAD3R",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Chilli",
+      "model": "Faded 2.0 Gun",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chilli",
+      "model": "Grom +",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chilli",
+      "model": "HKII",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chilli",
+      "model": "Mini Bird",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Chilli",
+      "model": "Peppa Twin",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Chilli",
+      "model": "Piña Colada",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Chilli",
+      "model": "Rare Bird EVO",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chilli",
+      "model": "Rare Bird EVO TT",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Chilli",
+      "model": "SHORTIE",
+      "hasDescription": true,
+      "confidence": 0.65
+    },
+    {
+      "brand": "Chilli",
+      "model": "Sugar",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Chilli",
+      "model": "Volume II",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Christenson",
+      "model": "Beausoleil",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "C-Bucket",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "C-Hag",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "C-Hawk",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Cafe Racer 2.0",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Carrera",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Chris Craft",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Easy Wind",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Hole Shot",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Huntsman",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Lane Splitter",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Nautilus",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "OP1",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Ocean Racer",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Osprey",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Scarlet Begonia",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Sicario",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Speed Master",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Sportsman",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Submariner",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Surfer Rosa",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "The Cliff",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "The Cliff Pintail",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "The Outlaw",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "The Wolverine",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Tradesman",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Ultra Tracker",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Christenson",
+      "model": "Waterlion",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "DHD",
+      "model": "EE Juliette",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "DHD",
+      "model": "EE Juliette Jnr",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "DHD",
+      "model": "MF DNA",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "DHD",
+      "model": "MF Lightning",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "DHD",
+      "model": "Mini Twin",
+      "hasDescription": true,
+      "confidence": 0.65
+    },
+    {
+      "brand": "DHD",
+      "model": "Mini Twin II",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "DHD",
+      "model": "Nexus",
+      "hasDescription": true,
+      "confidence": 0.65
+    },
+    {
+      "brand": "DHD",
+      "model": "Nexus EPS",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "DHD",
+      "model": "The Twin",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "DHD",
+      "model": "Utopia",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Carny",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Gherkin",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Seahawk",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Stilnox",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Supercell",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Thunderbird",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "X-Wing",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "DMS Surfboards",
+      "model": "Zephyr",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Firewire",
+      "model": "DRK",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Firewire",
+      "model": "Dominator 2.0",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Firewire",
+      "model": "FRK Swallow",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Firewire",
+      "model": "Machadocado",
+      "hasDescription": true,
+      "confidence": 0.65
+    },
+    {
+      "brand": "Firewire",
+      "model": "Mindcraft",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Firewire",
+      "model": "S Boss",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Firewire",
+      "model": "Sci-Fi 2.0",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Firewire",
+      "model": "Seaside",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Firewire",
+      "model": "Seaside & Beyond",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Firewire",
+      "model": "Spaceship",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Firewire",
+      "model": "Taylor Jensen Hull Rider",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Firewire",
+      "model": "Taylor Jensen Pro",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Firewire",
+      "model": "Taylor Jensen Pro V",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Haydenshapes",
+      "model": "Cannon",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Haydenshapes",
+      "model": "Holy Grail",
+      "hasDescription": true,
+      "confidence": 0.75
+    },
+    {
+      "brand": "Haydenshapes",
+      "model": "Holy Hypto",
+      "hasDescription": true,
+      "confidence": 0.75
+    },
+    {
+      "brand": "Haydenshapes",
+      "model": "Holy Hypto FutureFlex",
+      "hasDescription": true,
+      "confidence": 0.75
+    },
+    {
+      "brand": "Haydenshapes",
+      "model": "Merlot",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Haydenshapes",
+      "model": "Nova",
+      "hasDescription": true,
+      "confidence": 0.75
+    },
+    {
+      "brand": "Haydenshapes",
+      "model": "Psychedelic Germ",
+      "hasDescription": true,
+      "confidence": 0.65
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Big Baron Easy Rider",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Big Horse",
+      "hasDescription": true,
+      "confidence": 0.25
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Black Baron",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Black Eagle 2",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Bull Run",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "JS Industries",
+      "model": "El Baron",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Flame Fish",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Flame Fish Softboard",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Forget Me Not 3",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Golden Child",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Golden Child Easy Rider",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Golden Child Youth",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Monsta Easy Rider",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Monsta Youth",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Mother Trucker",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Raging Bull",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Raging Bull Easy Rider",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Schooner",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Step Off",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Sub Xero",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Xero Gravity",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Xero Gravity Easy Rider",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Xero Gravity Youth",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Lost",
+      "model": "3.0 Stub Driver",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Lost",
+      "model": "Big Rig Driver",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Cali Twin",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Lost",
+      "model": "Crowd Killer Round",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Lost",
+      "model": "Double Up",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Driver 2.0",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Driver 3.0 Grom",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Driver 3.0 Round",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Driver 3.0 Squash",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "El Patron",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Formula 1 Round",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Formula 1 Squash",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Hydra",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Lazy Toy",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Lost",
+      "model": "Maysym Goofy",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Maysym Regular",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Micks Tape Goofy",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Micks Tape Regular",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Micks Tape Sym",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Party Crasher",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Lost",
+      "model": "Party Platter",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Pocket Rocket Round",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Pocket Rocket Squash",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Psycho Killer",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Puddle Jumper",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Puddle Jumper Sting",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "RNF Twinzer '96Er",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "RV",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Rad Ripper",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Rad Zapper",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Retro Gun",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Retro Tripper",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Lost",
+      "model": "Rocket Redux",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Speed Demon",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "Sub Driver",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Sub Driver Swallow Tail",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Swordfish",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Lost",
+      "model": "The Ripper Round",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "The Ripper Squash",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Tube Pig",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Lost",
+      "model": "Uber Driver XL",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Misfit Shapes",
+      "model": "BEACH CLOUD",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Misfit Shapes",
+      "model": "BEACH METALL",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Misfit Shapes",
+      "model": "BEACH METALL RND",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Misfit Shapes",
+      "model": "BULL DOVE 2",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Misfit Shapes",
+      "model": "DOPE MACHINE",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Misfit Shapes",
+      "model": "DRIB",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Misfit Shapes",
+      "model": "ERASER HEAD",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Misfit Shapes",
+      "model": "FUNGZETTI",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Misfit Shapes",
+      "model": "LONGUS",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Misfit Shapes",
+      "model": "SPEED EGG - DIAMOND TWIN",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Misfit Shapes",
+      "model": "YANDINA SPEEDWAY",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pegaso",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas All-Round Longboard",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Beachy Mood",
+      "hasDescription": false,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Easy Mood",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Fish",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Flying Diamond",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Hyperlink",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Magnetic",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Mustache",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Space Oddity",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Water Lion",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pukas",
+      "model": "Pukas Water Lion Ultra",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Gremlin",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Gremlin XL",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Happy Twin",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Highline",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Mini Ghost Round",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Mini Ghost Squash",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Next Step",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Phantom XL",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Power Tiger",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Power Tiger Grom",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Puerto Padi",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Shadow",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Tiger Twin",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "1984",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "421 Fish",
+      "hasDescription": true,
+      "confidence": 0.65
+    },
+    {
+      "brand": "Rusty",
+      "model": "Bali Single",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "Big Cat",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "Blackbird",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "Blade",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "D Min",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "Desert Island",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "Dwart",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "Dwart Too",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "Egg",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "Express",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Rusty",
+      "model": "Fish Quatro",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "Heckler",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "Hustler",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "Illuminati",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "Mini Tanker",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "Miso",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Rusty",
+      "model": "Moby Fish",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "Model 8",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "Not So Moby Fish",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "Panda",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "SD",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "Sista Brotha",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "Smoothie",
+      "hasDescription": false,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Rusty",
+      "model": "So Fuunnn",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "The Deuce",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "The Rooster",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "Underdog",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Rusty",
+      "model": "Utility",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Rusty",
+      "model": "Yeti",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Rusty",
+      "model": "Zeppelin",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Sharp Eye",
+      "model": "Maguro",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Sharp Eye",
+      "model": "Modern 2",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Sharp Eye",
+      "model": "Modern 2.5",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Sharp Eye",
+      "model": "Radar",
+      "hasDescription": true,
+      "confidence": 0.65
+    },
+    {
+      "brand": "Sharp Eye",
+      "model": "Zipper",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "5 Spark",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Alley",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Alley Grom",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Big S",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "DSC & DSC VEE",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "DTS",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Face Dancer",
+      "hasDescription": true,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Face Dancer Step Up",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Mollusc",
+      "hasDescription": true,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Mollusc Robo",
+      "hasDescription": true,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Nomad",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Nxfc",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "T&T",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Three Peat",
+      "hasDescription": true,
+      "confidence": 0.25
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Varmit",
+      "hasDescription": true,
+      "confidence": 0.35
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "XFC",
+      "hasDescription": true,
+      "confidence": 0.45
+    }
+  ]
+}

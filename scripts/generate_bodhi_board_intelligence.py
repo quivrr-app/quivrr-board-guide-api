@@ -2,11 +2,18 @@
 import re
 import html
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from app.board_intelligence_classifier import classify_board
 
 
 SOURCE_PATH = Path("app/knowledge/generated/canonical_board_profiles.json")
 OUTPUT_PATH = Path("app/knowledge/generated/board_intelligence_generated.json")
 OVERRIDES_PATH = Path("app/knowledge/board_intelligence_overrides.json")
+AUDIT_PATH = Path("app/knowledge/generated/board_intelligence_audit.json")
 
 
 CATEGORY_RULES = [
@@ -180,6 +187,56 @@ def apply_override(item, override):
     return item
 
 
+def build_audit(boards):
+    unique = {}
+    for board in boards:
+        board_key = (
+            re.sub(r"[^a-z0-9]+", " ", str(board.get("brand") or "").lower()).strip(),
+            re.sub(r"[^a-z0-9]+", " ", str(board.get("model") or "").lower()).strip(),
+        )
+        current = unique.get(board_key)
+        if current is None or board.get("classificationConfidence", 0) > current.get("classificationConfidence", 0):
+            unique[board_key] = board
+
+    rows = list(unique.values())
+    classified = [row for row in rows if row.get("boardCategory") != "unclassified"]
+    missing_descriptions = [
+        {"brand": row.get("brand"), "model": row.get("model")}
+        for row in rows if not row.get("model_description")
+    ]
+    unclassified = [
+        {
+            "brand": row.get("brand"),
+            "model": row.get("model"),
+            "hasDescription": bool(row.get("model_description")),
+            "confidence": row.get("classificationConfidence"),
+        }
+        for row in rows if row.get("boardCategory") == "unclassified"
+    ]
+    distribution = {"high": 0, "medium": 0, "low": 0, "none": 0}
+    for row in rows:
+        confidence = float(row.get("classificationConfidence") or 0)
+        if confidence >= 0.75:
+            distribution["high"] += 1
+        elif confidence >= 0.5:
+            distribution["medium"] += 1
+        elif confidence > 0:
+            distribution["low"] += 1
+        else:
+            distribution["none"] += 1
+
+    return {
+        "totalModels": len(rows),
+        "modelsClassified": len(classified),
+        "classificationCoveragePercent": round(100 * len(classified) / len(rows), 1) if rows else 0,
+        "confidenceDistribution": distribution,
+        "missingDescriptionCount": len(missing_descriptions),
+        "missingDescriptions": missing_descriptions,
+        "unclassifiedCount": len(unclassified),
+        "unclassifiedBoards": unclassified,
+    }
+
+
 def main():
     if not SOURCE_PATH.exists():
         raise SystemExit(f"Missing source file: {SOURCE_PATH}")
@@ -244,15 +301,20 @@ def main():
             item = apply_override(item, override)
             overrides_applied += 1
 
+        item.update(classify_board(item))
+
         output.append(item)
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps({"boards": output}, indent=2, ensure_ascii=False), encoding="utf-8")
+    audit = build_audit(output)
+    AUDIT_PATH.write_text(json.dumps(audit, indent=2, ensure_ascii=False), encoding="utf-8")
 
     print("Generated Bodhi intelligence metadata")
     print(f"Source boards: {len(boards)}")
     print(f"Generated boards: {len(output)}")
     print(f"Wrote: {OUTPUT_PATH}")
+    print(f"Wrote: {AUDIT_PATH}")
     print(f"Overrides applied: {overrides_applied}")
 
     by_category = {}
@@ -263,6 +325,13 @@ def main():
     print("Category summary")
     for category, count in sorted(by_category.items()):
         print(f"{category}: {count}")
+
+    print("")
+    print("Classification audit")
+    print(f"Distinct models: {audit['totalModels']}")
+    print(f"Classified models: {audit['modelsClassified']} ({audit['classificationCoveragePercent']}%)")
+    print(f"Missing descriptions: {audit['missingDescriptionCount']}")
+    print(f"Unclassified models: {audit['unclassifiedCount']}")
 
 
 if __name__ == "__main__":
