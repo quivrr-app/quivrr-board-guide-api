@@ -5,6 +5,7 @@ import os
 
 from app.azure_openai_client import ask_bodhi, build_official_recommendation_context, is_azure_openai_configured
 from app.model_recommendation_engine import build_recommendation_context, recommend_models
+from app.inventory_client import enrich_suggestions_with_inventory
 from app.models import BoardGuideRequest, BoardGuideResponse
 from app.profile_engine import (
     build_profile_reply,
@@ -56,6 +57,7 @@ def board_guide_chat(request: BoardGuideRequest):
     missing = missing_profile_fields(profile)
     recommendation = build_recommendation(profile)
     suggested_boards = recommend_models(profile)
+    suggested_boards = enrich_suggestions_with_inventory(suggested_boards, profile)
     recommendation_context = build_recommendation_context(suggested_boards)
     official_recommendation_context = build_official_recommendation_context(recommendation)
 
@@ -77,7 +79,16 @@ def board_guide_chat(request: BoardGuideRequest):
         if suggested_boards:
             reply += "\n\nBoards worth checking in Quivrr:\n"
             for board in suggested_boards:
-                reply += f"- {board.brand} {board.model}: {board.why_it_fits}\n"
+                stock = (
+                    f"{board.available_count} live result(s) in {board.region}"
+                    if board.available_count else f"no verified stock in {board.region or 'the selected region'}"
+                )
+                reply += (
+                    f"- {board.brand} {board.model}"
+                    f"{f' ({board.suggested_size})' if board.suggested_size else ''}: "
+                    f"{board.why_it_fits}; {stock}."
+                    f"{f' {board.example_live_source_url}' if board.example_live_source_url else ''}\n"
+                )
         source = "local_profile_engine"
 
     return BoardGuideResponse(
@@ -87,6 +98,6 @@ def board_guide_chat(request: BoardGuideRequest):
         recommendation=recommendation,
         suggested_boards=suggested_boards,
         missing_fields=missing,
-        recommended_next_step="Use the controlled board suggestions to refine Quivrr search direction. Availability will be added later through MFA and retailer inventory.",
+        recommended_next_step="Refine the fit, then open a verified live source in the selected region. If none is available, try the closest controlled alternative.",
         source=source,
     )

@@ -2,6 +2,7 @@
 import re
 
 from app.models import BoardRecommendation, RiderProfile
+from app.rider_fit import recommend_rider_fit
 
 
 def _extract_height_cm(text: str) -> int | None:
@@ -19,10 +20,65 @@ def _extract_weight_kg(text: str) -> int | None:
 
 
 def _extract_current_volume(text: str) -> float | None:
+    if any(token in text for token in ["around", "looking for", "want", "target"]):
+        return None
     match = re.search(r"\b([1-9][0-9](?:\.[0-9])?)\s*(?:l|litre|litres)\b", text)
     if match:
         return float(match.group(1))
     return None
+
+
+def _extract_target_volume(text: str) -> float | None:
+    match = re.search(
+        r"(?:around|about|roughly|target(?:ing)?|looking for|want(?:ing)?)\D{0,24}"
+        r"([1-9][0-9](?:\.[0-9])?)\s*(?:l|litre|litres)\b",
+        text,
+    )
+    return float(match.group(1)) if match else None
+
+
+def _extract_age(text: str) -> int | None:
+    match = re.search(r"\b(?:age(?:d)?\s*)?([1-8][0-9])\s*(?:years? old|yo)\b", text)
+    return int(match.group(1)) if match else None
+
+
+def _extract_fitness(text: str) -> str | None:
+    for token, label in [
+        ("low fitness", "Low"), ("not very fit", "Low"), ("poor fitness", "Low"),
+        ("high fitness", "High"), ("very fit", "High"), ("strong paddler", "High"),
+        ("average fitness", "Average"), ("moderate fitness", "Average"),
+    ]:
+        if token in text:
+            return label
+    return None
+
+
+def _extract_frequency(text: str) -> float | None:
+    match = re.search(r"\b([0-7](?:\.5)?)\s*(?:times?|sessions?)\s*(?:a|per)\s*week\b", text)
+    if match:
+        return float(match.group(1))
+    if (re.search(r"\bdaily\b", text) and "daily driver" not in text) or "most days" in text:
+        return 5.0
+    if "weekly" in text or "once a week" in text:
+        return 1.0
+    return None
+
+
+def _extract_board_type(text: str) -> str | None:
+    options = [
+        "performance shortboard", "daily driver", "everyday shortboard", "shortboard",
+        "groveller", "hybrid", "fish", "mid-length", "mid length", "longboard",
+    ]
+    return next((value.title() for value in options if value in text), None)
+
+
+def _extract_desired_feel(text: str) -> str | None:
+    options = [
+        "easier paddle", "more performance", "more forgiving", "faster in weak waves",
+        "hold in bigger waves",
+    ]
+    found = [value for value in options if value in text]
+    return ", ".join(found) or None
 
 
 def _extract_ability(text: str) -> str | None:
@@ -54,7 +110,7 @@ def _extract_wave_type(text: str) -> str | None:
     }
 
     for token, label in options.items():
-        if token in text:
+        if re.search(rf"\b{re.escape(token)}\b", text):
             return label
 
     return None
@@ -124,6 +180,12 @@ def extract_profile(message: str, region: str | None = None) -> RiderProfile:
         weight_kg=_extract_weight_kg(text),
         ability=_extract_ability(text),
         current_volume_litres=_extract_current_volume(text),
+        target_volume_litres=_extract_target_volume(text),
+        age=_extract_age(text),
+        fitness_level=_extract_fitness(text),
+        surf_frequency_per_week=_extract_frequency(text),
+        preferred_board_type=_extract_board_type(text),
+        desired_feel=_extract_desired_feel(text),
         region=_extract_region(text, region),
         wave_size=_extract_wave_size(text),
         wave_type=_extract_wave_type(text),
@@ -133,13 +195,11 @@ def extract_profile(message: str, region: str | None = None) -> RiderProfile:
 
 def missing_profile_fields(profile: RiderProfile) -> list[str]:
     required = {
-        "height_cm": "height",
         "weight_kg": "weight",
         "ability": "ability",
-        "region": "region",
-        "wave_size": "normal wave size",
-        "wave_type": "wave type",
-        "goal": "what you want the board to do better",
+        "surf_frequency_per_week": "surf frequency",
+        "wave_size": "usual waves",
+        "region": "search region",
     }
 
     missing = []
@@ -151,60 +211,46 @@ def missing_profile_fields(profile: RiderProfile) -> list[str]:
 
 
 def build_recommendation(profile: RiderProfile) -> BoardRecommendation | None:
-    missing = missing_profile_fields(profile)
-
-    if len(missing) > 2:
+    if not profile.weight_kg or not profile.ability:
+        return None
+    fit = recommend_rider_fit(profile)
+    if fit is None:
         return None
 
-    weight = profile.weight_kg or 80
     ability = (profile.ability or "Intermediate").lower()
     wave_type = profile.wave_type or "Beach Break"
-    goal = (profile.goal or "").lower()
-
-    if ability == "beginner":
-        volume_low = round(weight * 0.55)
-        volume_high = round(weight * 0.70)
-        category = "Funboard, mini mal or forgiving mid length"
-        length_range = "7'0 to 8'0"
-    elif "paddle" in goal or "catch more waves" in goal:
-        volume_low = round(weight * 0.40)
-        volume_high = round(weight * 0.44)
-        category = "Hybrid shortboard, groveller or performance fish"
-        length_range = "5'8 to 6'2"
-    elif ability in ["advanced", "expert"]:
-        volume_low = round(weight * 0.32)
-        volume_high = round(weight * 0.38)
-        category = "Performance shortboard or refined everyday shortboard"
-        length_range = "5'10 to 6'2"
-    else:
-        volume_low = round(weight * 0.37)
-        volume_high = round(weight * 0.45)
-        category = "Everyday shortboard, hybrid or groveller"
-        length_range = "5'9 to 6'3"
-
-    if wave_type in ["Point Break", "Reef Break"] and ability.lower() != "beginner":
+    if wave_type in ["Point Break", "Reef Break"] and ability != "beginner":
         construction_notes = "A slightly more refined rail and better hold will help if the waves have shape or push."
     else:
         construction_notes = "Keep some foam under the chest and avoid going too narrow if the waves are soft or broken up."
 
     return BoardRecommendation(
-        board_category=category,
-        suggested_length_range=length_range,
-        suggested_volume_range_litres=f"{volume_low} to {volume_high}L",
+        board_category=fit.board_category,
+        suggested_length_range=("7'0 to 8'0" if ability == "beginner" else "5'8 to 6'3"),
+        suggested_volume_range_litres=fit.volume_range_label,
         construction_notes=construction_notes,
         why_it_fits=(
-            "This gives you enough paddle support to catch more waves while keeping the board responsive enough to turn. "
-            "For everyday surf, the goal is usually to avoid going too high performance too early."
+            fit.explanation
         ),
         quivrr_search_direction=(
-            "Start with the Australia region, then search everyday shortboards, hybrids, grovellers and fish style boards in this volume range."
+            f"Search {(profile.region or 'your selected region')} for available boards in this category and volume range."
         ),
+        adjustment_factors=fit.adjustment_factors,
     )
 
 
 def build_profile_reply(profile: RiderProfile, missing: list[str], recommendation: BoardRecommendation | None) -> str:
+    if not any([
+        profile.height_cm, profile.weight_kg, profile.ability, profile.preferred_board_type,
+        profile.current_board, profile.current_volume_litres, profile.target_volume_litres,
+    ]):
+        return (
+            "Can’t find what you’re looking for, or not sure what you want yet? I’ve got access to live "
+            "board availability across Quivrr. Tell me how you surf, where you’re searching, and what kind "
+            "of board you’re chasing, and I’ll help narrow it down."
+        )
     if recommendation is None:
-        questions = ", ".join(missing[:4])
+        questions = ", ".join(missing[:1])
         return (
             "Good start. I need a bit more before I can point you at the right board. "
             f"Can you tell me your {questions}? "
@@ -216,6 +262,7 @@ def build_profile_reply(profile: RiderProfile, missing: list[str], recommendatio
         f"Recommended board type: {recommendation.board_category}\n"
         f"Suggested length range: {recommendation.suggested_length_range}\n"
         f"Suggested volume range: {recommendation.suggested_volume_range_litres}\n\n"
+        f"Adjustments: {'; '.join(recommendation.adjustment_factors) or 'Baseline only'}\n\n"
         f"Why: {recommendation.why_it_fits}\n\n"
         f"Search next: {recommendation.quivrr_search_direction}"
     )

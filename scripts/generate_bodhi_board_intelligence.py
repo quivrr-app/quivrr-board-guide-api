@@ -1,5 +1,6 @@
 ﻿import json
 import re
+import html
 from pathlib import Path
 
 
@@ -45,6 +46,11 @@ ABILITY_RULES = {
 
 def normalise(value):
     return str(value or "").strip().lower()
+
+
+def clean_description(value):
+    value = html.unescape(re.sub(r"<[^>]+>", " ", str(value or "")))
+    return re.sub(r"\s+", " ", value).strip() or None
 
 
 def text_blob(board):
@@ -105,7 +111,7 @@ def volume_range(board):
 
 
 def build_summary(board, inferred_category, feel_tags, wave_tags):
-    description = board.get("description")
+    description = clean_description(board.get("description"))
     if description:
         clean = re.sub(r"\s+", " ", description).strip()
         return clean[:420]
@@ -118,6 +124,20 @@ def build_summary(board, inferred_category, feel_tags, wave_tags):
     if wave_tags:
         parts.append("for " + ", ".join(wave_tags[:2]).lower())
     return " ".join(parts) + "."
+
+
+def first_sentences(value, limit=240):
+    clean = re.sub(r"\s+", " ", str(value or "")).strip()
+    if not clean:
+        return None
+    match = re.match(r"^(.{40,}?)(?:\.(?:\s|$)|$)", clean)
+    return (match.group(1) if match else clean)[:limit].rstrip() + "."
+
+
+def notes_with_tokens(description, tokens):
+    sentences = re.split(r"(?<=[.!?])\s+", str(description or ""))
+    selected = [sentence.strip() for sentence in sentences if any(token in sentence.lower() for token in tokens)]
+    return " ".join(selected[:2])[:500] or None
 
 
 def key_for(brand, model):
@@ -188,11 +208,23 @@ def main():
         if not ability_tags:
             ability_tags = ["Intermediate"]
 
+        description = clean_description(board.get("description"))
         item = {
             "brand": brand,
             "model": model,
+            "board_model_id": board.get("board_model_id"),
+            "model_description": description,
+            "short_description": first_sentences(description),
             "construction": board.get("construction"),
             "category": inferred_category,
+            "wave_range": board.get("recommended_wave_range"),
+            "wave_type": infer_tags(WAVE_RULES, text),
+            "skill_level": ability_tags,
+            "surfer_profile": notes_with_tokens(description, ["surfer", "beginner", "intermediate", "advanced", "ability"]),
+            "construction_notes": notes_with_tokens(description, ["construction", "carbon", "fiberglass", "eps", "pu"]),
+            "fin_setup_notes": notes_with_tokens(description, ["fin", "thruster", "quad", "twin"]),
+            "tail_notes": notes_with_tokens(description, ["tail", "swallow", "squash", "pin"]),
+            "rocker_notes": notes_with_tokens(description, ["rocker", "rail"]),
             "volume_range": volume_range(board),
             "ability_tags": ability_tags,
             "wave_tags": wave_tags,
@@ -201,6 +233,9 @@ def main():
             "official_image_url": board.get("official_image_url"),
             "summary": build_summary(board, inferred_category, feel_tags, wave_tags),
             "source": "generated_from_canonical_catalogue",
+            "source_url": board.get("description_source_url") or board.get("official_product_url") or board.get("source"),
+            "source_type": board.get("description_source_type") or ("manufacturer" if description else None),
+            "last_updated_utc": board.get("description_last_scraped_utc"),
             "override_applied": False,
         }
 

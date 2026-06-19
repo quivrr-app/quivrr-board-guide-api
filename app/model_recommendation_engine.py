@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 from app.models import RiderProfile, SuggestedBoard
+from app.rider_fit import recommend_rider_fit
 
 
 INTELLIGENCE_PATH = Path(__file__).parent / "knowledge" / "board_intelligence.json"
@@ -41,6 +42,24 @@ def _load_generated_intelligence() -> list[dict]:
     return boards
 
 
+def find_board_description(brand: str, model: str, boards: list[dict] | None = None) -> dict | None:
+    for board in boards if boards is not None else _load_generated_intelligence():
+        if _normalise(board.get("brand")) != _normalise(brand):
+            continue
+        if _normalise(board.get("model")) != _normalise(model):
+            continue
+        description = board.get("model_description") or board.get("summary")
+        if not description:
+            return None
+        return {
+            "description": description,
+            "shortDescription": board.get("short_description") or board.get("summary"),
+            "sourceUrl": board.get("source_url") or board.get("official_product_url"),
+            "sourceType": board.get("source_type") or "canonical_catalogue",
+        }
+    return None
+
+
 def _load_canonical_profiles() -> list[dict]:
     if not CANONICAL_PROFILES_PATH.exists():
         return []
@@ -61,30 +80,10 @@ def _normalise(value: str | None) -> str:
 
 
 def _profile_target_volume(profile: RiderProfile) -> tuple[float | None, float | None]:
-    if not profile.weight_kg:
-        return None, None
-
-    goal = _normalise(profile.goal)
-    ability = _normalise(profile.ability)
-
-    low_factor = 0.40
-    high_factor = 0.44
-
-    if any(token in goal for token in ["paddle", "catch", "easy", "small", "soft"]):
-        low_factor = 0.41
-        high_factor = 0.46
-
-    if any(token in goal for token in ["performance", "turn", "responsive"]):
-        high_factor = min(high_factor, 0.44)
-
-    if "beginner" in ability:
-        low_factor = max(low_factor, 0.48)
-        high_factor = max(high_factor, 0.55)
-
-    low = round(profile.weight_kg * low_factor, 1)
-    high = round(profile.weight_kg * high_factor, 1)
-
-    return low, high
+    if profile.target_volume_litres is not None:
+        return profile.target_volume_litres - 1.0, profile.target_volume_litres + 1.0
+    fit = recommend_rider_fit(profile)
+    return (fit.volume_low, fit.volume_high) if fit else (None, None)
 
 
 def _profile_volume_mid(profile: RiderProfile) -> float | None:
@@ -383,7 +382,23 @@ def recommend_models(profile: RiderProfile, limit: int = 4) -> list[SuggestedBoa
                 category=board.get("category") or "Surfboard",
                 confidence=confidence,
                 why_it_fits=why,
+                description=board.get("model_description") or board.get("description"),
+                short_description=board.get("short_description") or board.get("summary"),
                 trade_offs=board.get("trade_offs"),
+                volume_range=(
+                    f"{board['volume_range']['min']:g}-{board['volume_range']['max']:g}L"
+                    if isinstance(board.get("volume_range"), dict)
+                    and board["volume_range"].get("min") is not None
+                    and board["volume_range"].get("max") is not None
+                    else None
+                ),
+                wave_range=(
+                    board.get("wave_range")
+                    or board.get("recommended_wave_range")
+                    or ", ".join(board.get("wave_tags", []))
+                    or None
+                ),
+                skill_fit=", ".join(board.get("ability_tags", [])) or None,
                 source=source,
             )
         )
@@ -406,6 +421,13 @@ def build_recommendation_context(suggested_boards: list[SuggestedBoard]) -> str:
         lines.append(
             f"- {board.brand} {board.model}: {board.category}. "
             f"Why: {board.why_it_fits}. "
+            f"Manufacturer description: {board.short_description or 'Not available'}. "
+            f"Wave range: {board.wave_range or 'Not specified'}. "
+            f"Skill fit: {board.skill_fit or 'Not specified'}. "
+            f"Regional availability: {board.available_count} in {board.region or 'unspecified region'} "
+            f"({board.manufacturer_direct_count} manufacturer direct, {board.retailer_count} retailer). "
+            f"Live source: {board.example_live_source_url or 'None verified'}. "
+            f"Price range: {board.price_range or 'Not available'}. "
             f"Trade offs: {board.trade_offs or 'Not specified.'}. "
             f"Source: {board.source}."
         )
