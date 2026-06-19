@@ -80,6 +80,17 @@ with:
 python scripts/audit_board_intelligence_sources.py
 ```
 
+Phase 3 harvests reviewed global manufacturer metadata into a separate model-level companion file
+without changing production recommendation behaviour:
+
+```powershell
+python scripts/harvest_canonical_board_intelligence.py
+python scripts/harvest_canonical_board_intelligence.py --apply
+```
+
+See the Board Intelligence documentation for the source-index refresh workflow, field-level
+confidence rules, and coverage report.
+
 ## Rider Fit And Availability
 
 The rider-fit engine uses weight, ability, fitness, surf frequency, waves, preferred board type, current volume, age when supplied, and desired feel. It returns a volume range rather than a single prescriptive value and explains adjustment factors. Volume is guidance, not the whole fit decision.

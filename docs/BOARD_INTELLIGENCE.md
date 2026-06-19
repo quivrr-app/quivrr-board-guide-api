@@ -184,6 +184,89 @@ first produce a proposed matrix diff, then require review before replacing gener
 Recommendation behaviour should change only after field provenance and confidence are carried into
 the runtime model.
 
+## Phase 3 canonical harvesting
+
+Phase 3 now generates `canonical_board_intelligence.json` as one global record per canonical
+brand-model identity. It deliberately does not add the new fields to all 573 rows in
+`canonical_board_profiles.json`: those rows contain construction variants, and repeating global
+intelligence there would recreate the inflation identified in Phase 2. The existing canonical
+profiles remain the source for identity, dimensions, manufacturer URLs, and descriptions; the new
+file is their model-level structured intelligence companion.
+
+The harvester:
+
+- merges evidence across construction variants without changing the variants themselves;
+- retains existing manufacturer descriptions byte-for-byte and rejects short or repeated generic
+  descriptions;
+- refuses known retailer hosts as canonical description sources;
+- reads Sharp Eye labelled model range, ability, wave height/type, outline, rocker, rail, tail, and
+  fin evidence where present;
+- maps Pyzel and JS official category-page membership from a small reviewed source snapshot;
+- extracts Lost, DHD, and Rusty category, wave, surfer, and design evidence conservatively from
+  manufacturer prose;
+- carries existing generated evidence forward only as explicitly labelled `generated_fallback`
+  with low confidence;
+- records source and confidence at field or field-group level; and
+- contains no region or availability fields and is not read by production recommendations yet.
+
+Confidence follows the matrix rules: explicit manufacturer profile fields and product scales are
+high, deterministic manufacturer-description/category mappings are medium, and prior generated
+fallback is low. Mixed evidence retains per-field source metadata instead of inheriting the
+highest confidence found anywhere on the profile.
+
+### Phase 3 coverage
+
+| Field group | Before | After | Gain |
+| --- | ---: | ---: | ---: |
+| Manufacturer descriptions | 430 | 430 | 0; existing good copy preserved |
+| Primary category | 189 | 259 | +70 |
+| Wave metadata | 157 | 210 | +53 |
+| Surfer metadata | 63 | 72 | +9 |
+| Design metadata or preserved design evidence | 304 | 420 | +116 |
+
+The harvester enriches 377 models overall, including 224 models across the six priority brands.
+Priority-brand coverage after harvesting is:
+
+| Brand | Models | Descriptions | Categories | Wave | Surfer | Design | Main remaining gap |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Sharp Eye | 20 | 20 | 20 | 14 | 6 | 20 | Explicit wave type/range and ability are not present for every model |
+| Pyzel | 41 | 39 | 37 | 36 | 6 | 41 | Surfer ability and explicit ranges remain sparse |
+| Lost | 79 | 77 | 45 | 36 | 6 | 77 | Category-page membership and surfer ability need a dedicated source parser |
+| JS Industries | 30 | 20 | 26 | 8 | 1 | 29 | Ten descriptions plus most wave/surfer fields remain missing |
+| DHD | 23 | 22 | 13 | 19 | 14 | 23 | Manufacturer category and explicit wave type remain incomplete |
+| Rusty | 49 | 46 | 26 | 17 | 12 | 41 | Category pages, explicit ranges, and wave types remain incomplete |
+
+`manufacturer_category_index.json` contains reviewed manufacturer category membership for Pyzel
+and JS only. It is refreshed through explicit public read-only requests; normal harvesting is
+offline and deterministic. Lost category filtering is not snapshotted because its current page is
+client-filtered and a naive HTML parser would classify every model into every category.
+
+### Running Phase 3
+
+Dry-run coverage only:
+
+```powershell
+python scripts/harvest_canonical_board_intelligence.py
+```
+
+Refresh the small Pyzel/JS manufacturer category snapshot, then apply the reviewed model-level
+output:
+
+```powershell
+python scripts/harvest_canonical_board_intelligence.py --refresh-category-index --apply
+```
+
+Stable outputs:
+
+- `app/knowledge/generated/canonical_board_intelligence.json`
+- `app/knowledge/generated/manufacturer_category_index.json`
+- `app/knowledge/audits/phase3_harvest_coverage.json`
+- `app/knowledge/audits/phase3_harvest_coverage.csv`
+
+The next phase should review Lost category membership, recover the remaining JS descriptions, and
+introduce a schema-validated runtime adapter only after recommendation tests can prove that absent
+or low-confidence fields never become hard filters.
+
 ## Reproducing the audit
 
 ```powershell

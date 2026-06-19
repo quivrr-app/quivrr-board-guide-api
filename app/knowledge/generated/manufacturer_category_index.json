@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "manufacturer_category_index_v1",
+  "sourceType": "manufacturer_category_page",
+  "categories": [
+    {
+      "brand": "Pyzel",
+      "manufacturerCategory": "High Performance",
+      "sourceUrl": "https://pyzelsurfboards.com/pages/model-category/high-performance",
+      "modelKeys": [
+        "ghost",
+        "ghost pro",
+        "ghost squash",
+        "ghost xl",
+        "highline",
+        "power tiger 1",
+        "power tiger xl 1",
+        "radius",
+        "radius prime",
+        "shadow",
+        "shadow xl"
+      ]
+    },
+    {
+      "brand": "Pyzel",
+      "manufacturerCategory": "Daily Drivers",
+      "sourceUrl": "https://pyzelsurfboards.com/pages/model-category/daily-drivers",
+      "modelKeys": [
+        "mini ghost squash",
+        "phantom",
+        "phantom xl",
+        "pyzalien 2",
+        "pyzalien 2 xl",
+        "red tiger",
+        "red tiger xl",
+        "score lord"
+      ]
+    },
+    {
+      "brand": "Pyzel",
+      "manufacturerCategory": "Funformance",
+      "sourceUrl": "https://pyzelsurfboards.com/pages/model-category/funformance",
+      "modelKeys": [
+        "astro pop",
+        "astro pop xl",
+        "gremlin",
+        "gremlin xl",
+        "happy twin",
+        "white tiger"
+      ]
+    },
+    {
+      "brand": "Pyzel",
+      "manufacturerCategory": "Mid Length / Gun",
+      "sourceUrl": "https://pyzelsurfboards.com/pages/model-category/guns",
+      "modelKeys": [
+        "mini padillac",
+        "next step",
+        "padillac",
+        "puerto padi",
+        "tank"
+      ]
+    },
+    {
+      "brand": "JS Industries",
+      "manufacturerCategory": "Charger Series",
+      "sourceUrl": "https://jsindustries.com/collections/charger-series-1",
+      "modelKeys": [
+        "big horse",
+        "forget me not 3 step up",
+        "mother trucker",
+        "step off"
+      ]
+    },
+    {
+      "brand": "JS Industries",
+      "manufacturerCategory": "Performer Series",
+      "sourceUrl": "https://jsindustries.com/collections/performer-series",
+      "modelKeys": [
+        "big horse",
+        "forget me not 3",
+        "golden child",
+        "monsta 10",
+        "schooner"
+      ]
+    },
+    {
+      "brand": "JS Industries",
+      "manufacturerCategory": "Daily Series",
+      "sourceUrl": "https://jsindustries.com/collections/daily-series",
+      "modelKeys": [
+        "big baron",
+        "el baron",
+        "raging bull",
+        "xero fusion",
+        "xero gravity"
+      ]
+    },
+    {
+      "brand": "JS Industries",
+      "manufacturerCategory": "Fun Series",
+      "sourceUrl": "https://jsindustries.com/collections/fun-series",
+      "modelKeys": [
+        "black baron",
+        "bull run",
+        "flame fish",
+        "sub xero"
+      ]
+    },
+    {
+      "brand": "JS Industries",
+      "manufacturerCategory": "Youth Series",
+      "sourceUrl": "https://jsindustries.com/collections/youth-series-1",
+      "modelKeys": [
+        "golden child youth",
+        "monsta 10 youth",
+        "xero gravity youth"
+      ]
+    },
+    {
+      "brand": "JS Industries",
+      "manufacturerCategory": "Foil Boards",
+      "sourceUrl": "https://jsindustries.com/collections/foil-boards-1",
+      "modelKeys": [
+        "black eagle 2"
+      ]
+    },
+    {
+      "brand": "JS Industries",
+      "manufacturerCategory": "Softboards",
+      "sourceUrl": "https://jsindustries.com/collections/softboards-1",
+      "modelKeys": [
+        "big baron easy rider softboard",
+        "big baron softboard",
+        "bull run softboard",
+        "flame fish softboard"
+      ]
+    }
+  ]
+}
