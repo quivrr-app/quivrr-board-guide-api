@@ -63,12 +63,22 @@ The generated intelligence records board category, daily-driver/performance/grov
 Current June 2026 coverage:
 
 - 513 distinct canonical model profiles
-- 430 models with manufacturer descriptions
+- 430 models with manufacturer descriptions after construction-variant evidence is merged
 - 192 deterministically classified models
 - 321 deliberately unclassified models
-- 84 models missing manufacturer descriptions
+- 83 models missing manufacturer descriptions (the legacy audit reports 84 because it selects a
+  description-free Lost Puddle Jumper HP construction variant)
 
 Unclassified and low-confidence results remain visible in `app/knowledge/generated/board_intelligence_audit.json`; the classifier must not invent weak matches.
+
+The Phase 2 manufacturer intelligence discovery audit, target Board Intelligence Matrix, brand
+coverage, priority remediation queue, and Phase 3 plan are documented in
+[`docs/BOARD_INTELLIGENCE.md`](docs/BOARD_INTELLIGENCE.md). Reproduce its stable read-only outputs
+with:
+
+```powershell
+python scripts/audit_board_intelligence_sources.py
+```
 
 ## Rider Fit And Availability
 

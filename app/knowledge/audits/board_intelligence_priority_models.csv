@@ -1,0 +1,101 @@
+priorityScore,brand,model,boardModelId,canonicalSizeCount,descriptionPresent,classificationPresent,missingFields,recommendedNextAction
+184,Lost,Puddle Jumper,7865,24,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags,Extract structured manufacturer metadata
+184,Pyzel,Gremlin,7768,21,True,False,primaryCategory|waveRange|waveType|wavePower|recommendationTags|equivalency,Extract structured manufacturer metadata
+181,JS Industries,Black Baron,7696,15,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+181,Lost,Rad Ripper,7870,17,True,False,primaryCategory|waveRange|waveType|wavePower|recommendationTags|equivalency,Extract structured manufacturer metadata
+180,JS Industries,Monsta,7689,30,False,True,manufacturerDescription|waveType|designMetadata|equivalency,Recover manufacturer description
+175,Firewire,Dominator 2.0,7961,13,True,False,primaryCategory|waveRange|waveType|surferAbility|equivalency,Extract structured manufacturer metadata
+174,Firewire,Seaside,7972,12,True,False,primaryCategory|waveRange|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+174,Lost,RNF 96,7875,32,True,True,waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags,Extract structured manufacturer metadata
+168,JS Industries,Golden Child,7687,23,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+168,JS Industries,Xero Gravity,7692,26,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+168,Sharp Eye,Inferno 72,8028,39,True,True,waveRange|waveType|equivalency,Extract structured manufacturer metadata
+167,JS Industries,Golden Child Youth,7700,19,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+167,Lost,Crowd Killer Round,7834,19,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+166,Haydenshapes,Hypto Krypto,7998,22,True,True,designMetadata|equivalency,Extract structured manufacturer metadata
+164,Rusty,Dwart,7915,36,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags,Extract structured manufacturer metadata
+163,Lost,Party Crasher,7857,15,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+162,Firewire,Mashup,7971,12,True,True,waveRange|waveType|surferAbility|equivalency,Extract structured manufacturer metadata
+161,JS Industries,Xero Gravity Easy Rider,7710,13,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+160,Pyzel,Ghost,7761,14,True,True,waveType|equivalency,Curate equivalency only with explicit evidence
+159,JS Industries,Golden Child Easy Rider,7708,11,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+159,Pyzel,Gremlin XL,7772,11,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+159,Pyzel,Phantom,7787,9,True,True,waveRange|waveType|surferAbility|equivalency,Extract structured manufacturer metadata
+158,JS Industries,Big Horse,7686,33,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Extract structured manufacturer metadata
+158,JS Industries,Monsta Easy Rider,7709,10,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+157,Pyzel,Phantom XL,7773,9,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+156,JS Industries,Monsta Youth,7701,8,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+156,JS Industries,Xero Gravity Youth,7702,8,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+156,Lost,Sub Driver,7890,30,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|equivalency,Extract structured manufacturer metadata
+154,Chilli,Volume II,8113,12,True,False,primaryCategory|waveType|surferAbility|recommendationTags|equivalency,Review deterministic classification
+154,JS Industries,Forget Me Not 3,7688,22,True,False,primaryCategory|waveRange|waveType|surferAbility|designMetadata|equivalency,Extract structured manufacturer metadata
+154,JS Industries,Raging Bull,7691,21,True,False,primaryCategory|waveRange|waveType|surferAbility|designMetadata|equivalency,Extract structured manufacturer metadata
+154,Lost,Driver 3.0 Round,7840,25,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags,Extract structured manufacturer metadata
+154,Lost,Driver 3.0 Squash,7841,23,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags,Extract structured manufacturer metadata
+154,Lost,Pocket Rocket Round,7861,24,True,False,primaryCategory|waveRange|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+154,Lost,Pocket Rocket Squash,7862,24,True,False,primaryCategory|waveRange|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+154,Lost,Psycho Killer,7863,28,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+154,Lost,Puddle Jumper HP,7866,23,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+154,Lost,RNF Twinzer '96Er,7880,18,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+153,JS Industries,Bull Run,7697,15,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Extract structured manufacturer metadata
+153,JS Industries,Sub Xero,7698,17,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+153,Lost,Rocket Redux,7881,17,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+153,Lost,Speed Demon,7888,15,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Extract structured manufacturer metadata
+152,Firewire,Mindcraft,7956,18,True,False,primaryCategory|waveType|wavePower|surferAbility|recommendationTags|equivalency,Review deterministic classification
+152,JS Industries,Flame Fish,7699,14,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Extract structured manufacturer metadata
+152,Lost,Puddle Jumper Sting,7868,18,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+152,Lost,The Ripper Squash,7899,30,True,False,primaryCategory|waveRange|waveType|surferAbility|equivalency,Extract structured manufacturer metadata
+152,Lost,Uber Driver,7901,16,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+151,JS Industries,Schooner,7690,13,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Extract structured manufacturer metadata
+151,Lost,3.0 Stub Driver,7825,19,True,False,primaryCategory|waveRange|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+151,Lost,Big Rig Driver,7829,15,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+151,Lost,Formula 1 Round,7844,15,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+151,Lost,Formula 1 Squash,7845,15,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+151,Lost,Party Platter,7858,17,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+151,Lost,Swordfish,7895,15,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+150,JS Industries,Black Eagle 2,7703,12,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Extract structured manufacturer metadata
+150,Lost,Crowd Killer,7833,16,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+149,Lost,Driver 2.0,7836,13,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+149,Lost,Hydra,7847,15,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+149,Lost,Maysym Goofy,7850,15,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+149,Lost,Maysym Regular,7851,15,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+149,Lost,The Ripper Round,7898,15,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+149,Lost,Uber Driver XL,7902,15,True,False,primaryCategory|waveRange|waveType|wavePower|recommendationTags|equivalency,Extract structured manufacturer metadata
+148,Firewire,Sci-Fi 2.0,7973,12,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+148,Lost,Micks Tape Goofy,7852,14,True,False,primaryCategory|waveRange|waveType|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+148,Lost,Micks Tape Regular,7853,14,True,False,primaryCategory|waveRange|waveType|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+148,Lost,RV,7883,12,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+148,Lost,Retro Gun,7872,14,True,False,primaryCategory|waveRange|waveType|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+148,Pyzel,Mini Ghost Round,7763,14,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+148,Pyzel,Mini Ghost Squash,7764,14,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+148,Rusty,Miso,7931,38,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+147,Lost,Cali Twin,7830,15,True,False,primaryCategory|waveRange|waveType|surferAbility|equivalency,Extract structured manufacturer metadata
+147,Lost,Double Up,7835,11,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+147,Lost,Retro Tripper,7874,17,True,False,primaryCategory|waveRange|waveType|surferAbility,Extract structured manufacturer metadata
+147,Pyzel,Shadow,7796,11,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+146,Firewire,FRK Swallow,7959,10,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+146,Lost,Micks Tape Sym,7854,14,True,False,primaryCategory|waveRange|waveType|surferAbility|equivalency,Extract structured manufacturer metadata
+146,Lost,Sub Driver Swallow Tail,7893,12,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+146,Lost,Tube Pig,7900,12,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+145,DHD,Nexus EPS,7813,17,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+145,Firewire,DRK,7954,11,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+145,Haydenshapes,Cannon,7985,15,True,False,primaryCategory|waveRange|surferAbility|equivalency,Extract structured manufacturer metadata
+145,Haydenshapes,Holy Hypto,7996,17,True,False,primaryCategory|waveRange|equivalency,Extract structured manufacturer metadata
+145,JS Industries,Mother Trucker,7683,7,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Extract structured manufacturer metadata
+145,JS Industries,Raging Bull Easy Rider,7712,11,True,False,primaryCategory|waveRange|waveType|surferAbility|designMetadata|equivalency,Extract structured manufacturer metadata
+145,Pukas,Pukas Space Oddity,8066,17,False,False,manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Recover manufacturer description
+145,Sharp Eye,Radar,8034,15,True,False,primaryCategory|waveType|surferAbility|equivalency,Review deterministic classification
+144,JS Industries,Xero Fusion,7693,28,True,True,waveRange|waveType|wavePower|surferAbility|designMetadata|equivalency,Extract structured manufacturer metadata
+144,Lost,El Patron,7842,8,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+144,Sharp Eye,Zipper,8038,10,True,False,primaryCategory|waveRange|waveType|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+143,Firewire,Spaceship,7957,11,True,False,primaryCategory|waveRange|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+143,JS Industries,Flame Fish Softboard,7707,5,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency,Extract structured manufacturer metadata
+143,Pyzel,Highline,7788,13,True,False,primaryCategory|waveRange|waveType|surferAbility,Extract structured manufacturer metadata
+143,Pyzel,Power Tiger,7769,11,True,False,primaryCategory|waveRange|waveType|surferAbility|equivalency,Extract structured manufacturer metadata
+143,Pyzel,Tiger Twin,7766,9,True,False,primaryCategory|waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+143,Sharp Eye,Maguro,8030,9,True,False,primaryCategory|waveRange|waveType|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+143,Sharp Eye,Modern 2.5,8032,9,True,False,primaryCategory|waveRange|waveType|surferAbility|recommendationTags|equivalency,Extract structured manufacturer metadata
+142,Firewire,Machadocado,7966,12,True,False,primaryCategory|waveRange|waveType|equivalency,Extract structured manufacturer metadata
+142,Lost,Beach Buggy 2,7828,20,True,True,waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
+142,Lost,Lazy Toy,7848,10,True,False,primaryCategory|waveRange|waveType|surferAbility|equivalency,Extract structured manufacturer metadata
+142,Lost,Puddle Fish,7864,22,True,True,waveRange|waveType|wavePower|surferAbility|equivalency,Extract structured manufacturer metadata
