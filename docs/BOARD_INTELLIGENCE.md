@@ -267,6 +267,112 @@ The next phase should review Lost category membership, recover the remaining JS 
 introduce a schema-validated runtime adapter only after recommendation tests can prove that absent
 or low-confidence fields never become hard filters.
 
+## Phase 4 taxonomy and recommendation graph
+
+Phase 4 converts the harvested model profiles into a deterministic global recommendation graph.
+It is generated knowledge, not regional inventory, and is not yet wired into the production API.
+
+### Canonical taxonomy
+
+Every model receives one allowed primary category and optional secondary categories. Explicit
+manufacturer mappings and reviewed overrides take precedence, followed by deterministic
+manufacturer text, length taxonomy, and finally a low-confidence conservative shortboard fallback.
+Fallback assignments remain visible in `board_taxonomy_audit.json`; 100% structural coverage must
+not be confused with 100% high-confidence classification.
+
+Current taxonomy coverage:
+
+- 513 of 513 models have a primary category.
+- 8 are high confidence, 252 medium, and 253 low confidence.
+- Low-confidence models are the next classification remediation queue.
+
+Reviewed examples include Hypto Krypto as `hybrid` + `daily_driver`, Ghost as `step_up` +
+`performance_shortboard`, Monsta as `performance_shortboard` + `daily_driver`, RNF 96 as `fish` +
+`groveller`, and Seaside as `fish` + `hybrid`.
+
+### Board DNA
+
+Each graph node records:
+
+- `boardPersonality`
+- manufacturer wave range and power
+- `paddlingBias`
+- `turningBias`
+- `forgiveness`
+- `performanceBias`
+
+Biases are `low`, `medium`, or `high`. They are produced only by declared category, secondary
+category, and manufacturer-description rules. For example, performance shortboards increase
+performance and turning bias; fish, grovellers, hybrids, and longer boards increase paddle and
+forgiveness bias. Manufacturer phrases such as “easy paddling,” “forgiving,” and “critical” adjust
+the relevant bias by one bounded level.
+
+### Graph relationships
+
+`board_recommendation_graph.json` stores up to five explainable edges per relationship:
+
+- `similarBoards`: same primary category with compatible DNA, wave, and volume ranges.
+- `alternativeBoards`: compatible secondary category or strong DNA overlap.
+- `upgradeBoards`: higher performance bias among otherwise compatible boards.
+- `downgradeBoards`: greater forgiveness among otherwise compatible boards.
+
+Scores use only taxonomy, wave-range overlap, wave power, Board DNA, and canonical volume overlap.
+Edges contain confidence, score, and a short rationale. A small reviewed relationship set locks in
+important known comparisons such as Monsta → Phantom / Inferno 72 / Happy Everyday, without using
+fuzzy or AI-generated guesses.
+
+Current graph coverage is 512 of 513 models (99.8%). The sole model without an equivalent is JS
+Industries Black Eagle 2, the catalogue's only foil model.
+
+### Out-of-stock replacement strategy
+
+`available_replacements()` accepts a graph, target model, desired volume, explicit region, and
+caller-supplied availability rows. It ranks:
+
+1. available models in the requested region;
+2. closest canonical volume range;
+3. graph score and deterministic relation quality.
+
+AU stock is never treated as EU or ID stock. Unavailable candidates may remain as explanatory
+comparisons, but can never rank above a verified available candidate. The function does not query
+or mutate inventory itself.
+
+### Rider archetypes and volume formula
+
+The new canonical archetypes are `beginner_weekend`, `improver`, `intermediate`, `advanced`, and
+`expert`. Base volume is weight in kilograms multiplied by the archetype factor:
+
+| Archetype | Litres per kilogram |
+| --- | --- |
+| beginner_weekend | 0.50–0.60 |
+| improver | 0.43–0.50 |
+| intermediate | 0.38–0.43 |
+| advanced | 0.34–0.38 |
+| expert | 0.31–0.35 |
+
+Deterministic adjustments add 1.5–2.5L for low fitness, 1–1.5L for less-than-weekly surfing, and
+1.5–2L for surfers aged 50+ outside the expert archetype. Strong fitness or four-plus weekly
+sessions removes 0.5L. Height is retained for future length-fit guidance; volume remains
+weight-led. The result includes confidence and every adjustment reason.
+
+### Comparison and audit
+
+`compare_boards()` returns category, wave range/power, paddle bias, turning bias, forgiveness,
+performance, and recommended-surfer evidence for two canonical models. Coverage lives in:
+
+- `app/knowledge/audits/board_taxonomy_audit.json`
+- `app/knowledge/audits/board_graph_audit.json`
+
+Regenerate the graph and both audits with:
+
+```powershell
+python scripts/generate_board_recommendation_graph.py
+```
+
+The next integration phase should replace low-confidence taxonomy fallbacks with reviewed evidence,
+then add a read-only runtime adapter behind existing recommendation tests. Regional availability
+must remain a final ranking input, never part of global graph generation.
+
 ## Reproducing the audit
 
 ```powershell

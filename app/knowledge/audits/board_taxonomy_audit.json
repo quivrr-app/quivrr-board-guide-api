@@ -1,0 +1,628 @@
+{
+  "auditVersion": "bodhi_phase_4_taxonomy_v1",
+  "totalModels": 513,
+  "modelsWithPrimaryCategory": 513,
+  "categoryCoveragePercent": 100.0,
+  "categoryCounts": {
+    "daily_driver": 34,
+    "fish": 41,
+    "foil": 1,
+    "groveller": 19,
+    "gun": 3,
+    "hybrid": 209,
+    "longboard": 32,
+    "mid_length": 59,
+    "performance_shortboard": 72,
+    "softboard": 6,
+    "step_up": 29,
+    "youth": 8
+  },
+  "confidenceDistribution": {
+    "high": 8,
+    "low": 253,
+    "medium": 252
+  },
+  "lowConfidenceCount": 253,
+  "topLowConfidenceModels": [
+    {
+      "brand": "Album",
+      "model": "Bom Dia",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Album",
+      "model": "D'boa",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Album",
+      "model": "Delma",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Album",
+      "model": "Disorder",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Album",
+      "model": "Freewing",
+      "category": "performance_shortboard",
+      "source": "generated_fallback"
+    },
+    {
+      "brand": "Album",
+      "model": "Insanity",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Album",
+      "model": "Plasmic",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Album",
+      "model": "ProtoAtypical",
+      "category": "performance_shortboard",
+      "source": "generated_fallback"
+    },
+    {
+      "brand": "Album",
+      "model": "The End",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Album",
+      "model": "Twinsman",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Album",
+      "model": "VBSM",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Album",
+      "model": "Veebee",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Album",
+      "model": "Warp Twin",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "average-joe",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "better-everyday",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "big-happy",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "biscuit-bonzer",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bobby-quad",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bonzer-3d",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bonzer-shelter",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bunny-chow",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-2-pro",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-mid",
+      "category": "mid_length",
+      "source": "generated_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-mid-twin",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-mid-twin-1",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-pro",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "dumpster-diver",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "dumpster-diver-2",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "free-scrubber-1",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "girabbit",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "goldie",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "happy-traveler-1",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "high-5",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "hoglet",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "m-23",
+      "category": "hybrid",
+      "source": "generated_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "mavs-gun",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "mikey-february-shorty",
+      "category": "performance_shortboard",
+      "source": "generated_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "neckbeard",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "neckbeard-2",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "neckbeard-3",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "og-flyer",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "pod-mod-1",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rocket-9",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rocket-wide",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rocket-wide-squash",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rook-15",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "semi-pro-12",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "t-low",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "the-new-flyer",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "the-proton",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "the-solution",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "twin-fin",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "twin-pin",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "two-happy",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ultra-joe-1",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "weirdo-ripper",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "4x4",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Alchemist Remix",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Beaker",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Beaker Comp",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Beer Fridge",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Boombastik",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Cassette Deck",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Chem Zen",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Chem ZenAgain",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Chemistry M Mix Surfboard",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Chemistry Pantera Rosa Surfboard",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Chemistry The 23 Surfboard",
+      "category": "hybrid",
+      "source": "generated_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Compression",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "D3",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Daisho",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Disk",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Disk 2",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Flash Point",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Liquid Sword",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Nucleus",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Pool Toy",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "R2",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Solution",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Summertime Pt 2",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "The Zen4 Deluxe",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "The Zenith",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Zen 4",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Zen 4 1",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Zen3",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chilli",
+      "model": "A2",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chilli",
+      "model": "BV2",
+      "category": "groveller",
+      "source": "generated_fallback"
+    },
+    {
+      "brand": "Chilli",
+      "model": "FAD3R",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chilli",
+      "model": "Faded 2.0 Gun",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Chilli",
+      "model": "HKII",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chilli",
+      "model": "Peppa Twin",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chilli",
+      "model": "Piña Colada",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chilli",
+      "model": "Rare Bird EVO",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Chilli",
+      "model": "Rare Bird EVO TT",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Chilli",
+      "model": "SHORTIE",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Chilli",
+      "model": "Volume II",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Beausoleil",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Christenson",
+      "model": "C-Hawk",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Cafe Racer 2.0",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Easy Wind",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    }
+  ]
+}

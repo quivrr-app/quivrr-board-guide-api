@@ -91,6 +91,16 @@ python scripts/harvest_canonical_board_intelligence.py --apply
 See the Board Intelligence documentation for the source-index refresh workflow, field-level
 confidence rules, and coverage report.
 
+Phase 4 builds the deterministic global taxonomy, Board DNA, comparison layer, rider archetypes,
+and recommendation graph without changing live recommendation behaviour:
+
+```powershell
+python scripts/generate_board_recommendation_graph.py
+```
+
+The graph covers 512 of 513 canonical models. Runtime inventory remains a separate explicit-region
+input to the replacement-ranking helper.
+
 ## Rider Fit And Availability
 
 The rider-fit engine uses weight, ability, fitness, surf frequency, waves, preferred board type, current volume, age when supplied, and desired feel. It returns a volume range rather than a single prescriptive value and explains adjustment factors. Volume is guidance, not the whole fit decision.
