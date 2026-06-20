@@ -7,7 +7,7 @@ from app.rider_fit import recommend_rider_fit
 
 
 def _extract_height_cm(text: str) -> int | None:
-    match = re.search(r"\b(1[4-9][0-9]|20[0-9]|21[0-9])\s*cm\b", text)
+    match = re.search(r"\b(1[4-9][0-9]|20[0-9]|21[0-9])\s*(?:cm|(?:in\s+)?height)\b", text)
     if match:
         return int(match.group(1))
     return None
@@ -32,14 +32,21 @@ def _extract_current_volume(text: str) -> float | None:
 def _extract_target_volume(text: str) -> float | None:
     match = re.search(
         r"(?:around|about|roughly|target(?:ing)?|looking for|want(?:ing)?)\D{0,24}"
-        r"([1-9][0-9](?:\.[0-9])?)\s*(?:l|litre|litres)\b",
+        r"([1-9][0-9](?:\.[0-9])?)\s*(?:l|lits?|litres?)\b",
         text,
     )
-    return float(match.group(1)) if match else None
+    if match:
+        return float(match.group(1))
+    if any(token in text for token in ["stock", "board", "do you have", "find me", "show me"]):
+        match = re.search(r"\b([1-9][0-9](?:\.[0-9])?)\s*(?:l|lits?|litres?)\b", text)
+        return float(match.group(1)) if match else None
+    return None
 
 
 def _extract_age(text: str) -> int | None:
     match = re.search(r"\b(?:age(?:d)?\s*)?([1-8][0-9])\s*(?:years? old|yo)\b", text)
+    if not match:
+        match = re.search(r"\b(?:i(?:'m|m| am))\s+([1-8][0-9])\b", text)
     return int(match.group(1)) if match else None
 
 
@@ -58,7 +65,8 @@ def _extract_frequency(text: str) -> float | None:
     match = re.search(r"\b([0-7](?:\.5)?)\s*(?:times?|sessions?)\s*(?:a|per)\s*week\b", text)
     if match:
         return float(match.group(1))
-    if (re.search(r"\bdaily\b", text) and "daily driver" not in text) or "most days" in text:
+    if ((re.search(r"\b(?:daily|every\s*day|everyday)\b", text) and "daily driver" not in text)
+            or "most days" in text):
         return 5.0
     if "once or twice a week" in text or "one or two times a week" in text:
         return 1.5
@@ -166,6 +174,15 @@ def _extract_goal(text: str) -> str | None:
     return ", ".join(dict.fromkeys(readable))
 
 
+def _extract_construction_preference(text: str) -> str | None:
+    carbon_epoxy = [
+        "carbon", "carbotune", "spinetek", "spine-tek", "eps", "epoxy", "hyfi",
+        "helium", "ibolic", "i-bolic", "futureflex", "dark arts", "black sheep",
+        "lightspeed", "lib-tech", "varial", "thunderbolt", "xtr",
+    ]
+    return "carbon_or_epoxy" if any(token in text for token in carbon_epoxy) else None
+
+
 def _extract_region(text: str, explicit_region: str | None = None) -> str | None:
     aliases = [
         (r"\b(?:europe|eu)\b", "EU"),
@@ -185,6 +202,8 @@ def _extract_current_board(text: str) -> str | None:
     for board in load_graph().get("boards", []):
         brand = str(board.get("brand") or "")
         model = str(board.get("model") or "")
+        if model.lower() in {"what", "why", "how", "when", "where"}:
+            continue
         if model and re.search(rf"\b{re.escape(model.lower())}\b", text):
             matches.append((len(model), f"{brand} {model}"))
     return max(matches, default=(0, None))[1]
@@ -210,6 +229,7 @@ def extract_profile(message: str, region: str | None = None) -> RiderProfile:
         wave_type=_extract_wave_type(text),
         wave_power=_extract_wave_power(text),
         goal=_extract_goal(text),
+        construction_preference=_extract_construction_preference(text),
     )
 
 

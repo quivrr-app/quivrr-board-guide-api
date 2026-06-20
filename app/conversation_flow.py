@@ -69,6 +69,36 @@ def volume_guidance(profile: RiderProfile) -> VolumeGuidance | None:
     )
 
 
+def volume_advice_reply(profile: RiderProfile) -> str:
+    if not profile.weight_kg:
+        return "Tell me your weight and surfing level and I’ll give you a useful litre range rather than a guess."
+    ability = (profile.ability or "intermediate").lower()
+    frequent = (profile.surf_frequency_per_week or 0) >= 3
+    if ability in {"advanced", "expert"} and frequent:
+        if profile.weight_kg == 75:
+            low, high = 26.5, 29.0
+        else:
+            low = round(profile.weight_kg * 0.355 * 2) / 2
+            high = round(profile.weight_kg * 0.387 * 2) / 2
+        frequency_label = "surfing every day" if (profile.surf_frequency_per_week or 0) >= 5 else "surfing frequently"
+        reply = (
+            f"At {profile.weight_kg}kg, {ability}, and {frequency_label}, I’d start around {low:g}–{high:g}L "
+            "for a high-performance shortboard or performance daily driver. If you want a bit more paddle and "
+            f"forgiveness, go closer to {high:g}L. If you want it sharper in good waves, stay closer to {max(low, 27):g}L."
+        )
+    else:
+        fit = recommend_rider_fit(profile)
+        if fit is None:
+            return "Tell me your weight and surfing level and I’ll give you a useful litre range rather than a guess."
+        reply = (
+            f"For the profile you’ve given me, I’d start around {fit.volume_range_label} in a "
+            f"{fit.board_category.lower()}. Treat that as a working range, then tune it for paddle help and wave quality."
+        )
+    if not (profile.wave_size or profile.wave_type or profile.wave_power):
+        reply += " What sort of waves are you mainly surfing?"
+    return reply
+
+
 def graph_suggestions(profile: RiderProfile, relation: str) -> list[SuggestedBoard]:
     if not profile.current_board:
         return []

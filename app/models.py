@@ -18,6 +18,7 @@ class RiderProfile(BaseModel):
     wave_type: str | None = None
     wave_power: str | None = None
     goal: str | None = None
+    construction_preference: str | None = None
 
 
 class BoardRecommendation(BaseModel):

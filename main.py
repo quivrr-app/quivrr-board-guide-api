@@ -8,7 +8,7 @@ from app.conversation_flow import (
     comparison_reply, enough_for_recommendations, find_requested_board, general_board_reply,
     graph_suggestions, has_intake_signal, intake_questions, opening_message,
     public_recommendations, recommendation_reply, site_help_reply, suggestions_for_board,
-    volume_guidance,
+    volume_advice_reply, volume_guidance,
 )
 from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
 from app.intent_router import route_intent
@@ -68,7 +68,11 @@ def board_guide_chat(request: BoardGuideRequest):
     category = extract_category(request.message, profile.preferred_board_type)
     requested_board = find_requested_board(request.message)
 
-    if intent == "site_help_question":
+    if intent == "volume_advice_request":
+        suggested_boards = []
+        reply = volume_advice_reply(profile)
+        questions = []
+    elif intent == "site_help_question":
         suggested_boards = []
         reply = site_help_reply(profile.region)
         questions = []
@@ -107,9 +111,16 @@ def board_guide_chat(request: BoardGuideRequest):
         if suggested_boards:
             count = sum(board.available_count for board in suggested_boards)
             brands = ", ".join(dict.fromkeys(board.brand for board in suggested_boards))
+            construction_note = ""
+            if profile.construction_preference:
+                exact = sum("matches your carbon/epoxy" in board.why_it_fits for board in suggested_boards)
+                construction_note = (
+                    f" {exact} model group(s) match the requested carbon/epoxy construction."
+                    + (" I found a few close non-carbon/epoxy options too." if exact < len(suggested_boards) else "")
+                )
             reply = (
                 f"I found {count} verified live {label} or {label}-style listings{target} in {profile.region}. "
-                f"The live brand groups are {brands}. Here are the strongest matching models. "
+                f"The live brand groups are {brands}.{construction_note} Here are the strongest matching models. "
                 "Want me to narrow them by ability, waves, brand, or how forgiving you want the board to feel?"
             )
         else:

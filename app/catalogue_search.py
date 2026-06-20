@@ -5,9 +5,12 @@ import re
 from app.board_graph_engine import board_key, load_graph
 from app.inventory_client import enrich_suggestions_concurrently, normalise_region
 from app.models import RiderProfile, SuggestedBoard
+from app.daily_driver_taxonomy import daily_driver_lane
 
 
 CATEGORY_ALIASES = {
+    "high performance daily driver": "performance_daily_driver",
+    "performance daily driver": "performance_daily_driver",
     "fish": "fish", "twin": "fish", "twin fin": "fish",
     "daily driver": "daily_driver", "everyday": "daily_driver",
     "groveller": "groveller", "groveler": "groveller",
@@ -41,6 +44,8 @@ def _category_matches(board: dict, category: str) -> bool:
         return bool(values & {"daily_driver", "performance_shortboard", "groveller", "fish", "hybrid", "step_up"})
     if category == "fish":
         return "fish" in values or any(term in model for term in FISH_MODEL_TERMS)
+    if category == "performance_daily_driver":
+        return daily_driver_lane(board.get("brand"), board.get("model")) == "performance_daily_driver"
     return category in values
 
 
@@ -101,7 +106,18 @@ def search_live_category(profile: RiderProfile, category: str, limit: int = 20) 
     target = profile.target_volume_litres
     candidates = category_candidates(category, target, limit)
     live = enrich_suggestions_concurrently(candidates, profile)
-    return [board for board in live if board.available_count > 0]
+    if not profile.construction_preference:
+        return [board for board in live if board.available_count > 0]
+    exact = [board.model_copy(update={"why_it_fits": board.why_it_fits + "; matches your carbon/epoxy construction preference"})
+             for board in live if board.available_count > 0]
+    if len(exact) >= 5:
+        return exact
+    relaxed_profile = profile.model_copy(update={"construction_preference": None})
+    relaxed = enrich_suggestions_concurrently(candidates, relaxed_profile)
+    seen = {(board.brand.lower(), board.model.lower()) for board in exact}
+    close = [board.model_copy(update={"why_it_fits": board.why_it_fits + "; close fit in another construction"})
+             for board in relaxed if board.available_count > 0 and (board.brand.lower(), board.model.lower()) not in seen]
+    return exact + close
 
 
 def inventory_snapshot_reply(region: str, category: str | None = None) -> str:

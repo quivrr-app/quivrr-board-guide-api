@@ -9,6 +9,7 @@ from app.models import SuggestedBoard
 from app.profile_engine import extract_profile
 from app.daily_driver_taxonomy import daily_driver_lane
 from app.model_recommendation_engine import recommend_models
+from app.inventory_client import construction_matches_preference
 
 
 def live_fish_rows(_profile, _category):
@@ -38,6 +39,8 @@ class IntentRouterTests(unittest.TestCase):
             "Compare Ghost and Phantom": "comparison_request",
             "What is a fish surfboard?": "general_board_question",
             "How do I use the site?": "site_help_question",
+            "What volume should I ride if I'm 75kg?": "volume_advice_request",
+            "How many litres should I be on?": "volume_advice_request",
         }
         for message, expected in cases.items():
             with self.subTest(message=message):
@@ -54,6 +57,26 @@ class IntentRouterTests(unittest.TestCase):
         self.assertEqual(profile.region, "EU")
         self.assertEqual(profile.wave_type, "Reef Break")
         self.assertEqual(profile.wave_power, "Average to Powerful")
+
+    def test_volume_profile_extracts_natural_age_height_and_daily_frequency(self):
+        profile = extract_profile(
+            "what volume should i ride if im 46, 75kgs, 175 in height, advanced surfer and surf everyday?"
+        )
+        self.assertEqual(profile.age, 46)
+        self.assertEqual(profile.height_cm, 175)
+        self.assertEqual(profile.weight_kg, 75)
+        self.assertEqual(profile.ability, "Advanced")
+        self.assertEqual(profile.surf_frequency_per_week, 5)
+        self.assertIsNone(profile.current_board)
+
+    def test_construction_aliases_are_deterministic(self):
+        for construction in [
+            "Carbon", "CarboTune", "Spine-Tek", "EPS Epoxy", "HYFI", "Helium", "I-Bolic",
+            "FutureFlex", "Dark Arts", "Black Sheep", "LightSpeed", "Lib-Tech", "Varial", "Thunderbolt", "XTR",
+        ]:
+            with self.subTest(construction=construction):
+                self.assertTrue(construction_matches_preference(construction, "carbon_or_epoxy"))
+        self.assertFalse(construction_matches_preference("PU", "carbon_or_epoxy"))
 
     def test_performance_daily_drivers_outrank_hybrids_for_good_waves(self):
         profile = extract_profile(
@@ -87,6 +110,35 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertEqual(body["intakeState"]["region"], "EU")
         self.assertIn("retailer listings", body["reply"])
         self.assertNotIn("rough weight", body["reply"].lower())
+
+    def test_volume_advice_returns_specific_range_without_products(self):
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "what volume should i ride if im 46, 75kgs, 175 in height, advanced surfer and surf everyday?"
+        })
+        body = response.json()
+        self.assertEqual(body["intent"], "volume_advice_request")
+        self.assertIn("26.5–29L", body["reply"])
+        self.assertIn("high-performance shortboard", body["reply"])
+        self.assertNotIn("Volume is the board’s litres", body["reply"])
+        self.assertEqual(body["suggested_boards"], [])
+        self.assertEqual(body["recommendations"], [])
+
+    @patch("main.search_live_category", return_value=[SuggestedBoard(
+        brand="JS Industries", model="Monsta", category="Performance Daily Driver", confidence=.95,
+        why_it_fits="matches your carbon/epoxy construction preference", suggested_size="5'11 | 28L",
+        available_count=2, retailer_count=2, region="AU", example_live_source_url="https://example.test/au/monsta",
+    )])
+    def test_carbon_epoxy_daily_driver_stock_search_returns_results(self, _search):
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "do you have any boards in stock for 28lits or around that, for a carbon or epoxy high performance daily driver?",
+            "region": "AU",
+        })
+        body = response.json()
+        self.assertEqual(body["intent"], "board_search_request")
+        self.assertEqual(body["intakeState"]["target_volume_litres"], 28)
+        self.assertEqual(body["intakeState"]["construction_preference"], "carbon_or_epoxy")
+        self.assertEqual(body["recommendations"][0]["model"], "Monsta")
+        self.assertEqual(body["recommendations"][0]["region"], "AU")
 
     @patch("main.search_live_category", side_effect=live_fish_rows)
     def test_fish_search_returns_live_eu_models(self, _search):

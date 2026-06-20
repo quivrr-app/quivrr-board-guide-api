@@ -4,6 +4,7 @@ from functools import lru_cache
 from concurrent.futures import ThreadPoolExecutor
 import os
 import re
+import time
 from typing import Callable
 from urllib.parse import quote, urlencode
 
@@ -31,9 +32,15 @@ def _key(value: str | None) -> str:
 
 @lru_cache(maxsize=1024)
 def _get_json(path: str):
-    response = requests.get(f"{API_BASE}{path}", timeout=10)
-    response.raise_for_status()
-    return response.json()
+    for attempt in range(3):
+        try:
+            response = requests.get(f"{API_BASE}{path}", timeout=15)
+            response.raise_for_status()
+            return response.json()
+        except requests.RequestException:
+            if attempt == 2:
+                raise
+            time.sleep(0.35 * (attempt + 1))
 
 
 def _find_brand_id(brand: str, get_json: Callable[[str], object]) -> int | None:
@@ -50,9 +57,25 @@ def _find_model_id(brand_id: int, model: str, get_json: Callable[[str], object])
     return int(matches[0]["modelId"]) if len(matches) == 1 else None
 
 
-def _candidate_sizes(model_id: int, target_volume: float | None, get_json: Callable[[str], object]) -> list[dict]:
+CARBON_EPOXY_TERMS = (
+    "carbon", "carbotune", "spinetek", "spine tek", "eps", "epoxy", "hyfi", "helium",
+    "ibolic", "i bolic", "futureflex", "dark arts", "black sheep", "lightspeed", "lib tech",
+    "varial", "thunderbolt", "xtr",
+)
+
+
+def construction_matches_preference(construction: str | None, preference: str | None) -> bool:
+    if not preference:
+        return True
+    return any(term in _key(construction) for term in CARBON_EPOXY_TERMS)
+
+
+def _candidate_sizes(model_id: int, target_volume: float | None, get_json: Callable[[str], object],
+                     construction_preference: str | None = None) -> list[dict]:
     output = []
     for row in get_json(f"/api/constructions/{model_id}") or []:
+        if not construction_matches_preference(row.get("construction"), construction_preference):
+            continue
         construction = quote(str(row.get("construction") or ""), safe="")
         for size in get_json(f"/api/sizes/{model_id}/{construction}") or []:
             try:
@@ -81,7 +104,7 @@ def _candidate_sizes(model_id: int, target_volume: float | None, get_json: Calla
     return selected[:2]
 
 
-def _summarise_stock(payloads: list[dict], region: str) -> dict:
+def _summarise_stock(payloads: list[dict], region: str, construction_preference: str | None = None) -> dict:
     rows = []
     direct_rows = {}
     retailer_rows = {}
@@ -93,6 +116,13 @@ def _summarise_stock(payloads: list[dict], region: str) -> dict:
             row for key in ("exactRetailerMatches", "closeRetailerMatches")
             for row in payload.get(key, []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"}
         ]
+        if construction_preference:
+            direct = [row for row in direct if construction_matches_preference(
+                " ".join(filter(None, [row.get("construction"), row.get("title")])), construction_preference
+            )]
+            retailers = [row for row in retailers if construction_matches_preference(
+                " ".join(filter(None, [row.get("construction"), row.get("title")])), construction_preference
+            )]
         for row in direct:
             key = row.get("manufacturerInventoryId") or row.get("productUrl") or repr(sorted(row.items()))
             direct_rows[key] = row
@@ -143,12 +173,12 @@ def enrich_suggestions_with_inventory(
             if model_id is None:
                 brand_id = _find_brand_id(suggestion.brand, get_json)
                 model_id = _find_model_id(brand_id, suggestion.model, get_json) if brand_id else None
-            sizes = _candidate_sizes(model_id, target, get_json) if model_id else []
+            sizes = _candidate_sizes(model_id, target, get_json, profile.construction_preference) if model_id else []
             payloads = [
                 get_json("/api/search?" + urlencode({"boardSizeId": size["boardSizeId"], "region": region}))
                 for size in sizes
             ]
-            stock = _summarise_stock(payloads, region)
+            stock = _summarise_stock(payloads, region, profile.construction_preference)
             if sizes:
                 selected_size = sizes[0].get("label")
         except (requests.RequestException, TypeError, ValueError, KeyError):
