@@ -101,6 +101,18 @@ python scripts/generate_board_recommendation_graph.py
 The graph covers 512 of 513 canonical models. Runtime inventory remains a separate explicit-region
 input to the replacement-ranking helper.
 
+## Bodhi Phase 5: progressive surfer intake
+
+The chat endpoint accumulates rider facts from the supplied conversation, asks no more than two
+useful follow-up questions at a time, and returns deterministic `intakeState`, `missingQuestions`,
+`volumeGuidance`, and `recommendations` fields alongside the legacy response shape. A recommendation
+is emitted only after weight, skill, usual waves, and an explicit AU, EU, or ID search region are known.
+
+Board fit is global canonical intelligence. Availability remains live and regional. User-facing board
+recommendations contain only verified stock from the requested region; an inventory failure produces
+no stock claim. Specific unavailable models and current-board performance requests use the canonical
+recommendation graph before candidates pass through the unchanged regional inventory client.
+
 ## Rider Fit And Availability
 
 The rider-fit engine uses weight, ability, fitness, surf frequency, waves, preferred board type, current volume, age when supplied, and desired feel. It returns a volume range rather than a single prescriptive value and explains adjustment factors. Volume is guidance, not the whole fit decision.

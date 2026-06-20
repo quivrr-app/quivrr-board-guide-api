@@ -1,6 +1,7 @@
 
 import re
 
+from app.board_graph_engine import load_graph
 from app.models import BoardRecommendation, RiderProfile
 from app.rider_fit import recommend_rider_fit
 
@@ -59,6 +60,10 @@ def _extract_frequency(text: str) -> float | None:
         return float(match.group(1))
     if (re.search(r"\bdaily\b", text) and "daily driver" not in text) or "most days" in text:
         return 5.0
+    if "once or twice a week" in text or "one or two times a week" in text:
+        return 1.5
+    if "twice a week" in text or "two times a week" in text:
+        return 2.0
     if "weekly" in text or "once a week" in text:
         return 1.0
     return None
@@ -172,6 +177,18 @@ def _extract_region(text: str, explicit_region: str | None = None) -> str | None
     return None
 
 
+def _extract_current_board(text: str) -> str | None:
+    if not re.search(r"\b(?:i ride|i'm riding|im riding|my current board|currently ride)\b", text):
+        return None
+    matches = []
+    for board in load_graph().get("boards", []):
+        brand = str(board.get("brand") or "")
+        model = str(board.get("model") or "")
+        if model and re.search(rf"\b{re.escape(model.lower())}\b", text):
+            matches.append((len(model), f"{brand} {model}"))
+    return max(matches, default=(0, None))[1]
+
+
 def extract_profile(message: str, region: str | None = None) -> RiderProfile:
     text = message.lower()
 
@@ -179,6 +196,7 @@ def extract_profile(message: str, region: str | None = None) -> RiderProfile:
         height_cm=_extract_height_cm(text),
         weight_kg=_extract_weight_kg(text),
         ability=_extract_ability(text),
+        current_board=_extract_current_board(text),
         current_volume_litres=_extract_current_volume(text),
         target_volume_litres=_extract_target_volume(text),
         age=_extract_age(text),
@@ -191,6 +209,15 @@ def extract_profile(message: str, region: str | None = None) -> RiderProfile:
         wave_type=_extract_wave_type(text),
         goal=_extract_goal(text),
     )
+
+
+def merge_profiles(*profiles: RiderProfile) -> RiderProfile:
+    merged = {}
+    for profile in profiles:
+        for field, value in profile.model_dump().items():
+            if value not in (None, ""):
+                merged[field] = value
+    return RiderProfile(**merged)
 
 
 def missing_profile_fields(profile: RiderProfile) -> list[str]:

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class RiderProfile(BaseModel):
@@ -51,6 +51,34 @@ class SuggestedBoard(BaseModel):
     source: str = "quivrr_controlled_knowledge"
 
 
+class VolumeGuidance(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+    minimum_litres: float = Field(alias="minimumLitres")
+    maximum_litres: float = Field(alias="maximumLitres")
+    label: str
+    recommended_category: str = Field(alias="recommendedCategory")
+    reasoning: str
+
+
+class BodhiRecommendation(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+    brand: str
+    model: str
+    category: str
+    why_it_fits: str = Field(alias="whyItFits")
+    suggested_volume_or_size_range: str | None = Field(default=None, alias="suggestedVolumeOrSizeRange")
+    wave_range: str | None = Field(default=None, alias="waveRange")
+    skill_fit: str | None = Field(default=None, alias="skillFit")
+    available_count: int = Field(default=0, alias="availableCount")
+    region: str | None = None
+    example_product_url: str | None = Field(default=None, alias="exampleProductUrl")
+    source_type: str = Field(alias="sourceType")
+    price_range: str | None = Field(default=None, alias="priceRange")
+    confidence: float
+
+
 class BoardGuideMessage(BaseModel):
     role: str = Field(..., examples=["user"])
     content: str
@@ -64,6 +92,8 @@ class BoardGuideRequest(BaseModel):
 
 
 class BoardGuideResponse(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
     guide_name: str
     reply: str
     profile: RiderProfile
@@ -72,3 +102,7 @@ class BoardGuideResponse(BaseModel):
     missing_fields: list[str]
     recommended_next_step: str | None = None
     source: str
+    intake_state: RiderProfile = Field(alias="intakeState")
+    missing_questions: list[str] = Field(default_factory=list, alias="missingQuestions")
+    volume_guidance: VolumeGuidance | None = Field(default=None, alias="volumeGuidance")
+    recommendations: list[BodhiRecommendation] = Field(default_factory=list)

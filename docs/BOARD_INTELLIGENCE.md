@@ -373,6 +373,21 @@ The next integration phase should replace low-confidence taxonomy fallbacks with
 then add a read-only runtime adapter behind existing recommendation tests. Regional availability
 must remain a final ranking input, never part of global graph generation.
 
+## Phase 5 runtime conversation boundary
+
+Phase 5 connects canonical intelligence to conversation without moving inventory into the graph.
+The workflow progressively extracts height, weight, ability, surf frequency, paddle fitness, usual
+wave size and type, current board, desired improvement, preferred board type, stated target volume,
+and search region from user turns. It merges only user-provided facts and asks one or two missing
+questions at a time.
+
+Once weight, ability, waves, and a valid region are present, the existing rider-fit engine supplies a
+guidance range and category. Controlled model candidates are then checked through the existing
+read-only inventory client. Only candidates with verified availability in the selected region become
+public recommendations. Specific out-of-stock requests use similar and alternative graph edges;
+performance-oriented current-board requests use upgrade edges. Every graph candidate still passes
+through the same explicit AU, EU, or ID lookup, with no cross-region fallback.
+
 ## Reproducing the audit
 
 ```powershell
