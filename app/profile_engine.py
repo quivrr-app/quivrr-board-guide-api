@@ -96,9 +96,18 @@ def _extract_desired_feel(text: str) -> str | None:
 
 
 def _extract_ability(text: str) -> str | None:
-    for ability in ["beginner", "intermediate", "advanced", "expert"]:
-        if ability in text:
-            return ability.title()
+    ability_phrases = [
+        ("Expert", [r"\bexpert\b"]),
+        ("Advanced", [r"\badvanced\b", r"\bexperienced(?: surfer)?\b"]),
+        ("Intermediate", [
+            r"\bintermediate\b", r"\bgood\s+or\s+average(?:\s+surfer)?\b",
+            r"\bgood(?:\s+surfer)?\b", r"\baverage(?:\s+surfer)?\b", r"\bdecent(?:\s+surfer)?\b",
+        ]),
+        ("Beginner", [r"\bbeginner\b", r"\bnovice\b", r"\blearning\b"]),
+    ]
+    for ability, patterns in ability_phrases:
+        if any(re.search(pattern, text) for pattern in patterns):
+            return ability
     return None
 
 

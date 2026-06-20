@@ -50,6 +50,39 @@ class BodhiApiTests(unittest.TestCase):
         self.assertIsNotNone(body["volumeGuidance"])
         self.assertIn("sensible starting range", body["reply"])
 
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    def test_australia_good_or_average_profile_persists_without_reasking_skill(self, _inventory, _azure):
+        first = self.client.post("/api/board-guide/chat", json={
+            "message": "Im surfing in australia, am 75kgs, a good or average surfer, im 46 years old and 175cm high",
+        })
+        self.assertEqual(first.status_code, 200)
+        first_body = first.json()
+        state = first_body["intakeState"]
+        self.assertEqual(state["region"], "AU")
+        self.assertEqual(state["weight_kg"], 75)
+        self.assertEqual(state["height_cm"], 175)
+        self.assertEqual(state["age"], 46)
+        self.assertEqual(state["ability"], "Intermediate")
+        self.assertIn("29 to 33L", first_body["reply"])
+        self.assertIn("27.5 to 30.5L", first_body["reply"])
+        self.assertNotIn("surfing level", first_body["reply"].lower())
+
+        second = self.client.post("/api/board-guide/chat", json={
+            "message": "I just said im a good surfer or average. did you not see that?",
+            "intakeState": state,
+            "conversation": [
+                {"role": "user", "content": "Im surfing in australia, am 75kgs, a good or average surfer, im 46 years old and 175cm high"},
+                {"role": "assistant", "content": first_body["reply"]},
+            ],
+        })
+        self.assertEqual(second.status_code, 200)
+        second_body = second.json()
+        self.assertEqual(second_body["intakeState"]["ability"], "Intermediate")
+        self.assertIn("Yep, I’ve got that", second_body["reply"])
+        self.assertIn("waves you usually surf", second_body["reply"])
+        self.assertNotIn("surfing level", second_body["reply"].lower())
+
     @staticmethod
     def _regional_inventory(rows, profile):
         region = profile.region.upper()

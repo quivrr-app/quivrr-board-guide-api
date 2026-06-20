@@ -5,8 +5,8 @@ from fastapi.testclient import TestClient
 
 import main
 from app.intent_router import route_intent
-from app.models import SuggestedBoard
-from app.profile_engine import extract_profile
+from app.models import RiderProfile, SuggestedBoard
+from app.profile_engine import extract_profile, merge_profiles
 from app.daily_driver_taxonomy import daily_driver_lane
 from app.model_recommendation_engine import recommend_models
 from app.inventory_client import construction_matches_preference
@@ -30,6 +30,26 @@ def live_fish_rows(_profile, _category):
 
 
 class IntentRouterTests(unittest.TestCase):
+    def test_natural_language_skill_extraction(self):
+        cases = {
+            "I'm a good surfer": "Intermediate", "I'm an average surfer": "Intermediate",
+            "good or average": "Intermediate", "pretty decent surfer": "Intermediate",
+            "experienced surfer": "Advanced", "advanced": "Advanced", "expert": "Expert",
+            "beginner": "Beginner", "novice": "Beginner", "still learning": "Beginner",
+        }
+        for message, expected in cases.items():
+            with self.subTest(message=message):
+                self.assertEqual(extract_profile(message).ability, expected)
+
+    def test_profile_merge_does_not_overwrite_known_values_with_null(self):
+        known = RiderProfile(region="AU", weight_kg=75, height_cm=175, age=46, ability="Intermediate")
+        merged = merge_profiles(known, RiderProfile(wave_size="2-4ft"))
+        self.assertEqual(merged.region, "AU")
+        self.assertEqual(merged.weight_kg, 75)
+        self.assertEqual(merged.height_cm, 175)
+        self.assertEqual(merged.age, 46)
+        self.assertEqual(merged.ability, "Intermediate")
+        self.assertEqual(merged.wave_size, "2-4ft")
     def test_routes_supported_intents(self):
         cases = {
             "How many boards do you know about in Europe?": "inventory_count_question",

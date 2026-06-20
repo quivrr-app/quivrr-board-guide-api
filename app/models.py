@@ -88,10 +88,13 @@ class BoardGuideMessage(BaseModel):
 
 
 class BoardGuideRequest(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
     message: str
     region: str | None = None
     page_context: str | None = None
     conversation: list[BoardGuideMessage] = Field(default_factory=list)
+    intake_state: RiderProfile | None = Field(default=None, alias="intakeState")
 
 
 class BoardGuideResponse(BaseModel):

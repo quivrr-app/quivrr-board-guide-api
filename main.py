@@ -7,6 +7,7 @@ from app.azure_openai_client import is_azure_openai_configured
 from app.conversation_flow import (
     comparison_reply, enough_for_recommendations, find_requested_board, general_board_reply,
     graph_suggestions, has_intake_signal, intake_questions, opening_message,
+    is_memory_correction, partial_volume_reply,
     public_recommendations, recommendation_reply, site_help_reply, suggestions_for_board,
     volume_advice_reply, volume_guidance,
 )
@@ -58,7 +59,8 @@ def health():
 @app.post("/api/board-guide/chat", response_model=BoardGuideResponse)
 def board_guide_chat(request: BoardGuideRequest):
     history_profiles = [extract_profile(item.content) for item in request.conversation if item.role == "user"]
-    profile = merge_profiles(*history_profiles, extract_profile(request.message, request.region))
+    persisted_profile = request.intake_state or extract_profile("")
+    profile = merge_profiles(persisted_profile, *history_profiles, extract_profile(request.message, request.region))
 
     missing = missing_profile_fields(profile)
     recommendation = build_recommendation(profile)
@@ -164,6 +166,10 @@ def board_guide_chat(request: BoardGuideRequest):
     elif not has_intake_signal(profile):
         suggested_boards = []
         reply = opening_message(profile.region)
+    elif profile.weight_kg and profile.ability and not (profile.wave_size or profile.wave_type or profile.wave_power):
+        suggested_boards = []
+        reply = partial_volume_reply(profile, acknowledge_memory=is_memory_correction(request.message))
+        questions = ["What size waves are you mostly surfing?"]
     elif enough_for_recommendations(profile):
         wants_performance = "performance" in " ".join(filter(None, [profile.desired_feel, profile.goal])).lower()
         if profile.current_board and wants_performance:

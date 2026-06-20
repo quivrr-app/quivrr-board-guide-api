@@ -99,6 +99,44 @@ def volume_advice_reply(profile: RiderProfile) -> str:
     return reply
 
 
+def is_memory_correction(message: str) -> bool:
+    text = message.lower()
+    return any(phrase in text for phrase in [
+        "i already said", "i just said", "already told you", "i told you",
+        "did you not see", "didn't you see", "did you forget",
+    ])
+
+
+def partial_volume_reply(profile: RiderProfile, acknowledge_memory: bool = False) -> str:
+    ability = (profile.ability or "intermediate").lower()
+    if acknowledge_memory:
+        return (
+            f"Yep, I’ve got that. I’m treating you as {ability}. "
+            "The only thing I still need is the waves you usually surf."
+        )
+
+    weight = float(profile.weight_kg)
+    forgiving_low = round(weight * 0.39)
+    forgiving_high = round(weight * 0.44)
+    performance_low = round(weight * 0.367 * 2) / 2
+    performance_high = round(weight * 0.407 * 2) / 2
+    personal = []
+    if profile.height_cm:
+        personal.append(f"{profile.height_cm}cm")
+    if profile.age:
+        personal.append(str(profile.age))
+    personal_text = f", {', '.join(personal)}" if personal else ""
+    region = {"AU": "Australia", "EU": "Europe", "ID": "Indonesia"}.get(
+        normalise_region(profile.region), "your region"
+    )
+    return (
+        f"Got it. I’ll treat that as {ability}. At {profile.weight_kg:g}kg{personal_text}, surfing in {region}, "
+        f"I’d start around {forgiving_low:g} to {forgiving_high:g}L for a forgiving daily driver, or about "
+        f"{performance_low:g} to {performance_high:g}L if you want a sharper performance shortboard. "
+        "What size waves are you mostly surfing?"
+    )
+
+
 def graph_suggestions(profile: RiderProfile, relation: str) -> list[SuggestedBoard]:
     if not profile.current_board:
         return []
