@@ -36,7 +36,7 @@ def recommend_rider_fit(profile: RiderProfile) -> RiderFitResult | None:
     fitness = _key(profile.fitness_level)
     board_type = _key(profile.preferred_board_type)
     desired = _key(profile.desired_feel or profile.goal)
-    waves = " ".join(filter(None, [_key(profile.wave_size), _key(profile.wave_type)]))
+    waves = " ".join(filter(None, [_key(profile.wave_size), _key(profile.wave_type), _key(profile.wave_power)]))
     frequency = profile.surf_frequency_per_week
     adjustments: list[str] = []
 

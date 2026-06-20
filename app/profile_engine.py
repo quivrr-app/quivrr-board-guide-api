@@ -14,7 +14,7 @@ def _extract_height_cm(text: str) -> int | None:
 
 
 def _extract_weight_kg(text: str) -> int | None:
-    match = re.search(r"\b([4-9][0-9]|1[0-4][0-9])\s*kg\b", text)
+    match = re.search(r"\b([4-9][0-9]|1[0-4][0-9])\s*(?:kgs?|kilograms?|kilos?)\b", text)
     if match:
         return int(match.group(1))
     return None
@@ -72,7 +72,8 @@ def _extract_frequency(text: str) -> float | None:
 def _extract_board_type(text: str) -> str | None:
     options = [
         "performance shortboard", "daily driver", "everyday shortboard", "shortboard",
-        "groveller", "hybrid", "fish", "mid-length", "mid length", "longboard",
+        "groveller", "groveler", "hybrid", "fish", "mid-length", "mid length", "longboard",
+        "step up", "step-up",
     ]
     return next((value.title() for value in options if value in text), None)
 
@@ -121,6 +122,16 @@ def _extract_wave_type(text: str) -> str | None:
     return None
 
 
+def _extract_wave_power(text: str) -> str | None:
+    if any(token in text for token in ["small waves", "weak waves", "soft waves", "gutless"]):
+        return "Weak"
+    if any(token in text for token in ["powerful waves", "heavy waves", "punchy"]):
+        return "Powerful"
+    if re.search(r"\bgood (?:waves?|reef|beach|point)", text):
+        return "Average to Powerful"
+    return None
+
+
 def _extract_goal(text: str) -> str | None:
     goal_tokens = [
         "paddle power",
@@ -156,25 +167,15 @@ def _extract_goal(text: str) -> str | None:
 
 
 def _extract_region(text: str, explicit_region: str | None = None) -> str | None:
-    if explicit_region:
-        return explicit_region
-
-    regions = [
-        "australia",
-        "united states",
-        "canada",
-        "europe",
-        "united kingdom",
-        "indonesia",
-        "japan",
-        "brazil",
+    aliases = [
+        (r"\b(?:europe|eu)\b", "EU"),
+        (r"\b(?:australia|australian|aus|au)\b", "AU"),
+        (r"\b(?:indonesia|indonesian|indo|bali|id)\b", "ID"),
     ]
-
-    for region in regions:
-        if region in text:
-            return region.title()
-
-    return None
+    for pattern, code in aliases:
+        if re.search(pattern, text):
+            return code
+    return explicit_region
 
 
 def _extract_current_board(text: str) -> str | None:
@@ -207,6 +208,7 @@ def extract_profile(message: str, region: str | None = None) -> RiderProfile:
         region=_extract_region(text, region),
         wave_size=_extract_wave_size(text),
         wave_type=_extract_wave_type(text),
+        wave_power=_extract_wave_power(text),
         goal=_extract_goal(text),
     )
 

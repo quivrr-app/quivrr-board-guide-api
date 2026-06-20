@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from functools import lru_cache
+from concurrent.futures import ThreadPoolExecutor
 import os
 import re
 from typing import Callable
@@ -68,13 +69,22 @@ def _candidate_sizes(model_id: int, target_volume: float | None, get_json: Calla
             continue
         seen.add(size_id)
         deduped.append(row)
-    return deduped[:2]
+    if target_volume is None:
+        return deduped[:2]
+    selected = []
+    for tolerance in (1.0, 2.0, 3.0):
+        for row in deduped:
+            if row["_distance"] <= tolerance and row not in selected:
+                selected.append(row)
+        if len(selected) >= 2:
+            break
+    return selected[:2]
 
 
 def _summarise_stock(payloads: list[dict], region: str) -> dict:
     rows = []
-    direct_count = 0
-    retailer_count = 0
+    direct_rows = {}
+    retailer_rows = {}
     for payload in payloads:
         if normalise_region(payload.get("regionCode")) != region:
             continue
@@ -83,10 +93,16 @@ def _summarise_stock(payloads: list[dict], region: str) -> dict:
             row for key in ("exactRetailerMatches", "closeRetailerMatches")
             for row in payload.get(key, []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"}
         ]
-        direct_count += len(direct)
-        retailer_count += len(retailers)
-        rows.extend(direct)
-        rows.extend(retailers)
+        for row in direct:
+            key = row.get("manufacturerInventoryId") or row.get("productUrl") or repr(sorted(row.items()))
+            direct_rows[key] = row
+        for row in retailers:
+            key = row.get("retailerInventoryId") or row.get("productUrl") or repr(sorted(row.items()))
+            retailer_rows[key] = row
+    rows.extend(direct_rows.values())
+    rows.extend(retailer_rows.values())
+    direct_count = len(direct_rows)
+    retailer_count = len(retailer_rows)
 
     urls = [row.get("productUrl") for row in rows if row.get("productUrl")]
     prices = [float(row["priceAmount"]) for row in rows if row.get("priceAmount") is not None]
@@ -123,8 +139,10 @@ def enrich_suggestions_with_inventory(
                  "example_live_source_url": None, "price_range": None}
         selected_size = None
         try:
-            brand_id = _find_brand_id(suggestion.brand, get_json)
-            model_id = _find_model_id(brand_id, suggestion.model, get_json) if brand_id else None
+            model_id = suggestion.board_model_id
+            if model_id is None:
+                brand_id = _find_brand_id(suggestion.brand, get_json)
+                model_id = _find_model_id(brand_id, suggestion.model, get_json) if brand_id else None
             sizes = _candidate_sizes(model_id, target, get_json) if model_id else []
             payloads = [
                 get_json("/api/search?" + urlencode({"boardSizeId": size["boardSizeId"], "region": region}))
@@ -144,6 +162,32 @@ def enrich_suggestions_with_inventory(
         key=lambda board: (
             board.confidence,
             board.available_count > 0,
+            board.manufacturer_direct_count > 0,
+            board.retailer_count > 0,
+        ),
+        reverse=True,
+    )
+    return enriched
+
+
+def enrich_suggestions_concurrently(
+    suggestions: list[SuggestedBoard],
+    profile: RiderProfile,
+    get_json: Callable[[str], object] = _get_json,
+    workers: int = 8,
+) -> list[SuggestedBoard]:
+    if len(suggestions) <= 1:
+        return enrich_suggestions_with_inventory(suggestions, profile, get_json)
+
+    def enrich_one(board: SuggestedBoard) -> SuggestedBoard:
+        return enrich_suggestions_with_inventory([board], profile, get_json)[0]
+
+    with ThreadPoolExecutor(max_workers=min(workers, len(suggestions))) as executor:
+        enriched = list(executor.map(enrich_one, suggestions))
+    enriched.sort(
+        key=lambda board: (
+            board.available_count > 0,
+            board.confidence,
             board.manufacturer_direct_count > 0,
             board.retailer_count > 0,
         ),

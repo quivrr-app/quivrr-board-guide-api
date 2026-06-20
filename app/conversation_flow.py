@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from app.board_graph_engine import board_key, find_board, load_graph
+from app.board_graph_engine import board_key, compare_boards, find_board, load_graph
 from app.inventory_client import normalise_region
 from app.models import BodhiRecommendation, RiderProfile, SuggestedBoard, VolumeGuidance
 from app.rider_fit import recommend_rider_fit
@@ -17,9 +17,9 @@ def opening_message(region: str | None) -> str:
         else "live board availability across Quivrr"
     )
     return (
-        "Can’t find what you’re looking for, or not sure what you want yet? I’ve got access to "
-        f"{availability}. Tell me how you surf, where you’re searching, and what kind of board "
-        "you’re chasing, and I’ll help narrow it down."
+        "Don’t know exactly what to search for? I can help. Tell me your weight, ability, where you "
+        "surf, and what kind of board you’re chasing. I’ll work out a sensible volume range, match "
+        f"the board type, and show options from {availability} that are actually available in your region."
     )
 
 
@@ -29,7 +29,7 @@ def has_intake_signal(profile: RiderProfile) -> bool:
 
 def intake_questions(profile: RiderProfile) -> list[str]:
     questions = []
-    waves_missing = not profile.wave_size and not profile.wave_type
+    waves_missing = not profile.wave_size and not profile.wave_type and not profile.wave_power
     if not profile.weight_kg and waves_missing:
         questions.append("What’s your rough weight, and what sort of waves are you mainly surfing?")
     elif not profile.weight_kg:
@@ -51,7 +51,7 @@ def enough_for_recommendations(profile: RiderProfile) -> bool:
         profile.weight_kg
         and profile.ability
         and normalise_region(profile.region)
-        and (profile.wave_size or profile.wave_type)
+        and (profile.wave_size or profile.wave_type or profile.wave_power)
     )
 
 
@@ -94,6 +94,7 @@ def graph_suggestions(profile: RiderProfile, relation: str) -> list[SuggestedBoa
             wave_range=wave_label,
             skill_fit=(f"{board['surferFit'].get('abilityMin') or 'unspecified'} to {board['surferFit'].get('abilityMax') or 'unspecified'}" if board else None),
             source="quivrr_board_graph",
+            board_model_id=board.get("boardModelId") if board else None,
         ))
     return suggestions
 
@@ -138,6 +139,7 @@ def suggestions_for_board(board: dict, relations: list[str] | None = None) -> li
             wave_range=(f"{wave['minFt']:g}-{wave['maxFt']:g}ft" if wave.get("minFt") is not None and wave.get("maxFt") is not None else None),
             skill_fit=(f"{candidate['surferFit'].get('abilityMin') or 'unspecified'} to {candidate['surferFit'].get('abilityMax') or 'unspecified'}"),
             source="quivrr_board_graph",
+            board_model_id=candidate.get("boardModelId"),
         ))
     return output[:4]
 
@@ -175,3 +177,70 @@ def recommendation_reply(profile: RiderProfile, guidance: VolumeGuidance, boards
         return base + f" I can’t verify a matching board in {normalise_region(profile.region)} right now, so I won’t invent stock."
     names = ", ".join(f"{board.brand} {board.model}" for board in available[:3])
     return base + f" The live options I’d check first are {names}."
+
+
+def find_boards_in_message(message: str) -> list[dict]:
+    text = f" {board_key('', message)[1]} "
+    matches = []
+    for board in load_graph().get("boards", []):
+        brand, model = board_key(board.get("brand"), board.get("model"))
+        if f" {model} " in text and (f" {brand} " in text or len(model.split()) >= 1):
+            matches.append((len(model), board))
+    matches.sort(key=lambda row: -row[0])
+    output, seen = [], set()
+    for _, board in matches:
+        key = board_key(board["brand"], board["model"])
+        if key not in seen:
+            output.append(board); seen.add(key)
+    return output
+
+
+def comparison_reply(message: str) -> str:
+    boards = find_boards_in_message(message)
+    if len(boards) < 2:
+        return "Name the two boards you want compared—for example, ‘Compare Pyzel Phantom and JS Monsta’."
+    left, right = boards[:2]
+    comparison = compare_boards(load_graph(), left["brand"], left["model"], right["brand"], right["model"])
+    left_data, right_data = comparison["left"], comparison["right"]
+    return (
+        f"{left['brand']} {left['model']} is a {left_data['category']['primaryCategory'].replace('_', ' ')} "
+        f"with {left_data['paddlingBias']} paddle help, {left_data['performanceBias']} performance bias, and "
+        f"{left_data['forgiveness']} forgiveness. {right['brand']} {right['model']} is a "
+        f"{right_data['category']['primaryCategory'].replace('_', ' ')} with {right_data['paddlingBias']} paddle help, "
+        f"{right_data['performanceBias']} performance bias, and {right_data['forgiveness']} forgiveness. "
+        "Tell me your litres and region and I can check which one is actually available."
+    )
+
+
+def general_board_reply(message: str) -> str:
+    text = message.lower()
+    definitions = [
+        ("fish", "A fish is a wide, fast board built for easy speed and flow, usually in small-to-average waves. Twin and hybrid-fish designs feel loose and lively; your weight and preferred litres help narrow the right one."),
+        ("daily driver", "A daily driver is an everyday shortboard that balances paddle power, forgiveness, and performance across the waves you surf most often."),
+        ("grov", "A groveller is a compact, higher-volume board designed to create speed and catch waves when conditions are small or weak."),
+        ("step", "A step-up adds length, hold, and control for larger or more powerful waves. It is usually chosen around the waves and surfer, not just litres."),
+        ("mid", "A mid-length prioritises paddle power, glide, and earlier entry while staying more manoeuvrable than a longboard."),
+        ("longboard", "A longboard prioritises glide, stability, and wave count, with performance varying from easy cruisers to refined noseriders."),
+        ("shortboard", "Shortboard covers several lanes: performance boards, daily drivers, grovellers, fish, hybrids, and step-ups. Conditions and desired feel decide which lane fits."),
+        ("volume", "Volume is the board’s litres of displacement. It affects flotation and paddling, but outline, length, width, rails, rocker, and foam distribution decide how that volume actually feels."),
+        ("litre", "Litres measure board volume. Use them as a sensible range rather than a single truth, because two boards at the same litres can paddle and turn very differently."),
+        ("rocker", "Rocker is the board’s nose-to-tail curve. More rocker adds control in steep or powerful waves; flatter rocker creates speed and easier entry in weaker waves."),
+        ("rail", "Rails are the board’s edges. Fuller rails add forgiveness and flotation; lower, refined rails engage more precisely but usually demand cleaner technique."),
+        ("concave", "Bottom concave controls water flow under the board. Different single, double, and vee combinations tune lift, speed, rail-to-rail response, and release."),
+        ("twin", "A twin-fin uses two main fins for speed, flow, and a loose feel. Modern twins range from small-wave fish to performance twins for better waves."),
+        ("thruster", "A thruster has three fins and offers a familiar balance of drive, hold, and controlled turning across a wide range of conditions."),
+        ("quad", "A quad uses four fins for speed and hold without a centre fin. It can suit fast lines, barrels, fish, and some step-ups, depending on the board."),
+        ("epoxy", "Epoxy usually refers to an EPS core with epoxy resin: typically lighter and more buoyant than traditional PU, though flex and durability depend on the exact construction."),
+        ("construction", "Construction changes weight, flex, durability, and feel. Compare the manufacturer’s actual build rather than treating every epoxy or PU board as identical."),
+    ]
+    return next((answer for token, answer in definitions if token in text), "Ask me about a board type, model, size, construction, or the waves it suits.")
+
+
+def site_help_reply(region: str | None) -> str:
+    code = normalise_region(region) or "AU"
+    name = {"AU": "Australia", "EU": "Europe", "ID": "Indonesia"}[code]
+    return (
+        f"Start in the {name} search, then choose brand, model, construction, and size to see exact manufacturer "
+        "and retailer matches. Or ask me naturally—‘show me fish boards around 30L in Europe’, ‘compare Phantom "
+        "and Monsta’, or tell me your weight and ability for a guided fit. I’ll only show stock verified for your region."
+    )

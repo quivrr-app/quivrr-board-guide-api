@@ -16,6 +16,7 @@ class RiderProfile(BaseModel):
     region: str | None = None
     wave_size: str | None = None
     wave_type: str | None = None
+    wave_power: str | None = None
     goal: str | None = None
 
 
@@ -49,6 +50,7 @@ class SuggestedBoard(BaseModel):
     price_range: str | None = None
     region: str | None = None
     source: str = "quivrr_controlled_knowledge"
+    board_model_id: int | None = Field(default=None, exclude=True)
 
 
 class VolumeGuidance(BaseModel):
@@ -106,3 +108,4 @@ class BoardGuideResponse(BaseModel):
     missing_questions: list[str] = Field(default_factory=list, alias="missingQuestions")
     volume_guidance: VolumeGuidance | None = Field(default=None, alias="volumeGuidance")
     recommendations: list[BodhiRecommendation] = Field(default_factory=list)
+    intent: str = "surfer_fit_request"

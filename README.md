@@ -113,6 +113,13 @@ recommendations contain only verified stock from the requested region; an invent
 no stock claim. Specific unavailable models and current-board performance requests use the canonical
 recommendation graph before candidates pass through the unchanged regional inventory client.
 
+Intent routing runs before intake. Direct stock counts, category searches, comparisons, alternatives,
+board-design questions, and site-help questions are answered without forcing the rider questionnaire.
+Explicit regions in the user message override page context. Category searches use canonical taxonomy,
+fish-style/model aliases, target-volume tolerances of ±1L then ±2L then ±3L, and read-only regional
+inventory checks. Broad regional totals are labelled as the latest verified inventory snapshot because
+the existing inventory API intentionally exposes exact stock only through size-scoped searches.
+
 ## Rider Fit And Availability
 
 The rider-fit engine uses weight, ability, fitness, surf frequency, waves, preferred board type, current volume, age when supplied, and desired feel. It returns a volume range rather than a single prescriptive value and explains adjustment factors. Volume is guidance, not the whole fit decision.
