@@ -3,6 +3,7 @@ from pathlib import Path
 
 from app.models import RiderProfile, SuggestedBoard
 from app.rider_fit import recommend_rider_fit
+from app.daily_driver_taxonomy import daily_driver_lane, lane_label
 
 
 INTELLIGENCE_PATH = Path(__file__).parent / "knowledge" / "board_intelligence.json"
@@ -279,9 +280,46 @@ def _score_generated_board(board: dict, profile: RiderProfile) -> tuple[float, l
     target_mid = _profile_volume_mid(profile)
     volume_low, volume_high = _volume_range_stats(board)
 
+    preferred_type = _normalise(profile.preferred_board_type)
+    ability = _normalise(profile.ability)
+    wave_power = _normalise(profile.wave_power)
+    lane = daily_driver_lane(board.get("brand"), board.get("model"))
+
     if category in ["hybrid shortboard", "groveller", "everyday shortboard", "performance fish", "fish"]:
         score += 2.5
         reasons.append("matches the target board category")
+
+    if "daily driver" in preferred_type:
+        performance_brief = ability in {"advanced", "expert"} and wave_power in {
+            "average to powerful", "powerful"
+        }
+        if lane == "performance_daily_driver":
+            score += 10.0 if performance_brief else 5.0
+            reasons.insert(0, "is a proper performance daily driver for better waves")
+        elif lane == "forgiving_daily_driver":
+            score += 4.0
+            reasons.insert(0, "is a forgiving daily driver with extra paddle help")
+        elif lane == "hybrid_daily_driver":
+            score += 2.0
+            reasons.insert(0, "is a forgiving hybrid daily driver")
+            if performance_brief:
+                score -= 6.0
+                reasons.append("is less precise than the performance daily-driver lane")
+        elif lane == "small_wave_daily_driver":
+            score += 2.0 if wave_power == "weak" else -2.0
+            reasons.insert(0, "leans toward a small-wave daily-driver feel")
+
+        performance_order = {
+            ("pyzel", "phantom"): 1.8,
+            ("js industries", "xero gravity"): 1.7,
+            ("js industries", "monsta"): 1.6,
+            ("sharp eye", "inferno 72"): 1.5,
+            ("channel islands", "better everyday"): 1.4,
+            ("js industries", "golden child"): 1.3,
+            ("lost", "rad ripper"): 1.1,
+            ("lost", "driver 2.0"): 1.0,
+        }
+        score += performance_order.get((_normalise(board.get("brand")), _normalise(board.get("model"))), 0)
 
     if board.get("override_applied"):
         score += 2.0
@@ -331,7 +369,7 @@ def _brand_limited(scored: list[tuple[float, dict, list[str], str]], limit: int,
     return selected
 
 
-def recommend_models(profile: RiderProfile, limit: int = 4) -> list[SuggestedBoard]:
+def recommend_models(profile: RiderProfile, limit: int = 10) -> list[SuggestedBoard]:
     scored = []
     generated_boards = _load_generated_intelligence()
 
@@ -368,18 +406,22 @@ def recommend_models(profile: RiderProfile, limit: int = 4) -> list[SuggestedBoa
 
     scored.sort(key=lambda row: row[0], reverse=True)
     scored = _dedupe_suggestions(scored)
-    scored = _brand_limited(scored, limit=limit, per_brand_limit=1)
+    per_brand_limit = 2 if "daily driver" in _normalise(profile.preferred_board_type) else 1
+    scored = _brand_limited(scored, limit=limit, per_brand_limit=per_brand_limit)
 
     suggestions = []
     for score, board, reasons, source in scored[:limit]:
-        confidence = min(round(score / 12.0, 2), 0.96)
+        # Keep enough score resolution for the inventory layer to preserve suitability order.
+        # A hard .96 ceiling made very different boards tie and fall back to source ordering.
+        confidence = min(round(0.35 + (score / 30.0), 2), 0.98)
         why = "; ".join(dict.fromkeys(reasons[:4])) or "Fits the selected rider profile."
 
+        lane = daily_driver_lane(board.get("brand"), board.get("model"))
         suggestions.append(
             SuggestedBoard(
                 brand=board["brand"],
                 model=board["model"],
-                category=board.get("category") or "Surfboard",
+                category=lane_label(lane) or board.get("category") or "Surfboard",
                 confidence=confidence,
                 why_it_fits=why,
                 description=board.get("model_description") or board.get("description"),
@@ -400,6 +442,7 @@ def recommend_models(profile: RiderProfile, limit: int = 4) -> list[SuggestedBoa
                 ),
                 skill_fit=", ".join(board.get("ability_tags", [])) or None,
                 source=source,
+                board_model_id=board.get("board_model_id") or board.get("boardModelId"),
             )
         )
 

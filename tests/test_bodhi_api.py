@@ -114,7 +114,8 @@ class BodhiApiTests(unittest.TestCase):
         body = response.json()
         self.assertIn("Hypto Krypto", body["intakeState"]["current_board"])
         self.assertTrue(body["suggested_boards"])
-        self.assertTrue(all(board["source"] == "quivrr_board_graph" for board in body["suggested_boards"]))
+        self.assertTrue(any(board["category"] == "Performance Daily Driver" for board in body["suggested_boards"]))
+        self.assertTrue(all(board["region"] == "EU" for board in body["suggested_boards"]))
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [

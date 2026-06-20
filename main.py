@@ -156,7 +156,16 @@ def board_guide_chat(request: BoardGuideRequest):
     elif enough_for_recommendations(profile):
         wants_performance = "performance" in " ".join(filter(None, [profile.desired_feel, profile.goal])).lower()
         if profile.current_board and wants_performance:
-            suggested_boards = graph_suggestions(profile, "upgradeBoards")
+            performance_profile = profile.model_copy(update={"preferred_board_type": "Daily Driver"})
+            expert_lane = recommend_models(performance_profile, limit=8)
+            graph_lane = graph_suggestions(profile, "upgradeBoards")
+            seen = set()
+            suggested_boards = []
+            for board in expert_lane + graph_lane:
+                key = (board.brand.lower(), board.model.lower())
+                if key not in seen:
+                    suggested_boards.append(board)
+                    seen.add(key)
             suggested_boards = enrich_suggestions_with_inventory(suggested_boards, profile)
         else:
             suggested_boards = recommend_models(profile)

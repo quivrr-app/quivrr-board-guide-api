@@ -16,7 +16,7 @@ def route_intent(message: str) -> str:
         return "surfer_fit_request"
     if re.search(r"\b(?:how do i|how can i|help me)\s+(?:use|search|find|navigate)\b|\bhow does (?:quivrr|the site) work\b|\bwhere (?:do i|can i) (?:search|find)\b", text):
         return "site_help_question"
-    if re.search(r"\b(?:compare|comparison|versus|vs\.?)\b", text):
+    if re.search(r"\b(?:compare|comparison|versus|vs\.?|better\b.+\bthan)\b", text):
         return "comparison_request"
     if re.search(r"\b(?:instead of|alternative|similar to|what else is similar|what is like|out of stock)\b", text):
         return "alternative_request"

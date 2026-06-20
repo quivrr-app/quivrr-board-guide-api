@@ -4,6 +4,7 @@ from app.board_graph_engine import board_key, compare_boards, find_board, load_g
 from app.inventory_client import normalise_region
 from app.models import BodhiRecommendation, RiderProfile, SuggestedBoard, VolumeGuidance
 from app.rider_fit import recommend_rider_fit
+from app.daily_driver_taxonomy import daily_driver_lane
 
 
 REGION_NAMES = {"AU": "Australian", "EU": "European", "ID": "Indonesian"}
@@ -168,15 +169,31 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
 
 
 def recommendation_reply(profile: RiderProfile, guidance: VolumeGuidance, boards: list[SuggestedBoard]) -> str:
-    base = (
-        f"Based on what you’ve told me, {guidance.label} is a sensible starting range—not an exact truth. "
-        f"I’d look in the {guidance.recommended_category.lower()} lane."
+    performance_brief = (
+        (profile.preferred_board_type or "").lower() == "daily driver"
+        and (profile.ability or "").lower() in {"advanced", "expert"}
+        and (profile.wave_power or "").lower() in {"average to powerful", "powerful"}
     )
+    if performance_brief:
+        base = (
+            f"At {profile.weight_kg}kg and {profile.ability.lower()}, I’d start around {guidance.label} for a "
+            "good-wave daily driver. I’d prioritise proper performance daily drivers over broad hybrids."
+        )
+    else:
+        base = (
+            f"Based on what you’ve told me, {guidance.label} is a sensible starting range—not an exact truth. "
+            f"I’d look in the {guidance.recommended_category.lower()} lane."
+        )
     available = [board for board in boards if board.available_count > 0]
     if not available:
         return base + f" I can’t verify a matching board in {normalise_region(profile.region)} right now, so I won’t invent stock."
-    names = ", ".join(f"{board.brand} {board.model}" for board in available[:3])
-    return base + f" The live options I’d check first are {names}."
+    names = ", ".join(f"{board.brand} {board.model}" for board in available[:5])
+    explanation = ""
+    if performance_brief:
+        hybrids = [board for board in available if daily_driver_lane(board.brand, board.model) == "hybrid_daily_driver"]
+        if hybrids:
+            explanation = " Hybrid choices are more forgiving, but they aren’t my first pick for this brief."
+    return base + f" From verified {normalise_region(profile.region)} stock, I’d check {names} first." + explanation
 
 
 def find_boards_in_message(message: str) -> list[dict]:
@@ -192,6 +209,17 @@ def find_boards_in_message(message: str) -> list[dict]:
         key = board_key(board["brand"], board["model"])
         if key not in seen:
             output.append(board); seen.add(key)
+    aliases = {
+        "hypto": ("Haydenshapes", "Hypto Krypto"),
+    }
+    normalised_message = board_key("", message)[1]
+    for alias, (brand, model) in aliases.items():
+        if alias not in normalised_message.split():
+            continue
+        board = find_board(load_graph(), brand, model)
+        if board and board_key(brand, model) not in seen:
+            output.append(board)
+            seen.add(board_key(brand, model))
     return output
 
 
@@ -202,13 +230,23 @@ def comparison_reply(message: str) -> str:
     left, right = boards[:2]
     comparison = compare_boards(load_graph(), left["brand"], left["model"], right["brand"], right["model"])
     left_data, right_data = comparison["left"], comparison["right"]
+    lane_note = ""
+    left_lane = daily_driver_lane(left["brand"], left["model"])
+    right_lane = daily_driver_lane(right["brand"], right["model"])
+    if {left_lane, right_lane} == {"performance_daily_driver", "hybrid_daily_driver"}:
+        performance = left if left_lane == "performance_daily_driver" else right
+        hybrid = right if left_lane == "performance_daily_driver" else left
+        lane_note = (
+            f" For good waves, {performance['brand']} {performance['model']} is the stronger performance daily-driver pick; "
+            f"{hybrid['brand']} {hybrid['model']} is the easier-paddling, more forgiving hybrid."
+        )
     return (
         f"{left['brand']} {left['model']} is a {left_data['category']['primaryCategory'].replace('_', ' ')} "
         f"with {left_data['paddlingBias']} paddle help, {left_data['performanceBias']} performance bias, and "
         f"{left_data['forgiveness']} forgiveness. {right['brand']} {right['model']} is a "
         f"{right_data['category']['primaryCategory'].replace('_', ' ')} with {right_data['paddlingBias']} paddle help, "
         f"{right_data['performanceBias']} performance bias, and {right_data['forgiveness']} forgiveness. "
-        "Tell me your litres and region and I can check which one is actually available."
+        f"{lane_note} Tell me your litres and region and I can check which one is actually available."
     )
 
 
