@@ -138,6 +138,60 @@ def partial_volume_reply(profile: RiderProfile, acknowledge_memory: bool = False
     )
 
 
+def fish_advice_reply(profile: RiderProfile, canonical: list[SuggestedBoard] | None = None,
+                      live: list[SuggestedBoard] | None = None) -> str:
+    low = round(float(profile.weight_kg or 75) * .41)
+    high = round(float(profile.weight_kg or 75) * .46)
+    base = (
+        f"Got it. I’m treating you as {(profile.ability or 'intermediate').lower()}. "
+        f"For a fish at {profile.weight_kg or 75:g}kg, I’d start around {low:g} to {high:g}L depending on how cruisy you want it. "
+    )
+    if not normalise_region(profile.region):
+        return base + "Fish covers traditional, performance, cruisy and small-wave lanes. Which region should I check?"
+    if not (profile.wave_type or profile.wave_size or profile.wave_power):
+        return base + "Are your waves mostly weak beach breaks, points, or reefs?"
+    point = "point" in (profile.wave_type or "").lower()
+    lane = (
+        "For point breaks I’d look first at proper down-the-line fish, performance twins and point-break fish rather than any generic small-wave board. "
+        if point else
+        "I’d separate proper fish and twin designs from generic small-wave hybrids, then tune the choice to your wave power. "
+    )
+    canonical = canonical or []
+    live = live or []
+    canonical_names = [f"{row.brand} {row.model}" for row in canonical[:10]]
+    if point:
+        iconic = [
+            "Christenson Fish/Ocean Racer family", "Album Lightbender", "Album Twinsman",
+            "Lost RNF 96", "Firewire Seaside", "JS Industries Black Baron",
+            "Channel Islands twin-pin",
+        ]
+        canonical_names = list(dict.fromkeys([*iconic, *canonical_names]))[:10]
+    live_keys = {(row.brand.lower(), row.model.lower()) for row in live}
+    unavailable = [name for row, name in zip(canonical, [f"{row.brand} {row.model}" for row in canonical])
+                   if (row.brand.lower(), row.model.lower()) not in live_keys][:4]
+    reply = base + lane
+    if canonical_names:
+        reply += "The canonical boards I’d think about first are " + ", ".join(canonical_names) + ". "
+    if live:
+        reply += f"I found verified {normalise_region(profile.region)} stock for " + ", ".join(f"{row.brand} {row.model}" for row in live[:5]) + ". "
+    if unavailable:
+        reply += "Good fits not currently found in live stock are " + ", ".join(unavailable) + "."
+    return reply.strip()
+
+
+def board_family_reply(board: dict, requested_family: str) -> str:
+    expert = find_matrix_board(board["brand"], board["model"])
+    if not expert:
+        return f"I know the {board['brand']} {board['model']}, but its expert classification still needs review."
+    lanes = {expert["primaryLane"], *expert.get("secondaryLanes", []), *expert.get("boardLanes", [])}
+    if requested_family == "fish" and not any("fish" in lane or "twin_fin" in lane for lane in lanes):
+        return (
+            f"No. The {board['brand']} {board['model']} is more {expert['primaryLane'].replace('_', ' ')} "
+            "than a true fish. It may share easy speed or versatility, but it does not sit in the proper fish/twin lane."
+        )
+    return f"Yes. The {board['brand']} {board['model']} sits in the {expert['primaryLane'].replace('_', ' ')} lane."
+
+
 def graph_suggestions(profile: RiderProfile, relation: str) -> list[SuggestedBoard]:
     if not profile.current_board:
         return []
@@ -173,6 +227,16 @@ def find_requested_board(message: str) -> dict | None:
     text = board_key("", message)[1]
     if not text or any(phrase in text for phrase in ["i ride", "im riding", "my current board", "currently ride"]):
         return None
+    shorthand = {
+        "hypto": ("Haydenshapes", "Hypto Krypto"),
+        "rnf": ("Lost", "RNF 96"),
+        "seaside": ("Firewire", "Seaside"),
+    }
+    for alias, (brand, model) in shorthand.items():
+        if alias in text.split():
+            board = find_board(load_graph(), brand, model)
+            if board:
+                return board
     matches = []
     for board in load_graph().get("boards", []):
         brand_key, model_key = board_key(board.get("brand"), board.get("model"))
@@ -276,6 +340,8 @@ def find_boards_in_message(message: str) -> list[dict]:
     matches = []
     for board in load_graph().get("boards", []):
         brand, model = board_key(board.get("brand"), board.get("model"))
+        if model in {"what", "why", "how", "when", "where"}:
+            continue
         if f" {model} " in text and (f" {brand} " in text or len(model.split()) >= 1):
             matches.append((len(model), board))
     matches.sort(key=lambda row: -row[0])
@@ -286,6 +352,8 @@ def find_boards_in_message(message: str) -> list[dict]:
             output.append(board); seen.add(key)
     aliases = {
         "hypto": ("Haydenshapes", "Hypto Krypto"),
+        "rnf": ("Lost", "RNF 96"),
+        "seaside": ("Firewire", "Seaside"),
     }
     normalised_message = board_key("", message)[1]
     for alias, (brand, model) in aliases.items():

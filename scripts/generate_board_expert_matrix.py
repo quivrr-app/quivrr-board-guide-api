@@ -15,6 +15,8 @@ OVERRIDES_PATH = ROOT / "app/knowledge/curated/board_expert_overrides.json"
 OUTPUT_PATH = ROOT / "app/knowledge/generated/board_expert_matrix.json"
 AUDIT_JSON_PATH = ROOT / "app/knowledge/audits/board_expert_matrix_audit.json"
 AUDIT_CSV_PATH = ROOT / "app/knowledge/audits/board_expert_matrix_audit.csv"
+PHASE8_AUDIT_JSON_PATH = ROOT / "app/knowledge/audits/phase8_expert_override_audit.json"
+PHASE8_AUDIT_CSV_PATH = ROOT / "app/knowledge/audits/phase8_expert_override_audit.csv"
 
 SCORE_FIELDS = [
     "paddleEaseScore", "forgivenessScore", "performanceScore", "speedGenerationScore",
@@ -76,6 +78,33 @@ def lane_from_graph(board: dict) -> tuple[str, list[str]]:
     return primary, list(dict.fromkeys(secondary))
 
 
+def sublanes_from_board(board: dict, primary: str) -> list[str]:
+    text = " ".join(filter(None, [board.get("brand"), board.get("model"), board.get("dna", {}).get("boardPersonality")])).lower()
+    dna = board.get("dna", {})
+    lanes = []
+    if primary == "fish":
+        lanes.append("modern_fish")
+        lanes.append("performance_fish" if dna.get("performanceBias") == "high" else "cruisy_fish")
+        if dna.get("paddlingBias") == "high": lanes.append("small_wave_fish")
+        if "keel" in text: lanes.append("keel_fish")
+        if "twin" in text: lanes.append("twin_fin_performance" if dna.get("performanceBias") == "high" else "twin_fin_cruiser")
+    elif primary == "groveller":
+        lanes.extend(["performance_groveller" if dna.get("performanceBias") == "high" else "forgiving_groveller", "small_wave_speed_board"])
+    elif primary == "mid_length":
+        lanes.append("performance_mid_length" if dna.get("performanceBias") == "high" else "cruisy_mid_length")
+        if "twin" in text: lanes.append("mid_length_twin")
+        if "single" in text: lanes.append("mid_length_single_fin")
+    elif primary == "step_up":
+        lanes.extend(["performance_step_up", "barrel_board"])
+    elif primary == "longboard":
+        lanes.append("performance_longboard" if dna.get("performanceBias") == "high" else "cruisy_longboard")
+    elif primary == "high_performance_shortboard":
+        lanes.append("high_performance_shortboard")
+    elif primary in {"performance_daily_driver", "forgiving_daily_driver", "hybrid_daily_driver"}:
+        lanes.append(primary)
+    return list(dict.fromkeys(lanes))
+
+
 def build_scores(primary: str, secondary: list[str], dna: dict) -> dict[str, int]:
     values = {field: 45 for field in SCORE_FIELDS}
     values.update({
@@ -113,7 +142,12 @@ def main() -> None:
         current = generated.get(item_key)
         if current is None or float(row.get("classificationConfidence") or 0) > float(current.get("classificationConfidence") or 0):
             generated[item_key] = row
-    overrides = {key(row.get("brand"), row.get("model")): row for row in load_json(OVERRIDES_PATH).get("boards", [])}
+    override_payload = load_json(OVERRIDES_PATH)
+    defaults = override_payload.get("defaults", {})
+    overrides = {
+        key(row.get("brand"), row.get("model")): {**defaults, **row}
+        for row in override_payload.get("boards", [])
+    }
 
     matrix = []
     for board in graph:
@@ -134,6 +168,9 @@ def main() -> None:
             reason = override["reason"]
             reviewed_by = override.get("reviewedByQuivrr")
             reviewed_at = override.get("reviewedAtUtc")
+        board_lanes = sublanes_from_board(board, primary)
+        if override:
+            board_lanes = list(dict.fromkeys(override.get("boardLanes", []) + board_lanes))
         dna = board.get("dna", {})
         scores = build_scores(primary, secondary, dna)
         evidence = {"primaryLane": {"source": source, "confidence": confidence, "reason": reason}}
@@ -157,9 +194,10 @@ def main() -> None:
             missing.append("surferFit")
         if not any(design.get(name) for name in ["outline", "railType", "entryRocker", "exitRocker", "tailShape", "finSetup", "designNotes"]):
             missing.append("designData")
-        matrix.append({
+        item = {
             "brand": board["brand"], "model": board["model"], "boardModelId": board.get("boardModelId"),
             "primaryLane": primary, "secondaryLanes": secondary,
+            "boardLanes": board_lanes,
             "boardFamily": gen.get("model_family") or board["model"],
             "boardCategory": board.get("taxonomy", {}).get("primaryCategory") or "general_surfboard",
             "subCategory": primary,
@@ -179,7 +217,22 @@ def main() -> None:
             "sourceUrls": source_urls, "confidence": confidence, "evidenceSources": evidence,
             "missingFields": missing, "reviewedByQuivrr": reviewed_by, "reviewedAtUtc": reviewed_at,
             "volumeRange": board.get("volumeRange", {}), "lengthRangeInches": board.get("lengthRangeInches", {}),
-        })
+            "reputationSummary": None, "knownFor": [], "strengths": [], "weaknesses": [],
+            "bestFor": [], "notIdealFor": [], "notes": None,
+        }
+        if override:
+            for field in [
+                "boardFamily", "reputationSummary", "knownFor", "strengths", "weaknesses", "bestFor",
+                "notIdealFor", "waveRangeMinFt", "waveRangeMaxFt", "waveTypes", "wavePower",
+                "abilityMin", "abilityMax", "notes",
+            ] + SCORE_FIELDS:
+                if override.get(field) is not None:
+                    item[field] = override[field]
+            item["evidenceSources"]["curatedOverride"] = {
+                "source": "quivrr_curated_override", "confidence": confidence, "reason": reason,
+                "references": override.get("evidenceSources", []),
+            }
+        matrix.append(item)
 
     matrix.sort(key=lambda row: (row["brand"].lower(), row["model"].lower()))
     OUTPUT_PATH.write_text(json.dumps({"schemaVersion": "board_expert_matrix_v1", "boards": matrix}, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -203,6 +256,23 @@ def main() -> None:
         writer.writeheader()
         for row in matrix:
             writer.writerow({name: "; ".join(row[name]) if isinstance(row.get(name), list) else row.get(name) for name in writer.fieldnames})
+    override_rows = [row for row in matrix if row.get("reviewedByQuivrr")]
+    all_lanes = Counter(lane for row in override_rows for lane in [row["primaryLane"], *row.get("secondaryLanes", []), *row.get("boardLanes", [])])
+    phase8 = {
+        "totalCuratedOverrides": len(override_rows),
+        "highConfidenceOverrides": sum(row["confidence"] == "high" for row in override_rows),
+        "mediumConfidenceOverrides": sum(row["confidence"] == "medium" for row in override_rows),
+        "laneCoverageByCategory": dict(sorted(all_lanes.items())),
+        "fishLaneCoverage": {lane: all_lanes.get(lane, 0) for lane in ["traditional_fish", "performance_fish", "cruisy_fish", "small_wave_fish", "point_break_fish", "twin_fin_performance", "twin_fin_cruiser", "fish_hybrid", "keel_fish", "modern_fish"]},
+        "dailyDriverLaneCoverage": {lane: all_lanes.get(lane, 0) for lane in ["performance_daily_driver", "forgiving_daily_driver", "hybrid_daily_driver", "small_wave_daily_driver"]},
+        "top50LowConfidenceImportantBoards": audit["top50LowConfidenceImportantModels"],
+    }
+    PHASE8_AUDIT_JSON_PATH.write_text(json.dumps(phase8, indent=2, ensure_ascii=False), encoding="utf-8")
+    with PHASE8_AUDIT_CSV_PATH.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["brand", "model", "primaryLane", "boardLanes", "confidence", "notes"])
+        writer.writeheader()
+        for row in override_rows:
+            writer.writerow({"brand": row["brand"], "model": row["model"], "primaryLane": row["primaryLane"], "boardLanes": "; ".join(row["boardLanes"]), "confidence": row["confidence"], "notes": row.get("notes")})
     print(json.dumps({
         "totalModels": audit["totalModels"],
         "modelsWithPrimaryLane": audit["modelsWithPrimaryLane"],

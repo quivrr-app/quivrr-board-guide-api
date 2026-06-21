@@ -16,7 +16,7 @@ def route_intent(message: str) -> str:
         return "surfer_fit_request"
     if re.search(r"\b(?:how do i|how can i|help me)\s+(?:use|search|find|navigate)\b|\bhow does (?:quivrr|the site) work\b|\bwhere (?:do i|can i) (?:search|find)\b", text):
         return "site_help_question"
-    if re.search(r"\b(?:compare|comparison|versus|vs\.?|better\b.+\bthan)\b", text):
+    if re.search(r"\b(?:compare|comparison|versus|vs\.?|better\b.+\bthan|difference between)\b", text):
         return "comparison_request"
     if re.search(r"\b(?:where (?:is|can i buy)|give me (?:the )?links?|is there)\b", text) and re.search(r"\b(?:board|buy|link|available|there)\b", text):
         return "exact_board_location_request"
@@ -24,6 +24,8 @@ def route_intent(message: str) -> str:
         return "alternative_request"
     if re.search(r"\b(?:what|which|how many)\s+(?:board\s+)?(?:volume|litres?|lits?)\b|\bwhat\s+(?:volume|litre)\s+board\b|\bvolume should i\b", text):
         return "volume_advice_request"
+    if re.search(r"\bis .+\b(?:a |an )?(?:fish|daily driver|groveller|step[ -]?up)\b", text):
+        return "general_board_question"
     if re.search(r"\bhow many\b|\bwhat stock\b|\bhow much stock\b|\bboards? (?:are|do you have) available\b", text):
         return "inventory_count_question"
     if re.search(r"\b(?:show me|find me|search for|available|in stock|do you have|stock of|looking for)\b", text):

@@ -1,56 +1,63 @@
 {
-  "totalModels": 513,
-  "modelsWithPrimaryLane": 513,
-  "modelsWithSecondaryLanes": 438,
-  "confidenceDistribution": {
-    "high": 12,
-    "low": 214,
-    "medium": 287
+  "totalCuratedOverrides": 128,
+  "highConfidenceOverrides": 12,
+  "mediumConfidenceOverrides": 116,
+  "laneCoverageByCategory": {
+    "barrel_board": 25,
+    "big_wave_step_up": 6,
+    "cruisy_fish": 13,
+    "cruisy_longboard": 8,
+    "cruisy_mid_length": 15,
+    "fish_hybrid": 13,
+    "forgiving_daily_driver": 19,
+    "forgiving_groveller": 4,
+    "high_performance_shortboard": 38,
+    "high_volume_groveller": 6,
+    "hybrid_daily_driver": 18,
+    "keel_fish": 4,
+    "mid_length_single_fin": 4,
+    "mid_length_twin": 6,
+    "mini_mal": 4,
+    "modern_fish": 37,
+    "noserider": 2,
+    "one_board_quiver": 10,
+    "performance_daily_driver": 49,
+    "performance_fish": 30,
+    "performance_groveller": 12,
+    "performance_longboard": 4,
+    "performance_mid_length": 20,
+    "performance_step_up": 24,
+    "point_break_fish": 19,
+    "small_wave_daily_driver": 16,
+    "small_wave_fish": 27,
+    "small_wave_speed_board": 12,
+    "step_down_shortboard": 4,
+    "step_up_mid_length": 8,
+    "traditional_fish": 8,
+    "travel_step_up": 10,
+    "twin_fin_cruiser": 4,
+    "twin_fin_performance": 30,
+    "user_friendly_shortboard": 3
   },
-  "modelsMissingWaveRange": 475,
-  "modelsMissingSurferFit": 448,
-  "modelsMissingDesignData": 93,
-  "categoryDistribution": {
-    "big_wave_step_up": 3,
-    "cruisy_fish": 3,
-    "cruisy_longboard": 1,
-    "cruisy_mid_length": 6,
-    "fish": 20,
-    "fish_hybrid": 3,
-    "foil": 1,
-    "forgiving_daily_driver": 8,
-    "forgiving_groveller": 2,
-    "groveller": 10,
-    "gun": 3,
-    "high_performance_shortboard": 72,
-    "high_volume_groveller": 3,
-    "hybrid_daily_driver": 194,
-    "longboard": 24,
-    "mid_length": 43,
-    "mid_length_twin": 2,
-    "mini_mal": 2,
-    "modern_fish": 6,
-    "noserider": 1,
-    "performance_daily_driver": 19,
-    "performance_fish": 8,
-    "performance_groveller": 3,
-    "performance_longboard": 1,
-    "performance_mid_length": 5,
-    "performance_step_up": 11,
-    "small_wave_daily_driver": 4,
-    "small_wave_fish": 2,
-    "softboard": 6,
-    "step_down_shortboard": 1,
-    "step_up": 18,
-    "step_up_mid_length": 1,
-    "traditional_fish": 4,
-    "travel_step_up": 1,
-    "twin_fin_cruiser": 1,
-    "twin_fin_performance": 12,
-    "user_friendly_shortboard": 1,
-    "youth": 8
+  "fishLaneCoverage": {
+    "traditional_fish": 8,
+    "performance_fish": 30,
+    "cruisy_fish": 13,
+    "small_wave_fish": 27,
+    "point_break_fish": 19,
+    "twin_fin_performance": 30,
+    "twin_fin_cruiser": 4,
+    "fish_hybrid": 13,
+    "keel_fish": 4,
+    "modern_fish": 37
   },
-  "top50LowConfidenceImportantModels": [
+  "dailyDriverLaneCoverage": {
+    "performance_daily_driver": 49,
+    "forgiving_daily_driver": 19,
+    "hybrid_daily_driver": 18,
+    "small_wave_daily_driver": 16
+  },
+  "top50LowConfidenceImportantBoards": [
     {
       "brand": "Album",
       "model": "Bom Dia",
@@ -550,258 +557,6 @@
         "surferFit",
         "designData"
       ]
-    }
-  ],
-  "top50ModelsNeedingCuratedReview": [
-    {
-      "brand": "Album",
-      "model": "Bom Dia",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "D'boa",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "Delma",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "Insanity",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "ProtoAtypical",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "The End",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "VBSM",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "Veebee",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Channel Islands",
-      "model": "bonzer-shelter",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Channel Islands",
-      "model": "goldie",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Channel Islands",
-      "model": "happy-traveler-1",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Channel Islands",
-      "model": "m-23",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Channel Islands",
-      "model": "mavs-gun",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Channel Islands",
-      "model": "rook-15",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Channel Islands",
-      "model": "weirdo-ripper",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Beaker",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Chem Zen",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Chem ZenAgain",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Chemistry M Mix Surfboard",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Chemistry Pantera Rosa Surfboard",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Compression",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Flash Point",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Nucleus",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Zen3",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Beausoleil",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Cafe Racer 2.0",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Easy Wind",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Hole Shot",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "OP1",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "OP3",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "OP4",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Osprey",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Submariner",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Surfer Rosa",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Waterlion",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Lost",
-      "model": "Crowd Killer Round",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Lost",
-      "model": "Party Crasher",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pegaso",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Beachy Mood",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Easy Mood",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Flying Diamond",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Hyperlink",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Magnetic",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Mustache",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Performance Mood",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Space Oddity",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Water Lion",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Water Lion Ultra",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Rusty",
-      "model": "Blade",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Rusty",
-      "model": "Express",
-      "reason": "waveRange, surferFit, designData"
     }
   ]
 }

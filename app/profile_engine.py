@@ -51,6 +51,8 @@ def _extract_age(text: str) -> int | None:
 
 
 def _extract_fitness(text: str) -> str | None:
+    if re.search(r"\bfit\b", text):
+        return "High"
     if re.search(r"\bsurf(?:ing)?\s+(?:every\s*day|everyday|daily)\b", text):
         return "High"
     for token, label in [
@@ -104,7 +106,7 @@ def _extract_ability(text: str) -> str | None:
         ("Expert", [r"\bexpert\b"]),
         ("Advanced", [r"\badvanced\b", r"\bexperienced(?: surfer)?\b"]),
         ("Intermediate", [
-            r"\bintermediate\b", r"\bgood\s+or\s+average(?:\s+surfer)?\b",
+            r"\bintermediate\b", r"\bgood\s*(?:or|/)\s*average(?:\s+surfer)?\b",
             r"\bgood(?:\s+surfer)?\b", r"\baverage(?:\s+surfer)?\b", r"\bdecent(?:\s+surfer)?\b",
         ]),
         ("Beginner", [r"\bbeginner\b", r"\bnovice\b", r"\blearning\b"]),
@@ -211,6 +213,15 @@ def _extract_requested_length(text: str) -> str | None:
     return f"{match.group(1)}'{int(match.group(2))}" if match else None
 
 
+def _extract_requested_brand(text: str) -> str | None:
+    aliases = {"js": "JS Industries", "ci": "Channel Islands", "lost": "Lost"}
+    for token, brand in aliases.items():
+        if re.search(rf"\b{re.escape(token)}\b", text):
+            return brand
+    brands = sorted({str(row.get("brand") or "") for row in load_graph().get("boards", [])}, key=len, reverse=True)
+    return next((brand for brand in brands if brand and re.search(rf"\b{re.escape(brand.lower())}\b", text)), None)
+
+
 def _extract_region(text: str, explicit_region: str | None = None) -> str | None:
     aliases = [
         (r"\b(?:europe|eu)\b", "EU"),
@@ -260,6 +271,7 @@ def extract_profile(message: str, region: str | None = None) -> RiderProfile:
         construction_preference=_extract_construction_preference(text),
         requested_construction=_extract_requested_construction(text),
         requested_length=_extract_requested_length(text),
+        requested_brand=_extract_requested_brand(text),
     )
 
 

@@ -169,17 +169,55 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertEqual(body["recommendations"][0]["model"], "Monsta")
         self.assertEqual(body["recommendations"][0]["region"], "AU")
 
-    @patch("main.search_live_category", side_effect=live_fish_rows)
-    def test_fish_search_returns_live_eu_models(self, _search):
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
+        row.model_copy(update={
+            "available_count": 2 if index < 2 else 0,
+            "retailer_count": 2 if index < 2 else 0,
+            "region": profile.region,
+            "example_live_source_url": f"https://example.test/{profile.region.lower()}/{index}" if index < 2 else None,
+        }) for index, row in enumerate(rows)
+    ])
+    def test_fish_search_returns_only_live_eu_models(self, _inventory):
         response = self.client.post("/api/board-guide/chat", json={
             "message": "Show me fish boards around 30 litres in Europe", "region": "Australia",
         })
         body = response.json()
         self.assertEqual(body["intent"], "board_search_request")
         self.assertEqual(body["intakeState"]["target_volume_litres"], 30)
-        self.assertEqual({row["brand"] for row in body["recommendations"]}, {"Album", "JS Industries"})
+        self.assertTrue(body["recommendations"])
         self.assertTrue(all(row["region"] == "EU" for row in body["recommendations"]))
+        self.assertTrue(all(row["availableCount"] > 0 for row in body["recommendations"]))
         self.assertNotIn("rough weight", body["reply"].lower())
+
+    def test_hypto_is_not_misclassified_as_a_fish(self):
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "Is the Hypto a fish?", "region": "AU",
+        })
+        body = response.json()
+        self.assertEqual(body["intent"], "general_board_question")
+        self.assertIn("No.", body["reply"])
+        self.assertIn("Hypto Krypto", body["reply"])
+        self.assertIn("hybrid daily driver", body["reply"])
+
+    def test_seaside_and_rnf_comparison_uses_intended_canonical_models(self):
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "What is the difference between a Seaside and an RNF?", "region": "AU",
+        })
+        body = response.json()
+        self.assertEqual(body["intent"], "comparison_request")
+        self.assertIn("Firewire Seaside", body["reply"])
+        self.assertIn("Lost RNF 96", body["reply"])
+        self.assertNotIn("Rusty What", body["reply"])
+
+    def test_unavailable_christenson_fish_is_explained_without_inventing_stock(self):
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "Where can I buy a Christenson Fish in Australia?", "region": "AU",
+        })
+        body = response.json()
+        self.assertEqual(body["intent"], "exact_board_location_request")
+        self.assertIn("canonical point-break fish reference", body["reply"])
+        self.assertIn("can’t see a matching canonical model", body["reply"])
+        self.assertEqual(body["recommendations"], [])
 
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
         row.model_copy(update={"available_count": 1, "retailer_count": 1, "region": profile.region})

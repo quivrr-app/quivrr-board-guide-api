@@ -93,7 +93,7 @@ def _candidate_sizes(model_id: int, target_volume: float | None, get_json: Calla
         seen.add(size_id)
         deduped.append(row)
     if target_volume is None:
-        return deduped[:2]
+        return deduped[:8]
     selected = []
     for tolerance in (1.0, 2.0, 3.0):
         for row in deduped:

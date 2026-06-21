@@ -21,3 +21,20 @@ External reviews may be supporting evidence only. A future review record should 
 The evidence model must permit disagreement: a reviewer may describe a board as demanding while a manufacturer presents it as accessible. Bodhi should retain both attributed claims, apply explicit weights, and explain uncertainty rather than flattening them into a false fact.
 
 Live stock links and counts never come from this knowledge layer. They are added only after model selection through verified region-scoped inventory APIs.
+
+## Curated expert override governance
+
+`app/knowledge/curated/board_expert_overrides.json` is the reviewable expert layer for iconic and
+high-value models. An override may set a primary lane, crossover lanes, board family, concise
+reputation and fit notes, bounded design scores, confidence, evidence sources and review metadata.
+Uncertain judgements stay medium confidence and retain a note; they are not promoted through fuzzy
+matching. Defaults provide the full schema, while each model entry records the facts that are
+specifically known about it.
+
+Fish is deliberately not one undifferentiated category. A traditional keel fish, point-break twin,
+performance fish, cruisy fish and small-wave fish can suit different waves and surfers even when
+their outlines look related. Bodhi uses those sub-lanes to form advice before stock is queried.
+
+Canonical recommendations and availability are separate statements. A strong canonical fit may be
+named when no regional stock is found, but it must be labelled as unavailable. Only a successful
+region-scoped inventory lookup can create a verified live card or direct purchase link.

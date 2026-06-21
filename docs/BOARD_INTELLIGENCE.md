@@ -403,3 +403,30 @@ Outputs:
 
 The outputs are intentionally stable: there is no timestamp, network request, SQL query, or LLM
 call. Regeneration from unchanged committed inputs must produce an empty diff.
+
+## Phase 8 expert sub-lanes
+
+The expert matrix keeps one `primaryLane` per canonical model and adds explicit `boardLanes` and
+`secondaryLanes` for meaningful crossovers. Shortboards distinguish performance, forgiving,
+hybrid, small-wave, step-down and user-friendly roles. Fish distinguish traditional,
+performance, cruisy, small-wave, point-break, performance twin, cruiser twin, hybrid, keel and
+modern roles. Groveller, mid-length, step-up and longboard families use similarly specific lanes.
+These values are structured ranking inputs rather than phrases hidden in descriptions.
+
+The runtime now follows an expert-first, inventory-second boundary:
+
+1. retain the surfer profile and requested board family across turns;
+2. choose the appropriate sub-lanes for the surfer and waves;
+3. rank canonical models from the global expert matrix;
+4. check those candidates against verified stock in the selected region;
+5. show live candidates as stock cards and describe strong unavailable canonical fits explicitly.
+
+For example, a fish request for point breaks prioritises point-break fish, traditional fish,
+performance fish and performance twins. It does not silently broaden into generic daily drivers.
+Canonical references such as Christenson's Fish family may be explained when useful even if the
+current Quivrr canonical graph has no model identity for that exact name; in that case Bodhi must
+say that it cannot verify a canonical identity or live link.
+
+Phase 8 coverage is recorded in `app/knowledge/audits/phase8_expert_override_audit.json` and its
+CSV companion. The audit reports curated override counts, confidence, lane coverage and the next
+low-confidence models requiring review.

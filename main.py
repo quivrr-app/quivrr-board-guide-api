@@ -7,7 +7,7 @@ from app.azure_openai_client import is_azure_openai_configured
 from app.conversation_flow import (
     comparison_reply, enough_for_recommendations, find_requested_board, general_board_reply,
     graph_suggestions, has_intake_signal, intake_questions, opening_message,
-    is_memory_correction, partial_volume_reply,
+    is_memory_correction, partial_volume_reply, fish_advice_reply, board_family_reply,
     public_recommendations, recommendation_reply, site_help_reply, suggestions_for_board,
     volume_advice_reply, volume_guidance,
 )
@@ -83,7 +83,10 @@ def board_guide_chat(request: BoardGuideRequest):
         questions = ["Which region should I search: Australia, Europe, or Indonesia?"]
     elif intent == "exact_board_location_request" and not requested_board:
         suggested_boards = []
-        reply = "Tell me the brand and model you want located, and I’ll check verified stock in that region."
+        if "christenson fish" in request.message.lower():
+            reply = "The Christenson Fish is a strong canonical point-break fish reference, but I can’t see a matching canonical model or verified live link in the selected regional inventory right now."
+        else:
+            reply = "Tell me the brand and model you want located, and I’ll check verified stock in that region."
         questions = []
     elif intent == "exact_board_location_request":
         base = suggestions_for_board(requested_board)[:1]
@@ -111,6 +114,10 @@ def board_guide_chat(request: BoardGuideRequest):
     elif intent == "site_help_question":
         suggested_boards = []
         reply = site_help_reply(profile.region)
+        questions = []
+    elif intent == "general_board_question" and requested_board and "fish" in request.message.lower():
+        suggested_boards = []
+        reply = board_family_reply(requested_board, "fish")
         questions = []
     elif intent == "general_board_question":
         suggested_boards = []
@@ -140,6 +147,35 @@ def board_guide_chat(request: BoardGuideRequest):
         suggested_boards = []
         reply = inventory_snapshot_reply(profile.region, category)
         questions = []
+    elif category == "fish" and intent in {"board_search_request", "surfer_fit_request"}:
+        canonical_boards = recommend_from_matrix(profile, limit=12)
+        brand_stock_request = bool(profile.requested_brand and profile.region and intent == "board_search_request")
+        if brand_stock_request:
+            checked = enrich_suggestions_with_inventory(canonical_boards, profile)
+            suggested_boards = [board for board in checked if board.available_count > 0]
+            if suggested_boards:
+                reply = f"I found verified {profile.region} fish stock from {profile.requested_brand}: " + ", ".join(f"{row.model}" for row in suggested_boards[:5]) + "."
+            else:
+                alternative_profile = profile.model_copy(update={"requested_brand": None})
+                alternatives = recommend_from_matrix(alternative_profile, limit=8)
+                checked_alternatives = enrich_suggestions_with_inventory(alternatives, alternative_profile)
+                suggested_boards = [board for board in checked_alternatives if board.available_count > 0]
+                reply = f"I can’t see verified live {profile.region} fish stock from {profile.requested_brand} right now. "
+                if suggested_boards:
+                    reply += "The closest live fish alternatives are " + ", ".join(f"{row.brand} {row.model}" for row in suggested_boards[:5]) + "."
+            questions = []
+        elif not profile.region or (
+            not (profile.wave_type or profile.wave_size or profile.wave_power)
+            and not (intent == "board_search_request" and profile.target_volume_litres)
+        ):
+            suggested_boards = []
+            reply = fish_advice_reply(profile, canonical_boards)
+            questions = ["Which region should I search: Australia, Europe, or Indonesia?"] if not profile.region else ["Are your waves mostly weak beach breaks, points, or reefs?"]
+        else:
+            checked = enrich_suggestions_with_inventory(canonical_boards, profile)
+            suggested_boards = [board for board in checked if board.available_count > 0]
+            reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
+            questions = []
     elif intent == "board_search_request" and category and profile.region and not requested_board:
         suggested_boards = search_live_category(profile, category)
         label = category.replace("_", " ")

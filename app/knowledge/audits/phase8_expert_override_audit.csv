@@ -1,0 +1,129 @@
+brand,model,primaryLane,boardLanes,confidence,notes
+Album,Bullet,hybrid_daily_driver,hybrid_daily_driver; user_friendly_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Album,Disorder,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Album,Fascination,modern_fish,modern_fish; performance_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Album,Lightbender,performance_fish,performance_fish; modern_fish; point_break_fish,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Album,Moonstone,performance_fish,performance_fish; modern_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Album,Plasmic,fish_hybrid,fish_hybrid; small_wave_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Album,Sunstone,cruisy_fish,cruisy_fish; modern_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Album,Townsend,performance_mid_length,performance_mid_length; step_up_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Album,Twinsman,twin_fin_performance,twin_fin_performance; modern_fish; point_break_fish,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Album,Warp Twin,twin_fin_performance,twin_fin_performance; modern_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,better-everyday,performance_daily_driver,performance_daily_driver; forgiving_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,ci-fish,traditional_fish,traditional_fish; small_wave_fish; keel_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,ci-mid,performance_mid_length,performance_mid_length; cruisy_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,ci-mid-twin,mid_length_twin,mid_length_twin; performance_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,dumpster-diver-2,step_down_shortboard,step_down_shortboard; small_wave_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,febs-fish,modern_fish,modern_fish; performance_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,fever,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,fishbeard,performance_fish,performance_fish; modern_fish; twin_fin_performance,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,g-skate,twin_fin_performance,twin_fin_performance; performance_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,happy-everyday,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,neckbeard-3,small_wave_daily_driver,small_wave_daily_driver; performance_groveller,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,taco-grinder-1,performance_step_up,performance_step_up; barrel_board; travel_step_up,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,the-black-beauty,performance_step_up,performance_step_up; barrel_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,the-water-hog,mini_mal,mini_mal; cruisy_longboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Channel Islands,twin-pin,twin_fin_performance,twin_fin_performance; point_break_fish,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Chilli,Blueprint,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Chilli,Faded 2.0 Step Up,performance_step_up,performance_step_up; barrel_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Chilli,Middy,cruisy_mid_length,cruisy_mid_length; performance_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Chilli,Peppa Twin,twin_fin_performance,twin_fin_performance; modern_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Chilli,Piña Colada,forgiving_groveller,forgiving_groveller; small_wave_speed_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Chilli,Rare Bird EVO,hybrid_daily_driver,hybrid_daily_driver; forgiving_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Chilli,Sugar,modern_fish,modern_fish; small_wave_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Chilli,Volume II,hybrid_daily_driver,hybrid_daily_driver; forgiving_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Christenson,C-Bucket,cruisy_mid_length,cruisy_mid_length; mid_length_single_fin,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Christenson,C-Hawk,performance_step_up,performance_step_up; barrel_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Christenson,Chris Craft,cruisy_longboard,cruisy_longboard; performance_longboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Christenson,Huntsman,performance_mid_length,performance_mid_length; step_up_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Christenson,Lane Splitter,twin_fin_performance,twin_fin_performance; point_break_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Christenson,Nautilus,step_up_mid_length,step_up_mid_length; performance_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Christenson,Ocean Racer,traditional_fish,traditional_fish; point_break_fish; twin_fin_cruiser,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Christenson,OP2,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Christenson,The Wolverine,performance_mid_length,performance_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Christenson,Ultra Tracker,cruisy_mid_length,cruisy_mid_length; mid_length_single_fin,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+DHD,Black Diamond,forgiving_daily_driver,forgiving_daily_driver; hybrid_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+DHD,MF DNA,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+DHD,MF Twin,twin_fin_performance,twin_fin_performance; performance_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+DHD,Mini Twin,twin_fin_cruiser,twin_fin_cruiser; fish_hybrid,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+DHD,Nexus,hybrid_daily_driver,hybrid_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+DHD,Phoenix,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+DHD,Sandman,small_wave_daily_driver,small_wave_daily_driver; performance_groveller,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+DHD,Sweet Spot 4.0,performance_step_up,performance_step_up; barrel_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+DHD,Utopia,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Boss Up,performance_mid_length,performance_mid_length; step_up_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Dominator 2.0,forgiving_daily_driver,forgiving_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Dominator Pro,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Great White Twin,twin_fin_performance,twin_fin_performance; small_wave_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Greedy Beaver,cruisy_mid_length,cruisy_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Machadocado,modern_fish,modern_fish; cruisy_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Mashup,fish_hybrid,fish_hybrid; performance_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Sci-Fi 2.0,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Seaside,cruisy_fish,cruisy_fish; small_wave_fish; modern_fish; point_break_fish,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Sweet Potato,high_volume_groveller,high_volume_groveller; small_wave_speed_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Taylor Jensen Hull Rider,noserider,noserider; cruisy_longboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Firewire,Taylor Jensen Pro,performance_longboard,performance_longboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Haydenshapes,Cannon,big_wave_step_up,big_wave_step_up; travel_step_up,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Haydenshapes,Holy Grail,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Haydenshapes,Holy Hypto,performance_daily_driver,performance_daily_driver; hybrid_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Haydenshapes,Hypto Krypto,hybrid_daily_driver,hybrid_daily_driver; forgiving_daily_driver,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Haydenshapes,Love Buzz,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Haydenshapes,Plunder,cruisy_fish,cruisy_fish; fish_hybrid,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Haydenshapes,Shred Sled,performance_groveller,performance_groveller; small_wave_speed_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,Big Baron,cruisy_mid_length,cruisy_mid_length; mid_length_twin,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,Black Baron,performance_fish,performance_fish; small_wave_fish; twin_fin_performance; point_break_fish,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,Bull Run,user_friendly_shortboard,user_friendly_shortboard; forgiving_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,El Baron,twin_fin_performance,twin_fin_performance; performance_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,Flame Fish,small_wave_fish,small_wave_fish; fish_hybrid,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,Forget Me Not 3,performance_step_up,performance_step_up; barrel_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,Forget Me Not 3 Step Up,big_wave_step_up,big_wave_step_up; travel_step_up; barrel_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,Golden Child,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,Monsta,high_performance_shortboard,high_performance_shortboard; performance_daily_driver,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,Raging Bull,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,Sub Xero,high_volume_groveller,high_volume_groveller; small_wave_speed_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+JS Industries,Xero Gravity,performance_daily_driver,performance_daily_driver,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Cali Twin,twin_fin_performance,twin_fin_performance; modern_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Cali Twin Pin,twin_fin_performance,twin_fin_performance; point_break_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Crowd Killer,cruisy_mid_length,cruisy_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Driver 2.0,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Hydra,high_volume_groveller,high_volume_groveller; small_wave_speed_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Puddle Fish,small_wave_fish,small_wave_fish; cruisy_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Puddle Jumper HP,performance_groveller,performance_groveller; small_wave_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Rad Ripper,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Retro Ripper,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,RNF 96,modern_fish,modern_fish; small_wave_fish; performance_fish; point_break_fish,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,RNF Retro,traditional_fish,traditional_fish; keel_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Rocket Redux,performance_step_up,performance_step_up; barrel_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Sub Driver 2.0,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,Swordfish,performance_fish,performance_fish; modern_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Lost,V3 Rocket,small_wave_daily_driver,small_wave_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Astro Pop,performance_fish,performance_fish; small_wave_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Crisis Twin,mid_length_twin,mid_length_twin; performance_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Ghost,performance_step_up,performance_step_up; barrel_board,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Gremlin,forgiving_groveller,forgiving_groveller; small_wave_speed_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Mini Ghost Squash,performance_daily_driver,performance_daily_driver; step_down_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Next Step,performance_step_up,performance_step_up; barrel_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Padillac,big_wave_step_up,big_wave_step_up; travel_step_up,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Phantom,performance_daily_driver,performance_daily_driver,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Pyzalien 2,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Red Tiger,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Tiger Twin,twin_fin_performance,twin_fin_performance; modern_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,White Tiger,hybrid_daily_driver,hybrid_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Rusty,419 Fish,performance_fish,performance_fish; small_wave_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Rusty,421 Fish,traditional_fish,traditional_fish; small_wave_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Rusty,Blackbird,performance_step_up,performance_step_up; barrel_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Rusty,Dwart,fish_hybrid,fish_hybrid; cruisy_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Rusty,Fish Quatro,modern_fish,modern_fish; small_wave_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Rusty,Hustler,forgiving_daily_driver,forgiving_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Rusty,Moby Fish,mini_mal,mini_mal; cruisy_longboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Rusty,New Traveler,travel_step_up,travel_step_up; performance_step_up,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Rusty,Slayer 2,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Rusty,The Rooster,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Sharp Eye,Cheat Code,small_wave_daily_driver,small_wave_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Sharp Eye,Disco Inferno,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Sharp Eye,HT2.5,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Sharp Eye,Inferno 72,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Sharp Eye,Maguro,performance_step_up,performance_step_up; barrel_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Sharp Eye,Modern 2.5,performance_fish,performance_fish; modern_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Sharp Eye,Synergy,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
+Sharp Eye,Zipper,performance_groveller,performance_groveller,medium,Concise curated classification; retain manufacturer evidence as the primary authority.

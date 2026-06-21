@@ -27,8 +27,8 @@ class BoardExpertMatrixTests(unittest.TestCase):
         self.assertIn("one_board_quiver", phantom["secondaryLanes"])
         self.assertEqual(hypto["primaryLane"], "hybrid_daily_driver")
         self.assertIn("forgiving_daily_driver", hypto["secondaryLanes"])
-        self.assertEqual(rnf["primaryLane"], "fish")
-        self.assertIn("twin_fin", rnf["secondaryLanes"])
+        self.assertEqual(rnf["primaryLane"], "modern_fish")
+        self.assertIn("twin_fin_performance", rnf["secondaryLanes"])
 
     def test_matrix_supports_every_required_lane(self):
         required = {
@@ -50,10 +50,36 @@ class BoardExpertMatrixTests(unittest.TestCase):
 
     def test_fish_profile_searches_crossover_lanes(self):
         profile = RiderProfile(preferred_board_type="Fish", target_volume_litres=30)
-        self.assertEqual(target_lanes(profile), ["fish", "twin_fin", "small_wave_daily_driver"])
+        self.assertEqual(target_lanes(profile), [
+            "modern_fish", "performance_fish", "traditional_fish", "cruisy_fish",
+        ])
         rows = recommend_from_matrix(profile, limit=20)
         self.assertTrue(rows)
-        self.assertTrue(any("Fish" in row.category or "Twin" in row.category for row in rows))
+        self.assertTrue(any("fish" in row.category.lower() or "twin" in row.category.lower() for row in rows))
+
+    def test_phase8_curated_overrides_and_iconic_fish_sublanes(self):
+        audit = json.loads(generator.PHASE8_AUDIT_JSON_PATH.read_text(encoding="utf-8"))
+        self.assertGreaterEqual(audit["totalCuratedOverrides"], 100)
+        self.assertGreater(audit["highConfidenceOverrides"], 0)
+        expectations = {
+            ("Album", "Lightbender"): {"performance_fish", "modern_fish", "point_break_fish"},
+            ("Album", "Twinsman"): {"twin_fin_performance", "modern_fish", "point_break_fish"},
+            ("Christenson", "Ocean Racer"): {"traditional_fish", "point_break_fish"},
+            ("Firewire", "Seaside"): {"cruisy_fish", "small_wave_fish"},
+            ("JS Industries", "Black Baron"): {"performance_fish", "small_wave_fish"},
+            ("Lost", "RNF 96"): {"modern_fish", "small_wave_fish"},
+        }
+        for identity, required in expectations.items():
+            with self.subTest(board=identity):
+                row = find_matrix_board(*identity)
+                lanes = {row["primaryLane"], *row["secondaryLanes"], *row["boardLanes"]}
+                self.assertTrue(required <= lanes)
+
+    def test_point_break_fish_profile_prioritises_point_lane(self):
+        profile = RiderProfile(preferred_board_type="Fish", wave_type="Point Break", ability="Intermediate")
+        self.assertEqual(target_lanes(profile)[0], "point_break_fish")
+        rows = recommend_from_matrix(profile, limit=12)
+        self.assertTrue(any(row.model in {"Ocean Racer", "Lightbender", "Twinsman", "RNF 96"} for row in rows))
 
     def test_generation_is_deterministic(self):
         before = hashlib.sha256(generator.OUTPUT_PATH.read_bytes()).hexdigest()

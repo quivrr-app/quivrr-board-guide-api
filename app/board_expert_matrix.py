@@ -30,7 +30,12 @@ def target_lanes(profile: RiderProfile) -> list[str]:
     text = " ".join(filter(None, [profile.preferred_board_type, profile.goal, profile.wave_power])).lower()
     lanes = []
     if "fish" in text:
-        lanes.extend(["fish", "twin_fin", "small_wave_daily_driver"])
+        if "point" in (profile.wave_type or "").lower():
+            lanes.extend(["point_break_fish", "traditional_fish", "performance_fish", "twin_fin_performance"])
+        elif "weak" in text or "beach" in (profile.wave_type or "").lower():
+            lanes.extend(["small_wave_fish", "cruisy_fish", "fish_hybrid"])
+        else:
+            lanes.extend(["modern_fish", "performance_fish", "traditional_fish", "cruisy_fish"])
     if "grov" in text:
         lanes.extend(["groveller", "small_wave_daily_driver", "weak_wave_board"])
     if "daily driver" in text:
@@ -66,12 +71,15 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
     target = profile.target_volume_litres or ((fit.volume_low + fit.volume_high) / 2 if fit else None)
     rows = []
     for board in load_matrix():
-        board_lanes = {board["primaryLane"], *board.get("secondaryLanes", [])}
+        if profile.requested_brand and _key(board.get("brand")) != _key(profile.requested_brand):
+            continue
+        board_lanes = {board["primaryLane"], *board.get("secondaryLanes", []), *board.get("boardLanes", [])}
         lane_rank = next((len(lanes) - index for index, lane in enumerate(lanes) if lane in board_lanes), 0)
         if lane_rank == 0:
             continue
         distance = _volume_distance(board, target)
-        score = lane_rank * 20 + board.get("oneBoardQuiverScore", 0) * .08 + board.get("performanceScore", 0) * .06 - distance * 4
+        fish_weight = board.get("fishScore", 0) * .1 if any("fish" in lane or "twin" in lane for lane in lanes) else 0
+        score = lane_rank * 20 + board.get("oneBoardQuiverScore", 0) * .08 + board.get("performanceScore", 0) * .06 + fish_weight - distance * 4
         rows.append((score, board, lanes[0], distance))
     rows.sort(key=lambda item: (-item[0], item[1]["brand"], item[1]["model"]))
     selected, brands = [], {}

@@ -162,6 +162,50 @@ class BodhiApiTests(unittest.TestCase):
         self.assertTrue(all(board["availableCount"] == 0 for board in body["recommendations"]))
         self.assertIn("won’t invent stock", body["reply"])
 
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=_regional_inventory)
+    def test_three_turn_fish_intake_keeps_context_and_prioritises_point_break_fish(self, _inventory, _azure):
+        first = self.client.post("/api/board-guide/chat", json={
+            "message": "Good / average surfer, 46, fit, 76kg, looking for a good fish.",
+        }).json()
+        self.assertEqual(first["intakeState"]["ability"], "Intermediate")
+        self.assertEqual(first["intakeState"]["preferred_board_type"], "Fish")
+        self.assertIn("31 to 35L", first["reply"])
+        self.assertIn("Which region", first["reply"])
+
+        second = self.client.post("/api/board-guide/chat", json={
+            "message": "Australia", "intakeState": first["intakeState"],
+        }).json()
+        self.assertEqual(second["intakeState"]["preferred_board_type"], "Fish")
+        self.assertEqual(second["intakeState"]["region"], "AU")
+        self.assertIn("weak beach breaks, points, or reefs", second["reply"])
+
+        third = self.client.post("/api/board-guide/chat", json={
+            "message": "point breaks", "intakeState": second["intakeState"],
+        }).json()
+        self.assertEqual(third["intakeState"]["preferred_board_type"], "Fish")
+        self.assertIn("down-the-line fish", third["reply"])
+        self.assertIn("Christenson Fish/Ocean Racer", third["reply"])
+        self.assertIn("Album Lightbender", third["reply"])
+        self.assertTrue(all(row["region"] == "AU" for row in third["recommendations"]))
+        self.assertTrue(all(row["availableCount"] > 0 for row in third["recommendations"]))
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
+        row.model_copy(update={
+            "available_count": 1 if index == 0 else 0,
+            "retailer_count": 1 if index == 0 else 0,
+            "region": profile.region,
+        }) for index, row in enumerate(rows)
+    ])
+    def test_fish_reply_mentions_canonical_fits_even_when_not_live(self, _inventory, _azure):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "76kg intermediate looking for a fish for point breaks in Australia",
+        }).json()
+        self.assertIn("canonical boards", body["reply"])
+        self.assertIn("not currently found in live stock", body["reply"])
+        self.assertTrue(all(row["availableCount"] > 0 for row in body["recommendations"]))
+
 
 if __name__ == "__main__":
     unittest.main()

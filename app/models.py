@@ -21,6 +21,7 @@ class RiderProfile(BaseModel):
     construction_preference: str | None = None
     requested_construction: str | None = None
     requested_length: str | None = None
+    requested_brand: str | None = None
 
 
 class BoardRecommendation(BaseModel):
