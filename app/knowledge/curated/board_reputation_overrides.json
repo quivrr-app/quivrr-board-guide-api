@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "quivrr_curated_reputation",
+  "notes": "Curated surf-shop board knowledge. Stock claims must still come from verified regional inventory.",
+  "boards": [
+    {
+      "brand": "Pyzel",
+      "model": "Phantom",
+      "shortPosition": "a modern performance daily driver",
+      "reputationSummary": "A forgiving step-down from the Ghost that still feels like a proper shortboard.",
+      "knownFor": [
+        "good-wave daily driver",
+        "reliable paddle",
+        "average to overhead surf"
+      ]
+    },
+    {
+      "brand": "Haydenshapes",
+      "model": "Hypto Krypto",
+      "shortPosition": "a forgiving hybrid one-board quiver",
+      "reputationSummary": "Famous for easy paddle, speed and versatility rather than pure high-performance precision.",
+      "knownFor": [
+        "easy speed",
+        "paddle help",
+        "forgiving hybrid feel"
+      ]
+    },
+    {
+      "brand": "Firewire",
+      "model": "Seaside",
+      "shortPosition": "a fast, cruisy modern fish",
+      "reputationSummary": "A user-friendly fish with easy speed and flow in small to average waves.",
+      "knownFor": [
+        "easy speed",
+        "flow",
+        "small wave fun"
+      ]
+    },
+    {
+      "brand": "Lost",
+      "model": "RNF 96",
+      "shortPosition": "a modern performance fish benchmark",
+      "reputationSummary": "A refined fish-style board with more performance and range than a very traditional keel fish.",
+      "knownFor": [
+        "speed",
+        "modern fish performance",
+        "small to good-wave range"
+      ]
+    },
+    {
+      "brand": "Album",
+      "model": "Lightbender",
+      "shortPosition": "a cult performance twin and point-break fish",
+      "reputationSummary": "A refined twin that runs fast down the line and feels more performance-led than a cruisy fish.",
+      "knownFor": [
+        "point-break flow",
+        "performance twin feel",
+        "speed with hold"
+      ]
+    },
+    {
+      "brand": "Album",
+      "model": "Twinsman",
+      "shortPosition": "a modern twin-fin performance board",
+      "reputationSummary": "A performance twin that sits closer to a refined shortboard than a cruisy retro fish.",
+      "knownFor": [
+        "twin-fin speed",
+        "performance rail work",
+        "clean wave flow"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "twin-pin",
+      "shortPosition": "a refined twin-pin for clean lines",
+      "reputationSummary": "A sleek twin-pin style board for fast, smooth lines in better waves.",
+      "knownFor": [
+        "speed",
+        "flow",
+        "point-break lines"
+      ]
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Black Baron",
+      "shortPosition": "a performance fish and small-wave speed board",
+      "reputationSummary": "A JS twin built to generate speed while keeping a more performance-oriented feel than a cruisy fish.",
+      "knownFor": [
+        "speed",
+        "release",
+        "small-wave performance"
+      ]
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Monsta",
+      "shortPosition": "a high-performance shortboard",
+      "reputationSummary": "A proper performance shortboard lane, not the easiest board in weak surf.",
+      "knownFor": [
+        "performance surfing",
+        "response",
+        "good-wave shortboard feel"
+      ]
+    },
+    {
+      "brand": "JS Industries",
+      "model": "Xero Gravity",
+      "shortPosition": "a performance daily driver",
+      "reputationSummary": "A daily shortboard for surfers who want performance with more everyday usability.",
+      "knownFor": [
+        "daily performance",
+        "speed generation",
+        "range"
+      ]
+    },
+    {
+      "brand": "Sharp Eye",
+      "model": "Inferno 72",
+      "shortPosition": "a high-performance daily shortboard",
+      "reputationSummary": "A fast, responsive performance board with more everyday range than a pure pro-only blade.",
+      "knownFor": [
+        "speed",
+        "drive",
+        "high-performance daily use"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "happy-everyday",
+      "shortPosition": "a performance daily driver",
+      "reputationSummary": "A user-friendlier everyday version of the Happy lane with a strong shortboard feel.",
+      "knownFor": [
+        "daily performance",
+        "range",
+        "clean shortboard feel"
+      ]
+    },
+    {
+      "brand": "Lost",
+      "model": "Rad Ripper",
+      "shortPosition": "a retro-flavoured performance daily driver",
+      "reputationSummary": "A fast, flatter-rockered performance board with more glide and trim than a pure modern shortboard.",
+      "knownFor": [
+        "speed",
+        "retro shortboard feel",
+        "average-wave performance"
+      ]
+    },
+    {
+      "brand": "Firewire",
+      "model": "Dominator 2.0",
+      "shortPosition": "a forgiving performance hybrid",
+      "reputationSummary": "A versatile board with more forgiveness and paddle help than sharper performance shortboards.",
+      "knownFor": [
+        "versatility",
+        "paddle help",
+        "everyday range"
+      ]
+    },
+    {
+      "brand": "Chilli",
+      "model": "Rare Bird",
+      "shortPosition": "a forgiving hybrid daily board",
+      "reputationSummary": "A user-friendly, wider-range board rather than a sharp performance daily driver.",
+      "knownFor": [
+        "forgiveness",
+        "easy speed",
+        "everyday usability"
+      ]
+    },
+    {
+      "brand": "Christenson",
+      "model": "Ocean Racer",
+      "shortPosition": "a classic down-the-line fish reference",
+      "reputationSummary": "A respected Christenson fish-style board for speed, trim and clean point-break lines.",
+      "knownFor": [
+        "classic fish flow",
+        "speed",
+        "point-break lines"
+      ]
+    }
+  ]
+}

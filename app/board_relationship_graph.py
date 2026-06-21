@@ -7,6 +7,7 @@ from pathlib import Path
 
 from app.board_expert_matrix import find_matrix_board
 from app.models import RiderProfile, SuggestedBoard
+from app.board_reputation import relationship_expert_intro
 
 
 GRAPH_PATH = Path(__file__).parent / "knowledge/generated/board_relationship_graph.json"
@@ -96,7 +97,9 @@ def relationship_reply(source: dict, relation: str, canonical: list[SuggestedBoa
         "betterBeachBreakBoards": "better beach-break fits", "betterReefBoards": "better reef fits",
     }
     names = ", ".join(f"{row.brand} {row.model}" for row in canonical[:5])
-    reply = f"From the relationship graph, the {labels.get(relation, relation)} from {source['brand']} {source['model']} are {names}."
+    reply = relationship_expert_intro(source["brand"], source["model"], relation, canonical)
+    if not reply:
+        reply = f"From the relationship graph, the {labels.get(relation, relation)} from {source['brand']} {source['model']} are {names}."
     if not region:
         return reply + " That is canonical board advice; tell me Australia, Europe or Indonesia if you want live stock checked."
     live_keys = {(row.brand.lower(), row.model.lower()) for row in live}
