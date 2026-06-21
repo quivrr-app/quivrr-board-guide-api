@@ -12,6 +12,7 @@ from app.board_expert_matrix import recommend_from_matrix
 CATEGORY_ALIASES = {
     "high performance daily driver": "performance_daily_driver",
     "performance daily driver": "performance_daily_driver",
+    "daily shortboard": "performance_daily_driver",
     "fish": "fish", "twin": "fish", "twin fin": "fish",
     "daily driver": "daily_driver", "everyday": "daily_driver",
     "groveller": "groveller", "groveler": "groveller",

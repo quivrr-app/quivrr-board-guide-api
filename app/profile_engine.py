@@ -85,7 +85,7 @@ def _extract_frequency(text: str) -> float | None:
 
 def _extract_board_type(text: str) -> str | None:
     options = [
-        "performance shortboard", "daily driver", "everyday shortboard", "shortboard",
+        "performance shortboard", "daily shortboard", "daily driver", "everyday shortboard", "shortboard",
         "groveller", "groveler", "hybrid", "fish", "mid-length", "mid length", "longboard",
         "step up", "step-up",
     ]
@@ -107,7 +107,7 @@ def _extract_ability(text: str) -> str | None:
         ("Advanced", [r"\badvanced\b", r"\bexperienced(?: surfer)?\b"]),
         ("Intermediate", [
             r"\bintermediate\b", r"\bgood\s*(?:or|/)\s*average(?:\s+surfer)?\b",
-            r"\bgood(?:\s+surfer)?\b", r"\baverage\s+surfer\b", r"\bdecent(?:\s+surfer)?\b",
+            r"\bgood\s+surfer\b", r"\baverage\s+surfer\b", r"\bdecent(?:\s+surfer)?\b",
         ]),
         ("Beginner", [r"\bbeginner\b", r"\bnovice\b", r"\blearning\b"]),
     ]

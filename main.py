@@ -138,6 +138,21 @@ def board_guide_chat(request: BoardGuideRequest):
         suggested_boards = []
         reply = general_board_reply(request.message)
         questions = []
+    elif active_topic.stock_check:
+        canonical = []
+        for board in active_topic.boards:
+            matches = suggestions_for_board(board)
+            if matches:
+                canonical.append(matches[0])
+        checked = enrich_suggestions_with_inventory(canonical, profile) if profile.region else []
+        suggested_boards = [row for row in checked if row.available_count > 0]
+        names = ", ".join(f"{row.brand} {row.model}" for row in suggested_boards)
+        requested_names = ", ".join(f"{row['brand']} {row['model']}" for row in active_topic.boards)
+        reply = (
+            f"I checked live {profile.region} stock for {requested_names}. "
+            + (f"The available matches are {names}." if suggested_boards else "I can’t verify a live match for those boards right now.")
+        ) if profile.region else "Which region should I check for those boards: Australia, Europe, or Indonesia?"
+        questions = []
     elif intent == "comparison_request":
         if active_topic.is_everyday_pushback:
             requested = active_topic.boards[:]
@@ -217,7 +232,15 @@ def board_guide_chat(request: BoardGuideRequest):
             reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
             questions = []
     elif intent == "board_search_request" and category and profile.region and not requested_board:
-        suggested_boards = search_live_category(profile, category)
+        if category in {"daily_driver", "performance_daily_driver"} and not profile.construction_preference:
+            ranking_profile = profile.model_copy(update={"preferred_board_type": "Daily Driver"})
+            canonical_boards = recommend_from_matrix(ranking_profile, limit=12)
+            checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
+            suggested_boards = [board for board in checked if board.available_count > 0]
+            if "three" in request.message.lower() or "3" in request.message:
+                suggested_boards = suggested_boards[:3]
+        else:
+            suggested_boards = search_live_category(profile, category)
         label = category.replace("_", " ")
         target = f" around {profile.target_volume_litres:g}L" if profile.target_volume_litres else ""
         if suggested_boards:

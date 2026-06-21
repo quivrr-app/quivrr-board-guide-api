@@ -17,6 +17,21 @@ from app.rider_fit import recommend_rider_fit
 API_BASE = os.getenv("QUIVRR_INVENTORY_API_URL", "https://quivrr-backend-api.azurewebsites.net").rstrip("/")
 REGION_ALIASES = {"AUSTRALIA": "AU", "EUROPE": "EU", "INDONESIA": "ID"}
 BRAND_ALIASES = {"CHEMISTRY": "CHEMISTRY SURFBOARDS", "DMS": "DMS SURFBOARDS"}
+QUIVRR_REGION_PATHS = {"AU": "australia", "EU": "europe", "ID": "indonesia"}
+
+
+def quivrr_search_url(board: SuggestedBoard, region: str, size: dict | None = None) -> str:
+    size = size or {}
+    params = {
+        "region": region,
+        "brand": board.brand,
+        "model": board.model,
+        "construction": size.get("construction"),
+        "volume": size.get("volumeLitres"),
+        "boardSizeId": size.get("boardSizeId"),
+        "autoSearch": "1",
+    }
+    return f"https://quivrr.app/{QUIVRR_REGION_PATHS[region]}?{urlencode({key: value for key, value in params.items() if value not in (None, '')})}"
 
 
 def normalise_region(value: str | None) -> str | None:
@@ -168,6 +183,7 @@ def enrich_suggestions_with_inventory(
         stock = {"available_count": 0, "manufacturer_direct_count": 0, "retailer_count": 0,
                  "example_live_source_url": None, "price_range": None}
         selected_size = None
+        selected_size_data = None
         try:
             model_id = suggestion.board_model_id
             if model_id is None:
@@ -180,12 +196,23 @@ def enrich_suggestions_with_inventory(
             ]
             stock = _summarise_stock(payloads, region, profile.construction_preference)
             if sizes:
+                selected_size_data = sizes[0]
                 selected_size = sizes[0].get("label")
         except (requests.RequestException, TypeError, ValueError, KeyError):
             # Availability is optional context. Failure must produce zero stock, never invented stock.
             pass
 
-        enriched.append(suggestion.model_copy(update={**stock, "suggested_size": selected_size, "region": region}))
+        source_url = stock.get("example_live_source_url")
+        enriched.append(suggestion.model_copy(update={
+            **stock,
+            "suggested_size": selected_size,
+            "region": region,
+            "quivrr_search_url": quivrr_search_url(suggestion, region, selected_size_data),
+            "source_product_url": source_url,
+            "board_size_id": selected_size_data.get("boardSizeId") if selected_size_data else None,
+            "selected_construction": selected_size_data.get("construction") if selected_size_data else None,
+            "selected_volume_litres": selected_size_data.get("volumeLitres") if selected_size_data else None,
+        }))
 
     # Exact fit first, then actual regional availability, manufacturer direct, retailer, confidence.
     enriched.sort(
@@ -266,13 +293,13 @@ def locate_exact_board(
         payload = get_json("/api/search?" + urlencode({"boardSizeId": size["boardSizeId"], "region": region}))
         if normalise_region(payload.get("regionCode")) != region:
             continue
-        exact_rows.extend(("Manufacturer Direct", row) for row in payload.get("directManufacturerMatches", []) if row.get("isAvailable") is not False)
-        exact_rows.extend((row.get("retailerName") or "Retailer", row) for row in payload.get("exactRetailerMatches", []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"})
-        close_rows.extend((row.get("retailerName") or "Retailer", row) for row in payload.get("closeRetailerMatches", []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"})
+        exact_rows.extend(("Manufacturer Direct", row, size) for row in payload.get("directManufacturerMatches", []) if row.get("isAvailable") is not False)
+        exact_rows.extend((row.get("retailerName") or "Retailer", row, size) for row in payload.get("exactRetailerMatches", []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"})
+        close_rows.extend((row.get("retailerName") or "Retailer", row, size) for row in payload.get("closeRetailerMatches", []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"})
 
     selected_rows, exact = (exact_rows, True) if exact_rows else (close_rows, False)
     output, seen = [], set()
-    for source_name, row in selected_rows:
+    for source_name, row, size in selected_rows:
         url = row.get("productUrl")
         if not url or url in seen:
             continue
@@ -286,7 +313,11 @@ def locate_exact_board(
             "available_count": 1,
             "manufacturer_direct_count": 1 if source_name == "Manufacturer Direct" else 0,
             "retailer_count": 0 if source_name == "Manufacturer Direct" else 1,
-            "example_live_source_url": url, "price_range": price, "region": region,
+            "example_live_source_url": url, "source_product_url": url,
+            "quivrr_search_url": quivrr_search_url(board, region, size),
+            "board_size_id": size.get("boardSizeId"), "selected_construction": size.get("construction"),
+            "selected_volume_litres": size.get("volumeLitres"),
+            "price_range": price, "region": region,
             "suggested_size": " | ".join(filter(None, [row.get("length"), f"{row.get('volumeLitres'):g}L" if row.get("volumeLitres") is not None else None, row.get("construction")])),
         }))
         if len(output) >= 8:

@@ -51,6 +51,11 @@ class SuggestedBoard(BaseModel):
     manufacturer_direct_count: int = 0
     retailer_count: int = 0
     example_live_source_url: str | None = None
+    quivrr_search_url: str | None = None
+    source_product_url: str | None = None
+    board_size_id: int | None = None
+    selected_construction: str | None = None
+    selected_volume_litres: float | None = None
     price_range: str | None = None
     region: str | None = None
     source: str = "quivrr_controlled_knowledge"
@@ -83,6 +88,8 @@ class BodhiRecommendation(BaseModel):
     available_count: int = Field(default=0, alias="availableCount")
     region: str | None = None
     example_product_url: str | None = Field(default=None, alias="exampleProductUrl")
+    quivrr_search_url: str | None = Field(default=None, alias="quivrrSearchUrl")
+    source_product_url: str | None = Field(default=None, alias="sourceProductUrl")
     source_type: str = Field(alias="sourceType")
     price_range: str | None = Field(default=None, alias="priceRange")
     confidence: float

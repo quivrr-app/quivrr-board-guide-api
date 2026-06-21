@@ -21,6 +21,7 @@ class ActiveTopic:
     desired_feel: str | None = None
     is_follow_up: bool = False
     is_everyday_pushback: bool = False
+    stock_check: bool = False
 
 
 def _topic(profile: RiderProfile, **values) -> ActiveTopic:
@@ -37,6 +38,17 @@ def resolve_active_topic(request: BoardGuideRequest, profile: RiderProfile, curr
     """Derive the conversational topic from the request; no persistence or API change required."""
     latest_boards = find_boards_in_message(request.message)
     text = request.message.lower()
+    stock_check = bool(re.search(
+        r"\b(?:yes[, ]+)?check (?:the )?stock(?: levels)?\b|\bshow availability\b|\bwhat is available\b",
+        text,
+    ))
+    fresh_request = current_intent in {"board_search_request", "expert_board_question"} or bool(re.search(
+        r"\b(?:show me|find me|search(?: for)?|give me|recommend)\b|\b(?:good|best)\s+"
+        r"(?:daily drivers?|fish boards?|shortboards?)\b",
+        text,
+    ))
+    if fresh_request and not stock_check:
+        return _topic(profile, kind="board_search", boards=latest_boards)
     fresh_search = current_intent in {"exact_board_location_request", "inventory_count_question"} or bool(
         re.search(r"\b(?:fresh|new|different) (?:stock )?search\b|\bwhere can i buy\b|\bexact (?:board|location)\b", text)
     )
@@ -53,6 +65,12 @@ def resolve_active_topic(request: BoardGuideRequest, profile: RiderProfile, curr
             found = find_boards_in_message(turn.content)
             if len(found) >= 2:
                 previous_comparison = found
+
+    if stock_check and previous_comparison:
+        return _topic(
+            profile, kind="comparison", boards=previous_comparison,
+            is_follow_up=True, stock_check=True,
+        )
 
     pushback = (
         prior_monsta

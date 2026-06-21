@@ -327,6 +327,8 @@ class BodhiIntentApiTests(unittest.TestCase):
         why_it_fits="Exact verified EU match from 58 Surf", suggested_size="5'11 | 28L | CarboTune",
         available_count=1, retailer_count=1, region="EU",
         example_live_source_url="https://58surf.example/monsta",
+        source_product_url="https://58surf.example/monsta",
+        quivrr_search_url="https://quivrr.app/europe?brand=JS+Industries&model=Monsta",
     )], True))
     def test_exact_board_location_returns_verified_direct_link(self, _locate):
         response = self.client.post("/api/board-guide/chat", json={
@@ -335,8 +337,8 @@ class BodhiIntentApiTests(unittest.TestCase):
         body = response.json()
         self.assertEqual(body["intent"], "exact_board_location_request")
         self.assertIn("exact verified EU", body["reply"])
-        self.assertEqual(body["recommendations"][0]["exampleProductUrl"], "https://58surf.example/monsta")
-        self.assertNotIn("/au/", body["recommendations"][0]["exampleProductUrl"])
+        self.assertIn("https://quivrr.app/europe?", body["recommendations"][0]["exampleProductUrl"])
+        self.assertEqual(body["recommendations"][0]["sourceProductUrl"], "https://58surf.example/monsta")
 
     @patch("main.locate_exact_board", return_value=([], False))
     def test_exact_board_unavailable_does_not_hallucinate_link(self, _locate):

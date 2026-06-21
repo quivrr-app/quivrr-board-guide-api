@@ -39,7 +39,7 @@ def target_lanes(profile: RiderProfile) -> list[str]:
     if "grov" in text:
         lanes.extend(["groveller", "small_wave_daily_driver", "weak_wave_board"])
     if "daily driver" in text:
-        if (profile.ability or "").lower() in {"advanced", "expert"} and "weak" not in text:
+        if "forgiving" not in text and "easy" not in text and "paddle" not in text:
             lanes.extend(["performance_daily_driver", "high_performance_shortboard"])
         else:
             lanes.extend(["forgiving_daily_driver", "hybrid_daily_driver", "one_board_quiver"])
@@ -69,10 +69,12 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
     lanes = target_lanes(profile)
     fit = recommend_rider_fit(profile)
     target = profile.target_volume_litres or ((fit.volume_low + fit.volume_high) / 2 if fit else None)
-    performance_daily_brief = (
-        (profile.ability or "").lower() in {"advanced", "expert"}
-        and ("daily driver" in " ".join(filter(None, [profile.preferred_board_type, profile.goal])).lower())
-        and "forgiving" not in (profile.desired_feel or "").lower()
+    brief_text = " ".join(filter(None, [profile.preferred_board_type, profile.goal, profile.desired_feel])).lower()
+    daily_driver_brief = "daily driver" in brief_text or "daily shortboard" in brief_text
+    asks_forgiving = any(token in brief_text for token in ("forgiving", "easy", "paddle help"))
+    performance_daily_brief = daily_driver_brief and not asks_forgiving
+    advanced_performance_brief = performance_daily_brief and (
+        (profile.ability or "").lower() in {"advanced", "expert"} or "performance" in brief_text
     )
     rows = []
     for board in load_matrix():
@@ -94,7 +96,7 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
             }
             score += priority.get(model_key, 0)
             if board["primaryLane"] == "hybrid_daily_driver":
-                score -= 90
+                score -= 90 if advanced_performance_brief else 45
             elif board["primaryLane"] == "performance_daily_driver":
                 score += 35
         rows.append((score, board, lanes[0], distance))

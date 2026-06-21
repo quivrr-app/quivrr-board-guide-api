@@ -355,7 +355,10 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
             suggestedVolumeOrSizeRange=board.suggested_size or board.volume_range,
             waveRange=board.wave_range, skillFit=board.skill_fit,
             availableCount=board.available_count, region=board.region,
-            exampleProductUrl=board.example_live_source_url, sourceType=source_type,
+            exampleProductUrl=board.quivrr_search_url or board.example_live_source_url,
+            quivrrSearchUrl=board.quivrr_search_url,
+            sourceProductUrl=board.source_product_url or board.example_live_source_url,
+            sourceType=source_type,
             priceRange=board.price_range, confidence=board.confidence,
         ))
     return output
@@ -438,6 +441,27 @@ def comparison_reply(message: str, boards: list[dict] | None = None, profile: Ri
     if len(boards) < 2:
         return "Name the two boards you want compared—for example, ‘Compare Pyzel Phantom and JS Monsta’."
     boards = boards[:5]
+    compared_models = {board["model"].replace("-", " ").lower() for board in boards}
+    fish_trio = {"seaside", "rnf 96", "lightbender"}.issubset(compared_models)
+    if fish_trio:
+        context = []
+        if profile and profile.target_volume_litres:
+            context.append(f"around {profile.target_volume_litres:g}L")
+        if profile and profile.region:
+            context.append(profile.region)
+        if profile and profile.wave_type:
+            context.append(profile.wave_type.lower())
+        intro = "Got it. " if follow_up else ""
+        if context:
+            intro += f"For {', '.join(context)}: "
+        return (
+            intro
+            + "Firewire Seaside is the easiest and cruisier choice, with effortless speed in smaller or weaker surf. "
+            "Lost RNF 96 is the more performance-led fish: it has more range and is the better pick if you want to push turns. "
+            "Album Lightbender is the refined performance twin / point-break twin—more specialist, and best on clean, running walls. "
+            "For point breaks I’d choose Lightbender for clean lines, RNF 96 for performance and range, or Seaside for easy speed. "
+            "Do you want easier speed, more performance, or cleaner point-break lines?"
+        )
     left, right = boards[:2]
     comparison = compare_boards(load_graph(), left["brand"], left["model"], right["brand"], right["model"])
     left_data, right_data = comparison["left"], comparison["right"]
