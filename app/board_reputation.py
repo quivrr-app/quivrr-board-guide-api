@@ -72,6 +72,12 @@ def relationship_expert_intro(source_brand: str, source_model: str, relation: st
             f"For point breaks, I’d look past a generic category match and start with {names}. "
             "Those sit closer to the down-the-line, trim-and-flow lane surfers usually want on a running wall."
         )
+    elif relation == "morePaddleBoards":
+        reply = (
+            f"For more paddle than the {source_brand} {source_model}, I’d start with {names}. "
+            "Keep the litres close to your current board unless wave count is the priority; extra width and foam help early entry, "
+            "but the trade-off is a little less sensitivity and rail precision."
+        )
     else:
         reply = (
             f"The closest useful relatives to {source_brand} {source_model} are {names}. "

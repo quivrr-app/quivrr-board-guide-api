@@ -146,7 +146,7 @@ def _extract_wave_type(text: str) -> str | None:
     }
 
     for token, label in options.items():
-        if re.search(rf"\b{re.escape(token)}\b", text):
+        if re.search(rf"\b{re.escape(token)}(?:es|s)?\b", text):
             return label
 
     return None

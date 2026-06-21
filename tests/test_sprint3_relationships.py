@@ -52,16 +52,18 @@ class Sprint3RelationshipTests(unittest.TestCase):
         def available(rows, _profile):
             return [row.model_copy(update={"available_count": 1, "region": "AU"}) for row in rows]
 
-        with patch.object(main, "enrich_suggestions_with_inventory", side_effect=available):
+        with patch.object(main, "enrich_suggestions_with_inventory", side_effect=available) as inventory:
             data = self.post("Yes, check the stock levels", prior, "AU")
         names = {row["model"] for row in data["suggested_boards"]}
         self.assertIn("Phantom", names)
         self.assertNotIn("Hypto Krypto", names)
+        self.assertEqual(inventory.call_args.args[1].target_volume_litres, 29)
 
     def test_fresh_fish_search_resets_relationship_topic(self):
         prior = [{"role": "user", "content": "I ride a 29L Hypto and want more performance"}]
         data = self.post("Show me fish boards for points in Australia", prior, "AU")
         self.assertNotEqual(data["intent"], "relationship_request")
+        self.assertEqual(data["profile"]["wave_type"], "Point Break")
 
     def test_eu_quivrr_link_cannot_leak_to_australia(self):
         board = SuggestedBoard(brand="Pyzel", model="Phantom", category="Daily Driver", confidence=.9, why_it_fits="test")

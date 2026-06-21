@@ -149,7 +149,11 @@ def board_guide_chat(request: BoardGuideRequest):
                 matches = suggestions_for_board(board)
                 if matches:
                     canonical.append(matches[0])
-        checked = enrich_suggestions_with_inventory(canonical, profile) if profile.region else []
+        stock_profile = profile
+        if active_topic.kind == "relationship" and profile.current_volume_litres and not profile.target_volume_litres:
+            offset = 1.5 if active_topic.relationship_type in {"moreForgivingBoards", "morePaddleBoards", "stepDownFromBoards"} else 0
+            stock_profile = profile.model_copy(update={"target_volume_litres": profile.current_volume_litres + offset})
+        checked = enrich_suggestions_with_inventory(canonical, stock_profile) if profile.region else []
         suggested_boards = [row for row in checked if row.available_count > 0]
         names = ", ".join(f"{row.brand} {row.model}" for row in suggested_boards)
         requested_names = ", ".join(f"{row['brand']} {row['model']}" for row in active_topic.boards)
