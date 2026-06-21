@@ -7,14 +7,18 @@ INTENTS = {
     "inventory_count_question", "board_search_request", "surfer_fit_request",
     "alternative_request", "comparison_request", "general_board_question",
     "site_help_question", "volume_advice_request", "exact_board_location_request",
-    "relationship_request",
+    "relationship_request", "greeting_request", "expert_board_question",
 }
 
 
 def route_intent(message: str) -> str:
     text = re.sub(r"\s+", " ", (message or "").strip().lower())
     if not text:
-        return "surfer_fit_request"
+        return "greeting_request"
+    if re.fullmatch(r"(?:hey|hi|hello|gday|g'day|yo|morning|afternoon|evening|thanks|thank you|cheers|bodhi|hi bodhi|hey bodhi)[!. ]*", text):
+        return "greeting_request"
+    if re.search(r"\b(?:best|top|favourite|favorite|what should i buy|what would you ride)\b", text) and re.search(r"\b(?:shortboard|fish|groveller|groveler|daily driver|step[ -]?up|board)\b", text):
+        return "expert_board_question"
     if re.search(r"\b(?:more performance|more forgiving|sharper|more responsive)\s+than\b|\b(?:similar to|alternative to)\b|\blike .+ but better for\b|\bi ride .+ but want .+(?:sharper|performance|forgiving)", text):
         return "relationship_request"
     if re.search(r"\b(?:how do i|how can i|help me)\s+(?:use|search|find|navigate)\b|\bhow does (?:quivrr|the site) work\b|\bwhere (?:do i|can i) (?:search|find)\b", text):

@@ -12,6 +12,48 @@ from app.volume_engine_v2 import fish_volume_bands, recommend_volume_v2
 REGION_NAMES = {"AU": "Australian", "EU": "European", "ID": "Indonesian"}
 
 
+def greeting_reply(region: str | None = None) -> str:
+    code = normalise_region(region)
+    availability = (
+        "Indonesian board availability where feeds exist" if code == "ID"
+        else f"live {REGION_NAMES[code]} board availability" if code
+        else "live board availability across Quivrr"
+    )
+    return (
+        "Hey mate. What are you chasing today? I can help you compare boards, work out volume, "
+        f"find live stock, or narrow down the right board type for your waves using {availability}."
+    )
+
+
+def expert_board_question_reply(message: str) -> str:
+    text = message.lower()
+    if "shortboard" in text:
+        return (
+            "There is no single best shortboard. If you mean pure performance, I’d start with boards like "
+            "Pyzel Ghost, JS Monsta, Sharp Eye Inferno 72 and Lost Driver style boards. For an everyday "
+            "performance shortboard, I’d look more at Pyzel Phantom, JS Xero Gravity, Channel Islands Happy "
+            "Everyday and Lost Rad Ripper. If you want easier paddle and more forgiveness, then Hypto Krypto, "
+            "Chilli Rare Bird or Firewire Dominator 2.0 sit in that friendlier lane. What sort of waves are you surfing?"
+        )
+    if "fish" in text:
+        return (
+            "For fish boards, I’d split it into lanes. Traditional fish means flow and speed, like Christenson "
+            "Ocean Racer style boards. Performance fish points more toward Album Lightbender, Album Twinsman, "
+            "Lost RNF 96, JS Black Baron and CI Twin Pin. A cruisier fish would be closer to Firewire Seaside. "
+            "Tell me your region if you want me to check what is actually available."
+        )
+    if "daily driver" in text:
+        return (
+            "For daily drivers, I’d split it into performance daily driver, forgiving daily driver and hybrid daily driver. "
+            "Performance daily driver means Phantom, Xero Gravity, Happy Everyday, Inferno 72 and Rad Ripper type boards. "
+            "Forgiving or hybrid daily drivers are easier, but less sharp. What waves are you mostly surfing?"
+        )
+    return (
+        "Depends what job you want the board to do. I’d first separate performance, everyday performance, forgiving hybrid, "
+        "fish, groveller and step up. Tell me the waves and how you want the board to feel, and I’ll narrow the lane."
+    )
+
+
 def opening_message(region: str | None) -> str:
     code = normalise_region(region)
     availability = (

@@ -5,8 +5,8 @@ import os
 
 from app.azure_openai_client import is_azure_openai_configured
 from app.conversation_flow import (
-    comparison_reply, enough_for_recommendations, find_requested_board, general_board_reply,
-    graph_suggestions, has_intake_signal, intake_questions, opening_message,
+    comparison_reply, enough_for_recommendations, expert_board_question_reply, find_requested_board,
+    general_board_reply, graph_suggestions, greeting_reply, has_intake_signal, intake_questions, opening_message,
     is_memory_correction, partial_volume_reply, fish_advice_reply, board_family_reply,
     public_recommendations, recommendation_reply, site_help_reply, suggestions_for_board,
     volume_advice_reply, volume_guidance,
@@ -80,7 +80,15 @@ def board_guide_chat(request: BoardGuideRequest):
                 if requested_board:
                     break
 
-    if intent == "exact_board_location_request" and not profile.region:
+    if intent == "greeting_request":
+        suggested_boards = []
+        reply = greeting_reply(profile.region)
+        questions = []
+    elif intent == "expert_board_question":
+        suggested_boards = []
+        reply = expert_board_question_reply(request.message)
+        questions = []
+    elif intent == "exact_board_location_request" and not profile.region:
         suggested_boards = []
         reply = "I’ve got the board. Should I check Australia, Europe, or Indonesia?"
         questions = ["Which region should I search: Australia, Europe, or Indonesia?"]
