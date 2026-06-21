@@ -19,7 +19,7 @@ def route_intent(message: str) -> str:
         return "greeting_request"
     if re.search(r"\b(?:best|top|favourite|favorite|what should i buy|what would you ride)\b", text) and re.search(r"\b(?:shortboard|fish|groveller|groveler|daily driver|step[ -]?up|board)\b", text):
         return "expert_board_question"
-    if re.search(r"\b(?:more performance|more forgiving|sharper|more responsive)\s+than\b|\b(?:similar to|alternative to)\b|\blike .+ but better for\b|\bi ride .+ but want .+(?:sharper|performance|forgiving)", text):
+    if re.search(r"\b(?:more performance|more forgiving|more paddle|easier paddle|sharper|more responsive|easier|less demanding)(?:\s+than)?\b|\b(?:similar to|alternative to|like|step up from|step down from|after my)\b|\blike .+ but better for\b|\b(?:i ride|currently riding|my current board).+\b(?:want|need|after)\b", text):
         return "relationship_request"
     if re.search(r"\b(?:how do i|how can i|help me)\s+(?:use|search|find|navigate)\b|\bhow does (?:quivrr|the site) work\b|\bwhere (?:do i|can i) (?:search|find)\b", text):
         return "site_help_question"

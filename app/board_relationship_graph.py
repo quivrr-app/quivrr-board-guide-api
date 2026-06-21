@@ -29,11 +29,21 @@ def find_relationship_board(brand: str, model: str) -> dict | None:
 
 def relationship_type(message: str) -> str | None:
     text = _key(message)
+    if any(token in text for token in ("fish alternative", "fish version", "as a fish")):
+        return "fishAlternativeBoards"
+    if any(token in text for token in ("shortboard alternative", "shortboard version", "as a shortboard")):
+        return "shortboardAlternativeBoards"
+    if any(token in text for token in ("step up from", "next board after", "after my")):
+        return "stepUpFromBoards"
+    if any(token in text for token in ("step down from", "step down", "less demanding")):
+        return "stepDownFromBoards"
+    if any(token in text for token in ("more paddle", "easier paddle", "paddles better", "catch more waves")):
+        return "morePaddleBoards"
     if "point" in text and any(token in text for token in ("like", "better", "alternative")):
         return "betterPointBreakBoards"
     if any(token in text for token in ("more performance", "sharper", "more responsive")):
         return "morePerformanceBoards"
-    if "more forgiving" in text or "easier than" in text:
+    if any(token in text for token in ("more forgiving", "easier than", "easier", "less demanding")):
         return "moreForgivingBoards"
     if "small wave" in text:
         return "betterSmallWaveBoards"
@@ -55,11 +65,6 @@ def source_board_from_message(message: str, profile: RiderProfile) -> dict | Non
         "seaside": ("Firewire", "Seaside"), "monsta": ("JS Industries", "Monsta"),
         "phantom": ("Pyzel", "Phantom"),
     }
-    if profile.current_board:
-        current = _key(profile.current_board)
-        match = next((row for row in load_relationship_graph()["boards"] if current.endswith(_key(row["model"]))), None)
-        if match:
-            return match
     for alias, identity in aliases.items():
         if alias in text.split():
             return find_relationship_board(*identity)
@@ -69,11 +74,28 @@ def source_board_from_message(message: str, profile: RiderProfile) -> dict | Non
         brand = _key(row["brand"])
         if model and f" {model} " in f" {text} " and (f" {brand} " in f" {text} " or len(model.split()) > 1):
             matches.append((len(model), row))
-    return max(matches, default=(0, None))[1]
+    explicit = max(matches, default=(0, None))[1]
+    if explicit:
+        return explicit
+    if profile.current_board:
+        current = _key(profile.current_board)
+        return next((row for row in load_relationship_graph()["boards"] if current.endswith(_key(row["model"]))), None)
+    return None
 
 
-def relationship_suggestions(source: dict, relation: str, limit: int = 8) -> list[SuggestedBoard]:
+def relationship_suggestions(source: dict, relation: str, limit: int = 8, profile: RiderProfile | None = None) -> list[SuggestedBoard]:
     output = []
+    size_hint = None
+    if profile and profile.current_volume_litres:
+        base = profile.current_volume_litres
+        ability = (profile.ability or "").lower()
+        if relation in {"moreForgivingBoards", "morePaddleBoards", "stepDownFromBoards"}:
+            low, high = base + 1, base + 3
+        elif ability in {"intermediate", "beginner"}:
+            low, high = base, base + 2.5
+        else:
+            low, high = base - 1, base + 1.5
+        size_hint = f"Aim around {low:g}-{high:g}L; keep this progression anchored to your {base:g}L board."
     for edge in source.get("relationships", {}).get(relation, [])[:limit]:
         matrix = find_matrix_board(edge["brand"], edge["model"])
         if not matrix:
@@ -85,6 +107,7 @@ def relationship_suggestions(source: dict, relation: str, limit: int = 8) -> lis
             why_it_fits=edge["reason"], description=matrix.get("manufacturerDescription"),
             volume_range=(f"{matrix['volumeRange']['min']:g}-{matrix['volumeRange']['max']:g}L" if matrix.get("volumeRange", {}).get("min") is not None else None),
             source="quivrr_board_relationship_graph_v2", board_model_id=matrix.get("boardModelId"),
+            suggested_size=size_hint,
         ))
     return output
 
@@ -93,6 +116,9 @@ def relationship_reply(source: dict, relation: str, canonical: list[SuggestedBoa
     labels = {
         "similarBoards": "closest canonical relatives", "morePerformanceBoards": "sharper, more performance-focused steps",
         "moreForgivingBoards": "more forgiving options", "betterPointBreakBoards": "better point-break fits",
+        "morePaddleBoards": "easier-paddling options", "stepUpFromBoards": "controlled step-ups",
+        "stepDownFromBoards": "less demanding step-downs", "fishAlternativeBoards": "fish alternatives",
+        "shortboardAlternativeBoards": "shortboard alternatives",
         "betterSmallWaveBoards": "better small-wave fits", "betterGoodWaveBoards": "better good-wave fits",
         "betterBeachBreakBoards": "better beach-break fits", "betterReefBoards": "better reef fits",
     }

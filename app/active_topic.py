@@ -4,7 +4,9 @@ from dataclasses import dataclass, field
 import re
 
 from app.conversation_flow import find_boards_in_message
+from app.board_relationship_graph import relationship_suggestions, relationship_type, source_board_from_message
 from app.models import BoardGuideRequest, RiderProfile
+from app.intent_router import route_intent
 
 
 @dataclass
@@ -22,6 +24,8 @@ class ActiveTopic:
     is_follow_up: bool = False
     is_everyday_pushback: bool = False
     stock_check: bool = False
+    relationship_source: dict | None = None
+    relationship_type: str | None = None
 
 
 def _topic(profile: RiderProfile, **values) -> ActiveTopic:
@@ -56,6 +60,9 @@ def resolve_active_topic(request: BoardGuideRequest, profile: RiderProfile, curr
         return _topic(profile, kind="board_search", boards=latest_boards)
 
     previous_comparison: list[dict] = []
+    previous_relationship_boards: list[dict] = []
+    previous_relationship_source: dict | None = None
+    previous_relationship_type: str | None = None
     prior_monsta = False
     for turn in request.conversation:
         if turn.role != "user":
@@ -65,12 +72,38 @@ def resolve_active_topic(request: BoardGuideRequest, profile: RiderProfile, curr
             found = find_boards_in_message(turn.content)
             if len(found) >= 2:
                 previous_comparison = found
+        relation = relationship_type(turn.content) if route_intent(turn.content) == "relationship_request" else None
+        source = source_board_from_message(turn.content, profile) if relation else None
+        if source and relation:
+            previous_relationship_source = source
+            previous_relationship_type = relation
+            previous_relationship_boards = [
+                {"brand": row.brand, "model": row.model}
+                for row in relationship_suggestions(source, relation)
+            ]
+
+    if stock_check and previous_relationship_boards:
+        return _topic(
+            profile, kind="relationship", boards=previous_relationship_boards,
+            relationship_source=previous_relationship_source,
+            relationship_type=previous_relationship_type,
+            is_follow_up=True, stock_check=True,
+        )
 
     if stock_check and previous_comparison:
         return _topic(
             profile, kind="comparison", boards=previous_comparison,
             is_follow_up=True, stock_check=True,
         )
+
+    if current_intent == "relationship_request":
+        relation = relationship_type(request.message)
+        source = source_board_from_message(request.message, profile) or previous_relationship_source
+        if relation and source:
+            return _topic(
+                profile, kind="relationship", relationship_source=source,
+                relationship_type=relation, is_follow_up=bool(previous_relationship_source),
+            )
 
     pushback = (
         prior_monsta

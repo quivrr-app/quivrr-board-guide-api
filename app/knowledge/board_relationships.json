@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "board_relationships_v1",
+  "coverage": "Curated anchors overlay deterministic relationships for every canonical model and board lane.",
+  "boards": [
+    {
+      "brand": "Haydenshapes",
+      "model": "Hypto Krypto",
+      "relationships": {
+        "similar": [["Haydenshapes", "Holy Hypto"], ["Pyzel", "Gremlin"], ["Pyzel", "White Tiger"]],
+        "more_performance": [
+          {"brand": "Pyzel", "model": "Phantom", "reason": "Keeps useful daily-driver paddle while adding a cleaner performance rail and more dependable hold."},
+          {"brand": "JS Industries", "model": "Xero Gravity", "reason": "A balanced performance daily driver: more precise than the Hypto without becoming a full contest board."},
+          {"brand": "Channel Islands", "model": "happy-everyday", "reason": "Adds shortboard response and control while remaining friendly enough for regular beach-break surfing."},
+          {"brand": "Sharp Eye", "model": "Inferno 72", "reason": "The sharper option for surfers willing to trade some Hypto forgiveness for speed and response."},
+          {"brand": "Lost", "model": "Rad Ripper", "reason": "A lively step toward performance with more familiar everyday usability than a pure high-performance shortboard."}
+        ],
+        "more_forgiving": [["Chilli", "Rare Bird EVO"], ["Firewire", "Dominator 2.0"], ["Pyzel", "Gremlin"]],
+        "more_paddle": [["Firewire", "Dominator 2.0"], ["Chilli", "Rare Bird EVO"], ["Pyzel", "White Tiger"]],
+        "step_up_from": [["Pyzel", "Ghost"], ["Lost", "Driver 2.0"], ["JS Industries", "Monsta"]],
+        "fish_alternative": [["Lost", "RNF 96"], ["Firewire", "Seaside"], ["JS Industries", "Black Baron"]],
+        "shortboard_alternative": [["Pyzel", "Phantom"], ["JS Industries", "Xero Gravity"], ["Channel Islands", "happy-everyday"]]
+      }
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Phantom",
+      "relationships": {
+        "similar": [["JS Industries", "Xero Gravity"], ["Channel Islands", "happy-everyday"], ["Sharp Eye", "Inferno 72"]],
+        "more_performance": [["JS Industries", "Monsta"], ["Lost", "Driver 2.0"], ["Pyzel", "Ghost"]],
+        "more_forgiving": [["Haydenshapes", "Hypto Krypto"], ["Firewire", "Dominator 2.0"], ["Channel Islands", "happy-everyday"]],
+        "more_paddle": [["Firewire", "Dominator 2.0"], ["Haydenshapes", "Hypto Krypto"], ["Chilli", "Rare Bird EVO"]],
+        "step_up_from": [["Pyzel", "Ghost"], ["Lost", "Driver 2.0"]],
+        "step_down_from": [["Haydenshapes", "Hypto Krypto"], ["Firewire", "Dominator 2.0"]]
+      }
+    },
+    {
+      "brand": "Firewire",
+      "model": "Seaside",
+      "relationships": {
+        "similar": [["Lost", "RNF 96"], ["JS Industries", "Black Baron"], ["Album", "Twinsman"]],
+        "more_performance": [
+          {"brand": "Lost", "model": "RNF 96", "reason": "Retains fish speed but brings a more controlled, shortboard-like rail line and broader performance range."},
+          {"brand": "JS Industries", "model": "Black Baron", "reason": "A more performance-minded twin with extra precision when the point gets faster or cleaner."},
+          {"brand": "Album", "model": "Lightbender", "reason": "The higher-performance fish path: more drive and hold, with less of the Seaside's automatic forgiveness."}
+        ],
+        "better_for_points": [["Album", "Lightbender"], ["Christenson", "Ocean Racer"], ["Lost", "RNF 96"]],
+        "shortboard_alternative": [["Lost", "RNF 96"], ["Pyzel", "Phantom"], ["JS Industries", "Xero Gravity"]]
+      }
+    },
+    {
+      "brand": "Lost",
+      "model": "RNF 96",
+      "relationships": {
+        "similar": [["Firewire", "Seaside"], ["JS Industries", "Black Baron"], ["Album", "Twinsman"]],
+        "more_performance": [["Album", "Lightbender"], ["JS Industries", "Black Baron"], ["Channel Islands", "twin-pin"]],
+        "more_forgiving": [["Firewire", "Mashup"], ["Pyzel", "Astro Pop"]],
+        "better_for_points": [["Album", "Lightbender"], ["Album", "Twinsman"], ["Christenson", "Ocean Racer"]]
+      }
+    },
+    {
+      "brand": "Album",
+      "model": "Lightbender",
+      "relationships": {
+        "similar": [["Album", "Twinsman"], ["Lost", "RNF 96"], ["JS Industries", "Black Baron"]],
+        "more_forgiving": [["Firewire", "Seaside"], ["Firewire", "Mashup"], ["Lost", "RNF 96"]],
+        "more_paddle": [["Firewire", "Seaside"], ["Lost", "RNF 96"]]
+      }
+    }
+  ]
+}

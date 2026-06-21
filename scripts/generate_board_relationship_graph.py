@@ -10,13 +10,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MATRIX_PATH = ROOT / "app/knowledge/generated/board_expert_matrix.json"
 OVERRIDES_PATH = ROOT / "app/knowledge/curated/board_relationship_overrides.json"
+FIRST_CLASS_PATH = ROOT / "app/knowledge/board_relationships.json"
 OUTPUT_PATH = ROOT / "app/knowledge/generated/board_relationship_graph.json"
 AUDIT_JSON_PATH = ROOT / "app/knowledge/audits/phase9_relationship_graph_audit.json"
 AUDIT_CSV_PATH = ROOT / "app/knowledge/audits/phase9_relationship_graph_audit.csv"
 
 RELATIONSHIPS = [
     "similarBoards", "upgradeBoards", "downgradeBoards", "moreForgivingBoards",
-    "morePerformanceBoards", "betterSmallWaveBoards", "betterGoodWaveBoards",
+    "morePerformanceBoards", "morePaddleBoards", "stepUpFromBoards", "stepDownFromBoards",
+    "fishAlternativeBoards", "shortboardAlternativeBoards",
+    "betterSmallWaveBoards", "betterGoodWaveBoards",
     "betterPointBreakBoards", "betterBeachBreakBoards", "betterReefBoards",
     "closestFishAlternatives", "closestDailyDriverAlternatives",
     "closestStepUpAlternatives", "closestGrovellerAlternatives",
@@ -27,6 +30,8 @@ SCORES = {
     "betterPointBreakBoards": "holdScore", "betterBeachBreakBoards": "speedGenerationScore",
     "betterReefBoards": "holdScore", "upgradeBoards": "performanceScore",
     "downgradeBoards": "forgivenessScore",
+    "morePaddleBoards": "paddleEaseScore", "stepUpFromBoards": "performanceScore",
+    "stepDownFromBoards": "forgivenessScore",
 }
 
 
@@ -52,10 +57,10 @@ def similarity(left: dict, right: dict) -> tuple[float, set[str]]:
     return min(score, 100), shared
 
 
-def edge(target: dict, candidate: dict, relation: str, score: float, shared: set[str], curated: bool = False) -> dict:
+def edge(target: dict, candidate: dict, relation: str, score: float, shared: set[str], curated: bool = False, reason: str | None = None) -> dict:
     confidence = "high" if curated else "medium" if score >= 65 else "low"
     different = sorted(lanes(candidate) - lanes(target))
-    reason = (
+    reason = reason or (
         "Quivrr-reviewed relationship; " if curated else "Deterministic expert-matrix relationship; "
     ) + (f"shared lanes: {', '.join(sorted(shared))}" if shared else f"stronger {relation.replace('Boards', '').replace('better', '').lower()} profile")
     return {
@@ -84,6 +89,11 @@ def generated_relationships(target: dict, candidates: list[dict], limit: int = 6
             "downgradeBoards": candidate.get("forgivenessScore", 0) >= target.get("forgivenessScore", 0) + 8,
             "moreForgivingBoards": candidate.get("forgivenessScore", 0) >= target.get("forgivenessScore", 0) + 8,
             "morePerformanceBoards": candidate.get("performanceScore", 0) >= target.get("performanceScore", 0) + 8,
+            "morePaddleBoards": candidate.get("paddleEaseScore", 0) >= target.get("paddleEaseScore", 0) + 8,
+            "stepUpFromBoards": (family_match(candidate, "step_up") or family_match(candidate, "powerful_wave")) and candidate.get("holdScore", 0) >= target.get("holdScore", 0),
+            "stepDownFromBoards": (family_match(candidate, "daily_driver") or family_match(candidate, "groveller")) and candidate.get("forgivenessScore", 0) >= target.get("forgivenessScore", 0),
+            "fishAlternativeBoards": family_match(candidate, "fish") or any("twin_fin" in lane for lane in candidate_lanes),
+            "shortboardAlternativeBoards": family_match(candidate, "daily_driver") or family_match(candidate, "high_performance"),
             "betterPointBreakBoards": "point_break_fish" in candidate_lanes or candidate.get("holdScore", 0) >= target.get("holdScore", 0) + 10,
             "betterSmallWaveBoards": candidate.get("smallWaveScore", 0) >= target.get("smallWaveScore", 0) + 10,
             "betterGoodWaveBoards": candidate.get("goodWaveScore", 0) >= target.get("goodWaveScore", 0) + 10,
@@ -109,6 +119,19 @@ def generated_relationships(target: dict, candidates: list[dict], limit: int = 6
 def main() -> int:
     boards = json.loads(MATRIX_PATH.read_text(encoding="utf-8-sig"))["boards"]
     overrides = json.loads(OVERRIDES_PATH.read_text(encoding="utf-8-sig"))["relationships"]
+    first_class = json.loads(FIRST_CLASS_PATH.read_text(encoding="utf-8-sig"))
+    public_names = {
+        "similar": "similarBoards", "more_performance": "morePerformanceBoards",
+        "more_forgiving": "moreForgivingBoards", "more_paddle": "morePaddleBoards",
+        "better_for_points": "betterPointBreakBoards", "better_for_beach_breaks": "betterBeachBreakBoards",
+        "better_for_small_waves": "betterSmallWaveBoards", "better_for_good_waves": "betterGoodWaveBoards",
+        "step_up_from": "stepUpFromBoards", "step_down_from": "stepDownFromBoards",
+        "fish_alternative": "fishAlternativeBoards", "shortboard_alternative": "shortboardAlternativeBoards",
+    }
+    for row in first_class["boards"]:
+        normalized = {"brand": row["brand"], "model": row["model"]}
+        normalized.update({public_names[name]: values for name, values in row.get("relationships", {}).items()})
+        overrides = [old for old in overrides if identity(old) != identity(normalized)] + [normalized]
     board_map = {identity(board): board for board in boards}
     override_map = {(key(row["brand"]), key(row["model"])): row for row in overrides}
     unmatched = []
@@ -119,12 +142,14 @@ def main() -> int:
         if override:
             for relation in RELATIONSHIPS:
                 additions = []
-                for brand, model in override.get(relation, []):
+                for item in override.get(relation, []):
+                    brand, model = item[:2] if isinstance(item, list) else (item["brand"], item["model"])
                     candidate = board_map.get((key(brand), key(model)))
                     if not candidate:
                         continue
                     score, shared = similarity(board, candidate)
-                    additions.append(edge(board, candidate, relation, max(score, 85), shared, curated=True))
+                    custom_reason = item.get("reason") if isinstance(item, dict) else None
+                    additions.append(edge(board, candidate, relation, max(score, 85), shared, curated=True, reason=custom_reason))
                 added = {identity(item) for item in additions}
                 if additions:
                     relations[relation] = additions[:8]

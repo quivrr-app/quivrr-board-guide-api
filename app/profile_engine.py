@@ -21,6 +21,12 @@ def _extract_weight_kg(text: str) -> int | None:
 
 
 def _extract_current_volume(text: str) -> float | None:
+    riding = re.search(
+        r"\b(?:i ride|i'm riding|im riding|currently ride|currently riding|my current board(?: is)?)\D{0,40}"
+        r"([1-9][0-9](?:\.[0-9])?)\s*(?:l|litre|litres)\b", text,
+    )
+    if riding:
+        return float(riding.group(1))
     if any(token in text for token in ["around", "looking for", "want", "target"]):
         return None
     match = re.search(r"\b([1-9][0-9](?:\.[0-9])?)\s*(?:l|litre|litres)\b", text)

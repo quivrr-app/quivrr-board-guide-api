@@ -139,11 +139,16 @@ def board_guide_chat(request: BoardGuideRequest):
         reply = general_board_reply(request.message)
         questions = []
     elif active_topic.stock_check:
-        canonical = []
-        for board in active_topic.boards:
-            matches = suggestions_for_board(board)
-            if matches:
-                canonical.append(matches[0])
+        if active_topic.kind == "relationship" and active_topic.relationship_source and active_topic.relationship_type:
+            canonical = relationship_suggestions(
+                active_topic.relationship_source, active_topic.relationship_type, profile=profile,
+            )
+        else:
+            canonical = []
+            for board in active_topic.boards:
+                matches = suggestions_for_board(board)
+                if matches:
+                    canonical.append(matches[0])
         checked = enrich_suggestions_with_inventory(canonical, profile) if profile.region else []
         suggested_boards = [row for row in checked if row.available_count > 0]
         names = ", ".join(f"{row.brand} {row.model}" for row in suggested_boards)
@@ -168,15 +173,19 @@ def board_guide_chat(request: BoardGuideRequest):
             reply = comparison_reply(request.message, active_topic.boards, profile, active_topic.is_follow_up)
         questions = []
     elif intent == "relationship_request":
-        source_board = source_board_from_message(request.message, profile)
-        relation = relationship_type(request.message)
+        source_board = active_topic.relationship_source or source_board_from_message(request.message, profile)
+        relation = active_topic.relationship_type or relationship_type(request.message)
         if not source_board or not relation:
             suggested_boards = []
             reply = "Tell me the source board and whether you want something sharper, more forgiving, or better for particular waves."
         else:
-            canonical_boards = relationship_suggestions(source_board, relation)
+            canonical_boards = relationship_suggestions(source_board, relation, profile=profile)
+            inventory_profile = profile
+            if profile.current_volume_litres and not profile.target_volume_litres:
+                offset = 1.5 if relation in {"moreForgivingBoards", "morePaddleBoards", "stepDownFromBoards"} else 0
+                inventory_profile = profile.model_copy(update={"target_volume_litres": profile.current_volume_litres + offset})
             if profile.region:
-                checked = enrich_suggestions_with_inventory(canonical_boards, profile)
+                checked = enrich_suggestions_with_inventory(canonical_boards, inventory_profile)
                 suggested_boards = [row for row in checked if row.available_count > 0]
             else:
                 suggested_boards = []

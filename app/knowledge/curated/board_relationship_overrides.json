@@ -1,7 +1,7 @@
 {
   "schemaVersion": "board_relationship_overrides_v1",
   "relationships": [
-    {"brand":"Haydenshapes","model":"Hypto Krypto","similarBoards":[["Haydenshapes","Holy Hypto"],["Pyzel","Gremlin"],["Pyzel","White Tiger"]],"morePerformanceBoards":[["Pyzel","Phantom"],["Sharp Eye","Inferno 72"],["JS Industries","Xero Gravity"],["JS Industries","Monsta"],["Channel Islands","happy-everyday"]],"moreForgivingBoards":[["Chilli","Rare Bird EVO"],["Firewire","Dominator 2.0"],["Pyzel","Gremlin"]]},
+    {"brand":"Haydenshapes","model":"Hypto Krypto","similarBoards":[["Haydenshapes","Holy Hypto"],["Pyzel","Gremlin"],["Pyzel","White Tiger"]],"morePerformanceBoards":[["Pyzel","Phantom"],["JS Industries","Xero Gravity"],["Channel Islands","happy-everyday"],["Sharp Eye","Inferno 72"],["Lost","Rad Ripper"]],"moreForgivingBoards":[["Chilli","Rare Bird EVO"],["Firewire","Dominator 2.0"],["Pyzel","Gremlin"]]},
     {"brand":"Haydenshapes","model":"Holy Hypto","similarBoards":[["Haydenshapes","Hypto Krypto"],["Pyzel","Phantom"]],"morePerformanceBoards":[["JS Industries","Xero Gravity"],["Sharp Eye","Inferno 72"]],"moreForgivingBoards":[["Haydenshapes","Hypto Krypto"],["Firewire","Dominator 2.0"]]},
     {"brand":"Pyzel","model":"Phantom","similarBoards":[["JS Industries","Xero Gravity"],["Channel Islands","happy-everyday"],["Sharp Eye","Inferno 72"]],"morePerformanceBoards":[["JS Industries","Monsta"],["Lost","Driver 2.0"],["Pyzel","Ghost"]],"moreForgivingBoards":[["Haydenshapes","Hypto Krypto"],["Firewire","Dominator 2.0"]]},
     {"brand":"Pyzel","model":"Ghost","similarBoards":[["Pyzel","Next Step"],["Lost","Rocket Redux"]],"moreForgivingBoards":[["Pyzel","Phantom"],["JS Industries","Xero Gravity"]]},
@@ -21,7 +21,7 @@
     {"brand":"Lost","model":"Driver 2.0","similarBoards":[["JS Industries","Monsta"],["Sharp Eye","Inferno 72"]],"moreForgivingBoards":[["Lost","Rad Ripper"],["Pyzel","Phantom"]]},
     {"brand":"Lost","model":"Rad Ripper","similarBoards":[["Pyzel","Phantom"],["Channel Islands","happy-everyday"]],"morePerformanceBoards":[["Lost","Driver 2.0"],["JS Industries","Monsta"]]},
     {"brand":"Lost","model":"Puddle Jumper","similarBoards":[["Pyzel","Gremlin"],["Firewire","Sweet Potato"]],"morePerformanceBoards":[["Lost","Puddle Jumper HP"],["Firewire","Mashup"]]},
-    {"brand":"Firewire","model":"Seaside","similarBoards":[["Lost","RNF 96"],["JS Industries","Black Baron"],["Album","Twinsman"]],"morePerformanceBoards":[["Album","Lightbender"],["Channel Islands","twin-pin"]],"betterPointBreakBoards":[["Album","Lightbender"],["Christenson","Ocean Racer"]]},
+    {"brand":"Firewire","model":"Seaside","similarBoards":[["Lost","RNF 96"],["JS Industries","Black Baron"],["Album","Twinsman"]],"morePerformanceBoards":[["Lost","RNF 96"],["JS Industries","Black Baron"],["Album","Lightbender"],["Channel Islands","twin-pin"]],"betterPointBreakBoards":[["Album","Lightbender"],["Christenson","Ocean Racer"]]},
     {"brand":"Firewire","model":"Mashup","similarBoards":[["Pyzel","Astro Pop"],["Lost","RNF 96"]],"morePerformanceBoards":[["Album","Lightbender"],["JS Industries","Black Baron"]]},
     {"brand":"Firewire","model":"Dominator 2.0","similarBoards":[["Haydenshapes","Hypto Krypto"],["Chilli","Rare Bird EVO"]],"morePerformanceBoards":[["Pyzel","Phantom"],["JS Industries","Xero Gravity"]]},
     {"brand":"Album","model":"Lightbender","similarBoards":[["Album","Twinsman"],["Lost","RNF 96"],["JS Industries","Black Baron"]],"moreForgivingBoards":[["Firewire","Seaside"],["Firewire","Mashup"]]},
