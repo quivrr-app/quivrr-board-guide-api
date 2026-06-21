@@ -107,7 +107,7 @@ def _extract_ability(text: str) -> str | None:
         ("Advanced", [r"\badvanced\b", r"\bexperienced(?: surfer)?\b"]),
         ("Intermediate", [
             r"\bintermediate\b", r"\bgood\s*(?:or|/)\s*average(?:\s+surfer)?\b",
-            r"\bgood(?:\s+surfer)?\b", r"\baverage(?:\s+surfer)?\b", r"\bdecent(?:\s+surfer)?\b",
+            r"\bgood(?:\s+surfer)?\b", r"\baverage\s+surfer\b", r"\bdecent(?:\s+surfer)?\b",
         ]),
         ("Beginner", [r"\bbeginner\b", r"\bnovice\b", r"\blearning\b"]),
     ]

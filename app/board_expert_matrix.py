@@ -69,6 +69,11 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
     lanes = target_lanes(profile)
     fit = recommend_rider_fit(profile)
     target = profile.target_volume_litres or ((fit.volume_low + fit.volume_high) / 2 if fit else None)
+    performance_daily_brief = (
+        (profile.ability or "").lower() in {"advanced", "expert"}
+        and ("daily driver" in " ".join(filter(None, [profile.preferred_board_type, profile.goal])).lower())
+        and "forgiving" not in (profile.desired_feel or "").lower()
+    )
     rows = []
     for board in load_matrix():
         if profile.requested_brand and _key(board.get("brand")) != _key(profile.requested_brand):
@@ -80,6 +85,18 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
         distance = _volume_distance(board, target)
         fish_weight = board.get("fishScore", 0) * .1 if any("fish" in lane or "twin" in lane for lane in lanes) else 0
         score = lane_rank * 20 + board.get("oneBoardQuiverScore", 0) * .08 + board.get("performanceScore", 0) * .06 + fish_weight - distance * 4
+        if performance_daily_brief:
+            model_key = _key(board.get("model"))
+            priority = {
+                "phantom": 120, "xero gravity": 115, "happy everyday": 110,
+                "inferno 72": 105, "rad ripper": 100, "driver 2 0": 95,
+                "monsta": 25,
+            }
+            score += priority.get(model_key, 0)
+            if board["primaryLane"] == "hybrid_daily_driver":
+                score -= 90
+            elif board["primaryLane"] == "performance_daily_driver":
+                score += 35
         rows.append((score, board, lanes[0], distance))
     rows.sort(key=lambda item: (-item[0], item[1]["brand"], item[1]["model"]))
     selected, brands = [], {}
@@ -91,9 +108,16 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
         why = f"{board['primaryLane'].replace('_', ' ')} fit from the global expert matrix"
         if target is not None:
             why += f"; canonical sizes cover or sit {distance:g}L from the {target:g}L target"
+        confidence = {"high": .94, "medium": .78, "low": .58}.get(board.get("confidence"), .55)
+        if performance_daily_brief:
+            priority_confidence = {
+                "phantom": .995, "xero gravity": .99, "happy everyday": .985,
+                "inferno 72": .98, "rad ripper": .975, "driver 2 0": .97,
+            }
+            confidence = priority_confidence.get(_key(board.get("model")), min(confidence, .94))
         selected.append(SuggestedBoard(
             brand=board["brand"], model=board["model"], category=board["primaryLane"].replace("_", " ").title(),
-            confidence={"high": .94, "medium": .78, "low": .58}.get(board.get("confidence"), .55),
+            confidence=confidence,
             why_it_fits=why, description=board.get("manufacturerDescription"),
             volume_range=(f"{board['volumeRange']['min']:g}-{board['volumeRange']['max']:g}L" if board.get("volumeRange", {}).get("min") is not None else None),
             wave_range=(f"{board['waveRangeMinFt']:g}-{board['waveRangeMaxFt']:g}ft" if board.get("waveRangeMinFt") is not None and board.get("waveRangeMaxFt") is not None else None),

@@ -9,8 +9,9 @@ from app.conversation_flow import (
     general_board_reply, graph_suggestions, greeting_reply, has_intake_signal, intake_questions, opening_message,
     is_memory_correction, partial_volume_reply, fish_advice_reply, board_family_reply,
     public_recommendations, recommendation_reply, site_help_reply, suggestions_for_board,
-    volume_advice_reply, volume_guidance,
+    volume_advice_reply, volume_guidance, everyday_pushback_reply,
 )
+from app.active_topic import resolve_active_topic
 from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
 from app.intent_router import route_intent
 from app.board_expert_matrix import recommend_from_matrix
@@ -71,6 +72,9 @@ def board_guide_chat(request: BoardGuideRequest):
     questions = intake_questions(profile)
     guidance = volume_guidance(profile)
     intent = route_intent(request.message)
+    active_topic = resolve_active_topic(request, profile, intent)
+    if active_topic.kind == "comparison" and active_topic.is_follow_up:
+        intent = "comparison_request"
     category = extract_category(request.message, profile.preferred_board_type)
     requested_board = find_requested_board(request.message)
     if intent == "exact_board_location_request" and not requested_board:
@@ -135,8 +139,18 @@ def board_guide_chat(request: BoardGuideRequest):
         reply = general_board_reply(request.message)
         questions = []
     elif intent == "comparison_request":
-        suggested_boards = []
-        reply = comparison_reply(request.message)
+        if active_topic.is_everyday_pushback:
+            requested = active_topic.boards[:]
+            phantom = find_requested_board("Pyzel Phantom")
+            if phantom and not any(row["brand"] == "Pyzel" and row["model"] == "Phantom" for row in requested):
+                requested.append(phantom)
+            canonical = [suggestions_for_board(row)[0] for row in requested if suggestions_for_board(row)]
+            checked = enrich_suggestions_with_inventory(canonical, profile) if profile.region else []
+            suggested_boards = [row for row in checked if row.available_count > 0]
+            reply = everyday_pushback_reply(profile.region, requested, suggested_boards)
+        else:
+            suggested_boards = []
+            reply = comparison_reply(request.message, active_topic.boards, profile, active_topic.is_follow_up)
         questions = []
     elif intent == "relationship_request":
         source_board = source_board_from_message(request.message, profile)

@@ -33,7 +33,8 @@ def expert_board_question_reply(message: str) -> str:
             "Pyzel Ghost, JS Monsta, Sharp Eye Inferno 72 and Lost Driver style boards. For an everyday "
             "performance shortboard, I’d look more at Pyzel Phantom, JS Xero Gravity, Channel Islands Happy "
             "Everyday and Lost Rad Ripper. If you want easier paddle and more forgiveness, then Hypto Krypto, "
-            "Chilli Rare Bird or Firewire Dominator 2.0 sit in that friendlier lane. What sort of waves are you surfing?"
+            "Chilli Rare Bird or Firewire Dominator 2.0 sit in that friendlier lane. For small-wave performance, "
+            "I’d shift toward Lost Rad Ripper, CI Dumpster Diver 2 or a performance groveller. What sort of waves are you surfing?"
         )
     if "fish" in text:
         return (
@@ -401,12 +402,15 @@ def find_boards_in_message(message: str) -> list[dict]:
     output, seen = [], set()
     for _, board in matches:
         key = board_key(board["brand"], board["model"])
+        if any(key[0] == existing[0] and f" {key[1]} " in f" {existing[1]} " for existing in seen):
+            continue
         if key not in seen:
             output.append(board); seen.add(key)
     aliases = {
         "hypto": ("Haydenshapes", "Hypto Krypto"),
         "rnf": ("Lost", "RNF 96"),
         "seaside": ("Firewire", "Seaside"),
+        "gravity": ("JS Industries", "Xero Gravity"),
     }
     normalised_message = board_key("", message)[1]
     for alias, (brand, model) in aliases.items():
@@ -419,10 +423,21 @@ def find_boards_in_message(message: str) -> list[dict]:
     return output
 
 
-def comparison_reply(message: str) -> str:
-    boards = find_boards_in_message(message)
+def _display_board(board: dict) -> str:
+    model = board["model"].replace("-", " ").title()
+    canonical = {
+        "Xero Gravity": "Xero Gravity", "Happy Everyday": "Happy Everyday",
+        "Rnf 96": "RNF 96",
+    }.get(model, model)
+    return f"{board['brand']} {canonical}"
+
+
+def comparison_reply(message: str, boards: list[dict] | None = None, profile: RiderProfile | None = None,
+                     follow_up: bool = False) -> str:
+    boards = boards or find_boards_in_message(message)
     if len(boards) < 2:
         return "Name the two boards you want compared—for example, ‘Compare Pyzel Phantom and JS Monsta’."
+    boards = boards[:5]
     left, right = boards[:2]
     comparison = compare_boards(load_graph(), left["brand"], left["model"], right["brand"], right["model"])
     left_data, right_data = comparison["left"], comparison["right"]
@@ -446,14 +461,82 @@ def comparison_reply(message: str) -> str:
             f" For good-wave performance, the matrix favours {better['brand']} {better['model']}; "
             f"{easier['brand']} {easier['model']} is the more forgiving option."
         )
-    return (
-        f"{left['brand']} {left['model']} is a {left_data['category']['primaryCategory'].replace('_', ' ')} "
-        f"with {left_data['paddlingBias']} paddle help, {left_data['performanceBias']} performance bias, and "
-        f"{left_data['forgiveness']} forgiveness. {right['brand']} {right['model']} is a "
-        f"{right_data['category']['primaryCategory'].replace('_', ' ')} with {right_data['paddlingBias']} paddle help, "
-        f"{right_data['performanceBias']} performance bias, and {right_data['forgiveness']} forgiveness. "
-        f"{lane_note}{expert_note} Tell me your litres and region if you want me to check availability."
+    target = profile.target_volume_litres if profile else None
+    context = []
+    if target:
+        context.append(f"around {target:g}L")
+    elif profile and profile.weight_kg:
+        context.append(f"a {profile.weight_kg:g}kg surfer")
+    if profile and profile.region:
+        context.append(profile.region)
+    if profile and profile.wave_type:
+        context.append(profile.wave_type.lower())
+    intro = "Got it. " if follow_up else ""
+    if context:
+        intro += f"For {', '.join(context)}, I’d rank them: "
+    else:
+        intro += "Here’s how I’d rank them for everyday usability: "
+
+    preferred = {"happy everyday": 30, "phantom": 20, "xero gravity": 10}
+    ranked = sorted(boards, key=lambda board: -preferred.get(board["model"].replace("-", " ").lower(), 0))
+    notes = {
+        "happy everyday": "the friendliest everyday shortboard here, with the easiest balance of speed and forgiveness",
+        "phantom": "a strong performance daily driver with more hold and precision while staying usable",
+        "xero gravity": "the sharper, more performance-oriented option and a little more demanding",
+        "monsta": "the sharpest and most demanding option; best when the waves and your timing are on",
+    }
+    lines = []
+    for index, board in enumerate(ranked, 1):
+        key = board["model"].replace("-", " ").lower()
+        matrix = find_matrix_board(board["brand"], board["model"])
+        note = notes.get(key)
+        if not note:
+            lane = daily_driver_lane(board["brand"], board["model"]) or board.get("taxonomy", {}).get("primaryCategory") or "shortboard"
+            note = f"a {lane.replace('_', ' ')} option"
+            if matrix:
+                note += f" with {matrix.get('performanceScore', 60)}/100 performance emphasis"
+        lines.append(f"{index}. {_display_board(board)} — {note}.")
+    compared = {board["model"].replace("-", " ").lower() for board in boards}
+    trio = {"happy everyday", "phantom", "xero gravity"}.issubset(compared)
+    closing = (
+        " If you want easier every day, take Happy Everyday; if you want sharper, lean Phantom or Xero Gravity."
+        if trio else " The best pick depends on whether you value forgiveness or sharper performance."
     )
+    if not target:
+        fit = recommend_volume_v2(profile) if profile else None
+        if fit:
+            closing += f" A sensible starting window is roughly {fit.volume_band_label}."
+        closing += (
+            " Tell me if you want me to check live stock for these boards."
+            if profile and profile.region
+            else " Tell me your region if you want me to check live stock for these boards."
+        )
+    else:
+        closing += " Tell me if you want me to check live stock for these boards."
+    return intro + " ".join(lines) + lane_note + expert_note + closing
+
+
+def everyday_pushback_reply(region: str | None, boards: list[dict], live: list[SuggestedBoard]) -> str:
+    names = {_display_board(board) for board in boards}
+    if not any("Phantom" in name for name in names):
+        phantom = find_board(load_graph(), "Pyzel", "Phantom")
+        if phantom:
+            names.add(_display_board(phantom))
+    reply = (
+        "Yep, that makes sense. JS Industries Monsta is the sharper, more demanding option. "
+        "Channel Islands Happy Everyday is the friendlier everyday shortboard. JS Industries Xero Gravity "
+        "still sits in the performance daily-driver lane—more performance-oriented than Happy Everyday, but "
+        "more usable day to day than Monsta. Pyzel Phantom is also worth keeping in the mix."
+    )
+    if region:
+        reply += f" I checked {region} stock for Happy Everyday, Xero Gravity and Phantom first."
+        if live:
+            reply += " The live matches are " + ", ".join(f"{row.brand} {row.model}" for row in live[:3]) + "."
+        else:
+            reply += " I can’t verify a live match for those three right now."
+    else:
+        reply += " Tell me your region and I’ll check Happy Everyday, Xero Gravity and Phantom first."
+    return reply
 
 
 def general_board_reply(message: str) -> str:
