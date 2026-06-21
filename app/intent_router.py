@@ -6,7 +6,7 @@ import re
 INTENTS = {
     "inventory_count_question", "board_search_request", "surfer_fit_request",
     "alternative_request", "comparison_request", "general_board_question",
-    "site_help_question", "volume_advice_request",
+    "site_help_question", "volume_advice_request", "exact_board_location_request",
 }
 
 
@@ -18,6 +18,8 @@ def route_intent(message: str) -> str:
         return "site_help_question"
     if re.search(r"\b(?:compare|comparison|versus|vs\.?|better\b.+\bthan)\b", text):
         return "comparison_request"
+    if re.search(r"\b(?:where (?:is|can i buy)|give me (?:the )?links?|is there)\b", text) and re.search(r"\b(?:board|buy|link|available|there)\b", text):
+        return "exact_board_location_request"
     if re.search(r"\b(?:instead of|alternative|similar to|what else is similar|what is like|out of stock)\b", text):
         return "alternative_request"
     if re.search(r"\b(?:what|which|how many)\s+(?:board\s+)?(?:volume|litres?|lits?)\b|\bwhat\s+(?:volume|litre)\s+board\b|\bvolume should i\b", text):

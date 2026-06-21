@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "board_expert_overrides_v1",
+  "boards": [
+    {"brand":"Pyzel","model":"Phantom","primaryLane":"performance_daily_driver","secondaryLanes":["high_performance_shortboard","one_board_quiver"],"confidence":"high","reason":"Manufacturer calls the Phantom an everyday daily driver with a high-performance edge.","reviewedByQuivrr":"Quivrr","reviewedAtUtc":"2026-06-21T00:00:00Z"},
+    {"brand":"Haydenshapes","model":"Hypto Krypto","primaryLane":"hybrid_daily_driver","secondaryLanes":["forgiving_daily_driver","one_board_quiver"],"confidence":"high","reason":"Manufacturer explicitly describes all-conditions versatility, easy paddling and one-board-quiver use.","reviewedByQuivrr":"Quivrr","reviewedAtUtc":"2026-06-21T00:00:00Z"},
+    {"brand":"JS Industries","model":"Monsta","primaryLane":"high_performance_shortboard","secondaryLanes":["performance_daily_driver"],"confidence":"high","reason":"Reviewed canonical relationship: performance shortboard with daily-driver crossover.","reviewedByQuivrr":"Quivrr","reviewedAtUtc":"2026-06-21T00:00:00Z"},
+    {"brand":"Lost","model":"RNF 96","primaryLane":"fish","secondaryLanes":["small_wave_daily_driver","twin_fin"],"confidence":"high","reason":"Manufacturer describes a retro performance fish with 2+1 setup and weak-wave versatility.","reviewedByQuivrr":"Quivrr","reviewedAtUtc":"2026-06-21T00:00:00Z"},
+    {"brand":"Channel Islands","model":"happy-everyday","primaryLane":"performance_daily_driver","secondaryLanes":["one_board_quiver"],"confidence":"high","reason":"Reviewed canonical daily-driver relationship.","reviewedByQuivrr":"Quivrr","reviewedAtUtc":"2026-06-21T00:00:00Z"},
+    {"brand":"Chilli","model":"Rare Bird Evo","primaryLane":"hybrid_daily_driver","secondaryLanes":["forgiving_daily_driver","small_wave_daily_driver"],"confidence":"high","reason":"Reviewed forgiving hybrid daily-driver relationship.","reviewedByQuivrr":"Quivrr","reviewedAtUtc":"2026-06-21T00:00:00Z"}
+  ]
+}

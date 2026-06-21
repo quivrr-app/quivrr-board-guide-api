@@ -1,0 +1,514 @@
+brand,model,boardModelId,primaryLane,secondaryLanes,confidence,missingFields
+Album,Bom Dia,8114,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Album,Bullet,8115,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Album,D'boa,8116,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Album,Delma,8117,mid_length,,low,waveRange; surferFit; designData
+Album,Disorder,8118,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Album,Fascination,8119,fish,weak_wave_board,medium,waveRange; surferFit
+Album,Freewing,8120,high_performance_shortboard,powerful_wave_board,low,waveRange; surferFit
+Album,Insanity,8121,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Album,Lightbender,8123,fish,weak_wave_board,medium,waveRange; surferFit
+Album,Moonstone,8124,mid_length,,medium,waveRange; surferFit
+Album,Plasmic,8125,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Album,ProtoAtypical,8126,high_performance_shortboard,powerful_wave_board,low,waveRange; surferFit; designData
+Album,Sunstone,8127,fish,weak_wave_board,medium,waveRange; surferFit
+Album,The End,8128,mid_length,,low,waveRange; surferFit; designData
+Album,Townsend,8129,mid_length,,medium,waveRange; surferFit
+Album,Twinsman,8130,hybrid_daily_driver,twin_fin; one_board_quiver,low,waveRange; surferFit; designData
+Album,VBSM,8131,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Album,Veebee,8132,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Album,Warp Twin,8133,hybrid_daily_driver,twin_fin; one_board_quiver,low,waveRange; surferFit; designData
+Channel Islands,average-joe,7714,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,better-everyday,7715,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,big-happy,7716,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,biscuit-bonzer,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,black-and-white,,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Channel Islands,bobby-quad,7718,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,bonzer-3d,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,bonzer-shelter,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Channel Islands,bunny-chow,7719,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,chancho,,mid_length,,medium,waveRange; surferFit
+Channel Islands,ci-2-pro,7720,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,ci-2-pro-step-up,,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Channel Islands,ci-fish,7721,fish,weak_wave_board,medium,waveRange; surferFit; designData
+Channel Islands,ci-mid,7722,mid_length,,low,waveRange; surferFit
+Channel Islands,ci-mid-twin,7723,hybrid_daily_driver,twin_fin; one_board_quiver,low,waveRange; surferFit
+Channel Islands,ci-mid-twin-1,,hybrid_daily_driver,twin_fin; one_board_quiver,low,waveRange; surferFit
+Channel Islands,ci-pro,7724,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,ci-pro-step-up,,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Channel Islands,dumpster-diver,7725,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,dumpster-diver-2,7726,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,febs-fish,,fish,weak_wave_board,medium,waveRange; surferFit; designData
+Channel Islands,fever,7728,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit; designData
+Channel Islands,fishbeard,,fish,weak_wave_board,medium,waveRange; surferFit
+Channel Islands,free-scrubber-1,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,g-skate,7731,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Channel Islands,girabbit,7732,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,goldie,7733,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Channel Islands,happy,7734,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Channel Islands,happy-everyday,7735,performance_daily_driver,one_board_quiver,high,waveRange; surferFit; designData
+Channel Islands,happy-traveler-1,,hybrid_daily_driver,one_board_quiver; travel_board,low,waveRange; surferFit; designData
+Channel Islands,high-5,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,hoglet,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,m-23,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Channel Islands,mavs-gun,7738,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Channel Islands,mikey-february-shorty,7739,high_performance_shortboard,powerful_wave_board,low,waveRange; surferFit
+Channel Islands,mini-eco-hybrid,,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Channel Islands,neckbeard,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,neckbeard-2,7740,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,neckbeard-3,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,og-flyer,7741,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,pod-mod-1,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,rocket-9,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,rocket-wide,7743,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,rocket-wide-squash,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,rook-15,7744,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Channel Islands,sampler,7745,fish,weak_wave_board,medium,waveRange; surferFit; designData
+Channel Islands,semi-pro-12,7746,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,t-low,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,taco-grinder-1,,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Channel Islands,the-black-beauty,,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Channel Islands,the-new-flyer,7749,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,the-peregrine,7750,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Channel Islands,the-proton,7751,hybrid_daily_driver,one_board_quiver,low,waveRange
+Channel Islands,the-solution,7752,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,the-water-hog,,longboard,,medium,waveRange; surferFit
+Channel Islands,tph-single-fin-1,,mid_length,,medium,waveRange; surferFit
+Channel Islands,twin-fin,7755,hybrid_daily_driver,twin_fin; one_board_quiver,low,waveRange; surferFit
+Channel Islands,twin-pin,7756,hybrid_daily_driver,twin_fin; one_board_quiver,low,waveRange; surferFit
+Channel Islands,two-happy,7757,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,ultra-joe-1,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Channel Islands,weirdo-ripper,7759,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Channel Islands,zeus,,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Chemistry Surfboards,40 Oz,,high_performance_shortboard,powerful_wave_board; beginner_progression,medium,waveRange; designData
+Chemistry Surfboards,4x4,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,Alchemist,,fish,weak_wave_board,medium,waveRange; surferFit; designData
+Chemistry Surfboards,Alchemist Remix,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,B Side,8051,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Chemistry Surfboards,Beaker,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Chemistry Surfboards,Beaker Comp,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,Beer Fridge,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,Boombastik,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,Cassette Deck,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,Chem Zen,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Chemistry Surfboards,Chem ZenAgain,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Chemistry Surfboards,Chemistry M Mix Surfboard,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Chemistry Surfboards,Chemistry Pantera Rosa Surfboard,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Chemistry Surfboards,Chemistry The 23 Surfboard,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,Compression,,mid_length,,low,waveRange; surferFit; designData
+Chemistry Surfboards,D3,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,Daisho,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,Disk,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,Disk 2,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,Flash Point,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Chemistry Surfboards,Holiday,,fish,weak_wave_board,medium,waveRange; surferFit
+Chemistry Surfboards,Honey Dip,,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit; designData
+Chemistry Surfboards,Liquid Sword,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,Mid Mod,,longboard,,medium,waveRange; surferFit
+Chemistry Surfboards,Minion,,longboard,,medium,waveRange; surferFit
+Chemistry Surfboards,Nucleus,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Chemistry Surfboards,Pool Toy,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,R2,,mid_length,,low,waveRange; surferFit
+Chemistry Surfboards,Robotwo,,fish,weak_wave_board,medium,waveRange; surferFit
+Chemistry Surfboards,Side-A,,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit; designData
+Chemistry Surfboards,Solution,,mid_length,beginner_progression,low,waveRange
+Chemistry Surfboards,Summertime Pt 2,8053,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chemistry Surfboards,The Zen4 Deluxe,,mid_length,,low,waveRange; surferFit
+Chemistry Surfboards,The Zenith,,mid_length,,low,waveRange; surferFit
+Chemistry Surfboards,Zen 4,,mid_length,,low,waveRange; surferFit
+Chemistry Surfboards,Zen 4 1,,mid_length,,low,waveRange; surferFit
+Chemistry Surfboards,Zen3,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Chilli,A2,8090,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chilli,Blueprint,8092,high_performance_shortboard,powerful_wave_board,medium,waveRange
+Chilli,Blueprint Grom,8093,high_performance_shortboard,powerful_wave_board,medium,waveRange
+Chilli,BV2,8091,groveller,weak_wave_board,low,waveRange; surferFit
+Chilli,Churro 2,8094,forgiving_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Chilli,FAD3R,8095,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chilli,Faded 2.0,8096,step_up,powerful_wave_board; travel_board,medium,waveRange
+Chilli,Faded 2.0 Gun,8097,mid_length,,low,waveRange
+Chilli,Faded 2.0 Step Up,8098,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Chilli,Full Strength,8099,mid_length,,medium,waveRange; surferFit
+Chilli,Grom +,8100,youth,,medium,waveRange
+Chilli,HKII,8101,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chilli,Mid Strength,8102,mid_length,,medium,waveRange; surferFit
+Chilli,Middy,8103,mid_length,,medium,waveRange; surferFit
+Chilli,Mini Bird,8104,softboard,beginner_progression,medium,waveRange
+Chilli,Peppa Twin,8105,hybrid_daily_driver,twin_fin; one_board_quiver,low,waveRange
+Chilli,Piña Colada,8106,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Chilli,Rare Bird EVO,8107,hybrid_daily_driver,forgiving_daily_driver; small_wave_daily_driver,high,waveRange; surferFit
+Chilli,Rare Bird EVO TT,8108,mid_length,,low,waveRange; surferFit
+Chilli,SHORTIE,8109,hybrid_daily_driver,one_board_quiver,low,
+Chilli,SHORTIE SQUASH,8110,high_performance_shortboard,powerful_wave_board,medium,
+Chilli,SHORTIE YOUTH,8111,high_performance_shortboard,powerful_wave_board,medium,
+Chilli,Sugar,8112,fish,weak_wave_board,medium,waveRange; surferFit
+Chilli,Volume II,8113,hybrid_daily_driver,one_board_quiver,low,surferFit
+Christenson,Beausoleil,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Christenson,C-Bucket,,longboard,,medium,waveRange; surferFit; designData
+Christenson,C-Hag,,longboard,,medium,waveRange; surferFit; designData
+Christenson,C-Hawk,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Christenson,Cafe Racer 2.0,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Christenson,Carrera,8136,longboard,,medium,waveRange; surferFit; designData
+Christenson,Chris Craft,,longboard,,medium,waveRange; surferFit; designData
+Christenson,Easy Wind,8137,mid_length,,low,waveRange; surferFit; designData
+Christenson,Hole Shot,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Christenson,Huntsman,,mid_length,,low,waveRange; surferFit; designData
+Christenson,Lane Splitter,8140,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Christenson,Nautilus,,mid_length,,low,waveRange; surferFit; designData
+Christenson,Ocean Racer,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Christenson,OP1,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Christenson,OP2,8143,high_performance_shortboard,powerful_wave_board,low,waveRange; surferFit; designData
+Christenson,OP3,8144,high_performance_shortboard,powerful_wave_board,low,waveRange; surferFit; designData
+Christenson,OP4,8145,high_performance_shortboard,powerful_wave_board,low,waveRange; surferFit; designData
+Christenson,Osprey,8146,mid_length,,low,waveRange; surferFit; designData
+Christenson,Scarlet Begonia,,longboard,,medium,waveRange; surferFit; designData
+Christenson,Sicario,,longboard,,medium,waveRange; surferFit; designData
+Christenson,Speed Master,,longboard,,medium,waveRange; surferFit; designData
+Christenson,Sportsman,,longboard,,medium,waveRange; surferFit; designData
+Christenson,Submariner,,mid_length,,low,waveRange; surferFit; designData
+Christenson,Surfer Rosa,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Christenson,The Cliff,,longboard,,medium,waveRange; surferFit; designData
+Christenson,The Cliff Pintail,,longboard,,medium,waveRange; surferFit; designData
+Christenson,The Outlaw,,longboard,,medium,waveRange; surferFit; designData
+Christenson,The Wolverine,8148,mid_length,,low,waveRange; surferFit; designData
+Christenson,Tradesman,,longboard,,medium,waveRange; surferFit; designData
+Christenson,Ultra Tracker,,mid_length,,low,waveRange; surferFit; designData
+Christenson,Waterlion,,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+DHD,Black Diamond,7824,forgiving_daily_driver,one_board_quiver; beginner_progression,medium,
+DHD,Black Diamond EPS,7823,hybrid_daily_driver,one_board_quiver; beginner_progression,low,
+DHD,Black Diamond Soft Top,7807,forgiving_daily_driver,one_board_quiver; beginner_progression,medium,
+DHD,EE Juliette,7812,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+DHD,EE Juliette Jnr,7809,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+DHD,Interceptor,7816,mid_length,beginner_progression,medium,
+DHD,MF Bolt,7805,forgiving_daily_driver,one_board_quiver,low,waveRange; surferFit
+DHD,MF DNA,7801,hybrid_daily_driver,one_board_quiver,low,
+DHD,MF DNA Jnr,7821,high_performance_shortboard,powerful_wave_board,medium,surferFit
+DHD,MF Lightning,7802,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+DHD,MF Twin,7806,fish,twin_fin; weak_wave_board,medium,
+DHD,Mini Twin,7820,hybrid_daily_driver,twin_fin; one_board_quiver; beginner_progression,low,
+DHD,Mini Twin II,7811,hybrid_daily_driver,twin_fin; one_board_quiver,low,surferFit
+DHD,Nexus,7814,hybrid_daily_driver,one_board_quiver,medium,
+DHD,Nexus EPS,7813,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+DHD,Phoenix,7822,hybrid_daily_driver,one_board_quiver,medium,
+DHD,Phoenix EPS Swallow Tail,7817,hybrid_daily_driver,one_board_quiver,medium,
+DHD,Phoenix Flight EPS,7810,step_up,powerful_wave_board; travel_board,medium,
+DHD,Sandman,7818,step_up,powerful_wave_board; beginner_progression; travel_board,medium,
+DHD,SG No.8,7815,step_up,powerful_wave_board; travel_board,medium,
+DHD,Sweet Spot 4.0,7804,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+DHD,The Twin,7819,hybrid_daily_driver,twin_fin; one_board_quiver,low,surferFit
+DHD,Utopia,7808,hybrid_daily_driver,one_board_quiver,low,
+DMS Surfboards,Carny,3717,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+DMS Surfboards,Gherkin,3712,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+DMS Surfboards,Seahawk,3713,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+DMS Surfboards,Stilnox,3714,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+DMS Surfboards,Supercell,3718,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+DMS Surfboards,Thunderbird,3716,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+DMS Surfboards,X-Wing,3719,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+DMS Surfboards,Zephyr,3715,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Firewire,Boss Up,7968,mid_length,,medium,waveRange; surferFit
+Firewire,Dominator 2.0,7961,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Firewire,Dominator Pro,7958,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Firewire,DRK,7954,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Firewire,FRK Swallow,7959,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Firewire,FRK+,7970,high_performance_shortboard,powerful_wave_board,medium,waveRange
+Firewire,Great White Twin,7965,groveller,twin_fin; weak_wave_board,medium,waveRange; surferFit
+Firewire,Greedy Beaver,7976,longboard,,medium,waveRange; surferFit
+Firewire,Groove,7963,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Firewire,Machadocado,7966,fish,weak_wave_board,medium,waveRange
+Firewire,Mashup,7971,groveller,weak_wave_board,medium,waveRange; surferFit
+Firewire,Mindcraft,7956,youth,,medium,surferFit
+Firewire,Neutrino,7960,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Firewire,Revo Max,7964,mid_length,,medium,waveRange; surferFit
+Firewire,S Boss,7967,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Firewire,Sci-Fi 2.0,7973,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Firewire,Seaside,7972,fish,hybrid_daily_driver; weak_wave_board,high,waveRange; surferFit
+Firewire,Seaside & Beyond,7978,fish,weak_wave_board,medium,waveRange; surferFit
+Firewire,Singleton,7979,longboard,,medium,waveRange; surferFit
+Firewire,Spaceship,7957,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Firewire,Special T,7980,longboard,,low,waveRange; surferFit
+Firewire,Sweet Potato,7969,longboard,,medium,waveRange; surferFit
+Firewire,Taylor Jensen Hull Rider,7962,longboard,,medium,waveRange; surferFit
+Firewire,Taylor Jensen Pro,7982,longboard,,medium,waveRange; surferFit
+Firewire,Taylor Jensen Pro Mid,7974,longboard,,medium,waveRange; surferFit
+Firewire,Taylor Jensen Pro V,7983,longboard,,medium,waveRange; surferFit
+Firewire,Taylor Jensen Twinzer,7975,step_up,twin_fin; powerful_wave_board; travel_board,medium,waveRange; surferFit
+Firewire,The Gem,7981,longboard,,medium,waveRange; surferFit
+Firewire,Xtra Cado,7955,longboard,,medium,waveRange; surferFit
+Haydenshapes,Cannon,7985,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Haydenshapes,Holy Grail,7995,hybrid_daily_driver,one_board_quiver; beginner_progression,low,waveRange
+Haydenshapes,Holy Hypto,7996,hybrid_daily_driver,one_board_quiver,low,waveRange
+Haydenshapes,Holy Hypto FutureFlex,7997,hybrid_daily_driver,one_board_quiver,low,waveRange
+Haydenshapes,Hypto Krypto,7998,hybrid_daily_driver,forgiving_daily_driver; one_board_quiver,high,
+Haydenshapes,Love Buzz,,high_performance_shortboard,powerful_wave_board; beginner_progression,medium,
+Haydenshapes,Merlot,8004,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Haydenshapes,Nova,8009,hybrid_daily_driver,one_board_quiver; beginner_progression,low,waveRange
+Haydenshapes,Plunder,8011,hybrid_daily_driver,one_board_quiver,medium,waveRange
+Haydenshapes,Psychedelic Germ,8012,hybrid_daily_driver,one_board_quiver,low,
+Haydenshapes,Shred Sled,8013,fish,weak_wave_board,medium,waveRange
+Haydenshapes,Shred Sled King,8014,step_up,powerful_wave_board; travel_board,medium,
+Haydenshapes,Untitled,8015,high_performance_shortboard,powerful_wave_board,medium,waveRange
+Haydenshapes,Untitled V2,8016,high_performance_shortboard,powerful_wave_board,medium,waveRange
+JS Industries,Big Baron,7695,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+JS Industries,Big Baron Easy Rider,7704,softboard,beginner_progression,medium,waveRange; surferFit
+JS Industries,Big Baron Softboard,7705,softboard,beginner_progression,medium,waveRange; surferFit; designData
+JS Industries,Big Horse,7686,step_up,high_performance_shortboard; powerful_wave_board; travel_board,medium,waveRange; surferFit
+JS Industries,Black Baron,7696,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+JS Industries,Black Eagle 2,7703,foil,,medium,waveRange; surferFit
+JS Industries,Bull Run,7697,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+JS Industries,Bull Run Softboard,7706,softboard,beginner_progression,medium,waveRange; surferFit
+JS Industries,El Baron,7694,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+JS Industries,Flame Fish,7699,groveller,hybrid_daily_driver; weak_wave_board,medium,waveRange; surferFit
+JS Industries,Flame Fish Softboard,7707,softboard,beginner_progression,medium,waveRange; surferFit
+JS Industries,Forget Me Not 3,7688,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+JS Industries,Forget Me Not 3 Step Up,7685,step_up,high_performance_shortboard; powerful_wave_board; travel_board,medium,waveRange; surferFit
+JS Industries,Golden Child,7687,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+JS Industries,Golden Child Easy Rider,7708,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+JS Industries,Golden Child Youth,7700,youth,,medium,waveRange; surferFit
+JS Industries,Monsta,7689,high_performance_shortboard,performance_daily_driver,high,
+JS Industries,Monsta Easy Rider,7709,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+JS Industries,Monsta Youth,7701,youth,,medium,waveRange; surferFit
+JS Industries,Mother Trucker,7683,step_up,high_performance_shortboard; powerful_wave_board; travel_board,medium,waveRange; surferFit
+JS Industries,Raging Bull,7691,forgiving_daily_driver,one_board_quiver,medium,waveRange; surferFit
+JS Industries,Raging Bull Easy Rider,7712,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+JS Industries,Schooner,7690,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+JS Industries,Step Off,7684,step_up,high_performance_shortboard; powerful_wave_board; travel_board,medium,waveRange; surferFit
+JS Industries,Sub Xero,7698,groveller,hybrid_daily_driver; weak_wave_board,medium,waveRange; surferFit
+JS Industries,Xero Fusion,7693,forgiving_daily_driver,one_board_quiver,medium,waveRange; surferFit
+JS Industries,Xero Fusion Easy Rider,7711,groveller,weak_wave_board,medium,waveRange; surferFit
+JS Industries,Xero Gravity,7692,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+JS Industries,Xero Gravity Easy Rider,7710,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+JS Industries,Xero Gravity Youth,7702,youth,,medium,waveRange; surferFit
+Lost,3.0 Stub Driver,7825,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,3.0 Stub Thumb,7826,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Lost,3.0 Stub Thumb Driver,7827,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Lost,Beach Buggy 2,7828,performance_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Big Rig Driver,7829,fish,weak_wave_board,medium,waveRange; surferFit
+Lost,Cali Twin,7830,fish,twin_fin; weak_wave_board,medium,waveRange; surferFit
+Lost,Cali Twin Pin,7831,step_up,twin_fin; powerful_wave_board; travel_board,medium,waveRange; surferFit
+Lost,California Mid,7832,mid_length,,medium,waveRange; surferFit
+Lost,Crowd Killer,7833,mid_length,,low,waveRange; surferFit
+Lost,Crowd Killer Round,7834,mid_length,,low,waveRange; surferFit; designData
+Lost,Double Up,7835,mid_length,,low,waveRange; surferFit
+Lost,Driver 2.0,7836,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Driver 2.0 Round,7837,high_performance_shortboard,powerful_wave_board,low,waveRange
+Lost,Driver 2.0 Squash,7838,high_performance_shortboard,powerful_wave_board,low,waveRange
+Lost,Driver 3.0 Grom,7839,youth,,medium,waveRange
+Lost,Driver 3.0 Round,7840,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Driver 3.0 Squash,7841,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,El Patron,7842,fish,weak_wave_board,medium,waveRange; surferFit
+Lost,Evil Twin,7843,groveller,twin_fin; weak_wave_board,low,waveRange; surferFit
+Lost,Formula 1 Round,7844,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Formula 1 Squash,7845,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Glydra,7846,mid_length,,medium,waveRange; surferFit
+Lost,Hydra,7847,fish,weak_wave_board,medium,waveRange; surferFit
+Lost,Lazy Toy,7848,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Lost,Little Wing,7849,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Lost,Maysym Goofy,7850,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Maysym Regular,7851,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Micks Tape Goofy,7852,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Micks Tape Regular,7853,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Micks Tape Sym,7854,fish,weak_wave_board,medium,waveRange; surferFit
+Lost,Mini Driver (Re Issue),7855,step_up,powerful_wave_board; travel_board,medium,waveRange
+Lost,Mod Quad,7856,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Lost,Party Crasher,7857,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Lost,Party Platter,7858,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Pick Up Stick,7859,longboard,,medium,waveRange; surferFit
+Lost,Pisces,7860,fish,weak_wave_board,medium,waveRange; surferFit
+Lost,Pocket Rocket Round,7861,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Pocket Rocket Squash,7862,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Psycho Killer,7863,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Puddle Fish,7864,fish,weak_wave_board,medium,waveRange; surferFit
+Lost,Puddle Jumper,7865,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Puddle Jumper HP,7866,groveller,weak_wave_board,low,waveRange; surferFit
+Lost,Puddle Jumper Pro,7867,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Lost,Puddle Jumper Sting,7868,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Quiver Killer,7869,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Lost,Rad Ripper,7870,hybrid_daily_driver,one_board_quiver,low,waveRange
+Lost,Rad Zapper,7871,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Retro Gun,7872,gun,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Lost,Retro Ripper,7873,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Lost,Retro Tripper,7874,fish,weak_wave_board,medium,waveRange; surferFit
+Lost,RNF 96,7875,fish,small_wave_daily_driver; twin_fin,high,waveRange; surferFit
+Lost,RNF 96 King Fish,7876,mid_length,,medium,waveRange; surferFit
+Lost,RNF 96 Long Toe,7877,fish,weak_wave_board,medium,waveRange; surferFit
+Lost,RNF Redux,7878,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,RNF Retro,7879,fish,weak_wave_board,medium,waveRange; surferFit
+Lost,RNF Twinzer '96Er,7880,fish,twin_fin; weak_wave_board,medium,waveRange; surferFit
+Lost,Rocket Redux,7881,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Round Up,7882,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Lost,RV,7883,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Sabotaj,7884,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Lost,Sabotaj Legacy,7885,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Lost,Smooth Operator,7886,mid_length,,medium,waveRange; surferFit
+Lost,Smooth Operator Long Toe,7887,mid_length,,medium,waveRange; surferFit
+Lost,Speed Demon,7888,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Step Driver,7889,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Lost,Sub Driver,7890,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Sub Driver 2.0,7891,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Lost,Sub Driver 3.0 Swallow,7892,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Lost,Sub Driver Swallow Tail,7893,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Sub Scorcher Sting,7894,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Lost,Swordfish,7895,fish,weak_wave_board,medium,waveRange; surferFit
+Lost,Terrapin,7896,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Lost,The Original Puddle Jumper,7897,groveller,weak_wave_board,medium,waveRange; surferFit
+Lost,The Ripper Round,7898,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,The Ripper Squash,7899,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Tube Pig,7900,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Uber Driver,7901,forgiving_daily_driver,one_board_quiver,low,waveRange; surferFit
+Lost,Uber Driver XL,7902,hybrid_daily_driver,one_board_quiver,low,waveRange
+Lost,V3 Rocket,7903,fish,weak_wave_board,medium,waveRange; surferFit
+Misfit Shapes,(NEO) SPEED EGG,8049,softboard,beginner_progression,medium,waveRange; surferFit
+Misfit Shapes,BEACH CLOUD,8045,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Misfit Shapes,BEACH METALL,8046,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Misfit Shapes,BEACH METALL RND,8047,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Misfit Shapes,BULL DOVE 2,8039,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Misfit Shapes,DOPE MACHINE,8044,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Misfit Shapes,DRIB,8040,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Misfit Shapes,ERASER HEAD,8042,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Misfit Shapes,FUNGZETTI,8041,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Misfit Shapes,LONGUS,8050,mid_length,,low,waveRange; surferFit
+Misfit Shapes,SPEED EGG - DIAMOND TWIN,8048,mid_length,twin_fin,medium,waveRange; surferFit
+Misfit Shapes,YANDINA SPEEDWAY,8043,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Pukas,Pegaso,8057,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Pukas,Pukas All-Round Longboard,8059,longboard,,medium,waveRange; surferFit; designData
+Pukas,Pukas Beachy Mood,8060,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Pukas,Pukas Easy Mood,8061,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Pukas,Pukas Fish,8062,fish,weak_wave_board,medium,waveRange; surferFit; designData
+Pukas,Pukas Flying Diamond,8063,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Pukas,Pukas Hyperlink,8056,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Pukas,Pukas Magnetic,8064,mid_length,,low,waveRange; surferFit; designData
+Pukas,Pukas Mustache,8065,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Pukas,Pukas Performance Mood,8058,high_performance_shortboard,powerful_wave_board,low,waveRange; surferFit; designData
+Pukas,Pukas Space Oddity,8066,mid_length,,low,waveRange; surferFit; designData
+Pukas,Pukas Water Lion,8068,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Pukas,Pukas Water Lion Ultra,8067,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Pyzel,Astro Glider,7793,fish,weak_wave_board,medium,surferFit
+Pyzel,Astro Pop,7762,groveller,hybrid_daily_driver; weak_wave_board,medium,waveRange; surferFit
+Pyzel,Astro Pop XL,7786,groveller,hybrid_daily_driver; weak_wave_board,medium,waveRange; surferFit
+Pyzel,Crisis Twin,7770,mid_length,twin_fin,medium,waveRange; surferFit
+Pyzel,Ghost,7761,step_up,high_performance_shortboard; powerful_wave_board; travel_board,high,
+Pyzel,Ghost Pro,7794,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Pyzel,Ghost Swallow,7791,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Pyzel,Ghost XL,7785,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Pyzel,Gremlin,7768,groveller,daily_driver; weak_wave_board,high,waveRange
+Pyzel,Gremlin XL,7772,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Pyzel,Happy Twin,7771,groveller,hybrid_daily_driver; twin_fin; weak_wave_board,medium,waveRange; surferFit
+Pyzel,Highline,7788,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Pyzel,Mid Length Crisis,7790,mid_length,,medium,waveRange; surferFit
+Pyzel,Mini Ghost Round,7763,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Pyzel,Mini Ghost Squash,7764,forgiving_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Pyzel,Next Step,7782,mid_length,,medium,waveRange; surferFit
+Pyzel,Padillac,7781,mid_length,,medium,waveRange; surferFit
+Pyzel,Phantom,7787,performance_daily_driver,high_performance_shortboard; one_board_quiver,high,waveRange; surferFit
+Pyzel,Phantom Round,7797,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Pyzel,Phantom Squash,7798,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Pyzel,Phantom XL,7773,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Pyzel,Power Tiger,7769,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Pyzel,Power Tiger Grom,7765,youth,,medium,waveRange; surferFit
+Pyzel,Power Tiger XL,7767,groveller,hybrid_daily_driver; weak_wave_board,medium,waveRange; surferFit
+Pyzel,Precious,7776,hybrid_daily_driver,one_board_quiver,medium,surferFit
+Pyzel,Puerto Padi,7777,gun,step_up; powerful_wave_board; travel_board,medium,waveRange; surferFit
+Pyzel,Pyzalien,7799,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Pyzel,Pyzalien 2,7789,performance_daily_driver,one_board_quiver; beginner_progression,medium,waveRange
+Pyzel,Pyzalien 2 XL,7784,performance_daily_driver,one_board_quiver; beginner_progression,medium,waveRange
+Pyzel,Radius,7795,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Pyzel,Radius Prime Round,7775,high_performance_shortboard,powerful_wave_board,medium,surferFit
+Pyzel,Radius Prime Squash,7774,high_performance_shortboard,powerful_wave_board,medium,surferFit
+Pyzel,Red Tiger,7778,hybrid_daily_driver,one_board_quiver,medium,surferFit
+Pyzel,Red Tiger XL,7779,hybrid_daily_driver,one_board_quiver; beginner_progression,medium,
+Pyzel,Score Lord,7760,hybrid_daily_driver,one_board_quiver,medium,
+Pyzel,Shadow,7796,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Pyzel,Shadow XL,7792,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Pyzel,Tank,7800,gun,step_up; powerful_wave_board; travel_board,medium,waveRange; surferFit
+Pyzel,Tiger Twin,7766,hybrid_daily_driver,twin_fin; one_board_quiver,low,waveRange; surferFit
+Pyzel,White Tiger,7780,groveller,hybrid_daily_driver; weak_wave_board,medium,waveRange; surferFit
+Pyzel,Wildcat,7783,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Rusty,1984,7904,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Rusty,419 Fish,7905,groveller,weak_wave_board,medium,waveRange; surferFit
+Rusty,421 Fish,7906,fish,weak_wave_board,medium,waveRange
+Rusty,Bali Single,7907,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Rusty,Barking Spider,7908,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Rusty,Big Cat,7909,mid_length,,low,waveRange; surferFit
+Rusty,Blackbird,7910,mid_length,,low,waveRange; surferFit
+Rusty,Blade,7911,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Rusty,D Min,7912,fish,weak_wave_board,medium,waveRange; surferFit
+Rusty,Desert Island,7913,mid_length,,low,waveRange; designData
+Rusty,Dozer,7914,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Rusty,Dwart,7915,mid_length,,low,waveRange; surferFit
+Rusty,Dwart Too,7916,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Rusty,Egg,7917,mid_length,,medium,waveRange; surferFit
+Rusty,Egg Not,7918,mid_length,,medium,waveRange; surferFit
+Rusty,El Dorado,7919,longboard,,medium,waveRange; surferFit
+Rusty,Enough Said,7920,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Rusty,Express,7921,mid_length,,low,waveRange; surferFit; designData
+Rusty,Fish Quatro,7922,fish,weak_wave_board,medium,waveRange; surferFit
+Rusty,Hatchet,7923,groveller,weak_wave_board,medium,waveRange; surferFit
+Rusty,Heckler,7924,fish,weak_wave_board,medium,waveRange; surferFit
+Rusty,Hustler,7925,fish,weak_wave_board,medium,waveRange; surferFit
+Rusty,Illuminati,7926,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Rusty,Keg,7927,high_performance_shortboard,powerful_wave_board,low,waveRange; surferFit
+Rusty,Lowrider,7928,mid_length,,medium,waveRange; surferFit
+Rusty,Mi Amigo,7929,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Rusty,Mini Tanker,7930,longboard,,medium,waveRange; designData
+Rusty,Miso,7931,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Rusty,Moby Fish,7932,longboard,beginner_progression,medium,waveRange
+Rusty,Model 8,7933,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Rusty,Neil,7934,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Rusty,New Traveler,7935,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Rusty,Not So Moby Fish,7936,fish,weak_wave_board,medium,waveRange; surferFit
+Rusty,Panda,7937,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Rusty,SD,7938,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Rusty,SD RT RE,7939,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Rusty,Shiv,7940,groveller,weak_wave_board,medium,waveRange; surferFit
+Rusty,Sista Brotha,7941,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Rusty,Slayer,7942,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Rusty,Slayer 2,7943,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Rusty,Smoothie,7944,mid_length,,low,waveRange; surferFit; designData
+Rusty,So Fuunnn,7945,hybrid_daily_driver,one_board_quiver,low,waveRange; designData
+Rusty,The Deuce,7946,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Rusty,The Rooster,7947,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Rusty,Underdog,7948,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit; designData
+Rusty,Utility,7949,longboard,,medium,waveRange; surferFit
+Rusty,What,7950,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Rusty,Yeti,7951,mid_length,,low,waveRange; surferFit
+Rusty,Zeppelin,7952,longboard,,medium,waveRange; surferFit
+Sharp Eye,#77,8019,high_performance_shortboard,powerful_wave_board,medium,waveRange
+Sharp Eye,Cheat Code,8020,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Sharp Eye,Disco,8021,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Sharp Eye,Disco II,8022,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Sharp Eye,Disco Inferno,8023,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Sharp Eye,File Fifty,8024,high_performance_shortboard,powerful_wave_board,medium,waveRange
+Sharp Eye,Holy Toledo,8027,high_performance_shortboard,powerful_wave_board,medium,waveRange
+Sharp Eye,HT2,8025,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Sharp Eye,HT2.5,8026,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Sharp Eye,Inferno 72,8028,high_performance_shortboard,daily_driver; powerful_wave_board,high,waveRange
+Sharp Eye,Inferno FT,8029,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Sharp Eye,Maguro,8030,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Sharp Eye,Modern 2,8031,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Sharp Eye,Modern 2.5,8032,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Sharp Eye,Okay,8033,high_performance_shortboard,powerful_wave_board,medium,waveRange
+Sharp Eye,Radar,8034,hybrid_daily_driver,one_board_quiver,medium,surferFit
+Sharp Eye,SB-1,8035,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Sharp Eye,Storms,8036,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Sharp Eye,Synergy,8037,high_performance_shortboard,powerful_wave_board,medium,
+Sharp Eye,Zipper,8038,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Simon Anderson,5 Spark,8069,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Simon Anderson,Alley,8070,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Simon Anderson,Alley Grom,8071,youth,,medium,waveRange; surferFit
+Simon Anderson,Big S,8072,mid_length,,low,waveRange; surferFit; designData
+Simon Anderson,DSC & DSC VEE,8084,mid_length,,low,waveRange; surferFit
+Simon Anderson,DTS,8073,fish,weak_wave_board,medium,waveRange; surferFit
+Simon Anderson,Early Bird,8074,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Simon Anderson,Face Dancer,8085,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Simon Anderson,Face Dancer Step Up,8075,step_up,powerful_wave_board; travel_board,medium,surferFit
+Simon Anderson,Fusion,8076,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Simon Anderson,Mollusc,8087,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Simon Anderson,Mollusc Robo,8086,mid_length,,low,waveRange; surferFit
+Simon Anderson,Nomad,8077,fish,weak_wave_board,medium,waveRange; surferFit; designData
+Simon Anderson,Nxfc,8088,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Simon Anderson,Spudnick,8078,fish,weak_wave_board,medium,waveRange; surferFit
+Simon Anderson,Spudster,8079,groveller,weak_wave_board,low,waveRange; surferFit
+Simon Anderson,SXE3,8080,step_up,powerful_wave_board; travel_board,medium,waveRange; surferFit
+Simon Anderson,T&T,8082,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Simon Anderson,Three Peat,8081,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Simon Anderson,Varmit,8089,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
+Simon Anderson,XFC,8083,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit

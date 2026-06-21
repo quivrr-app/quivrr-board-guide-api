@@ -1,0 +1,216 @@
+from __future__ import annotations
+
+import csv
+import json
+import re
+from collections import Counter
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+GRAPH_PATH = ROOT / "app/knowledge/generated/board_recommendation_graph.json"
+INTELLIGENCE_PATH = ROOT / "app/knowledge/generated/canonical_board_intelligence.json"
+GENERATED_PATH = ROOT / "app/knowledge/generated/board_intelligence_generated.json"
+OVERRIDES_PATH = ROOT / "app/knowledge/curated/board_expert_overrides.json"
+OUTPUT_PATH = ROOT / "app/knowledge/generated/board_expert_matrix.json"
+AUDIT_JSON_PATH = ROOT / "app/knowledge/audits/board_expert_matrix_audit.json"
+AUDIT_CSV_PATH = ROOT / "app/knowledge/audits/board_expert_matrix_audit.csv"
+
+SCORE_FIELDS = [
+    "paddleEaseScore", "forgivenessScore", "performanceScore", "speedGenerationScore",
+    "holdScore", "manoeuvrabilityScore", "stabilityScore", "smallWaveScore", "goodWaveScore",
+    "stepUpScore", "dailyDriverScore", "grovellerScore", "fishScore", "midLengthScore",
+    "oneBoardQuiverScore",
+]
+
+
+def key(brand: str | None, model: str | None) -> tuple[str, str]:
+    clean = lambda value: re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
+    return clean(brand), clean(model)
+
+
+def load_json(path: Path):
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def score(label: str | None) -> int:
+    return {"low": 35, "medium": 60, "high": 85}.get(str(label or "").lower(), 50)
+
+
+def lane_from_graph(board: dict) -> tuple[str, list[str]]:
+    category = board.get("taxonomy", {}).get("primaryCategory") or "general_surfboard"
+    dna = board.get("dna", {})
+    mapping = {
+        "performance_shortboard": "high_performance_shortboard", "hybrid": "hybrid_daily_driver",
+        "groveller": "groveller", "fish": "fish", "step_up": "step_up", "mid_length": "mid_length",
+        "longboard": "longboard", "softboard": "softboard", "foil": "foil", "gun": "gun",
+    }
+    if category == "daily_driver":
+        if dna.get("performanceBias") == "high":
+            primary = "performance_daily_driver"
+        elif dna.get("forgiveness") == "high":
+            primary = "forgiving_daily_driver"
+        else:
+            primary = "hybrid_daily_driver"
+    else:
+        primary = mapping.get(category, category if category != "surfboard" else "general_surfboard")
+    secondary = []
+    for value in board.get("taxonomy", {}).get("secondaryCategories", []):
+        mapped = mapping.get(value, value)
+        if mapped != primary and mapped not in secondary:
+            secondary.append(mapped)
+    text = f"{board.get('model','')} {category}".lower()
+    if "twin" in text and "twin_fin" not in secondary and primary != "twin_fin":
+        secondary.append("twin_fin")
+    if primary in {"performance_daily_driver", "forgiving_daily_driver", "hybrid_daily_driver"}:
+        secondary.append("one_board_quiver")
+    if primary in {"groveller", "fish"}:
+        secondary.append("weak_wave_board")
+    if primary in {"step_up", "gun", "high_performance_shortboard"}:
+        secondary.append("powerful_wave_board")
+    ability_min = str(board.get("surferFit", {}).get("abilityMin") or "").lower()
+    if primary == "softboard" or ability_min == "beginner":
+        secondary.append("beginner_progression")
+    if primary in {"step_up", "gun"} or "travel" in text:
+        secondary.append("travel_board")
+    return primary, list(dict.fromkeys(secondary))
+
+
+def build_scores(primary: str, secondary: list[str], dna: dict) -> dict[str, int]:
+    values = {field: 45 for field in SCORE_FIELDS}
+    values.update({
+        "paddleEaseScore": score(dna.get("paddlingBias")),
+        "forgivenessScore": score(dna.get("forgiveness")),
+        "performanceScore": score(dna.get("performanceBias")),
+        "speedGenerationScore": score(dna.get("turningBias")),
+        "manoeuvrabilityScore": score(dna.get("turningBias")),
+        "holdScore": 75 if "powerful" in dna.get("wavePower", []) else 55,
+        "stabilityScore": score(dna.get("forgiveness")),
+    })
+    lanes = {primary, *secondary}
+    lane_scores = {
+        "small_wave_daily_driver": ("smallWaveScore", 90), "weak_wave_board": ("smallWaveScore", 85),
+        "performance_daily_driver": ("dailyDriverScore", 90), "forgiving_daily_driver": ("dailyDriverScore", 85),
+        "hybrid_daily_driver": ("dailyDriverScore", 80), "groveller": ("grovellerScore", 95),
+        "fish": ("fishScore", 95), "mid_length": ("midLengthScore", 95), "step_up": ("stepUpScore", 95),
+        "one_board_quiver": ("oneBoardQuiverScore", 90), "high_performance_shortboard": ("goodWaveScore", 90),
+        "powerful_wave_board": ("goodWaveScore", 90),
+    }
+    for lane in lanes:
+        if lane in lane_scores:
+            field, value = lane_scores[lane]
+            values[field] = max(values[field], value)
+    return values
+
+
+def main() -> None:
+    graph = load_json(GRAPH_PATH).get("boards", [])
+    canonical = {key(row["identity"].get("brand"), row["identity"].get("model")): row for row in load_json(INTELLIGENCE_PATH).get("profiles", [])}
+    generated_rows = load_json(GENERATED_PATH).get("boards", [])
+    generated = {}
+    for row in generated_rows:
+        item_key = key(row.get("brand"), row.get("model"))
+        current = generated.get(item_key)
+        if current is None or float(row.get("classificationConfidence") or 0) > float(current.get("classificationConfidence") or 0):
+            generated[item_key] = row
+    overrides = {key(row.get("brand"), row.get("model")): row for row in load_json(OVERRIDES_PATH).get("boards", [])}
+
+    matrix = []
+    for board in graph:
+        item_key = key(board.get("brand"), board.get("model"))
+        intel = canonical.get(item_key, {})
+        gen = generated.get(item_key, {})
+        override = overrides.get(item_key)
+        primary, secondary = lane_from_graph(board)
+        confidence = board.get("taxonomy", {}).get("confidence") or "low"
+        source = board.get("taxonomy", {}).get("source") or "deterministic_board_graph"
+        reason = f"Mapped from canonical taxonomy {board.get('taxonomy', {}).get('primaryCategory') or 'general surfboard'}."
+        reviewed_by = reviewed_at = None
+        if override:
+            primary = override["primaryLane"]
+            secondary = override.get("secondaryLanes", [])
+            confidence = override.get("confidence", "high")
+            source = "quivrr_curated_override"
+            reason = override["reason"]
+            reviewed_by = override.get("reviewedByQuivrr")
+            reviewed_at = override.get("reviewedAtUtc")
+        dna = board.get("dna", {})
+        scores = build_scores(primary, secondary, dna)
+        evidence = {"primaryLane": {"source": source, "confidence": confidence, "reason": reason}}
+        for field in SCORE_FIELDS:
+            evidence[field] = {
+                "source": "deterministic_canonical_dna", "confidence": confidence,
+                "reason": f"Derived from the canonical lane and board DNA; value {scores[field]}.",
+            }
+        design = intel.get("design", {})
+        wave = intel.get("wave", {})
+        surfer = intel.get("surfer", {})
+        description = intel.get("description", {})
+        source_urls = list(dict.fromkeys(filter(None, [
+            intel.get("identity", {}).get("sourceUrl"), description.get("descriptionSource"),
+            gen.get("official_product_url"), gen.get("source_url"),
+        ])))
+        missing = []
+        if wave.get("waveHeightMinFt") is None or wave.get("waveHeightMaxFt") is None:
+            missing.append("waveRange")
+        if not surfer.get("abilityMin") and not surfer.get("abilityMax"):
+            missing.append("surferFit")
+        if not any(design.get(name) for name in ["outline", "railType", "entryRocker", "exitRocker", "tailShape", "finSetup", "designNotes"]):
+            missing.append("designData")
+        matrix.append({
+            "brand": board["brand"], "model": board["model"], "boardModelId": board.get("boardModelId"),
+            "primaryLane": primary, "secondaryLanes": secondary,
+            "boardFamily": gen.get("model_family") or board["model"],
+            "boardCategory": board.get("taxonomy", {}).get("primaryCategory") or "general_surfboard",
+            "subCategory": primary,
+            "waveRangeMinFt": wave.get("waveHeightMinFt") if wave.get("waveHeightMinFt") is not None else dna.get("waveRange", {}).get("minFt"),
+            "waveRangeMaxFt": wave.get("waveHeightMaxFt") if wave.get("waveHeightMaxFt") is not None else dna.get("waveRange", {}).get("maxFt"),
+            "wavePower": wave.get("wavePower") or dna.get("wavePower", []),
+            "waveTypes": wave.get("waveTypes") or gen.get("waveType", []),
+            "abilityMin": surfer.get("abilityMin") or board.get("surferFit", {}).get("abilityMin"),
+            "abilityMax": surfer.get("abilityMax") or board.get("surferFit", {}).get("abilityMax"),
+            **scores,
+            "constructionNotes": design.get("constructionNotes") or gen.get("construction_notes"),
+            "finSetupNotes": design.get("finSetup") or gen.get("fin_setup_notes"),
+            "rockerNotes": " / ".join(filter(None, [design.get("entryRocker"), design.get("exitRocker")])) or gen.get("rocker_notes"),
+            "railNotes": design.get("railType"), "tailNotes": design.get("tailShape") or gen.get("tail_notes"),
+            "sourceSummary": reason,
+            "manufacturerDescription": description.get("manufacturerDescription") or gen.get("model_description"),
+            "sourceUrls": source_urls, "confidence": confidence, "evidenceSources": evidence,
+            "missingFields": missing, "reviewedByQuivrr": reviewed_by, "reviewedAtUtc": reviewed_at,
+            "volumeRange": board.get("volumeRange", {}), "lengthRangeInches": board.get("lengthRangeInches", {}),
+        })
+
+    matrix.sort(key=lambda row: (row["brand"].lower(), row["model"].lower()))
+    OUTPUT_PATH.write_text(json.dumps({"schemaVersion": "board_expert_matrix_v1", "boards": matrix}, indent=2, ensure_ascii=False), encoding="utf-8")
+    confidence_counts = Counter(row["confidence"] for row in matrix)
+    lane_counts = Counter(row["primaryLane"] for row in matrix)
+    review = sorted(matrix, key=lambda row: ({"low": 0, "medium": 1, "high": 2}.get(row["confidence"], 0), -len(row["missingFields"]), row["brand"], row["model"]))[:50]
+    audit = {
+        "totalModels": len(matrix), "modelsWithPrimaryLane": sum(bool(row["primaryLane"]) for row in matrix),
+        "modelsWithSecondaryLanes": sum(bool(row["secondaryLanes"]) for row in matrix),
+        "confidenceDistribution": dict(sorted(confidence_counts.items())),
+        "modelsMissingWaveRange": sum("waveRange" in row["missingFields"] for row in matrix),
+        "modelsMissingSurferFit": sum("surferFit" in row["missingFields"] for row in matrix),
+        "modelsMissingDesignData": sum("designData" in row["missingFields"] for row in matrix),
+        "categoryDistribution": dict(sorted(lane_counts.items())),
+        "top50LowConfidenceImportantModels": [{"brand": row["brand"], "model": row["model"], "primaryLane": row["primaryLane"], "missingFields": row["missingFields"]} for row in review],
+        "top50ModelsNeedingCuratedReview": [{"brand": row["brand"], "model": row["model"], "reason": ", ".join(row["missingFields"]) or "low confidence lane"} for row in review],
+    }
+    AUDIT_JSON_PATH.write_text(json.dumps(audit, indent=2, ensure_ascii=False), encoding="utf-8")
+    with AUDIT_CSV_PATH.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["brand", "model", "boardModelId", "primaryLane", "secondaryLanes", "confidence", "missingFields"])
+        writer.writeheader()
+        for row in matrix:
+            writer.writerow({name: "; ".join(row[name]) if isinstance(row.get(name), list) else row.get(name) for name in writer.fieldnames})
+    print(json.dumps({
+        "totalModels": audit["totalModels"],
+        "modelsWithPrimaryLane": audit["modelsWithPrimaryLane"],
+        "modelsWithSecondaryLanes": audit["modelsWithSecondaryLanes"],
+        "confidenceDistribution": audit["confidenceDistribution"],
+        "categoryDistribution": audit["categoryDistribution"],
+    }, indent=2))
+
+
+if __name__ == "__main__":
+    main()

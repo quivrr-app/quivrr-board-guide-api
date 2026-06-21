@@ -61,6 +61,7 @@ class IntentRouterTests(unittest.TestCase):
             "How do I use the site?": "site_help_question",
             "What volume should I ride if I'm 75kg?": "volume_advice_request",
             "How many litres should I be on?": "volume_advice_request",
+            "Where can I buy a JS Monsta 5'11 CarboTune in Europe?": "exact_board_location_request",
         }
         for message, expected in cases.items():
             with self.subTest(message=message):
@@ -87,7 +88,15 @@ class IntentRouterTests(unittest.TestCase):
         self.assertEqual(profile.weight_kg, 75)
         self.assertEqual(profile.ability, "Advanced")
         self.assertEqual(profile.surf_frequency_per_week, 5)
+        self.assertEqual(profile.fitness_level, "High")
         self.assertIsNone(profile.current_board)
+
+    def test_exact_location_profile_extracts_board_spec(self):
+        profile = extract_profile("Where can I buy a JS Monsta 5'11 CarboTune around 28L in Europe?")
+        self.assertEqual(profile.region, "EU")
+        self.assertEqual(profile.requested_length, "5'11")
+        self.assertEqual(profile.requested_construction, "Carbotune")
+        self.assertEqual(profile.target_volume_litres, 28)
 
     def test_construction_aliases_are_deterministic(self):
         for construction in [
@@ -222,6 +231,47 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertIn("Pyzel Phantom", body["reply"])
         self.assertIn("Haydenshapes Hypto Krypto", body["reply"])
         self.assertIn("performance daily-driver", body["reply"])
+        self.assertIn("matrix favours Pyzel Phantom", body["reply"])
+        self.assertEqual(body["suggested_boards"], [])
+
+    @patch("main.locate_exact_board", return_value=([SuggestedBoard(
+        brand="JS Industries", model="Monsta", category="Exact stock", confidence=.94,
+        why_it_fits="Exact verified EU match from 58 Surf", suggested_size="5'11 | 28L | CarboTune",
+        available_count=1, retailer_count=1, region="EU",
+        example_live_source_url="https://58surf.example/monsta",
+    )], True))
+    def test_exact_board_location_returns_verified_direct_link(self, _locate):
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "Where can I buy a JS Monsta 5'11 CarboTune in Europe?",
+        })
+        body = response.json()
+        self.assertEqual(body["intent"], "exact_board_location_request")
+        self.assertIn("exact verified EU", body["reply"])
+        self.assertEqual(body["recommendations"][0]["exampleProductUrl"], "https://58surf.example/monsta")
+        self.assertNotIn("/au/", body["recommendations"][0]["exampleProductUrl"])
+
+    @patch("main.locate_exact_board", return_value=([], False))
+    def test_exact_board_unavailable_does_not_hallucinate_link(self, _locate):
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "Where can I buy a JS Monsta 5'11 CarboTune in Europe?",
+        })
+        body = response.json()
+        self.assertIn("can’t see that exact", body["reply"])
+        self.assertEqual(body["recommendations"], [])
+
+    @patch("main.locate_exact_board", return_value=([SuggestedBoard(
+        brand="JS Industries", model="Monsta", category="Exact stock", confidence=.94,
+        why_it_fits="Exact verified EU match", available_count=1, retailer_count=1, region="EU",
+        example_live_source_url="https://example.test/eu/monsta",
+    )], True))
+    def test_where_is_this_exact_board_uses_conversation_context(self, _locate):
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "Where is this exact board?", "region": "EU",
+            "conversation": [{"role": "user", "content": "I'm looking at a JS Monsta 5'11 CarboTune"}],
+        })
+        body = response.json()
+        self.assertEqual(body["intent"], "exact_board_location_request")
+        self.assertEqual(body["recommendations"][0]["model"], "Monsta")
 
     def test_site_help_does_not_start_fit_intake(self):
         response = self.client.post("/api/board-guide/chat", json={

@@ -224,3 +224,71 @@ def enrich_suggestions_concurrently(
         reverse=True,
     )
     return enriched
+
+
+def locate_exact_board(
+    board: SuggestedBoard,
+    profile: RiderProfile,
+    get_json: Callable[[str], object] = _get_json,
+) -> tuple[list[SuggestedBoard], bool]:
+    region = normalise_region(profile.region)
+    if not region:
+        return [], False
+    model_id = board.board_model_id
+    if model_id is None:
+        brand_id = _find_brand_id(board.brand, get_json)
+        model_id = _find_model_id(brand_id, board.model, get_json) if brand_id else None
+    if model_id is None:
+        return [], False
+
+    requested_construction = _key(profile.requested_construction)
+    requested_length = _key(profile.requested_length)
+    target_volume = profile.target_volume_litres
+    sizes = []
+    for construction_row in get_json(f"/api/constructions/{model_id}") or []:
+        construction = str(construction_row.get("construction") or "")
+        if requested_construction and requested_construction not in _key(construction):
+            continue
+        for size in get_json(f"/api/sizes/{model_id}/{quote(construction, safe='')}") or []:
+            if requested_length and _key(size.get("length")) != requested_length:
+                continue
+            try:
+                volume_delta = abs(float(size.get("volumeLitres")) - target_volume) if target_volume is not None else 0
+            except (TypeError, ValueError):
+                volume_delta = 99
+            if target_volume is not None and volume_delta > 1.0:
+                continue
+            sizes.append((volume_delta, size))
+    sizes.sort(key=lambda item: (item[0], item[1].get("boardSizeId") or 0))
+
+    exact_rows, close_rows = [], []
+    for _, size in sizes[:4]:
+        payload = get_json("/api/search?" + urlencode({"boardSizeId": size["boardSizeId"], "region": region}))
+        if normalise_region(payload.get("regionCode")) != region:
+            continue
+        exact_rows.extend(("Manufacturer Direct", row) for row in payload.get("directManufacturerMatches", []) if row.get("isAvailable") is not False)
+        exact_rows.extend((row.get("retailerName") or "Retailer", row) for row in payload.get("exactRetailerMatches", []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"})
+        close_rows.extend((row.get("retailerName") or "Retailer", row) for row in payload.get("closeRetailerMatches", []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"})
+
+    selected_rows, exact = (exact_rows, True) if exact_rows else (close_rows, False)
+    output, seen = [], set()
+    for source_name, row in selected_rows:
+        url = row.get("productUrl")
+        if not url or url in seen:
+            continue
+        seen.add(url)
+        price = None
+        if row.get("priceAmount") is not None and row.get("priceCurrency"):
+            price = f"{float(row['priceAmount']):g} {row['priceCurrency']}"
+        output.append(board.model_copy(update={
+            "category": "Exact stock" if exact else "Close stock",
+            "why_it_fits": f"{'Exact' if exact else 'Close'} verified {region} match from {source_name}",
+            "available_count": 1,
+            "manufacturer_direct_count": 1 if source_name == "Manufacturer Direct" else 0,
+            "retailer_count": 0 if source_name == "Manufacturer Direct" else 1,
+            "example_live_source_url": url, "price_range": price, "region": region,
+            "suggested_size": " | ".join(filter(None, [row.get("length"), f"{row.get('volumeLitres'):g}L" if row.get("volumeLitres") is not None else None, row.get("construction")])),
+        }))
+        if len(output) >= 8:
+            break
+    return output, exact

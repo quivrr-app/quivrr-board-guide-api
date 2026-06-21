@@ -51,6 +51,8 @@ def _extract_age(text: str) -> int | None:
 
 
 def _extract_fitness(text: str) -> str | None:
+    if re.search(r"\bsurf(?:ing)?\s+(?:every\s*day|everyday|daily)\b", text):
+        return "High"
     for token, label in [
         ("low fitness", "Low"), ("not very fit", "Low"), ("poor fitness", "Low"),
         ("high fitness", "High"), ("very fit", "High"), ("strong paddler", "High"),
@@ -74,6 +76,8 @@ def _extract_frequency(text: str) -> float | None:
         return 2.0
     if "weekly" in text or "once a week" in text:
         return 1.0
+    if "weekend surfer" in text or "surf on weekends" in text:
+        return 1.5
     return None
 
 
@@ -125,6 +129,7 @@ def _extract_wave_size(text: str) -> str | None:
 
 def _extract_wave_type(text: str) -> str | None:
     options = {
+        "beachie": "Beach Break",
         "beach": "Beach Break",
         "reef": "Reef Break",
         "point": "Point Break",
@@ -140,7 +145,7 @@ def _extract_wave_type(text: str) -> str | None:
 
 
 def _extract_wave_power(text: str) -> str | None:
-    if any(token in text for token in ["small waves", "weak waves", "soft waves", "gutless"]):
+    if any(token in text for token in ["small waves", "weak waves", "soft waves", "gutless", "mushy"]):
         return "Weak"
     if any(token in text for token in ["powerful waves", "heavy waves", "punchy"]):
         return "Powerful"
@@ -192,6 +197,20 @@ def _extract_construction_preference(text: str) -> str | None:
     return "carbon_or_epoxy" if any(token in text for token in carbon_epoxy) else None
 
 
+def _extract_requested_construction(text: str) -> str | None:
+    constructions = [
+        "carbotune", "spinetek", "spine-tek", "hyfi", "helium", "ibolic", "i-bolic",
+        "futureflex", "lightspeed", "black sheep", "lib-tech", "dark arts", "xtr", "pu", "eps",
+    ]
+    found = next((value for value in constructions if re.search(rf"\b{re.escape(value)}\b", text)), None)
+    return found.replace("-", " ").title() if found else None
+
+
+def _extract_requested_length(text: str) -> str | None:
+    match = re.search(r"\b([4-9])\s*['’]\s*(\d{1,2})(?:\s*(?:\"|in))?\b", text)
+    return f"{match.group(1)}'{int(match.group(2))}" if match else None
+
+
 def _extract_region(text: str, explicit_region: str | None = None) -> str | None:
     aliases = [
         (r"\b(?:europe|eu)\b", "EU"),
@@ -239,6 +258,8 @@ def extract_profile(message: str, region: str | None = None) -> RiderProfile:
         wave_power=_extract_wave_power(text),
         goal=_extract_goal(text),
         construction_preference=_extract_construction_preference(text),
+        requested_construction=_extract_requested_construction(text),
+        requested_length=_extract_requested_length(text),
     )
 
 

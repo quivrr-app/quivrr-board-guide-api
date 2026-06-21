@@ -5,6 +5,7 @@ from app.inventory_client import normalise_region
 from app.models import BodhiRecommendation, RiderProfile, SuggestedBoard, VolumeGuidance
 from app.rider_fit import recommend_rider_fit
 from app.daily_driver_taxonomy import daily_driver_lane
+from app.board_expert_matrix import find_matrix_board
 
 
 REGION_NAMES = {"AU": "Australian", "EU": "European", "ID": "Indonesian"}
@@ -176,7 +177,13 @@ def find_requested_board(message: str) -> dict | None:
     for board in load_graph().get("boards", []):
         brand_key, model_key = board_key(board.get("brand"), board.get("model"))
         model_present = f" {model_key} " in f" {text} "
-        brand_present = f" {brand_key} " in f" {text} "
+        brand_aliases = {
+            "js industries": ["js"], "channel islands": ["ci"],
+            "chemistry surfboards": ["chemistry"], "dms surfboards": ["dms"],
+        }
+        brand_present = f" {brand_key} " in f" {text} " or any(
+            f" {alias} " in f" {text} " for alias in brand_aliases.get(brand_key, [])
+        )
         if model_key and model_present and (brand_present or len(model_key.split()) >= 2):
             matches.append((len(model_key), board))
     return max(matches, key=lambda item: item[0])[1] if matches else None
@@ -298,6 +305,8 @@ def comparison_reply(message: str) -> str:
     left, right = boards[:2]
     comparison = compare_boards(load_graph(), left["brand"], left["model"], right["brand"], right["model"])
     left_data, right_data = comparison["left"], comparison["right"]
+    left_expert = find_matrix_board(left["brand"], left["model"])
+    right_expert = find_matrix_board(right["brand"], right["model"])
     lane_note = ""
     left_lane = daily_driver_lane(left["brand"], left["model"])
     right_lane = daily_driver_lane(right["brand"], right["model"])
@@ -308,13 +317,21 @@ def comparison_reply(message: str) -> str:
             f" For good waves, {performance['brand']} {performance['model']} is the stronger performance daily-driver pick; "
             f"{hybrid['brand']} {hybrid['model']} is the easier-paddling, more forgiving hybrid."
         )
+    expert_note = ""
+    if left_expert and right_expert and "good wave" in message.lower():
+        better = left if left_expert["goodWaveScore"] >= right_expert["goodWaveScore"] else right
+        easier = left if left_expert["forgivenessScore"] >= right_expert["forgivenessScore"] else right
+        expert_note = (
+            f" For good-wave performance, the matrix favours {better['brand']} {better['model']}; "
+            f"{easier['brand']} {easier['model']} is the more forgiving option."
+        )
     return (
         f"{left['brand']} {left['model']} is a {left_data['category']['primaryCategory'].replace('_', ' ')} "
         f"with {left_data['paddlingBias']} paddle help, {left_data['performanceBias']} performance bias, and "
         f"{left_data['forgiveness']} forgiveness. {right['brand']} {right['model']} is a "
         f"{right_data['category']['primaryCategory'].replace('_', ' ')} with {right_data['paddlingBias']} paddle help, "
         f"{right_data['performanceBias']} performance bias, and {right_data['forgiveness']} forgiveness. "
-        f"{lane_note} Tell me your litres and region and I can check which one is actually available."
+        f"{lane_note}{expert_note} Tell me your litres and region if you want me to check availability."
     )
 
 

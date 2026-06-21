@@ -13,8 +13,9 @@ from app.conversation_flow import (
 )
 from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
 from app.intent_router import route_intent
+from app.board_expert_matrix import recommend_from_matrix
 from app.model_recommendation_engine import recommend_models
-from app.inventory_client import enrich_suggestions_with_inventory
+from app.inventory_client import enrich_suggestions_with_inventory, locate_exact_board
 from app.models import BoardGuideRequest, BoardGuideResponse
 from app.profile_engine import (
     build_recommendation,
@@ -69,8 +70,41 @@ def board_guide_chat(request: BoardGuideRequest):
     intent = route_intent(request.message)
     category = extract_category(request.message, profile.preferred_board_type)
     requested_board = find_requested_board(request.message)
+    if intent == "exact_board_location_request" and not requested_board:
+        for item in reversed(request.conversation):
+            if item.role == "user":
+                requested_board = find_requested_board(item.content)
+                if requested_board:
+                    break
 
-    if intent == "volume_advice_request":
+    if intent == "exact_board_location_request" and not profile.region:
+        suggested_boards = []
+        reply = "I’ve got the board. Should I check Australia, Europe, or Indonesia?"
+        questions = ["Which region should I search: Australia, Europe, or Indonesia?"]
+    elif intent == "exact_board_location_request" and not requested_board:
+        suggested_boards = []
+        reply = "Tell me the brand and model you want located, and I’ll check verified stock in that region."
+        questions = []
+    elif intent == "exact_board_location_request":
+        base = suggestions_for_board(requested_board)[:1]
+        suggested_boards, exact = locate_exact_board(base[0], profile) if base else ([], False)
+        if suggested_boards:
+            source_names = []
+            if any(board.manufacturer_direct_count for board in suggested_boards):
+                source_names.append("manufacturer-direct")
+            if any(board.retailer_count for board in suggested_boards):
+                source_names.append("retailer")
+            reply = (
+                f"I found {len(suggested_boards)} {'exact' if exact else 'close'} verified {profile.region} match(es) "
+                f"for {requested_board['brand']} {requested_board['model']} across {' and '.join(source_names)} stock."
+            )
+        else:
+            reply = (
+                f"I can’t see that exact {requested_board['brand']} {requested_board['model']} in {profile.region} right now. "
+                "I haven’t invented a substitute link."
+            )
+        questions = []
+    elif intent == "volume_advice_request":
         suggested_boards = []
         reply = volume_advice_reply(profile)
         questions = []
@@ -160,8 +194,13 @@ def board_guide_chat(request: BoardGuideRequest):
                     f"alternative in {requested[0].region if requested else profile.region} right now."
                 )
     elif intent == "alternative_request":
-        suggested_boards = []
-        reply = "Tell me the exact board model and region, and I’ll check live graph alternatives."
+        if requested_board:
+            suggested_boards = suggestions_for_board(requested_board, ["similarBoards", "alternativeBoards"])
+            names = ", ".join(f"{board.brand} {board.model}" for board in suggested_boards[:4])
+            reply = f"Boards in the closest canonical design lanes to {requested_board['brand']} {requested_board['model']} include {names}. Tell me a region only if you want verified stock."
+        else:
+            suggested_boards = []
+            reply = "Tell me the exact board model and I’ll compare its canonical design lane with similar boards."
         questions = []
     elif not has_intake_signal(profile):
         suggested_boards = []
@@ -174,7 +213,7 @@ def board_guide_chat(request: BoardGuideRequest):
         wants_performance = "performance" in " ".join(filter(None, [profile.desired_feel, profile.goal])).lower()
         if profile.current_board and wants_performance:
             performance_profile = profile.model_copy(update={"preferred_board_type": "Daily Driver"})
-            expert_lane = recommend_models(performance_profile, limit=8)
+            expert_lane = recommend_from_matrix(performance_profile, limit=8)
             graph_lane = graph_suggestions(profile, "upgradeBoards")
             seen = set()
             suggested_boards = []
@@ -185,7 +224,7 @@ def board_guide_chat(request: BoardGuideRequest):
                     seen.add(key)
             suggested_boards = enrich_suggestions_with_inventory(suggested_boards, profile)
         else:
-            suggested_boards = recommend_models(profile)
+            suggested_boards = recommend_from_matrix(profile)
             suggested_boards = enrich_suggestions_with_inventory(suggested_boards, profile)
         suggested_boards = [board for board in suggested_boards if board.available_count > 0]
         reply = recommendation_reply(profile, guidance, suggested_boards) if guidance else opening_message(profile.region)

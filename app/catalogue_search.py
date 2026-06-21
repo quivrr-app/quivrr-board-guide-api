@@ -6,6 +6,7 @@ from app.board_graph_engine import board_key, load_graph
 from app.inventory_client import enrich_suggestions_concurrently, normalise_region
 from app.models import RiderProfile, SuggestedBoard
 from app.daily_driver_taxonomy import daily_driver_lane
+from app.board_expert_matrix import recommend_from_matrix
 
 
 CATEGORY_ALIASES = {
@@ -81,25 +82,13 @@ def _to_suggestion(board: dict, category: str, target: float | None) -> Suggeste
 
 
 def category_candidates(category: str, target: float | None, limit: int = 20) -> list[SuggestedBoard]:
-    boards = [
-        board for board in load_graph().get("boards", [])
-        if board.get("boardModelId") and _category_matches(board, category)
-    ]
-    boards.sort(key=lambda board: (
-        _volume_distance(board, target),
-        {"high": 0, "medium": 1, "low": 2}.get(board["taxonomy"].get("confidence"), 3),
-        board["brand"], board["model"],
-    ))
-    selected, brand_counts = [], {}
-    for board in boards:
-        key = board_key(board["brand"], "")[0]
-        if brand_counts.get(key, 0) >= 2:
-            continue
-        selected.append(board)
-        brand_counts[key] = brand_counts.get(key, 0) + 1
-        if len(selected) == limit:
-            break
-    return [_to_suggestion(board, category, target) for board in selected]
+    label = {
+        "performance_daily_driver": "performance daily driver",
+        "performance_shortboard": "performance shortboard",
+        "mid_length": "mid length",
+        "step_up": "step up",
+    }.get(category, category.replace("_", " "))
+    return recommend_from_matrix(RiderProfile(preferred_board_type=label, target_volume_litres=target), limit=limit)
 
 
 def search_live_category(profile: RiderProfile, category: str, limit: int = 20) -> list[SuggestedBoard]:
