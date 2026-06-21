@@ -126,11 +126,8 @@ def main() -> int:
                     score, shared = similarity(board, candidate)
                     additions.append(edge(board, candidate, relation, max(score, 85), shared, curated=True))
                 added = {identity(item) for item in additions}
-                deterministic = [
-                    item for item in relations[relation]
-                    if identity(item) not in added and item["confidence"] != "low"
-                ]
-                relations[relation] = (additions + deterministic)[:8]
+                if additions:
+                    relations[relation] = additions[:8]
         output.append({"brand": board["brand"], "model": board["model"], "boardModelId": board.get("boardModelId"), "relationships": relations})
     for requested in overrides:
         if (key(requested["brand"]), key(requested["model"])) not in board_map:

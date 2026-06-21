@@ -1,30 +1,30 @@
 {
   "totalModels": 513,
   "modelsWithSimilarBoards": 512,
-  "modelsWithUpgradeBoards": 509,
-  "modelsWithMoreForgivingBoards": 227,
-  "modelsWithMorePerformanceBoards": 510,
+  "modelsWithUpgradeBoards": 512,
+  "modelsWithMoreForgivingBoards": 228,
+  "modelsWithMorePerformanceBoards": 512,
   "modelsWithWaveSpecificRelationships": 513,
   "confidenceDistribution": {
     "high": 134,
-    "low": 18946,
-    "medium": 17479
+    "low": 19864,
+    "medium": 17254
   },
   "relationshipCoverage": {
     "similarBoards": 512,
-    "upgradeBoards": 509,
-    "downgradeBoards": 223,
-    "moreForgivingBoards": 227,
-    "morePerformanceBoards": 510,
-    "betterSmallWaveBoards": 465,
-    "betterGoodWaveBoards": 398,
-    "betterPointBreakBoards": 506,
-    "betterBeachBreakBoards": 512,
-    "betterReefBoards": 476,
-    "closestFishAlternatives": 501,
-    "closestDailyDriverAlternatives": 502,
-    "closestStepUpAlternatives": 488,
-    "closestGrovellerAlternatives": 488
+    "upgradeBoards": 512,
+    "downgradeBoards": 227,
+    "moreForgivingBoards": 228,
+    "morePerformanceBoards": 512,
+    "betterSmallWaveBoards": 473,
+    "betterGoodWaveBoards": 412,
+    "betterPointBreakBoards": 513,
+    "betterBeachBreakBoards": 513,
+    "betterReefBoards": 485,
+    "closestFishAlternatives": 513,
+    "closestDailyDriverAlternatives": 513,
+    "closestStepUpAlternatives": 513,
+    "closestGrovellerAlternatives": 513
   },
   "curatedSourceBoardsMatched": 26,
   "unmatchedCuratedSourceBoards": [
