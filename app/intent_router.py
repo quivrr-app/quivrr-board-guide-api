@@ -7,6 +7,7 @@ INTENTS = {
     "inventory_count_question", "board_search_request", "surfer_fit_request",
     "alternative_request", "comparison_request", "general_board_question",
     "site_help_question", "volume_advice_request", "exact_board_location_request",
+    "relationship_request",
 }
 
 
@@ -14,6 +15,8 @@ def route_intent(message: str) -> str:
     text = re.sub(r"\s+", " ", (message or "").strip().lower())
     if not text:
         return "surfer_fit_request"
+    if re.search(r"\b(?:more performance|more forgiving|sharper|more responsive)\s+than\b|\b(?:similar to|alternative to)\b|\blike .+ but better for\b|\bi ride .+ but want .+(?:sharper|performance|forgiving)", text):
+        return "relationship_request"
     if re.search(r"\b(?:how do i|how can i|help me)\s+(?:use|search|find|navigate)\b|\bhow does (?:quivrr|the site) work\b|\bwhere (?:do i|can i) (?:search|find)\b", text):
         return "site_help_question"
     if re.search(r"\b(?:compare|comparison|versus|vs\.?|better\b.+\bthan|difference between)\b", text):

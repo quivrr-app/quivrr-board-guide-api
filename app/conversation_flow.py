@@ -6,6 +6,7 @@ from app.models import BodhiRecommendation, RiderProfile, SuggestedBoard, Volume
 from app.rider_fit import recommend_rider_fit
 from app.daily_driver_taxonomy import daily_driver_lane
 from app.board_expert_matrix import find_matrix_board
+from app.volume_engine_v2 import fish_volume_bands, recommend_volume_v2
 
 
 REGION_NAMES = {"AU": "Australian", "EU": "European", "ID": "Indonesian"}
@@ -58,15 +59,14 @@ def enough_for_recommendations(profile: RiderProfile) -> bool:
 
 
 def volume_guidance(profile: RiderProfile) -> VolumeGuidance | None:
-    fit = recommend_rider_fit(profile)
+    fit = recommend_volume_v2(profile)
     if fit is None:
         return None
     return VolumeGuidance(
-        minimumLitres=fit.volume_low,
-        maximumLitres=fit.volume_high,
-        label=fit.volume_range_label,
-        recommendedCategory=fit.board_category,
-        reasoning=fit.explanation,
+        minimumLitres=fit.minimum_volume, maximumLitres=fit.maximum_volume,
+        targetLitres=fit.target_volume, label=fit.volume_band_label,
+        recommendedCategory=fit.board_lane.replace("_", " ").title(),
+        reasoning="; ".join(fit.reasoning), confidence=fit.confidence, boardLane=fit.board_lane,
     )
 
 
@@ -74,6 +74,16 @@ def volume_advice_reply(profile: RiderProfile) -> str:
     if not profile.weight_kg:
         return "Tell me your weight and surfing level and I’ll give you a useful litre range rather than a guess."
     ability = (profile.ability or "intermediate").lower()
+    if (profile.preferred_board_type or "").lower() == "fish":
+        fit = recommend_volume_v2(profile)
+        bands = fish_volume_bands(profile)
+        reply = (
+            f"At {profile.weight_kg:g}kg, {ability}, I’d use {fit.volume_band_label} as the overall {fit.board_lane.replace('_', ' ')} range. "
+            f"Traditional fish: {bands['traditional_fish'].volume_band_label}; performance fish: {bands['performance_fish'].volume_band_label}; "
+            f"point-break fish: {bands['point_break_fish'].volume_band_label}. "
+            "Fish boards often carry more foam differently, so 33L in a fish can feel very different from 33L in a shortboard."
+        )
+        return reply
     frequent = (profile.surf_frequency_per_week or 0) >= 3
     if ability in {"advanced", "expert"} and frequent:
         if profile.weight_kg == 75:
@@ -140,8 +150,9 @@ def partial_volume_reply(profile: RiderProfile, acknowledge_memory: bool = False
 
 def fish_advice_reply(profile: RiderProfile, canonical: list[SuggestedBoard] | None = None,
                       live: list[SuggestedBoard] | None = None) -> str:
-    low = round(float(profile.weight_kg or 75) * .41)
-    high = round(float(profile.weight_kg or 75) * .46)
+    volume_profile = profile if profile.weight_kg else profile.model_copy(update={"weight_kg": 75})
+    fit = recommend_volume_v2(volume_profile, "point_break_fish")
+    low, high = fit.minimum_volume, fit.maximum_volume
     base = (
         f"Got it. I’m treating you as {(profile.ability or 'intermediate').lower()}. "
         f"For a fish at {profile.weight_kg or 75:g}kg, I’d start around {low:g} to {high:g}L depending on how cruisy you want it. "

@@ -95,7 +95,7 @@ def _extract_board_type(text: str) -> str | None:
 def _extract_desired_feel(text: str) -> str | None:
     options = [
         "easier paddle", "more performance", "more forgiving", "faster in weak waves",
-        "hold in bigger waves",
+        "hold in bigger waves", "sharper", "more responsive",
     ]
     found = [value for value in options if value in text]
     return ", ".join(found) or None
@@ -237,6 +237,14 @@ def _extract_region(text: str, explicit_region: str | None = None) -> str | None
 def _extract_current_board(text: str) -> str | None:
     if not re.search(r"\b(?:i ride|i'm riding|im riding|my current board|currently ride)\b", text):
         return None
+    aliases = {
+        "hypto": "Haydenshapes Hypto Krypto", "rnf": "Lost RNF 96",
+        "seaside": "Firewire Seaside", "monsta": "JS Industries Monsta",
+        "phantom": "Pyzel Phantom",
+    }
+    for alias, canonical in aliases.items():
+        if re.search(rf"\b{alias}\b", text):
+            return canonical
     matches = []
     for board in load_graph().get("boards", []):
         brand = str(board.get("brand") or "")

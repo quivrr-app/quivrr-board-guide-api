@@ -38,3 +38,20 @@ their outlines look related. Bodhi uses those sub-lanes to form advice before st
 Canonical recommendations and availability are separate statements. A strong canonical fit may be
 named when no regional stock is found, but it must be labelled as unavailable. Only a successful
 region-scoped inventory lookup can create a verified live card or direct purchase link.
+
+## Relationship evidence precedence
+
+Board-to-board relationships use the same evidence boundary:
+
+1. explicit relationships in `board_relationship_overrides.json`;
+2. shared expert-matrix lanes and reviewed model scores;
+3. deterministic similarity and directional score differences.
+
+Curated edges are high confidence only when both source and target exist in the canonical matrix.
+Requested iconic names missing from that matrix are reported by the Phase 9 audit rather than being
+silently invented. Generated edges remain medium or low confidence and are bounded to prevent the
+graph from becoming an indiscriminate list of every vaguely similar surfboard.
+
+Volume guidance is not an inventory fact and never changes regional stock. The v2 engine uses global
+board-lane knowledge and user-provided rider context; inventory is queried only after a canonical
+relationship or board fit has been selected and only when the user supplies a region.

@@ -219,6 +219,56 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertIn("can’t see a matching canonical model", body["reply"])
         self.assertEqual(body["recommendations"], [])
 
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_relationship_without_region_is_canonical_only(self, inventory):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "What is more performance than a Hypto Krypto?",
+        }).json()
+        self.assertEqual(body["intent"], "relationship_request")
+        self.assertIn("Pyzel Phantom", body["reply"])
+        self.assertIn("canonical board advice", body["reply"])
+        self.assertEqual(body["recommendations"], [])
+        inventory.assert_not_called()
+
+    def test_monsta_more_forgiving_uses_relationship_graph(self):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "What is more forgiving than a Monsta?",
+        }).json()
+        self.assertEqual(body["intent"], "relationship_request")
+        self.assertIn("Pyzel Phantom", body["reply"])
+        self.assertIn("JS Industries Xero Gravity", body["reply"])
+
+    def test_rnf_point_break_relationship(self):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "What is like a Lost RNF 96 but better for point breaks?",
+        }).json()
+        self.assertEqual(body["intent"], "relationship_request")
+        self.assertIn("Album Lightbender", body["reply"])
+        self.assertIn("Christenson Ocean Racer", body["reply"])
+
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
+        row.model_copy(update={"available_count": 1, "retailer_count": 1, "region": profile.region,
+                               "example_live_source_url": f"https://example.test/{profile.region.lower()}/{index}"})
+        for index, row in enumerate(rows)
+    ])
+    def test_relationship_with_region_checks_only_that_region(self, inventory):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I ride a Seaside but want something sharper in Europe.",
+        }).json()
+        inventory.assert_called_once()
+        self.assertTrue(body["recommendations"])
+        self.assertTrue(all(row["region"] == "EU" for row in body["recommendations"]))
+        self.assertTrue(all("/au/" not in row["exampleProductUrl"] for row in body["recommendations"]))
+
+    def test_fish_volume_question_uses_lane_specific_bands(self):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I'm 76kg, 46, fit, intermediate and want a fish for point breaks. What volume should I ride?",
+        }).json()
+        self.assertIn("31 to 35L", body["reply"])
+        self.assertIn("Traditional fish: 32 to 36L", body["reply"])
+        self.assertIn("performance fish: 30.5 to 34L", body["reply"])
+        self.assertIn("33L in a fish can feel very different", body["reply"])
+
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
         row.model_copy(update={"available_count": 1, "retailer_count": 1, "region": profile.region})
         for row in rows

@@ -62,9 +62,12 @@ class VolumeGuidance(BaseModel):
 
     minimum_litres: float = Field(alias="minimumLitres")
     maximum_litres: float = Field(alias="maximumLitres")
+    target_litres: float | None = Field(default=None, alias="targetLitres")
     label: str
     recommended_category: str = Field(alias="recommendedCategory")
     reasoning: str
+    confidence: str | None = None
+    board_lane: str | None = Field(default=None, alias="boardLane")
 
 
 class BodhiRecommendation(BaseModel):

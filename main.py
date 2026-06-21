@@ -14,6 +14,9 @@ from app.conversation_flow import (
 from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
 from app.intent_router import route_intent
 from app.board_expert_matrix import recommend_from_matrix
+from app.board_relationship_graph import (
+    relationship_reply, relationship_suggestions, relationship_type, source_board_from_message,
+)
 from app.model_recommendation_engine import recommend_models
 from app.inventory_client import enrich_suggestions_with_inventory, locate_exact_board
 from app.models import BoardGuideRequest, BoardGuideResponse
@@ -126,6 +129,21 @@ def board_guide_chat(request: BoardGuideRequest):
     elif intent == "comparison_request":
         suggested_boards = []
         reply = comparison_reply(request.message)
+        questions = []
+    elif intent == "relationship_request":
+        source_board = source_board_from_message(request.message, profile)
+        relation = relationship_type(request.message)
+        if not source_board or not relation:
+            suggested_boards = []
+            reply = "Tell me the source board and whether you want something sharper, more forgiving, or better for particular waves."
+        else:
+            canonical_boards = relationship_suggestions(source_board, relation)
+            if profile.region:
+                checked = enrich_suggestions_with_inventory(canonical_boards, profile)
+                suggested_boards = [row for row in checked if row.available_count > 0]
+            else:
+                suggested_boards = []
+            reply = relationship_reply(source_board, relation, canonical_boards, suggested_boards, profile.region)
         questions = []
     elif intent == "inventory_count_question" and category and profile.region:
         suggested_boards = search_live_category(profile, category)

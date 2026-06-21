@@ -430,3 +430,37 @@ say that it cannot verify a canonical identity or live link.
 Phase 8 coverage is recorded in `app/knowledge/audits/phase8_expert_override_audit.json` and its
 CSV companion. The audit reports curated override counts, confidence, lane coverage and the next
 low-confidence models requiring review.
+
+## Phase 9 relationship graph
+
+`board_relationship_graph.json` is a global, deterministic model-to-model graph built from curated
+Quivrr relationships first, expert-matrix lanes and scores second, and bounded similarity scoring
+third. It keeps distinct relationships for similarity, upgrades, forgiveness, performance,
+wave-type improvements and the closest fish, daily-driver, step-up and groveller alternatives.
+Every edge records its relationship type, reason, confidence, source, shared lanes and differing
+lanes. Lists are capped, self-edges are rejected and low-confidence generated edges remain labelled.
+
+Natural questions such as “more forgiving than a Monsta” or “like an RNF 96 but better for points”
+resolve the source model and relationship before any stock lookup. Without a region Bodhi answers
+canonically and offers to check stock. With AU, EU or ID supplied, the candidates pass through the
+existing verified regional inventory adapter; only live results become purchase cards, while useful
+unavailable canonical candidates remain explicit in prose.
+
+## Rider Volume Engine v2
+
+Volume Engine v2 selects a starting band by board lane rather than applying one universal litres-per-
+kilogram range. Performance shortboards, daily drivers, traditional fish, performance fish,
+point-break fish, cruisy fish, grovellers and step-ups each use bounded deterministic factors. Ability,
+fitness, frequency, waves and desired feel make small explainable adjustments. Age adds foam only
+when paired with low fitness/frequency or a request for forgiveness. A supplied current-board volume
+partly anchors the target instead of being ignored.
+
+The output contains minimum, target and maximum volume, a band label, board lane, reasoning and
+confidence. Litres remain guidance: a fish can distribute 33L very differently from a performance
+shortboard of the same stated volume.
+
+Regenerate Phase 9 graph and audit outputs with:
+
+```powershell
+python scripts/generate_board_relationship_graph.py
+```
