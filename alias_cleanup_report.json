@@ -1,0 +1,23 @@
+{
+  "generatedAtUtc": "2026-06-22T06:35:06.282321+00:00",
+  "file": "app\\knowledge\\curated\\board_relationship_overrides.json",
+  "removedLegacyAliases": [
+    {
+      "brand": "JS Industries",
+      "model": "Red Baron",
+      "reason": "Curated alias does not match canonical catalogue. Generated relationship coverage remains available."
+    },
+    {
+      "brand": "DHD",
+      "model": "Golden Child",
+      "reason": "Curated alias does not match canonical catalogue. Generated relationship coverage remains available."
+    },
+    {
+      "brand": "Christenson",
+      "model": "Fish",
+      "reason": "Curated alias does not match canonical catalogue. Generated relationship coverage remains available."
+    }
+  ],
+  "removedCount": 3,
+  "note": "These curated aliases did not match canonical catalogue names. Sprint 3 generated relationships still cover the models where canonical profiles exist."
+}

@@ -137,3 +137,40 @@ Recommendation ranking considers board/category/volume fit first, then verified 
 7. Full Bodhi recommendation integration with live regional inventory.
 
 The phases are architectural workstreams rather than hard release boundaries; several are already implemented and continue to improve as catalogue coverage grows.
+
+<!-- BODHI_SPRINT3_RELATIONSHIPS_START -->
+## Bodhi Sprint 3 relationship graph
+
+Bodhi now uses a relationship graph across the canonical board catalogue to support surf shop style progression logic.
+
+Current capabilities:
+
+* Similar board recommendations
+* More performance and more forgiving alternatives
+* More paddle, step up and step down paths
+* Fish, twin, shortboard and wave specific alternatives
+* Current volume continuity, for example moving from a 29L Hypto into nearby performance options
+* Relationship follow ups, including stock checks against the recommended progression boards
+* Region safe Quivrr CTAs for Australia, Europe and Indonesia
+* Source product URLs retained separately from visible Quivrr search links
+
+The relationship layer is intentionally separate from SQL, inventory importers, MFA jobs and retailer jobs. It sits inside the Bodhi API knowledge layer and uses live inventory only when a card or stock action is requested.
+
+Sprint 3.1 cleanup removed three legacy curated aliases that did not match canonical catalogue names:
+
+* JS Industries Red Baron
+* DHD Golden Child
+* Christenson Fish
+
+Generated relationships still provide coverage where canonical board profiles exist.
+
+Key files:
+
+* `app/board_relationship_graph.py`
+* `app/knowledge/board_relationships.json`
+* `app/knowledge/curated/board_relationship_overrides.json`
+* `scripts/generate_board_relationship_graph.py`
+* `tests/test_sprint3_relationships.py`
+* `tests/test_sprint3_alias_integrity.py`
+<!-- BODHI_SPRINT3_RELATIONSHIPS_END -->
+
