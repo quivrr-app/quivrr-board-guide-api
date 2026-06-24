@@ -1,0 +1,71 @@
+{
+  "brand": "Pukas",
+  "source": "official_manufacturer_pages_snapshot",
+  "descriptions": [
+    {
+      "model": "Pukas Fish",
+      "official_product_url": "https://pukassurf.com/en/surfboards/pukas-fish/",
+      "description": "An old-school fish adapted to modern surfing. With an outline reminiscent of a classic old-school fish but slightly narrower throughout, this board offers enhanced agility for executing manoeuvres in the pocket. A more pronounced rocker than a standard fish makes vertical manoeuvres easier. It runs a smooth full concave through the midsection into a V-bottom through the tail with a subtle double concave between the fins. Ultra-low rails help the board slice cleanly through the wave face. Best paired with keel fins, it is ideal for surfers of all skill levels and a wide range of conditions."
+    },
+    {
+      "model": "Pukas Mustache",
+      "official_product_url": "https://pukassurf.com/en/surfboards/pukas-mustache/",
+      "description": "The Mustache is a new-school fish performance concept built around a twin or 2+1 setup. It blends fish speed with high-performance surfboard control through a wider nose outline, smooth taper into the tail, and a distinctive winged mustache swallow tail that sharpens rail engagement and vertical surfing. Recommended for intermediate to advanced surfers in 2-5ft waves, it can be ridden as a 2+1, twin or thruster."
+    },
+    {
+      "model": "Pukas Easy Mood",
+      "official_product_url": "https://pukassurf.com/en/surfboards/pukas-easy-mood/",
+      "description": "Easy Mood is the easiest member of the Mood family and is designed as a step-down to ride around two inches shorter than an everyday performance board. Its curved outline, generous nose area and wide tail help it work in softer conditions without giving away performance. A super deep full concave keeps speed constant, while a lazy rocker balances ease and response. Well-distributed chest thickness improves paddling, wave catching and speed generation, making it a user-friendly performance board for all surfer types once the volume is matched correctly."
+    },
+    {
+      "model": "Pukas Beachy Mood",
+      "official_product_url": "https://pukassurf.com/en/surfboards/pukas-beachy-mood/",
+      "description": "Beachy Mood is a daily surf companion built for easy, versatile performance surfing, especially in beach breaks. It uses a subtly curved outline that is slightly wider than high-performance pro dimensions, plus a lazy rocker that increases water contact and natural speed. The bottom runs a medium-depth single concave into double concave between the fins with a soft tail exit, helping rail-to-rail transitions stay smooth while holding speed through flatter sections. It suits small to medium beach-break waves and is recommended one inch shorter than your usual daily board."
+    },
+    {
+      "model": "Pukas Performance Mood",
+      "official_product_url": "https://pukassurf.com/en/surfboards/performance-mood/",
+      "description": "Performance Mood carries the DNA of a high-performance surfboard and is aimed at surfers chasing vertical lines, rail surfing, speed and modern manoeuvres. It features a clean outline, medium nose and tail width, and a full concave bottom that channels energy toward the tail for quick, responsive direction changes with release and control. It is intended for hardcore surfers who want a modern high-performance board they can tune to their own skill level, preferences and waves."
+    },
+    {
+      "model": "Pukas Space Oddity",
+      "official_product_url": "https://pukassurf.com/en/surfboards/pukas-space-oddity/",
+      "description": "Space Oddity is pitched as a one-board quiver that combines paddle power, versatility, ease and high performance. A forward wide point and healthy nose width carry into a narrower tail, while extra chest thickness boosts paddling. The narrower round pin tail improves control and grip through rail-to-rail surfing. Tail rocker is more pronounced for bigger turns and steeper take-offs, while the medium nose rocker smooths entry. A soft full concave flows into V-bottom and double concave between the fins, and Pukas prefers it as a thruster. It is recommended for surfers of all skill levels across a wide range of conditions."
+    },
+    {
+      "model": "Pukas Magnetic",
+      "official_product_url": "https://pukassurf.com/en/surfboards/pukas-magnetic/",
+      "description": "Magnetic is a medium-to-long twin-fin design that blends alternative-board flow with new-school performance. It carries a smooth outline with minimal curve, low overall rocker and slightly more tail curve to keep the tail loose and easy to redirect. The bottom mixes concaves with V-bottom for clean hydrodynamics and a smooth efficient ride. It is aimed at surfers of all skill levels who want a longer twin for moderate to larger waves, including more powerful breaks."
+    },
+    {
+      "model": "Pukas Flying Diamond",
+      "official_product_url": "https://pukassurf.com/en/surfboards/pukas-flying-diamond/",
+      "description": "Flying Diamond takes Magnetic DNA and pushes it into a more performance-oriented twin. The outline has more curve and the rocker is medium, while the projected diamond tail keeps the board stable and flowing between turns. The board is designed for strong paddling, modern twin-fin feel and more projection through turns, making it a good fit for surfers who want an easy-riding board with lively performance across travel waves and beach breaks. Pukas recommends a few extra litres compared with your usual board."
+    },
+    {
+      "model": "Pukas Hyperlink",
+      "official_product_url": "https://pukassurf.com/en/surfboards/hyperlink/",
+      "description": "Hyperlink is an exclusive Pukas x Matt Biolos design for European waves. It is meant to be swift-turning, fast and responsive, evolving from the Link Two concept into a more racey hybrid-performance board. Entry rocker is lifted slightly, tail rocker is lowered, and extra stringer-line curve is added. The double concave is deepened, the deck flattened a touch, and the rails made steeper with a smaller bottom-rail radius. Added forward foil volume and a small beak in the nose help paddling, while the scooped deck in the tail adds rear-foot sensitivity."
+    },
+    {
+      "model": "Pegaso",
+      "official_product_url": "https://pukassurf.com/en/surfboards/pegaso/",
+      "description": "Pegaso is Chris Christenson's more performance-based twin fin, with a more vertical approach than the Chris Fish while keeping twin-fin glide and drive. It can be surfed aggressively in the pocket, still carries speed, and handles surf from 1ft to 5ft, from local beach breaks to Indo. Pukas positions it as a twin you can size 3-4 inches longer than a standard fish or 3-4 inches shorter than a daily performance shortboard."
+    },
+    {
+      "model": "Pukas Water Lion",
+      "official_product_url": "https://pukassurf.com/en/surfboards/pukas-water-lion/",
+      "description": "Water Lion is Chris Christenson's answer for solid European waves like Hossegor and Mundaka. It sits between a performance shortboard and a step-up, adding performance feel to a more powerful-wave board. It starts working in proper hollow head-high surf around 3ft and can be pushed into 6-8ft double-overhead conditions. The outline carries a fuller front end for paddling, while the baby squash tail is tuned for control in solid surf."
+    },
+    {
+      "model": "Pukas Water Lion Ultra",
+      "official_product_url": "https://pukassurf.com/en/surfboards/pukas-water-lion-ultra/",
+      "description": "Water Lion Ultra is the sharper, pro-level extension of the Water Lion for solid waves and skilled surfers. It keeps the Water Lion's good-wave DNA but narrows the brief toward the surfers chasing the X factor in serious sessions. Pukas frames it as a board that earned a place in Europe's better surf and then drew interest from pro surfers wanting a more performance-driven version."
+    },
+    {
+      "model": "Pukas All-Round Longboard",
+      "official_product_url": "https://pukassurf.com/en/surfboards/pukas-all-round-longboard/",
+      "description": "The All-Round Longboard is built to work in all wave conditions and stay easy to surf. It carries slightly more tail rocker for sharper, more vertical manoeuvres, blending into a smooth medium nose rocker. The bottom contour uses three transitions: a slightly accentuated full concave in the nose, a smooth middle section and a V-bottom with a more defined double concave through the tail. That layout is intended to keep the board moving efficiently while still supporting movement around the board."
+    }
+  ]
+}

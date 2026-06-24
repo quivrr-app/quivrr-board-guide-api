@@ -25,8 +25,8 @@ class BoardIntelligenceSourceAuditTests(unittest.TestCase):
         self.assertEqual(summary["constructionVariantRowsCollapsed"], 60)
         self.assertIn("global canonical board intelligence", summary["scope"])
         reconciliation = summary["descriptionCoverageReconciliation"]
-        self.assertEqual(reconciliation["modelsWithDescriptionAfterVariantMerge"], 430)
-        self.assertEqual(reconciliation["modelsMissingDescriptionAfterVariantMerge"], 83)
+        self.assertEqual(reconciliation["modelsWithDescriptionAfterVariantMerge"], 503)
+        self.assertEqual(reconciliation["modelsMissingDescriptionAfterVariantMerge"], 10)
         self.assertEqual(reconciliation["legacyVariantSelectionFalseMissing"], ["Lost Puddle Jumper HP"])
 
         with paths[1].open(encoding="utf-8", newline="") as handle:

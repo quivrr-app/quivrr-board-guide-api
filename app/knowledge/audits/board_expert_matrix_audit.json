@@ -1,37 +1,37 @@
 {
   "totalModels": 513,
   "modelsWithPrimaryLane": 513,
-  "modelsWithSecondaryLanes": 438,
+  "modelsWithSecondaryLanes": 443,
   "confidenceDistribution": {
     "high": 12,
-    "low": 214,
-    "medium": 287
+    "low": 204,
+    "medium": 297
   },
-  "modelsMissingWaveRange": 475,
-  "modelsMissingSurferFit": 448,
-  "modelsMissingDesignData": 93,
+  "modelsMissingWaveRange": 462,
+  "modelsMissingSurferFit": 442,
+  "modelsMissingDesignData": 43,
   "categoryDistribution": {
     "big_wave_step_up": 3,
     "cruisy_fish": 3,
     "cruisy_longboard": 1,
     "cruisy_mid_length": 6,
-    "fish": 20,
+    "fish": 25,
     "fish_hybrid": 3,
     "foil": 1,
     "forgiving_daily_driver": 8,
     "forgiving_groveller": 2,
-    "groveller": 10,
-    "gun": 3,
+    "groveller": 11,
+    "gun": 4,
     "high_performance_shortboard": 72,
     "high_volume_groveller": 3,
-    "hybrid_daily_driver": 194,
-    "longboard": 24,
-    "mid_length": 43,
+    "hybrid_daily_driver": 188,
+    "longboard": 23,
+    "mid_length": 41,
     "mid_length_twin": 2,
     "mini_mal": 2,
     "modern_fish": 6,
     "noserider": 1,
-    "performance_daily_driver": 19,
+    "performance_daily_driver": 20,
     "performance_fish": 8,
     "performance_groveller": 3,
     "performance_longboard": 1,
@@ -41,7 +41,7 @@
     "small_wave_fish": 2,
     "softboard": 6,
     "step_down_shortboard": 1,
-    "step_up": 18,
+    "step_up": 19,
     "step_up_mid_length": 1,
     "traditional_fish": 4,
     "travel_step_up": 1,
@@ -52,86 +52,6 @@
   },
   "top50LowConfidenceImportantModels": [
     {
-      "brand": "Album",
-      "model": "Bom Dia",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Album",
-      "model": "D'boa",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Album",
-      "model": "Delma",
-      "primaryLane": "mid_length",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Album",
-      "model": "Insanity",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Album",
-      "model": "ProtoAtypical",
-      "primaryLane": "high_performance_shortboard",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Album",
-      "model": "The End",
-      "primaryLane": "mid_length",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Album",
-      "model": "VBSM",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Album",
-      "model": "Veebee",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
       "brand": "Channel Islands",
       "model": "bonzer-shelter",
       "primaryLane": "hybrid_daily_driver",
@@ -293,107 +213,7 @@
     },
     {
       "brand": "Christenson",
-      "model": "Beausoleil",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Christenson",
-      "model": "Cafe Racer 2.0",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Christenson",
-      "model": "Easy Wind",
-      "primaryLane": "mid_length",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Christenson",
-      "model": "Hole Shot",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Christenson",
-      "model": "OP1",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Christenson",
-      "model": "OP3",
-      "primaryLane": "high_performance_shortboard",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Christenson",
       "model": "OP4",
-      "primaryLane": "high_performance_shortboard",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Christenson",
-      "model": "Osprey",
-      "primaryLane": "mid_length",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Christenson",
-      "model": "Submariner",
-      "primaryLane": "mid_length",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Christenson",
-      "model": "Surfer Rosa",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Christenson",
-      "model": "Waterlion",
       "primaryLane": "hybrid_daily_driver",
       "missingFields": [
         "waveRange",
@@ -422,116 +242,6 @@
       ]
     },
     {
-      "brand": "Pukas",
-      "model": "Pegaso",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Beachy Mood",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Easy Mood",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Flying Diamond",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Hyperlink",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Magnetic",
-      "primaryLane": "mid_length",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Mustache",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Performance Mood",
-      "primaryLane": "high_performance_shortboard",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Space Oddity",
-      "primaryLane": "mid_length",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Water Lion",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Water Lion Ultra",
-      "primaryLane": "hybrid_daily_driver",
-      "missingFields": [
-        "waveRange",
-        "surferFit",
-        "designData"
-      ]
-    },
-    {
       "brand": "Rusty",
       "model": "Blade",
       "primaryLane": "hybrid_daily_driver",
@@ -549,51 +259,276 @@
         "waveRange",
         "surferFit",
         "designData"
+      ]
+    },
+    {
+      "brand": "Rusty",
+      "model": "Miso",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit",
+        "designData"
+      ]
+    },
+    {
+      "brand": "Rusty",
+      "model": "Smoothie",
+      "primaryLane": "mid_length",
+      "missingFields": [
+        "waveRange",
+        "surferFit",
+        "designData"
+      ]
+    },
+    {
+      "brand": "Rusty",
+      "model": "Underdog",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit",
+        "designData"
+      ]
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Big S",
+      "primaryLane": "mid_length",
+      "missingFields": [
+        "waveRange",
+        "surferFit",
+        "designData"
+      ]
+    },
+    {
+      "brand": "Album",
+      "model": "Bom Dia",
+      "primaryLane": "high_performance_shortboard",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Album",
+      "model": "Freewing",
+      "primaryLane": "high_performance_shortboard",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Album",
+      "model": "Insanity",
+      "primaryLane": "high_performance_shortboard",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Album",
+      "model": "The End",
+      "primaryLane": "mid_length",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Album",
+      "model": "VBSM",
+      "primaryLane": "high_performance_shortboard",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "average-joe",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "big-happy",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "biscuit-bonzer",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bobby-quad",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bonzer-3d",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bunny-chow",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-2-pro",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-mid-twin-1",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-pro",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "dumpster-diver",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "free-scrubber-1",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "girabbit",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "high-5",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "hoglet",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "mikey-february-shorty",
+      "primaryLane": "high_performance_shortboard",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "neckbeard",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "neckbeard-2",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "og-flyer",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "pod-mod-1",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rocket-9",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
       ]
     }
   ],
   "top50ModelsNeedingCuratedReview": [
     {
-      "brand": "Album",
-      "model": "Bom Dia",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "D'boa",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "Delma",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "Insanity",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "ProtoAtypical",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "The End",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "VBSM",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Album",
-      "model": "Veebee",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
       "brand": "Channel Islands",
       "model": "bonzer-shelter",
       "reason": "waveRange, surferFit, designData"
@@ -675,57 +610,7 @@
     },
     {
       "brand": "Christenson",
-      "model": "Beausoleil",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Cafe Racer 2.0",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Easy Wind",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Hole Shot",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "OP1",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "OP3",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
       "model": "OP4",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Osprey",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Submariner",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Surfer Rosa",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Waterlion",
       "reason": "waveRange, surferFit, designData"
     },
     {
@@ -739,61 +624,6 @@
       "reason": "waveRange, surferFit, designData"
     },
     {
-      "brand": "Pukas",
-      "model": "Pegaso",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Beachy Mood",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Easy Mood",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Flying Diamond",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Hyperlink",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Magnetic",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Mustache",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Performance Mood",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Space Oddity",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Water Lion",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Water Lion Ultra",
-      "reason": "waveRange, surferFit, designData"
-    },
-    {
       "brand": "Rusty",
       "model": "Blade",
       "reason": "waveRange, surferFit, designData"
@@ -802,6 +632,151 @@
       "brand": "Rusty",
       "model": "Express",
       "reason": "waveRange, surferFit, designData"
+    },
+    {
+      "brand": "Rusty",
+      "model": "Miso",
+      "reason": "waveRange, surferFit, designData"
+    },
+    {
+      "brand": "Rusty",
+      "model": "Smoothie",
+      "reason": "waveRange, surferFit, designData"
+    },
+    {
+      "brand": "Rusty",
+      "model": "Underdog",
+      "reason": "waveRange, surferFit, designData"
+    },
+    {
+      "brand": "Simon Anderson",
+      "model": "Big S",
+      "reason": "waveRange, surferFit, designData"
+    },
+    {
+      "brand": "Album",
+      "model": "Bom Dia",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Album",
+      "model": "Freewing",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Album",
+      "model": "Insanity",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Album",
+      "model": "The End",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Album",
+      "model": "VBSM",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "average-joe",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "big-happy",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "biscuit-bonzer",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bobby-quad",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bonzer-3d",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "bunny-chow",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-2-pro",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-mid-twin-1",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-pro",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "dumpster-diver",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "free-scrubber-1",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "girabbit",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "high-5",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "hoglet",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "mikey-february-shorty",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "neckbeard",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "neckbeard-2",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "og-flyer",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "pod-mod-1",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rocket-9",
+      "reason": "waveRange, surferFit"
     }
   ]
 }

@@ -369,6 +369,22 @@ def _brand_limited(scored: list[tuple[float, dict, list[str], str]], limit: int,
     return selected
 
 
+def _design_context(board: dict) -> str | None:
+    fields = [
+        board.get("rocker_notes"),
+        board.get("tail_notes"),
+        board.get("fin_setup_notes"),
+        board.get("construction_notes"),
+        board.get("surfer_profile"),
+    ]
+    values = []
+    for value in fields:
+        text = str(value or "").strip()
+        if text and text not in values:
+            values.append(text.rstrip(".") + ".")
+    return " ".join(values[:3]) or None
+
+
 def recommend_models(profile: RiderProfile, limit: int = 10) -> list[SuggestedBoard]:
     scored = []
     generated_boards = _load_generated_intelligence()
@@ -426,6 +442,7 @@ def recommend_models(profile: RiderProfile, limit: int = 10) -> list[SuggestedBo
                 why_it_fits=why,
                 description=board.get("model_description") or board.get("description"),
                 short_description=board.get("short_description") or board.get("summary"),
+                design_context=_design_context(board),
                 trade_offs=board.get("trade_offs"),
                 volume_range=(
                     f"{board['volume_range']['min']:g}-{board['volume_range']['max']:g}L"
@@ -465,6 +482,7 @@ def build_recommendation_context(suggested_boards: list[SuggestedBoard]) -> str:
             f"- {board.brand} {board.model}: {board.category}. "
             f"Why: {board.why_it_fits}. "
             f"Manufacturer description: {board.short_description or 'Not available'}. "
+            f"Design cues: {board.design_context or 'Not specified'}. "
             f"Wave range: {board.wave_range or 'Not specified'}. "
             f"Skill fit: {board.skill_fit or 'Not specified'}. "
             f"Regional availability: {board.available_count} in {board.region or 'unspecified region'} "

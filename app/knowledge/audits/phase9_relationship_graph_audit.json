@@ -2,53 +2,37 @@
   "totalModels": 513,
   "modelsWithSimilarBoards": 512,
   "modelsWithUpgradeBoards": 512,
-  "modelsWithMoreForgivingBoards": 228,
+  "modelsWithMoreForgivingBoards": 234,
   "modelsWithMorePerformanceBoards": 512,
   "modelsWithWaveSpecificRelationships": 513,
   "confidenceDistribution": {
     "high": 160,
-    "low": 26739,
-    "medium": 23939
+    "low": 26299,
+    "medium": 24351
   },
   "relationshipCoverage": {
     "similarBoards": 512,
     "upgradeBoards": 512,
-    "downgradeBoards": 227,
-    "moreForgivingBoards": 228,
+    "downgradeBoards": 233,
+    "moreForgivingBoards": 234,
     "morePerformanceBoards": 512,
-    "morePaddleBoards": 219,
+    "morePaddleBoards": 224,
     "stepUpFromBoards": 512,
     "stepDownFromBoards": 512,
     "fishAlternativeBoards": 513,
     "shortboardAlternativeBoards": 513,
-    "betterSmallWaveBoards": 473,
-    "betterGoodWaveBoards": 412,
+    "betterSmallWaveBoards": 467,
+    "betterGoodWaveBoards": 410,
     "betterPointBreakBoards": 513,
     "betterBeachBreakBoards": 513,
-    "betterReefBoards": 485,
+    "betterReefBoards": 478,
     "closestFishAlternatives": 513,
     "closestDailyDriverAlternatives": 513,
     "closestStepUpAlternatives": 513,
     "closestGrovellerAlternatives": 513
   },
   "curatedSourceBoardsMatched": 26,
-  "unmatchedCuratedSourceBoards": [
-    {
-      "brand": "JS Industries",
-      "model": "Red Baron",
-      "reason": "not in canonical matrix"
-    },
-    {
-      "brand": "DHD",
-      "model": "Golden Child",
-      "reason": "not in canonical matrix"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Fish",
-      "reason": "not in canonical matrix"
-    }
-  ],
+  "unmatchedCuratedSourceBoards": [],
   "top50ModelsNeedingCuratedRelationshipReview": [
     {
       "brand": "Lost",
@@ -68,6 +52,11 @@
     {
       "brand": "Chilli",
       "model": "FAD3R",
+      "relationshipCount": 80
+    },
+    {
+      "brand": "Christenson",
+      "model": "OP1",
       "relationshipCount": 80
     },
     {
@@ -236,6 +225,21 @@
       "relationshipCount": 86
     },
     {
+      "brand": "Album",
+      "model": "D'boa",
+      "relationshipCount": 90
+    },
+    {
+      "brand": "Album",
+      "model": "Delma",
+      "relationshipCount": 90
+    },
+    {
+      "brand": "Album",
+      "model": "Veebee",
+      "relationshipCount": 90
+    },
+    {
       "brand": "Channel Islands",
       "model": "goldie",
       "relationshipCount": 90
@@ -271,33 +275,13 @@
       "relationshipCount": 90
     },
     {
-      "brand": "Firewire",
-      "model": "Seaside & Beyond",
+      "brand": "Christenson",
+      "model": "Submariner",
       "relationshipCount": 90
     },
     {
-      "brand": "JS Industries",
-      "model": "Raging Bull Easy Rider",
-      "relationshipCount": 90
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Xero Fusion Easy Rider",
-      "relationshipCount": 90
-    },
-    {
-      "brand": "Lost",
-      "model": "Big Rig Driver",
-      "relationshipCount": 90
-    },
-    {
-      "brand": "Lost",
-      "model": "El Patron",
-      "relationshipCount": 90
-    },
-    {
-      "brand": "Lost",
-      "model": "Evil Twin",
+      "brand": "Christenson",
+      "model": "Waterlion",
       "relationshipCount": 90
     }
   ]

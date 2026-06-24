@@ -42,6 +42,7 @@ class SuggestedBoard(BaseModel):
     why_it_fits: str
     description: str | None = None
     short_description: str | None = None
+    design_context: str | None = None
     trade_offs: str | None = None
     suggested_size: str | None = None
     volume_range: str | None = None

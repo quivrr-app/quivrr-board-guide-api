@@ -1,59 +1,15 @@
 {
   "totalModels": 513,
-  "modelsClassified": 192,
-  "classificationCoveragePercent": 37.4,
+  "modelsClassified": 205,
+  "classificationCoveragePercent": 40.0,
   "confidenceDistribution": {
-    "high": 38,
-    "medium": 155,
-    "low": 320,
+    "high": 39,
+    "medium": 178,
+    "low": 296,
     "none": 0
   },
-  "missingDescriptionCount": 84,
+  "missingDescriptionCount": 11,
   "missingDescriptions": [
-    {
-      "brand": "Album",
-      "model": "Bom Dia"
-    },
-    {
-      "brand": "Album",
-      "model": "D'boa"
-    },
-    {
-      "brand": "Album",
-      "model": "Delma"
-    },
-    {
-      "brand": "Album",
-      "model": "Insanity"
-    },
-    {
-      "brand": "Album",
-      "model": "Plasmic"
-    },
-    {
-      "brand": "Album",
-      "model": "ProtoAtypical"
-    },
-    {
-      "brand": "Album",
-      "model": "The End"
-    },
-    {
-      "brand": "Album",
-      "model": "Twinsman"
-    },
-    {
-      "brand": "Album",
-      "model": "VBSM"
-    },
-    {
-      "brand": "Album",
-      "model": "Veebee"
-    },
-    {
-      "brand": "Album",
-      "model": "Warp Twin"
-    },
     {
       "brand": "Chemistry Surfboards",
       "model": "Chemistry M Mix Surfboard"
@@ -63,204 +19,8 @@
       "model": "Chemistry Pantera Rosa Surfboard"
     },
     {
-      "brand": "Christenson",
-      "model": "Beausoleil"
-    },
-    {
-      "brand": "Christenson",
-      "model": "C-Bucket"
-    },
-    {
-      "brand": "Christenson",
-      "model": "C-Hag"
-    },
-    {
-      "brand": "Christenson",
-      "model": "C-Hawk"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Cafe Racer 2.0"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Carrera"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Chris Craft"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Easy Wind"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Hole Shot"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Huntsman"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Lane Splitter"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Nautilus"
-    },
-    {
-      "brand": "Christenson",
-      "model": "OP1"
-    },
-    {
-      "brand": "Christenson",
-      "model": "OP2"
-    },
-    {
-      "brand": "Christenson",
-      "model": "OP3"
-    },
-    {
-      "brand": "Christenson",
-      "model": "OP4"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Ocean Racer"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Osprey"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Scarlet Begonia"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Sicario"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Speed Master"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Sportsman"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Submariner"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Surfer Rosa"
-    },
-    {
-      "brand": "Christenson",
-      "model": "The Cliff"
-    },
-    {
-      "brand": "Christenson",
-      "model": "The Cliff Pintail"
-    },
-    {
-      "brand": "Christenson",
-      "model": "The Outlaw"
-    },
-    {
-      "brand": "Christenson",
-      "model": "The Wolverine"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Tradesman"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Ultra Tracker"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Waterlion"
-    },
-    {
       "brand": "DHD",
       "model": "Nexus EPS"
-    },
-    {
-      "brand": "DMS Surfboards",
-      "model": "Carny"
-    },
-    {
-      "brand": "DMS Surfboards",
-      "model": "Gherkin"
-    },
-    {
-      "brand": "DMS Surfboards",
-      "model": "Seahawk"
-    },
-    {
-      "brand": "DMS Surfboards",
-      "model": "Stilnox"
-    },
-    {
-      "brand": "DMS Surfboards",
-      "model": "Supercell"
-    },
-    {
-      "brand": "DMS Surfboards",
-      "model": "Thunderbird"
-    },
-    {
-      "brand": "DMS Surfboards",
-      "model": "X-Wing"
-    },
-    {
-      "brand": "DMS Surfboards",
-      "model": "Zephyr"
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Big Baron Softboard"
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Golden Child"
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Golden Child Easy Rider"
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Golden Child Youth"
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Monsta"
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Monsta Easy Rider"
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Monsta Youth"
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Xero Gravity"
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Xero Gravity Easy Rider"
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Xero Gravity Youth"
     },
     {
       "brand": "Lost",
@@ -273,58 +33,6 @@
     {
       "brand": "Lost",
       "model": "Puddle Jumper HP"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pegaso"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas All-Round Longboard"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Beachy Mood"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Easy Mood"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Fish"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Flying Diamond"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Hyperlink"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Magnetic"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Mustache"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Performance Mood"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Space Oddity"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Water Lion"
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Water Lion Ultra"
     },
     {
       "brand": "Pyzel",
@@ -347,25 +55,19 @@
       "model": "Smoothie"
     }
   ],
-  "unclassifiedCount": 321,
+  "unclassifiedCount": 308,
   "unclassifiedBoards": [
     {
       "brand": "Album",
-      "model": "Bom Dia",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Album",
       "model": "D'boa",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.55
     },
     {
       "brand": "Album",
       "model": "Delma",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "Album",
@@ -381,15 +83,9 @@
     },
     {
       "brand": "Album",
-      "model": "Insanity",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Album",
       "model": "Plasmic",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "Album",
@@ -400,32 +96,20 @@
     {
       "brand": "Album",
       "model": "The End",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Album",
       "model": "Twinsman",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Album",
-      "model": "VBSM",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Album",
       "model": "Veebee",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Album",
-      "model": "Warp Twin",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "Channel Islands",
@@ -964,170 +648,146 @@
     {
       "brand": "Christenson",
       "model": "Beausoleil",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "C-Bucket",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Christenson",
-      "model": "C-Hag",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.55
     },
     {
       "brand": "Christenson",
       "model": "C-Hawk",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Christenson",
-      "model": "Cafe Racer 2.0",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "Carrera",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "Chris Craft",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "Easy Wind",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "Hole Shot",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "Huntsman",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "Lane Splitter",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.55
     },
     {
       "brand": "Christenson",
-      "model": "Nautilus",
-      "hasDescription": false,
-      "confidence": 0.25
+      "model": "OP2",
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
-      "model": "OP1",
-      "hasDescription": false,
+      "model": "OP3",
+      "hasDescription": true,
+      "confidence": 0.45
+    },
+    {
+      "brand": "Christenson",
+      "model": "OP4",
+      "hasDescription": true,
       "confidence": 0.25
     },
     {
       "brand": "Christenson",
       "model": "Ocean Racer",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "Osprey",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.55
     },
     {
       "brand": "Christenson",
       "model": "Scarlet Begonia",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "Sicario",
-      "hasDescription": false,
+      "hasDescription": true,
       "confidence": 0.25
     },
     {
       "brand": "Christenson",
       "model": "Speed Master",
-      "hasDescription": false,
+      "hasDescription": true,
       "confidence": 0.25
     },
     {
       "brand": "Christenson",
       "model": "Sportsman",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "Christenson",
       "model": "Submariner",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "Christenson",
       "model": "Surfer Rosa",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Christenson",
-      "model": "The Cliff",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Christenson",
-      "model": "The Cliff Pintail",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "The Outlaw",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Christenson",
-      "model": "The Wolverine",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "Tradesman",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "Ultra Tracker",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Christenson",
       "model": "Waterlion",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "DHD",
@@ -1191,51 +851,45 @@
     },
     {
       "brand": "DMS Surfboards",
-      "model": "Carny",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "DMS Surfboards",
       "model": "Gherkin",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "DMS Surfboards",
       "model": "Seahawk",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "DMS Surfboards",
       "model": "Stilnox",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "DMS Surfboards",
       "model": "Supercell",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.65
     },
     {
       "brand": "DMS Surfboards",
       "model": "Thunderbird",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.55
     },
     {
       "brand": "DMS Surfboards",
       "model": "X-Wing",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.55
     },
     {
       "brand": "DMS Surfboards",
       "model": "Zephyr",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Firewire",
@@ -1365,6 +1019,12 @@
     },
     {
       "brand": "JS Industries",
+      "model": "Big Baron Softboard",
+      "hasDescription": true,
+      "confidence": 0.25
+    },
+    {
+      "brand": "JS Industries",
       "model": "Big Horse",
       "hasDescription": true,
       "confidence": 0.25
@@ -1414,32 +1074,32 @@
     {
       "brand": "JS Industries",
       "model": "Golden Child",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "JS Industries",
       "model": "Golden Child Easy Rider",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "JS Industries",
       "model": "Golden Child Youth",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "JS Industries",
       "model": "Monsta Easy Rider",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.55
     },
     {
       "brand": "JS Industries",
       "model": "Monsta Youth",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.55
     },
     {
       "brand": "JS Industries",
@@ -1476,24 +1136,6 @@
       "model": "Sub Xero",
       "hasDescription": true,
       "confidence": 0.35
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Xero Gravity",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Xero Gravity Easy Rider",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "JS Industries",
-      "model": "Xero Gravity Youth",
-      "hasDescription": false,
-      "confidence": 0.25
     },
     {
       "brand": "Lost",
@@ -1809,75 +1451,63 @@
     },
     {
       "brand": "Pukas",
-      "model": "Pegaso",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Pukas",
       "model": "Pukas All-Round Longboard",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Beachy Mood",
-      "hasDescription": false,
+      "hasDescription": true,
       "confidence": 0.35
     },
     {
       "brand": "Pukas",
+      "model": "Pukas Beachy Mood",
+      "hasDescription": true,
+      "confidence": 0.55
+    },
+    {
+      "brand": "Pukas",
       "model": "Pukas Easy Mood",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Pukas",
       "model": "Pukas Fish",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "Pukas",
       "model": "Pukas Flying Diamond",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "Pukas",
       "model": "Pukas Hyperlink",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Pukas",
       "model": "Pukas Magnetic",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.35
     },
     {
       "brand": "Pukas",
       "model": "Pukas Mustache",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.65
     },
     {
       "brand": "Pukas",
-      "model": "Pukas Space Oddity",
-      "hasDescription": false,
-      "confidence": 0.25
-    },
-    {
-      "brand": "Pukas",
-      "model": "Pukas Water Lion",
-      "hasDescription": false,
-      "confidence": 0.25
+      "model": "Pukas Performance Mood",
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "Pukas",
       "model": "Pukas Water Lion Ultra",
-      "hasDescription": false,
-      "confidence": 0.25
+      "hasDescription": true,
+      "confidence": 0.45
     },
     {
       "brand": "Pyzel",

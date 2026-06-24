@@ -4,43 +4,31 @@
   "modelsWithPrimaryCategory": 513,
   "categoryCoveragePercent": 100.0,
   "categoryCounts": {
-    "daily_driver": 34,
-    "fish": 41,
+    "daily_driver": 38,
+    "fish": 49,
     "foil": 1,
-    "groveller": 19,
-    "gun": 3,
-    "hybrid": 209,
-    "longboard": 32,
-    "mid_length": 59,
+    "groveller": 20,
+    "gun": 4,
+    "hybrid": 197,
+    "longboard": 31,
+    "mid_length": 56,
     "performance_shortboard": 72,
     "softboard": 6,
-    "step_up": 29,
+    "step_up": 31,
     "youth": 8
   },
   "confidenceDistribution": {
     "high": 8,
-    "low": 253,
-    "medium": 252
+    "low": 238,
+    "medium": 267
   },
-  "lowConfidenceCount": 253,
+  "lowConfidenceCount": 238,
   "topLowConfidenceModels": [
     {
       "brand": "Album",
       "model": "Bom Dia",
-      "category": "hybrid",
-      "source": "conservative_shortboard_fallback"
-    },
-    {
-      "brand": "Album",
-      "model": "D'boa",
-      "category": "hybrid",
-      "source": "conservative_shortboard_fallback"
-    },
-    {
-      "brand": "Album",
-      "model": "Delma",
-      "category": "mid_length",
-      "source": "deterministic_length_taxonomy"
+      "category": "performance_shortboard",
+      "source": "generated_fallback"
     },
     {
       "brand": "Album",
@@ -57,18 +45,6 @@
     {
       "brand": "Album",
       "model": "Insanity",
-      "category": "hybrid",
-      "source": "conservative_shortboard_fallback"
-    },
-    {
-      "brand": "Album",
-      "model": "Plasmic",
-      "category": "hybrid",
-      "source": "conservative_shortboard_fallback"
-    },
-    {
-      "brand": "Album",
-      "model": "ProtoAtypical",
       "category": "performance_shortboard",
       "source": "generated_fallback"
     },
@@ -87,20 +63,14 @@
     {
       "brand": "Album",
       "model": "VBSM",
-      "category": "hybrid",
-      "source": "conservative_shortboard_fallback"
-    },
-    {
-      "brand": "Album",
-      "model": "Veebee",
-      "category": "hybrid",
-      "source": "conservative_shortboard_fallback"
+      "category": "performance_shortboard",
+      "source": "generated_fallback"
     },
     {
       "brand": "Album",
       "model": "Warp Twin",
-      "category": "hybrid",
-      "source": "conservative_shortboard_fallback"
+      "category": "performance_shortboard",
+      "source": "generated_fallback"
     },
     {
       "brand": "Channel Islands",
@@ -608,19 +578,49 @@
     },
     {
       "brand": "Christenson",
-      "model": "C-Hawk",
-      "category": "hybrid",
-      "source": "conservative_shortboard_fallback"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Cafe Racer 2.0",
-      "category": "hybrid",
-      "source": "conservative_shortboard_fallback"
-    },
-    {
-      "brand": "Christenson",
       "model": "Easy Wind",
+      "category": "mid_length",
+      "source": "deterministic_length_taxonomy"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Hole Shot",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Lane Splitter",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Nautilus",
+      "category": "mid_length",
+      "source": "generated_fallback"
+    },
+    {
+      "brand": "Christenson",
+      "model": "OP2",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Christenson",
+      "model": "OP3",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Christenson",
+      "model": "OP4",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Christenson",
+      "model": "Osprey",
       "category": "mid_length",
       "source": "deterministic_length_taxonomy"
     }

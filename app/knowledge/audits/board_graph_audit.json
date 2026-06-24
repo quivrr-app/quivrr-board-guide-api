@@ -6,9 +6,9 @@
   "recommendationCoveragePercent": 99.8,
   "relationCoverage": {
     "similarBoards": 512,
-    "alternativeBoards": 405,
-    "upgradeBoards": 357,
-    "downgradeBoards": 118
+    "alternativeBoards": 409,
+    "upgradeBoards": 352,
+    "downgradeBoards": 123
   },
   "outOfStockCoverage": 512,
   "topModelsWithoutEquivalents": [

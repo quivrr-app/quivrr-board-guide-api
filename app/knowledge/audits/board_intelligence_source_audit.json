@@ -7,21 +7,21 @@
   "constructionVariantRowsCollapsed": 60,
   "existingClassifierAudit": {
     "totalModels": 513,
-    "modelsClassified": 192,
-    "classificationCoveragePercent": 37.4,
+    "modelsClassified": 205,
+    "classificationCoveragePercent": 40.0,
     "confidenceDistribution": {
-      "high": 38,
-      "medium": 155,
-      "low": 320,
+      "high": 39,
+      "medium": 178,
+      "low": 296,
       "none": 0
     },
-    "missingDescriptionCount": 84,
-    "unclassifiedCount": 321
+    "missingDescriptionCount": 11,
+    "unclassifiedCount": 308
   },
   "descriptionCoverageReconciliation": {
-    "modelsWithDescriptionAfterVariantMerge": 430,
-    "modelsMissingDescriptionAfterVariantMerge": 83,
-    "legacyAuditMissingDescriptionCount": 84,
+    "modelsWithDescriptionAfterVariantMerge": 503,
+    "modelsMissingDescriptionAfterVariantMerge": 10,
+    "legacyAuditMissingDescriptionCount": 11,
     "legacyVariantSelectionFalseMissing": [
       "Lost Puddle Jumper HP"
     ]
@@ -80,18 +80,18 @@
     {
       "brand": "Album",
       "totalModels": 19,
-      "modelsWithDescription": 8,
-      "modelsWithCategory": 6,
+      "modelsWithDescription": 19,
+      "modelsWithCategory": 10,
       "modelsWithWaveRange": 0,
       "modelsWithWaveType": 0,
-      "modelsWithWavePower": 0,
+      "modelsWithWavePower": 1,
       "modelsWithAbility": 0,
-      "modelsWithDesignMetadata": 5,
-      "modelsWithRecommendationTags": 4,
-      "modelsWithRelatedBoardEvidence": 0,
+      "modelsWithDesignMetadata": 16,
+      "modelsWithRecommendationTags": 12,
+      "modelsWithRelatedBoardEvidence": 11,
       "modelsWithRiderGuidance": 0,
-      "manufacturerPrimaryDescriptions": 8,
-      "metadataSourceQuality": "mixed",
+      "manufacturerPrimaryDescriptions": 19,
+      "metadataSourceQuality": "high",
       "topGaps": "ability: 19; wave range: 19; wave type: 19",
       "recommendedNextEnhancement": "Repair missing manufacturer descriptions first, then curate category and alternative-board relationships."
     },
@@ -152,19 +152,19 @@
     {
       "brand": "Christenson",
       "totalModels": 31,
-      "modelsWithDescription": 0,
-      "modelsWithCategory": 3,
-      "modelsWithWaveRange": 0,
-      "modelsWithWaveType": 0,
-      "modelsWithWavePower": 0,
-      "modelsWithAbility": 0,
-      "modelsWithDesignMetadata": 0,
-      "modelsWithRecommendationTags": 3,
-      "modelsWithRelatedBoardEvidence": 0,
-      "modelsWithRiderGuidance": 0,
-      "manufacturerPrimaryDescriptions": 0,
-      "metadataSourceQuality": "low",
-      "topGaps": "ability: 31; description: 31; design metadata: 31",
+      "modelsWithDescription": 31,
+      "modelsWithCategory": 7,
+      "modelsWithWaveRange": 2,
+      "modelsWithWaveType": 2,
+      "modelsWithWavePower": 4,
+      "modelsWithAbility": 4,
+      "modelsWithDesignMetadata": 18,
+      "modelsWithRecommendationTags": 2,
+      "modelsWithRelatedBoardEvidence": 2,
+      "modelsWithRiderGuidance": 9,
+      "manufacturerPrimaryDescriptions": 31,
+      "metadataSourceQuality": "high",
+      "topGaps": "recommendation tags: 29; wave range: 29; wave type: 29",
       "recommendedNextEnhancement": "Repair description coverage and distinguish fish, mid-length, longboard and performance families."
     },
     {
@@ -188,19 +188,19 @@
     {
       "brand": "DMS Surfboards",
       "totalModels": 8,
-      "modelsWithDescription": 0,
-      "modelsWithCategory": 0,
-      "modelsWithWaveRange": 0,
-      "modelsWithWaveType": 0,
-      "modelsWithWavePower": 0,
+      "modelsWithDescription": 8,
+      "modelsWithCategory": 1,
+      "modelsWithWaveRange": 4,
+      "modelsWithWaveType": 1,
+      "modelsWithWavePower": 2,
       "modelsWithAbility": 0,
-      "modelsWithDesignMetadata": 0,
-      "modelsWithRecommendationTags": 0,
+      "modelsWithDesignMetadata": 8,
+      "modelsWithRecommendationTags": 4,
       "modelsWithRelatedBoardEvidence": 0,
       "modelsWithRiderGuidance": 0,
-      "manufacturerPrimaryDescriptions": 0,
-      "metadataSourceQuality": "low",
-      "topGaps": "ability: 8; category: 8; description: 8",
+      "manufacturerPrimaryDescriptions": 8,
+      "metadataSourceQuality": "high",
+      "topGaps": "ability: 8; category: 7; wave type: 7",
       "recommendedNextEnhancement": "Capture official model descriptions, intended waves and design notes; retain DMS as a canonical brand alias only."
     },
     {
@@ -242,19 +242,19 @@
     {
       "brand": "JS Industries",
       "totalModels": 30,
-      "modelsWithDescription": 20,
-      "modelsWithCategory": 7,
-      "modelsWithWaveRange": 1,
-      "modelsWithWaveType": 1,
-      "modelsWithWavePower": 4,
+      "modelsWithDescription": 30,
+      "modelsWithCategory": 9,
+      "modelsWithWaveRange": 6,
+      "modelsWithWaveType": 3,
+      "modelsWithWavePower": 7,
       "modelsWithAbility": 1,
       "modelsWithDesignMetadata": 6,
-      "modelsWithRecommendationTags": 11,
+      "modelsWithRecommendationTags": 13,
       "modelsWithRelatedBoardEvidence": 0,
       "modelsWithRiderGuidance": 0,
-      "manufacturerPrimaryDescriptions": 20,
-      "metadataSourceQuality": "mixed",
-      "topGaps": "ability: 29; wave range: 29; wave type: 29",
+      "manufacturerPrimaryDescriptions": 30,
+      "metadataSourceQuality": "high",
+      "topGaps": "ability: 29; wave type: 27; design metadata: 24",
       "recommendedNextEnhancement": "Persist manufacturer series (Charger, Performer, Daily, Fun, Youth, Foil and Softboard) and structured design labels."
     },
     {
@@ -296,19 +296,19 @@
     {
       "brand": "Pukas",
       "totalModels": 13,
-      "modelsWithDescription": 0,
-      "modelsWithCategory": 1,
-      "modelsWithWaveRange": 0,
-      "modelsWithWaveType": 1,
-      "modelsWithWavePower": 0,
-      "modelsWithAbility": 0,
-      "modelsWithDesignMetadata": 0,
-      "modelsWithRecommendationTags": 1,
-      "modelsWithRelatedBoardEvidence": 0,
-      "modelsWithRiderGuidance": 0,
-      "manufacturerPrimaryDescriptions": 0,
-      "metadataSourceQuality": "low",
-      "topGaps": "ability: 13; description: 13; design metadata: 13",
+      "modelsWithDescription": 13,
+      "modelsWithCategory": 3,
+      "modelsWithWaveRange": 2,
+      "modelsWithWaveType": 3,
+      "modelsWithWavePower": 3,
+      "modelsWithAbility": 2,
+      "modelsWithDesignMetadata": 11,
+      "modelsWithRecommendationTags": 6,
+      "modelsWithRelatedBoardEvidence": 1,
+      "modelsWithRiderGuidance": 1,
+      "manufacturerPrimaryDescriptions": 13,
+      "metadataSourceQuality": "high",
+      "topGaps": "ability: 11; wave range: 11; category: 10",
       "recommendedNextEnhancement": "Capture manufacturer model narratives and shaper/series metadata independently of Pukas retailer inventory."
     },
     {
@@ -430,17 +430,6 @@
       "recommendedNextAction": "Extract structured manufacturer metadata"
     },
     {
-      "priorityScore": 180,
-      "brand": "JS Industries",
-      "model": "Monsta",
-      "boardModelId": 7689,
-      "canonicalSizeCount": 30,
-      "descriptionPresent": false,
-      "classificationPresent": true,
-      "missingFields": "manufacturerDescription|waveType|designMetadata|equivalency",
-      "recommendedNextAction": "Recover manufacturer description"
-    },
-    {
       "priorityScore": 175,
       "brand": "Firewire",
       "model": "Dominator 2.0",
@@ -475,28 +464,6 @@
     },
     {
       "priorityScore": 168,
-      "brand": "JS Industries",
-      "model": "Golden Child",
-      "boardModelId": 7687,
-      "canonicalSizeCount": 23,
-      "descriptionPresent": false,
-      "classificationPresent": false,
-      "missingFields": "manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
-      "recommendedNextAction": "Recover manufacturer description"
-    },
-    {
-      "priorityScore": 168,
-      "brand": "JS Industries",
-      "model": "Xero Gravity",
-      "boardModelId": 7692,
-      "canonicalSizeCount": 26,
-      "descriptionPresent": false,
-      "classificationPresent": false,
-      "missingFields": "manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
-      "recommendedNextAction": "Recover manufacturer description"
-    },
-    {
-      "priorityScore": 168,
       "brand": "Sharp Eye",
       "model": "Inferno 72",
       "boardModelId": 8028,
@@ -505,17 +472,6 @@
       "classificationPresent": true,
       "missingFields": "waveRange|waveType|equivalency",
       "recommendedNextAction": "Extract structured manufacturer metadata"
-    },
-    {
-      "priorityScore": 167,
-      "brand": "JS Industries",
-      "model": "Golden Child Youth",
-      "boardModelId": 7700,
-      "canonicalSizeCount": 19,
-      "descriptionPresent": false,
-      "classificationPresent": false,
-      "missingFields": "manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
-      "recommendedNextAction": "Recover manufacturer description"
     },
     {
       "priorityScore": 167,
@@ -534,6 +490,17 @@
       "model": "Hypto Krypto",
       "boardModelId": 7998,
       "canonicalSizeCount": 22,
+      "descriptionPresent": true,
+      "classificationPresent": true,
+      "missingFields": "designMetadata|equivalency",
+      "recommendedNextAction": "Extract structured manufacturer metadata"
+    },
+    {
+      "priorityScore": 166,
+      "brand": "JS Industries",
+      "model": "Monsta",
+      "boardModelId": 7689,
+      "canonicalSizeCount": 30,
       "descriptionPresent": true,
       "classificationPresent": true,
       "missingFields": "designMetadata|equivalency",
@@ -573,17 +540,6 @@
       "recommendedNextAction": "Extract structured manufacturer metadata"
     },
     {
-      "priorityScore": 161,
-      "brand": "JS Industries",
-      "model": "Xero Gravity Easy Rider",
-      "boardModelId": 7710,
-      "canonicalSizeCount": 13,
-      "descriptionPresent": false,
-      "classificationPresent": false,
-      "missingFields": "manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
-      "recommendedNextAction": "Recover manufacturer description"
-    },
-    {
       "priorityScore": 160,
       "brand": "Pyzel",
       "model": "Ghost",
@@ -593,17 +549,6 @@
       "classificationPresent": true,
       "missingFields": "waveType|equivalency",
       "recommendedNextAction": "Curate equivalency only with explicit evidence"
-    },
-    {
-      "priorityScore": 159,
-      "brand": "JS Industries",
-      "model": "Golden Child Easy Rider",
-      "boardModelId": 7708,
-      "canonicalSizeCount": 11,
-      "descriptionPresent": false,
-      "classificationPresent": false,
-      "missingFields": "manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
-      "recommendedNextAction": "Recover manufacturer description"
     },
     {
       "priorityScore": 159,
@@ -639,17 +584,6 @@
       "recommendedNextAction": "Extract structured manufacturer metadata"
     },
     {
-      "priorityScore": 158,
-      "brand": "JS Industries",
-      "model": "Monsta Easy Rider",
-      "boardModelId": 7709,
-      "canonicalSizeCount": 10,
-      "descriptionPresent": false,
-      "classificationPresent": false,
-      "missingFields": "manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
-      "recommendedNextAction": "Recover manufacturer description"
-    },
-    {
       "priorityScore": 157,
       "brand": "Pyzel",
       "model": "Phantom XL",
@@ -663,24 +597,13 @@
     {
       "priorityScore": 156,
       "brand": "JS Industries",
-      "model": "Monsta Youth",
-      "boardModelId": 7701,
-      "canonicalSizeCount": 8,
-      "descriptionPresent": false,
+      "model": "Golden Child",
+      "boardModelId": 7687,
+      "canonicalSizeCount": 23,
+      "descriptionPresent": true,
       "classificationPresent": false,
-      "missingFields": "manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
-      "recommendedNextAction": "Recover manufacturer description"
-    },
-    {
-      "priorityScore": 156,
-      "brand": "JS Industries",
-      "model": "Xero Gravity Youth",
-      "boardModelId": 7702,
-      "canonicalSizeCount": 8,
-      "descriptionPresent": false,
-      "classificationPresent": false,
-      "missingFields": "manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
-      "recommendedNextAction": "Recover manufacturer description"
+      "missingFields": "primaryCategory|waveRange|waveType|surferAbility|designMetadata|recommendationTags|equivalency",
+      "recommendedNextAction": "Extract structured manufacturer metadata"
     },
     {
       "priorityScore": 156,
@@ -691,6 +614,17 @@
       "descriptionPresent": true,
       "classificationPresent": false,
       "missingFields": "primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|equivalency",
+      "recommendedNextAction": "Extract structured manufacturer metadata"
+    },
+    {
+      "priorityScore": 155,
+      "brand": "JS Industries",
+      "model": "Golden Child Youth",
+      "boardModelId": 7700,
+      "canonicalSizeCount": 19,
+      "descriptionPresent": true,
+      "classificationPresent": false,
+      "missingFields": "primaryCategory|waveRange|waveType|surferAbility|designMetadata|recommendationTags|equivalency",
       "recommendedNextAction": "Extract structured manufacturer metadata"
     },
     {
@@ -1157,6 +1091,17 @@
     },
     {
       "priorityScore": 147,
+      "brand": "JS Industries",
+      "model": "Golden Child Easy Rider",
+      "boardModelId": 7708,
+      "canonicalSizeCount": 11,
+      "descriptionPresent": true,
+      "classificationPresent": false,
+      "missingFields": "primaryCategory|waveRange|waveType|surferAbility|designMetadata|recommendationTags|equivalency",
+      "recommendedNextAction": "Extract structured manufacturer metadata"
+    },
+    {
+      "priorityScore": 147,
       "brand": "Lost",
       "model": "Cali Twin",
       "boardModelId": 7830,
@@ -1311,17 +1256,6 @@
     },
     {
       "priorityScore": 145,
-      "brand": "Pukas",
-      "model": "Pukas Space Oddity",
-      "boardModelId": 8066,
-      "canonicalSizeCount": 17,
-      "descriptionPresent": false,
-      "classificationPresent": false,
-      "missingFields": "manufacturerDescription|primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
-      "recommendedNextAction": "Recover manufacturer description"
-    },
-    {
-      "priorityScore": 145,
       "brand": "Sharp Eye",
       "model": "Radar",
       "boardModelId": 8034,
@@ -1330,6 +1264,17 @@
       "classificationPresent": false,
       "missingFields": "primaryCategory|waveType|surferAbility|equivalency",
       "recommendedNextAction": "Review deterministic classification"
+    },
+    {
+      "priorityScore": 144,
+      "brand": "JS Industries",
+      "model": "Monsta Easy Rider",
+      "boardModelId": 7709,
+      "canonicalSizeCount": 10,
+      "descriptionPresent": true,
+      "classificationPresent": false,
+      "missingFields": "primaryCategory|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
+      "recommendedNextAction": "Extract structured manufacturer metadata"
     },
     {
       "priorityScore": 144,
@@ -1373,6 +1318,17 @@
       "descriptionPresent": true,
       "classificationPresent": false,
       "missingFields": "primaryCategory|waveRange|wavePower|surferAbility|equivalency",
+      "recommendedNextAction": "Extract structured manufacturer metadata"
+    },
+    {
+      "priorityScore": 143,
+      "brand": "JS Industries",
+      "model": "Big Baron Softboard",
+      "boardModelId": 7705,
+      "canonicalSizeCount": 5,
+      "descriptionPresent": true,
+      "classificationPresent": false,
+      "missingFields": "primaryCategory|waveRange|waveType|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
       "recommendedNextAction": "Extract structured manufacturer metadata"
     },
     {
@@ -1454,6 +1410,28 @@
     },
     {
       "priorityScore": 142,
+      "brand": "JS Industries",
+      "model": "Monsta Youth",
+      "boardModelId": 7701,
+      "canonicalSizeCount": 8,
+      "descriptionPresent": true,
+      "classificationPresent": false,
+      "missingFields": "primaryCategory|wavePower|surferAbility|designMetadata|recommendationTags|equivalency",
+      "recommendedNextAction": "Extract structured manufacturer metadata"
+    },
+    {
+      "priorityScore": 142,
+      "brand": "JS Industries",
+      "model": "Xero Gravity",
+      "boardModelId": 7692,
+      "canonicalSizeCount": 26,
+      "descriptionPresent": true,
+      "classificationPresent": true,
+      "missingFields": "waveType|wavePower|surferAbility|designMetadata|equivalency",
+      "recommendedNextAction": "Extract structured manufacturer metadata"
+    },
+    {
+      "priorityScore": 142,
       "brand": "Lost",
       "model": "Beach Buggy 2",
       "boardModelId": 7828,
@@ -1480,6 +1458,28 @@
       "model": "Puddle Fish",
       "boardModelId": 7864,
       "canonicalSizeCount": 22,
+      "descriptionPresent": true,
+      "classificationPresent": true,
+      "missingFields": "waveRange|waveType|wavePower|surferAbility|equivalency",
+      "recommendedNextAction": "Extract structured manufacturer metadata"
+    },
+    {
+      "priorityScore": 142,
+      "brand": "Lost",
+      "model": "RNF 96 King Fish",
+      "boardModelId": 7876,
+      "canonicalSizeCount": 18,
+      "descriptionPresent": true,
+      "classificationPresent": true,
+      "missingFields": "waveRange|waveType|wavePower|surferAbility|recommendationTags|equivalency",
+      "recommendedNextAction": "Extract structured manufacturer metadata"
+    },
+    {
+      "priorityScore": 142,
+      "brand": "Lost",
+      "model": "Sabotaj Legacy",
+      "boardModelId": 7885,
+      "canonicalSizeCount": 21,
       "descriptionPresent": true,
       "classificationPresent": true,
       "missingFields": "waveRange|waveType|wavePower|surferAbility|equivalency",
