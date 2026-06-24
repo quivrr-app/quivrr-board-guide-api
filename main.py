@@ -1,7 +1,10 @@
 from fastapi import FastAPI
+from fastapi import Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import os
+import time
 
 from app.azure_openai_client import is_azure_openai_configured
 from app.conversation_flow import (
@@ -27,6 +30,7 @@ from app.profile_engine import (
     merge_profiles,
     missing_profile_fields,
 )
+from app.structured_logging import emit_event
 
 
 load_dotenv()
@@ -61,8 +65,31 @@ def health():
     }
 
 
+@app.exception_handler(Exception)
+async def unhandled_exception_handler(request: Request, exc: Exception):
+    if request.url.path == "/api/board-guide/chat":
+        emit_event(
+            "bodhi_recommendation_failed",
+            "bodhi_api",
+            status="failed",
+            source="deterministic_intake_engine",
+            error_type=type(exc).__name__,
+            error_message=str(exc),
+        )
+    return JSONResponse(status_code=500, content={"detail": "Internal server error"})
+
+
 @app.post("/api/board-guide/chat", response_model=BoardGuideResponse)
 def board_guide_chat(request: BoardGuideRequest):
+    started = time.perf_counter()
+    emit_event(
+        "bodhi_request_received",
+        "bodhi_api",
+        region=request.region,
+        status="success",
+        source="deterministic_intake_engine",
+        conversation_turn_count=len(request.conversation),
+    )
     history_profiles = [extract_profile(item.content) for item in request.conversation if item.role == "user"]
     persisted_profile = request.intake_state or extract_profile("")
     profile = merge_profiles(persisted_profile, *history_profiles, extract_profile(request.message, request.region))
@@ -83,6 +110,14 @@ def board_guide_chat(request: BoardGuideRequest):
                 requested_board = find_requested_board(item.content)
                 if requested_board:
                     break
+    emit_event(
+        "bodhi_profile_extracted",
+        "bodhi_api",
+        region=profile.region or request.region,
+        status="success",
+        source="deterministic_intake_engine",
+        missing_field_count=len(missing),
+    )
 
     if intent == "greeting_request":
         suggested_boards = []
@@ -346,8 +381,18 @@ def board_guide_chat(request: BoardGuideRequest):
         suggested_boards = []
         reply = "Nice. " + " ".join(questions)
     source = "deterministic_intake_engine"
-
-    return BoardGuideResponse(
+    duration = round(time.perf_counter() - started, 3)
+    emit_event(
+        "bodhi_recommendation_generated",
+        "bodhi_api",
+        region=profile.region or request.region,
+        status="success",
+        source=source,
+        missing_field_count=len(missing),
+        suggested_board_count=len(suggested_boards),
+        duration_seconds=duration,
+    )
+    response = BoardGuideResponse(
         guide_name="Bodhi, the Core Lord",
         reply=reply,
         profile=profile,
@@ -362,3 +407,14 @@ def board_guide_chat(request: BoardGuideRequest):
         recommendations=public_recommendations(suggested_boards),
         intent=intent,
     )
+    emit_event(
+        "bodhi_response_completed",
+        "bodhi_api",
+        region=profile.region or request.region,
+        status="success",
+        source=source,
+        missing_field_count=len(missing),
+        suggested_board_count=len(suggested_boards),
+        duration_seconds=duration,
+    )
+    return response

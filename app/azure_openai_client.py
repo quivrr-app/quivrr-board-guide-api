@@ -3,6 +3,7 @@ from openai import AzureOpenAI
 
 from app.models import BoardRecommendation
 from app.prompts import BODHI_SYSTEM_PROMPT
+from app.structured_logging import emit_event
 from app.text_cleaning import clean_llm_text
 
 
@@ -44,32 +45,43 @@ def ask_bodhi(
     recommendation_context: str | None = None,
     official_recommendation_context: str | None = None,
 ) -> str:
-    client = AzureOpenAI(
-        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
-        api_key=os.environ["AZURE_OPENAI_API_KEY"],
-        api_version=os.environ["AZURE_OPENAI_API_VERSION"],
-    )
+    try:
+        client = AzureOpenAI(
+            azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+            api_key=os.environ["AZURE_OPENAI_API_KEY"],
+            api_version=os.environ["AZURE_OPENAI_API_VERSION"],
+        )
 
-    context = []
-    if region:
-        context.append(f"Region: {region}")
-    if page_context:
-        context.append(f"Page context: {page_context}")
-    if official_recommendation_context:
-        context.append(official_recommendation_context)
-    if recommendation_context:
-        context.append(recommendation_context)
+        context = []
+        if region:
+            context.append(f"Region: {region}")
+        if page_context:
+            context.append(f"Page context: {page_context}")
+        if official_recommendation_context:
+            context.append(official_recommendation_context)
+        if recommendation_context:
+            context.append(recommendation_context)
 
-    user_content = "\n".join(context + [f"User message: {message}"])
+        user_content = "\n".join(context + [f"User message: {message}"])
 
-    response = client.chat.completions.create(
-        model=os.environ["AZURE_OPENAI_DEPLOYMENT"],
-        messages=[
-            {"role": "system", "content": BODHI_SYSTEM_PROMPT},
-            {"role": "user", "content": user_content},
-        ],
-        temperature=0.25,
-        max_tokens=650,
-    )
+        response = client.chat.completions.create(
+            model=os.environ["AZURE_OPENAI_DEPLOYMENT"],
+            messages=[
+                {"role": "system", "content": BODHI_SYSTEM_PROMPT},
+                {"role": "user", "content": user_content},
+            ],
+            temperature=0.25,
+            max_tokens=650,
+        )
 
-    return clean_llm_text(response.choices[0].message.content or "")
+        return clean_llm_text(response.choices[0].message.content or "")
+    except Exception as exc:
+        emit_event(
+            "bodhi_openai_failure",
+            "bodhi_api",
+            region=region,
+            status="failed",
+            error_type=type(exc).__name__,
+            error_message=str(exc),
+        )
+        raise
