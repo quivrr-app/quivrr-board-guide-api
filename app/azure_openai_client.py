@@ -1,4 +1,6 @@
-﻿import os
+import os
+import time
+
 from openai import AzureOpenAI
 
 from app.models import BoardRecommendation
@@ -14,6 +16,21 @@ def is_azure_openai_configured() -> bool:
         os.getenv("AZURE_OPENAI_DEPLOYMENT"),
         os.getenv("AZURE_OPENAI_API_VERSION"),
     ])
+
+
+def configured_deployment(request_type: str = "response") -> str | None:
+    if request_type == "profile":
+        return os.getenv("AZURE_OPENAI_PROFILE_DEPLOYMENT") or os.getenv("AZURE_OPENAI_DEPLOYMENT")
+    return os.getenv("AZURE_OPENAI_DEPLOYMENT")
+
+
+def refinement_enabled() -> bool:
+    return os.getenv("BODHI_ENABLE_LLM_REFINEMENT", "0") == "1"
+
+
+def _is_retryable(exc: Exception) -> bool:
+    text = str(exc).lower()
+    return any(token in text for token in ["timeout", "temporar", "rate limit", "429", "500", "502", "503", "504", "connection"])
 
 
 def build_official_recommendation_context(recommendation: BoardRecommendation | None) -> str:
@@ -45,43 +62,60 @@ def ask_bodhi(
     recommendation_context: str | None = None,
     official_recommendation_context: str | None = None,
 ) -> str:
+    deployment = configured_deployment("response")
+    client = AzureOpenAI(
+        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+        api_key=os.environ["AZURE_OPENAI_API_KEY"],
+        api_version=os.environ["AZURE_OPENAI_API_VERSION"],
+    )
+
+    context = []
+    if region:
+        context.append(f"Region: {region}")
+    if page_context:
+        context.append(f"Page context: {page_context}")
+    if official_recommendation_context:
+        context.append(official_recommendation_context)
+    if recommendation_context:
+        context.append(recommendation_context)
+
+    user_content = "\n".join(context + [f"User message: {message}"])
+    max_attempts = max(1, int(os.getenv("AZURE_OPENAI_RETRY_ATTEMPTS", "2")))
+    timeout_seconds = float(os.getenv("AZURE_OPENAI_TIMEOUT_SECONDS", "20"))
+
+    for attempt in range(1, max_attempts + 1):
+        try:
+            response = client.chat.completions.create(
+                model=deployment,
+                messages=[
+                    {"role": "system", "content": BODHI_SYSTEM_PROMPT},
+                    {"role": "user", "content": user_content},
+                ],
+                temperature=0.25,
+                max_tokens=int(os.getenv("AZURE_OPENAI_MAX_OUTPUT_TOKENS", "650")),
+                timeout=timeout_seconds,
+            )
+            return clean_llm_text(response.choices[0].message.content or "")
+        except Exception as exc:
+            if attempt >= max_attempts or not _is_retryable(exc):
+                emit_event(
+                    "bodhi_openai_failure",
+                    "bodhi_api",
+                    region=region,
+                    status="failed",
+                    deployment=deployment,
+                    request_type="response",
+                    error_type=type(exc).__name__,
+                    error_message=str(exc),
+                )
+                raise
+            time.sleep(0.25 * attempt)
+
+
+def safe_ask_bodhi(**kwargs) -> tuple[str | None, str | None]:
+    if not refinement_enabled() or not is_azure_openai_configured():
+        return None, None
     try:
-        client = AzureOpenAI(
-            azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
-            api_key=os.environ["AZURE_OPENAI_API_KEY"],
-            api_version=os.environ["AZURE_OPENAI_API_VERSION"],
-        )
-
-        context = []
-        if region:
-            context.append(f"Region: {region}")
-        if page_context:
-            context.append(f"Page context: {page_context}")
-        if official_recommendation_context:
-            context.append(official_recommendation_context)
-        if recommendation_context:
-            context.append(recommendation_context)
-
-        user_content = "\n".join(context + [f"User message: {message}"])
-
-        response = client.chat.completions.create(
-            model=os.environ["AZURE_OPENAI_DEPLOYMENT"],
-            messages=[
-                {"role": "system", "content": BODHI_SYSTEM_PROMPT},
-                {"role": "user", "content": user_content},
-            ],
-            temperature=0.25,
-            max_tokens=650,
-        )
-
-        return clean_llm_text(response.choices[0].message.content or "")
-    except Exception as exc:
-        emit_event(
-            "bodhi_openai_failure",
-            "bodhi_api",
-            region=region,
-            status="failed",
-            error_type=type(exc).__name__,
-            error_message=str(exc),
-        )
-        raise
+        return ask_bodhi(**kwargs), configured_deployment("response")
+    except Exception:
+        return None, None

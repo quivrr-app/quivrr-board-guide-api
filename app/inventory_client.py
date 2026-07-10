@@ -15,9 +15,15 @@ from app.rider_fit import recommend_rider_fit
 
 
 API_BASE = os.getenv("QUIVRR_INVENTORY_API_URL", "https://quivrr-backend-api.azurewebsites.net").rstrip("/")
-REGION_ALIASES = {"AUSTRALIA": "AU", "EUROPE": "EU", "INDONESIA": "ID"}
+REGION_ALIASES = {
+    "AUSTRALIA": "AU",
+    "EUROPE": "EU",
+    "UNITED STATES": "US",
+    "USA": "US",
+    "INDONESIA": "ID",
+}
 BRAND_ALIASES = {"CHEMISTRY": "CHEMISTRY SURFBOARDS", "DMS": "DMS SURFBOARDS"}
-QUIVRR_REGION_PATHS = {"AU": "australia", "EU": "europe", "ID": "indonesia"}
+QUIVRR_REGION_PATHS = {"AU": "australia", "EU": "europe", "US": "us", "ID": "indonesia"}
 
 
 def quivrr_search_url(board: SuggestedBoard, region: str, size: dict | None = None) -> str:
@@ -37,7 +43,7 @@ def quivrr_search_url(board: SuggestedBoard, region: str, size: dict | None = No
 def normalise_region(value: str | None) -> str | None:
     region = (value or "").strip().upper()
     region = REGION_ALIASES.get(region, region)
-    return region if region in {"AU", "EU", "ID"} else None
+    return region if region in {"AU", "EU", "US", "ID"} else None
 
 
 def _key(value: str | None) -> str:

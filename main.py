@@ -1,12 +1,18 @@
 from fastapi import FastAPI
 from fastapi import Request
+from fastapi import Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import os
 import time
+import uuid
 
-from app.azure_openai_client import is_azure_openai_configured
+from app.azure_openai_client import (
+    build_official_recommendation_context,
+    is_azure_openai_configured,
+    safe_ask_bodhi,
+)
 from app.conversation_flow import (
     comparison_reply, enough_for_recommendations, expert_board_question_reply, find_requested_board,
     general_board_reply, graph_suggestions, greeting_reply, has_intake_signal, intake_questions, opening_message,
@@ -21,15 +27,19 @@ from app.board_expert_matrix import recommend_from_matrix
 from app.board_relationship_graph import (
     relationship_reply, relationship_suggestions, relationship_type, source_board_from_message,
 )
-from app.model_recommendation_engine import recommend_models
+from app.model_recommendation_engine import build_recommendation_context, recommend_models
 from app.inventory_client import enrich_suggestions_with_inventory, locate_exact_board
-from app.models import BoardGuideRequest, BoardGuideResponse
+from app.models import BoardComparison, BoardGuideRequest, BoardGuideResponse, BoardReference
 from app.profile_engine import (
     build_recommendation,
     extract_profile,
+    merge_rider_profile,
     merge_profiles,
     missing_profile_fields,
+    profile_completeness,
+    with_profile_source,
 )
+from app.volume_engine_v2 import build_volume_recommendation
 from app.structured_logging import emit_event
 
 
@@ -67,21 +77,26 @@ def health():
 
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception):
+    correlation_id = getattr(request.state, "correlation_id", None) or request.headers.get("X-Correlation-ID") or str(uuid.uuid4())
     if request.url.path == "/api/board-guide/chat":
         emit_event(
             "bodhi_recommendation_failed",
             "bodhi_api",
             status="failed",
             source="deterministic_intake_engine",
+            correlation_id=correlation_id,
             error_type=type(exc).__name__,
             error_message=str(exc),
         )
-    return JSONResponse(status_code=500, content={"detail": "Internal server error"})
+    return JSONResponse(status_code=500, content={"detail": "Internal server error"}, headers={"X-Correlation-ID": correlation_id})
 
 
 @app.post("/api/board-guide/chat", response_model=BoardGuideResponse)
-def board_guide_chat(request: BoardGuideRequest):
+def board_guide_chat(request: BoardGuideRequest, response: Response, http_request: Request):
     started = time.perf_counter()
+    correlation_id = http_request.headers.get("X-Correlation-ID") or str(uuid.uuid4())
+    http_request.state.correlation_id = correlation_id
+    response.headers["X-Correlation-ID"] = correlation_id
     emit_event(
         "bodhi_request_received",
         "bodhi_api",
@@ -89,13 +104,21 @@ def board_guide_chat(request: BoardGuideRequest):
         status="success",
         source="deterministic_intake_engine",
         conversation_turn_count=len(request.conversation),
+        correlation_id=correlation_id,
     )
-    history_profiles = [extract_profile(item.content) for item in request.conversation if item.role == "user"]
-    persisted_profile = request.intake_state or extract_profile("")
-    profile = merge_profiles(persisted_profile, *history_profiles, extract_profile(request.message, request.region))
+    history_profiles = [with_profile_source(extract_profile(item.content, request.region), "conversation_user") for item in request.conversation if item and item.role == "user" and item.content]
+    persisted_profile = with_profile_source(request.profile or request.intake_state or extract_profile(""), "conversation_profile")
+    account_profile = with_profile_source(request.account_profile, "account_profile") if request.account_profile else None
+    profile = account_profile or extract_profile("")
+    for historical in history_profiles:
+        profile = merge_rider_profile(profile, historical)
+    profile = merge_rider_profile(profile, persisted_profile, account_profile=account_profile)
+    current_profile = with_profile_source(extract_profile(request.message, request.region), "current_user")
+    profile = merge_rider_profile(profile, current_profile, account_profile=account_profile)
 
     missing = missing_profile_fields(profile)
     recommendation = build_recommendation(profile)
+    volume_recommendation = build_volume_recommendation(profile)
     questions = intake_questions(profile)
     guidance = volume_guidance(profile)
     intent = route_intent(request.message)
@@ -117,7 +140,10 @@ def board_guide_chat(request: BoardGuideRequest):
         status="success",
         source="deterministic_intake_engine",
         missing_field_count=len(missing),
+        profile_completeness=profile_completeness(profile),
+        correlation_id=correlation_id,
     )
+    comparison = None
 
     if intent == "greeting_request":
         suggested_boards = []
@@ -198,6 +224,17 @@ def board_guide_chat(request: BoardGuideRequest):
         ) if profile.region else "Which region should I check for those boards: Australia, Europe, or Indonesia?"
         questions = []
     elif intent == "comparison_request":
+        if len(active_topic.boards) >= 2:
+            comparison = BoardComparison(
+                board_a=BoardReference(brand=active_topic.boards[0]["brand"], model=active_topic.boards[0]["model"]),
+                board_b=BoardReference(brand=active_topic.boards[1]["brand"], model=active_topic.boards[1]["model"]),
+                similarities=[],
+                differences=[],
+                better_for_board_a=[],
+                better_for_board_b=[],
+                rider_specific_conclusion=None,
+                evidence_confidence=0.75,
+            )
         if active_topic.is_everyday_pushback:
             requested = active_topic.boards[:]
             phantom = find_requested_board("Pyzel Phantom")
@@ -391,10 +428,20 @@ def board_guide_chat(request: BoardGuideRequest):
         missing_field_count=len(missing),
         suggested_board_count=len(suggested_boards),
         duration_seconds=duration,
+        top_recommendation=(f"{suggested_boards[0].brand} {suggested_boards[0].model}" if suggested_boards else None),
+        correlation_id=correlation_id,
     )
+    llm_reply, model_deployment = safe_ask_bodhi(
+        message=request.message,
+        region=profile.region,
+        page_context=request.page_context,
+        recommendation_context=build_recommendation_context(suggested_boards),
+        official_recommendation_context=build_official_recommendation_context(recommendation),
+    )
+    final_reply = llm_reply or reply
     response = BoardGuideResponse(
         guide_name="Bodhi, the Core Lord",
-        reply=reply,
+        reply=final_reply,
         profile=profile,
         recommendation=recommendation,
         suggested_boards=suggested_boards,
@@ -406,6 +453,15 @@ def board_guide_chat(request: BoardGuideRequest):
         volumeGuidance=guidance,
         recommendations=public_recommendations(suggested_boards),
         intent=intent,
+        conversationProfile=profile,
+        profileCompleteness=profile_completeness(profile),
+        profileConflicts=profile.profile_conflicts,
+        volumeRecommendation=volume_recommendation,
+        comparison=comparison,
+        usefulFollowUpQuestions=questions,
+        modelDeployment=model_deployment,
+        recommendationVersion="bodhi-sprint-4",
+        correlationId=correlation_id,
     )
     emit_event(
         "bodhi_response_completed",
@@ -416,5 +472,6 @@ def board_guide_chat(request: BoardGuideRequest):
         missing_field_count=len(missing),
         suggested_board_count=len(suggested_boards),
         duration_seconds=duration,
+        correlation_id=correlation_id,
     )
     return response

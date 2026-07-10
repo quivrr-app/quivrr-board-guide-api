@@ -57,11 +57,19 @@ def canonical_stats(rows: list[dict]) -> dict[tuple[str, str], dict]:
 
 
 def compact_write(path: Path, schema: str, boards: list[dict]) -> None:
-    with path.open("w", encoding="utf-8", newline="\n") as handle:
-        handle.write('{\n  "schemaVersion": ' + json.dumps(schema) + ',\n  "boards": [\n')
-        for index, board in enumerate(boards):
-            handle.write("    " + json.dumps(board, ensure_ascii=False, separators=(",", ":")) + ("," if index < len(boards) - 1 else "") + "\n")
-        handle.write("  ]\n}\n")
+    lines = ['{', '  "schemaVersion": ' + json.dumps(schema) + ',', '  "boards": [']
+    for index, board in enumerate(boards):
+        lines.append("    " + json.dumps(board, ensure_ascii=False, separators=(",", ":")) + ("," if index < len(boards) - 1 else ""))
+    lines.extend(["  ]", "}"])
+    temp_path = path.with_suffix(path.suffix + ".tmp")
+    with temp_path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write("\n".join(lines) + "\n")
+    try:
+        temp_path.replace(path)
+    except PermissionError:
+        with path.open("w", encoding="utf-8", newline="\n") as handle:
+            handle.write("\n".join(lines) + "\n")
+        temp_path.unlink(missing_ok=True)
 
 
 def main() -> int:

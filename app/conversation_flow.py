@@ -380,6 +380,8 @@ def recommendation_reply(profile: RiderProfile, guidance: VolumeGuidance, boards
             f"Based on what you’ve told me, {guidance.label} is a sensible starting range—not an exact truth. "
             f"I’d look in the {guidance.recommended_category.lower()} lane."
         )
+        if guidance.recommended_category == "Performance Daily Driver":
+            base = base.replace("performance daily driver lane", "performance daily drivers lane")
     available = [board for board in boards if board.available_count > 0]
     if not available:
         return base + f" I can’t verify a matching board in {normalise_region(profile.region)} right now, so I won’t invent stock."

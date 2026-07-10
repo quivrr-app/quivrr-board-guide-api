@@ -157,11 +157,19 @@ def main() -> int:
     for requested in overrides:
         if (key(requested["brand"]), key(requested["model"])) not in board_map:
             unmatched.append({"brand": requested["brand"], "model": requested["model"], "reason": "not in canonical matrix"})
-    with OUTPUT_PATH.open("w", encoding="utf-8", newline="\n") as handle:
-        handle.write('{\n  "schemaVersion": "board_relationship_graph_v2",\n  "boards": [\n')
-        for index, row in enumerate(output):
-            handle.write("    " + json.dumps(row, ensure_ascii=False, separators=(",", ":")) + ("," if index < len(output) - 1 else "") + "\n")
-        handle.write("  ]\n}\n")
+    lines = ['{', '  "schemaVersion": "board_relationship_graph_v2",', '  "boards": [']
+    for index, row in enumerate(output):
+        lines.append("    " + json.dumps(row, ensure_ascii=False, separators=(",", ":")) + ("," if index < len(output) - 1 else ""))
+    lines.extend(["  ]", "}"])
+    temp_path = OUTPUT_PATH.with_suffix(OUTPUT_PATH.suffix + ".tmp")
+    with temp_path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write("\n".join(lines) + "\n")
+    try:
+        temp_path.replace(OUTPUT_PATH)
+    except PermissionError:
+        with OUTPUT_PATH.open("w", encoding="utf-8", newline="\n") as handle:
+            handle.write("\n".join(lines) + "\n")
+        temp_path.unlink(missing_ok=True)
     counts = {relation: sum(bool(row["relationships"][relation]) for row in output) for relation in RELATIONSHIPS}
     confidence = Counter(edge_row["confidence"] for row in output for edges in row["relationships"].values() for edge_row in edges)
     needing_review = [
