@@ -356,6 +356,15 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
             suggestedVolumeOrSizeRange=board.suggested_size or board.volume_range,
             waveRange=board.wave_range, skillFit=board.skill_fit,
             availableCount=board.available_count, region=board.region,
+            fitScore=board.fit_score,
+            fitConfidence=board.fit_confidence,
+            availabilityChecked=board.availability_checked,
+            availabilityStatus=board.availability_status,
+            inventorySource=board.inventory_source,
+            inventoryMatchCount=board.inventory_match_count,
+            manufacturerMatchCount=board.manufacturer_direct_count,
+            retailerMatchCount=board.retailer_count,
+            regionCode=board.region_code or board.region,
             exampleProductUrl=board.quivrr_search_url or board.example_live_source_url,
             quivrrSearchUrl=board.quivrr_search_url,
             sourceProductUrl=board.source_product_url or board.example_live_source_url,
@@ -383,16 +392,19 @@ def recommendation_reply(profile: RiderProfile, guidance: VolumeGuidance, boards
         )
         if guidance.recommended_category == "Performance Daily Driver":
             base = base.replace("performance daily driver lane", "performance daily drivers lane")
-    available = [board for board in boards if board.available_count > 0]
-    if not available:
+    if not boards:
         return base + f" I can’t verify a matching board in {normalise_region(profile.region)} right now, so I won’t invent stock."
-    names = ", ".join(f"{board.brand} {board.model}" for board in available[:5])
+    names = ", ".join(f"{board.brand} {board.model}" for board in boards[:5])
+    available = [board for board in boards if board.available_count > 0]
     explanation = ""
     if performance_brief:
         hybrids = [board for board in available if daily_driver_lane(board.brand, board.model) == "hybrid_daily_driver"]
         if hybrids:
             explanation = " Hybrid choices are more forgiving, but they aren’t my first pick for this brief."
-    return base + f" From verified {normalise_region(profile.region)} stock, I’d check {names} first." + explanation
+    if not available:
+        return base + f" I’d shortlist {names} first. I did not find live stock in {normalise_region(profile.region)} right now, so I won’t invent stock." + explanation
+    stock_names = ", ".join(f"{board.brand} {board.model}" for board in available[:5])
+    return base + f" I’d shortlist {names} first. Live stock exists in {normalise_region(profile.region)} for {stock_names}." + explanation
 
 
 def find_boards_in_message(message: str) -> list[dict]:

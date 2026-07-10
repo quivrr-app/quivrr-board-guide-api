@@ -4,6 +4,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 import main
+from app.models import SuggestedBoard
 
 
 class ApiContractTests(unittest.TestCase):
@@ -36,6 +37,38 @@ class ApiContractTests(unittest.TestCase):
         self.assertIn("source", body)
         self.assertIn("X-Correlation-ID", response.headers)
         self.assertEqual(body["correlationId"], response.headers["X-Correlation-ID"])
+
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_recommendation_and_availability_fields_remain_separate(self, inventory):
+        inventory.return_value = [SuggestedBoard(
+            brand="Pyzel",
+            model="Phantom",
+            category="Performance Daily Driver",
+            confidence=0.91,
+            fit_score=91,
+            fit_confidence="high",
+            why_it_fits="Drive and control",
+            available_count=0,
+            manufacturer_direct_count=0,
+            retailer_count=0,
+            availability_checked=True,
+            availability_status="not_found",
+            inventory_source=None,
+            inventory_match_count=0,
+            region="US",
+            region_code="US",
+        )]
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "I am 75kg intermediate surfing 3 to 5ft beach breaks in the United States and want a daily driver.",
+        })
+        self.assertEqual(response.status_code, 200)
+        recommendation = response.json()["recommendations"][0]
+        self.assertEqual(recommendation["fitScore"], 91)
+        self.assertEqual(recommendation["fitConfidence"], "high")
+        self.assertTrue(recommendation["availabilityChecked"])
+        self.assertEqual(recommendation["availabilityStatus"], "not_found")
+        self.assertEqual(recommendation["inventoryMatchCount"], 0)
+        self.assertEqual(recommendation["regionCode"], "US")
 
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: rows)
     def test_request_accepts_profile_alias(self, _inventory):

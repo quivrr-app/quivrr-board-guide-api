@@ -73,6 +73,8 @@ class SuggestedBoard(BaseModel):
     model: str
     category: str
     confidence: float
+    fit_score: int | None = None
+    fit_confidence: str | None = None
     why_it_fits: str
     description: str | None = None
     short_description: str | None = None
@@ -85,6 +87,10 @@ class SuggestedBoard(BaseModel):
     available_count: int = 0
     manufacturer_direct_count: int = 0
     retailer_count: int = 0
+    availability_checked: bool = False
+    availability_status: str = "not_checked"
+    inventory_source: str | None = None
+    inventory_match_count: int = 0
     example_live_source_url: str | None = None
     quivrr_search_url: str | None = None
     source_product_url: str | None = None
@@ -93,6 +99,7 @@ class SuggestedBoard(BaseModel):
     selected_volume_litres: float | None = None
     price_range: str | None = None
     region: str | None = None
+    region_code: str | None = None
     source: str = "quivrr_controlled_knowledge"
     board_model_id: int | None = Field(default=None, exclude=True)
 
@@ -202,6 +209,15 @@ class BodhiRecommendation(BaseModel):
     skill_fit: str | None = Field(default=None, alias="skillFit")
     available_count: int = Field(default=0, alias="availableCount")
     region: str | None = None
+    fit_score: int | None = Field(default=None, alias="fitScore")
+    fit_confidence: str | None = Field(default=None, alias="fitConfidence")
+    availability_checked: bool = Field(default=False, alias="availabilityChecked")
+    availability_status: str = Field(default="not_checked", alias="availabilityStatus")
+    inventory_source: str | None = Field(default=None, alias="inventorySource")
+    inventory_match_count: int = Field(default=0, alias="inventoryMatchCount")
+    manufacturer_match_count: int = Field(default=0, alias="manufacturerMatchCount")
+    retailer_match_count: int = Field(default=0, alias="retailerMatchCount")
+    region_code: str | None = Field(default=None, alias="regionCode")
     example_product_url: str | None = Field(default=None, alias="exampleProductUrl")
     quivrr_search_url: str | None = Field(default=None, alias="quivrrSearchUrl")
     source_product_url: str | None = Field(default=None, alias="sourceProductUrl")

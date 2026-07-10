@@ -216,12 +216,13 @@ def board_guide_chat(request: BoardGuideRequest, response: Response, http_reques
             offset = 1.5 if active_topic.relationship_type in {"moreForgivingBoards", "morePaddleBoards", "stepDownFromBoards"} else 0
             stock_profile = profile.model_copy(update={"target_volume_litres": profile.current_volume_litres + offset})
         checked = enrich_suggestions_with_inventory(canonical, stock_profile) if profile.region else []
-        suggested_boards = [row for row in checked if row.available_count > 0]
-        names = ", ".join(f"{row.brand} {row.model}" for row in suggested_boards)
+        suggested_boards = checked
+        available = [row for row in suggested_boards if row.available_count > 0]
+        names = ", ".join(f"{row.brand} {row.model}" for row in available)
         requested_names = ", ".join(f"{row['brand']} {row['model']}" for row in active_topic.boards)
         reply = (
             f"I checked live {profile.region} stock for {requested_names}. "
-            + (f"The available matches are {names}." if suggested_boards else "I can’t verify a live match for those boards right now.")
+            + (f"The available matches are {names}." if available else "I can’t verify a live match for those boards right now.")
         ) if profile.region else "Which region should I check for those boards: Australia, Europe, or Indonesia?"
         questions = []
     elif intent == "comparison_request":
@@ -250,7 +251,7 @@ def board_guide_chat(request: BoardGuideRequest, response: Response, http_reques
                 requested.append(phantom)
             canonical = [suggestions_for_board(row)[0] for row in requested if suggestions_for_board(row)]
             checked = enrich_suggestions_with_inventory(canonical, profile) if profile.region else []
-            suggested_boards = [row for row in checked if row.available_count > 0]
+            suggested_boards = checked
             reply = everyday_pushback_reply(profile.region, requested, suggested_boards)
         else:
             suggested_boards = []
@@ -270,7 +271,7 @@ def board_guide_chat(request: BoardGuideRequest, response: Response, http_reques
                 inventory_profile = profile.model_copy(update={"target_volume_litres": profile.current_volume_litres + offset})
             if profile.region:
                 checked = enrich_suggestions_with_inventory(canonical_boards, inventory_profile)
-                suggested_boards = [row for row in checked if row.available_count > 0]
+                suggested_boards = checked
             else:
                 suggested_boards = []
             reply = relationship_reply(source_board, relation, canonical_boards, suggested_boards, profile.region)
@@ -418,7 +419,6 @@ def board_guide_chat(request: BoardGuideRequest, response: Response, http_reques
         else:
             suggested_boards = recommend_from_matrix(profile)
             suggested_boards = enrich_suggestions_with_inventory(suggested_boards, profile)
-        suggested_boards = [board for board in suggested_boards if board.available_count > 0]
         reply = recommendation_reply(profile, guidance, suggested_boards) if guidance else opening_message(profile.region)
         if questions:
             reply += " " + questions[0]

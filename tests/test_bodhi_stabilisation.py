@@ -145,6 +145,30 @@ class BodhiStabilisationTests(unittest.TestCase):
         self.assertIn("boardSizeId=12345", enriched.quivrr_search_url)
         self.assertEqual(public.example_product_url, enriched.quivrr_search_url)
         self.assertEqual(public.source_product_url, "https://retailer.example/phantom")
+        self.assertEqual(public.availability_status, "available")
+        self.assertTrue(public.availability_checked)
+        self.assertEqual(public.inventory_match_count, 1)
+        self.assertEqual(public.manufacturer_match_count, 0)
+        self.assertEqual(public.retailer_match_count, 1)
+        self.assertEqual(public.region_code, "EU")
+
+    def test_us_deep_link_uses_united_states_path(self):
+        board = SuggestedBoard(
+            brand="Pyzel",
+            model="Ghost",
+            category="Performance Daily Driver",
+            confidence=0.91,
+            why_it_fits="fit",
+        )
+        enriched = enrich_suggestions_with_inventory([board], RiderProfile(region="US"), lambda path: {
+            "/api/brands": [{"brandId": 1, "brandName": "Pyzel"}],
+            "/api/models/1": [{"modelId": 2, "modelName": "Ghost"}],
+            "/api/constructions/2": [{"construction": "PU"}],
+            "/api/sizes/2/PU": [{"boardSizeId": 999, "label": "6'0 | 30L", "volumeLitres": 30, "construction": "PU"}],
+            "/api/search?boardSizeId=999&region=US": {"regionCode": "US", "directManufacturerMatches": [], "exactRetailerMatches": [], "closeRetailerMatches": []},
+        }[path])[0]
+        self.assertTrue(enriched.quivrr_search_url.startswith("https://quivrr.app/united-states?"))
+        self.assertEqual(enriched.availability_status, "not_found")
 
 
 if __name__ == "__main__":

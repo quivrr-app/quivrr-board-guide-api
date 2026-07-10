@@ -23,7 +23,28 @@ REGION_ALIASES = {
     "INDONESIA": "ID",
 }
 BRAND_ALIASES = {"CHEMISTRY": "CHEMISTRY SURFBOARDS", "DMS": "DMS SURFBOARDS"}
-QUIVRR_REGION_PATHS = {"AU": "australia", "EU": "europe", "US": "us", "ID": "indonesia"}
+QUIVRR_REGION_PATHS = {"AU": "australia", "EU": "europe", "US": "united-states", "ID": "indonesia"}
+
+
+def fit_score_label(confidence: float | None) -> str | None:
+    if confidence is None:
+        return None
+    score = confidence * 100 if confidence <= 1 else confidence
+    if score >= 85:
+        return "high"
+    if score >= 75:
+        return "medium"
+    return "limited"
+
+
+def inventory_source_label(manufacturer_count: int, retailer_count: int) -> str | None:
+    if manufacturer_count and retailer_count:
+        return "manufacturer_direct_and_retailer"
+    if manufacturer_count:
+        return "manufacturer_direct"
+    if retailer_count:
+        return "retailer"
+    return None
 
 
 def quivrr_search_url(board: SuggestedBoard, region: str, size: dict | None = None) -> str:
@@ -129,9 +150,11 @@ def _summarise_stock(payloads: list[dict], region: str, construction_preference:
     rows = []
     direct_rows = {}
     retailer_rows = {}
+    checked = False
     for payload in payloads:
         if normalise_region(payload.get("regionCode")) != region:
             continue
+        checked = True
         direct = [row for row in payload.get("directManufacturerMatches", []) if row.get("isAvailable") is not False]
         retailers = [
             row for key in ("exactRetailerMatches", "closeRetailerMatches")
@@ -163,9 +186,13 @@ def _summarise_stock(payloads: list[dict], region: str, construction_preference:
         currency = next(iter(currencies))
         price_range = f"{min(prices):g}-{max(prices):g} {currency}" if min(prices) != max(prices) else f"{min(prices):g} {currency}"
     return {
+        "availability_checked": checked,
+        "availability_status": "available" if (direct_count + retailer_count) > 0 else ("not_found" if checked else "not_checked"),
         "available_count": direct_count + retailer_count,
         "manufacturer_direct_count": direct_count,
         "retailer_count": retailer_count,
+        "inventory_match_count": direct_count + retailer_count,
+        "inventory_source": inventory_source_label(direct_count, retailer_count),
         "example_live_source_url": urls[0] if urls else None,
         "price_range": price_range,
     }
@@ -182,12 +209,32 @@ def enrich_suggestions_with_inventory(
     if target is None and fit is not None:
         target = (fit.volume_low + fit.volume_high) / 2
     if not region:
-        return suggestions
+        return [
+            suggestion.model_copy(update={
+                "fit_score": round((suggestion.confidence * 100) if suggestion.confidence <= 1 else suggestion.confidence),
+                "fit_confidence": fit_score_label(suggestion.confidence),
+                "availability_checked": False,
+                "availability_status": "not_checked",
+                "inventory_source": None,
+                "inventory_match_count": 0,
+                "region_code": None,
+            })
+            for suggestion in suggestions
+        ]
 
     enriched = []
     for suggestion in suggestions:
-        stock = {"available_count": 0, "manufacturer_direct_count": 0, "retailer_count": 0,
-                 "example_live_source_url": None, "price_range": None}
+        stock = {
+            "available_count": 0,
+            "manufacturer_direct_count": 0,
+            "retailer_count": 0,
+            "availability_checked": False,
+            "availability_status": "unknown",
+            "inventory_source": None,
+            "inventory_match_count": 0,
+            "example_live_source_url": None,
+            "price_range": None,
+        }
         selected_size = None
         selected_size_data = None
         try:
@@ -209,10 +256,14 @@ def enrich_suggestions_with_inventory(
             pass
 
         source_url = stock.get("example_live_source_url")
+        fit_score = round((suggestion.confidence * 100) if suggestion.confidence <= 1 else suggestion.confidence)
         enriched.append(suggestion.model_copy(update={
             **stock,
+            "fit_score": fit_score,
+            "fit_confidence": fit_score_label(suggestion.confidence),
             "suggested_size": selected_size,
             "region": region,
+            "region_code": region,
             "quivrr_search_url": quivrr_search_url(suggestion, region, selected_size_data),
             "source_product_url": source_url,
             "board_size_id": selected_size_data.get("boardSizeId") if selected_size_data else None,
@@ -316,14 +367,20 @@ def locate_exact_board(
         output.append(board.model_copy(update={
             "category": "Exact stock" if exact else "Close stock",
             "why_it_fits": f"{'Exact' if exact else 'Close'} verified {region} match from {source_name}",
+            "fit_score": round((board.confidence * 100) if board.confidence <= 1 else board.confidence),
+            "fit_confidence": fit_score_label(board.confidence),
             "available_count": 1,
             "manufacturer_direct_count": 1 if source_name == "Manufacturer Direct" else 0,
             "retailer_count": 0 if source_name == "Manufacturer Direct" else 1,
+            "availability_checked": True,
+            "availability_status": "available",
+            "inventory_source": "manufacturer_direct" if source_name == "Manufacturer Direct" else "retailer",
+            "inventory_match_count": 1,
             "example_live_source_url": url, "source_product_url": url,
             "quivrr_search_url": quivrr_search_url(board, region, size),
             "board_size_id": size.get("boardSizeId"), "selected_construction": size.get("construction"),
             "selected_volume_litres": size.get("volumeLitres"),
-            "price_range": price, "region": region,
+            "price_range": price, "region": region, "region_code": region,
             "suggested_size": " | ".join(filter(None, [row.get("length"), f"{row.get('volumeLitres'):g}L" if row.get("volumeLitres") is not None else None, row.get("construction")])),
         }))
         if len(output) >= 8:
