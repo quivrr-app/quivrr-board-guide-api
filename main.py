@@ -13,6 +13,7 @@ from app.azure_openai_client import (
     is_azure_openai_configured,
     safe_ask_bodhi,
 )
+from app.comparison_engine import compare_board_models
 from app.conversation_flow import (
     comparison_reply, enough_for_recommendations, expert_board_question_reply, find_requested_board,
     general_board_reply, graph_suggestions, greeting_reply, has_intake_signal, intake_questions, opening_message,
@@ -225,7 +226,14 @@ def board_guide_chat(request: BoardGuideRequest, response: Response, http_reques
         questions = []
     elif intent == "comparison_request":
         if len(active_topic.boards) >= 2:
-            comparison = BoardComparison(
+            engine_comparison = compare_board_models(
+                active_topic.boards[0]["brand"],
+                active_topic.boards[0]["model"],
+                active_topic.boards[1]["brand"],
+                active_topic.boards[1]["model"],
+                profile,
+            )
+            comparison = engine_comparison.comparison if engine_comparison else BoardComparison(
                 board_a=BoardReference(brand=active_topic.boards[0]["brand"], model=active_topic.boards[0]["model"]),
                 board_b=BoardReference(brand=active_topic.boards[1]["brand"], model=active_topic.boards[1]["model"]),
                 similarities=[],

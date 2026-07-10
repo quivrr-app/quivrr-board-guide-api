@@ -6,6 +6,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from app.board_expert_matrix import find_matrix_board
+from app.board_relationships import normalize_relationship_type
 from app.models import RiderProfile, SuggestedBoard
 from app.board_reputation import relationship_expert_intro
 
@@ -30,31 +31,31 @@ def find_relationship_board(brand: str, model: str) -> dict | None:
 def relationship_type(message: str) -> str | None:
     text = _key(message)
     if any(token in text for token in ("fish alternative", "fish version", "as a fish")):
-        return "fishAlternativeBoards"
+        return normalize_relationship_type("fishAlternativeBoards")
     if any(token in text for token in ("shortboard alternative", "shortboard version", "as a shortboard")):
-        return "shortboardAlternativeBoards"
+        return normalize_relationship_type("shortboardAlternativeBoards")
     if any(token in text for token in ("step up from", "next board after", "after my")):
-        return "stepUpFromBoards"
+        return normalize_relationship_type("stepUpFromBoards")
     if any(token in text for token in ("step down from", "step down", "less demanding")):
-        return "stepDownFromBoards"
+        return normalize_relationship_type("stepDownFromBoards")
     if any(token in text for token in ("more paddle", "easier paddle", "paddles better", "catch more waves")):
-        return "morePaddleBoards"
+        return normalize_relationship_type("morePaddleBoards")
     if "point" in text and any(token in text for token in ("like", "better", "alternative")):
-        return "betterPointBreakBoards"
+        return normalize_relationship_type("betterPointBreakBoards")
     if any(token in text for token in ("more performance", "sharper", "more responsive")):
-        return "morePerformanceBoards"
+        return normalize_relationship_type("morePerformanceBoards")
     if any(token in text for token in ("more forgiving", "easier than", "easier", "less demanding")):
-        return "moreForgivingBoards"
+        return normalize_relationship_type("moreForgivingBoards")
     if "small wave" in text:
-        return "betterSmallWaveBoards"
+        return normalize_relationship_type("betterSmallWaveBoards")
     if "good wave" in text:
-        return "betterGoodWaveBoards"
+        return normalize_relationship_type("betterGoodWaveBoards")
     if "beach break" in text:
-        return "betterBeachBreakBoards"
+        return normalize_relationship_type("betterBeachBreakBoards")
     if "reef" in text:
-        return "betterReefBoards"
+        return normalize_relationship_type("betterReefBoards")
     if any(token in text for token in ("similar", "like", "alternative")):
-        return "similarBoards"
+        return normalize_relationship_type("similarBoards")
     return None
 
 
@@ -84,6 +85,7 @@ def source_board_from_message(message: str, profile: RiderProfile) -> dict | Non
 
 
 def relationship_suggestions(source: dict, relation: str, limit: int = 8, profile: RiderProfile | None = None) -> list[SuggestedBoard]:
+    relation = normalize_relationship_type(relation) or relation
     output = []
     size_hint = None
     if profile and profile.current_volume_litres:

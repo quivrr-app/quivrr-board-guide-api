@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from app.board_graph_engine import board_key, compare_boards, find_board, load_graph
+from app.comparison_engine import compare_board_models
 from app.inventory_client import normalise_region
 from app.models import BodhiRecommendation, RiderProfile, SuggestedBoard, VolumeGuidance
 from app.rider_fit import recommend_rider_fit
@@ -465,8 +466,7 @@ def comparison_reply(message: str, boards: list[dict] | None = None, profile: Ri
             "Do you want easier speed, more performance, or cleaner point-break lines?"
         )
     left, right = boards[:2]
-    comparison = compare_boards(load_graph(), left["brand"], left["model"], right["brand"], right["model"])
-    left_data, right_data = comparison["left"], comparison["right"]
+    engine_result = compare_board_models(left["brand"], left["model"], right["brand"], right["model"], profile)
     left_expert = find_matrix_board(left["brand"], left["model"])
     right_expert = find_matrix_board(right["brand"], right["model"])
     lane_note = ""
@@ -504,7 +504,11 @@ def comparison_reply(message: str, boards: list[dict] | None = None, profile: Ri
         intro += "Here’s how I’d rank them for everyday usability: "
 
     preferred = {"happy everyday": 30, "phantom": 20, "xero gravity": 10}
-    ranked = sorted(boards, key=lambda board: -preferred.get(board["model"].replace("-", " ").lower(), 0))
+    ranked = boards[:2]
+    if engine_result:
+        ranked = [{"brand": row.brand, "model": row.model} for row in engine_result.ordered_boards]
+    else:
+        ranked = sorted(boards, key=lambda board: -preferred.get(board["model"].replace("-", " ").lower(), 0))
     notes = {
         "happy everyday": "the friendliest everyday shortboard here, with the easiest balance of speed and forgiveness",
         "phantom": "a strong performance daily driver with more hold and precision while staying usable",
@@ -528,6 +532,8 @@ def comparison_reply(message: str, boards: list[dict] | None = None, profile: Ri
         " If you want easier every day, take Happy Everyday; if you want sharper, lean Phantom or Xero Gravity."
         if trio else " The best pick depends on whether you value forgiveness or sharper performance."
     )
+    if engine_result and engine_result.comparison.rider_specific_conclusion:
+        closing = f" {engine_result.comparison.rider_specific_conclusion}" + closing
     if not target:
         fit = recommend_volume_v2(profile) if profile else None
         if fit:
