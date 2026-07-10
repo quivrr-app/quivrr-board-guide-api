@@ -44,6 +44,14 @@ class ProfileEngineTests(unittest.TestCase):
         self.assertGreater(result.confidence_by_field["weight_kg"], 0.8)
         self.assertEqual(result.profile.field_provenance["weight_kg"], "current_user")
 
+    def test_weight_statement_does_not_get_mistaken_for_age(self):
+        result = extract_profile_result("I am 72 kg and need an all rounder for Europe.", "EU")
+
+        self.assertEqual(result.profile.weight_kg, 72)
+        self.assertIsNone(result.profile.age)
+        self.assertIsNone(result.profile.age_band)
+        self.assertEqual(result.profile.region, "EU")
+
     def test_profile_completeness_reflects_recommendation_readiness(self):
         sparse = RiderProfile(weight_kg=75)
         rich = RiderProfile(

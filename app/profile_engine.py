@@ -112,7 +112,11 @@ def _extract_target_volume(text: str) -> float | None:
 def _extract_age(text: str) -> int | None:
     match = re.search(r"\b(?:age(?:d)?\s*)?([1-8][0-9])\s*(?:years? old|yo)\b", text)
     if not match:
-        match = re.search(r"\b(?:i(?:'m|m| am))\s+([1-8][0-9])\b", text)
+        match = re.search(
+            r"\b(?:i(?:'m|m| am))\s+([1-8][0-9])\b"
+            r"(?!\s*(?:kgs?|kilograms?|kilos?|cm|ft|feet|foot|l|litre|litres)\b)",
+            text,
+        )
     if not match:
         match = re.search(r"\b([1-8][0-9])\b(?=,\s*(?:intermediate|advanced|expert|beginner|goofy|regular|fit|surfer))", text)
     return int(match.group(1)) if match else None
