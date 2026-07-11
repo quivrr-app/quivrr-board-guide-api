@@ -4,6 +4,8 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 import main
+from app.authenticated_profile import AuthenticatedProfileContext
+from app.models import RiderProfile
 
 
 class BodhiApiTests(unittest.TestCase):
@@ -34,6 +36,55 @@ class BodhiApiTests(unittest.TestCase):
     def test_region_aware_opening_greeting(self, _inventory, _azure):
         response = self.client.post("/api/board-guide/chat", json={"message": "", "region": "EU"})
         self.assertIn("live European board availability", response.json()["reply"])
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    @patch("main.load_authenticated_profile_context")
+    def test_authenticated_profile_personalises_first_reply(self, auth_loader, _inventory, _azure):
+        auth_loader.return_value = AuthenticatedProfileContext(
+            authenticated=True,
+            profile_loaded=True,
+            user_id="user-123",
+            profile=RiderProfile(
+                display_name="Nathan Dunn",
+                weight_kg=78,
+                ability="Advanced",
+                region="ID",
+                wave_type="Point Break",
+                goal="Performance progression",
+                preferred_brands=["JS Industries", "Album"],
+            ),
+        )
+        response = self.client.post(
+            "/api/board-guide/chat",
+            json={"message": "Need a daily driver for 3-5ft surf"},
+            headers={"Authorization": "Bearer token-123"},
+        )
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertTrue(body["reply"].startswith("Hey Nathan."))
+        self.assertEqual(body["conversationProfile"]["region"], "ID")
+        self.assertEqual(body["conversationProfile"]["ability"], "Advanced")
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    @patch("main.load_authenticated_profile_context")
+    def test_invalid_bearer_token_falls_back_to_anonymous_chat(self, auth_loader, _inventory, _azure):
+        auth_loader.return_value = AuthenticatedProfileContext(
+            authenticated=False,
+            profile_loaded=False,
+            invalid_token=True,
+            profile=None,
+        )
+        response = self.client.post(
+            "/api/board-guide/chat",
+            json={"message": "Looking for a fish in Australia"},
+            headers={"Authorization": "Bearer bad-token"},
+        )
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertNotIn("Nathan", body["reply"])
+        self.assertEqual(body["conversationProfile"].get("display_name"), None)
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)

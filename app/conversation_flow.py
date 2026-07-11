@@ -70,6 +70,22 @@ def opening_message(region: str | None) -> str:
     )
 
 
+def personalise_opening(reply: str, profile: RiderProfile, *, is_first_turn: bool) -> str:
+    display_name = (profile.display_name or "").strip()
+    if not is_first_turn or not display_name:
+        return reply
+    first_name = display_name.split()[0].strip(" ,.!?")
+    if not first_name:
+        return reply
+    if reply.lower().startswith("hey mate. "):
+        return reply.replace("Hey mate. ", f"Hey {first_name}. ", 1)
+    if reply.lower().startswith("hey mate, "):
+        return reply.replace("Hey mate, ", f"Hey {first_name}, ", 1)
+    if reply.lower().startswith("hey "):
+        return reply.replace("Hey ", f"Hey {first_name}. ", 1)
+    return f"Hey {first_name}. {reply}"
+
+
 def has_intake_signal(profile: RiderProfile) -> bool:
     return any(value not in (None, "") for field, value in profile.model_dump().items() if field != "region")
 

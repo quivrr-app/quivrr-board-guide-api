@@ -4,6 +4,7 @@ from pydantic import AliasChoices, BaseModel, ConfigDict, Field
 class RiderProfile(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
 
+    display_name: str | None = None
     height_cm: int | None = None
     weight_kg: int | None = None
     age: int | None = None
@@ -38,6 +39,7 @@ class RiderProfile(BaseModel):
         serialization_alias="preferred_feel",
     )
     goal: str | None = None
+    preferred_brands: list[str] = Field(default_factory=list)
     construction_preference: str | None = None
     requested_construction: str | None = None
     requested_length: str | None = None
@@ -51,6 +53,8 @@ class RiderProfile(BaseModel):
     current_board_volume_litres: float | None = None
     current_board_feedback: str | None = None
     target_volume_litres: float | None = None
+    home_break: str | None = None
+    home_country: str | None = None
 
     confidence: float | None = None
     profile_sources: list[str] = Field(default_factory=list)

@@ -38,6 +38,10 @@ class BoardIntelligenceRecord:
     graph_eligible: bool
     classified: bool
     unclassified: bool
+    release_year: int | None = None
+    model_generation: str | None = None
+    is_current_model: bool | None = None
+    is_discontinued: bool | None = None
     ability_tags: tuple[str, ...] = ()
     wave_tags: tuple[str, ...] = ()
     wave_types: tuple[str, ...] = ()
@@ -77,6 +81,15 @@ def _coerce_float(value: object) -> float | None:
         if value is None or value == "":
             return None
         return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _coerce_int(value: object) -> int | None:
+    try:
+        if value is None or value == "":
+            return None
+        return int(value)
     except (TypeError, ValueError):
         return None
 
@@ -137,6 +150,56 @@ def _sizes_volume_range(sizes: tuple[BoardSize, ...]) -> tuple[float | None, flo
     if not volumes:
         return None, None
     return min(volumes), max(volumes)
+
+
+def _metadata_release_year(model: str, description_text: str, metadata: dict, curated: dict) -> int | None:
+    explicit = _coerce_int(curated.get("release_year") or metadata.get("releaseYear"))
+    if explicit and 1990 <= explicit <= 2100:
+        return explicit
+
+    search_text = " ".join([model or "", description_text or ""])
+    for pattern in [r"\bnew for (20[0-9]{2})\b", r"\breleased in (20[0-9]{2})\b", r"\bfor (20[0-9]{2})\b"]:
+        match = re.search(pattern, search_text, flags=re.IGNORECASE)
+        if match:
+            year = _coerce_int(match.group(1))
+            if year and 1990 <= year <= 2100:
+                return year
+    return None
+
+
+def _metadata_model_generation(model: str, metadata: dict, curated: dict) -> str | None:
+    explicit = curated.get("model_generation") or metadata.get("modelGeneration")
+    if explicit:
+        return str(explicit).strip() or None
+    match = re.search(r"\b([2-9](?:\.[0-9])?)\b", model or "")
+    return match.group(1) if match else None
+
+
+def _metadata_current_flag(model: str, description_text: str, metadata: dict, curated: dict) -> bool | None:
+    explicit = curated.get("is_current_model")
+    if isinstance(explicit, bool):
+        return explicit
+    explicit = metadata.get("isCurrentModel")
+    if isinstance(explicit, bool):
+        return explicit
+
+    search_text = " ".join([model or "", description_text or ""]).lower()
+    if any(
+        token in search_text
+        for token in ["all-new", "all new", "new for 20", "updated version", "new improved", "next generation", "latest innovation"]
+    ):
+        return True
+    return None
+
+
+def _metadata_discontinued_flag(description_text: str, metadata: dict, curated: dict) -> bool | None:
+    explicit = curated.get("is_discontinued")
+    if isinstance(explicit, bool):
+        return explicit
+    explicit = metadata.get("isDiscontinued")
+    if isinstance(explicit, bool):
+        return explicit
+    return True if "discontinued" in (description_text or "").lower() else None
 
 
 def _build_records() -> dict[str, BoardIntelligenceRecord]:
@@ -215,6 +278,13 @@ def _build_records() -> dict[str, BoardIntelligenceRecord]:
         surfer = canonical.get("surfer") or {}
         design = canonical.get("design") or {}
         metadata = canonical.get("metadata") or {}
+        description_text = (
+            curated.get("model_description")
+            or generated.get("model_description")
+            or description.get("manufacturerDescription")
+            or profile.get("description")
+            or ""
+        )
 
         sizes = _sizes_from_profile(profile)
         size_volume_min, size_volume_max = _sizes_volume_range(sizes)
@@ -247,12 +317,7 @@ def _build_records() -> dict[str, BoardIntelligenceRecord]:
             category=category_value,
             primary_category=primary_category,
             lane=daily_driver_lane(profile.get("brand"), profile.get("model")),
-            description=(
-                curated.get("model_description")
-                or generated.get("model_description")
-                or description.get("manufacturerDescription")
-                or profile.get("description")
-            ),
+            description=description_text or None,
             short_description=(
                 curated.get("short_description")
                 or generated.get("short_description")
@@ -275,6 +340,10 @@ def _build_records() -> dict[str, BoardIntelligenceRecord]:
             graph_eligible=bool(graph),
             classified=bool(primary_category or category_value not in {None, "", "Surfboard"}),
             unclassified=key in unclassified_keys,
+            release_year=_metadata_release_year(profile.get("model") or "", description_text, metadata, curated),
+            model_generation=_metadata_model_generation(profile.get("model") or "", metadata, curated),
+            is_current_model=_metadata_current_flag(profile.get("model") or "", description_text, metadata, curated),
+            is_discontinued=_metadata_discontinued_flag(description_text, metadata, curated),
             ability_tags=_text_list(
                 curated.get("ability_tags"),
                 generated.get("ability_tags"),

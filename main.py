@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi import Header
 from fastapi import Request
 from fastapi import Response
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,10 +14,12 @@ from app.azure_openai_client import (
     is_azure_openai_configured,
     safe_ask_bodhi,
 )
+from app.authenticated_profile import load_authenticated_profile_context
 from app.comparison_engine import compare_board_models
 from app.conversation_flow import (
     comparison_reply, enough_for_recommendations, expert_board_question_reply, find_requested_board,
     general_board_reply, graph_suggestions, greeting_reply, has_intake_signal, intake_questions, opening_message,
+    personalise_opening,
     is_memory_correction, partial_volume_reply, fish_advice_reply, board_family_reply,
     public_recommendations, recommendation_reply, site_help_reply, suggestions_for_board,
     volume_advice_reply, volume_guidance, everyday_pushback_reply,
@@ -93,7 +96,12 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
 
 
 @app.post("/api/board-guide/chat", response_model=BoardGuideResponse)
-def board_guide_chat(request: BoardGuideRequest, response: Response, http_request: Request):
+def board_guide_chat(
+    request: BoardGuideRequest,
+    response: Response,
+    http_request: Request,
+    authorization: str | None = Header(default=None),
+):
     started = time.perf_counter()
     correlation_id = http_request.headers.get("X-Correlation-ID") or str(uuid.uuid4())
     http_request.state.correlation_id = correlation_id
@@ -105,11 +113,16 @@ def board_guide_chat(request: BoardGuideRequest, response: Response, http_reques
         status="success",
         source="deterministic_intake_engine",
         conversation_turn_count=len(request.conversation),
+        authenticated=bool(authorization),
         correlation_id=correlation_id,
     )
+    auth_context = load_authenticated_profile_context(authorization, correlation_id=correlation_id)
     history_profiles = [with_profile_source(extract_profile(item.content, request.region), "conversation_user") for item in request.conversation if item and item.role == "user" and item.content]
+    legacy_account_profile = with_profile_source(request.account_profile, "conversation_profile") if request.account_profile else None
     persisted_profile = with_profile_source(request.profile or request.intake_state or extract_profile(""), "conversation_profile")
-    account_profile = with_profile_source(request.account_profile, "account_profile") if request.account_profile else None
+    if legacy_account_profile:
+        persisted_profile = merge_rider_profile(legacy_account_profile, persisted_profile)
+    account_profile = auth_context.profile if auth_context.profile else None
     profile = account_profile or extract_profile("")
     for historical in history_profiles:
         profile = merge_rider_profile(profile, historical)
@@ -140,15 +153,22 @@ def board_guide_chat(request: BoardGuideRequest, response: Response, http_reques
         region=profile.region or request.region,
         status="success",
         source="deterministic_intake_engine",
+        authenticated=auth_context.authenticated,
+        profile_loaded=auth_context.profile_loaded,
+        profile_fields_used=sorted(
+            field for field, value in profile.model_dump().items()
+            if field not in {"profile_sources", "profile_conflicts", "field_provenance"} and value not in (None, "", [], {})
+        ),
         missing_field_count=len(missing),
         profile_completeness=profile_completeness(profile),
         correlation_id=correlation_id,
     )
     comparison = None
+    is_first_turn = not any(item.role == "assistant" for item in request.conversation if item)
 
     if intent == "greeting_request":
         suggested_boards = []
-        reply = greeting_reply(profile.region)
+        reply = personalise_opening(greeting_reply(profile.region), profile, is_first_turn=is_first_turn)
         questions = []
     elif intent == "expert_board_question":
         suggested_boards = []
@@ -397,7 +417,7 @@ def board_guide_chat(request: BoardGuideRequest, response: Response, http_reques
         questions = []
     elif not has_intake_signal(profile):
         suggested_boards = []
-        reply = opening_message(profile.region)
+        reply = personalise_opening(opening_message(profile.region), profile, is_first_turn=is_first_turn)
     elif profile.weight_kg and profile.ability and not (profile.wave_size or profile.wave_type or profile.wave_power):
         suggested_boards = []
         reply = partial_volume_reply(profile, acknowledge_memory=is_memory_correction(request.message))
@@ -420,6 +440,7 @@ def board_guide_chat(request: BoardGuideRequest, response: Response, http_reques
             suggested_boards = recommend_from_matrix(profile)
             suggested_boards = enrich_suggestions_with_inventory(suggested_boards, profile)
         reply = recommendation_reply(profile, guidance, suggested_boards) if guidance else opening_message(profile.region)
+        reply = personalise_opening(reply, profile, is_first_turn=is_first_turn)
         if questions:
             reply += " " + questions[0]
     else:
@@ -433,8 +454,12 @@ def board_guide_chat(request: BoardGuideRequest, response: Response, http_reques
         region=profile.region or request.region,
         status="success",
         source=source,
+        authenticated=auth_context.authenticated,
+        profile_loaded=auth_context.profile_loaded,
         missing_field_count=len(missing),
         suggested_board_count=len(suggested_boards),
+        recommendation_count=len(suggested_boards),
+        recommendation_source="authenticated_profile" if auth_context.profile_loaded else "conversation_only",
         duration_seconds=duration,
         top_recommendation=(f"{suggested_boards[0].brand} {suggested_boards[0].model}" if suggested_boards else None),
         correlation_id=correlation_id,
@@ -477,6 +502,8 @@ def board_guide_chat(request: BoardGuideRequest, response: Response, http_reques
         region=profile.region or request.region,
         status="success",
         source=source,
+        authenticated=auth_context.authenticated,
+        profile_loaded=auth_context.profile_loaded,
         missing_field_count=len(missing),
         suggested_board_count=len(suggested_boards),
         duration_seconds=duration,
