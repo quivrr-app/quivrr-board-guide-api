@@ -1,4 +1,4 @@
-from pydantic import AliasChoices, BaseModel, ConfigDict, Field
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field, model_validator
 
 
 class RiderProfile(BaseModel):
@@ -212,7 +212,7 @@ class BodhiRecommendation(BaseModel):
     volume_hint: str | None = Field(default=None, alias="volumeHint")
     availability_label: str | None = Field(default=None, alias="availabilityLabel")
     search_url: str | None = Field(default=None, alias="searchUrl")
-    why_it_fits: str = Field(alias="whyItFits")
+    why_it_fits: str | None = Field(default=None, alias="whyItFits")
     suggested_volume_or_size_range: str | None = Field(default=None, alias="suggestedVolumeOrSizeRange")
     wave_range: str | None = Field(default=None, alias="waveRange")
     skill_fit: str | None = Field(default=None, alias="skillFit")
@@ -233,6 +233,15 @@ class BodhiRecommendation(BaseModel):
     source_type: str = Field(alias="sourceType")
     price_range: str | None = Field(default=None, alias="priceRange")
     confidence: float
+
+    @model_validator(mode="before")
+    @classmethod
+    def populate_compact_reason(cls, values):
+        if isinstance(values, dict) and not values.get("whyItFits") and not values.get("why_it_fits"):
+            fallback = values.get("shortReason") or values.get("short_reason") or values.get("reason") or values.get("summary")
+            if fallback:
+                values = {**values, "whyItFits": fallback}
+        return values
 
 
 class BoardGuideMessage(BaseModel):
