@@ -63,6 +63,8 @@ class IntentRouterTests(unittest.TestCase):
             "What volume should I ride if I'm 75kg?": "volume_advice_request",
             "How many litres should I be on?": "volume_advice_request",
             "Where can I buy a JS Monsta 5'11 CarboTune in Europe?": "exact_board_location_request",
+            "Hey Bohdi": "greeting_request",
+            "How are you?": "greeting_request",
         }
         for message, expected in cases.items():
             with self.subTest(message=message):
@@ -392,6 +394,15 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertEqual(body["intent"], "capability_help_request")
         self.assertIn("choose a board", body["reply"])
         self.assertNotIn("Start in the Europe search", body["reply"])
+
+    def test_small_wave_request_asks_a_targeted_question(self):
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "I want something for weak waves",
+            "region": "AU",
+        })
+        body = response.json()
+        self.assertEqual(body["recommendations"], [])
+        self.assertIn("easier paddling and speed", body["reply"])
 
 
 if __name__ == "__main__":

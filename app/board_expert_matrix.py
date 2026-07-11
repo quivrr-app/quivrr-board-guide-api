@@ -10,6 +10,49 @@ from app.rider_fit import recommend_rider_fit
 
 
 MATRIX_PATH = Path(__file__).parent / "knowledge/generated/board_expert_matrix.json"
+FAMILY_LANES = {
+    "performance_shortboard": {
+        "high_performance_shortboard",
+        "performance_daily_driver",
+        "competition_shortboard",
+    },
+    "fish": {
+        "traditional_fish",
+        "performance_fish",
+        "modern_fish",
+        "small_wave_fish",
+        "cruisy_fish",
+        "point_break_fish",
+        "fish_hybrid",
+        "twin_fin_performance",
+    },
+    "hybrid": {
+        "hybrid_daily_driver",
+        "forgiving_daily_driver",
+        "performance_daily_driver",
+        "one_board_quiver",
+        "fish_hybrid",
+    },
+    "small_wave": {
+        "groveller",
+        "small_wave_daily_driver",
+        "weak_wave_board",
+        "small_wave_fish",
+        "fish_hybrid",
+        "hybrid_daily_driver",
+        "step_down_shortboard",
+    },
+    "step_up": {
+        "step_up",
+        "semi_gun",
+        "travel_step_up",
+    },
+    "mid_length": {
+        "mid_length",
+        "performance_mid_length",
+        "egg",
+    },
+}
 
 
 def _key(value: str | None) -> str:
@@ -29,6 +72,8 @@ def find_matrix_board(brand: str, model: str) -> dict | None:
 def target_lanes(profile: RiderProfile) -> list[str]:
     text = " ".join(filter(None, [profile.preferred_board_type, profile.goal, profile.wave_power])).lower()
     lanes = []
+    if "small wave" in text or "weak wave" in text:
+        lanes.extend(["groveller", "small_wave_daily_driver", "weak_wave_board", "small_wave_fish", "fish_hybrid"])
     if "fish" in text:
         if "point" in (profile.wave_type or "").lower():
             lanes.extend(["point_break_fish", "traditional_fish", "performance_fish", "twin_fin_performance"])
@@ -43,7 +88,9 @@ def target_lanes(profile: RiderProfile) -> list[str]:
             lanes.extend(["performance_daily_driver", "high_performance_shortboard"])
         else:
             lanes.extend(["forgiving_daily_driver", "hybrid_daily_driver", "one_board_quiver"])
-    if "performance" in text and "daily driver" not in text:
+    if "performance shortboard" in text:
+        lanes.extend(["high_performance_shortboard", "performance_daily_driver"])
+    elif "performance" in text and "daily driver" not in text:
         lanes.append("high_performance_shortboard")
     if "step" in text:
         lanes.extend(["step_up", "powerful_wave_board"])
@@ -54,6 +101,23 @@ def target_lanes(profile: RiderProfile) -> list[str]:
     if "shortboard" in text and "performance" not in text and "daily driver" not in text:
         lanes.extend(["forgiving_daily_driver", "performance_daily_driver", "high_performance_shortboard"])
     return list(dict.fromkeys(lanes)) or ["one_board_quiver", "forgiving_daily_driver", "performance_daily_driver"]
+
+
+def resolve_target_family(profile: RiderProfile) -> str | None:
+    text = " ".join(filter(None, [profile.preferred_board_type, profile.goal, profile.desired_feel, profile.wave_power])).lower()
+    if "performance shortboard" in text:
+        return "performance_shortboard"
+    if "fish" in text or "twin" in text:
+        return "fish"
+    if "small wave" in text or "weak wave" in text or "grov" in text:
+        return "small_wave"
+    if "step" in text:
+        return "step_up"
+    if "mid" in text or "egg" in text:
+        return "mid_length"
+    if "hybrid" in text or "daily driver" in text or "everyday" in text or "shortboard" in text:
+        return "hybrid"
+    return None
 
 
 def _volume_distance(board: dict, target: float | None) -> float:
@@ -67,6 +131,8 @@ def _volume_distance(board: dict, target: float | None) -> float:
 
 def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[SuggestedBoard]:
     lanes = target_lanes(profile)
+    family = resolve_target_family(profile)
+    allowed_lanes = FAMILY_LANES.get(family, set())
     fit = recommend_rider_fit(profile)
     target = profile.target_volume_litres or ((fit.volume_low + fit.volume_high) / 2 if fit else None)
     brief_text = " ".join(filter(None, [profile.preferred_board_type, profile.goal, profile.desired_feel])).lower()
@@ -81,6 +147,8 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
         if profile.requested_brand and _key(board.get("brand")) != _key(profile.requested_brand):
             continue
         board_lanes = {board["primaryLane"], *board.get("secondaryLanes", []), *board.get("boardLanes", [])}
+        if allowed_lanes and board.get("primaryLane") not in allowed_lanes:
+            continue
         lane_rank = next((len(lanes) - index for index, lane in enumerate(lanes) if lane in board_lanes), 0)
         if lane_rank == 0:
             continue

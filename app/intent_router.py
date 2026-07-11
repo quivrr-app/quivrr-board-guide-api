@@ -37,6 +37,27 @@ def _normalise_text(message: str) -> str:
     return re.sub(r"\s+", " ", (message or "").strip().lower())
 
 
+def _normalise_greeting_text(message: str) -> str:
+    text = re.sub(r"[^a-z0-9\s']", " ", (message or "").lower())
+    text = re.sub(r"\s+", " ", text).strip()
+    text = re.sub(r"\bbohdi\b", "bodhi", text)
+    text = re.sub(r"\bbodi\b", "bodhi", text)
+    return text
+
+
+def _is_greeting_or_small_talk(message: str) -> bool:
+    text = _normalise_greeting_text(message)
+    greeting_patterns = (
+        r"(?:hey|hi|hello)(?: there| mate| again)?(?: bodhi)?",
+        r"(?:good )?morning",
+        r"good afternoon",
+        r"good evening",
+        r"what'?s up",
+        r"how are you",
+    )
+    return any(re.fullmatch(pattern, text) for pattern in greeting_patterns)
+
+
 def _extract_entities(text: str) -> dict[str, object]:
     entities: dict[str, object] = {
         "region": None,
@@ -106,7 +127,7 @@ def classify_intent(message: str) -> IntentResult:
 
     if not text:
         return IntentResult("GREETING", "greeting_request", 0.96, entities)
-    if re.fullmatch(r"(?:hey|hi|hello|gday|g'day|yo|morning|afternoon|evening|good morning|good afternoon|good evening|hi bodhi|hey bodhi|hello bodhi)[!. ]*", text):
+    if _is_greeting_or_small_talk(message) or re.fullmatch(r"(?:hey|hi|hello|gday|g'day|yo|morning|afternoon|evening|good morning|good afternoon|good evening|hi bodhi|hey bodhi|hello bodhi)[!. ]*", text):
         return IntentResult("GREETING", "greeting_request", 0.98, entities)
     if re.fullmatch(r"(?:thanks|thank you|cheers|nice one|legend)[!. ]*", text):
         return IntentResult("SMALL_TALK", "greeting_request", 0.93, entities)

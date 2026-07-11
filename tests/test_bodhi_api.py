@@ -42,6 +42,14 @@ class BodhiApiTests(unittest.TestCase):
             "regionCode": region,
         }
 
+    @staticmethod
+    def _assert_categories_in_family(recommendations, allowed_categories):
+        actual = {item["category"].lower() for item in recommendations}
+        expected = {category.lower() for category in allowed_categories}
+        assert actual, "expected at least one recommendation"
+        unexpected = actual - expected
+        assert not unexpected, f"unexpected categories: {sorted(unexpected)}"
+
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
     def test_28_litre_request_asks_one_useful_question(self, _inventory, _azure):
@@ -146,11 +154,13 @@ class BodhiApiTests(unittest.TestCase):
     @patch("main.recommend_from_matrix")
     @patch("main.enrich_suggestions_with_inventory")
     def test_greetings_never_invoke_recommendations(self, inventory, recommend_from_matrix, _azure):
-        for greeting in ["Hello", "Hi", "Hey", "Good morning"]:
+        for greeting in ["Hello", "Hi", "Hey", "Good morning", "Hey Bodhi", "Hey Bohdi", "Hey Bodi", "Hey mate", "Hello again"]:
             with self.subTest(greeting=greeting):
                 body = self.client.post("/api/board-guide/chat", json={"message": greeting, "region": "AU"}).json()
                 self.assertEqual(body["recommendations"], [])
                 self.assertEqual(body["missingQuestions"], [])
+                self.assertIsNone(body["volumeGuidance"])
+                self.assertIsNone(body["category"])
         recommend_from_matrix.assert_not_called()
         inventory.assert_not_called()
 
@@ -158,12 +168,38 @@ class BodhiApiTests(unittest.TestCase):
     @patch("main.recommend_from_matrix")
     @patch("main.enrich_suggestions_with_inventory")
     def test_general_help_never_invoke_recommendations(self, inventory, recommend_from_matrix, _azure):
-        for message in ["Can you help me?", "What can you do?"]:
+        for message in ["Can you help me?", "What can you do?", "How are you?"]:
             with self.subTest(message=message):
                 body = self.client.post("/api/board-guide/chat", json={"message": message, "region": "AU"}).json()
                 self.assertEqual(body["recommendations"], [])
-                self.assertEqual(body["intent"], "capability_help_request")
-                self.assertIn("choose a board", body["reply"])
+                self.assertIn(body["intent"], {"capability_help_request", "greeting_request"})
+        recommend_from_matrix.assert_not_called()
+        inventory.assert_not_called()
+
+    @patch("main.recommend_from_matrix")
+    @patch("main.enrich_suggestions_with_inventory")
+    @patch("main.load_authenticated_profile_context")
+    @patch("main.is_azure_openai_configured", return_value=False)
+    def test_complete_profile_greeting_does_not_trigger_cards(self, _azure, auth_loader, inventory, recommend_from_matrix):
+        auth_loader.return_value = AuthenticatedProfileContext(
+            authenticated=True,
+            profile_loaded=True,
+            user_id="user-123",
+            profile=RiderProfile(
+                display_name="Nathan Dunn",
+                ability="Advanced",
+                region="ID",
+                current_volume_litres=28.6,
+                preferred_brands=["JS Industries", "Album"],
+                home_break="Canggu",
+                goal="Performance progression",
+            ),
+        )
+        body = self.client.post("/api/board-guide/chat", json={"message": "Hey Bohdi"}, headers={"Authorization": "Bearer good"}).json()
+        self.assertEqual(body["intent"], "greeting_request")
+        self.assertEqual(body["recommendations"], [])
+        self.assertIsNone(body["volumeGuidance"])
+        self.assertTrue(body["reply"].startswith("Hey Nathan."))
         recommend_from_matrix.assert_not_called()
         inventory.assert_not_called()
 
@@ -398,6 +434,82 @@ class BodhiApiTests(unittest.TestCase):
         self.assertGreaterEqual(len(body["recommendations"]), 3)
         self.assertNotIn("I still need your weight", body["reply"])
         self.assertTrue(any(card["availableCount"] == 0 for card in body["recommendations"]))
+
+    @patch("main.recommend_from_matrix")
+    @patch("main.enrich_suggestions_with_inventory")
+    @patch("main.is_azure_openai_configured", return_value=False)
+    def test_ambiguous_new_board_request_asks_question_instead_of_guessing(self, _azure, inventory, recommend_from_matrix):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I want a new board",
+            "profile": {"weight_kg": 78, "ability": "Advanced", "region": "ID", "wave_type": "Reef Break"},
+        }).json()
+        self.assertEqual(body["recommendations"], [])
+        self.assertTrue(body["missingQuestions"])
+        self.assertIn("What kind of board", body["reply"])
+        recommend_from_matrix.assert_not_called()
+        inventory.assert_not_called()
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    def test_performance_shortboard_shortlist_stays_in_family(self, _inventory, _azure):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "Show me six performance shortboards",
+            "profile": {"weight_kg": 75, "ability": "Advanced", "region": "AU", "wave_type": "Point Break", "wave_power": "Average to Powerful"},
+            "region": "AU",
+        }).json()
+        self.assertGreaterEqual(len(body["recommendations"]), 3)
+        self._assert_categories_in_family(
+            body["recommendations"],
+            {"High Performance Shortboard", "Performance Daily Driver", "Competition Shortboard"},
+        )
+        self.assertEqual(body["category"], "performance_shortboard")
+        self.assertEqual(body["categorySource"], "explicit_user_request")
+        self.assertGreater(body["categoryConfidence"], 0.9)
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    def test_fish_shortlist_stays_in_family(self, _inventory, _azure):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "Show me six fish boards",
+            "profile": {"weight_kg": 75, "ability": "Intermediate", "region": "AU", "wave_type": "Beach Break", "wave_power": "Weak"},
+            "region": "AU",
+        }).json()
+        self.assertGreaterEqual(len(body["recommendations"]), 3)
+        self._assert_categories_in_family(
+            body["recommendations"],
+            {"Fish", "Performance Fish", "Cruisy Fish", "Modern Fish", "Traditional Fish", "Small Wave Fish"},
+        )
+        self.assertEqual(body["category"], "fish")
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    def test_small_wave_shortlist_stays_in_family(self, _inventory, _azure):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I want a small-wave board",
+            "profile": {"weight_kg": 75, "ability": "Intermediate", "region": "AU", "wave_type": "Beach Break", "wave_power": "Weak"},
+            "region": "AU",
+        }).json()
+        self.assertGreaterEqual(len(body["recommendations"]), 3)
+        self._assert_categories_in_family(
+            body["recommendations"],
+            {"Groveller", "Small Wave Daily Driver", "Weak Wave Board", "Small Wave Fish", "Fish Hybrid", "Hybrid Daily Driver", "Step Down Shortboard"},
+        )
+        self.assertEqual(body["category"], "small_wave")
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    def test_step_up_shortlist_stays_in_family(self, _inventory, _azure):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I need a step up for Bali",
+            "profile": {"weight_kg": 75, "ability": "Advanced", "region": "ID", "wave_type": "Reef Break", "wave_power": "Powerful"},
+            "region": "ID",
+        }).json()
+        self.assertGreaterEqual(len(body["recommendations"]), 1)
+        self._assert_categories_in_family(
+            body["recommendations"],
+            {"Step Up", "Powerful Wave Board", "Semi Gun", "Travel Step Up"},
+        )
+        self.assertEqual(body["category"], "step_up")
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory")

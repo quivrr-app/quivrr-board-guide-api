@@ -329,6 +329,9 @@ class BoardGuideResponse(BaseModel):
     profile_completeness: float = Field(default=0.0, alias="profileCompleteness")
     profile_conflicts: list[str] = Field(default_factory=list, alias="profileConflicts")
     volume_recommendation: VolumeRecommendation | None = Field(default=None, alias="volumeRecommendation")
+    category: str | None = None
+    category_confidence: float | None = Field(default=None, alias="categoryConfidence")
+    category_source: str | None = Field(default=None, alias="categorySource")
     comparison: BoardComparison | None = None
     useful_follow_up_questions: list[str] = Field(default_factory=list, alias="usefulFollowUpQuestions")
     follow_up_actions: list[FollowUpAction] = Field(default_factory=list, alias="followUpActions")

@@ -5,6 +5,7 @@ from fastapi import Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
+from dataclasses import dataclass
 import os
 import time
 import uuid
@@ -57,10 +58,70 @@ REGION_DISPLAY_NAMES = {
     "ID": "Indonesia",
     "US": "the United States",
 }
+RECOMMENDATION_INTENTS = {
+    "board_search_request",
+    "surfer_fit_request",
+    "alternative_request",
+}
+
+
+@dataclass(frozen=True)
+class CategoryResolution:
+    category: str | None
+    confidence: float
+    source: str
 
 
 def _region_display_name(value: str | None) -> str:
     return REGION_DISPLAY_NAMES.get((value or "").upper(), value or "your region")
+
+
+def _resolve_request_category(request_message: str, profile, *, allow_follow_up_profile_category: bool = False) -> CategoryResolution:
+    category = extract_category(request_message)
+    if category:
+        return CategoryResolution(category=category, confidence=0.94, source="explicit_user_request")
+    if allow_follow_up_profile_category and profile.preferred_board_type:
+        follow_up_category = extract_category(profile.preferred_board_type)
+        if follow_up_category:
+            return CategoryResolution(category=follow_up_category, confidence=0.72, source="conversation_follow_up")
+    if "weak wave" in request_message.lower() or "small wave" in request_message.lower():
+        return CategoryResolution(category=None, confidence=0.2, source="unknown")
+    return CategoryResolution(category=None, confidence=0.0, source="unknown")
+
+
+def _clarifying_category_reply(request_message: str) -> tuple[str, list[str]]:
+    lowered = request_message.lower()
+    if "weak" in lowered or "small wave" in lowered:
+        question = "Do you want easier paddling and speed, or something that still feels more performance-focused?"
+        return question, [question]
+    question = "What kind of board are we looking for: fish, small-wave board, daily driver, performance shortboard, step-up, or mid-length?"
+    return question, [question]
+
+
+def _should_clarify_category(request_message: str, category: str | None, requested_board, intent_result) -> bool:
+    if category or requested_board:
+        return False
+    lowered = request_message.lower()
+    explicit_board_language = any(
+        phrase in lowered
+        for phrase in (
+            "want a",
+            "want an",
+            "want something",
+            "looking for",
+            "show me",
+            "find me",
+            "need a",
+            "need an",
+            "need something",
+            "new board",
+            "next board",
+            "what should i ride",
+            "recommend",
+        )
+    )
+    ambiguous_wave_request = ("weak" in lowered or "small wave" in lowered) and "board" not in lowered and "fish" not in lowered
+    return explicit_board_language and (intent_result.needs_clarification or ambiguous_wave_request)
 
 
 def _state_cards(request: BoardGuideRequest):
@@ -444,7 +505,15 @@ def board_guide_chat(
     if active_topic.kind == "comparison" and active_topic.is_follow_up:
         legacy_intent = "comparison_request"
         intent = "BOARD_COMPARISON"
-    category = extract_category(request.message, profile.preferred_board_type)
+    allow_contextual_profile_category = legacy_intent in RECOMMENDATION_INTENTS and bool(
+        request.profile or request.intake_state or request.conversation_state or request.conversation
+    )
+    category_resolution = _resolve_request_category(
+        request.message,
+        profile,
+        allow_follow_up_profile_category=allow_contextual_profile_category,
+    )
+    category = category_resolution.category
     requested_board = find_requested_board(request.message)
     if legacy_intent == "exact_board_location_request" and not requested_board:
         for item in reversed(request.conversation):
@@ -473,6 +542,11 @@ def board_guide_chat(
     is_first_turn = not any(item.role == "assistant" for item in request.conversation if item)
     state_follow_up = _handle_state_follow_up(request, profile)
     asks_name = request.message.strip().lower() in {"what's my name?", "what's my name", "whats my name?", "whats my name"}
+    allow_recommendations = legacy_intent in RECOMMENDATION_INTENTS
+    if legacy_intent in {"greeting_request", "capability_help_request", "site_help_question"}:
+        recommendation = None
+        volume_recommendation = None
+        guidance = None
 
     if asks_name:
         suggested_boards = []
@@ -549,6 +623,12 @@ def board_guide_chat(
         suggested_boards = []
         reply = general_board_reply(request.message)
         questions = []
+    elif allow_recommendations and legacy_intent in {"board_search_request", "surfer_fit_request"} and _should_clarify_category(request.message, category, requested_board, intent_result):
+        suggested_boards = []
+        recommendation = None
+        volume_recommendation = None
+        guidance = None
+        reply, questions = _clarifying_category_reply(request.message)
     elif (
         legacy_intent == "board_search_request"
         and profile.target_volume_litres
@@ -787,7 +867,7 @@ def board_guide_chat(
         suggested_boards = []
         reply = partial_volume_reply(profile, acknowledge_memory=is_memory_correction(request.message))
         questions = ["What size waves are you mostly surfing?"]
-    elif enough_for_recommendations(profile):
+    elif allow_recommendations and enough_for_recommendations(profile):
         wants_performance = "performance" in " ".join(filter(None, [profile.desired_feel, profile.goal])).lower()
         if profile.current_board and wants_performance:
             performance_profile = profile.model_copy(update={"preferred_board_type": "Daily Driver"})
@@ -876,6 +956,9 @@ def board_guide_chat(
         profileCompleteness=profile_completeness(profile),
         profileConflicts=profile.profile_conflicts,
         volumeRecommendation=volume_recommendation,
+        category=category_resolution.category,
+        categoryConfidence=category_resolution.confidence,
+        categorySource=category_resolution.source,
         comparison=comparison,
         usefulFollowUpQuestions=questions,
         followUpActions=follow_up_actions,

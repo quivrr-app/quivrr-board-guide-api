@@ -10,6 +10,23 @@ import requests
 
 SUPPORTED_REGION_PATHS = ("/australia", "/europe", "/indonesia", "/united-states")
 UNSAFE_URL_TOKENS = ("construction=", "volume=", "boardSizeId=", "autoSearch=")
+FAMILY_CATEGORIES = {
+    "performance_shortboard": {
+        "high performance shortboard",
+        "performance daily driver",
+        "competition shortboard",
+    },
+    "fish": {
+        "fish",
+        "performance fish",
+        "cruisy fish",
+        "modern fish",
+        "traditional fish",
+        "small wave fish",
+        "fish hybrid",
+        "twin fin performance",
+    },
+}
 
 
 def build_session(token: str | None) -> requests.Session:
@@ -40,6 +57,14 @@ def check_search_urls(recommendations: list[dict[str, Any]]) -> None:
             assert_true(token not in url, f"Unsafe standard recommendation URL: {url}")
 
 
+def assert_family(recommendations: list[dict[str, Any]], family: str) -> None:
+    allowed = FAMILY_CATEGORIES[family]
+    actual = {(item.get("category") or "").lower() for item in recommendations}
+    assert_true(bool(actual), f"No recommendation categories returned for {family}")
+    unexpected = sorted(actual - allowed)
+    assert_true(not unexpected, f"Incoherent {family} shortlist categories: {unexpected}")
+
+
 def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
     session = build_session(token)
     results: list[tuple[str, bool, str]] = []
@@ -61,7 +86,14 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
         "Greeting returned recommendations",
     ))
 
-    scenario("3. General help returns no recommendations", lambda: assert_true(
+    def misspelled_greeting() -> None:
+        data = call_chat(session, base_url, {"message": "Hey Bohdi", "region": "AU"})
+        assert_true(data.get("recommendations") == [], "Misspelled greeting returned recommendations")
+        assert_true(data.get("volumeGuidance") is None, "Misspelled greeting returned volume guidance")
+        assert_true(data.get("category") is None, "Misspelled greeting resolved a category")
+    scenario("3. Hey Bohdi returns no recommendations, no volume guidance and no category", misspelled_greeting)
+
+    scenario("4. General help returns no recommendations", lambda: assert_true(
         call_chat(session, base_url, {"message": "Can you help me?", "region": "AU"}).get("recommendations") == [],
         "General help returned recommendations",
     ))
@@ -74,7 +106,8 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
         })
         count = len(data.get("recommendations", []))
         assert_true(3 <= count <= 6, f"Expected 3-6 recommendations, got {count}")
-    scenario("4. Broad fish request returns between 3 and 6 recommendations", broad_fish)
+        assert_family(data.get("recommendations", []), "fish")
+    scenario("5. Broad fish request returns between 3 and 6 coherent fish recommendations", broad_fish)
 
     def no_overflow() -> None:
         data = call_chat(session, base_url, {
@@ -83,19 +116,23 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
             "region": "ID",
         })
         assert_true(len(data.get("recommendations", [])) <= 6, "Recommendation response exceeded six")
-    scenario("5. No recommendation response exceeds 6", no_overflow)
+    scenario("6. No recommendation response exceeds 6", no_overflow)
 
     def rec_contract() -> None:
         data = call_chat(session, base_url, {
-            "message": "Show me fish boards around 30 litres in Europe",
-            "region": "EU",
+            "message": "Show me six performance shortboards",
+            "profile": {"weight_kg": 75, "ability": "Advanced", "region": "AU", "wave_type": "Point Break", "wave_power": "Average to Powerful"},
+            "region": "AU",
         })
         for item in data.get("recommendations", []):
             assert_true(bool(item.get("brand")), "Recommendation missing brand")
             assert_true(bool(item.get("model")), "Recommendation missing model")
-    scenario("6. Every recommendation includes brand and model", rec_contract)
+        assert_true(data.get("category") == "performance_shortboard", "Performance request did not resolve performance category")
+        assert_true((data.get("categorySource") or "") == "explicit_user_request", "Performance category source was not explicit user request")
+        assert_family(data.get("recommendations", []), "performance_shortboard")
+    scenario("7. Performance shortlist stays coherent and returns category metadata", rec_contract)
 
-    scenario("7. Every supplied search URL uses quivrr.app and a supported regional path", lambda: check_search_urls(
+    scenario("8. Every supplied search URL uses quivrr.app and a supported regional path", lambda: check_search_urls(
         call_chat(session, base_url, {
             "message": "I need a daily driver for 3 to 5ft surf",
             "profile": {"weight_kg": 75, "ability": "Intermediate", "region": "US", "wave_type": "Beach Break", "wave_size": "3-5ft"},
@@ -115,21 +152,21 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
             "region": "ID",
         })
         assert_true("Want the design details" in second.get("reply", ""), "Numbered follow-up did not resolve")
-    scenario("8. Follow-up conversation state can reference prior recommendations", follow_up_state)
+    scenario("9. Follow-up conversation state can reference prior recommendations", follow_up_state)
 
     def anonymous_isolation() -> None:
         data = call_chat(session, base_url, {"message": "What's my name?", "region": "AU"})
         assert_true("Nathan" not in data.get("reply", ""), "Anonymous response exposed a saved name")
         assert_true(not data.get("profileLoaded"), "Anonymous response claimed profileLoaded")
-    scenario("9. Anonymous response does not expose a user name or saved profile", anonymous_isolation)
+    scenario("10. Anonymous response does not expose a user name or saved profile", anonymous_isolation)
 
     if token:
-        scenario("10. Authenticated mode reports profileLoaded true", lambda: assert_true(
+        scenario("11. Authenticated mode reports profileLoaded true", lambda: assert_true(
             call_chat(session, base_url, {"message": "What's my name?"}).get("profileLoaded") is True,
             "Authenticated response did not report profileLoaded true",
         ))
     else:
-        results.append(("10. Authenticated mode reports profileLoaded true", True, "PASS: skipped (no bearer token supplied)"))
+        results.append(("11. Authenticated mode reports profileLoaded true", True, "PASS: skipped (no bearer token supplied)"))
 
     def anonymous_conversation_contract() -> None:
         profile = {
@@ -212,7 +249,7 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
         assert_true("swallow tail" in education_reply and "hold" in education_reply, "Education reply fell back generically")
         assert_true(len(education.get("recommendations", [])) == 0, "Education reply returned recommendation cards")
 
-    scenario("11. Anonymous multi-turn conversation preserves state, safe links, follow-ups and education", anonymous_conversation_contract)
+    scenario("12. Anonymous multi-turn conversation preserves state, safe links, follow-ups and education", anonymous_conversation_contract)
 
     return results
 

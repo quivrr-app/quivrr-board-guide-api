@@ -13,9 +13,14 @@ CATEGORY_ALIASES = {
     "high performance daily driver": "performance_daily_driver",
     "performance daily driver": "performance_daily_driver",
     "daily shortboard": "performance_daily_driver",
+    "performance shortboards": "performance_shortboard",
     "fish": "fish", "twin": "fish", "twin fin": "fish",
     "daily driver": "daily_driver", "everyday": "daily_driver",
     "groveller": "groveller", "groveler": "groveller",
+    "small wave board": "small_wave",
+    "small-wave board": "small_wave",
+    "small wave": "small_wave",
+    "small-wave": "small_wave",
     "step up": "step_up", "step-up": "step_up",
     "performance shortboard": "performance_shortboard", "shortboard": "shortboard",
     "mid length": "mid_length", "mid-length": "mid_length",
@@ -86,6 +91,7 @@ def category_candidates(category: str, target: float | None, limit: int = 20) ->
     label = {
         "performance_daily_driver": "performance daily driver",
         "performance_shortboard": "performance shortboard",
+        "small_wave": "small wave",
         "mid_length": "mid length",
         "step_up": "step up",
     }.get(category, category.replace("_", " "))
