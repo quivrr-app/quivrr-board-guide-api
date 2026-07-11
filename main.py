@@ -553,6 +553,7 @@ def board_guide_chat(
         legacy_intent == "board_search_request"
         and profile.target_volume_litres
         and not profile.weight_kg
+        and not (category == "fish" and profile.region)
         and "stock" not in request.message.lower()
         and "available" not in request.message.lower()
     ):

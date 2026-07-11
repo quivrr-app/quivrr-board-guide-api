@@ -377,6 +377,23 @@ class BodhiApiTests(unittest.TestCase):
                 self.assertGreaterEqual(len({card["brand"] for card in body["recommendations"]}), 3)
 
     @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.recommend_from_matrix")
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_volume_and_region_fish_request_without_weight_can_still_return_cards(self, inventory, recommend_from_matrix, _azure):
+        seeded = self._seed_recommendations(6, "Fish", region="ID")
+        recommend_from_matrix.return_value = seeded
+        inventory.side_effect = lambda rows, profile: [
+            row.model_copy(update={"available_count": 1, "retailer_count": 1, "region": "ID", "region_code": "ID"})
+            for row in rows
+        ]
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I want a fish for small weak waves around 29L in Indonesia",
+            "region": "ID",
+        }).json()
+        self.assertGreaterEqual(len(body["recommendations"]), 3)
+        self.assertNotIn("I still need your weight", body["reply"])
+
+    @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory")
     def test_follow_up_filters_to_verified_regional_stock_and_remove_brand(self, inventory, _azure):
         inventory.side_effect = lambda rows, profile: [
