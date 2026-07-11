@@ -468,6 +468,61 @@ class BodhiApiTests(unittest.TestCase):
         self.assertIsNotNone(compare["comparison"])
         self.assertEqual(len(compare["conversationState"]["comparisonBoards"]), 2)
 
+    @patch("main.is_azure_openai_configured", return_value=False)
+    def test_compact_frontend_conversation_state_cards_are_accepted(self, _azure):
+        compact_state = {
+            "lastIntent": "BOARD_RECOMMENDATION",
+            "activeRegion": "ID",
+            "lastRecommendations": [
+                {
+                    "brand": "JS Industries",
+                    "model": "Black Baron",
+                    "category": "Performance Fish",
+                    "shortReason": "Fast fish with good bite.",
+                    "fitScore": 94,
+                    "regionCode": "ID",
+                    "searchUrl": "https://quivrr.app/indonesia/?brand=JS+Industries&model=Black+Baron",
+                },
+                {
+                    "brand": "Firewire",
+                    "model": "Seaside",
+                    "category": "Cruisy Fish",
+                    "shortReason": "Easy speed and flow.",
+                    "fitScore": 94,
+                    "regionCode": "ID",
+                    "searchUrl": "https://quivrr.app/indonesia/?brand=Firewire&model=Seaside",
+                },
+                {
+                    "brand": "Lost",
+                    "model": "RNF 96",
+                    "category": "Modern Fish",
+                    "shortReason": "More performance-led fish.",
+                    "fitScore": 94,
+                    "regionCode": "ID",
+                    "searchUrl": "https://quivrr.app/indonesia/?brand=Lost&model=RNF+96",
+                },
+                {
+                    "brand": "Chemistry Surfboards",
+                    "model": "Holiday",
+                    "category": "Fish",
+                    "shortReason": "Broader catalogue option.",
+                    "fitScore": 78,
+                    "regionCode": "ID",
+                    "searchUrl": "https://quivrr.app/indonesia/?brand=Chemistry+Surfboards&model=Holiday",
+                },
+            ],
+            "comparisonBoards": [],
+            "conversationTurn": 3,
+        }
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "Tell me about number 3.",
+            "conversationState": compact_state,
+            "region": "ID",
+        })
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertIn("Lost RNF 96", body["reply"])
+
 
 if __name__ == "__main__":
     unittest.main()

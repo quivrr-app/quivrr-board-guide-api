@@ -230,17 +230,33 @@ class BodhiRecommendation(BaseModel):
     example_product_url: str | None = Field(default=None, alias="exampleProductUrl")
     quivrr_search_url: str | None = Field(default=None, alias="quivrrSearchUrl")
     source_product_url: str | None = Field(default=None, alias="sourceProductUrl")
-    source_type: str = Field(alias="sourceType")
+    source_type: str = Field(default="no_verified_live_source", alias="sourceType")
     price_range: str | None = Field(default=None, alias="priceRange")
-    confidence: float
+    confidence: float = 0.0
 
     @model_validator(mode="before")
     @classmethod
     def populate_compact_reason(cls, values):
-        if isinstance(values, dict) and not values.get("whyItFits") and not values.get("why_it_fits"):
-            fallback = values.get("shortReason") or values.get("short_reason") or values.get("reason") or values.get("summary")
-            if fallback:
-                values = {**values, "whyItFits": fallback}
+        if isinstance(values, dict):
+            updates = {}
+            if not values.get("whyItFits") and not values.get("why_it_fits"):
+                fallback = values.get("shortReason") or values.get("short_reason") or values.get("reason") or values.get("summary")
+                if fallback:
+                    updates["whyItFits"] = fallback
+            if not values.get("sourceType") and not values.get("source_type"):
+                updates["sourceType"] = "no_verified_live_source"
+            if values.get("confidence") in (None, ""):
+                fit_score = values.get("fitScore") or values.get("fit_score")
+                if fit_score not in (None, ""):
+                    try:
+                        numeric = float(fit_score)
+                        updates["confidence"] = numeric / 100 if numeric > 1 else numeric
+                    except (TypeError, ValueError):
+                        updates["confidence"] = 0.0
+                else:
+                    updates["confidence"] = 0.0
+            if updates:
+                values = {**values, **updates}
         return values
 
 
