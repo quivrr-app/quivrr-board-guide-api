@@ -383,8 +383,13 @@ class BodhiApiTests(unittest.TestCase):
         seeded = self._seed_recommendations(6, "Fish", region="ID")
         recommend_from_matrix.return_value = seeded
         inventory.side_effect = lambda rows, profile: [
-            row.model_copy(update={"available_count": 1, "retailer_count": 1, "region": "ID", "region_code": "ID"})
-            for row in rows
+            row.model_copy(update={
+                "available_count": 1 if index == 0 else 0,
+                "retailer_count": 1 if index == 0 else 0,
+                "region": "ID",
+                "region_code": "ID",
+            })
+            for index, row in enumerate(rows)
         ]
         body = self.client.post("/api/board-guide/chat", json={
             "message": "I want a fish for small weak waves around 29L in Indonesia",
@@ -392,6 +397,7 @@ class BodhiApiTests(unittest.TestCase):
         }).json()
         self.assertGreaterEqual(len(body["recommendations"]), 3)
         self.assertNotIn("I still need your weight", body["reply"])
+        self.assertTrue(any(card["availableCount"] == 0 for card in body["recommendations"]))
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory")

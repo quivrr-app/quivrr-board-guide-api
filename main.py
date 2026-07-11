@@ -664,7 +664,13 @@ def board_guide_chat(
         if not canonical_boards and profile.region:
             canonical_boards = search_live_category(profile, category)
         brand_stock_request = bool(profile.requested_brand and profile.region and legacy_intent == "board_search_request")
-        direct_stock_request = bool(profile.region and legacy_intent == "board_search_request" and profile.target_volume_litres and not profile.weight_kg)
+        direct_stock_request = bool(
+            profile.region
+            and legacy_intent == "board_search_request"
+            and profile.target_volume_litres
+            and not profile.weight_kg
+            and any(token in request.message.lower() for token in ("stock", "in stock", "available now", "available"))
+        )
         if brand_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, profile)
             suggested_boards = [board for board in checked if board.available_count > 0]
