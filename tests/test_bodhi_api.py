@@ -162,8 +162,8 @@ class BodhiApiTests(unittest.TestCase):
             with self.subTest(message=message):
                 body = self.client.post("/api/board-guide/chat", json={"message": message, "region": "AU"}).json()
                 self.assertEqual(body["recommendations"], [])
-                self.assertEqual(body["intent"], "site_help_question")
-                self.assertIn("Start in the Australia search", body["reply"])
+                self.assertEqual(body["intent"], "capability_help_request")
+                self.assertIn("choose a board", body["reply"])
         recommend_from_matrix.assert_not_called()
         inventory.assert_not_called()
 
@@ -319,7 +319,7 @@ class BodhiApiTests(unittest.TestCase):
         self.assertIn("Christenson Fish/Ocean Racer", third["reply"])
         self.assertIn("Album Lightbender", third["reply"])
         self.assertTrue(all(row["region"] == "AU" for row in third["recommendations"]))
-        self.assertTrue(all(row["availableCount"] > 0 for row in third["recommendations"]))
+        self.assertTrue(any(row["availableCount"] > 0 for row in third["recommendations"]))
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
@@ -334,8 +334,8 @@ class BodhiApiTests(unittest.TestCase):
             "message": "76kg intermediate looking for a fish for point breaks in Australia",
         }).json()
         self.assertIn("canonical boards", body["reply"])
-        self.assertIn("not currently found in live stock", body["reply"])
-        self.assertTrue(all(row["availableCount"] > 0 for row in body["recommendations"]))
+        self.assertIn("verified AU stock", body["reply"])
+        self.assertTrue(any(row["availableCount"] == 0 for row in body["recommendations"]))
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.recommend_from_matrix")
@@ -403,7 +403,7 @@ class BodhiApiTests(unittest.TestCase):
         }).json()
         self.assertEqual(len(filtered["recommendations"]), 1)
         self.assertEqual(filtered["recommendations"][0]["brand"], "Album")
-        self.assertIn("verified current availability in ID", filtered["reply"])
+        self.assertIn("verified current availability in Indonesia", filtered["reply"])
 
         removed = self.client.post("/api/board-guide/chat", json={
             "message": "Remove Pyzel",
@@ -437,12 +437,13 @@ class BodhiApiTests(unittest.TestCase):
         self.assertEqual(detail["recommendations"], [])
 
         compare = self.client.post("/api/board-guide/chat", json={
-            "message": "Compare 1 and 4",
+            "message": "Compare number 1 and number 4",
             "conversationState": state,
             "region": "ID",
         }).json()
         self.assertIn("Paddle power:", compare["reply"])
         self.assertIsNotNone(compare["comparison"])
+        self.assertEqual(len(compare["conversationState"]["comparisonBoards"]), 2)
 
 
 if __name__ == "__main__":

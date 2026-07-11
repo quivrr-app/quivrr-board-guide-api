@@ -9,6 +9,7 @@ import requests
 
 
 SUPPORTED_REGION_PATHS = ("/australia", "/europe", "/indonesia", "/united-states")
+UNSAFE_URL_TOKENS = ("construction=", "volume=", "boardSizeId=", "autoSearch=")
 
 
 def build_session(token: str | None) -> requests.Session:
@@ -35,6 +36,8 @@ def check_search_urls(recommendations: list[dict[str, Any]]) -> None:
         url = item.get("searchUrl") or item.get("quivrrSearchUrl") or ""
         assert_true(url.startswith("https://quivrr.app/"), f"Invalid search host: {url}")
         assert_true(any(path in url for path in SUPPORTED_REGION_PATHS), f"Unsupported regional path: {url}")
+        for token in UNSAFE_URL_TOKENS:
+            assert_true(token not in url, f"Unsafe standard recommendation URL: {url}")
 
 
 def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
@@ -127,6 +130,89 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
         ))
     else:
         results.append(("10. Authenticated mode reports profileLoaded true", True, "PASS: skipped (no bearer token supplied)"))
+
+    def anonymous_conversation_contract() -> None:
+        profile = {
+            "region": "ID",
+            "ability": "Advanced",
+            "current_volume_litres": 28.6,
+            "preferred_volume_min_litres": 27.5,
+            "preferred_volume_max_litres": 30,
+            "wave_type": "Reef Break",
+            "home_break": "Canggu",
+            "preferred_brands": ["JS Industries", "Album"],
+            "goal": "Performance progression",
+        }
+        transcript: list[dict[str, str]] = []
+        conversation_state: dict[str, Any] = {}
+
+        def turn(message: str) -> dict[str, Any]:
+            nonlocal conversation_state
+            payload = {
+                "message": message,
+                "region": "ID",
+                "pageContext": "quivrr.surf",
+                "conversation": transcript,
+                "profile": profile,
+                "conversationState": conversation_state,
+                "clientCapabilities": {
+                    "supportsRecommendationCards": True,
+                    "supportsDeepLinks": True,
+                },
+            }
+            data = call_chat(session, base_url, payload)
+            transcript.extend([
+                {"role": "user", "content": message},
+                {"role": "assistant", "content": data.get("reply", "")},
+            ])
+            conversation_state = data.get("conversationState") or conversation_state
+            return data
+
+        hello = turn("Hello")
+        assert_true(hello.get("normalizedIntent") == "GREETING", "Hello did not classify as greeting")
+        assert_true(len(hello.get("recommendations", [])) == 0, "Hello returned cards")
+
+        help_data = turn("What can you help me with?")
+        assert_true(help_data.get("intent") == "capability_help_request", "Capability help intent routed incorrectly")
+        assert_true("choose a board" in help_data.get("reply", "").lower(), "Capability help reply missing Bodhi help")
+        assert_true("start in the" not in help_data.get("reply", "").lower(), "Capability help fell into site help")
+
+        fish = turn("I want a fish for small weak waves around my normal volume.")
+        recommendations = fish.get("recommendations", [])
+        assert_true(3 <= len(recommendations) <= 6, f"Expected 3-6 fish cards, got {len(recommendations)}")
+        assert_true(len({item.get('brand') for item in recommendations}) >= 3, "Expected at least 3 brands in broad fish set")
+        check_search_urls(recommendations)
+
+        detail = turn("Tell me about number 3.")
+        third = recommendations[2]
+        assert_true(third["brand"] in detail.get("reply", "") and third["model"] in detail.get("reply", ""), "Numbered detail did not resolve the third board")
+        state_after_detail = detail.get("conversationState", {}).get("lastRecommendations", [])
+        assert_true(len(state_after_detail) >= 3, "Detail follow-up did not preserve the active recommendation set")
+
+        compare = turn("Compare number 1 and number 4.")
+        first = recommendations[0]
+        fourth = recommendations[3]
+        compare_reply = compare.get("reply", "")
+        assert_true(first["brand"] in compare_reply and first["model"] in compare_reply, "Comparison did not reference first board")
+        assert_true(fourth["brand"] in compare_reply and fourth["model"] in compare_reply, "Comparison did not reference fourth board")
+        comparison_boards = compare.get("conversationState", {}).get("comparisonBoards", [])
+        assert_true(len(comparison_boards) == 2, "Comparison context was not persisted")
+
+        paddle = turn("Which one paddles best?")
+        assert_true("paddle" in paddle.get("reply", "").lower(), "Paddle follow-up did not use active comparison context")
+
+        available = turn("Only show the boards currently available in Indonesia.")
+        filtered = available.get("recommendations", [])
+        original_pairs = {(item["brand"], item["model"]) for item in recommendations}
+        filtered_pairs = {(item["brand"], item["model"]) for item in filtered}
+        assert_true(filtered_pairs.issubset(original_pairs), "Availability filter introduced unrelated boards")
+
+        education = turn("What does a swallow tail change?")
+        education_reply = education.get("reply", "").lower()
+        assert_true("swallow tail" in education_reply and "hold" in education_reply, "Education reply fell back generically")
+        assert_true(len(education.get("recommendations", [])) == 0, "Education reply returned recommendation cards")
+
+    scenario("11. Anonymous multi-turn conversation preserves state, safe links, follow-ups and education", anonymous_conversation_contract)
 
     return results
 

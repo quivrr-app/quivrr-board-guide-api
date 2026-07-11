@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 LEGACY_INTENTS = {
     "inventory_count_question", "board_search_request", "surfer_fit_request",
     "alternative_request", "comparison_request", "general_board_question",
-    "site_help_question", "volume_advice_request", "exact_board_location_request",
+    "site_help_question", "capability_help_request", "volume_advice_request", "exact_board_location_request",
     "relationship_request", "greeting_request", "expert_board_question",
 }
 
@@ -114,8 +114,8 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("FOLLOW_UP", "surfer_fit_request", 0.78, entities)
     if re.fullmatch(r"(?:point breaks?|reef breaks?|beach breaks?|weak waves?)", text):
         return IntentResult("FOLLOW_UP", "surfer_fit_request", 0.8, entities)
-    if re.search(r"\b(?:what can you do|can you help me|help me|what should i ask)\b", text):
-        return IntentResult("GENERAL_HELP", "site_help_question", 0.96, entities)
+    if re.search(r"\b(?:what can you do|can you help me|help me|what should i ask|what can you help me with)\b", text):
+        return IntentResult("GENERAL_HELP", "capability_help_request", 0.96, entities)
     if re.search(r"\b(?:how do i use the site|how do i use quivrr|how do i use this site|how can i use the site)\b", text):
         return IntentResult("GENERAL_HELP", "site_help_question", 0.96, entities)
     if re.search(r"\b(?:how many boards do you know about|how many boards are there|how many boards do you have)\b", text):

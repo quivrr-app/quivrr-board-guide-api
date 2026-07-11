@@ -34,7 +34,7 @@ from app.board_relationship_graph import (
 )
 from app.model_recommendation_engine import build_recommendation_context, recommend_models
 from app.inventory_client import enrich_suggestions_with_inventory, locate_exact_board
-from app.models import BoardComparison, BoardGuideRequest, BoardGuideResponse, BoardReference, ConversationState, FollowUpAction, SuggestedBoard
+from app.models import BoardComparison, BoardGuideRequest, BoardGuideResponse, BoardReference, BodhiRecommendation, ConversationState, FollowUpAction, SuggestedBoard
 from app.profile_engine import (
     build_recommendation,
     extract_profile,
@@ -51,27 +51,64 @@ from app.structured_logging import emit_event
 load_dotenv()
 
 APP_NAME = "Quivrr Board Guide API"
+REGION_DISPLAY_NAMES = {
+    "AU": "Australia",
+    "EU": "Europe",
+    "ID": "Indonesia",
+    "US": "the United States",
+}
+
+
+def _region_display_name(value: str | None) -> str:
+    return REGION_DISPLAY_NAMES.get((value or "").upper(), value or "your region")
 
 
 def _state_cards(request: BoardGuideRequest):
     if not request.conversation_state:
         return []
-    return list(request.conversation_state.last_recommendations or [])
+    return [_normalise_active_recommendation(card) for card in request.conversation_state.last_recommendations or []]
 
 
 def _state_card_index(message: str) -> int | None:
     import re
-    match = re.search(r"\b(?:number|#)\s*(\d+)\b", message.lower())
+    lowered = message.lower()
+    ordinals = {
+        "first": 0,
+        "second": 1,
+        "third": 2,
+        "fourth": 3,
+        "fifth": 4,
+        "sixth": 5,
+        "top one": 0,
+    }
+    match = re.search(r"\b(?:number|#)\s*(\d+)\b", lowered)
     if match:
         return max(int(match.group(1)) - 1, 0)
+    for token, index in ordinals.items():
+        if re.search(rf"\b{re.escape(token)}\b", lowered):
+            return index
     return None
 
 
 def _state_card_pair(message: str) -> tuple[int, int] | None:
     import re
-    match = re.search(r"\bcompare\s+(\d+)\s+(?:and|&)\s+(\d+)\b", message.lower())
+    lowered = message.lower()
+    ordinal_number = {
+        "first": 1,
+        "second": 2,
+        "third": 3,
+        "fourth": 4,
+        "fifth": 5,
+        "sixth": 6,
+    }
+    match = re.search(r"\bcompare\s+(?:number\s+)?(\d+)\s+(?:and|&)\s+(?:number\s+)?(\d+)\b", lowered)
     if match:
         return max(int(match.group(1)) - 1, 0), max(int(match.group(2)) - 1, 0)
+    match = re.search(r"\bcompare\s+(?:the\s+)?(first|second|third|fourth|fifth|sixth)\s+(?:and|&)\s+(?:the\s+)?(first|second|third|fourth|fifth|sixth)\b", lowered)
+    if match:
+        return ordinal_number[match.group(1)] - 1, ordinal_number[match.group(2)] - 1
+    if "top two" in lowered:
+        return 0, 1
     return None
 
 
@@ -99,7 +136,18 @@ def _card_to_requested_board(card):
     return {"brand": card.brand, "model": card.model}
 
 
+def _normalise_active_recommendation(card) -> BodhiRecommendation:
+    if isinstance(card, BodhiRecommendation):
+        return card
+    if isinstance(card, SuggestedBoard):
+        return public_recommendations([card])[0]
+    if isinstance(card, dict):
+        return BodhiRecommendation.model_validate(card)
+    raise TypeError(f"Unsupported active recommendation record: {type(card)!r}")
+
+
 def _card_to_suggested_board(card) -> SuggestedBoard:
+    card = _normalise_active_recommendation(card)
     return SuggestedBoard(
         brand=card.brand,
         model=card.model,
@@ -135,6 +183,22 @@ def _detail_reply(card) -> str:
     return " ".join([what_it_is, conditions, feel, rider, trade_off, "Want the design details, sizing guidance, similar boards, or availability?"])
 
 
+def _best_paddler_reply(cards) -> str:
+    scored = []
+    for card in cards:
+        record = find_board_record(card.brand, card.model)
+        paddle = 0
+        if record:
+            paddle = record.design_scores.get("paddle") or record.design_scores.get("paddle_power") or 0
+        scored.append((paddle, card))
+    scored.sort(key=lambda item: (-item[0], item[1].brand.lower(), item[1].model.lower()))
+    best = scored[0][1]
+    return (
+        f"Within this active shortlist, {best.brand} {best.model} looks like the strongest paddler. "
+        "If you want, I can rank the rest of the set for paddle help, weak-wave speed, or forgiveness."
+    )
+
+
 def _comparison_follow_up_reply(left_card, right_card, profile: BoardGuideRequest | None = None):
     result = compare_board_models(left_card.brand, left_card.model, right_card.brand, right_card.model, profile)
     if not result:
@@ -150,6 +214,7 @@ def _comparison_follow_up_reply(left_card, right_card, profile: BoardGuideReques
         elif right_paddle > left_paddle:
             paddle_winner = f"{right.brand} {right.model} has the stronger paddle bias."
     parts = [
+        f"Comparing {left_card.brand} {left_card.model} and {right_card.brand} {right_card.model}.",
         f"Paddle power: {paddle_winner or 'They are close, but the more forgiving board usually wins on easier entry.'}",
         f"Speed: {result.comparison.differences[0] if result.comparison.differences else 'They split speed differently through their lanes.'}",
         f"Forgiveness: {result.comparison.better_for_board_a[0] if result.comparison.better_for_board_a else result.comparison.better_for_board_b[0] if result.comparison.better_for_board_b else 'The easier board is the one that asks less of your positioning.'}",
@@ -166,10 +231,24 @@ def _handle_state_follow_up(request: BoardGuideRequest, profile):
         return None
 
     index = _state_card_index(message)
+    if index is not None and index >= len(cards):
+        return {
+            "reply": f"I only have {len(cards)} boards in the current shortlist. Pick 1 to {len(cards)}.",
+            "suggested_boards": [],
+            "comparison": None,
+            "questions": [],
+        }
     if index is not None and 0 <= index < len(cards) and ("tell me about" in lowered or "what is" in lowered):
         return {"reply": _detail_reply(cards[index]), "suggested_boards": [], "comparison": None, "questions": []}
 
     pair = _state_card_pair(message)
+    if pair and (pair[0] >= len(cards) or pair[1] >= len(cards)):
+        return {
+            "reply": f"I only have {len(cards)} boards in the current shortlist. Pick 1 to {len(cards)}.",
+            "suggested_boards": [],
+            "comparison": None,
+            "questions": [],
+        }
     if pair and pair[0] < len(cards) and pair[1] < len(cards):
         left_card = cards[pair[0]]
         right_card = cards[pair[1]]
@@ -180,13 +259,26 @@ def _handle_state_follow_up(request: BoardGuideRequest, profile):
             "suggested_boards": [],
             "comparison": comparison.comparison if comparison else None,
             "questions": [],
-            "active_cards": [left_card, right_card],
+            "comparison_boards": [left_card, right_card],
         }
 
-    if "which paddles best" in lowered and len(cards) >= 2:
-        left_card = request.conversation_state.comparison_boards[0] if request.conversation_state and request.conversation_state.comparison_boards else cards[0]
-        right_card = request.conversation_state.comparison_boards[1] if request.conversation_state and len(request.conversation_state.comparison_boards) > 1 else cards[1]
-        return {"reply": _comparison_follow_up_reply(left_card, right_card, profile), "suggested_boards": [], "comparison": None, "questions": []}
+    if any(token in lowered for token in ("which paddles best", "which one paddles best")) and len(cards) >= 2:
+        if request.conversation_state and len(request.conversation_state.comparison_boards) >= 2:
+            left_card = request.conversation_state.comparison_boards[0]
+            right_card = request.conversation_state.comparison_boards[1]
+            return {
+                "reply": _comparison_follow_up_reply(left_card, right_card, profile),
+                "suggested_boards": [],
+                "comparison": None,
+                "questions": [],
+                "comparison_boards": [left_card, right_card],
+            }
+        return {
+            "reply": _best_paddler_reply(cards),
+            "suggested_boards": [],
+            "comparison": None,
+            "questions": [],
+        }
 
     if "remove pyzel" in lowered:
         remaining = [_card_to_suggested_board(card) for card in cards if card.brand.lower() != "pyzel"]
@@ -196,12 +288,14 @@ def _handle_state_follow_up(request: BoardGuideRequest, profile):
     if "only show" in lowered and ("available" in lowered or "in stock" in lowered):
         target_region = profile.region or request.region
         verified = [_card_to_suggested_board(card) for card in cards]
-        checked = enrich_suggestions_with_inventory(verified, profile) if target_region and verified else []
+        inventory_profile = profile if profile.region else profile.model_copy(update={"region": target_region})
+        checked = enrich_suggestions_with_inventory(verified, inventory_profile) if target_region and verified else []
         filtered = [row for row in checked if row.available_count > 0]
+        region_name = _region_display_name(target_region)
         reply = (
-            f"I filtered the active set to boards with verified current availability in {target_region}."
+            f"I filtered the active set to boards with verified current availability in {region_name}."
             if filtered else
-            f"I couldn’t verify current stock in {target_region} for the active set."
+            f"I couldn’t verify live {region_name} stock for those boards right now. I can keep the best-fitting catalogue options or search a wider set of boards currently in stock."
         )
         return {"reply": reply, "suggested_boards": filtered, "comparison": None, "questions": []}
 
@@ -228,20 +322,32 @@ def build_follow_up_actions(intent: str, boards: list) -> list[FollowUpAction]:
     return []
 
 
-def build_conversation_state(request: BoardGuideRequest, profile, normalized_intent: str, public_cards: list, questions: list[str]) -> ConversationState:
+def build_conversation_state(
+    request: BoardGuideRequest,
+    profile,
+    normalized_intent: str,
+    public_cards: list,
+    questions: list[str],
+    comparison_boards_override: list | None = None,
+) -> ConversationState:
     active_region = profile.region or request.region
     last_question = questions[0] if questions else None
-    previous_turn = request.conversation_state.conversation_turn if request.conversation_state else 0
-    mentioned = request.conversation_state.mentioned_boards if request.conversation_state else []
-    comparison_boards = request.conversation_state.comparison_boards if request.conversation_state else []
+    previous_state = request.conversation_state
+    previous_turn = previous_state.conversation_turn if previous_state else 0
+    previous_recommendations = previous_state.last_recommendations if previous_state else []
+    mentioned = previous_state.mentioned_boards if previous_state else []
+    comparison_boards = previous_state.comparison_boards if previous_state else []
+    if comparison_boards_override:
+        comparison_boards = [_normalise_active_recommendation(card) for card in comparison_boards_override]
     if normalized_intent == "BOARD_COMPARISON" and len(public_cards) >= 2:
         comparison_boards = public_cards[:2]
+    last_recommendations = public_cards[:6] or previous_recommendations[:6]
     return ConversationState(
         lastIntent=normalized_intent,
         activeRegion=active_region,
         activeProfile=profile.model_dump(exclude={"profile_sources", "profile_conflicts", "field_provenance"}, exclude_none=True),
-        lastRecommendations=public_cards[:6],
-        mentionedBoards=(public_cards[:6] or mentioned[:8]),
+        lastRecommendations=last_recommendations,
+        mentionedBoards=(last_recommendations or mentioned[:8]),
         comparisonBoards=comparison_boards[:4],
         lastQuestion=last_question,
         conversationTurn=previous_turn + 1,
@@ -363,6 +469,7 @@ def board_guide_chat(
         correlation_id=correlation_id,
     )
     comparison = None
+    comparison_boards_override = None
     is_first_turn = not any(item.role == "assistant" for item in request.conversation if item)
     state_follow_up = _handle_state_follow_up(request, profile)
     asks_name = request.message.strip().lower() in {"what's my name?", "what's my name", "whats my name?", "whats my name"}
@@ -377,19 +484,24 @@ def board_guide_chat(
     elif state_follow_up:
         suggested_boards = state_follow_up.get("suggested_boards", [])
         comparison = state_follow_up.get("comparison")
+        comparison_boards_override = state_follow_up.get("comparison_boards")
         reply = state_follow_up["reply"]
         questions = state_follow_up.get("questions", [])
     elif legacy_intent == "greeting_request":
         suggested_boards = []
         reply = personalise_opening(greeting_reply(profile.region), profile, is_first_turn=is_first_turn)
         questions = []
+    elif legacy_intent == "capability_help_request":
+        suggested_boards = []
+        reply = (
+            "I can help you choose a board, compare models, understand design features, check regional availability, "
+            "review your quiver, work through volume and sizing, or figure out what will help your surfing progress. "
+            "What are we looking at today?"
+        )
+        questions = []
     elif legacy_intent == "site_help_question":
         suggested_boards = []
         reply = site_help_reply(profile.region)
-        questions = []
-    elif intent_result.intent == "GENERAL_HELP":
-        suggested_boards = []
-        reply = "Absolutely. I can help you choose a board, compare models, check availability, review your quiver, or explain design details. What are we looking at?"
         questions = []
     elif legacy_intent == "expert_board_question":
         suggested_boards = []
@@ -585,7 +697,7 @@ def board_guide_chat(
             questions = ["Which region should I search: Australia, Europe, or Indonesia?"] if not profile.region else ["Are your waves mostly weak beach breaks, points, or reefs?"]
         else:
             checked = enrich_suggestions_with_inventory(canonical_boards, profile)
-            suggested_boards = [board for board in checked if board.available_count > 0]
+            suggested_boards = checked
             reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
             questions = []
     elif legacy_intent == "board_search_request" and category and profile.region and not requested_board:
@@ -593,7 +705,8 @@ def board_guide_chat(
             ranking_profile = profile.model_copy(update={"preferred_board_type": "Daily Driver"})
             canonical_boards = recommend_from_matrix(ranking_profile, limit=12)
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
-            suggested_boards = [board for board in checked if board.available_count > 0]
+            requested_stock = any(token in request.message.lower() for token in ("stock", "in stock", "available now", "available"))
+            suggested_boards = [board for board in checked if board.available_count > 0] if requested_stock else checked
             if requested_limit := _requested_card_limit(request.message):
                 suggested_boards = suggested_boards[:requested_limit]
         else:
@@ -723,7 +836,14 @@ def board_guide_chat(
     )
     final_reply = llm_reply or reply
     public_cards = public_recommendations(suggested_boards)
-    conversation_state = build_conversation_state(request, profile, intent, public_cards, questions)
+    conversation_state = build_conversation_state(
+        request,
+        profile,
+        intent,
+        public_cards,
+        questions,
+        comparison_boards_override=comparison_boards_override,
+    )
     follow_up_actions = build_follow_up_actions(intent, public_cards)
     response = BoardGuideResponse(
         guide_name="Bodhi, the Core Lord",

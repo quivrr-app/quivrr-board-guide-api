@@ -7,6 +7,7 @@ import re
 import time
 from typing import Callable
 from urllib.parse import quote, urlencode
+from urllib.parse import urlparse
 
 import requests
 
@@ -60,6 +61,14 @@ def quivrr_search_url(board: SuggestedBoard, region: str, size: dict | None = No
     if size.get("boardSizeId"):
         params["autoSearch"] = "1"
     return f"https://quivrr.app/{QUIVRR_REGION_PATHS[region]}?{urlencode({key: value for key, value in params.items() if value not in (None, '')})}"
+
+
+def quivrr_model_search_url(board: SuggestedBoard, region: str) -> str:
+    params = {
+        "brand": board.brand,
+        "model": board.model,
+    }
+    return f"https://quivrr.app/{QUIVRR_REGION_PATHS[region]}/?{urlencode(params)}"
 
 
 def normalise_region(value: str | None) -> str | None:

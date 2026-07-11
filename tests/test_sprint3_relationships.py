@@ -5,7 +5,7 @@ from fastapi.testclient import TestClient
 
 import main
 from app.board_relationship_graph import find_relationship_board, relationship_suggestions
-from app.inventory_client import quivrr_search_url
+from app.inventory_client import quivrr_model_search_url
 from app.models import SuggestedBoard
 from app.profile_engine import extract_profile
 
@@ -67,10 +67,10 @@ class Sprint3RelationshipTests(unittest.TestCase):
 
     def test_eu_quivrr_link_cannot_leak_to_australia(self):
         board = SuggestedBoard(brand="Pyzel", model="Phantom", category="Daily Driver", confidence=.9, why_it_fits="test")
-        url = quivrr_search_url(board, "EU")
+        url = quivrr_model_search_url(board, "EU")
         self.assertIn("quivrr.app/europe", url)
-        self.assertIn("region=EU", url)
         self.assertNotIn("/australia", url)
+        self.assertNotIn("boardSizeId=", url)
 
 
 if __name__ == "__main__":

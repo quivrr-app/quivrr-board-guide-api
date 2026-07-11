@@ -59,6 +59,7 @@ class IntentRouterTests(unittest.TestCase):
             "Compare Ghost and Phantom": "comparison_request",
             "What is a fish surfboard?": "general_board_question",
             "How do I use the site?": "site_help_question",
+            "What can you help me with?": "capability_help_request",
             "What volume should I ride if I'm 75kg?": "volume_advice_request",
             "How many litres should I be on?": "volume_advice_request",
             "Where can I buy a JS Monsta 5'11 CarboTune in Europe?": "exact_board_location_request",
@@ -196,7 +197,7 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertEqual(body["intakeState"]["target_volume_litres"], 30)
         if body["recommendations"]:
             self.assertTrue(all(row["region"] == "EU" for row in body["recommendations"]))
-            self.assertTrue(all(row["availableCount"] > 0 for row in body["recommendations"]))
+            self.assertGreaterEqual(len(body["recommendations"]), 2)
         else:
             self.assertIn("weight", body["reply"].lower())
 
@@ -348,7 +349,7 @@ class BodhiIntentApiTests(unittest.TestCase):
         body = response.json()
         self.assertEqual(body["intent"], "exact_board_location_request")
         self.assertIn("exact verified EU", body["reply"])
-        self.assertIn("https://quivrr.app/europe?", body["recommendations"][0]["exampleProductUrl"])
+        self.assertIn("https://quivrr.app/europe/?", body["recommendations"][0]["exampleProductUrl"])
         self.assertEqual(body["recommendations"][0]["sourceProductUrl"], "https://58surf.example/monsta")
 
     @patch("main.locate_exact_board", return_value=([], False))
@@ -382,6 +383,15 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertEqual(body["intent"], "site_help_question")
         self.assertIn("Start in the Europe search", body["reply"])
         self.assertEqual(body["missingQuestions"], [])
+
+    def test_capability_help_stays_separate_from_site_help(self):
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "What can you help me with?", "region": "EU",
+        })
+        body = response.json()
+        self.assertEqual(body["intent"], "capability_help_request")
+        self.assertIn("choose a board", body["reply"])
+        self.assertNotIn("Start in the Europe search", body["reply"])
 
 
 if __name__ == "__main__":

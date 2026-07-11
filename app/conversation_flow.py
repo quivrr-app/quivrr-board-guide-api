@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from app.board_graph_engine import board_key, compare_boards, find_board, load_graph
 from app.comparison_engine import compare_board_models
-from app.inventory_client import normalise_region
+from app.inventory_client import normalise_region, quivrr_model_search_url
 from app.models import BodhiRecommendation, RiderProfile, SuggestedBoard, VolumeGuidance
 from app.rider_fit import recommend_rider_fit
 from app.daily_driver_taxonomy import daily_driver_lane
@@ -357,6 +357,7 @@ def suggestions_for_board(board: dict, relations: list[str] | None = None) -> li
 def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommendation]:
     output = []
     for board in boards[:6]:
+        safe_search_url = quivrr_model_search_url(board, board.region_code or board.region or "AU")
         if board.manufacturer_direct_count and board.retailer_count:
             source_type = "manufacturer_direct_and_retailer"
             availability_label = "Available in your region"
@@ -381,7 +382,7 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
             shortReason=board.why_it_fits,
             volumeHint=board.suggested_size or board.volume_range,
             availabilityLabel=availability_label,
-            searchUrl=board.quivrr_search_url,
+            searchUrl=safe_search_url,
             whyItFits=board.why_it_fits,
             suggestedVolumeOrSizeRange=board.suggested_size or board.volume_range,
             waveRange=board.wave_range, skillFit=board.skill_fit,
@@ -395,8 +396,8 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
             manufacturerMatchCount=board.manufacturer_direct_count,
             retailerMatchCount=board.retailer_count,
             regionCode=board.region_code or board.region,
-            exampleProductUrl=board.quivrr_search_url or board.example_live_source_url,
-            quivrrSearchUrl=board.quivrr_search_url,
+            exampleProductUrl=safe_search_url,
+            quivrrSearchUrl=safe_search_url,
             sourceProductUrl=board.source_product_url or board.example_live_source_url,
             sourceType=source_type,
             priceRange=board.price_range, confidence=board.confidence,
@@ -628,11 +629,19 @@ def general_board_reply(message: str) -> str:
         ("rocker", "Rocker is the board’s nose-to-tail curve. More rocker adds control in steep or powerful waves; flatter rocker creates speed and easier entry in weaker waves."),
         ("rail", "Rails are the board’s edges. Fuller rails add forgiveness and flotation; lower, refined rails engage more precisely but usually demand cleaner technique."),
         ("concave", "Bottom concave controls water flow under the board. Different single, double, and vee combinations tune lift, speed, rail-to-rail response, and release."),
+        ("channel", "Channels add extra grip, projection, and direction through the tail. They can make a board feel faster and more positive off the back foot, but the effect depends on the rocker, tail shape, and how deep the channels are."),
+        ("swallow tail", "A swallow tail gives the rail line two narrower exit points instead of one wide tail block. That can add hold and bite through turns while still keeping speed and release. It generally suits boards designed to carry speed and turn tightly, especially fish and performance fish shapes. The exact feel still depends on tail width, rocker, rails and fins."),
+        ("tail", "Tail shape changes how a board releases, holds, pivots and carries speed. Swallow tails usually add bite with speed, squash tails balance release and control, and rounder tails smooth the turning arc."),
         ("twin", "A twin-fin uses two main fins for speed, flow, and a loose feel. Modern twins range from small-wave fish to performance twins for better waves."),
+        ("fin", "Fin setup changes hold, release, drive and turning style. Thrusters feel balanced and dependable, twins feel faster and looser, and quads add speed and hold without a centre fin."),
         ("thruster", "A thruster has three fins and offers a familiar balance of drive, hold, and controlled turning across a wide range of conditions."),
         ("quad", "A quad uses four fins for speed and hold without a centre fin. It can suit fast lines, barrels, fish, and some step-ups, depending on the board."),
+        ("eps", "EPS boards are usually lighter and more buoyant, and often feel a little livelier underfoot. The exact feel still depends on the glassing schedule, stringer setup and the rest of the construction."),
+        ("pu", "PU boards usually feel more damped and familiar, with a smoother flex pattern than many EPS builds. The exact feel still depends on the glassing and the shaper’s construction choices."),
         ("epoxy", "Epoxy usually refers to an EPS core with epoxy resin: typically lighter and more buoyant than traditional PU, though flex and durability depend on the exact construction."),
         ("construction", "Construction changes weight, flex, durability, and feel. Compare the manufacturer’s actual build rather than treating every epoxy or PU board as identical."),
+        ("width", "Width changes stability, planing speed and how easily a board rolls from rail to rail. More width usually adds forgiveness and paddle support; less width usually feels more sensitive and performance-focused."),
+        ("thickness", "Thickness affects foam distribution and support under the chest, but it matters most in combination with outline, rails and rocker. Two boards with the same thickness can feel very different."),
     ]
     return next((answer for token, answer in definitions if token in text), "Ask me about a board type, model, size, construction, or the waves it suits.")
 

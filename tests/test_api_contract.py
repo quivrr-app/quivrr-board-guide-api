@@ -4,7 +4,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 import main
-from app.inventory_client import quivrr_search_url
+from app.inventory_client import quivrr_model_search_url, quivrr_search_url
 from app.models import SuggestedBoard
 
 
@@ -116,7 +116,7 @@ class ApiContractTests(unittest.TestCase):
         self.assertTrue(body["reply"])
         self.assertIsNone(body["modelDeployment"])
 
-    def test_quivrr_search_urls_preselect_safely_for_each_region(self):
+    def test_quivrr_model_search_urls_preselect_safely_for_each_region(self):
         board = SuggestedBoard(
             brand="Pyzel",
             model="Ghost",
@@ -132,11 +132,14 @@ class ApiContractTests(unittest.TestCase):
         }
         for region, path in expected.items():
             with self.subTest(region=region):
-                url = quivrr_search_url(board, region)
-                self.assertIn(path, url)
+                url = quivrr_model_search_url(board, region)
+                self.assertIn(path.replace("?", "/?"), url)
                 self.assertIn("brand=Pyzel", url)
                 self.assertIn("model=Ghost", url)
                 self.assertNotIn("autoSearch=1", url)
+                self.assertNotIn("construction=", url)
+                self.assertNotIn("volume=", url)
+                self.assertNotIn("boardSizeId=", url)
 
     def test_exact_size_search_url_only_autosearches_when_board_size_is_known(self):
         board = SuggestedBoard(
