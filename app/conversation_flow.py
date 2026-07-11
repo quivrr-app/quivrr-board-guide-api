@@ -21,8 +21,8 @@ def greeting_reply(region: str | None = None) -> str:
         else "live board availability across Quivrr"
     )
     return (
-        "Hey mate. What are you chasing today? I can help you compare boards, work out volume, "
-        f"find live stock, or narrow down the right board type for your waves using {availability}."
+        "Hey. What are we working on today? I can help you compare boards, work out volume, "
+        f"check live stock, review quiver gaps, or narrow down the right board type using {availability}."
     )
 
 
@@ -64,9 +64,8 @@ def opening_message(region: str | None) -> str:
         else "live board availability across Quivrr"
     )
     return (
-        "Don’t know exactly what to search for? I can help. Tell me your weight, ability, where you "
-        "surf, and what kind of board you’re chasing. I’ll work out a sensible volume range, match "
-        f"the board type, and show options from {availability} that are actually available in your region."
+        "Tell me what you want the board to do and I’ll steer the conversation from there. "
+        f"I can use {availability}, your saved profile where available, and a sensible volume range without turning this into a form."
     )
 
 
@@ -357,17 +356,32 @@ def suggestions_for_board(board: dict, relations: list[str] | None = None) -> li
 
 def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommendation]:
     output = []
-    for board in boards:
+    for board in boards[:6]:
         if board.manufacturer_direct_count and board.retailer_count:
             source_type = "manufacturer_direct_and_retailer"
+            availability_label = "Available in your region"
         elif board.manufacturer_direct_count:
             source_type = "manufacturer_direct"
+            availability_label = "Manufacturer stock available"
         elif board.retailer_count:
             source_type = "retailer"
+            availability_label = "Retailer stock available"
         else:
             source_type = "no_verified_live_source"
+            availability_label = "Catalogue model, no current stock found" if board.availability_checked else "Availability not yet confirmed"
+        fit_label = (
+            "Excellent match" if (board.fit_score or 0) >= 85
+            else "Strong match" if (board.fit_score or 0) >= 75
+            else "Good option" if (board.fit_score or 0) >= 65
+            else "Worth considering"
+        )
         output.append(BodhiRecommendation(
             brand=board.brand, model=board.model, category=board.category,
+            fitLabel=fit_label,
+            shortReason=board.why_it_fits,
+            volumeHint=board.suggested_size or board.volume_range,
+            availabilityLabel=availability_label,
+            searchUrl=board.quivrr_search_url,
             whyItFits=board.why_it_fits,
             suggestedVolumeOrSizeRange=board.suggested_size or board.volume_range,
             waveRange=board.wave_range, skillFit=board.skill_fit,

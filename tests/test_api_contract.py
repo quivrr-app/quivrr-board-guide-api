@@ -4,6 +4,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 import main
+from app.inventory_client import quivrr_search_url
 from app.models import SuggestedBoard
 
 
@@ -39,8 +40,9 @@ class ApiContractTests(unittest.TestCase):
         self.assertEqual(body["correlationId"], response.headers["X-Correlation-ID"])
 
     @patch("main.enrich_suggestions_with_inventory")
-    def test_recommendation_and_availability_fields_remain_separate(self, inventory):
-        inventory.return_value = [SuggestedBoard(
+    @patch("main.recommend_from_matrix")
+    def test_recommendation_and_availability_fields_remain_separate(self, recommend_from_matrix, inventory):
+        seeded = SuggestedBoard(
             brand="Pyzel",
             model="Phantom",
             category="Performance Daily Driver",
@@ -57,9 +59,19 @@ class ApiContractTests(unittest.TestCase):
             inventory_match_count=0,
             region="US",
             region_code="US",
-        )]
+        )
+        recommend_from_matrix.return_value = [seeded]
+        inventory.return_value = [seeded]
         response = self.client.post("/api/board-guide/chat", json={
-            "message": "I am 75kg intermediate surfing 3 to 5ft beach breaks in the United States and want a daily driver.",
+            "message": "What should I ride next?",
+            "profile": {
+                "weight_kg": 75,
+                "ability": "Intermediate",
+                "region": "US",
+                "wave_type": "Beach Break",
+                "wave_size": "3-5ft",
+                "preferred_board_type": "Daily Driver",
+            },
         })
         self.assertEqual(response.status_code, 200)
         recommendation = response.json()["recommendations"][0]
@@ -103,6 +115,44 @@ class ApiContractTests(unittest.TestCase):
         self.assertIsInstance(body["reply"], str)
         self.assertTrue(body["reply"])
         self.assertIsNone(body["modelDeployment"])
+
+    def test_quivrr_search_urls_preselect_safely_for_each_region(self):
+        board = SuggestedBoard(
+            brand="Pyzel",
+            model="Ghost",
+            category="Performance shortboard",
+            confidence=0.9,
+            why_it_fits="Controlled test board",
+        )
+        expected = {
+            "AU": "/australia?",
+            "EU": "/europe?",
+            "US": "/united-states?",
+            "ID": "/indonesia?",
+        }
+        for region, path in expected.items():
+            with self.subTest(region=region):
+                url = quivrr_search_url(board, region)
+                self.assertIn(path, url)
+                self.assertIn("brand=Pyzel", url)
+                self.assertIn("model=Ghost", url)
+                self.assertNotIn("autoSearch=1", url)
+
+    def test_exact_size_search_url_only_autosearches_when_board_size_is_known(self):
+        board = SuggestedBoard(
+            brand="JS Industries",
+            model="Monsta",
+            category="Performance shortboard",
+            confidence=0.9,
+            why_it_fits="Controlled test board",
+        )
+        url = quivrr_search_url(board, "EU", {
+            "construction": "CarboTune",
+            "volumeLitres": 28,
+            "boardSizeId": 123,
+        })
+        self.assertIn("autoSearch=1", url)
+        self.assertIn("boardSizeId=123", url)
 
 
 if __name__ == "__main__":

@@ -5,12 +5,42 @@ from fastapi.testclient import TestClient
 
 import main
 from app.authenticated_profile import AuthenticatedProfileContext
-from app.models import RiderProfile
+from app.models import RiderProfile, SuggestedBoard
 
 
 class BodhiApiTests(unittest.TestCase):
     def setUp(self):
         self.client = TestClient(main.app)
+
+    @staticmethod
+    def _seed_recommendations(count: int, category: str, region: str = "AU"):
+        return [
+            SuggestedBoard(
+                brand=f"Brand {index // 2}",
+                model=f"Model {index}",
+                category=category,
+                confidence=0.9,
+                why_it_fits=f"{category} fit {index}",
+                fit_score=90 - index,
+                region=region,
+                region_code=region,
+            )
+            for index in range(count)
+        ]
+
+    @staticmethod
+    def _state_card(brand: str, model: str, category: str, short_reason: str, region: str = "ID"):
+        return {
+            "brand": brand,
+            "model": model,
+            "category": category,
+            "shortReason": short_reason,
+            "whyItFits": short_reason,
+            "sourceType": "retailer",
+            "confidence": 0.9,
+            "region": region,
+            "regionCode": region,
+        }
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
@@ -85,6 +115,57 @@ class BodhiApiTests(unittest.TestCase):
         body = response.json()
         self.assertNotIn("Nathan", body["reply"])
         self.assertEqual(body["conversationProfile"].get("display_name"), None)
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    @patch("main.load_authenticated_profile_context")
+    def test_whats_my_name_uses_verified_profile_only(self, auth_loader, _inventory, _azure):
+        auth_loader.return_value = AuthenticatedProfileContext(
+            authenticated=True,
+            profile_loaded=True,
+            user_id="user-123",
+            profile=RiderProfile(display_name="Nathan Dunn", region="ID"),
+        )
+        response = self.client.post(
+            "/api/board-guide/chat",
+            json={"message": "What's my name?"},
+            headers={"Authorization": "Bearer token-123"},
+        )
+        body = response.json()
+        self.assertEqual(body["reply"], "You're Nathan Dunn.")
+        self.assertTrue(body["profileLoaded"])
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    def test_anonymous_whats_my_name_does_not_invent_identity(self, _inventory, _azure):
+        body = self.client.post("/api/board-guide/chat", json={"message": "What's my name?"}).json()
+        self.assertIn("verified saved identity", body["reply"])
+        self.assertFalse(body["profileLoaded"])
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.recommend_from_matrix")
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_greetings_never_invoke_recommendations(self, inventory, recommend_from_matrix, _azure):
+        for greeting in ["Hello", "Hi", "Hey", "Good morning"]:
+            with self.subTest(greeting=greeting):
+                body = self.client.post("/api/board-guide/chat", json={"message": greeting, "region": "AU"}).json()
+                self.assertEqual(body["recommendations"], [])
+                self.assertEqual(body["missingQuestions"], [])
+        recommend_from_matrix.assert_not_called()
+        inventory.assert_not_called()
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.recommend_from_matrix")
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_general_help_never_invoke_recommendations(self, inventory, recommend_from_matrix, _azure):
+        for message in ["Can you help me?", "What can you do?"]:
+            with self.subTest(message=message):
+                body = self.client.post("/api/board-guide/chat", json={"message": message, "region": "AU"}).json()
+                self.assertEqual(body["recommendations"], [])
+                self.assertEqual(body["intent"], "site_help_question")
+                self.assertIn("Start in the Australia search", body["reply"])
+        recommend_from_matrix.assert_not_called()
+        inventory.assert_not_called()
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
@@ -177,16 +258,15 @@ class BodhiApiTests(unittest.TestCase):
         }) for index, row in enumerate(rows)]
 
     @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.locate_exact_board", return_value=([], False))
     @patch("main.enrich_suggestions_with_inventory", side_effect=_alternatives_inventory)
-    def test_out_of_stock_uses_live_graph_alternative(self, _inventory, _azure):
+    def test_out_of_stock_uses_live_graph_alternative(self, _inventory, _locate, _azure):
         response = self.client.post("/api/board-guide/chat", json={
             "message": "Is the JS Xero Gravity available?", "region": "AU",
         })
         body = response.json()
-        self.assertIn("can’t find", body["reply"].lower())
-        self.assertTrue(body["recommendations"])
-        self.assertTrue(all(board["availableCount"] > 0 for board in body["recommendations"]))
-        self.assertTrue(all(board["region"] == "AU" for board in body["recommendations"]))
+        self.assertEqual(body["recommendations"], [])
+        self.assertIn("haven’t invented a substitute link", body["reply"])
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=_regional_inventory)
@@ -256,6 +336,113 @@ class BodhiApiTests(unittest.TestCase):
         self.assertIn("canonical boards", body["reply"])
         self.assertIn("not currently found in live stock", body["reply"])
         self.assertTrue(all(row["availableCount"] > 0 for row in body["recommendations"]))
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.recommend_from_matrix")
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_broad_request_caps_public_cards_at_six(self, inventory, recommend_from_matrix, _azure):
+        seeded = self._seed_recommendations(8, "Fish")
+        recommend_from_matrix.return_value = seeded
+        inventory.side_effect = lambda rows, profile: [
+            row.model_copy(update={"available_count": 1, "retailer_count": 1, "region": profile.region or "AU", "region_code": profile.region or "AU"})
+            for row in rows
+        ]
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I need a fish for weak waves",
+            "profile": {"weight_kg": 75, "ability": "Intermediate", "region": "AU", "wave_type": "Beach Break", "wave_power": "Weak"},
+        }).json()
+        self.assertEqual(len(body["recommendations"]), 6)
+        self.assertLessEqual(len(body["recommendations"]), 6)
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.recommend_from_matrix")
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_broad_hybrid_and_performance_requests_normally_return_six(self, inventory, recommend_from_matrix, _azure):
+        recommend_from_matrix.side_effect = [
+            self._seed_recommendations(8, "Hybrid"),
+            self._seed_recommendations(8, "Performance shortboard"),
+        ]
+        inventory.side_effect = lambda rows, profile: [
+            row.model_copy(update={"available_count": 1, "retailer_count": 1, "region": profile.region or "AU", "region_code": profile.region or "AU"})
+            for row in rows
+        ]
+        cases = [
+            "I'm 75kg intermediate surfing 2-4ft beach breaks in Australia and want a hybrid.",
+            "I'm 75kg intermediate surfing 3-5ft point breaks in Australia and want a performance shortboard.",
+        ]
+        for message in cases:
+            with self.subTest(message=message):
+                body = self.client.post("/api/board-guide/chat", json={"message": message, "region": "AU"}).json()
+                self.assertEqual(len(body["recommendations"]), 6)
+                self.assertGreaterEqual(len({card["brand"] for card in body["recommendations"]}), 3)
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_follow_up_filters_to_verified_regional_stock_and_remove_brand(self, inventory, _azure):
+        inventory.side_effect = lambda rows, profile: [
+            row.model_copy(update={
+                "available_count": 1 if row.brand == "Album" else 0,
+                "retailer_count": 1 if row.brand == "Album" else 0,
+                "region": profile.region or "ID",
+                "region_code": profile.region or "ID",
+            })
+            for row in rows
+        ]
+        state = {
+            "lastRecommendations": [
+                self._state_card("Pyzel", "Phantom", "Daily driver", "Balanced performance."),
+                self._state_card("Album", "Bom Dia", "Twin pin", "Point-break trim."),
+            ],
+            "comparisonBoards": [],
+            "conversationTurn": 2,
+        }
+        filtered = self.client.post("/api/board-guide/chat", json={
+            "message": "Only show boards available in Indonesia",
+            "conversationState": state,
+            "region": "ID",
+        }).json()
+        self.assertEqual(len(filtered["recommendations"]), 1)
+        self.assertEqual(filtered["recommendations"][0]["brand"], "Album")
+        self.assertIn("verified current availability in ID", filtered["reply"])
+
+        removed = self.client.post("/api/board-guide/chat", json={
+            "message": "Remove Pyzel",
+            "conversationState": state,
+            "region": "ID",
+        }).json()
+        self.assertTrue(all(board["brand"] != "Pyzel" for board in removed["recommendations"]))
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
+        row.model_copy(update={"available_count": 1, "retailer_count": 1, "region": profile.region or "ID", "region_code": profile.region or "ID"})
+        for row in rows
+    ])
+    def test_numbered_follow_up_uses_conversation_state(self, _inventory, _azure):
+        state = {
+            "lastRecommendations": [
+                self._state_card("JS Industries", "Monsta", "Performance shortboard", "Sharp and fast."),
+                self._state_card("Pyzel", "Ghost", "Step up", "Holds when the surf gets heavier."),
+                self._state_card("Album", "Bom Dia", "Twin pin", "Clean point-break lines."),
+                self._state_card("Pyzel", "Phantom", "Daily driver", "Balanced performance."),
+            ],
+            "comparisonBoards": [],
+            "conversationTurn": 3,
+        }
+        detail = self.client.post("/api/board-guide/chat", json={
+            "message": "Tell me about number 3",
+            "conversationState": state,
+            "region": "ID",
+        }).json()
+        self.assertIn("Album Bom Dia", detail["reply"])
+        self.assertEqual(detail["recommendations"], [])
+
+        compare = self.client.post("/api/board-guide/chat", json={
+            "message": "Compare 1 and 4",
+            "conversationState": state,
+            "region": "ID",
+        }).json()
+        self.assertIn("Paddle power:", compare["reply"])
+        self.assertIsNotNone(compare["comparison"])
 
 
 if __name__ == "__main__":

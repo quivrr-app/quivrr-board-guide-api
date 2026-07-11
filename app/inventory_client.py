@@ -56,8 +56,9 @@ def quivrr_search_url(board: SuggestedBoard, region: str, size: dict | None = No
         "construction": size.get("construction"),
         "volume": size.get("volumeLitres"),
         "boardSizeId": size.get("boardSizeId"),
-        "autoSearch": "1",
     }
+    if size.get("boardSizeId"):
+        params["autoSearch"] = "1"
     return f"https://quivrr.app/{QUIVRR_REGION_PATHS[region]}?{urlencode({key: value for key, value in params.items() if value not in (None, '')})}"
 
 

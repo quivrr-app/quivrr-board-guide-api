@@ -15,10 +15,12 @@ class NaturalConversationEntryTests(unittest.TestCase):
         return response.json()
 
     def test_greeting_is_conversational_not_form(self):
-        body = self.ask("Hey")
-        self.assertEqual(body["intent"], "greeting_request")
-        self.assertIn("Hey mate", body["reply"])
-        self.assertNotIn("Tell me your weight", body["reply"])
+        for greeting in ["Hey", "Hello", "Hi", "Good morning"]:
+            with self.subTest(greeting=greeting):
+                body = self.ask(greeting)
+                self.assertEqual(body["intent"], "greeting_request")
+                self.assertIn("What are we working on today?", body["reply"])
+                self.assertNotIn("Tell me your weight", body["reply"])
 
     def test_best_shortboard_answers_before_intake(self):
         body = self.ask("what's the best shortboard?")

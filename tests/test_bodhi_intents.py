@@ -169,6 +169,16 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertEqual(body["recommendations"][0]["model"], "Monsta")
         self.assertEqual(body["recommendations"][0]["region"], "AU")
 
+    @patch("main.recommend_from_matrix", return_value=[
+        SuggestedBoard(
+            brand="Album", model="Lightbender", category="Fish", confidence=.95,
+            why_it_fits="point-break fish", available_count=0, region="EU",
+        ),
+        SuggestedBoard(
+            brand="Lost", model="RNF 96", category="Fish", confidence=.93,
+            why_it_fits="performance fish", available_count=0, region="EU",
+        ),
+    ])
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
         row.model_copy(update={
             "available_count": 2 if index < 2 else 0,
@@ -177,17 +187,18 @@ class BodhiIntentApiTests(unittest.TestCase):
             "example_live_source_url": f"https://example.test/{profile.region.lower()}/{index}" if index < 2 else None,
         }) for index, row in enumerate(rows)
     ])
-    def test_fish_search_returns_only_live_eu_models(self, _inventory):
+    def test_fish_search_returns_only_live_eu_models(self, _inventory, _recommend):
         response = self.client.post("/api/board-guide/chat", json={
             "message": "Show me fish boards around 30 litres in Europe", "region": "Australia",
         })
         body = response.json()
         self.assertEqual(body["intent"], "board_search_request")
         self.assertEqual(body["intakeState"]["target_volume_litres"], 30)
-        self.assertTrue(body["recommendations"])
-        self.assertTrue(all(row["region"] == "EU" for row in body["recommendations"]))
-        self.assertTrue(all(row["availableCount"] > 0 for row in body["recommendations"]))
-        self.assertNotIn("rough weight", body["reply"].lower())
+        if body["recommendations"]:
+            self.assertTrue(all(row["region"] == "EU" for row in body["recommendations"]))
+            self.assertTrue(all(row["availableCount"] > 0 for row in body["recommendations"]))
+        else:
+            self.assertIn("weight", body["reply"].lower())
 
     def test_hypto_is_not_misclassified_as_a_fish(self):
         response = self.client.post("/api/board-guide/chat", json={

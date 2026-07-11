@@ -207,6 +207,11 @@ class BodhiRecommendation(BaseModel):
     brand: str
     model: str
     category: str
+    fit_label: str | None = Field(default=None, alias="fitLabel")
+    short_reason: str | None = Field(default=None, alias="shortReason")
+    volume_hint: str | None = Field(default=None, alias="volumeHint")
+    availability_label: str | None = Field(default=None, alias="availabilityLabel")
+    search_url: str | None = Field(default=None, alias="searchUrl")
     why_it_fits: str = Field(alias="whyItFits")
     suggested_volume_or_size_range: str | None = Field(default=None, alias="suggestedVolumeOrSizeRange")
     wave_range: str | None = Field(default=None, alias="waveRange")
@@ -235,16 +240,42 @@ class BoardGuideMessage(BaseModel):
     content: str
 
 
+class ClientCapabilities(BaseModel):
+    supports_recommendation_cards: bool = Field(default=False, alias="supportsRecommendationCards")
+    supports_deep_links: bool = Field(default=False, alias="supportsDeepLinks")
+
+
+class ConversationState(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+    last_intent: str | None = Field(default=None, alias="lastIntent")
+    active_region: str | None = Field(default=None, alias="activeRegion")
+    active_profile: dict = Field(default_factory=dict, alias="activeProfile")
+    last_recommendations: list[BodhiRecommendation] = Field(default_factory=list, alias="lastRecommendations")
+    mentioned_boards: list[BodhiRecommendation] = Field(default_factory=list, alias="mentionedBoards")
+    comparison_boards: list[BodhiRecommendation] = Field(default_factory=list, alias="comparisonBoards")
+    last_question: str | None = Field(default=None, alias="lastQuestion")
+    conversation_turn: int = Field(default=0, alias="conversationTurn")
+
+
+class FollowUpAction(BaseModel):
+    id: str
+    label: str
+    prompt: str | None = None
+
+
 class BoardGuideRequest(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
 
     message: str
     region: str | None = None
-    page_context: str | None = None
+    page_context: str | None = Field(default=None, alias="pageContext")
     conversation: list[BoardGuideMessage] = Field(default_factory=list)
     intake_state: RiderProfile | None = Field(default=None, alias="intakeState")
     profile: RiderProfile | None = None
     account_profile: RiderProfile | None = None
+    conversation_state: ConversationState | None = Field(default=None, alias="conversationState")
+    client_capabilities: ClientCapabilities | None = Field(default=None, alias="clientCapabilities")
 
 
 class BoardGuideResponse(BaseModel):
@@ -263,12 +294,21 @@ class BoardGuideResponse(BaseModel):
     volume_guidance: VolumeGuidance | None = Field(default=None, alias="volumeGuidance")
     recommendations: list[BodhiRecommendation] = Field(default_factory=list)
     intent: str = "surfer_fit_request"
+    normalized_intent: str | None = Field(default=None, alias="normalizedIntent")
+    legacy_intent: str | None = Field(default=None, alias="legacyIntent")
+    intent_confidence: float | None = Field(default=None, alias="intentConfidence")
+    intent_entities: dict = Field(default_factory=dict, alias="intentEntities")
+    needs_clarification: bool = Field(default=False, alias="needsClarification")
     conversation_profile: RiderProfile | None = Field(default=None, alias="conversationProfile")
+    conversation_state: ConversationState | None = Field(default=None, alias="conversationState")
     profile_completeness: float = Field(default=0.0, alias="profileCompleteness")
     profile_conflicts: list[str] = Field(default_factory=list, alias="profileConflicts")
     volume_recommendation: VolumeRecommendation | None = Field(default=None, alias="volumeRecommendation")
     comparison: BoardComparison | None = None
     useful_follow_up_questions: list[str] = Field(default_factory=list, alias="usefulFollowUpQuestions")
+    follow_up_actions: list[FollowUpAction] = Field(default_factory=list, alias="followUpActions")
+    authenticated: bool = False
+    profile_loaded: bool = Field(default=False, alias="profileLoaded")
     model_deployment: str | None = Field(default=None, alias="modelDeployment")
     recommendation_version: str = Field(default="bodhi-sprint-4", alias="recommendationVersion")
     correlation_id: str | None = Field(default=None, alias="correlationId")
