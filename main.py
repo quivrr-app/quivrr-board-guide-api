@@ -28,7 +28,7 @@ from app.conversation_flow import (
     volume_advice_reply, volume_guidance, everyday_pushback_reply,
 )
 from app.active_topic import resolve_active_topic
-from app.catalogue_search import category_candidates, extract_category, inventory_snapshot_reply, search_live_category
+from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
 from app.intent_router import classify_intent, route_intent
 from app.board_expert_matrix import recommend_from_matrix
 from app.board_relationship_graph import (
@@ -115,6 +115,39 @@ def _category_label(category: str | None) -> str:
         "step_up": "step up",
         "shortboard": "shortboard",
     }.get(category, category.replace("_", " "))
+
+
+def _category_ranking_profile(profile, message: str, category: str | None):
+    lowered = (message or "").lower()
+    current_preference = (profile.preferred_board_type or "").lower()
+    updates = {}
+
+    if "forgiving" in lowered or "more support" in lowered or "paddle help" in lowered:
+        updates["desired_feel"] = "more forgiving"
+
+    if "performance twin" in lowered or ("twin" in lowered and "performance" in lowered):
+        updates["preferred_board_type"] = "Performance Twin"
+    elif category == "fish":
+        updates["preferred_board_type"] = "Fish"
+    elif category in {"daily_driver", "performance_daily_driver"}:
+        updates["preferred_board_type"] = "Performance Daily Driver"
+    elif category == "performance_shortboard":
+        if "true performance shortboard" in lowered or "competition shortboard" in lowered or "strict hpsb" in lowered:
+            updates["preferred_board_type"] = "True performance shortboard"
+        elif "true performance shortboard" in current_preference or "competition shortboard" in current_preference:
+            updates["preferred_board_type"] = "True performance shortboard"
+        else:
+            updates["preferred_board_type"] = "Performance shortboard"
+    elif category == "small_wave":
+        updates["preferred_board_type"] = "Small wave board"
+    elif category == "step_up":
+        updates["preferred_board_type"] = "Step up"
+    elif category == "mid_length":
+        updates["preferred_board_type"] = "Mid length"
+    elif category == "shortboard":
+        updates["preferred_board_type"] = "Shortboard"
+
+    return profile.model_copy(update=updates) if updates else profile
 
 
 def _verified_in_stock(boards):
@@ -806,18 +839,19 @@ def board_guide_chat(
         reply = inventory_snapshot_reply(profile.region, category)
         questions = []
     elif category == "fish" and legacy_intent in {"board_search_request", "surfer_fit_request"}:
-        canonical_boards = recommend_from_matrix(profile, limit=12)
+        ranking_profile = _category_ranking_profile(profile, request.message, category)
+        canonical_boards = recommend_from_matrix(ranking_profile, limit=12)
         if not canonical_boards and profile.region:
             canonical_boards = search_live_category(profile, category)
         brand_stock_request = bool(profile.requested_brand and profile.region and legacy_intent == "board_search_request")
         direct_stock_request = availability_constraint == STOCK_ONLY_CONSTRAINT and bool(profile.region)
         if brand_stock_request:
-            checked = enrich_suggestions_with_inventory(canonical_boards, profile)
+            checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             suggested_boards = [board for board in checked if board.available_count > 0]
             if suggested_boards:
                 reply = f"I found verified {profile.region} fish stock from {profile.requested_brand}: " + ", ".join(f"{row.model}" for row in suggested_boards[:5]) + "."
             else:
-                alternative_profile = profile.model_copy(update={"requested_brand": None})
+                alternative_profile = ranking_profile.model_copy(update={"requested_brand": None})
                 alternatives = recommend_from_matrix(alternative_profile, limit=8)
                 checked_alternatives = enrich_suggestions_with_inventory(alternatives, alternative_profile)
                 suggested_boards = [board for board in checked_alternatives if board.available_count > 0]
@@ -826,7 +860,7 @@ def board_guide_chat(
                     reply += "The closest live fish alternatives are " + ", ".join(f"{row.brand} {row.model}" for row in suggested_boards[:5]) + "."
             questions = []
         elif direct_stock_request:
-            checked = enrich_suggestions_with_inventory(canonical_boards, profile)
+            checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             suggested_boards = _verified_in_stock(checked)
             reply = _stock_only_reply("fish", profile.region, suggested_boards, candidate_count=len(canonical_boards))
             questions = []
@@ -835,7 +869,7 @@ def board_guide_chat(
             and not (legacy_intent == "board_search_request" and profile.target_volume_litres)
         ):
             if stock_constraint_removed and profile.region:
-                suggested_boards = enrich_suggestions_with_inventory(canonical_boards, profile)
+                suggested_boards = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
                 reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
                 questions = []
             else:
@@ -843,32 +877,25 @@ def board_guide_chat(
                 reply = fish_advice_reply(profile, canonical_boards)
                 questions = ["Which region should I search: Australia, Europe, or Indonesia?"] if not profile.region else ["Are your waves mostly weak beach breaks, points, or reefs?"]
         else:
-            checked = enrich_suggestions_with_inventory(canonical_boards, profile)
+            checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             suggested_boards = checked
             reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
             questions = []
     elif legacy_intent == "board_search_request" and category and profile.region and not requested_board:
-        if category in {"daily_driver", "performance_daily_driver"} and not profile.construction_preference:
-            ranking_profile = profile.model_copy(update={"preferred_board_type": "Daily Driver"})
+        use_live_category_search = bool(profile.construction_preference) or category == "step_up"
+        if use_live_category_search:
+            suggested_boards = search_live_category(profile, category)
+            candidate_count = len(suggested_boards)
+        else:
+            ranking_profile = _category_ranking_profile(profile, request.message, category)
             canonical_boards = recommend_from_matrix(ranking_profile, limit=12)
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             suggested_boards = _verified_in_stock(checked) if availability_constraint == STOCK_ONLY_CONSTRAINT else checked
             if requested_limit := _requested_card_limit(request.message):
                 suggested_boards = suggested_boards[:requested_limit]
             candidate_count = len(canonical_boards)
-        elif availability_constraint == STOCK_ONLY_CONSTRAINT:
-            canonical_boards = category_candidates(category, profile.target_volume_litres, limit=12)
-            checked = enrich_suggestions_with_inventory(canonical_boards, profile)
-            suggested_boards = _verified_in_stock(checked)
-            if requested_limit := _requested_card_limit(request.message):
-                suggested_boards = suggested_boards[:requested_limit]
-            candidate_count = len(canonical_boards)
-        else:
-            suggested_boards = search_live_category(profile, category)
-            candidate_count = len(suggested_boards)
-        if not suggested_boards and profile.target_volume_litres:
-            suggested_boards = search_live_category(profile, category)
-            if not candidate_count:
+            if not canonical_boards:
+                suggested_boards = search_live_category(profile, category)
                 candidate_count = len(suggested_boards)
         label = _category_label(category)
         target = f" around {profile.target_volume_litres:g}L" if profile.target_volume_litres else ""

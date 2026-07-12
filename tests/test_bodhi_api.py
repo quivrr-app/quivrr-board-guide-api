@@ -468,6 +468,57 @@ class BodhiApiTests(unittest.TestCase):
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    def test_strict_hpsb_request_excludes_ghost_xl_and_bom_dia(self, _inventory, _azure):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I want a true performance shortboard for stronger waves",
+            "profile": {
+                "age": 45,
+                "weight_kg": 75,
+                "ability": "Advanced",
+                "current_volume_litres": 28.6,
+                "target_volume_litres": 28.6,
+                "region": "ID",
+                "fitness": "Good",
+                "surf_frequency": 3,
+                "paddle_strength": "Good",
+                "preferred_board_type": "True performance shortboard",
+                "goal": "Performance progression",
+                "wave_power": "Powerful",
+            },
+            "region": "ID",
+        }).json()
+        names = {(card["brand"], card["model"]) for card in body["recommendations"]}
+        self.assertIn(("JS Industries", "Monsta"), names)
+        self.assertNotIn(("Pyzel", "Ghost XL"), names)
+        self.assertNotIn(("Album", "Bom Dia"), names)
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    def test_performance_twin_request_uses_twin_family(self, _inventory, _azure):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "Show me performance twins instead",
+            "profile": {
+                "age": 45,
+                "weight_kg": 75,
+                "ability": "Advanced",
+                "current_volume_litres": 28.6,
+                "target_volume_litres": 28.6,
+                "region": "ID",
+                "fitness": "Good",
+                "surf_frequency": 3,
+                "paddle_strength": "Good",
+                "preferred_board_type": "True performance shortboard",
+                "goal": "Performance progression",
+                "wave_power": "Powerful",
+            },
+            "region": "ID",
+        }).json()
+        self.assertGreaterEqual(len(body["recommendations"]), 1)
+        self.assertTrue(any(card["model"] == "Bom Dia" for card in body["recommendations"]))
+        self._assert_categories_in_family(body["recommendations"], {"Performance Twin"})
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
     def test_fish_shortlist_stays_in_family(self, _inventory, _azure):
         body = self.client.post("/api/board-guide/chat", json={
             "message": "Show me six fish boards",
