@@ -62,6 +62,7 @@ def _extract_entities(text: str) -> dict[str, object]:
     entities: dict[str, object] = {
         "region": None,
         "boardCategory": None,
+        "availabilityConstraint": None,
         "brand": None,
         "models": [],
         "targetVolumeLitres": None,
@@ -83,7 +84,7 @@ def _extract_entities(text: str) -> dict[str, object]:
         "Fish": r"\bfish\b",
         "Hybrid": r"\bhybrid\b",
         "Daily driver": r"\bdaily driver\b",
-        "Performance shortboard": r"\b(?:performance shortboard|shortboard)\b",
+        "Performance shortboard": r"\b(?:performance shortboard|shortboard|short board)\b",
         "Groveller": r"\b(?:groveller|groveler)\b",
         "Step up": r"\bstep[ -]?up\b",
         "Mid length": r"\bmid[ -]?length\b",
@@ -105,6 +106,14 @@ def _extract_entities(text: str) -> dict[str, object]:
         entities["waveType"] = "Beach Break"
     elif re.search(r"\bweak\b", text):
         entities["waveType"] = "Weak waves"
+
+    if re.search(
+        r"\b(?:only in stock|just show me ones in stock|show available boards|available now|currently available|"
+        r"ones i can buy|in stock in indo|in stock in indonesia|live stock only|only boards with stock|"
+        r"just show me .* in stock|only show .* in stock)\b",
+        text,
+    ):
+        entities["availabilityConstraint"] = "VERIFIED_IN_STOCK"
 
     if re.search(r"\bpyzel\b", text):
         entities["brand"] = "Pyzel"
@@ -167,6 +176,8 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("PROGRESSION", "surfer_fit_request", 0.86, entities)
     if re.search(r"\b(?:help choosing a board|need help choosing a board|what should i ride next)\b", text):
         return IntentResult("BOARD_RECOMMENDATION", "surfer_fit_request", 0.88, entities, needs_clarification=True)
+    if re.search(r"\b(?:show catalogue options too|show catalog options too|ignore stock for now|include catalogue options|include catalog options)\b", text):
+        return IntentResult("BOARD_RECOMMENDATION", "board_search_request", 0.9, entities, needs_clarification=False)
     if re.search(r"\b(?:do you have any boards|boards in stock|show me .* in stock)\b", text):
         return IntentResult("BOARD_RECOMMENDATION", "board_search_request", 0.9, entities, needs_clarification=False)
     if re.search(r"\b(?:easier than|more forgiving than|more performance than|better for point breaks|better for weak waves)\b", text):

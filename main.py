@@ -7,6 +7,7 @@ from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 from dataclasses import dataclass
 import os
+import re
 import time
 import uuid
 
@@ -27,7 +28,7 @@ from app.conversation_flow import (
     volume_advice_reply, volume_guidance, everyday_pushback_reply,
 )
 from app.active_topic import resolve_active_topic
-from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
+from app.catalogue_search import category_candidates, extract_category, inventory_snapshot_reply, search_live_category
 from app.intent_router import classify_intent, route_intent
 from app.board_expert_matrix import recommend_from_matrix
 from app.board_relationship_graph import (
@@ -63,6 +64,7 @@ RECOMMENDATION_INTENTS = {
     "surfer_fit_request",
     "alternative_request",
 }
+STOCK_ONLY_CONSTRAINT = "VERIFIED_IN_STOCK"
 
 
 @dataclass(frozen=True)
@@ -70,6 +72,66 @@ class CategoryResolution:
     category: str | None
     confidence: float
     source: str
+
+
+def _message_requests_stock_only(message: str) -> bool:
+    lowered = message.lower()
+    return bool(re.search(
+        r"\b(?:only in stock|just show me ones in stock|show available boards|available now|currently available|"
+        r"ones i can buy|in stock in indo|in stock in indonesia|live stock only|only boards with stock|"
+        r"just show me .* in stock|only show .* in stock)\b",
+        lowered,
+    ))
+
+
+def _message_removes_stock_constraint(message: str) -> bool:
+    lowered = message.lower()
+    return bool(re.search(
+        r"\b(?:show catalogue options too|show catalog options too|ignore stock for now|include catalogue options|"
+        r"include catalog options|don't worry about stock|do not worry about stock)\b",
+        lowered,
+    ))
+
+
+def _resolve_availability_constraint(request, intent_result) -> str | None:
+    if _message_removes_stock_constraint(request.message):
+        return None
+    if _message_requests_stock_only(request.message):
+        return STOCK_ONLY_CONSTRAINT
+    previous = request.conversation_state.availability_constraint if request.conversation_state else None
+    if previous == STOCK_ONLY_CONSTRAINT and intent_result.legacy_intent in RECOMMENDATION_INTENTS:
+        return STOCK_ONLY_CONSTRAINT
+    return previous
+
+
+def _category_label(category: str | None) -> str:
+    if not category:
+        return "board"
+    return {
+        "performance_daily_driver": "performance daily driver",
+        "performance_shortboard": "performance shortboard",
+        "small_wave": "small wave board",
+        "mid_length": "mid length",
+        "step_up": "step up",
+        "shortboard": "shortboard",
+    }.get(category, category.replace("_", " "))
+
+
+def _verified_in_stock(boards):
+    return [board for board in boards if (board.available_count or 0) > 0]
+
+
+def _stock_only_reply(label: str, region: str | None, boards, candidate_count: int | None = None) -> str:
+    region_name = _region_display_name(region)
+    model_count = len(boards)
+    if model_count == 1:
+        return f"I could only verify one suitable {label} with stock in {region_name} right now."
+    if model_count > 1:
+        return f"I found {model_count} {label} models with verified stock in {region_name} that fit this brief."
+    prefix = f"I couldn’t verify live {region_name} stock for that {label} brief right now."
+    if candidate_count:
+        return prefix + " I can widen the board type slightly, include catalogue options without confirmed stock, or search a different region."
+    return prefix + " I can widen the board type slightly, include catalogue options without confirmed stock, or search a different region."
 
 
 def _region_display_name(value: str | None) -> str:
@@ -389,6 +451,7 @@ def build_conversation_state(
     normalized_intent: str,
     public_cards: list,
     questions: list[str],
+    availability_constraint: str | None = None,
     comparison_boards_override: list | None = None,
 ) -> ConversationState:
     active_region = profile.region or request.region
@@ -406,6 +469,7 @@ def build_conversation_state(
     return ConversationState(
         lastIntent=normalized_intent,
         activeRegion=active_region,
+        availabilityConstraint=availability_constraint,
         activeProfile=profile.model_dump(exclude={"profile_sources", "profile_conflicts", "field_provenance"}, exclude_none=True),
         lastRecommendations=last_recommendations,
         mentionedBoards=(last_recommendations or mentioned[:8]),
@@ -501,6 +565,8 @@ def board_guide_chat(
     intent_result = classify_intent(request.message)
     legacy_intent = intent_result.legacy_intent
     intent = intent_result.intent
+    stock_constraint_removed = _message_removes_stock_constraint(request.message)
+    availability_constraint = _resolve_availability_constraint(request, intent_result)
     active_topic = resolve_active_topic(request, profile, legacy_intent)
     if active_topic.kind == "comparison" and active_topic.is_follow_up:
         legacy_intent = "comparison_request"
@@ -744,13 +810,7 @@ def board_guide_chat(
         if not canonical_boards and profile.region:
             canonical_boards = search_live_category(profile, category)
         brand_stock_request = bool(profile.requested_brand and profile.region and legacy_intent == "board_search_request")
-        direct_stock_request = bool(
-            profile.region
-            and legacy_intent == "board_search_request"
-            and profile.target_volume_litres
-            and not profile.weight_kg
-            and any(token in request.message.lower() for token in ("stock", "in stock", "available now", "available"))
-        )
+        direct_stock_request = availability_constraint == STOCK_ONLY_CONSTRAINT and bool(profile.region)
         if brand_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, profile)
             suggested_boards = [board for board in checked if board.available_count > 0]
@@ -767,21 +827,21 @@ def board_guide_chat(
             questions = []
         elif direct_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, profile)
-            suggested_boards = [board for board in checked if board.available_count > 0]
-            reply = (
-                f"I checked live {profile.region} fish stock around {profile.target_volume_litres:g}L. "
-                "Here are the strongest live options before we fine-tune rider fit."
-            ) if suggested_boards else (
-                f"I can’t verify live fish stock around {profile.target_volume_litres:g}L in {profile.region} right now."
-            )
+            suggested_boards = _verified_in_stock(checked)
+            reply = _stock_only_reply("fish", profile.region, suggested_boards, candidate_count=len(canonical_boards))
             questions = []
         elif not profile.region or (
             not (profile.wave_type or profile.wave_size or profile.wave_power)
             and not (legacy_intent == "board_search_request" and profile.target_volume_litres)
         ):
-            suggested_boards = []
-            reply = fish_advice_reply(profile, canonical_boards)
-            questions = ["Which region should I search: Australia, Europe, or Indonesia?"] if not profile.region else ["Are your waves mostly weak beach breaks, points, or reefs?"]
+            if stock_constraint_removed and profile.region:
+                suggested_boards = enrich_suggestions_with_inventory(canonical_boards, profile)
+                reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
+                questions = []
+            else:
+                suggested_boards = []
+                reply = fish_advice_reply(profile, canonical_boards)
+                questions = ["Which region should I search: Australia, Europe, or Indonesia?"] if not profile.region else ["Are your waves mostly weak beach breaks, points, or reefs?"]
         else:
             checked = enrich_suggestions_with_inventory(canonical_boards, profile)
             suggested_boards = checked
@@ -792,17 +852,29 @@ def board_guide_chat(
             ranking_profile = profile.model_copy(update={"preferred_board_type": "Daily Driver"})
             canonical_boards = recommend_from_matrix(ranking_profile, limit=12)
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
-            requested_stock = any(token in request.message.lower() for token in ("stock", "in stock", "available now", "available"))
-            suggested_boards = [board for board in checked if board.available_count > 0] if requested_stock else checked
+            suggested_boards = _verified_in_stock(checked) if availability_constraint == STOCK_ONLY_CONSTRAINT else checked
             if requested_limit := _requested_card_limit(request.message):
                 suggested_boards = suggested_boards[:requested_limit]
+            candidate_count = len(canonical_boards)
+        elif availability_constraint == STOCK_ONLY_CONSTRAINT:
+            canonical_boards = category_candidates(category, profile.target_volume_litres, limit=12)
+            checked = enrich_suggestions_with_inventory(canonical_boards, profile)
+            suggested_boards = _verified_in_stock(checked)
+            if requested_limit := _requested_card_limit(request.message):
+                suggested_boards = suggested_boards[:requested_limit]
+            candidate_count = len(canonical_boards)
         else:
             suggested_boards = search_live_category(profile, category)
+            candidate_count = len(suggested_boards)
         if not suggested_boards and profile.target_volume_litres:
             suggested_boards = search_live_category(profile, category)
-        label = category.replace("_", " ")
+            if not candidate_count:
+                candidate_count = len(suggested_boards)
+        label = _category_label(category)
         target = f" around {profile.target_volume_litres:g}L" if profile.target_volume_litres else ""
-        if suggested_boards:
+        if availability_constraint == STOCK_ONLY_CONSTRAINT:
+            reply = _stock_only_reply(label, profile.region, suggested_boards, candidate_count=candidate_count)
+        elif suggested_boards:
             count = sum(board.available_count for board in suggested_boards)
             brands = ", ".join(dict.fromkeys(board.brand for board in suggested_boards))
             construction_note = ""
@@ -884,7 +956,12 @@ def board_guide_chat(
         else:
             suggested_boards = recommend_from_matrix(profile)
             suggested_boards = enrich_suggestions_with_inventory(suggested_boards, profile)
-        reply = recommendation_reply(profile, guidance, suggested_boards) if guidance else opening_message(profile.region)
+        if availability_constraint == STOCK_ONLY_CONSTRAINT:
+            suggested_boards = _verified_in_stock(suggested_boards)
+            lane_label = (category or extract_category(profile.preferred_board_type or "") or "board").replace("_", " ")
+            reply = _stock_only_reply(lane_label, profile.region, suggested_boards)
+        else:
+            reply = recommendation_reply(profile, guidance, suggested_boards) if guidance else opening_message(profile.region)
         reply = personalise_opening(reply, profile, is_first_turn=is_first_turn)
         if questions:
             reply += " " + questions[0]
@@ -893,6 +970,7 @@ def board_guide_chat(
         reply = "Nice. " + " ".join(questions)
     source = "deterministic_intake_engine"
     duration = round(time.perf_counter() - started, 3)
+    verified_stock_count = sum(1 for board in suggested_boards if (board.available_count or 0) > 0)
     emit_event(
         "bodhi_recommendation_generated",
         "bodhi_api",
@@ -905,6 +983,10 @@ def board_guide_chat(
         intent_confidence=intent_result.confidence,
         conversation_turn=(request.conversation_state.conversation_turn + 1) if request.conversation_state else 1,
         missing_field_count=len(missing),
+        availability_constraint=availability_constraint,
+        requested_region=profile.region or request.region,
+        candidate_count_before_inventory=len(suggested_boards),
+        verified_stock_count=verified_stock_count,
         suggested_board_count=len(suggested_boards),
         recommendation_count=len(suggested_boards),
         recommendation_brands=list(dict.fromkeys(board.brand for board in suggested_boards[:6])),
@@ -929,6 +1011,7 @@ def board_guide_chat(
         intent,
         public_cards,
         questions,
+        availability_constraint=availability_constraint,
         comparison_boards_override=comparison_boards_override,
     )
     follow_up_actions = build_follow_up_actions(intent, public_cards)
@@ -980,6 +1063,9 @@ def board_guide_chat(
         intent_confidence=intent_result.confidence,
         conversation_turn=conversation_state.conversation_turn if conversation_state else 0,
         missing_field_count=len(missing),
+        availability_constraint=availability_constraint,
+        requested_region=profile.region or request.region,
+        verified_stock_count=verified_stock_count,
         suggested_board_count=len(suggested_boards),
         duration_seconds=duration,
         correlation_id=correlation_id,

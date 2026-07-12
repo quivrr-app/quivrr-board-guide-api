@@ -21,6 +21,7 @@ CATEGORY_ALIASES = {
     "small-wave board": "small_wave",
     "small wave": "small_wave",
     "small-wave": "small_wave",
+    "short board": "shortboard",
     "step up": "step_up", "step-up": "step_up",
     "performance shortboard": "performance_shortboard", "shortboard": "shortboard",
     "mid length": "mid_length", "mid-length": "mid_length",

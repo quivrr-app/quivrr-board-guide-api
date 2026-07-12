@@ -65,6 +65,12 @@ def assert_family(recommendations: list[dict[str, Any]], family: str) -> None:
     assert_true(not unexpected, f"Incoherent {family} shortlist categories: {unexpected}")
 
 
+def assert_only_verified_stock(recommendations: list[dict[str, Any]]) -> None:
+    for item in recommendations:
+      assert_true((item.get("availableCount") or 0) > 0, f"Stock-only request included unavailable board: {item.get('brand')} {item.get('model')}")
+      assert_true(item.get("availabilityStatus") == "available", f"Stock-only request included non-available status: {item.get('availabilityStatus')}")
+
+
 def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
     session = build_session(token)
     results: list[tuple[str, bool, str]] = []
@@ -250,6 +256,34 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
         assert_true(len(education.get("recommendations", [])) == 0, "Education reply returned recommendation cards")
 
     scenario("12. Anonymous multi-turn conversation preserves state, safe links, follow-ups and education", anonymous_conversation_contract)
+
+    def stock_only_contract() -> None:
+        initial = call_chat(session, base_url, {
+            "message": "I need a new short board, just show me ones in stock in indo",
+            "profile": {"weight_kg": 75, "ability": "Advanced", "region": "ID", "wave_type": "Reef Break", "wave_power": "Average to Powerful"},
+            "region": "ID",
+        })
+        cards = initial.get("recommendations", [])
+        assert_only_verified_stock(cards)
+        assert_true((initial.get("conversationState") or {}).get("availabilityConstraint") == "VERIFIED_IN_STOCK", "Stock-only constraint was not persisted")
+        follow_up = call_chat(session, base_url, {
+            "message": "Show me fish instead",
+            "region": "ID",
+            "conversationState": initial.get("conversationState"),
+            "intakeState": initial.get("intakeState"),
+        })
+        assert_only_verified_stock(follow_up.get("recommendations", []))
+        assert_true((follow_up.get("conversationState") or {}).get("availabilityConstraint") == "VERIFIED_IN_STOCK", "Stock-only constraint did not persist to follow-up")
+        relaxed = call_chat(session, base_url, {
+            "message": "Show catalogue options too",
+            "region": "ID",
+            "conversationState": follow_up.get("conversationState"),
+            "intakeState": follow_up.get("intakeState"),
+        })
+        assert_true((relaxed.get("conversationState") or {}).get("availabilityConstraint") in {None, ""}, "Stock-only constraint did not clear")
+        assert_true(any((item.get("availableCount") or 0) == 0 for item in relaxed.get("recommendations", [])), "Relaxed stock request did not restore catalogue options")
+
+    scenario("13. Explicit stock-only requests preserve and can remove the verified-stock constraint", stock_only_contract)
 
     return results
 

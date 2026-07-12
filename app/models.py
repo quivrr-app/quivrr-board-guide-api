@@ -275,6 +275,7 @@ class ConversationState(BaseModel):
 
     last_intent: str | None = Field(default=None, alias="lastIntent")
     active_region: str | None = Field(default=None, alias="activeRegion")
+    availability_constraint: str | None = Field(default=None, alias="availabilityConstraint")
     active_profile: dict = Field(default_factory=dict, alias="activeProfile")
     last_recommendations: list[BodhiRecommendation] = Field(default_factory=list, alias="lastRecommendations")
     mentioned_boards: list[BodhiRecommendation] = Field(default_factory=list, alias="mentionedBoards")

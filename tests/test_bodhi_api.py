@@ -548,6 +548,102 @@ class BodhiApiTests(unittest.TestCase):
         self.assertTrue(all(board["brand"] != "Pyzel" for board in removed["recommendations"]))
 
     @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.recommend_from_matrix")
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_explicit_stock_only_request_returns_only_verified_available_cards(self, inventory, recommend_from_matrix, _azure):
+        recommend_from_matrix.return_value = self._seed_recommendations(4, "Performance Shortboard", region="ID")
+        inventory.side_effect = lambda rows, profile: [
+            row.model_copy(update={
+                "available_count": 1 if index == 0 else 0,
+                "manufacturer_direct_count": 1 if index == 0 else 0,
+                "retailer_count": 0,
+                "availability_checked": True,
+                "availability_status": "available" if index == 0 else "not_found",
+                "region": profile.region or "ID",
+                "region_code": profile.region or "ID",
+            })
+            for index, row in enumerate(rows)
+        ]
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I need a new short board, just show me ones in stock in indo",
+            "profile": {"weight_kg": 75, "ability": "Advanced", "region": "ID", "wave_type": "Reef Break", "wave_power": "Average to Powerful"},
+            "region": "ID",
+        }).json()
+        self.assertEqual(len(body["recommendations"]), 1)
+        self.assertTrue(all(card["availableCount"] > 0 for card in body["recommendations"]))
+        self.assertEqual(body["conversationState"]["availabilityConstraint"], "VERIFIED_IN_STOCK")
+        self.assertIn("only verify one suitable", body["reply"].lower())
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_stock_only_follow_up_is_preserved_for_new_category(self, inventory, _azure):
+        inventory.side_effect = lambda rows, profile: [
+            row.model_copy(update={
+                "available_count": 1 if index < 2 else 0,
+                "manufacturer_direct_count": 1 if index < 2 else 0,
+                "retailer_count": 0,
+                "availability_checked": True,
+                "availability_status": "available" if index < 2 else "not_found",
+                "region": profile.region or "EU",
+                "region_code": profile.region or "EU",
+            })
+            for index, row in enumerate(rows)
+        ]
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "Show me fish instead",
+            "region": "EU",
+            "conversationState": {
+                "activeRegion": "EU",
+                "availabilityConstraint": "VERIFIED_IN_STOCK",
+                "conversationTurn": 2,
+            },
+            "intakeState": {
+                "weight_kg": 75,
+                "ability": "Intermediate",
+                "region": "EU",
+            },
+        }).json()
+        self.assertEqual(body["category"], "fish")
+        self.assertEqual(body["conversationState"]["availabilityConstraint"], "VERIFIED_IN_STOCK")
+        self.assertTrue(all(card["availableCount"] > 0 for card in body["recommendations"]))
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.recommend_from_matrix")
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_stock_only_constraint_can_be_removed_explicitly(self, inventory, recommend_from_matrix, _azure):
+        recommend_from_matrix.return_value = self._seed_recommendations(3, "Fish", region="ID")
+        inventory.side_effect = lambda rows, profile: [
+            row.model_copy(update={
+                "available_count": 1 if index == 0 else 0,
+                "manufacturer_direct_count": 1 if index == 0 else 0,
+                "retailer_count": 0,
+                "availability_checked": True,
+                "availability_status": "available" if index == 0 else "not_found",
+                "region": profile.region or "ID",
+                "region_code": profile.region or "ID",
+            })
+            for index, row in enumerate(rows)
+        ]
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "Show catalogue options too",
+            "region": "ID",
+            "conversationState": {
+                "activeRegion": "ID",
+                "availabilityConstraint": "VERIFIED_IN_STOCK",
+                "conversationTurn": 3,
+            },
+            "intakeState": {
+                "weight_kg": 75,
+                "ability": "Intermediate",
+                "region": "ID",
+                "preferred_board_type": "Fish",
+            },
+        }).json()
+        self.assertIsNone(body["conversationState"]["availabilityConstraint"])
+        self.assertGreaterEqual(len(body["recommendations"]), 1)
+        self.assertTrue(any(card["availableCount"] == 0 for card in body["recommendations"]))
+
+    @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
         row.model_copy(update={"available_count": 1, "retailer_count": 1, "region": profile.region or "ID", "region_code": profile.region or "ID"})
         for row in rows

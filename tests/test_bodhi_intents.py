@@ -65,10 +65,17 @@ class IntentRouterTests(unittest.TestCase):
             "Where can I buy a JS Monsta 5'11 CarboTune in Europe?": "exact_board_location_request",
             "Hey Bohdi": "greeting_request",
             "How are you?": "greeting_request",
+            "Show catalogue options too": "board_search_request",
         }
         for message, expected in cases.items():
             with self.subTest(message=message):
                 self.assertEqual(route_intent(message), expected)
+
+    def test_stock_only_entities_are_detected(self):
+        result = main.classify_intent("I need a new short board, just show me ones in stock in indo")
+        self.assertEqual(result.entities["region"], "ID")
+        self.assertEqual(result.entities["boardCategory"], "Performance shortboard")
+        self.assertEqual(result.entities["availabilityConstraint"], "VERIFIED_IN_STOCK")
 
     def test_natural_language_profile_extraction(self):
         profile = extract_profile(
