@@ -108,9 +108,14 @@ def _extract_entities(text: str) -> dict[str, object]:
         entities["waveType"] = "Weak waves"
 
     if re.search(
-        r"\b(?:only in stock|just show me ones in stock|show available boards|available now|currently available|"
-        r"ones i can buy|in stock in indo|in stock in indonesia|live stock only|only boards with stock|"
-        r"just show me .* in stock|only show .* in stock)\b",
+        r"\b(?:what(?:'s| is) available|show me what(?:'s| is) available|available in my (?:size|volume)|"
+        r"available in (?:indonesia|indo|bali)|what can i (?:buy|get)|boards? i can buy now|"
+        r"show me boards? in stock|i asked for (?:you to show me )?boards? in stock|"
+        r"i only want available boards?|why are you showing unavailable boards?|remove (?:anything|boards?) not in stock|"
+        r"remove unavailable boards?|only show what i can buy(?: now)?|only show available boards?|"
+        r"only in stock|just show me ones in stock|show available boards|available now|currently available|"
+        r"currently in stock|is in stock|ones i can buy|in stock in indo|in stock in indonesia|live stock(?: only)?|"
+        r"only boards with stock|just show me .* in stock|only show .* in stock)\b",
         text,
     ):
         entities["availabilityConstraint"] = "VERIFIED_IN_STOCK"
@@ -162,6 +167,10 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("BOARD_COMPARISON", "comparison_request", 0.9, entities, needs_board_pair=True)
     if re.search(r"\b(?:tell me about|what is the .* like|explain the)\b", text):
         return IntentResult("BOARD_DETAILS", "general_board_question", 0.9, entities)
+    if entities.get("availabilityConstraint") == "VERIFIED_IN_STOCK" and re.search(
+        r"\b(?:available|buy|in stock|live stock|unavailable)\b", text
+    ):
+        return IntentResult("AVAILABILITY", "board_search_request", 0.97, entities, needs_region=entities["region"] is None)
     if re.search(r"\b(?:where can i buy|is .* available|who has|manufacturer stock|retailer stock)\b", text):
         return IntentResult("AVAILABILITY", "exact_board_location_request", 0.95, entities, needs_region=entities["region"] is None)
     if "where is this exact board" in text:

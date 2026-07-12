@@ -22,6 +22,21 @@ class IntentRouterContractTests(unittest.TestCase):
         self.assertEqual(result.intent, "BOARD_RECOMMENDATION")
         self.assertEqual(result.legacy_intent, "surfer_fit_request")
 
+    def test_explicit_availability_phrases_set_verified_stock_constraint(self):
+        messages = [
+            "What's available in my size in Indonesia?",
+            "What can I buy around 29L in Indo?",
+            "I want a fish for Bali reefs that is in stock",
+            "I asked for boards in stock",
+            "Remove unavailable boards",
+            "Only show what I can buy now",
+        ]
+        for message in messages:
+            with self.subTest(message=message):
+                result = classify_intent(message)
+                self.assertEqual(result.entities.get("availabilityConstraint"), "VERIFIED_IN_STOCK")
+                self.assertIn(result.intent, {"AVAILABILITY", "BOARD_RECOMMENDATION"})
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -105,9 +105,14 @@ def _set_debug_headers(response: Response, recommendation_path: str | None = Non
 def _message_requests_stock_only(message: str) -> bool:
     lowered = message.lower()
     return bool(re.search(
-        r"\b(?:only in stock|just show me ones in stock|show available boards|available now|currently available|"
-        r"ones i can buy|in stock in indo|in stock in indonesia|live stock only|only boards with stock|"
-        r"just show me .* in stock|only show .* in stock)\b",
+        r"\b(?:what(?:'s| is) available|show me what(?:'s| is) available|available in my (?:size|volume)|"
+        r"available in (?:indonesia|indo|bali)|what can i (?:buy|get)|boards? i can buy now|"
+        r"show me boards? in stock|i asked for (?:you to show me )?boards? in stock|"
+        r"i only want available boards?|why are you showing unavailable boards?|remove (?:anything|boards?) not in stock|"
+        r"remove unavailable boards?|only show what i can buy(?: now)?|only show available boards?|"
+        r"only in stock|just show me ones in stock|show available boards|available now|currently available|"
+        r"currently in stock|is in stock|ones i can buy|in stock in indo|in stock in indonesia|live stock(?: only)?|"
+        r"only boards with stock|just show me .* in stock|only show .* in stock)\b",
         lowered,
     ))
 
@@ -244,7 +249,12 @@ def _category_ranking_profile(profile, message: str, category: str | None):
 
 
 def _verified_in_stock(boards):
-    return [board for board in boards if (board.available_count or 0) > 0]
+    return [
+        board for board in boards
+        if (board.available_count or 0) > 0
+        and board.availability_checked
+        and board.availability_status in {"manufacturer_stock", "retailer_stock", "manufacturer_and_retailer_stock", "available"}
+    ]
 
 
 def _shortlist_family_buckets(category: str | None, profile, message: str) -> tuple[set[str], set[str]]:
@@ -305,10 +315,17 @@ def _enforce_shortlist_coherence(boards, category: str | None, profile, message:
 def _stock_only_reply(label: str, region: str | None, boards, candidate_count: int | None = None) -> str:
     region_name = _region_display_name(region)
     model_count = len(boards)
+    volumes = [board.selected_volume_litres for board in boards if board.selected_volume_litres is not None]
+    volume_note = f" between {min(volumes):g} and {max(volumes):g}L" if volumes else ""
     if model_count == 1:
-        return f"I could only verify one suitable {label} with stock in {region_name} right now."
+        board = boards[0]
+        size_note = (
+            f" close to {board.selected_volume_litres:g}L" if board.exact_size_stock and board.selected_volume_litres is not None
+            else ", although I have only verified model-level stock rather than the exact size"
+        )
+        return f"I found one suitable {label} with verified stock in {region_name}{size_note}."
     if model_count > 1:
-        return f"I found {model_count} {label} models with verified stock in {region_name} that fit this brief."
+        return f"I found {model_count} {label} models with verified stock in {region_name}{volume_note} that fit this brief."
     prefix = f"I couldn’t verify live {region_name} stock for that {label} brief right now."
     if candidate_count:
         return prefix + " I can widen the board type slightly, include catalogue options without confirmed stock, or search a different region."
@@ -1296,7 +1313,8 @@ def board_guide_chat(
         recommendation_context=build_recommendation_context(suggested_boards),
         official_recommendation_context=build_official_recommendation_context(recommendation),
     )
-    final_reply = llm_reply or reply
+    # Stock-constrained prose must derive from the same enriched boards as the cards.
+    final_reply = reply if availability_constraint == STOCK_ONLY_CONSTRAINT else (llm_reply or reply)
     public_cards = public_recommendations(suggested_boards)
     _set_debug_headers(response, recommendation_path=recommendation_path, ranking_engine=ranking_engine_used)
     conversation_state = build_conversation_state(

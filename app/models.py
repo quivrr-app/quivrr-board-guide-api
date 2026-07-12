@@ -99,6 +99,10 @@ class SuggestedBoard(BaseModel):
     availability_status: str = "not_checked"
     inventory_source: str | None = None
     inventory_match_count: int = 0
+    exact_size_inventory_count: int = 0
+    close_size_inventory_count: int = 0
+    exact_size_stock: bool = False
+    model_level_stock: bool = False
     example_live_source_url: str | None = None
     quivrr_search_url: str | None = None
     source_product_url: str | None = None
@@ -243,6 +247,10 @@ class BodhiRecommendation(BaseModel):
     inventory_match_count: int = Field(default=0, alias="inventoryMatchCount")
     manufacturer_match_count: int = Field(default=0, alias="manufacturerMatchCount")
     retailer_match_count: int = Field(default=0, alias="retailerMatchCount")
+    exact_size_inventory_count: int = Field(default=0, alias="exactSizeInventoryCount")
+    close_size_inventory_count: int = Field(default=0, alias="closeSizeInventoryCount")
+    exact_size_stock: bool = Field(default=False, alias="exactSizeStock")
+    model_level_stock: bool = Field(default=False, alias="modelLevelStock")
     region_code: str | None = Field(default=None, alias="regionCode")
     example_product_url: str | None = Field(default=None, alias="exampleProductUrl")
     quivrr_search_url: str | None = Field(default=None, alias="quivrrSearchUrl")

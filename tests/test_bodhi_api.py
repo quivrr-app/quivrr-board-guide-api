@@ -744,7 +744,73 @@ class BodhiApiTests(unittest.TestCase):
         self.assertEqual(len(body["recommendations"]), 1)
         self.assertTrue(all(card["availableCount"] > 0 for card in body["recommendations"]))
         self.assertEqual(body["conversationState"]["availabilityConstraint"], "VERIFIED_IN_STOCK")
-        self.assertIn("only verify one suitable", body["reply"].lower())
+        self.assertIn("one suitable", body["reply"].lower())
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.recommend_from_matrix")
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_available_in_my_size_means_verified_stock_and_narrative_matches_cards(self, inventory, recommend_from_matrix, _azure):
+        recommend_from_matrix.return_value = self._seed_recommendations(4, "Performance Fish", region="ID")
+        inventory.side_effect = lambda rows, profile: [
+            row.model_copy(update={
+                "available_count": 1 if index < 2 else 0,
+                "manufacturer_direct_count": 1 if index == 0 else 0,
+                "retailer_count": 1 if index == 1 else 0,
+                "availability_checked": True,
+                "availability_status": "manufacturer_stock" if index == 0 else "retailer_stock" if index == 1 else "not_found",
+                "exact_size_inventory_count": 1 if index < 2 else 0,
+                "exact_size_stock": index < 2,
+                "model_level_stock": index < 2,
+                "selected_volume_litres": 28.5 + index,
+                "volume_compatibility": "excellent" if index == 0 else "good",
+                "region": profile.region or "ID",
+                "region_code": profile.region or "ID",
+            })
+            for index, row in enumerate(rows)
+        ]
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "What's available in my size in Indonesia? I want a fish for the reef breaks here.",
+            "profile": {"weight_kg": 75, "ability": "Advanced", "target_volume_litres": 28.6, "region": "ID", "wave_type": "Reef Break"},
+            "region": "ID",
+        }).json()
+        self.assertEqual(body["conversationState"]["availabilityConstraint"], "VERIFIED_IN_STOCK")
+        self.assertEqual(len(body["recommendations"]), 2)
+        self.assertIn("I found 2", body["reply"])
+        self.assertTrue(all(card["availableCount"] > 0 for card in body["recommendations"]))
+        self.assertTrue(all(card["availabilityStatus"] in {"manufacturer_stock", "retailer_stock"} for card in body["recommendations"]))
+        self.assertNotIn("Catalogue model", body["reply"])
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_corrective_stock_follow_up_filters_previous_cards_instead_of_repeating_them(self, inventory, _azure):
+        inventory.side_effect = lambda rows, profile: [
+            row.model_copy(update={
+                "available_count": 1 if row.brand == "Album" else 0,
+                "retailer_count": 1 if row.brand == "Album" else 0,
+                "availability_checked": True,
+                "availability_status": "retailer_stock" if row.brand == "Album" else "not_found",
+                "model_level_stock": row.brand == "Album",
+                "region": profile.region or "ID",
+                "region_code": profile.region or "ID",
+            }) for row in rows
+        ]
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I asked for you to show me boards in stock",
+            "region": "ID",
+            "conversationState": {
+                "activeRegion": "ID",
+                "lastRecommendations": [
+                    self._state_card("Album", "Lightbender", "Performance Fish", "Reef-capable fish."),
+                    self._state_card("Firewire", "Seaside", "Fish", "Fast traditional fish."),
+                ],
+                "conversationTurn": 2,
+            },
+            "intakeState": {"weight_kg": 75, "ability": "Advanced", "target_volume_litres": 28.6, "region": "ID", "preferred_board_type": "Fish", "wave_type": "Reef Break"},
+        }).json()
+        self.assertEqual(body["conversationState"]["availabilityConstraint"], "VERIFIED_IN_STOCK")
+        self.assertTrue(body["recommendations"])
+        self.assertTrue(all(card["brand"] == "Album" for card in body["recommendations"]))
+        self.assertNotIn("Seaside", body["reply"])
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory")

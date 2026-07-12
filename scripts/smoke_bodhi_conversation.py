@@ -67,9 +67,10 @@ def assert_family(recommendations: list[dict[str, Any]], family: str) -> None:
 
 
 def assert_only_verified_stock(recommendations: list[dict[str, Any]]) -> None:
+    verified_statuses = {"manufacturer_stock", "retailer_stock", "manufacturer_and_retailer_stock"}
     for item in recommendations:
       assert_true((item.get("availableCount") or 0) > 0, f"Stock-only request included unavailable board: {item.get('brand')} {item.get('model')}")
-      assert_true(item.get("availabilityStatus") == "available", f"Stock-only request included non-available status: {item.get('availabilityStatus')}")
+      assert_true(item.get("availabilityStatus") in verified_statuses, f"Stock-only request included non-verified status: {item.get('availabilityStatus')}")
 
 
 def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
@@ -306,6 +307,38 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
         scenario("14. Authenticated Bali reef fish stays profile-aware, tight in volume and reef-capable", authenticated_bali_reef_fish)
     else:
         results.append(("14. Authenticated Bali reef fish stays profile-aware, tight in volume and reef-capable", True, "PASS: skipped (no bearer token supplied)"))
+
+    def indonesia_reef_fish_stock() -> None:
+        profile = {
+            "weight_kg": 75,
+            "ability": "Advanced",
+            "target_volume_litres": 28.6,
+            "region": "ID",
+            "wave_type": "Reef Break",
+            "preferred_board_type": "Fish",
+        }
+        initial = call_chat(session, base_url, {
+            "message": "I'm wanting to see what's available in my size and volume in Indonesia. I want a new fish for the reef breaks here.",
+            "profile": profile,
+            "region": "ID",
+        })
+        cards = initial.get("recommendations", [])
+        assert_only_verified_stock(cards)
+        assert_true((initial.get("conversationState") or {}).get("availabilityConstraint") == "VERIFIED_IN_STOCK", "Availability phrase did not set stock constraint")
+        assert_true(all(item.get("regionCode") == "ID" for item in cards), "Stock response crossed region boundaries")
+        assert_true(all(item.get("volumeCompatibility") in {"excellent", "good"} for item in cards), "Stock response included incompatible volume")
+        assert_true("catalogue model" not in initial.get("reply", "").lower(), "Stock narrative included catalogue-only wording")
+        correction = call_chat(session, base_url, {
+            "message": "I asked for you to show me boards in stock",
+            "region": "ID",
+            "conversationState": initial.get("conversationState"),
+            "intakeState": initial.get("intakeState"),
+        })
+        assert_only_verified_stock(correction.get("recommendations", []))
+        assert_true((correction.get("conversationState") or {}).get("availabilityConstraint") == "VERIFIED_IN_STOCK", "Corrective stock statement lost constraint")
+        assert_true("catalogue model" not in correction.get("reply", "").lower(), "Correction repeated catalogue-only wording")
+
+    scenario("15. Indonesia reef-fish availability returns verified stock and preserves correction", indonesia_reef_fish_stock)
 
     return results
 

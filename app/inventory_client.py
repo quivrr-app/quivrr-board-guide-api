@@ -192,16 +192,17 @@ def _summarise_stock(payloads: list[dict], region: str, construction_preference:
     rows = []
     direct_rows = {}
     retailer_rows = {}
+    exact_retailer_rows = {}
+    close_retailer_rows = {}
     checked = False
     for payload in payloads:
         if normalise_region(payload.get("regionCode")) != region:
             continue
         checked = True
         direct = [row for row in payload.get("directManufacturerMatches", []) if row.get("isAvailable") is not False]
-        retailers = [
-            row for key in ("exactRetailerMatches", "closeRetailerMatches")
-            for row in payload.get(key, []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"}
-        ]
+        exact_retailers = [row for row in payload.get("exactRetailerMatches", []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"}]
+        close_retailers = [row for row in payload.get("closeRetailerMatches", []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"}]
+        retailers = [*exact_retailers, *close_retailers]
         if construction_preference:
             direct = [row for row in direct if construction_matches_preference(
                 " ".join(filter(None, [row.get("construction"), row.get("title")])), construction_preference
@@ -209,12 +210,20 @@ def _summarise_stock(payloads: list[dict], region: str, construction_preference:
             retailers = [row for row in retailers if construction_matches_preference(
                 " ".join(filter(None, [row.get("construction"), row.get("title")])), construction_preference
             )]
+            exact_retailers = [row for row in exact_retailers if row in retailers]
+            close_retailers = [row for row in close_retailers if row in retailers]
         for row in direct:
             key = row.get("manufacturerInventoryId") or row.get("productUrl") or repr(sorted(row.items()))
             direct_rows[key] = row
         for row in retailers:
             key = row.get("retailerInventoryId") or row.get("productUrl") or repr(sorted(row.items()))
             retailer_rows[key] = row
+        for row in exact_retailers:
+            key = row.get("retailerInventoryId") or row.get("productUrl") or repr(sorted(row.items()))
+            exact_retailer_rows[key] = row
+        for row in close_retailers:
+            key = row.get("retailerInventoryId") or row.get("productUrl") or repr(sorted(row.items()))
+            close_retailer_rows[key] = row
     rows.extend(direct_rows.values())
     rows.extend(retailer_rows.values())
     direct_count = len(direct_rows)
@@ -227,13 +236,26 @@ def _summarise_stock(payloads: list[dict], region: str, construction_preference:
     if prices and len(currencies) == 1:
         currency = next(iter(currencies))
         price_range = f"{min(prices):g}-{max(prices):g} {currency}" if min(prices) != max(prices) else f"{min(prices):g} {currency}"
+    if direct_count and retailer_count:
+        availability_status = "manufacturer_and_retailer_stock"
+    elif direct_count:
+        availability_status = "manufacturer_stock"
+    elif retailer_count:
+        availability_status = "retailer_stock"
+    else:
+        availability_status = "not_found" if checked else "not_checked"
+    exact_size_count = direct_count + len(exact_retailer_rows)
     return {
         "availability_checked": checked,
-        "availability_status": "available" if (direct_count + retailer_count) > 0 else ("not_found" if checked else "not_checked"),
+        "availability_status": availability_status,
         "available_count": direct_count + retailer_count,
         "manufacturer_direct_count": direct_count,
         "retailer_count": retailer_count,
         "inventory_match_count": direct_count + retailer_count,
+        "exact_size_inventory_count": exact_size_count,
+        "close_size_inventory_count": len(close_retailer_rows),
+        "exact_size_stock": exact_size_count > 0,
+        "model_level_stock": (direct_count + retailer_count) > 0,
         "inventory_source": inventory_source_label(direct_count, retailer_count),
         "example_live_source_url": urls[0] if urls else None,
         "price_range": price_range,
@@ -275,6 +297,10 @@ def enrich_suggestions_with_inventory(
             "availability_status": "unknown",
             "inventory_source": None,
             "inventory_match_count": 0,
+            "exact_size_inventory_count": 0,
+            "close_size_inventory_count": 0,
+            "exact_size_stock": False,
+            "model_level_stock": False,
             "example_live_source_url": None,
             "price_range": None,
         }
