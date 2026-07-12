@@ -1,5 +1,5 @@
 brand,model,boardModelId,primaryLane,secondaryLanes,confidence,missingFields
-Album,Bom Dia,8114,high_performance_shortboard,powerful_wave_board,low,waveRange; surferFit
+Album,Bom Dia,8114,twin_fin_performance,alternative_performance; point_break_fish,high,waveRange; surferFit
 Album,Bullet,8115,hybrid_daily_driver,small_wave_daily_driver,medium,waveRange; surferFit
 Album,D'boa,8116,fish,weak_wave_board,medium,waveRange; surferFit
 Album,Delma,8117,fish,weak_wave_board,medium,waveRange; surferFit
@@ -388,7 +388,7 @@ Pyzel,Crisis Twin,7770,mid_length_twin,performance_mid_length,medium,waveRange; 
 Pyzel,Ghost,7761,performance_step_up,barrel_board; high_performance_shortboard,high,
 Pyzel,Ghost Pro,7794,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
 Pyzel,Ghost Swallow,7791,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
-Pyzel,Ghost XL,7785,high_performance_shortboard,powerful_wave_board,medium,waveRange; surferFit
+Pyzel,Ghost XL,7785,high_performance_shortboard,powerful_wave_board,high,waveRange; surferFit
 Pyzel,Gremlin,7768,forgiving_groveller,small_wave_fish; small_wave_daily_driver,medium,waveRange
 Pyzel,Gremlin XL,7772,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
 Pyzel,Happy Twin,7771,groveller,hybrid_daily_driver; twin_fin; weak_wave_board,medium,waveRange; surferFit
@@ -401,7 +401,7 @@ Pyzel,Padillac,7781,big_wave_step_up,travel_step_up,medium,waveRange; surferFit
 Pyzel,Phantom,7787,performance_daily_driver,high_performance_shortboard; one_board_quiver,high,waveRange; surferFit
 Pyzel,Phantom Round,7797,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
 Pyzel,Phantom Squash,7798,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
-Pyzel,Phantom XL,7773,hybrid_daily_driver,one_board_quiver,medium,waveRange; surferFit
+Pyzel,Phantom XL,7773,hybrid_daily_driver,performance_daily_driver; one_board_quiver,high,waveRange; surferFit
 Pyzel,Power Tiger,7769,hybrid_daily_driver,one_board_quiver,low,waveRange; surferFit
 Pyzel,Power Tiger Grom,7765,youth,,medium,waveRange; surferFit
 Pyzel,Power Tiger XL,7767,groveller,hybrid_daily_driver; weak_wave_board,medium,waveRange; surferFit

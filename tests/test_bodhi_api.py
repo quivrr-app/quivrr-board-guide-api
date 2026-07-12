@@ -460,7 +460,7 @@ class BodhiApiTests(unittest.TestCase):
         self.assertGreaterEqual(len(body["recommendations"]), 3)
         self._assert_categories_in_family(
             body["recommendations"],
-            {"High Performance Shortboard", "Performance Daily Driver", "Competition Shortboard"},
+            {"High Performance Shortboard", "Performance Shortboard", "Performance Daily Driver", "Competition Shortboard"},
         )
         self.assertEqual(body["category"], "performance_shortboard")
         self.assertEqual(body["categorySource"], "explicit_user_request")
@@ -492,7 +492,7 @@ class BodhiApiTests(unittest.TestCase):
         self.assertGreaterEqual(len(body["recommendations"]), 3)
         self._assert_categories_in_family(
             body["recommendations"],
-            {"Groveller", "Small Wave Daily Driver", "Weak Wave Board", "Small Wave Fish", "Fish Hybrid", "Hybrid Daily Driver", "Step Down Shortboard"},
+            {"Groveller", "Small Wave Shortboard", "Fish", "Performance Fish", "Hybrid Shortboard", "Performance Daily Driver"},
         )
         self.assertEqual(body["category"], "small_wave")
 

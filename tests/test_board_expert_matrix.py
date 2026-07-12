@@ -1,4 +1,5 @@
 import hashlib
+import hashlib
 import json
 import unittest
 
@@ -80,6 +81,63 @@ class BoardExpertMatrixTests(unittest.TestCase):
         self.assertEqual(target_lanes(profile)[0], "point_break_fish")
         rows = recommend_from_matrix(profile, limit=12)
         self.assertTrue(any(row.model in {"Ocean Racer", "Lightbender", "Twinsman", "RNF 96"} for row in rows))
+
+    def test_bom_dia_is_classified_as_performance_twin(self):
+        bom_dia = find_matrix_board("Album", "Bom Dia")
+        self.assertEqual(bom_dia["primaryFamily"], "Performance Twin")
+        self.assertEqual(bom_dia["variantType"], "standard")
+        self.assertIn("Twin", bom_dia["finSetup"])
+
+    def test_strict_hpsb_excludes_bom_dia_and_ghost_xl_for_light_advanced_rider(self):
+        profile = RiderProfile(
+            age=45,
+            weight_kg=75,
+            ability="Advanced",
+            current_volume_litres=28.6,
+            target_volume_litres=28.6,
+            preferred_board_type="True performance shortboard",
+            goal="Performance progression",
+            wave_power="Powerful",
+            surf_frequency_per_week=3,
+            fitness_level="Good",
+            paddle_strength="Good",
+        )
+        rows = recommend_from_matrix(profile, limit=12)
+        names = {(row.brand, row.model) for row in rows}
+        self.assertIn(("JS Industries", "Monsta"), names)
+        self.assertNotIn(("Album", "Bom Dia"), names)
+        self.assertNotIn(("Pyzel", "Ghost XL"), names)
+
+    def test_heavier_rider_can_receive_supportive_xl_variant(self):
+        profile = RiderProfile(
+            age=48,
+            weight_kg=92,
+            ability="Advanced",
+            preferred_board_type="Performance shortboard",
+            goal="More paddle support",
+            wave_power="Powerful",
+            surf_frequency_per_week=1,
+            fitness_level="Average",
+            paddle_strength="Average",
+            target_volume_litres=33.5,
+        )
+        rows = recommend_from_matrix(profile, limit=12)
+        self.assertTrue(any(row.model == "Ghost XL" for row in rows))
+
+    def test_forgiving_performance_request_prefers_daily_drivers(self):
+        profile = RiderProfile(
+            age=45,
+            weight_kg=75,
+            ability="Intermediate",
+            preferred_board_type="Performance shortboard",
+            goal="Something more forgiving and performance focused",
+            surf_frequency_per_week=0.25,
+            fitness_level="Average",
+            paddle_strength="Average",
+        )
+        rows = recommend_from_matrix(profile, limit=8)
+        self.assertTrue(rows)
+        self.assertIn(rows[0].category, {"Performance Daily Driver", "Daily Driver", "Hybrid Shortboard"})
 
     def test_generation_is_deterministic(self):
         before = hashlib.sha256(generator.OUTPUT_PATH.read_bytes()).hexdigest()

@@ -2,10 +2,15 @@
   "totalModels": 513,
   "modelsWithPrimaryLane": 513,
   "modelsWithSecondaryLanes": 443,
+  "modelsWithPrimaryFamily": 513,
+  "variantCoverage": 513,
+  "finSetupCoverage": 513,
+  "ageSuitabilityCoverage": 513,
+  "abilityCoverage": 513,
   "confidenceDistribution": {
-    "high": 12,
-    "low": 204,
-    "medium": 297
+    "high": 15,
+    "low": 203,
+    "medium": 295
   },
   "modelsMissingWaveRange": 462,
   "modelsMissingSurferFit": 442,
@@ -22,7 +27,7 @@
     "forgiving_groveller": 2,
     "groveller": 11,
     "gun": 4,
-    "high_performance_shortboard": 72,
+    "high_performance_shortboard": 71,
     "high_volume_groveller": 3,
     "hybrid_daily_driver": 188,
     "longboard": 23,
@@ -46,7 +51,7 @@
     "traditional_fish": 4,
     "travel_step_up": 1,
     "twin_fin_cruiser": 1,
-    "twin_fin_performance": 12,
+    "twin_fin_performance": 13,
     "user_friendly_shortboard": 1,
     "youth": 8
   },
@@ -303,15 +308,6 @@
     },
     {
       "brand": "Album",
-      "model": "Bom Dia",
-      "primaryLane": "high_performance_shortboard",
-      "missingFields": [
-        "waveRange",
-        "surferFit"
-      ]
-    },
-    {
-      "brand": "Album",
       "model": "Freewing",
       "primaryLane": "high_performance_shortboard",
       "missingFields": [
@@ -525,6 +521,15 @@
         "waveRange",
         "surferFit"
       ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rocket-wide",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
     }
   ],
   "top50ModelsNeedingCuratedReview": [
@@ -655,11 +660,6 @@
     },
     {
       "brand": "Album",
-      "model": "Bom Dia",
-      "reason": "waveRange, surferFit"
-    },
-    {
-      "brand": "Album",
       "model": "Freewing",
       "reason": "waveRange, surferFit"
     },
@@ -776,6 +776,11 @@
     {
       "brand": "Channel Islands",
       "model": "rocket-9",
+      "reason": "waveRange, surferFit"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rocket-wide",
       "reason": "waveRange, surferFit"
     }
   ]

@@ -1,8 +1,9 @@
 {
-  "totalCuratedOverrides": 128,
-  "highConfidenceOverrides": 12,
+  "totalCuratedOverrides": 131,
+  "highConfidenceOverrides": 15,
   "mediumConfidenceOverrides": 116,
   "laneCoverageByCategory": {
+    "alternative_performance": 2,
     "barrel_board": 25,
     "big_wave_step_up": 6,
     "cruisy_fish": 13,
@@ -11,23 +12,24 @@
     "fish_hybrid": 13,
     "forgiving_daily_driver": 19,
     "forgiving_groveller": 4,
-    "high_performance_shortboard": 38,
+    "high_performance_shortboard": 40,
     "high_volume_groveller": 6,
-    "hybrid_daily_driver": 18,
+    "hybrid_daily_driver": 20,
     "keel_fish": 4,
     "mid_length_single_fin": 4,
     "mid_length_twin": 6,
     "mini_mal": 4,
     "modern_fish": 37,
     "noserider": 2,
-    "one_board_quiver": 10,
-    "performance_daily_driver": 49,
+    "one_board_quiver": 11,
+    "performance_daily_driver": 51,
     "performance_fish": 30,
     "performance_groveller": 12,
     "performance_longboard": 4,
     "performance_mid_length": 20,
     "performance_step_up": 24,
-    "point_break_fish": 19,
+    "point_break_fish": 20,
+    "powerful_wave_board": 2,
     "small_wave_daily_driver": 16,
     "small_wave_fish": 27,
     "small_wave_speed_board": 12,
@@ -36,7 +38,7 @@
     "traditional_fish": 8,
     "travel_step_up": 10,
     "twin_fin_cruiser": 4,
-    "twin_fin_performance": 30,
+    "twin_fin_performance": 32,
     "user_friendly_shortboard": 3
   },
   "fishLaneCoverage": {
@@ -44,17 +46,17 @@
     "performance_fish": 30,
     "cruisy_fish": 13,
     "small_wave_fish": 27,
-    "point_break_fish": 19,
-    "twin_fin_performance": 30,
+    "point_break_fish": 20,
+    "twin_fin_performance": 32,
     "twin_fin_cruiser": 4,
     "fish_hybrid": 13,
     "keel_fish": 4,
     "modern_fish": 37
   },
   "dailyDriverLaneCoverage": {
-    "performance_daily_driver": 49,
+    "performance_daily_driver": 51,
     "forgiving_daily_driver": 19,
-    "hybrid_daily_driver": 18,
+    "hybrid_daily_driver": 20,
     "small_wave_daily_driver": 16
   },
   "top50LowConfidenceImportantBoards": [
@@ -310,15 +312,6 @@
     },
     {
       "brand": "Album",
-      "model": "Bom Dia",
-      "primaryLane": "high_performance_shortboard",
-      "missingFields": [
-        "waveRange",
-        "surferFit"
-      ]
-    },
-    {
-      "brand": "Album",
       "model": "Freewing",
       "primaryLane": "high_performance_shortboard",
       "missingFields": [
@@ -527,6 +520,15 @@
     {
       "brand": "Channel Islands",
       "model": "rocket-9",
+      "primaryLane": "hybrid_daily_driver",
+      "missingFields": [
+        "waveRange",
+        "surferFit"
+      ]
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "rocket-wide",
       "primaryLane": "hybrid_daily_driver",
       "missingFields": [
         "waveRange",

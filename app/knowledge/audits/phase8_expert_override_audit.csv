@@ -1,4 +1,5 @@
 brand,model,primaryLane,boardLanes,confidence,notes
+Album,Bom Dia,twin_fin_performance,twin_fin_performance; alternative_performance,high,Concise curated classification; retain manufacturer evidence as the primary authority.
 Album,Bullet,hybrid_daily_driver,hybrid_daily_driver; user_friendly_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
 Album,Disorder,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
 Album,Fascination,modern_fish,modern_fish; performance_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
@@ -100,11 +101,13 @@ Lost,V3 Rocket,small_wave_daily_driver,small_wave_daily_driver,medium,Concise cu
 Pyzel,Astro Pop,performance_fish,performance_fish; small_wave_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
 Pyzel,Crisis Twin,mid_length_twin,mid_length_twin; performance_mid_length,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
 Pyzel,Ghost,performance_step_up,performance_step_up; barrel_board,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Ghost XL,high_performance_shortboard,high_performance_shortboard; powerful_wave_board,high,Concise curated classification; retain manufacturer evidence as the primary authority.
 Pyzel,Gremlin,forgiving_groveller,forgiving_groveller; small_wave_speed_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
 Pyzel,Mini Ghost Squash,performance_daily_driver,performance_daily_driver; step_down_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
 Pyzel,Next Step,performance_step_up,performance_step_up; barrel_board,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
 Pyzel,Padillac,big_wave_step_up,big_wave_step_up; travel_step_up,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
 Pyzel,Phantom,performance_daily_driver,performance_daily_driver,high,Concise curated classification; retain manufacturer evidence as the primary authority.
+Pyzel,Phantom XL,hybrid_daily_driver,hybrid_daily_driver; performance_daily_driver,high,Concise curated classification; retain manufacturer evidence as the primary authority.
 Pyzel,Pyzalien 2,performance_daily_driver,performance_daily_driver,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
 Pyzel,Red Tiger,high_performance_shortboard,high_performance_shortboard,medium,Concise curated classification; retain manufacturer evidence as the primary authority.
 Pyzel,Tiger Twin,twin_fin_performance,twin_fin_performance; modern_fish,medium,Concise curated classification; retain manufacturer evidence as the primary authority.

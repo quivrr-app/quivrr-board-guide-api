@@ -25,6 +25,69 @@ SCORE_FIELDS = [
     "oneBoardQuiverScore",
 ]
 
+PRIMARY_FAMILY_BY_LANE = {
+    "high_performance_shortboard": "High Performance Shortboard",
+    "competition_shortboard": "High Performance Shortboard",
+    "performance_daily_driver": "Performance Daily Driver",
+    "forgiving_daily_driver": "Daily Driver",
+    "hybrid_daily_driver": "Hybrid Shortboard",
+    "user_friendly_shortboard": "Daily Driver",
+    "small_wave_daily_driver": "Small Wave Shortboard",
+    "step_down_shortboard": "Small Wave Shortboard",
+    "groveller": "Groveller",
+    "performance_groveller": "Groveller",
+    "forgiving_groveller": "Groveller",
+    "high_volume_groveller": "Groveller",
+    "small_wave_speed_board": "Groveller",
+    "traditional_fish": "Fish",
+    "modern_fish": "Performance Fish",
+    "performance_fish": "Performance Fish",
+    "small_wave_fish": "Fish",
+    "cruisy_fish": "Fish",
+    "point_break_fish": "Performance Fish",
+    "keel_fish": "Fish",
+    "fish_hybrid": "Performance Fish",
+    "twin_fin_performance": "Performance Twin",
+    "twin_fin_cruiser": "Twin Fin",
+    "mid_length": "Mid Length",
+    "performance_mid_length": "Mid Length",
+    "cruisy_mid_length": "Mid Length",
+    "mid_length_twin": "Mid Length",
+    "mid_length_single_fin": "Mid Length",
+    "step_up": "Step Up",
+    "performance_step_up": "Step Up",
+    "travel_step_up": "Step Up",
+    "big_wave_step_up": "Semi Gun",
+    "barrel_board": "Step Up",
+    "longboard": "Longboard",
+    "performance_longboard": "Longboard",
+    "cruisy_longboard": "Longboard",
+    "noserider": "Longboard",
+    "mini_mal": "Longboard",
+    "softboard": "Softboard",
+    "gun": "Semi Gun",
+}
+
+FAMILY_DEFAULTS = {
+    "High Performance Shortboard": {"abilityPreferred": ["Advanced", "Expert"], "fitnessRequirement": "high", "surfFrequencyRequirement": "regular", "paddleSupport": "low", "ageModifier": "neutral", "finSetup": ["Thruster"]},
+    "Performance Shortboard": {"abilityPreferred": ["Intermediate", "Advanced", "Expert"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "regular", "paddleSupport": "low_to_moderate", "ageModifier": "neutral", "finSetup": ["Thruster"]},
+    "Performance Daily Driver": {"abilityPreferred": ["Intermediate", "Advanced"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "moderate", "paddleSupport": "moderate", "ageModifier": "neutral", "finSetup": ["Thruster", "Five Fin"]},
+    "Daily Driver": {"abilityPreferred": ["Progressing", "Intermediate", "Advanced"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "moderate", "paddleSupport": "moderate_to_high", "ageModifier": "supportive", "finSetup": ["Thruster", "Five Fin"]},
+    "Hybrid Shortboard": {"abilityPreferred": ["Progressing", "Intermediate", "Advanced"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "moderate", "paddleSupport": "high", "ageModifier": "supportive", "finSetup": ["Thruster", "Five Fin"]},
+    "Small Wave Shortboard": {"abilityPreferred": ["Intermediate", "Advanced"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "moderate", "paddleSupport": "moderate", "ageModifier": "supportive", "finSetup": ["Thruster", "Five Fin"]},
+    "Groveller": {"abilityPreferred": ["Intermediate", "Advanced"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "moderate", "paddleSupport": "high", "ageModifier": "supportive", "finSetup": ["Thruster", "Five Fin"]},
+    "Fish": {"abilityPreferred": ["Intermediate", "Advanced"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "moderate", "paddleSupport": "high", "ageModifier": "supportive", "finSetup": ["Twin"]},
+    "Performance Fish": {"abilityPreferred": ["Intermediate", "Advanced", "Expert"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "moderate", "paddleSupport": "moderate", "ageModifier": "neutral", "finSetup": ["Twin", "Quad"]},
+    "Twin Fin": {"abilityPreferred": ["Intermediate", "Advanced"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "moderate", "paddleSupport": "moderate", "ageModifier": "neutral", "finSetup": ["Twin"]},
+    "Performance Twin": {"abilityPreferred": ["Intermediate", "Advanced", "Expert"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "moderate", "paddleSupport": "moderate", "ageModifier": "neutral", "finSetup": ["Twin"]},
+    "Step Up": {"abilityPreferred": ["Advanced", "Expert"], "fitnessRequirement": "high", "surfFrequencyRequirement": "regular", "paddleSupport": "moderate", "ageModifier": "neutral", "finSetup": ["Thruster"]},
+    "Semi Gun": {"abilityPreferred": ["Advanced", "Expert"], "fitnessRequirement": "high", "surfFrequencyRequirement": "regular", "paddleSupport": "moderate", "ageModifier": "neutral", "finSetup": ["Thruster"]},
+    "Mid Length": {"abilityPreferred": ["Progressing", "Intermediate", "Advanced"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "moderate", "paddleSupport": "high", "ageModifier": "supportive", "finSetup": ["Single", "Two Plus One", "Twin"]},
+    "Alternative Performance": {"abilityPreferred": ["Intermediate", "Advanced", "Expert"], "fitnessRequirement": "medium", "surfFrequencyRequirement": "moderate", "paddleSupport": "moderate", "ageModifier": "neutral", "finSetup": ["Twin", "Quad"]},
+    "Softboard": {"abilityPreferred": ["Beginner", "Progressing"], "fitnessRequirement": "low", "surfFrequencyRequirement": "casual", "paddleSupport": "high", "ageModifier": "supportive", "finSetup": ["Thruster"]},
+    "Longboard": {"abilityPreferred": ["Beginner", "Progressing", "Intermediate", "Advanced"], "fitnessRequirement": "low", "surfFrequencyRequirement": "casual", "paddleSupport": "high", "ageModifier": "supportive", "finSetup": ["Single", "Two Plus One"]},
+}
+
 
 def key(brand: str | None, model: str | None) -> tuple[str, str]:
     clean = lambda value: re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
@@ -105,6 +168,64 @@ def sublanes_from_board(board: dict, primary: str) -> list[str]:
     return list(dict.fromkeys(lanes))
 
 
+def infer_primary_family(primary: str, secondary: list[str], board_lanes: list[str], override: dict | None) -> str:
+    if override and override.get("primaryFamily"):
+        return override["primaryFamily"]
+    for lane in [primary, *secondary, *board_lanes]:
+        if lane in PRIMARY_FAMILY_BY_LANE:
+            return PRIMARY_FAMILY_BY_LANE[lane]
+    return "Alternative Performance"
+
+
+def infer_variant_metadata(model: str, override: dict | None) -> tuple[str, str, bool]:
+    if override and override.get("variantType"):
+        variant_type = override["variantType"]
+        base_model = override.get("baseModel") or model
+        return variant_type, base_model, bool(override.get("xlVariant"))
+
+    lowered = (model or "").lower()
+    variant_type = "standard"
+    base_model = model
+    if " xl" in lowered or lowered.endswith("xl"):
+        variant_type = "xl"
+        base_model = re.sub(r"\bxl\b", "", model, flags=re.IGNORECASE).replace("  ", " ").strip()
+    elif " twin" in lowered and "twinsman" not in lowered:
+        variant_type = "twin_variant"
+        base_model = re.sub(r"\btwin\b", "", model, flags=re.IGNORECASE).replace("  ", " ").strip()
+    elif re.search(r"\b(v\d+|[2-9]\.0|20[0-9]{2}|box)\b", lowered):
+        variant_type = "updated_variant"
+    return variant_type, base_model or model, variant_type == "xl"
+
+
+def infer_secondary_tags(primary_family: str, board: dict, board_lanes: list[str], design: dict, wave: dict) -> list[str]:
+    tags = []
+    wave_types = wave.get("waveTypes") or []
+    wave_power = wave.get("wavePower") or board.get("dna", {}).get("wavePower", [])
+    if "reef_break" in wave_types:
+        tags.append("Reef")
+    if "point_break" in wave_types:
+        tags.append("Point")
+    if "beach_break" in wave_types:
+        tags.append("Beach Break")
+    if "powerful" in wave_power:
+        tags.append("Hollow")
+        tags.append("Hold")
+    if "weak" in wave_power:
+        tags.append("Weak Wave")
+        tags.append("Paddle Support")
+    if primary_family in {"High Performance Shortboard", "Performance Shortboard"}:
+        tags.extend(["Technical", "Refined Rails"])
+    if primary_family in {"Performance Twin", "Twin Fin"}:
+        tags.extend(["Twin", "Release", "Drive"])
+    if primary_family in {"Fish", "Performance Fish"}:
+        tags.extend(["Wide Tail", "Drive"])
+    if "performance_step_up" in board_lanes or primary_family == "Step Up":
+        tags.append("Fast")
+    if design.get("entryRocker"):
+        tags.append("High Rocker" if "high" in str(design.get("entryRocker")).lower() else "Low Entry Rocker")
+    return list(dict.fromkeys(tags))
+
+
 def build_scores(primary: str, secondary: list[str], dna: dict) -> dict[str, int]:
     values = {field: 45 for field in SCORE_FIELDS}
     values.update({
@@ -183,6 +304,11 @@ def main() -> None:
         wave = intel.get("wave", {})
         surfer = intel.get("surfer", {})
         description = intel.get("description", {})
+        primary_family = infer_primary_family(primary, secondary, board_lanes, override)
+        variant_type, base_model, xl_variant = infer_variant_metadata(board.get("model"), override)
+        family_defaults = FAMILY_DEFAULTS.get(primary_family, FAMILY_DEFAULTS["Alternative Performance"])
+        fin_setup = override.get("finSetup") if override and override.get("finSetup") is not None else family_defaults.get("finSetup", [])
+        secondary_tags = override.get("secondaryTags") if override and override.get("secondaryTags") is not None else infer_secondary_tags(primary_family, board, board_lanes, design, wave)
         source_urls = list(dict.fromkeys(filter(None, [
             intel.get("identity", {}).get("sourceUrl"), description.get("descriptionSource"),
             gen.get("official_product_url"), gen.get("source_url"),
@@ -219,12 +345,35 @@ def main() -> None:
             "volumeRange": board.get("volumeRange", {}), "lengthRangeInches": board.get("lengthRangeInches", {}),
             "reputationSummary": None, "knownFor": [], "strengths": [], "weaknesses": [],
             "bestFor": [], "notIdealFor": [], "notes": None,
+            "primaryFamily": primary_family,
+            "secondaryTags": secondary_tags,
+            "variantType": variant_type,
+            "baseModel": base_model,
+            "finSetup": fin_setup,
+            "abilityPreferred": override.get("abilityPreferred") if override and override.get("abilityPreferred") is not None else family_defaults.get("abilityPreferred", []),
+            "fitnessRequirement": override.get("fitnessRequirement") if override and override.get("fitnessRequirement") is not None else family_defaults.get("fitnessRequirement"),
+            "surfFrequencyRequirement": override.get("surfFrequencyRequirement") if override and override.get("surfFrequencyRequirement") is not None else family_defaults.get("surfFrequencyRequirement"),
+            "paddleSupport": override.get("paddleSupport") if override and override.get("paddleSupport") is not None else family_defaults.get("paddleSupport"),
+            "ageModifier": override.get("ageModifier") if override and override.get("ageModifier") is not None else family_defaults.get("ageModifier"),
+            "riderWeightMinKg": override.get("riderWeightMinKg") if override else None,
+            "riderWeightMaxKg": override.get("riderWeightMaxKg") if override else None,
+            "performanceStyle": override.get("performanceStyle") if override else None,
+            "foamDistribution": override.get("foamDistribution") if override else None,
+            "outlineProfile": override.get("outlineProfile") if override else None,
+            "railProfile": override.get("railProfile") if override else None,
+            "rockerProfile": override.get("rockerProfile") if override else None,
+            "xlVariant": xl_variant,
+            "keyTradeOffs": override.get("keyTradeOffs") if override and override.get("keyTradeOffs") is not None else [],
         }
         if override:
             for field in [
                 "boardFamily", "reputationSummary", "knownFor", "strengths", "weaknesses", "bestFor",
                 "notIdealFor", "waveRangeMinFt", "waveRangeMaxFt", "waveTypes", "wavePower",
-                "abilityMin", "abilityMax", "notes",
+                "abilityMin", "abilityMax", "notes", "primaryFamily", "secondaryTags", "variantType",
+                "baseModel", "finSetup", "abilityPreferred", "fitnessRequirement",
+                "surfFrequencyRequirement", "paddleSupport", "ageModifier", "riderWeightMinKg",
+                "riderWeightMaxKg", "performanceStyle", "foamDistribution", "outlineProfile",
+                "railProfile", "rockerProfile", "xlVariant", "keyTradeOffs",
             ] + SCORE_FIELDS:
                 if override.get(field) is not None:
                     item[field] = override[field]
@@ -242,6 +391,11 @@ def main() -> None:
     audit = {
         "totalModels": len(matrix), "modelsWithPrimaryLane": sum(bool(row["primaryLane"]) for row in matrix),
         "modelsWithSecondaryLanes": sum(bool(row["secondaryLanes"]) for row in matrix),
+        "modelsWithPrimaryFamily": sum(bool(row.get("primaryFamily")) for row in matrix),
+        "variantCoverage": sum(bool(row.get("variantType")) for row in matrix),
+        "finSetupCoverage": sum(bool(row.get("finSetup")) for row in matrix),
+        "ageSuitabilityCoverage": sum(row.get("ageModifier") is not None for row in matrix),
+        "abilityCoverage": sum(bool(row.get("abilityMin") or row.get("abilityMax") or row.get("abilityPreferred")) for row in matrix),
         "confidenceDistribution": dict(sorted(confidence_counts.items())),
         "modelsMissingWaveRange": sum("waveRange" in row["missingFields"] for row in matrix),
         "modelsMissingSurferFit": sum("surferFit" in row["missingFields"] for row in matrix),
