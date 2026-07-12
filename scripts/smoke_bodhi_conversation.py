@@ -13,6 +13,7 @@ UNSAFE_URL_TOKENS = ("construction=", "volume=", "boardSizeId=", "autoSearch=")
 FAMILY_CATEGORIES = {
     "performance_shortboard": {
         "high performance shortboard",
+        "performance shortboard",
         "performance daily driver",
         "competition shortboard",
     },

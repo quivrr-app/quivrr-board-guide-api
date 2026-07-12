@@ -88,6 +88,26 @@ FAMILY_DEFAULTS = {
     "Longboard": {"abilityPreferred": ["Beginner", "Progressing", "Intermediate", "Advanced"], "fitnessRequirement": "low", "surfFrequencyRequirement": "casual", "paddleSupport": "high", "ageModifier": "supportive", "finSetup": ["Single", "Two Plus One"]},
 }
 
+BROAD_FAMILY_BY_PRIMARY_FAMILY = {
+    "High Performance Shortboard": "Shortboard",
+    "Performance Shortboard": "Shortboard",
+    "Performance Daily Driver": "Shortboard",
+    "Daily Driver": "Shortboard",
+    "Hybrid Shortboard": "Hybrid",
+    "Small Wave Shortboard": "Shortboard",
+    "Groveller": "Shortboard",
+    "Fish": "Fish",
+    "Performance Fish": "Fish",
+    "Twin Fin": "Fish",
+    "Performance Twin": "Alternative",
+    "Step Up": "Step Up",
+    "Semi Gun": "Step Up",
+    "Mid Length": "Mid Length",
+    "Longboard": "Longboard",
+    "Softboard": "Softboard",
+    "Alternative Performance": "Alternative",
+}
+
 
 def key(brand: str | None, model: str | None) -> tuple[str, str]:
     clean = lambda value: re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
@@ -226,6 +246,50 @@ def infer_secondary_tags(primary_family: str, board: dict, board_lanes: list[str
     return list(dict.fromkeys(tags))
 
 
+def infer_broad_family(primary_family: str) -> str:
+    return BROAD_FAMILY_BY_PRIMARY_FAMILY.get(primary_family, "Alternative")
+
+
+def infer_design_subtype(primary: str, primary_family: str, board_lanes: list[str], override: dict | None) -> str:
+    if override and override.get("designSubtype"):
+        return override["designSubtype"]
+    if primary == "high_performance_shortboard":
+        return "Competition HPSB"
+    if primary == "performance_step_up" and primary_family == "Performance Shortboard":
+        return "Forgiving HPSB"
+    if primary_family == "Performance Daily Driver":
+        return "Performance Daily Driver"
+    if primary_family == "Daily Driver":
+        return "All Round Daily Driver"
+    if primary_family == "Hybrid Shortboard":
+        return "Performance Hybrid" if "performance_daily_driver" in board_lanes else "All Round Daily Driver"
+    if primary_family == "Small Wave Shortboard":
+        return "Small Wave Performance"
+    if primary_family == "Groveller":
+        return "Small Wave Performance"
+    if primary_family == "Fish":
+        if "traditional_fish" in board_lanes:
+            return "Traditional Fish"
+        if "small_wave_fish" in board_lanes:
+            return "Twin Fin Fish"
+        return "Retro Fish"
+    if primary_family == "Performance Fish":
+        return "Performance Fish"
+    if primary_family == "Twin Fin":
+        return "Twin Pin"
+    if primary_family == "Performance Twin":
+        return "Alternative Performance Twin" if "alternative_performance" in board_lanes else "Performance Twin"
+    if primary_family == "Step Up":
+        return "Reef Step Up" if "barrel_board" in board_lanes else "Travel Step Up"
+    if primary_family == "Semi Gun":
+        return "Travel Step Up"
+    if primary_family == "Mid Length":
+        return "Performance Mid Length" if primary == "performance_mid_length" else "Mid Length"
+    if primary_family == "Alternative Performance":
+        return "Alternative Performance"
+    return primary_family
+
+
 def build_scores(primary: str, secondary: list[str], dna: dict) -> dict[str, int]:
     values = {field: 45 for field in SCORE_FIELDS}
     values.update({
@@ -305,6 +369,8 @@ def main() -> None:
         surfer = intel.get("surfer", {})
         description = intel.get("description", {})
         primary_family = infer_primary_family(primary, secondary, board_lanes, override)
+        broad_family = infer_broad_family(primary_family)
+        design_subtype = infer_design_subtype(primary, primary_family, board_lanes, override)
         variant_type, base_model, xl_variant = infer_variant_metadata(board.get("model"), override)
         family_defaults = FAMILY_DEFAULTS.get(primary_family, FAMILY_DEFAULTS["Alternative Performance"])
         fin_setup = override.get("finSetup") if override and override.get("finSetup") is not None else family_defaults.get("finSetup", [])
@@ -346,6 +412,8 @@ def main() -> None:
             "reputationSummary": None, "knownFor": [], "strengths": [], "weaknesses": [],
             "bestFor": [], "notIdealFor": [], "notes": None,
             "primaryFamily": primary_family,
+            "broadFamily": broad_family,
+            "designSubtype": design_subtype,
             "secondaryTags": secondary_tags,
             "variantType": variant_type,
             "baseModel": base_model,
@@ -369,7 +437,7 @@ def main() -> None:
             for field in [
                 "boardFamily", "reputationSummary", "knownFor", "strengths", "weaknesses", "bestFor",
                 "notIdealFor", "waveRangeMinFt", "waveRangeMaxFt", "waveTypes", "wavePower",
-                "abilityMin", "abilityMax", "notes", "primaryFamily", "secondaryTags", "variantType",
+                "abilityMin", "abilityMax", "notes", "primaryFamily", "broadFamily", "designSubtype", "secondaryTags", "variantType",
                 "baseModel", "finSetup", "abilityPreferred", "fitnessRequirement",
                 "surfFrequencyRequirement", "paddleSupport", "ageModifier", "riderWeightMinKg",
                 "riderWeightMaxKg", "performanceStyle", "foamDistribution", "outlineProfile",

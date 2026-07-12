@@ -19,6 +19,8 @@ class BoardExpertMatrixTests(unittest.TestCase):
         self.assertEqual(len(boards), 513)
         self.assertEqual(len({(row["brand"].lower(), row["model"].lower()) for row in boards}), 513)
         self.assertTrue(all(row["primaryLane"] for row in boards))
+        self.assertTrue(all(row.get("broadFamily") for row in boards))
+        self.assertTrue(all(row.get("designSubtype") for row in boards))
 
     def test_crossovers_and_reviewed_examples(self):
         phantom = find_matrix_board("Pyzel", "Phantom")
@@ -84,7 +86,9 @@ class BoardExpertMatrixTests(unittest.TestCase):
 
     def test_bom_dia_is_classified_as_performance_twin(self):
         bom_dia = find_matrix_board("Album", "Bom Dia")
+        self.assertEqual(bom_dia["broadFamily"], "Alternative")
         self.assertEqual(bom_dia["primaryFamily"], "Performance Twin")
+        self.assertEqual(bom_dia["designSubtype"], "Alternative Performance Twin")
         self.assertEqual(bom_dia["variantType"], "standard")
         self.assertIn("Twin", bom_dia["finSetup"])
 

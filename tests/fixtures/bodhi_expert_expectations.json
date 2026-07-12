@@ -1,0 +1,326 @@
+[
+  {
+    "id": "strict_hpsb_01",
+    "request": "I want a true performance shortboard for stronger waves",
+    "profile": {"age": 45, "weight_kg": 75, "ability": "Advanced", "current_volume_litres": 28.6, "target_volume_litres": 28.6, "preferred_board_type": "True performance shortboard", "goal": "Performance progression", "wave_power": "Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Performance Fish", "Fish", "Hybrid Shortboard", "Groveller"],
+    "required_models": ["Monsta"],
+    "excluded_models": ["Ghost XL", "Bom Dia"],
+    "variant_preference": "prefer_standard",
+    "explanation_themes": ["high-performance", "stronger waves"]
+  },
+  {
+    "id": "strict_hpsb_02",
+    "request": "Give me a strict HPSB for good waves",
+    "profile": {"age": 32, "weight_kg": 72, "ability": "Expert", "target_volume_litres": 27.5, "preferred_board_type": "True performance shortboard", "goal": "Performance progression", "wave_power": "Powerful", "wave_type": "Reef Break", "surf_frequency": 4, "fitness": "High", "paddle_strength": "High"},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Performance Fish", "Fish", "Hybrid Shortboard"],
+    "excluded_models": ["Bom Dia"]
+  },
+  {
+    "id": "strict_hpsb_03",
+    "request": "Conventional high performance shortboard only",
+    "profile": {"age": 38, "weight_kg": 80, "ability": "Advanced", "target_volume_litres": 29.5, "preferred_board_type": "True performance shortboard", "goal": "Strict HPSB", "wave_power": "Average to Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Performance Fish", "Daily Driver"],
+    "excluded_models": ["Ghost XL", "Bom Dia"]
+  },
+  {
+    "id": "strict_hpsb_04",
+    "request": "True performance board for punchier waves",
+    "profile": {"age": 29, "weight_kg": 70, "ability": "Advanced", "target_volume_litres": 26.8, "preferred_board_type": "True performance shortboard", "goal": "Performance progression", "wave_power": "Powerful", "wave_type": "Beach Break", "surf_frequency": 4, "fitness": "High", "paddle_strength": "High"},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish", "Groveller"]
+  },
+  {
+    "id": "strict_hpsb_05",
+    "request": "Technical shortboard for reefs",
+    "profile": {"age": 41, "weight_kg": 77, "ability": "Expert", "target_volume_litres": 28.8, "preferred_board_type": "True performance shortboard", "goal": "Performance progression", "wave_power": "Powerful", "wave_type": "Reef Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Performance Fish", "Hybrid Shortboard"]
+  },
+  {
+    "id": "strict_hpsb_06",
+    "request": "I am 70kg and want a comp shortboard",
+    "profile": {"age": 25, "weight_kg": 70, "ability": "Expert", "target_volume_litres": 26.2, "preferred_board_type": "True performance shortboard", "goal": "Competition", "wave_power": "Powerful", "wave_type": "Point Break", "surf_frequency": 5, "fitness": "High", "paddle_strength": "High"},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard"],
+    "excluded_families": ["Performance Daily Driver", "Performance Twin", "Performance Fish"]
+  },
+  {
+    "id": "forgiving_perf_01",
+    "request": "Show me something more forgiving",
+    "profile": {"age": 45, "weight_kg": 75, "ability": "Intermediate", "preferred_board_type": "Performance shortboard", "goal": "Something more forgiving and performance focused", "wave_power": "Average to Powerful", "wave_type": "Point Break", "surf_frequency": 1, "fitness": "Average", "paddle_strength": "Average"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard", "Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish", "Step Up"],
+    "required_models": ["Phantom"]
+  },
+  {
+    "id": "forgiving_perf_02",
+    "request": "Need more paddle help but still performance",
+    "profile": {"age": 49, "weight_kg": 83, "ability": "Intermediate", "preferred_board_type": "Performance shortboard", "goal": "More paddle support", "wave_power": "Average", "wave_type": "Beach Break", "surf_frequency": 1, "fitness": "Average", "paddle_strength": "Average"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard", "Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish"]
+  },
+  {
+    "id": "forgiving_perf_03",
+    "request": "Advanced rider but I want a daily performance board",
+    "profile": {"age": 36, "weight_kg": 78, "ability": "Advanced", "preferred_board_type": "Performance Daily Driver", "goal": "Everyday performance", "wave_power": "Average to Powerful", "wave_type": "Beach Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["Performance Daily Driver", "High Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish"]
+  },
+  {
+    "id": "forgiving_perf_04",
+    "request": "Performance shortboard but not too technical",
+    "profile": {"age": 40, "weight_kg": 76, "ability": "Intermediate", "preferred_board_type": "Performance shortboard", "goal": "Not too technical", "wave_power": "Average", "wave_type": "Point Break", "surf_frequency": 2, "fitness": "Average", "paddle_strength": "Average"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish", "Semi Gun"]
+  },
+  {
+    "id": "forgiving_perf_05",
+    "request": "I want useful chest foam with performance",
+    "profile": {"age": 52, "weight_kg": 81, "ability": "Intermediate", "preferred_board_type": "Performance shortboard", "goal": "Extra chest foam", "wave_power": "Average", "wave_type": "Beach Break", "surf_frequency": 1, "fitness": "Average", "paddle_strength": "Low"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish", "High Performance Shortboard"]
+  },
+  {
+    "id": "xl_support_01",
+    "request": "95kg lower frequency surfer wants support",
+    "profile": {"age": 48, "weight_kg": 95, "ability": "Intermediate", "preferred_board_type": "Performance shortboard", "goal": "More paddle support", "wave_power": "Average to Powerful", "wave_type": "Beach Break", "surf_frequency": 0.5, "fitness": "Average", "paddle_strength": "Average", "target_volume_litres": 35.0},
+    "allowed_families": ["Performance Daily Driver", "Performance Shortboard", "Daily Driver"],
+    "excluded_families": ["Performance Twin", "Fish"]
+  },
+  {
+    "id": "xl_support_02",
+    "request": "Large rider wants a performance shortboard with support",
+    "profile": {"age": 43, "weight_kg": 92, "ability": "Advanced", "preferred_board_type": "Performance shortboard", "goal": "More support", "wave_power": "Powerful", "wave_type": "Point Break", "surf_frequency": 1, "fitness": "Average", "paddle_strength": "Average", "target_volume_litres": 33.5},
+    "allowed_families": ["Performance Shortboard", "Performance Daily Driver", "High Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish"],
+    "required_models": ["Ghost XL"],
+    "variant_preference": "prefer_xl"
+  },
+  {
+    "id": "xl_support_03",
+    "request": "Need a supportive step toward performance",
+    "profile": {"age": 55, "weight_kg": 90, "ability": "Intermediate", "preferred_board_type": "Performance shortboard", "goal": "Stability and support", "wave_power": "Average", "wave_type": "Beach Break", "surf_frequency": 0.25, "fitness": "Low", "paddle_strength": "Low", "target_volume_litres": 36.0},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard", "High Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish", "High Performance Shortboard"]
+  },
+  {
+    "id": "beginner_hpsb_01",
+    "request": "I am a beginner and want a performance shortboard",
+    "profile": {"age": 20, "weight_kg": 72, "ability": "Beginner", "preferred_board_type": "Performance shortboard", "goal": "Performance progression", "wave_power": "Average", "wave_type": "Beach Break", "surf_frequency": 0.5, "fitness": "Average", "paddle_strength": "Average"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard", "High Performance Shortboard"],
+    "excluded_families": ["High Performance Shortboard", "Performance Shortboard", "Performance Twin"]
+  },
+  {
+    "id": "beginner_hpsb_02",
+    "request": "New surfer wants a shortboard",
+    "profile": {"age": 24, "weight_kg": 78, "ability": "Beginner", "preferred_board_type": "Shortboard", "goal": "Learn faster", "wave_power": "Weak", "wave_type": "Beach Break", "surf_frequency": 1, "fitness": "Average", "paddle_strength": "Average"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard", "Small Wave Shortboard"],
+    "excluded_families": ["High Performance Shortboard", "Performance Twin", "Step Up"]
+  },
+  {
+    "id": "intermediate_perf_01",
+    "request": "Intermediate wants performance but still forgiving",
+    "profile": {"age": 34, "weight_kg": 74, "ability": "Intermediate", "preferred_board_type": "Performance shortboard", "goal": "More forgiving and performance focused", "wave_power": "Average", "wave_type": "Point Break", "surf_frequency": 1, "fitness": "Good", "paddle_strength": "Average"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish"]
+  },
+  {
+    "id": "intermediate_perf_02",
+    "request": "Intermediate rider wants a better everyday performer",
+    "profile": {"age": 39, "weight_kg": 80, "ability": "Intermediate", "preferred_board_type": "Performance Daily Driver", "goal": "Everyday performance", "wave_power": "Average to Powerful", "wave_type": "Beach Break", "surf_frequency": 2, "fitness": "Average", "paddle_strength": "Average"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "High Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish", "Mid Length"]
+  },
+  {
+    "id": "advanced_perf_01",
+    "request": "Advanced rider may receive true HPSB",
+    "profile": {"age": 33, "weight_kg": 77, "ability": "Advanced", "preferred_board_type": "Performance shortboard", "goal": "Performance progression", "wave_power": "Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard", "Performance Daily Driver"],
+    "excluded_families": ["Performance Twin", "Fish"]
+  },
+  {
+    "id": "advanced_perf_02",
+    "request": "Advanced surfer wants refined rails",
+    "profile": {"age": 42, "weight_kg": 79, "ability": "Advanced", "preferred_board_type": "Performance shortboard", "goal": "Refined rails and more response", "wave_power": "Powerful", "wave_type": "Reef Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish", "Groveller"]
+  },
+  {
+    "id": "performance_twin_01",
+    "request": "Show me performance twins instead",
+    "profile": {"age": 45, "weight_kg": 75, "ability": "Advanced", "preferred_board_type": "Performance Twin", "goal": "Alternative performance speed and release", "wave_power": "Average to Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good", "target_volume_litres": 28.6},
+    "allowed_families": ["Performance Twin"],
+    "excluded_families": ["High Performance Shortboard", "Performance Daily Driver", "Fish"],
+    "required_models": ["Bom Dia"]
+  },
+  {
+    "id": "performance_twin_02",
+    "request": "Need a twin that still surfs hard",
+    "profile": {"age": 37, "weight_kg": 74, "ability": "Advanced", "preferred_board_type": "Performance Twin", "goal": "Performance progression", "wave_power": "Average to Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["Performance Twin"],
+    "excluded_families": ["High Performance Shortboard", "Performance Daily Driver", "Fish"]
+  },
+  {
+    "id": "performance_twin_03",
+    "request": "Alternative performance twin pin",
+    "profile": {"age": 31, "weight_kg": 73, "ability": "Expert", "preferred_board_type": "Performance Twin", "goal": "Alternative performance", "wave_power": "Powerful", "wave_type": "Point Break", "surf_frequency": 4, "fitness": "High", "paddle_strength": "High"},
+    "allowed_families": ["Performance Twin"],
+    "excluded_families": ["High Performance Shortboard", "Performance Fish", "Fish"]
+  },
+  {
+    "id": "traditional_fish_01",
+    "request": "Show me fish boards",
+    "profile": {"age": 41, "weight_kg": 76, "ability": "Intermediate", "preferred_board_type": "Fish", "goal": "Traditional fish", "wave_power": "Weak", "wave_type": "Beach Break", "surf_frequency": 2, "fitness": "Good", "paddle_strength": "Average"},
+    "allowed_families": ["Fish", "Performance Fish"],
+    "excluded_families": ["High Performance Shortboard", "Performance Daily Driver", "Performance Twin"]
+  },
+  {
+    "id": "traditional_fish_02",
+    "request": "Traditional fast twin fin fish",
+    "profile": {"age": 46, "weight_kg": 78, "ability": "Intermediate", "preferred_board_type": "Fish", "goal": "Traditional fish", "wave_power": "Weak", "wave_type": "Point Break", "surf_frequency": 2, "fitness": "Good", "paddle_strength": "Average"},
+    "allowed_families": ["Fish", "Performance Fish"],
+    "excluded_families": ["Performance Twin", "High Performance Shortboard"]
+  },
+  {
+    "id": "performance_fish_01",
+    "request": "I want a fish that turns more like a shortboard",
+    "profile": {"age": 35, "weight_kg": 75, "ability": "Advanced", "preferred_board_type": "Fish", "goal": "Performance fish", "wave_power": "Average", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["Performance Fish", "Fish"],
+    "excluded_families": ["High Performance Shortboard", "Performance Daily Driver", "Performance Twin"]
+  },
+  {
+    "id": "performance_fish_02",
+    "request": "Need a more performance-focused fish",
+    "profile": {"age": 30, "weight_kg": 72, "ability": "Advanced", "preferred_board_type": "Fish", "goal": "Performance fish", "wave_power": "Average to Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["Performance Fish", "Fish"],
+    "excluded_families": ["High Performance Shortboard", "Performance Twin"]
+  },
+  {
+    "id": "small_wave_01",
+    "request": "I want a small-wave board",
+    "profile": {"age": 37, "weight_kg": 78, "ability": "Intermediate", "preferred_board_type": "Small wave board", "goal": "Small wave speed", "wave_power": "Weak", "wave_type": "Beach Break", "surf_frequency": 2, "fitness": "Average", "paddle_strength": "Average"},
+    "allowed_families": ["Groveller", "Small Wave Shortboard", "Performance Fish", "Fish", "Hybrid Shortboard"],
+    "excluded_families": ["Step Up", "Semi Gun", "Mid Length", "High Performance Shortboard"]
+  },
+  {
+    "id": "small_wave_02",
+    "request": "Weak beach break shortboard",
+    "profile": {"age": 44, "weight_kg": 82, "ability": "Intermediate", "preferred_board_type": "Small wave board", "goal": "Weak wave board", "wave_power": "Weak", "wave_type": "Beach Break", "surf_frequency": 1, "fitness": "Average", "paddle_strength": "Average"},
+    "allowed_families": ["Groveller", "Small Wave Shortboard", "Performance Fish", "Hybrid Shortboard"],
+    "excluded_families": ["Step Up", "High Performance Shortboard", "Mid Length"]
+  },
+  {
+    "id": "small_wave_03",
+    "request": "Need a board for gutless surf",
+    "profile": {"age": 50, "weight_kg": 79, "ability": "Intermediate", "preferred_board_type": "Small wave board", "goal": "More speed", "wave_power": "Weak", "wave_type": "Beach Break", "surf_frequency": 1, "fitness": "Average", "paddle_strength": "Average"},
+    "allowed_families": ["Groveller", "Small Wave Shortboard", "Performance Fish", "Hybrid Shortboard"],
+    "excluded_families": ["Step Up", "Semi Gun", "High Performance Shortboard"]
+  },
+  {
+    "id": "step_up_01",
+    "request": "I need a step up for Bali",
+    "profile": {"age": 39, "weight_kg": 78, "ability": "Advanced", "preferred_board_type": "Step up", "goal": "Travel step up", "wave_power": "Powerful", "wave_type": "Reef Break", "surf_frequency": 2, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["Step Up", "Semi Gun", "Performance Shortboard"],
+    "excluded_families": ["Fish", "Groveller", "Performance Daily Driver", "Mid Length"]
+  },
+  {
+    "id": "step_up_02",
+    "request": "Bali reef step up request",
+    "profile": {"age": 43, "weight_kg": 82, "ability": "Advanced", "preferred_board_type": "Step up", "goal": "Reef step up", "wave_power": "Powerful", "wave_type": "Reef Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["Step Up", "Semi Gun", "Performance Shortboard"],
+    "excluded_families": ["Fish", "Groveller", "Daily Driver"]
+  },
+  {
+    "id": "step_up_03",
+    "request": "Travel board for hollow surf",
+    "profile": {"age": 35, "weight_kg": 76, "ability": "Advanced", "preferred_board_type": "Step up", "goal": "Travel step up", "wave_power": "Powerful", "wave_type": "Point Break", "surf_frequency": 2, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["Step Up", "Semi Gun", "Performance Shortboard"],
+    "excluded_families": ["Fish", "Groveller", "Performance Daily Driver"]
+  },
+  {
+    "id": "older_fit_01",
+    "request": "Older fit advanced rider",
+    "profile": {"age": 46, "weight_kg": 75, "ability": "Advanced", "preferred_board_type": "Performance shortboard", "goal": "Performance progression", "wave_power": "Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good", "target_volume_litres": 28.6},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard", "Performance Daily Driver"],
+    "excluded_families": ["Performance Twin", "Fish"],
+    "excluded_models": ["Ghost XL"]
+  },
+  {
+    "id": "older_fit_02",
+    "request": "Fit 45 year old still wants performance",
+    "profile": {"age": 45, "weight_kg": 77, "ability": "Advanced", "preferred_board_type": "Performance shortboard", "goal": "Performance progression", "wave_power": "Average to Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard", "Performance Daily Driver"],
+    "excluded_families": ["Performance Twin", "Fish"]
+  },
+  {
+    "id": "older_low_freq_01",
+    "request": "Age 55 intermediate monthly surfing wants performance",
+    "profile": {"age": 55, "weight_kg": 80, "ability": "Intermediate", "preferred_board_type": "Performance shortboard", "goal": "Performance progression", "wave_power": "Average", "wave_type": "Beach Break", "surf_frequency": 0.25, "fitness": "Average", "paddle_strength": "Average"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard"],
+    "excluded_families": ["High Performance Shortboard", "Performance Twin", "Fish"]
+  },
+  {
+    "id": "older_low_freq_02",
+    "request": "Older low frequency intermediate rider",
+    "profile": {"age": 58, "weight_kg": 84, "ability": "Intermediate", "preferred_board_type": "Performance shortboard", "goal": "More support", "wave_power": "Average", "wave_type": "Beach Break", "surf_frequency": 0.25, "fitness": "Low", "paddle_strength": "Low"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard"],
+    "excluded_families": ["High Performance Shortboard", "Performance Twin", "Fish"],
+    "explanation_themes": ["support"]
+  },
+  {
+    "id": "daily_driver_01",
+    "request": "Weak beach break daily driver request",
+    "profile": {"age": 38, "weight_kg": 79, "ability": "Intermediate", "preferred_board_type": "Daily driver", "goal": "Everyday board", "wave_power": "Weak", "wave_type": "Beach Break", "surf_frequency": 2, "fitness": "Average", "paddle_strength": "Average"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard", "Small Wave Shortboard"],
+    "excluded_families": ["Step Up", "Semi Gun", "Performance Twin"]
+  },
+  {
+    "id": "daily_driver_02",
+    "request": "One board quiver for mixed waves",
+    "profile": {"age": 34, "weight_kg": 76, "ability": "Intermediate", "preferred_board_type": "Daily driver", "goal": "One board quiver", "wave_power": "Average", "wave_type": "Beach Break", "surf_frequency": 2, "fitness": "Good", "paddle_strength": "Average"},
+    "allowed_families": ["Performance Daily Driver", "Daily Driver", "Hybrid Shortboard", "High Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Semi Gun"]
+  },
+  {
+    "id": "daily_driver_03",
+    "request": "Everyday board with room to push",
+    "profile": {"age": 29, "weight_kg": 74, "ability": "Advanced", "preferred_board_type": "Daily driver", "goal": "Everyday performance", "wave_power": "Average to Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["Performance Daily Driver", "High Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish", "Semi Gun"]
+  },
+  {
+    "id": "variant_order_01",
+    "request": "Standard Ghost should beat Ghost XL here",
+    "profile": {"age": 45, "weight_kg": 75, "ability": "Advanced", "preferred_board_type": "Performance shortboard", "goal": "Performance progression", "wave_power": "Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good", "target_volume_litres": 28.6},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard", "Performance Daily Driver"],
+    "excluded_families": ["Performance Twin", "Fish"],
+    "excluded_models": ["Ghost XL"],
+    "variant_preference": "prefer_standard"
+  },
+  {
+    "id": "variant_order_02",
+    "request": "Standard model already covers target volume naturally",
+    "profile": {"age": 39, "weight_kg": 78, "ability": "Advanced", "preferred_board_type": "Performance shortboard", "goal": "Strict HPSB", "wave_power": "Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "High", "paddle_strength": "High", "target_volume_litres": 29.0},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish"],
+    "excluded_models": ["Ghost XL"],
+    "variant_preference": "prefer_standard"
+  },
+  {
+    "id": "fin_setup_01",
+    "request": "Strict HPSB should prefer thruster or five fin",
+    "profile": {"age": 33, "weight_kg": 74, "ability": "Advanced", "preferred_board_type": "True performance shortboard", "goal": "Performance progression", "wave_power": "Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["High Performance Shortboard", "Performance Shortboard"],
+    "excluded_families": ["Performance Twin", "Fish"]
+  },
+  {
+    "id": "fin_setup_02",
+    "request": "Performance twin should prefer twin or twin plus trailer",
+    "profile": {"age": 35, "weight_kg": 73, "ability": "Advanced", "preferred_board_type": "Performance Twin", "goal": "Alternative performance", "wave_power": "Average to Powerful", "wave_type": "Point Break", "surf_frequency": 3, "fitness": "Good", "paddle_strength": "Good"},
+    "allowed_families": ["Performance Twin"],
+    "excluded_families": ["High Performance Shortboard", "Performance Daily Driver", "Fish"]
+  }
+]

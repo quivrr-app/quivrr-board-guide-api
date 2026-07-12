@@ -9,3 +9,4 @@ zip-test/
 *.bak_bodhi_stage2
 patch_*.py
 tests/bodhi_evaluation/slice2_report.json
+scripts/output/

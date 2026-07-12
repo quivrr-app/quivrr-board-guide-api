@@ -53,14 +53,16 @@ from app.structured_logging import emit_event
 load_dotenv()
 
 APP_NAME = "Quivrr Board Guide API"
-BUILD_SHA = "59bb280738bd"
-BUILD_GIT_SHA = "59bb280738bdbb7df21651190772d7fb2589f638"
-RECOMMENDATION_ENGINE_NAME = "matrix_v2"
+BUILD_SHA = os.getenv("BODHI_BUILD_SHA") or os.getenv("WEBSITE_COMMIT_ID") or "unknown"
+BUILD_GIT_SHA = os.getenv("BODHI_GIT_SHA") or os.getenv("WEBSITE_COMMIT_ID") or "unknown"
+RECOMMENDATION_ENGINE_NAME = os.getenv("BODHI_ENGINE_VERSION") or "matrix_v2"
 STARTUP_TIME_UTC = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 DEPLOYMENT_ID = (
-    os.getenv("WEBSITE_DEPLOYMENT_ID")
+    os.getenv("BODHI_DEPLOYMENT_ID")
+    or os.getenv("WEBSITE_DEPLOYMENT_ID")
     or os.getenv("APPSETTING_WEBSITE_DEPLOYMENT_ID")
     or os.getenv("SCM_RUN_FROM_PACKAGE")
+    or "unknown"
 )
 REGION_DISPLAY_NAMES = {
     "AU": "Australia",
@@ -178,6 +180,59 @@ def _category_ranking_profile(profile, message: str, category: str | None):
 
 def _verified_in_stock(boards):
     return [board for board in boards if (board.available_count or 0) > 0]
+
+
+def _shortlist_family_buckets(category: str | None, profile, message: str) -> tuple[set[str], set[str]]:
+    lowered = (message or "").lower()
+    if category == "fish":
+        return {"Fish", "Performance Fish", "Traditional Fish"}, set()
+    if category == "performance_shortboard":
+        primary = {"High Performance Shortboard", "Performance Shortboard"}
+        secondary = set()
+        support_signals = (
+            "forgiving" in lowered
+            or "support" in lowered
+            or "weak wave" in lowered
+            or "small wave" in lowered
+            or (profile.ability or "").lower() in {"beginner", "progressing", "intermediate"}
+        )
+        if support_signals:
+            secondary.add("Performance Daily Driver")
+        return primary, secondary
+    if category == "performance_daily_driver":
+        return {"Performance Daily Driver"}, {"High Performance Shortboard"}
+    if category == "performance_twin":
+        return {"Performance Twin"}, {"Alternative Performance"}
+    if category == "small_wave":
+        return {"Groveller", "Small Wave Shortboard", "Performance Fish", "Fish", "Hybrid Shortboard"}, set()
+    if category == "step_up":
+        return {"Step Up", "Semi Gun", "Performance Shortboard"}, set()
+    return set(), set()
+
+
+def _enforce_shortlist_coherence(boards, category: str | None, profile, message: str, limit: int | None = None):
+    primary, secondary = _shortlist_family_buckets(category, profile, message)
+    if not boards or not primary:
+        return boards if limit is None else boards[:limit]
+
+    chosen = []
+    seen = set()
+    for board in boards:
+        if board.category in primary:
+            key = (board.brand.lower(), board.model.lower())
+            if key not in seen:
+                chosen.append(board)
+                seen.add(key)
+    if secondary and (limit is None or len(chosen) < limit):
+        for board in boards:
+            if board.category in secondary:
+                key = (board.brand.lower(), board.model.lower())
+                if key not in seen:
+                    chosen.append(board)
+                    seen.add(key)
+    if not chosen:
+        return boards if limit is None else boards[:limit]
+    return chosen if limit is None else chosen[:limit]
 
 
 def _stock_only_reply(label: str, region: str | None, boards, candidate_count: int | None = None) -> str:
@@ -928,14 +983,14 @@ def board_guide_chat(
         if brand_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             inventory_stage = "post_ranking"
-            suggested_boards = [board for board in checked if board.available_count > 0]
+            suggested_boards = _enforce_shortlist_coherence([board for board in checked if board.available_count > 0], category, ranking_profile, request.message)
             if suggested_boards:
                 reply = f"I found verified {profile.region} fish stock from {profile.requested_brand}: " + ", ".join(f"{row.model}" for row in suggested_boards[:5]) + "."
             else:
                 alternative_profile = ranking_profile.model_copy(update={"requested_brand": None})
                 alternatives = recommend_from_matrix(alternative_profile, limit=8)
                 checked_alternatives = enrich_suggestions_with_inventory(alternatives, alternative_profile)
-                suggested_boards = [board for board in checked_alternatives if board.available_count > 0]
+                suggested_boards = _enforce_shortlist_coherence([board for board in checked_alternatives if board.available_count > 0], category, alternative_profile, request.message)
                 reply = f"I can’t see verified live {profile.region} fish stock from {profile.requested_brand} right now. "
                 if suggested_boards:
                     reply += "The closest live fish alternatives are " + ", ".join(f"{row.brand} {row.model}" for row in suggested_boards[:5]) + "."
@@ -943,7 +998,7 @@ def board_guide_chat(
         elif direct_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             inventory_stage = "post_ranking"
-            suggested_boards = _verified_in_stock(checked)
+            suggested_boards = _enforce_shortlist_coherence(_verified_in_stock(checked), category, ranking_profile, request.message)
             reply = _stock_only_reply("fish", profile.region, suggested_boards, candidate_count=len(canonical_boards))
             questions = []
         elif not profile.region or (
@@ -962,7 +1017,7 @@ def board_guide_chat(
         else:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             inventory_stage = "post_ranking"
-            suggested_boards = checked
+            suggested_boards = _enforce_shortlist_coherence(checked, category, ranking_profile, request.message)
             reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
             questions = []
     elif legacy_intent == "board_search_request" and category and profile.region and not requested_board:
@@ -980,6 +1035,7 @@ def board_guide_chat(
             canonical_boards = recommend_from_matrix(ranking_profile, limit=12)
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             suggested_boards = _verified_in_stock(checked) if availability_constraint == STOCK_ONLY_CONSTRAINT else checked
+            suggested_boards = _enforce_shortlist_coherence(suggested_boards, category, ranking_profile, request.message)
             candidate_count_before_inventory = len(canonical_boards)
             candidate_source = "matrix"
             ranking_engine_used = RECOMMENDATION_ENGINE_NAME

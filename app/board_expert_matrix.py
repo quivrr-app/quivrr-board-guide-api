@@ -75,9 +75,18 @@ PRIMARY_FAMILY_BY_REQUEST = {
     "performance_daily_driver": {"Performance Daily Driver", "High Performance Shortboard"},
     "forgiving_performance": {"Performance Daily Driver", "Daily Driver", "Hybrid Shortboard", "Performance Shortboard"},
     "performance_twin": {"Performance Twin"},
-    "fish": {"Fish", "Performance Fish", "Twin Fin", "Performance Twin"},
+    "fish": {"Fish", "Performance Fish", "Twin Fin"},
     "small_wave": {"Small Wave Shortboard", "Groveller", "Performance Fish", "Fish", "Hybrid Shortboard"},
     "step_up": {"Step Up", "Semi Gun", "Performance Shortboard"},
+}
+FIN_COMPATIBILITY = {
+    "performance_shortboard": {"preferred": {"Thruster", "Five Fin"}, "discouraged": {"Twin", "Twin Plus Trailer", "Single", "Two Plus One"}},
+    "performance_daily_driver": {"preferred": {"Thruster", "Five Fin"}, "discouraged": {"Single", "Two Plus One"}},
+    "forgiving_performance": {"preferred": {"Thruster", "Five Fin"}, "discouraged": {"Single"}},
+    "performance_twin": {"preferred": {"Twin", "Twin Plus Trailer"}, "discouraged": {"Thruster"}},
+    "fish": {"preferred": {"Twin", "Twin Plus Trailer", "Quad"}, "discouraged": {"Thruster"}},
+    "small_wave": {"preferred": {"Twin", "Twin Plus Trailer", "Quad", "Thruster", "Five Fin"}, "discouraged": set()},
+    "step_up": {"preferred": {"Thruster", "Quad", "Five Fin"}, "discouraged": {"Twin", "Single"}},
 }
 
 
@@ -217,6 +226,10 @@ def _primary_family(board: dict) -> str:
     return str(board.get("primaryFamily") or "Alternative Performance")
 
 
+def _design_subtype(board: dict) -> str:
+    return str(board.get("designSubtype") or _primary_family(board))
+
+
 def _intent_profile(profile: RiderProfile) -> dict:
     text = _normalise_text(profile.preferred_board_type, profile.goal, profile.desired_feel, profile.wave_power, profile.wave_type)
     strict_hpsb = any(token in text for token in ("true performance shortboard", "competition shortboard", "conventional high performance shortboard", "strict hpsb"))
@@ -257,8 +270,75 @@ def _intent_profile(profile: RiderProfile) -> dict:
     }
 
 
+def _normalise_fin_setup(values: list[str] | None) -> set[str]:
+    normalised = set()
+    for value in values or []:
+        item = _key(value).replace(" ", "_")
+        if item in {"twin_plus_trailer", "2_plus_1", "two_plus_one", "five_fin"}:
+            item = {
+                "twin_plus_trailer": "Twin Plus Trailer",
+                "2_plus_1": "Two Plus One",
+                "two_plus_one": "Two Plus One",
+                "five_fin": "Five Fin",
+            }[item]
+        else:
+            item = item.replace("_", " ").title()
+        normalised.add(item)
+    return normalised
+
+
+def _board_difficulty(board: dict) -> int:
+    score = 2.5
+    family = _primary_family(board)
+    if family == "High Performance Shortboard":
+        score += 1.3
+    elif family == "Performance Shortboard":
+        score += 1.0
+    elif family in {"Performance Daily Driver", "Performance Fish", "Performance Twin", "Step Up"}:
+        score += 0.5
+    elif family in {"Daily Driver", "Hybrid Shortboard", "Fish"}:
+        score -= 0.2
+
+    if "high" in _key(board.get("rockerProfile")):
+        score += 0.7
+    if "refined" in _key(board.get("railProfile")):
+        score += 0.5
+    if "fuller" in _key(board.get("outlineProfile")) or "balanced" in _key(board.get("railProfile")):
+        score -= 0.4
+    if _key(board.get("paddleSupport")) in {"high", "moderate_to_high"}:
+        score -= 0.5
+    if "powerful" in {_key(value) for value in board.get("wavePower", [])}:
+        score += 0.4
+    if "Twin" in _normalise_fin_setup(board.get("finSetup")) and family not in {"Fish", "Performance Fish", "Performance Twin", "Twin Fin"}:
+        score += 0.2
+    return max(1, min(5, round(score)))
+
+
+def _rider_readiness(profile: RiderProfile) -> int:
+    score = 1.0 + _ability_rank(profile.ability)
+    if _fitness_bucket(profile) == "high":
+        score += 0.5
+    elif _fitness_bucket(profile) == "low":
+        score -= 0.5
+    if _surf_frequency_bucket(profile) == "regular":
+        score += 0.5
+    elif _surf_frequency_bucket(profile) == "low":
+        score -= 0.5
+    if _paddle_bucket(profile) == "high":
+        score += 0.25
+    elif _paddle_bucket(profile) == "low":
+        score -= 0.25
+    age = profile.age or 0
+    if age >= 55:
+        score -= 0.5
+    elif age >= 45:
+        score -= 0.25
+    return max(1, min(5, round(score)))
+
+
 def _family_score(board: dict, intent: dict) -> tuple[float, list[str], list[str]]:
     family = _primary_family(board)
+    subtype = _design_subtype(board)
     reasons: list[str] = []
     exclusions: list[str] = []
     score = 0.0
@@ -273,10 +353,18 @@ def _family_score(board: dict, intent: dict) -> tuple[float, list[str], list[str
     else:
         score += 45
 
+    if intent["intent_key"] == "fish" and family == "Performance Twin":
+        exclusions.append("Broad fish brief keeps dedicated performance twins out unless the rider explicitly asks for twin performance.")
+        return score, reasons, exclusions
+
     if intent["wants_performance_daily_driver"] and family == "High Performance Shortboard":
         score -= 18
     if intent["wants_performance_daily_driver"] and family == "Performance Daily Driver":
         score += 16
+    if intent["strict_hpsb"] and subtype == "Forgiving HPSB":
+        score -= 8
+    if intent["strict_hpsb"] and family in {"High Performance Shortboard", "Performance Shortboard"}:
+        score += 10
 
     if family == "High Performance Shortboard":
         reasons.append("genuine high-performance thruster direction")
@@ -314,6 +402,32 @@ def _ability_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[fl
     elif family == "Performance Daily Driver" and surfer_rank >= ABILITY_ORDER["intermediate"]:
         score += 8
         reasons.append("ability suits a forgiving performance board")
+    return score, reasons, exclusions
+
+
+def _suitability_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[float, list[str], list[str]]:
+    family = _primary_family(board)
+    difficulty = _board_difficulty(board)
+    readiness = _rider_readiness(profile)
+    gap = difficulty - readiness
+    reasons: list[str] = []
+    exclusions: list[str] = []
+    score = 0.0
+
+    if family in {"High Performance Shortboard", "Performance Shortboard"} and readiness <= 2:
+        exclusions.append("This rider is not ready for a true high-performance shortboard lane yet.")
+        return score, reasons, exclusions
+    if gap >= 2:
+        exclusions.append("Board difficulty materially outruns current rider readiness.")
+        return score, reasons, exclusions
+    if gap <= -1:
+        score += 10
+        reasons.append("rider readiness comfortably covers the board difficulty")
+    elif gap == 0:
+        score += 6
+        reasons.append("difficulty and readiness are well matched")
+    else:
+        score -= 8
     return score, reasons, exclusions
 
 
@@ -368,6 +482,8 @@ def _variant_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[fl
         reasons.append("extra support, foam, and width are justified here")
     else:
         score -= 16
+    if board.get("variantType") == "updated_variant":
+        score += 2
     return score, reasons, exclusions
 
 
@@ -403,6 +519,28 @@ def _goal_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[float
         score += 14
         reasons.append("daily-driver brief without drifting into generic hybrids")
     return score, reasons
+
+
+def _fin_setup_score(board: dict, intent: dict) -> tuple[float, list[str], list[str]]:
+    family = _primary_family(board)
+    fin_setup = _normalise_fin_setup(board.get("finSetup"))
+    compatibility = FIN_COMPATIBILITY.get(intent["intent_key"])
+    reasons: list[str] = []
+    exclusions: list[str] = []
+    score = 0.0
+
+    if not compatibility or not fin_setup:
+        return score, reasons, exclusions
+
+    if compatibility["preferred"] & fin_setup:
+        score += 10
+        reasons.append("fin setup matches the requested board feel")
+    if compatibility["discouraged"] & fin_setup:
+        score -= 10
+        if intent["strict_hpsb"] and family not in {"Performance Daily Driver"}:
+            exclusions.append("Fin setup conflicts with a strict conventional performance shortboard brief.")
+            return score, reasons, exclusions
+    return score, reasons, exclusions
 
 
 def _priority_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[float, list[str]]:
@@ -491,8 +629,10 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
         for part_score, part_reasons, part_exclusions in (
             _family_score(board, intent),
             _ability_score(board, profile, intent),
+            _suitability_score(board, profile, intent),
             _wave_score(board, profile, intent),
             _variant_score(board, profile, intent),
+            _fin_setup_score(board, intent),
         ):
             score += part_score
             reasons.extend(part_reasons)
@@ -521,6 +661,15 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
         rows.append((score, board, distance, reasons))
 
     rows.sort(key=lambda item: (-item[0], item[1]["brand"], item[1]["model"]))
+    best_by_base_model: dict[tuple[str, str], tuple[float, dict, float, list[str]]] = {}
+    for row in rows:
+        score_value, board, _, _ = row
+        base_key = (_key(board["brand"]), _key(board.get("baseModel") or board["model"]))
+        current = best_by_base_model.get(base_key)
+        if current is None or score_value > current[0]:
+            best_by_base_model[base_key] = row
+    rows = sorted(best_by_base_model.values(), key=lambda item: (-item[0], item[1]["brand"], item[1]["model"]))
+
     selected: list[SuggestedBoard] = []
     brands: dict[str, int] = {}
 
