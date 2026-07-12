@@ -53,6 +53,15 @@ from app.structured_logging import emit_event
 load_dotenv()
 
 APP_NAME = "Quivrr Board Guide API"
+BUILD_SHA = "59bb280738bd"
+BUILD_GIT_SHA = "59bb280738bdbb7df21651190772d7fb2589f638"
+RECOMMENDATION_ENGINE_NAME = "matrix_v2"
+STARTUP_TIME_UTC = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+DEPLOYMENT_ID = (
+    os.getenv("WEBSITE_DEPLOYMENT_ID")
+    or os.getenv("APPSETTING_WEBSITE_DEPLOYMENT_ID")
+    or os.getenv("SCM_RUN_FROM_PACKAGE")
+)
 REGION_DISPLAY_NAMES = {
     "AU": "Australia",
     "EU": "Europe",
@@ -72,6 +81,23 @@ class CategoryResolution:
     category: str | None
     confidence: float
     source: str
+
+
+def _build_metadata() -> dict:
+    return {
+        "build": BUILD_SHA,
+        "git_sha": BUILD_GIT_SHA,
+        "recommendation_engine": RECOMMENDATION_ENGINE_NAME,
+        "startup_time": STARTUP_TIME_UTC,
+        "deployment_id": DEPLOYMENT_ID,
+    }
+
+
+def _set_debug_headers(response: Response, recommendation_path: str | None = None, ranking_engine: str | None = None):
+    response.headers["X-Bodhi-Build"] = BUILD_SHA
+    response.headers["X-Bodhi-Engine"] = ranking_engine or RECOMMENDATION_ENGINE_NAME
+    if recommendation_path:
+        response.headers["X-Bodhi-Path"] = recommendation_path
 
 
 def _message_requests_stock_only(message: str) -> bool:
@@ -519,6 +545,18 @@ def get_allowed_origins() -> list[str]:
 
 app = FastAPI(title=APP_NAME)
 
+emit_event(
+    "bodhi_startup",
+    "bodhi_api",
+    status="success",
+    build=BUILD_SHA,
+    git_sha=BUILD_GIT_SHA,
+    recommendation_engine=RECOMMENDATION_ENGINE_NAME,
+    startup_time=STARTUP_TIME_UTC,
+    deployment_id=DEPLOYMENT_ID,
+    module_name=__name__,
+)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_allowed_origins() or ["*"],
@@ -529,13 +567,15 @@ app.add_middleware(
 
 
 @app.get("/api/health")
-def health():
+def health(response: Response):
+    _set_debug_headers(response)
     return {
         "status": "ok",
         "service": APP_NAME,
         "persona": "Bodhi, the Core Lord",
         "azure_openai_configured": is_azure_openai_configured(),
         "stage2_model_recommendations": True,
+        **_build_metadata(),
     }
 
 
@@ -552,7 +592,15 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
             error_type=type(exc).__name__,
             error_message=str(exc),
         )
-    return JSONResponse(status_code=500, content={"detail": "Internal server error"}, headers={"X-Correlation-ID": correlation_id})
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal server error"},
+        headers={
+            "X-Correlation-ID": correlation_id,
+            "X-Bodhi-Build": BUILD_SHA,
+            "X-Bodhi-Engine": RECOMMENDATION_ENGINE_NAME,
+        },
+    )
 
 
 @app.post("/api/board-guide/chat", response_model=BoardGuideResponse)
@@ -566,12 +614,18 @@ def board_guide_chat(
     correlation_id = http_request.headers.get("X-Correlation-ID") or str(uuid.uuid4())
     http_request.state.correlation_id = correlation_id
     response.headers["X-Correlation-ID"] = correlation_id
+    recommendation_path = "unresolved"
+    ranking_engine_used = "none"
+    candidate_source = "none"
+    inventory_stage = "not_run"
+    candidate_count_before_inventory = 0
     emit_event(
         "bodhi_request_received",
         "bodhi_api",
         region=request.region,
         status="success",
         source="deterministic_intake_engine",
+        build=BUILD_SHA,
         conversation_turn_count=len(request.conversation),
         authenticated=bool(authorization),
         correlation_id=correlation_id,
@@ -743,6 +797,9 @@ def board_guide_chat(
         )
         questions = ["Roughly how much do you weigh?"]
     elif active_topic.stock_check:
+        recommendation_path = "active_topic_stock_check"
+        candidate_source = "active_topic"
+        ranking_engine_used = "relationship_graph" if active_topic.kind == "relationship" else "direct_board_lookup"
         if active_topic.kind == "relationship" and active_topic.relationship_source and active_topic.relationship_type:
             canonical = relationship_suggestions(
                 active_topic.relationship_source, active_topic.relationship_type, profile=profile,
@@ -758,6 +815,8 @@ def board_guide_chat(
             offset = 1.5 if active_topic.relationship_type in {"moreForgivingBoards", "morePaddleBoards", "stepDownFromBoards"} else 0
             stock_profile = profile.model_copy(update={"target_volume_litres": profile.current_volume_litres + offset})
         checked = enrich_suggestions_with_inventory(canonical, stock_profile) if profile.region else []
+        candidate_count_before_inventory = len(canonical)
+        inventory_stage = "post_ranking"
         suggested_boards = checked
         available = [row for row in suggested_boards if row.available_count > 0]
         names = ", ".join(f"{row.brand} {row.model}" for row in available)
@@ -768,6 +827,9 @@ def board_guide_chat(
         ) if profile.region else "Which region should I check for those boards: Australia, Europe, or Indonesia?"
         questions = []
     elif legacy_intent == "comparison_request":
+        recommendation_path = "comparison_request"
+        candidate_source = "conversation_state"
+        ranking_engine_used = "comparison_engine"
         if len(active_topic.boards) >= 2:
             engine_comparison = compare_board_models(
                 active_topic.boards[0]["brand"],
@@ -800,6 +862,9 @@ def board_guide_chat(
             reply = comparison_reply(request.message, active_topic.boards, profile, active_topic.is_follow_up)
         questions = []
     elif legacy_intent == "relationship_request":
+        recommendation_path = "relationship_request"
+        candidate_source = "relationship_graph"
+        ranking_engine_used = "relationship_graph"
         source_board = active_topic.relationship_source or source_board_from_message(request.message, profile)
         relation = active_topic.relationship_type or relationship_type(request.message)
         if not source_board or not relation:
@@ -813,15 +878,22 @@ def board_guide_chat(
                 inventory_profile = profile.model_copy(update={"target_volume_litres": profile.current_volume_litres + offset})
             if profile.region:
                 checked = enrich_suggestions_with_inventory(canonical_boards, inventory_profile)
+                candidate_count_before_inventory = len(canonical_boards)
+                inventory_stage = "post_ranking"
                 suggested_boards = checked
             else:
                 suggested_boards = []
             reply = relationship_reply(source_board, relation, canonical_boards, suggested_boards, profile.region)
         questions = []
     elif legacy_intent == "inventory_count_question" and category and profile.region:
+        recommendation_path = "inventory_count_question"
+        candidate_source = "live_category_search"
+        ranking_engine_used = "catalogue_search"
         suggested_boards = search_live_category(profile, category)
         count = sum(board.available_count for board in suggested_boards)
         models = len(suggested_boards)
+        candidate_count_before_inventory = len(suggested_boards)
+        inventory_stage = "live_search"
         label = category.replace("_", " ")
         target = f" around {profile.target_volume_litres:g}L" if profile.target_volume_litres else ""
         if suggested_boards:
@@ -839,14 +911,23 @@ def board_guide_chat(
         reply = inventory_snapshot_reply(profile.region, category)
         questions = []
     elif category == "fish" and legacy_intent in {"board_search_request", "surfer_fit_request"}:
+        recommendation_path = "fish_family_request"
         ranking_profile = _category_ranking_profile(profile, request.message, category)
         canonical_boards = recommend_from_matrix(ranking_profile, limit=12)
+        candidate_source = "matrix"
+        ranking_engine_used = RECOMMENDATION_ENGINE_NAME
+        candidate_count_before_inventory = len(canonical_boards)
         if not canonical_boards and profile.region:
             canonical_boards = search_live_category(profile, category)
+            recommendation_path = "fish_family_fallback_live_search"
+            candidate_source = "live_category_search"
+            ranking_engine_used = "catalogue_search"
+            candidate_count_before_inventory = len(canonical_boards)
         brand_stock_request = bool(profile.requested_brand and profile.region and legacy_intent == "board_search_request")
         direct_stock_request = availability_constraint == STOCK_ONLY_CONSTRAINT and bool(profile.region)
         if brand_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
+            inventory_stage = "post_ranking"
             suggested_boards = [board for board in checked if board.available_count > 0]
             if suggested_boards:
                 reply = f"I found verified {profile.region} fish stock from {profile.requested_brand}: " + ", ".join(f"{row.model}" for row in suggested_boards[:5]) + "."
@@ -861,6 +942,7 @@ def board_guide_chat(
             questions = []
         elif direct_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
+            inventory_stage = "post_ranking"
             suggested_boards = _verified_in_stock(checked)
             reply = _stock_only_reply("fish", profile.region, suggested_boards, candidate_count=len(canonical_boards))
             questions = []
@@ -870,6 +952,7 @@ def board_guide_chat(
         ):
             if stock_constraint_removed and profile.region:
                 suggested_boards = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
+                inventory_stage = "post_ranking"
                 reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
                 questions = []
             else:
@@ -878,25 +961,40 @@ def board_guide_chat(
                 questions = ["Which region should I search: Australia, Europe, or Indonesia?"] if not profile.region else ["Are your waves mostly weak beach breaks, points, or reefs?"]
         else:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
+            inventory_stage = "post_ranking"
             suggested_boards = checked
             reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
             questions = []
     elif legacy_intent == "board_search_request" and category and profile.region and not requested_board:
+        recommendation_path = "explicit_category_request"
         use_live_category_search = bool(profile.construction_preference) or category == "step_up"
         if use_live_category_search:
             suggested_boards = search_live_category(profile, category)
             candidate_count = len(suggested_boards)
+            candidate_count_before_inventory = candidate_count
+            candidate_source = "live_category_search"
+            ranking_engine_used = "catalogue_search"
+            inventory_stage = "live_search"
         else:
             ranking_profile = _category_ranking_profile(profile, request.message, category)
             canonical_boards = recommend_from_matrix(ranking_profile, limit=12)
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             suggested_boards = _verified_in_stock(checked) if availability_constraint == STOCK_ONLY_CONSTRAINT else checked
+            candidate_count_before_inventory = len(canonical_boards)
+            candidate_source = "matrix"
+            ranking_engine_used = RECOMMENDATION_ENGINE_NAME
+            inventory_stage = "post_ranking"
             if requested_limit := _requested_card_limit(request.message):
                 suggested_boards = suggested_boards[:requested_limit]
             candidate_count = len(canonical_boards)
             if not canonical_boards:
                 suggested_boards = search_live_category(profile, category)
                 candidate_count = len(suggested_boards)
+                recommendation_path = "explicit_category_fallback_live_search"
+                candidate_count_before_inventory = candidate_count
+                candidate_source = "live_category_search"
+                ranking_engine_used = "catalogue_search"
+                inventory_stage = "live_search"
         label = _category_label(category)
         target = f" around {profile.target_volume_litres:g}L" if profile.target_volume_litres else ""
         if availability_constraint == STOCK_ONLY_CONSTRAINT:
@@ -967,11 +1065,15 @@ def board_guide_chat(
         reply = partial_volume_reply(profile, acknowledge_memory=is_memory_correction(request.message))
         questions = ["What size waves are you mostly surfing?"]
     elif allow_recommendations and enough_for_recommendations(profile):
+        recommendation_path = "general_recommendation"
         wants_performance = "performance" in " ".join(filter(None, [profile.desired_feel, profile.goal])).lower()
         if profile.current_board and wants_performance:
             performance_profile = profile.model_copy(update={"preferred_board_type": "Daily Driver"})
             expert_lane = recommend_from_matrix(performance_profile, limit=8)
             graph_lane = graph_suggestions(profile, "upgradeBoards")
+            candidate_source = "matrix_plus_graph"
+            ranking_engine_used = "matrix_plus_graph"
+            candidate_count_before_inventory = len(expert_lane) + len(graph_lane)
             seen = set()
             suggested_boards = []
             for board in expert_lane + graph_lane:
@@ -980,9 +1082,14 @@ def board_guide_chat(
                     suggested_boards.append(board)
                     seen.add(key)
             suggested_boards = enrich_suggestions_with_inventory(suggested_boards, profile)
+            inventory_stage = "post_ranking"
         else:
             suggested_boards = recommend_from_matrix(profile)
             suggested_boards = enrich_suggestions_with_inventory(suggested_boards, profile)
+            candidate_source = "matrix"
+            ranking_engine_used = RECOMMENDATION_ENGINE_NAME
+            candidate_count_before_inventory = len(suggested_boards)
+            inventory_stage = "post_ranking"
         if availability_constraint == STOCK_ONLY_CONSTRAINT:
             suggested_boards = _verified_in_stock(suggested_boards)
             lane_label = (category or extract_category(profile.preferred_board_type or "") or "board").replace("_", " ")
@@ -998,12 +1105,14 @@ def board_guide_chat(
     source = "deterministic_intake_engine"
     duration = round(time.perf_counter() - started, 3)
     verified_stock_count = sum(1 for board in suggested_boards if (board.available_count or 0) > 0)
+    selected_family = suggested_boards[0].category if suggested_boards else (category_resolution.category or category)
     emit_event(
         "bodhi_recommendation_generated",
         "bodhi_api",
         region=profile.region or request.region,
         status="success",
         source=source,
+        build=BUILD_SHA,
         authenticated=auth_context.authenticated,
         profile_loaded=auth_context.profile_loaded,
         intent=intent,
@@ -1012,7 +1121,14 @@ def board_guide_chat(
         missing_field_count=len(missing),
         availability_constraint=availability_constraint,
         requested_region=profile.region or request.region,
-        candidate_count_before_inventory=len(suggested_boards),
+        recommendation_path=recommendation_path,
+        function_name="board_guide_chat",
+        module_name=__name__,
+        ranking_engine_used=ranking_engine_used,
+        candidate_source=candidate_source,
+        inventory_stage=inventory_stage,
+        selected_family=selected_family,
+        candidate_count_before_inventory=candidate_count_before_inventory,
         verified_stock_count=verified_stock_count,
         suggested_board_count=len(suggested_boards),
         recommendation_count=len(suggested_boards),
@@ -1032,6 +1148,7 @@ def board_guide_chat(
     )
     final_reply = llm_reply or reply
     public_cards = public_recommendations(suggested_boards)
+    _set_debug_headers(response, recommendation_path=recommendation_path, ranking_engine=ranking_engine_used)
     conversation_state = build_conversation_state(
         request,
         profile,
@@ -1084,6 +1201,7 @@ def board_guide_chat(
         region=profile.region or request.region,
         status="success",
         source=source,
+        build=BUILD_SHA,
         authenticated=auth_context.authenticated,
         profile_loaded=auth_context.profile_loaded,
         intent=intent,
