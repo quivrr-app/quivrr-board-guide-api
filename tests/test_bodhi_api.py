@@ -43,6 +43,27 @@ class BodhiApiTests(unittest.TestCase):
         }
 
     @staticmethod
+    def _compatible_inventory(rows, profile):
+        updates = [
+            {"selected_volume_litres": 24.0, "volume_delta_litres": 4.6, "volume_compatibility": "incompatible"},
+            {"selected_volume_litres": 28.8, "volume_delta_litres": 0.2, "volume_compatibility": "excellent"},
+            {"selected_volume_litres": 30.4, "volume_delta_litres": 1.8, "volume_compatibility": "good"},
+            {"selected_volume_litres": 35.0, "volume_delta_litres": 6.4, "volume_compatibility": "incompatible"},
+        ]
+        seeded = []
+        for index, row in enumerate(rows):
+            extra = updates[index] if index < len(updates) else updates[1]
+            seeded.append(row.model_copy(update={
+                "available_count": 1,
+                "retailer_count": 1,
+                "region": profile.region or "ID",
+                "region_code": profile.region or "ID",
+                "selected_size_reason": "closest viable size for the rider",
+                **extra,
+            }))
+        return seeded
+
+    @staticmethod
     def _assert_categories_in_family(recommendations, allowed_categories):
         actual = {item["category"].lower() for item in recommendations}
         expected = {category.lower() for category in allowed_categories}
@@ -103,6 +124,106 @@ class BodhiApiTests(unittest.TestCase):
         self.assertTrue(body["reply"].startswith("Hey Nathan."))
         self.assertEqual(body["conversationProfile"]["region"], "ID")
         self.assertEqual(body["conversationProfile"]["ability"], "Advanced")
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    @patch("main.recommend_from_matrix")
+    @patch("main.load_authenticated_profile_context")
+    def test_authenticated_recommendation_waits_for_verified_profile(self, auth_loader, recommend_from_matrix, _inventory, _azure):
+        auth_loader.return_value = AuthenticatedProfileContext(
+            authenticated=True,
+            profile_loaded=False,
+            invalid_token=False,
+            profile=None,
+            status="loaded",
+        )
+        body = self.client.post(
+            "/api/board-guide/chat",
+            json={"message": "I need a good fish for Bali", "region": "ID"},
+            headers={"Authorization": "Bearer token-123"},
+        ).json()
+        self.assertEqual(body["reply"], "Loading your saved rider profile...")
+        self.assertTrue(body["authenticated"])
+        self.assertFalse(body["profileLoaded"])
+        self.assertEqual(body["recommendations"], [])
+        self.assertEqual(body["missingQuestions"], [])
+        recommend_from_matrix.assert_not_called()
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
+    @patch("main.recommend_from_matrix")
+    @patch("main.load_authenticated_profile_context")
+    def test_authenticated_profile_failure_does_not_invent_intermediate(self, auth_loader, recommend_from_matrix, _inventory, _azure):
+        auth_loader.return_value = AuthenticatedProfileContext(
+            authenticated=True,
+            profile_loaded=False,
+            invalid_token=False,
+            profile=None,
+            status="failed",
+        )
+        body = self.client.post(
+            "/api/board-guide/chat",
+            json={"message": "I need a good fish for Bali", "region": "ID"},
+            headers={"Authorization": "Bearer token-123"},
+        ).json()
+        self.assertIn("advanced level", body["reply"].lower())
+        self.assertNotIn("intermediate", body["reply"].lower())
+        self.assertEqual(body["recommendations"], [])
+        recommend_from_matrix.assert_not_called()
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=_compatible_inventory)
+    @patch("main.recommend_from_matrix")
+    @patch("main.load_authenticated_profile_context")
+    def test_authenticated_reef_fish_shortlist_uses_saved_advanced_profile_and_tight_target_volume(self, auth_loader, recommend_from_matrix, _inventory, _azure):
+        recommend_from_matrix.return_value = self._seed_recommendations(4, "Performance Fish", region="ID")
+        auth_loader.return_value = AuthenticatedProfileContext(
+            authenticated=True,
+            profile_loaded=True,
+            user_id="user-123",
+            profile=RiderProfile(
+                display_name="Nathan Dunn",
+                weight_kg=75,
+                ability="Advanced",
+                region="ID",
+                wave_type="Reef Break",
+                current_volume_litres=28.6,
+                target_volume_litres=28.6,
+                target_volume_source="saved_profile",
+                target_volume_confidence="high",
+                home_break="Canggu",
+                goal="Performance progression",
+                fieldProvenance={
+                    "ability": "saved_profile",
+                    "weight_kg": "saved_profile",
+                    "current_volume_litres": "saved_profile",
+                    "target_volume_litres": "saved_profile",
+                    "region": "saved_profile",
+                },
+            ),
+            status="loaded",
+        )
+        body = self.client.post(
+            "/api/board-guide/chat",
+            json={"message": "I need a good fish for Bali reefs.", "region": "ID"},
+            headers={"Authorization": "Bearer token-123"},
+        ).json()
+        self.assertTrue(body["profileLoaded"])
+        self.assertEqual(body["conversationProfile"]["ability"], "Advanced")
+        self.assertEqual(body["profileAbilitySource"], "saved_profile")
+        self.assertEqual(body["profileWeightSource"], "saved_profile")
+        self.assertEqual(body["profileVolumeSource"], "saved_profile")
+        self.assertEqual(body["targetVolume"]["targetLitres"], 28.6)
+        self.assertEqual(body["targetVolume"]["minimumLitres"], 27.5)
+        self.assertEqual(body["targetVolume"]["maximumLitres"], 30.5)
+        self.assertIn("Using your saved 28.6L target", body["reply"])
+        self.assertIn("performance fish and reef-capable twin designs", body["reply"])
+        self.assertTrue(body["recommendations"])
+        self.assertTrue(all(card["volumeCompatibility"] in {"excellent", "good"} for card in body["recommendations"]))
+        selected_volumes = [card["selected_volume_litres"] for card in body["suggested_boards"] if card["selected_volume_litres"] is not None]
+        self.assertTrue(selected_volumes)
+        self.assertGreaterEqual(min(selected_volumes), 27.0)
+        self.assertLessEqual(max(selected_volumes), 31.0)
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
@@ -337,7 +458,7 @@ class BodhiApiTests(unittest.TestCase):
         }).json()
         self.assertEqual(first["intakeState"]["ability"], "Intermediate")
         self.assertEqual(first["intakeState"]["preferred_board_type"], "Fish")
-        self.assertIn("31 to 35L", first["reply"])
+        self.assertIn("30.5 to 34L", first["reply"])
         self.assertIn("Which region", first["reply"])
 
         second = self.client.post("/api/board-guide/chat", json={

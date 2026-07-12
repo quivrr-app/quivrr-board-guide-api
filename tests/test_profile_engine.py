@@ -75,6 +75,16 @@ class ProfileEngineTests(unittest.TestCase):
         self.assertEqual(merged.weight_kg, 78)
         self.assertFalse(any("weight_kg:" in item for item in merged.profile_conflicts))
 
+    def test_current_user_correction_can_override_saved_profile_without_false_conflict(self):
+        saved = with_profile_source(RiderProfile(current_volume_litres=28.6), "saved_profile")
+        extracted = with_profile_source(RiderProfile(current_volume_litres=29.2), "current_user")
+
+        merged = merge_rider_profile(saved, extracted)
+
+        self.assertEqual(merged.current_volume_litres, 29.2)
+        self.assertEqual(merged.field_provenance["current_volume_litres"], "current_user")
+        self.assertFalse(any("current_volume_litres:" in item for item in merged.profile_conflicts))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -164,7 +164,9 @@ def target_lanes(profile: RiderProfile) -> list[str]:
     if "small wave" in text or "weak wave" in text:
         lanes.extend(["groveller", "small_wave_daily_driver", "weak_wave_board", "small_wave_fish", "fish_hybrid"])
     if "fish" in text:
-        if "point" in _key(profile.wave_type):
+        if "reef" in _key(profile.wave_type):
+            lanes.extend(["performance_fish", "point_break_fish", "twin_fin_performance", "modern_fish"])
+        elif "point" in _key(profile.wave_type):
             lanes.extend(["point_break_fish", "traditional_fish", "performance_fish", "twin_fin_performance"])
         elif "weak" in text or "beach" in _key(profile.wave_type):
             lanes.extend(["small_wave_fish", "cruisy_fish", "fish_hybrid"])
@@ -267,6 +269,7 @@ def _intent_profile(profile: RiderProfile) -> dict:
         "wants_performance_daily_driver": wants_performance_daily_driver,
         "intent_key": intent_key,
         "allowed_families": PRIMARY_FAMILY_BY_REQUEST.get(intent_key, set()),
+        "reef_fish": "fish" in text and "reef" in text,
     }
 
 
@@ -353,7 +356,7 @@ def _family_score(board: dict, intent: dict) -> tuple[float, list[str], list[str
     else:
         score += 45
 
-    if intent["intent_key"] == "fish" and family == "Performance Twin":
+    if intent["intent_key"] == "fish" and family == "Performance Twin" and not intent.get("reef_fish"):
         exclusions.append("Broad fish brief keeps dedicated performance twins out unless the rider explicitly asks for twin performance.")
         return score, reasons, exclusions
 
@@ -441,6 +444,14 @@ def _wave_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[float
     if ("weak wave" in text or "small wave" in text) and family in {"High Performance Shortboard", "Performance Shortboard"}:
         exclusions.append("Weak-wave request excludes narrow, high-rocker performance shortboards.")
         return score, reasons, exclusions
+    if intent.get("reef_fish"):
+        if family in {"Fish"} and "traditional" in _key(_design_subtype(board)):
+            score -= 18
+            exclusions.append("Traditional loose fish are not the right first pass for a Bali reef fish brief.")
+            return score, reasons, exclusions
+        if family in {"Performance Fish", "Performance Twin"}:
+            score += 16
+            reasons.append("reef context favours fish and twin designs with more hold and direction")
 
     wave_types = {_key(item) for item in board.get("waveTypes", [])}
     wave_power = {_key(item) for item in board.get("wavePower", [])}
@@ -518,6 +529,9 @@ def _goal_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[float
     if intent["wants_performance_daily_driver"] and family == "Performance Daily Driver":
         score += 14
         reasons.append("daily-driver brief without drifting into generic hybrids")
+    if intent.get("reef_fish") and family in {"Performance Fish", "Performance Twin"}:
+        score += 12
+        reasons.append("better hold and cleaner direction for reef surf")
     return score, reasons
 
 
@@ -594,6 +608,15 @@ def _explanation(board: dict, profile: RiderProfile, reasons: list[str], target:
         )
     if board.get("model") == "Monsta":
         return "The Monsta is a genuine high-performance thruster and fits a goal of more responsive surfing in stronger waves."
+    if family == "Performance Fish":
+        if target is not None:
+            return (
+                f"Refined rails and a more controlled tail make this a stronger reef-capable fish option. "
+                f"I kept it around {target:g}L, with this size landing {distance:g}L from your target."
+            )
+        return "Refined rails and a more controlled tail make this a stronger reef-capable fish option."
+    if family == "Performance Twin":
+        return "This performance twin keeps the speed of a fish but gives more hold and direction in cleaner reef waves."
     reason_text = ", ".join(dict.fromkeys(reasons[:3])) if reasons else family.lower()
     if target is not None:
         return f"{family} fit with {reason_text}. The size band sits {distance:g}L from the {target:g}L target."

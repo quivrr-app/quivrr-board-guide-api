@@ -13,6 +13,7 @@ import requests
 
 from app.models import RiderProfile, SuggestedBoard
 from app.rider_fit import recommend_rider_fit
+from app.volume_engine_v2 import build_target_volume_context
 
 
 API_BASE = os.getenv("QUIVRR_INVENTORY_API_URL", "https://quivrr-backend-api.azurewebsites.net").rstrip("/")
@@ -156,6 +157,37 @@ def _candidate_sizes(model_id: int, target_volume: float | None, get_json: Calla
     return selected[:2]
 
 
+def _volume_compatibility_label(volume: float | None, target_context) -> tuple[str, float | None]:
+    if volume is None or target_context is None or target_context.target_litres is None:
+        return "acceptable_with_tradeoff", None
+    delta = abs(float(volume) - float(target_context.target_litres))
+    if target_context.minimum_litres is not None and target_context.maximum_litres is not None:
+        if volume < target_context.minimum_litres or volume > target_context.maximum_litres:
+            return "incompatible", delta
+    if delta <= 0.5:
+        return "excellent", delta
+    if delta <= 1.5:
+        return "good", delta
+    if delta <= 2.0:
+        return "acceptable_with_tradeoff", delta
+    return "incompatible", delta
+
+
+def _select_best_size(sizes: list[dict], target_context) -> dict | None:
+    if target_context is None or target_context.target_litres is None:
+        return sizes[0] if sizes else None
+    ranked = []
+    for size in sizes:
+        compatibility, delta = _volume_compatibility_label(size.get("volumeLitres"), target_context)
+        rank = {"excellent": 0, "good": 1, "acceptable_with_tradeoff": 2, "incompatible": 3}[compatibility]
+        ranked.append((rank, delta if delta is not None else 99, size))
+    ranked.sort(key=lambda item: (item[0], item[1], item[2].get("boardSizeId") or 0))
+    for rank, _, size in ranked:
+        if rank <= 1:
+            return size
+    return None
+
+
 def _summarise_stock(payloads: list[dict], region: str, construction_preference: str | None = None) -> dict:
     rows = []
     direct_rows = {}
@@ -215,7 +247,8 @@ def enrich_suggestions_with_inventory(
 ) -> list[SuggestedBoard]:
     region = normalise_region(profile.region)
     fit = recommend_rider_fit(profile)
-    target = profile.target_volume_litres
+    target_context = build_target_volume_context(profile)
+    target = target_context.target_litres if target_context and target_context.target_litres is not None else profile.target_volume_litres
     if target is None and fit is not None:
         target = (fit.volume_low + fit.volume_high) / 2
     if not region:
@@ -253,6 +286,11 @@ def enrich_suggestions_with_inventory(
                 brand_id = _find_brand_id(suggestion.brand, get_json)
                 model_id = _find_model_id(brand_id, suggestion.model, get_json) if brand_id else None
             sizes = _candidate_sizes(model_id, target, get_json, profile.construction_preference) if model_id else []
+            selected_size_data = _select_best_size(sizes, target_context) if sizes else None
+            if selected_size_data is not None:
+                sizes = [selected_size_data]
+            else:
+                sizes = []
             payloads = [
                 get_json("/api/search?" + urlencode({"boardSizeId": size["boardSizeId"], "region": region}))
                 for size in sizes
@@ -267,6 +305,21 @@ def enrich_suggestions_with_inventory(
 
         source_url = stock.get("example_live_source_url")
         fit_score = round((suggestion.confidence * 100) if suggestion.confidence <= 1 else suggestion.confidence)
+        volume_compatibility, volume_delta = _volume_compatibility_label(
+            selected_size_data.get("volumeLitres") if selected_size_data else None,
+            target_context,
+        )
+        if selected_size_data is None:
+            volume_compatibility = "incompatible"
+        size_reason = None
+        if selected_size_data is not None:
+            litres = selected_size_data.get("volumeLitres")
+            if volume_delta is not None and target_context and target_context.target_litres is not None:
+                size_reason = (
+                    f"I selected the {selected_size} because it stays {volume_delta:g}L from your {target_context.target_litres:g}L target."
+                    if volume_delta > 0
+                    else f"I selected the {selected_size} because it lands right on your {target_context.target_litres:g}L target."
+                )
         enriched.append(suggestion.model_copy(update={
             **stock,
             "fit_score": fit_score,
@@ -279,11 +332,15 @@ def enrich_suggestions_with_inventory(
             "board_size_id": selected_size_data.get("boardSizeId") if selected_size_data else None,
             "selected_construction": selected_size_data.get("construction") if selected_size_data else None,
             "selected_volume_litres": selected_size_data.get("volumeLitres") if selected_size_data else None,
+            "volume_delta_litres": volume_delta,
+            "selected_size_reason": size_reason,
+            "volume_compatibility": volume_compatibility,
         }))
 
     # Exact fit first, then actual regional availability, manufacturer direct, retailer, confidence.
     enriched.sort(
         key=lambda board: (
+            board.volume_compatibility in {"excellent", "good"},
             board.confidence,
             board.available_count > 0,
             board.manufacturer_direct_count > 0,

@@ -1,7 +1,7 @@
 import unittest
 
 from app.models import RiderProfile
-from app.volume_engine_v2 import fish_volume_bands, recommend_volume_v2
+from app.volume_engine_v2 import build_target_volume_context, fish_volume_bands, recommend_volume_v2
 
 
 class VolumeEngineV2Tests(unittest.TestCase):
@@ -32,6 +32,42 @@ class VolumeEngineV2Tests(unittest.TestCase):
         younger = recommend_volume_v2(self.profile(age=30), "performance_fish")
         older_fit = recommend_volume_v2(self.profile(age=55), "performance_fish")
         self.assertEqual(younger.volume_band_label, older_fit.volume_band_label)
+
+    def test_saved_profile_current_volume_builds_tight_performance_fish_target_context(self):
+        profile = RiderProfile(
+            weight_kg=75,
+            ability="Advanced",
+            current_volume_litres=28.6,
+            target_volume_litres=28.6,
+            target_volume_source="saved_profile",
+            target_volume_confidence="high",
+            fieldProvenance={"current_volume_litres": "saved_profile", "target_volume_litres": "saved_profile"},
+        )
+
+        context = build_target_volume_context(profile, "performance_fish")
+
+        self.assertIsNotNone(context)
+        self.assertEqual(context.target_litres, 28.6)
+        self.assertEqual(context.minimum_litres, 27.5)
+        self.assertEqual(context.maximum_litres, 30.5)
+        self.assertEqual(context.source, "saved_profile")
+        self.assertEqual(context.confidence, "high")
+
+    def test_explicit_saved_profile_volume_range_is_preserved(self):
+        profile = RiderProfile(
+            target_volume_litres=28.6,
+            target_volume_min_litres=27.5,
+            target_volume_max_litres=30.5,
+            target_volume_source="saved_profile",
+            target_volume_confidence="high",
+            fieldProvenance={"target_volume_litres": "saved_profile"},
+        )
+
+        context = build_target_volume_context(profile, "performance_fish")
+
+        self.assertEqual(context.target_litres, 28.6)
+        self.assertEqual(context.minimum_litres, 27.5)
+        self.assertEqual(context.maximum_litres, 30.5)
 
 
 if __name__ == "__main__":

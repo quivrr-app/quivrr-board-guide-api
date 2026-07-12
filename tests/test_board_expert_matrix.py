@@ -84,6 +84,25 @@ class BoardExpertMatrixTests(unittest.TestCase):
         rows = recommend_from_matrix(profile, limit=12)
         self.assertTrue(any(row.model in {"Ocean Racer", "Lightbender", "Twinsman", "RNF 96"} for row in rows))
 
+    def test_reef_fish_profile_prioritises_performance_fish_and_twin_lanes(self):
+        profile = RiderProfile(
+            preferred_board_type="Fish",
+            wave_type="Reef Break",
+            wave_power="Average to Powerful",
+            ability="Advanced",
+            goal="Performance progression",
+            target_volume_litres=28.6,
+        )
+        self.assertEqual(
+            target_lanes(profile)[:4],
+            ["performance_fish", "point_break_fish", "twin_fin_performance", "modern_fish"],
+        )
+        rows = recommend_from_matrix(profile, limit=8)
+        self.assertTrue(rows)
+        top_categories = [row.category for row in rows[:4]]
+        self.assertTrue(any(category in {"Performance Fish", "Performance Twin"} for category in top_categories))
+        self.assertFalse(all(category == "Fish" for category in top_categories))
+
     def test_bom_dia_is_classified_as_performance_twin(self):
         bom_dia = find_matrix_board("Album", "Bom Dia")
         self.assertEqual(bom_dia["broadFamily"], "Alternative")

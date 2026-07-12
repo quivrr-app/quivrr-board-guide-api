@@ -7,7 +7,7 @@ from app.models import BodhiRecommendation, RiderProfile, SuggestedBoard, Volume
 from app.rider_fit import recommend_rider_fit
 from app.daily_driver_taxonomy import daily_driver_lane
 from app.board_expert_matrix import find_matrix_board
-from app.volume_engine_v2 import fish_volume_bands, recommend_volume_v2
+from app.volume_engine_v2 import build_target_volume_context, fish_volume_bands, recommend_volume_v2
 
 
 REGION_NAMES = {"AU": "Australian", "EU": "European", "ID": "Indonesian"}
@@ -210,18 +210,26 @@ def partial_volume_reply(profile: RiderProfile, acknowledge_memory: bool = False
 def fish_advice_reply(profile: RiderProfile, canonical: list[SuggestedBoard] | None = None,
                       live: list[SuggestedBoard] | None = None) -> str:
     volume_profile = profile if profile.weight_kg else profile.model_copy(update={"weight_kg": 75})
-    fit = recommend_volume_v2(volume_profile, "point_break_fish")
-    low, high = fit.minimum_volume, fit.maximum_volume
+    reef = "reef" in (profile.wave_type or "").lower()
+    point = "point" in (profile.wave_type or "").lower()
+    lane_key = "performance_fish" if reef else "point_break_fish" if point else "performance_fish"
+    target_context = build_target_volume_context(volume_profile, lane_key)
+    low = target_context.minimum_litres if target_context else None
+    high = target_context.maximum_litres if target_context else None
+    target = target_context.target_litres if target_context else None
     base = (
         f"Got it. I’m treating you as {(profile.ability or 'intermediate').lower()}. "
-        f"For a fish at {profile.weight_kg or 75:g}kg, I’d start around {low:g} to {high:g}L depending on how cruisy you want it. "
+        f"Using your saved {target:g}L target, I’ve kept these mostly around {low:g} to {high:g}L. "
+        if low is not None and high is not None and target is not None and (profile.target_volume_source == "saved_profile" or profile.field_provenance.get("target_volume_litres") == "saved_profile")
+        else f"For a fish at {profile.weight_kg or 75:g}kg, I’d start around {low:g} to {high:g}L depending on how cruisy you want it. "
     )
     if not normalise_region(profile.region):
         return base + "Fish covers traditional, performance, cruisy and small-wave lanes. Which region should I check?"
     if not (profile.wave_type or profile.wave_size or profile.wave_power):
         return base + "Are your waves mostly weak beach breaks, points, or reefs?"
-    point = "point" in (profile.wave_type or "").lower()
     lane = (
+        "For Bali reefs, I’ve favoured performance fish and reef-capable twin designs with more hold than a traditional weak-wave fish. "
+        if reef else
         "For point breaks I’d look first at proper down-the-line fish, performance twins and point-break fish rather than any generic small-wave board. "
         if point else
         "I’d separate proper fish and twin designs from generic small-wave hybrids, then tune the choice to your wave power. "
@@ -229,7 +237,7 @@ def fish_advice_reply(profile: RiderProfile, canonical: list[SuggestedBoard] | N
     canonical = canonical or []
     live = live or []
     canonical_names = [f"{row.brand} {row.model}" for row in canonical[:10]]
-    if point:
+    if point or reef:
         iconic = [
             "Christenson Fish/Ocean Racer family", "Album Lightbender", "Album Twinsman",
             "Lost RNF 96", "Firewire Seaside", "JS Industries Black Baron",
@@ -401,6 +409,9 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
             sourceProductUrl=board.source_product_url or board.example_live_source_url,
             sourceType=source_type,
             priceRange=board.price_range, confidence=board.confidence,
+            volumeDeltaLitres=board.volume_delta_litres,
+            selectedSizeReason=board.selected_size_reason,
+            volumeCompatibility=board.volume_compatibility,
         ))
     return output
 

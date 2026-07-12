@@ -46,7 +46,7 @@ from app.profile_engine import (
     profile_completeness,
     with_profile_source,
 )
-from app.volume_engine_v2 import build_volume_recommendation
+from app.volume_engine_v2 import build_target_volume_context, build_volume_recommendation
 from app.structured_logging import emit_event
 
 
@@ -145,6 +145,71 @@ def _category_label(category: str | None) -> str:
     }.get(category, category.replace("_", " "))
 
 
+def _safe_profile_source(value: str | None) -> str:
+    return {
+        "saved_profile": "saved_profile",
+        "account_profile": "saved_profile",
+        "current_user": "current_message",
+        "conversation_user": "conversation_context",
+        "conversation_profile": "conversation_context",
+        "inferred": "fallback",
+    }.get(str(value or "").strip().lower(), "missing")
+
+
+def _profile_field_source(profile, field: str) -> str:
+    if not profile:
+        return "missing"
+    return _safe_profile_source(profile.field_provenance.get(field))
+
+
+def _recommendation_lane(category: str | None, profile) -> str | None:
+    if category == "fish":
+        if "reef" in (profile.wave_type or "").lower():
+            return "performance_fish"
+        if "point" in (profile.wave_type or "").lower():
+            return "point_break_fish"
+        if "traditional" in " ".join(filter(None, [profile.goal, profile.desired_feel, profile.preferred_board_type])).lower():
+            return "traditional_fish"
+        return "performance_fish"
+    if category == "performance_twin":
+        return "performance_fish"
+    if category == "performance_shortboard":
+        return "performance_shortboard"
+    if category == "performance_daily_driver":
+        return "performance_daily_driver"
+    return None
+
+
+def _apply_target_volume_context(profile, category: str | None):
+    context = build_target_volume_context(profile, _recommendation_lane(category, profile))
+    if context is None:
+        return profile, None
+    updated = profile.model_copy(update={
+        "target_volume_litres": context.target_litres,
+        "target_volume_min_litres": context.minimum_litres,
+        "target_volume_max_litres": context.maximum_litres,
+        "target_volume_source": context.source,
+        "target_volume_confidence": context.confidence,
+    })
+    return updated, context
+
+
+def _filter_volume_compatible(boards):
+    filtered = [board for board in boards if (board.volume_compatibility or "good") in {"excellent", "good"}]
+    return filtered or boards
+
+
+def _volume_correction_requested(message: str) -> bool:
+    lowered = (message or "").lower()
+    return any(token in lowered for token in (
+        "range is too broad",
+        "volumes are all over the place",
+        "keep it around my normal volume",
+        "why is that one so small",
+        "why is that one so big",
+    ))
+
+
 def _category_ranking_profile(profile, message: str, category: str | None):
     lowered = (message or "").lower()
     current_preference = (profile.preferred_board_type or "").lower()
@@ -185,6 +250,8 @@ def _verified_in_stock(boards):
 def _shortlist_family_buckets(category: str | None, profile, message: str) -> tuple[set[str], set[str]]:
     lowered = (message or "").lower()
     if category == "fish":
+        if "reef" in lowered or "reef" in (profile.wave_type or "").lower():
+            return {"Performance Fish", "Performance Twin", "Fish"}, set()
         return {"Fish", "Performance Fish", "Traditional Fish"}, set()
     if category == "performance_shortboard":
         primary = {"High Performance Shortboard", "Performance Shortboard"}
@@ -698,12 +765,9 @@ def board_guide_chat(
     profile = merge_rider_profile(profile, persisted_profile, account_profile=account_profile)
     current_profile = with_profile_source(extract_profile(request.message, request.region), "current_user")
     profile = merge_rider_profile(profile, current_profile, account_profile=account_profile)
+    volume_correction_requested = _volume_correction_requested(request.message)
 
     missing = missing_profile_fields(profile)
-    recommendation = build_recommendation(profile)
-    volume_recommendation = build_volume_recommendation(profile)
-    questions = intake_questions(profile)
-    guidance = volume_guidance(profile)
     intent_result = classify_intent(request.message)
     legacy_intent = intent_result.legacy_intent
     intent = intent_result.intent
@@ -722,6 +786,12 @@ def board_guide_chat(
         allow_follow_up_profile_category=allow_contextual_profile_category,
     )
     category = category_resolution.category
+    profile, target_volume = _apply_target_volume_context(profile, category)
+    missing = missing_profile_fields(profile)
+    recommendation = build_recommendation(profile)
+    volume_recommendation = build_volume_recommendation(profile, _recommendation_lane(category, profile))
+    questions = intake_questions(profile)
+    guidance = volume_guidance(profile)
     requested_board = find_requested_board(request.message)
     if legacy_intent == "exact_board_location_request" and not requested_board:
         for item in reversed(request.conversation):
@@ -763,6 +833,17 @@ def board_guide_chat(
         else:
             reply = "I don’t have a verified saved identity for this conversation yet."
         questions = []
+    elif allow_recommendations and auth_context.authenticated and not auth_context.profile_loaded and not current_profile.ability and not current_profile.weight_kg:
+        suggested_boards = []
+        recommendation = None
+        volume_recommendation = None
+        guidance = None
+        if auth_context.status == "failed":
+            reply = "I couldn’t load your saved ability just now. Are you still surfing at an advanced level?"
+            questions = ["Are you still surfing at an advanced level?"]
+        else:
+            reply = "Loading your saved rider profile..."
+            questions = []
     elif state_follow_up:
         suggested_boards = state_follow_up.get("suggested_boards", [])
         comparison = state_follow_up.get("comparison")
@@ -983,14 +1064,14 @@ def board_guide_chat(
         if brand_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             inventory_stage = "post_ranking"
-            suggested_boards = _enforce_shortlist_coherence([board for board in checked if board.available_count > 0], category, ranking_profile, request.message)
+            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence([board for board in checked if board.available_count > 0], category, ranking_profile, request.message))
             if suggested_boards:
                 reply = f"I found verified {profile.region} fish stock from {profile.requested_brand}: " + ", ".join(f"{row.model}" for row in suggested_boards[:5]) + "."
             else:
                 alternative_profile = ranking_profile.model_copy(update={"requested_brand": None})
                 alternatives = recommend_from_matrix(alternative_profile, limit=8)
                 checked_alternatives = enrich_suggestions_with_inventory(alternatives, alternative_profile)
-                suggested_boards = _enforce_shortlist_coherence([board for board in checked_alternatives if board.available_count > 0], category, alternative_profile, request.message)
+                suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence([board for board in checked_alternatives if board.available_count > 0], category, alternative_profile, request.message))
                 reply = f"I can’t see verified live {profile.region} fish stock from {profile.requested_brand} right now. "
                 if suggested_boards:
                     reply += "The closest live fish alternatives are " + ", ".join(f"{row.brand} {row.model}" for row in suggested_boards[:5]) + "."
@@ -998,7 +1079,7 @@ def board_guide_chat(
         elif direct_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             inventory_stage = "post_ranking"
-            suggested_boards = _enforce_shortlist_coherence(_verified_in_stock(checked), category, ranking_profile, request.message)
+            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(_verified_in_stock(checked), category, ranking_profile, request.message))
             reply = _stock_only_reply("fish", profile.region, suggested_boards, candidate_count=len(canonical_boards))
             questions = []
         elif not profile.region or (
@@ -1008,6 +1089,7 @@ def board_guide_chat(
             if stock_constraint_removed and profile.region:
                 suggested_boards = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
                 inventory_stage = "post_ranking"
+                suggested_boards = _filter_volume_compatible(suggested_boards)
                 reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
                 questions = []
             else:
@@ -1017,8 +1099,14 @@ def board_guide_chat(
         else:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             inventory_stage = "post_ranking"
-            suggested_boards = _enforce_shortlist_coherence(checked, category, ranking_profile, request.message)
+            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(checked, category, ranking_profile, request.message))
             reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
+            if volume_correction_requested and target_volume and target_volume.minimum_litres is not None and target_volume.maximum_litres is not None:
+                reply = (
+                    f"You’re right. That range is too broad for your {target_volume.target_litres:g}L target. "
+                    f"I’ve tightened this to roughly {target_volume.minimum_litres:g} to {target_volume.maximum_litres:g}L and removed boards that only fit at unrealistic sizes. "
+                    + reply
+                )
             questions = []
     elif legacy_intent == "board_search_request" and category and profile.region and not requested_board:
         recommendation_path = "explicit_category_request"
@@ -1035,7 +1123,7 @@ def board_guide_chat(
             canonical_boards = recommend_from_matrix(ranking_profile, limit=12)
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             suggested_boards = _verified_in_stock(checked) if availability_constraint == STOCK_ONLY_CONSTRAINT else checked
-            suggested_boards = _enforce_shortlist_coherence(suggested_boards, category, ranking_profile, request.message)
+            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(suggested_boards, category, ranking_profile, request.message))
             candidate_count_before_inventory = len(canonical_boards)
             candidate_source = "matrix"
             ranking_engine_used = RECOMMENDATION_ENGINE_NAME
@@ -1070,6 +1158,12 @@ def board_guide_chat(
                 f"The live brand groups are {brands}.{construction_note} Here are the strongest matching models. "
                 "Want me to narrow them by ability, waves, brand, or how forgiving you want the board to feel?"
             )
+            if volume_correction_requested and target_volume and target_volume.minimum_litres is not None and target_volume.maximum_litres is not None:
+                reply = (
+                    f"You’re right. That range is too broad for your {target_volume.target_litres:g}L target. "
+                    f"I’ve tightened this to roughly {target_volume.minimum_litres:g} to {target_volume.maximum_litres:g}L and removed boards that only fit at unrealistic sizes. "
+                    + reply
+                )
         else:
             reply = (
                 f"I can’t verify a live {label} option{target} in {profile.region} right now. "
@@ -1247,6 +1341,10 @@ def board_guide_chat(
         followUpActions=follow_up_actions,
         authenticated=auth_context.authenticated,
         profileLoaded=auth_context.profile_loaded,
+        profileAbilitySource=_profile_field_source(profile, "ability"),
+        profileVolumeSource=_safe_profile_source(profile.target_volume_source or profile.field_provenance.get("target_volume_litres") or profile.field_provenance.get("current_volume_litres")),
+        profileWeightSource=_profile_field_source(profile, "weight_kg"),
+        targetVolume=target_volume,
         modelDeployment=model_deployment,
         recommendationVersion="bodhi-sprint-4",
         correlationId=correlation_id,

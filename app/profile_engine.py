@@ -54,6 +54,7 @@ SOURCE_PRIORITY = {
     "default": 0,
     "inferred": 1,
     "account_profile": 2,
+    "saved_profile": 2,
     "conversation_user": 3,
     "conversation_profile": 3,
     "current_user": 4,
@@ -545,7 +546,7 @@ def merge_rider_profile(
             current_source = field_provenance.get(field, _field_source(account_profile, field))
             incoming_source = _field_source(profile, field)
             allow_correction = incoming_source == "current_user" and current_source in {
-                "account_profile", "conversation_user", "conversation_profile", "inferred", "current_user",
+                "account_profile", "saved_profile", "conversation_user", "conversation_profile", "inferred", "current_user",
             } and field in CORRECTION_FIELDS
             conflict = None if allow_correction else _build_conflict(field, current, incoming)
             if conflict and conflict not in conflicts:

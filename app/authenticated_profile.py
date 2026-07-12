@@ -31,6 +31,7 @@ class AuthenticatedProfileContext:
     invalid_token: bool = False
     user_id: str | None = None
     profile: RiderProfile | None = None
+    status: str = "anonymous"
 
 
 def _bearer_token(authorization: str | None) -> str | None:
@@ -84,10 +85,19 @@ def _profile_from_backend(payload: dict) -> RiderProfile | None:
     preferred_max = profile.get("preferredVolumeMaxLitres")
     if preferred_min is not None and preferred_max is not None:
         rider.target_volume_litres = round((float(preferred_min) + float(preferred_max)) / 2, 2)
+        rider.target_volume_min_litres = float(preferred_min)
+        rider.target_volume_max_litres = float(preferred_max)
     elif preferred_min is not None:
         rider.target_volume_litres = float(preferred_min)
+        rider.target_volume_min_litres = float(preferred_min)
+        rider.target_volume_max_litres = float(preferred_min)
+    elif rider.current_volume_litres is not None:
+        rider.target_volume_litres = rider.current_volume_litres
+    if rider.target_volume_litres is not None:
+        rider.target_volume_source = "saved_profile"
+        rider.target_volume_confidence = "high"
     rider.field_provenance = {
-        field: "account_profile"
+        field: "saved_profile"
         for field, value in rider.model_dump().items()
         if field not in {"profile_sources", "profile_conflicts", "field_provenance"} and value not in (None, "", [], {})
     }
@@ -110,12 +120,12 @@ def load_authenticated_profile_context(
     try:
         response = requests.get(PROFILE_API_URL, headers=headers, timeout=timeout_seconds)
     except requests.RequestException:
-        return AuthenticatedProfileContext(authenticated=True, profile_loaded=False)
+        return AuthenticatedProfileContext(authenticated=True, profile_loaded=False, status="failed")
 
     if response.status_code in {401, 403}:
-        return AuthenticatedProfileContext(authenticated=False, profile_loaded=False, invalid_token=True)
+        return AuthenticatedProfileContext(authenticated=False, profile_loaded=False, invalid_token=True, status="invalid_token")
     if not response.ok:
-        return AuthenticatedProfileContext(authenticated=True, profile_loaded=False)
+        return AuthenticatedProfileContext(authenticated=True, profile_loaded=False, status="failed")
 
     payload = response.json()
     return AuthenticatedProfileContext(
@@ -124,4 +134,5 @@ def load_authenticated_profile_context(
         invalid_token=False,
         user_id=((payload.get("user") or {}).get("userId")),
         profile=_profile_from_backend(payload),
+        status="loaded",
     )

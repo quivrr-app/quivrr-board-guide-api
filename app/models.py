@@ -53,6 +53,10 @@ class RiderProfile(BaseModel):
     current_board_volume_litres: float | None = None
     current_board_feedback: str | None = None
     target_volume_litres: float | None = None
+    target_volume_min_litres: float | None = None
+    target_volume_max_litres: float | None = None
+    target_volume_source: str | None = None
+    target_volume_confidence: str | None = None
     home_break: str | None = None
     home_country: str | None = None
 
@@ -101,6 +105,9 @@ class SuggestedBoard(BaseModel):
     board_size_id: int | None = None
     selected_construction: str | None = None
     selected_volume_litres: float | None = None
+    volume_delta_litres: float | None = None
+    selected_size_reason: str | None = None
+    volume_compatibility: str | None = None
     price_range: str | None = None
     region: str | None = None
     region_code: str | None = None
@@ -143,6 +150,16 @@ class VolumeRecommendation(BaseModel):
     forgiving_max_litres: float | None = None
     confidence: float = 0.0
     explanation: str
+
+
+class TargetVolumeContext(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+    target_litres: float | None = Field(default=None, alias="targetLitres")
+    minimum_litres: float | None = Field(default=None, alias="minimumLitres")
+    maximum_litres: float | None = Field(default=None, alias="maximumLitres")
+    source: str = "missing"
+    confidence: str = "low"
 
 
 class ProfileExtractionResult(BaseModel):
@@ -232,6 +249,9 @@ class BodhiRecommendation(BaseModel):
     source_product_url: str | None = Field(default=None, alias="sourceProductUrl")
     source_type: str = Field(default="no_verified_live_source", alias="sourceType")
     price_range: str | None = Field(default=None, alias="priceRange")
+    volume_delta_litres: float | None = Field(default=None, alias="volumeDeltaLitres")
+    selected_size_reason: str | None = Field(default=None, alias="selectedSizeReason")
+    volume_compatibility: str | None = Field(default=None, alias="volumeCompatibility")
     confidence: float = 0.0
 
     @model_validator(mode="before")
@@ -338,6 +358,10 @@ class BoardGuideResponse(BaseModel):
     follow_up_actions: list[FollowUpAction] = Field(default_factory=list, alias="followUpActions")
     authenticated: bool = False
     profile_loaded: bool = Field(default=False, alias="profileLoaded")
+    profile_ability_source: str = Field(default="missing", alias="profileAbilitySource")
+    profile_volume_source: str = Field(default="missing", alias="profileVolumeSource")
+    profile_weight_source: str = Field(default="missing", alias="profileWeightSource")
+    target_volume: TargetVolumeContext | None = Field(default=None, alias="targetVolume")
     model_deployment: str | None = Field(default=None, alias="modelDeployment")
     recommendation_version: str = Field(default="bodhi-sprint-4", alias="recommendationVersion")
     correlation_id: str | None = Field(default=None, alias="correlationId")

@@ -286,6 +286,27 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
 
     scenario("13. Explicit stock-only requests preserve and can remove the verified-stock constraint", stock_only_contract)
 
+    def authenticated_bali_reef_fish() -> None:
+        data = call_chat(session, base_url, {
+            "message": "I need a good fish for Bali reefs",
+            "region": "ID",
+        })
+        assert_true(data.get("profileLoaded") is True, "Authenticated fish scenario did not load the saved profile")
+        assert_true((data.get("conversationProfile") or {}).get("ability") == "Advanced", "Saved advanced ability did not persist")
+        target = data.get("targetVolume") or {}
+        assert_true(abs(float(target.get("targetLitres") or 0) - 28.6) < 0.11, f"Target litres drifted: {target}")
+        assert_true((target.get("minimumLitres") or 0) >= 27.0, f"Minimum litres too low: {target}")
+        assert_true((target.get("maximumLitres") or 99) <= 30.5, f"Maximum litres too high: {target}")
+        recommendations = data.get("recommendations", [])
+        assert_true(bool(recommendations), "Authenticated reef fish scenario returned no recommendations")
+        assert_true(all(item.get("volumeCompatibility") in {"excellent", "good"} for item in recommendations), "Returned an incompatible reef fish card")
+        assert_true(any("performance fish" in (item.get("category") or "").lower() or "twin" in (item.get("category") or "").lower() for item in recommendations), "Reef fish scenario did not surface performance fish or twin direction")
+
+    if token:
+        scenario("14. Authenticated Bali reef fish stays profile-aware, tight in volume and reef-capable", authenticated_bali_reef_fish)
+    else:
+        results.append(("14. Authenticated Bali reef fish stays profile-aware, tight in volume and reef-capable", True, "PASS: skipped (no bearer token supplied)"))
+
     return results
 
 

@@ -15,6 +15,7 @@ class AuthenticatedProfileTests(unittest.TestCase):
             "profile": {
                 "weightKg": 78,
                 "ability": "Advanced",
+                "currentVolumeLitres": 28.6,
                 "preferredBrands": ["JS Industries", "Album"],
                 "currentBoard": "JS Monsta",
                 "surfingGoal": "Performance progression",
@@ -33,6 +34,12 @@ class AuthenticatedProfileTests(unittest.TestCase):
         self.assertEqual(context.profile.region, "ID")
         self.assertEqual(context.profile.preferred_brands, ["JS Industries", "Album"])
         self.assertEqual(context.profile.surf_frequency_per_week, 1.0)
+        self.assertEqual(context.profile.target_volume_litres, 28.6)
+        self.assertIsNone(context.profile.target_volume_min_litres)
+        self.assertIsNone(context.profile.target_volume_max_litres)
+        self.assertEqual(context.profile.target_volume_source, "saved_profile")
+        self.assertEqual(context.profile.field_provenance["ability"], "saved_profile")
+        self.assertEqual(context.status, "loaded")
 
     @patch("app.authenticated_profile.requests.get")
     def test_unauthorised_profile_response_falls_back_without_profile(self, requests_get):
@@ -47,6 +54,29 @@ class AuthenticatedProfileTests(unittest.TestCase):
         self.assertFalse(context.profile_loaded)
         self.assertTrue(context.invalid_token)
         self.assertIsNone(context.profile)
+        self.assertEqual(context.status, "invalid_token")
+
+    @patch("app.authenticated_profile.requests.get")
+    def test_preferred_volume_range_is_preserved_when_backend_supplies_it(self, requests_get):
+        response = Mock()
+        response.ok = True
+        response.status_code = 200
+        response.json.return_value = {
+            "user": {"userId": "user-123", "displayName": "Nathan Dunn", "homeRegion": "ID"},
+            "profile": {
+                "weightKg": 75,
+                "ability": "Advanced",
+                "preferredVolumeMinLitres": 27.5,
+                "preferredVolumeMaxLitres": 30.5,
+            },
+        }
+        requests_get.return_value = response
+
+        context = load_authenticated_profile_context("Bearer token-123", correlation_id="corr-1")
+
+        self.assertEqual(context.profile.target_volume_litres, 29.0)
+        self.assertEqual(context.profile.target_volume_min_litres, 27.5)
+        self.assertEqual(context.profile.target_volume_max_litres, 30.5)
 
 
 if __name__ == "__main__":

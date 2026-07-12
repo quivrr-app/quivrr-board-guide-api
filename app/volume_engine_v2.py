@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from app.models import RiderProfile, VolumeRecommendation
+from app.models import RiderProfile, TargetVolumeContext, VolumeRecommendation
 
 
 @dataclass(frozen=True)
@@ -32,12 +32,29 @@ def _half(value: float) -> float:
     return round(value * 2) / 2
 
 
+def _precise(value: float) -> float:
+    return round(value, 2)
+
+
+def _source_label(value: str | None) -> str:
+    return {
+        "saved_profile": "saved_profile",
+        "account_profile": "saved_profile",
+        "current_user": "current_message",
+        "conversation_user": "conversation_context",
+        "conversation_profile": "conversation_context",
+        "inferred": "fallback",
+    }.get(str(value or "").strip().lower(), "missing")
+
+
 def infer_volume_lane(profile: RiderProfile, explicit_lane: str | None = None) -> str:
     if explicit_lane:
         return explicit_lane
     text = " ".join(filter(None, [profile.preferred_board_type, profile.desired_feel, profile.goal])).lower()
     waves = " ".join(filter(None, [profile.wave_type, profile.wave_power])).lower()
     if "fish" in text:
+        if "reef" in waves:
+            return "performance_fish" if "traditional" not in text else "point_break_fish"
         if "traditional" in text:
             return "traditional_fish"
         if "cruisy" in text:
@@ -54,6 +71,60 @@ def infer_volume_lane(profile: RiderProfile, explicit_lane: str | None = None) -
     if "daily" in text:
         return "performance_daily_driver"
     return "performance_shortboard"
+
+
+def build_target_volume_context(profile: RiderProfile, board_lane: str | None = None) -> TargetVolumeContext | None:
+    lane = infer_volume_lane(profile, board_lane)
+    source = _source_label(profile.target_volume_source or profile.field_provenance.get("target_volume_litres") or profile.field_provenance.get("current_volume_litres"))
+    confidence = profile.target_volume_confidence or ("high" if source in {"saved_profile", "current_message", "conversation_context"} else "medium")
+
+    if profile.target_volume_litres is not None:
+        target = float(profile.target_volume_litres)
+        if profile.target_volume_min_litres is not None and profile.target_volume_max_litres is not None:
+            minimum = float(profile.target_volume_min_litres)
+            maximum = float(profile.target_volume_max_litres)
+        elif lane in {"performance_fish"}:
+            minimum, maximum = target - 1.0, target + 2.0
+        elif lane in {"point_break_fish"}:
+            minimum, maximum = target - 1.0, target + 2.0
+        elif lane in {"traditional_fish", "cruisy_fish"}:
+            minimum, maximum = target, target + 3.0
+        else:
+            minimum, maximum = target - 1.5, target + 1.5
+        return TargetVolumeContext(
+            targetLitres=_precise(target),
+            minimumLitres=_half(minimum),
+            maximumLitres=_half(maximum),
+            source=source,
+            confidence=confidence,
+        )
+
+    if profile.current_volume_litres is not None:
+        target = float(profile.current_volume_litres)
+        if lane in {"performance_fish", "point_break_fish"}:
+            minimum, maximum = target - 1.0, target + 2.0
+        elif lane in {"traditional_fish", "cruisy_fish"}:
+            minimum, maximum = target, target + 3.0
+        else:
+            minimum, maximum = target - 1.5, target + 1.5
+        return TargetVolumeContext(
+            targetLitres=_precise(target),
+            minimumLitres=_half(minimum),
+            maximumLitres=_half(maximum),
+            source=_source_label(profile.field_provenance.get("current_volume_litres")),
+            confidence="high",
+        )
+
+    fit = recommend_volume_v2(profile, board_lane)
+    if fit is None:
+        return None
+    return TargetVolumeContext(
+        targetLitres=fit.target_volume,
+        minimumLitres=fit.minimum_volume,
+        maximumLitres=fit.maximum_volume,
+        source="fallback",
+        confidence=fit.confidence,
+    )
 
 
 def recommend_volume_v2(profile: RiderProfile, board_lane: str | None = None) -> VolumeFitV2 | None:
@@ -130,6 +201,24 @@ def fish_volume_bands(profile: RiderProfile) -> dict[str, VolumeFitV2]:
 
 
 def build_volume_recommendation(profile: RiderProfile, board_lane: str | None = None) -> VolumeRecommendation | None:
+    target_context = build_target_volume_context(profile, board_lane)
+    if target_context and target_context.target_litres is not None:
+        explanation = (
+            f"The current target is about {target_context.target_litres:g}L, with a comfortable working range of "
+            f"{target_context.minimum_litres:g} to {target_context.maximum_litres:g}L. Volume is only part of the fit, because outline, "
+            "width, rocker, foil and rail shape can make two boards at the same litres feel very different."
+        )
+        confidence = {"high": 0.9, "medium": 0.7}.get(target_context.confidence, 0.5)
+        return VolumeRecommendation(
+            target_midpoint_litres=target_context.target_litres,
+            comfortable_min_litres=target_context.minimum_litres,
+            comfortable_max_litres=target_context.maximum_litres,
+            performance_min_litres=max((target_context.minimum_litres or 0.0) - 1.0, 0.0),
+            forgiving_max_litres=(target_context.maximum_litres or 0.0) + 1.0,
+            confidence=confidence,
+            explanation=explanation,
+        )
+
     fit = recommend_volume_v2(profile, board_lane)
     if fit is None:
         return None
