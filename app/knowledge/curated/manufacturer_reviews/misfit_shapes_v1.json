@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "manufacturer": "Misfit Shapes",
+  "review_status": "complete",
+  "reviewed_date": "2026-07-16",
+  "authority": "Official Misfit Shapes model descriptions and governed Quivrr catalogue records",
+  "governance": {
+    "public_family_reflects": "primary manufacturer design intent",
+    "detailed_category_reflects": "specific construction and performance lane",
+    "dna_role": "behavioural description only"
+  },
+  "models": [
+    {"canonical_model_id":8049,"model":"(NEO) SPEED EGG","public_family":"mid_length","detailed_category":"speed_egg_mid_length","reason":"Classic speed-egg platform with glide, paddle and longer rail line as the defining identity.","confidence":"high"},
+    {"canonical_model_id":8045,"model":"BEACH CLOUD","public_family":"daily_driver","detailed_category":"alternative_twin_daily_driver","reason":"Modern twin-fin all-rounder with progressive everyday use as the primary role.","confidence":"high"},
+    {"canonical_model_id":8046,"model":"BEACH METALL","public_family":"performance_shortboard","detailed_category":"performance_twin","reason":"Misfit positions it as a contemporary, lively performance twin rather than a general hybrid.","confidence":"high"},
+    {"canonical_model_id":8047,"model":"BEACH METALL RND","public_family":"performance_shortboard","detailed_category":"good_wave_performance_twin","reason":"Round-tail performance-twin variant aimed at added control and hold in stronger surf.","confidence":"high"},
+    {"canonical_model_id":8039,"model":"BULL DOVE 2","public_family":"daily_driver","detailed_category":"performance_daily_driver","reason":"High-output all-round shortboard combining power, clean lines and broad usability.","confidence":"high"},
+    {"canonical_model_id":8044,"model":"DOPE MACHINE","public_family":"daily_driver","detailed_category":"alternative_hybrid_shortboard","reason":"Fun-board and progressive shortboard blend with broad everyday intent.","confidence":"high"},
+    {"canonical_model_id":8040,"model":"DRIB","public_family":"performance_shortboard","detailed_category":"signature_performance_shortboard","reason":"Signature performance model built around aggressive, modern surfing rather than forgiving daily use.","confidence":"medium"},
+    {"canonical_model_id":8042,"model":"ERASER HEAD","public_family":"performance_shortboard","detailed_category":"alternative_performance_twin","reason":"Refined signature twin designed around speed, drive and progressive performance.","confidence":"medium"},
+    {"canonical_model_id":8041,"model":"FUNGZETTI","public_family":"performance_shortboard","detailed_category":"power_performance_shortboard","reason":"Power-oriented signature shortboard with performance intent as the governing role.","confidence":"medium"},
+    {"canonical_model_id":8050,"model":"LONGUS","public_family":"mid_length","detailed_category":"performance_mid_length_twin","reason":"Extended Beach Cloud concept with mid-length glide and twin-fin flow as the primary identity.","confidence":"high"},
+    {"canonical_model_id":8048,"model":"SPEED EGG - DIAMOND TWIN","public_family":"mid_length","detailed_category":"performance_speed_egg_twin","reason":"Shorter and livelier twin-fin speed-egg variant that remains fundamentally a mid-length design.","confidence":"high"},
+    {"canonical_model_id":8043,"model":"YANDINA SPEEDWAY","public_family":"daily_driver","detailed_category":"small_wave_daily_driver","reason":"Fast, accessible all-round shortboard designed to create speed and maintain flow in everyday surf.","confidence":"high"}
+  ],
+  "review_notes": [
+    "Beach Metall variants were moved out of the broad Daily Driver lane because Misfit explicitly presents them as performance twins.",
+    "DRIB, Eraser Head and Fungzetti are governed by signature performance intent rather than the previous generic hybrid fallback.",
+    "The speed-egg and Longus models remain Mid Length because rail line, glide and paddle identity dominate their behaviour."
+  ]
+}
