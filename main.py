@@ -625,6 +625,18 @@ def _handle_state_follow_up(request: BoardGuideRequest, profile):
             "comparison_boards": [left_card, right_card],
         }
 
+    if "trade off" in lowered or "trade-off" in lowered:
+        if len(cards) >= 2:
+            left_card, right_card = cards[:2]
+            comparison = compare_board_models(left_card.brand, left_card.model, right_card.brand, right_card.model, profile)
+            return {
+                "reply": _comparison_follow_up_reply(left_card, right_card, profile),
+                "suggested_boards": [],
+                "comparison": comparison.comparison if comparison else None,
+                "questions": [],
+                "comparison_boards": [left_card, right_card],
+            }
+
     if any(token in lowered for token in ("which paddles best", "which one paddles best")) and len(cards) >= 2:
         if request.conversation_state and len(request.conversation_state.comparison_boards) >= 2:
             left_card = request.conversation_state.comparison_boards[0]
@@ -709,7 +721,7 @@ def build_conversation_state(
     previous_brief = previous_state.active_board_brief if previous_state else {}
     active_board_brief = resolve_dna_brief(request.message, profile, previous_brief)
     if re.search(r"\b(?:reset|start over|new search|clear)\b", request.message.lower()):
-        active_board_brief = resolve_dna_brief(request.message, profile, {})
+        active_board_brief = {}
     correction = _model_classification_correction(request.message)
     if correction:
         active_board_brief["public_family"] = correction["dna"]["public_family"]
@@ -838,6 +850,15 @@ def board_guide_chat(
     profile = merge_rider_profile(profile, persisted_profile, account_profile=account_profile)
     current_profile = with_profile_source(extract_profile(request.message, request.region), "current_user")
     profile = merge_rider_profile(profile, current_profile, account_profile=account_profile)
+    reset_requested = bool(re.search(r"\b(?:reset|start over|new search|clear)\b", request.message.lower()))
+    dna_probe = resolve_dna_brief(request.message, profile, {})
+    if (
+        not reset_requested
+        and not profile.preferred_board_type
+        and (dna_probe.get("behaviour") or dna_probe.get("conditions"))
+        and re.search(r"\b(?:board|something)\b", request.message.lower())
+    ):
+        profile = profile.model_copy(update={"preferred_board_type": "Daily Driver"})
     prior_brief = request.conversation_state.active_board_brief if request.conversation_state else {}
     if prior_brief.get("public_family") and not current_profile.preferred_board_type:
         profile = profile.model_copy(update={
@@ -971,7 +992,7 @@ def board_guide_chat(
         suggested_boards = []
         reply = "I’m built for surfboards, board choice and Quivrr stock. I can help you choose a board, compare models or check regional availability."
         questions = []
-    elif intent == "CONVERSATION_RESET":
+    elif reset_requested or intent == "CONVERSATION_RESET":
         suggested_boards = []
         reply = personalise_opening("Fresh start. What are we working on today?", profile, is_first_turn=True)
         questions = []

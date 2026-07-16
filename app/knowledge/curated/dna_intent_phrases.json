@@ -10,6 +10,7 @@
     "vertical": {"behaviour": {"pivot": 9, "release": 8, "sensitivity": 9}},
     "carving": {"behaviour": {"drive": 9, "hold": 8, "carve": 9}},
     "easy paddle": {"behaviour": {"paddle": 9, "wave_entry": 9}},
+    "easy paddling": {"behaviour": {"paddle": 9, "wave_entry": 9}},
     "carries speed": {"behaviour": {"speed_generation": 9, "drive": 8, "glide": 7}},
     "more hold": {"behaviour": {"hold": 9, "drive": 8}},
     "stable twin": {"behaviour": {"stability": 8, "hold": 8}, "fin_configurations": ["twin", "twin_plus_trailer"]},

@@ -92,6 +92,43 @@ class ConversationMemoryTests(unittest.TestCase):
         self.assertIn("step up", body["reply"].lower())
         self.assertEqual(body["conversationState"]["activeBoardBrief"]["public_family"], "step_up")
 
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: rows)
+    def test_tradeoff_uses_active_top_two_and_reset_stops_stale_recommendations(self, _inventory):
+        first = self.client.post("/api/board-guide/chat", json={
+            "message": "I want a fast and loose fish for weak waves in Indonesia.",
+            "profile": {"weight_kg": 75, "ability": "Advanced", "region": "ID", "wave_type": "Beach Break"},
+        }).json()
+        tradeoff = self.client.post("/api/board-guide/chat", json={
+            "message": "What is the trade off?",
+            "conversationState": first["conversationState"],
+        }).json()
+        self.assertIsNotNone(tradeoff["comparison"])
+        self.assertIn("Main trade-off:", tradeoff["reply"])
+
+        reset = self.client.post("/api/board-guide/chat", json={
+            "message": "Reset the conversation.",
+            "conversationState": first["conversationState"],
+        }).json()
+        self.assertEqual(reset["recommendations"], [])
+        self.assertIsNone(reset["conversationState"]["activeBoardBrief"].get("public_family"))
+
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: rows)
+    def test_desired_feel_requests_use_governed_dna_daily_driver_direction(self, _inventory):
+        for message in (
+            "I want a drivey board for clean points.",
+            "I need an easy-paddling board.",
+            "I want something more vertical.",
+            "I want something cruisey and stable.",
+        ):
+            with self.subTest(message=message):
+                body = self.client.post("/api/board-guide/chat", json={
+                    "message": message,
+                    "profile": {"weight_kg": 75, "ability": "Advanced", "region": "AU", "wave_type": "Point Break"},
+                }).json()
+                self.assertGreaterEqual(len(body["recommendations"]), 3)
+                self.assertEqual(body["conversationState"]["activeBoardBrief"]["public_family"], "daily_driver")
+                self.assertTrue(all("Board DNA" in card["shortReason"] for card in body["recommendations"]))
+
 
 if __name__ == "__main__":
     unittest.main()

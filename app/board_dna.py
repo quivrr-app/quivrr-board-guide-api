@@ -91,6 +91,13 @@ def resolve_dna_brief(message: str | None, profile: Any = None, prior: dict | No
     if re.search(r"\bstep[ -]?up\b", text): brief["public_family"] = "step_up"
     if re.search(r"\bmid[ -]?length\b", text): brief["public_family"] = "mid_length"
     if re.search(r"\blongboard\b", text): brief["public_family"] = "longboard"
+    if not brief.get("public_family") and category:
+        category_key = _key(category)
+        brief["public_family"] = next((family for token, family in (
+            ("performance shortboard", "performance_shortboard"), ("daily driver", "daily_driver"),
+            ("step up", "step_up"), ("mid length", "mid_length"), ("longboard", "longboard"),
+            ("groveller", "groveller"), ("fish", "fish"),
+        ) if token in category_key), None)
     brief.update({
         "primary_category": category or brief.get("primary_category"),
         "desired_feel": list(dict.fromkeys(desired)),
