@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "manufacturer": "JS Industries",
+  "review_status": "complete",
+  "reviewed_date": "2026-07-16",
+  "authority": "Official JS Industries model descriptions and governed Quivrr catalogue records",
+  "governance": {
+    "public_family_reflects": "primary manufacturer design intent",
+    "detailed_category_reflects": "specific construction and performance lane",
+    "dna_role": "behavioural description only"
+  },
+  "models": [
+    {"canonical_model_id":7695,"model":"Big Baron","public_family":"mid_length","detailed_category":"performance_mid_length_twin","confidence":"high"},
+    {"canonical_model_id":7704,"model":"Big Baron Easy Rider","public_family":"groveller","detailed_category":"softboard_groveller","confidence":"high"},
+    {"canonical_model_id":7705,"model":"Big Baron Softboard","public_family":"groveller","detailed_category":"softboard_groveller","confidence":"high"},
+    {"canonical_model_id":7686,"model":"Big Horse","public_family":"step_up","detailed_category":"big_wave_step_up","confidence":"high"},
+    {"canonical_model_id":7696,"model":"Black Baron","public_family":"fish","detailed_category":"performance_fish","confidence":"high"},
+    {"canonical_model_id":7703,"model":"Black Eagle 2","public_family":"performance_shortboard","detailed_category":"foil_performance_shortboard","confidence":"medium"},
+    {"canonical_model_id":7697,"model":"Bull Run","public_family":"daily_driver","detailed_category":"forgiving_daily_driver","confidence":"high"},
+    {"canonical_model_id":7706,"model":"Bull Run Softboard","public_family":"groveller","detailed_category":"softboard_groveller","confidence":"high"},
+    {"canonical_model_id":7694,"model":"El Baron","public_family":"performance_shortboard","detailed_category":"good_wave_performance_twin","confidence":"high"},
+    {"canonical_model_id":7699,"model":"Flame Fish","public_family":"fish","detailed_category":"small_wave_fish","confidence":"high"},
+    {"canonical_model_id":7707,"model":"Flame Fish Softboard","public_family":"groveller","detailed_category":"softboard_groveller","confidence":"high"},
+    {"canonical_model_id":7688,"model":"Forget Me Not 3","public_family":"step_up","detailed_category":"reef_step_up","confidence":"high"},
+    {"canonical_model_id":7685,"model":"Forget Me Not 3 Step Up","public_family":"step_up","detailed_category":"travel_step_up","confidence":"high"},
+    {"canonical_model_id":7687,"model":"Golden Child","public_family":"performance_shortboard","detailed_category":"good_wave_performance_shortboard","confidence":"high"},
+    {"canonical_model_id":7708,"model":"Golden Child Easy Rider","public_family":"daily_driver","detailed_category":"forgiving_performance_daily_driver","confidence":"high"},
+    {"canonical_model_id":7700,"model":"Golden Child Youth","public_family":"performance_shortboard","detailed_category":"youth_performance_shortboard","confidence":"high"},
+    {"canonical_model_id":7689,"model":"Monsta","public_family":"performance_shortboard","detailed_category":"competition_hpsb","confidence":"high"},
+    {"canonical_model_id":7709,"model":"Monsta Easy Rider","public_family":"daily_driver","detailed_category":"forgiving_performance_daily_driver","confidence":"high"},
+    {"canonical_model_id":7701,"model":"Monsta Youth","public_family":"performance_shortboard","detailed_category":"youth_competition_hpsb","confidence":"high"}
+  ],
+  "review_notes": [
+    "El Baron and the youth competition variants are performance shortboards, not fish.",
+    "Golden Child is governed by its high-performance competition intent; the Easy Rider variant remains a Daily Driver because added accessibility is the defining variant purpose.",
+    "Softboard variants are grouped by their actual weak-wave and learning role rather than by the family of the hard-board source design."
+  ]
+}
