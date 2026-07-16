@@ -1082,6 +1082,19 @@ def board_guide_chat(
             "I’ll use that classification for this conversation without changing the authoritative record at runtime."
         )
         questions = []
+    elif legacy_intent == "general_board_question" and requested_board and re.search(r"\b(?:what type|what kind|which family|classification)\b", request.message.lower()):
+        suggested_boards = []
+        dna = find_board_dna(requested_board["brand"], requested_board["model"])
+        if dna:
+            family = dna["public_family"].replace("_", " ").title()
+            category = dna["primary_category"].replace("_", " ").title()
+            reply = (
+                f"{dna['brand']} {dna['model']} is a {family}. "
+                f"Its detailed governed category is {category}."
+            )
+        else:
+            reply = general_board_reply(request.message)
+        questions = []
     elif legacy_intent == "general_board_question" and requested_board and "fish" in request.message.lower():
         suggested_boards = []
         reply = board_family_reply(requested_board, "fish")

@@ -31,8 +31,14 @@ def _comparison_taxonomy_note(board: dict) -> str | None:
         return None
     matrix = find_matrix_board(board["brand"], board["model"]) or {}
     category = _comparison_label(taxonomy.get("primary_category"))
-    waves = [_comparison_label(value) for value in taxonomy.get("wave_types", [])]
-    power = [_comparison_label(value) for value in taxonomy.get("wave_power", [])]
+    waves = taxonomy.get("wave_types") or []
+    power = taxonomy.get("wave_power") or []
+    if isinstance(waves, str):
+        waves = [waves]
+    if isinstance(power, str):
+        power = [power]
+    waves = [_comparison_label(value) for value in waves]
+    power = [_comparison_label(value) for value in power]
     fins = matrix.get("finSetup") or taxonomy.get("fin_setup") or []
     if isinstance(fins, str):
         fins = [fins]

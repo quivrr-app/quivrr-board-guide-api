@@ -236,6 +236,14 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertIn("Hypto Krypto", body["reply"])
         self.assertIn("hybrid daily driver", body["reply"])
 
+    def test_ghost_type_question_uses_governed_public_family(self):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "What type of board is the Pyzel Ghost?", "region": "AU",
+        }).json()
+        self.assertEqual(body["intent"], "general_board_question")
+        self.assertIn("Pyzel Ghost is a Performance Shortboard", body["reply"])
+        self.assertNotIn("Daily Driver", body["reply"])
+
     def test_seaside_and_rnf_comparison_uses_intended_canonical_models(self):
         response = self.client.post("/api/board-guide/chat", json={
             "message": "What is the difference between a Seaside and an RNF?", "region": "AU",
