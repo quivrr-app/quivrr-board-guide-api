@@ -8,6 +8,7 @@ from pathlib import Path
 from app.models import RiderProfile, SuggestedBoard
 from app.rider_fit import recommend_rider_fit
 from app.board_taxonomy import allows_category, requested_category, taxonomy_by_id
+from app.board_dna import find_board_dna_by_id, resolve_dna_brief, score_dna_fit, explain_dna_fit
 
 
 MATRIX_PATH = Path(__file__).parent / "knowledge/generated/board_expert_matrix.json"
@@ -110,7 +111,9 @@ def _ability_rank(value: str | None) -> int:
 
 
 def _surf_frequency_bucket(profile: RiderProfile) -> str:
-    frequency = profile.surf_frequency_per_week or 0
+    if profile.surf_frequency_per_week is None:
+        return "unknown"
+    frequency = profile.surf_frequency_per_week
     if frequency >= 3:
         return "regular"
     if frequency >= 1:
@@ -120,6 +123,8 @@ def _surf_frequency_bucket(profile: RiderProfile) -> str:
 
 def _fitness_bucket(profile: RiderProfile) -> str:
     value = _key(profile.fitness_level)
+    if not value:
+        return "unknown"
     if value in {"high", "strong", "good", "fit"}:
         return "high"
     if value in {"low", "poor"}:
@@ -129,6 +134,8 @@ def _fitness_bucket(profile: RiderProfile) -> str:
 
 def _paddle_bucket(profile: RiderProfile) -> str:
     value = _key(profile.paddle_strength)
+    if not value:
+        return "unknown"
     if value in {"high", "strong", "good"}:
         return "high"
     if value in {"low", "weak"}:
@@ -363,9 +370,7 @@ def _family_score(board: dict, intent: dict) -> tuple[float, list[str], list[str
         elif intent["intent_key"] == "fish" and family not in {"Fish", "Performance Fish", "Twin Fin", "Performance Twin"}:
             exclusions.append("Fish request excludes non-fish shortboard families.")
         else:
-            score -= 35
-    else:
-        score += 45
+            exclusions.append("Hard taxonomy family exclusion for the active board brief.")
 
     if intent["intent_key"] == "fish" and family == "Performance Twin" and not intent.get("reef_fish"):
         exclusions.append("Broad fish brief keeps dedicated performance twins out unless the rider explicitly asks for twin performance.")
@@ -489,7 +494,7 @@ def _variant_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[fl
         return 6, reasons, exclusions
 
     support_need = _support_needs(profile)
-    explicit_support = any(token in intent["text"] for token in ("extra paddle", "more support", "stability", "forgiving"))
+    explicit_support = any(token in intent["text"] for token in ("extra paddle", "more support", "stability", "extra chest foam"))
     weight = profile.weight_kg or 0
     min_weight = board.get("riderWeightMinKg") or 0
     if weight and min_weight and weight < min_weight and support_need <= 2 and not explicit_support:
@@ -499,7 +504,7 @@ def _variant_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[fl
         exclusions.append("Strict performance shortboard brief excludes XL variants that force unnaturally short sizing for lighter advanced surfers.")
         return score, reasons, exclusions
 
-    if support_need >= 4 or explicit_support:
+    if explicit_support or (weight >= 90 and support_need >= 4):
         score += 22
         reasons.append("extra support, foam, and width are justified here")
     else:
@@ -602,7 +607,7 @@ def _priority_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[f
             "happy everyday": 16,
             "better everyday": 15,
             "dominator pro": 14,
-            "ghost xl": 24 if support_need >= 3 else 0,
+            "ghost xl": 100 if ((profile.weight_kg or 0) >= 90 and "support" in intent["text"]) else (45 if support_need >= 4 else 0),
         }
         score += priority.get(model_key, 0)
     if score > 0:
@@ -629,6 +634,8 @@ def _explanation(board: dict, profile: RiderProfile, reasons: list[str], target:
     if family == "Performance Twin":
         return "This performance twin keeps the speed of a fish but gives more hold and direction in cleaner reef waves."
     reason_text = ", ".join(dict.fromkeys(reasons[:3])) if reasons else family.lower()
+    if _support_needs(profile) >= 3 and "support" not in reason_text:
+        reason_text += ", with added paddle and stability support for this rider brief"
     if target is not None:
         return f"{family} fit with {reason_text}. The size band sits {distance:g}L from the {target:g}L target."
     return f"{family} fit with {reason_text}."
@@ -641,12 +648,45 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
     fit = recommend_rider_fit(profile)
     target = profile.target_volume_litres or ((fit.volume_low + fit.volume_high) / 2 if fit else None)
     intent = _intent_profile(profile)
+    supportive_performance_brief = (
+        family == "performance_shortboard"
+        and (
+            intent["wants_forgiving"]
+            or _support_needs(profile) >= 3
+            or _ability_rank(profile.ability) <= ABILITY_ORDER["beginner"]
+        )
+    )
+    if supportive_performance_brief:
+        intent = dict(intent)
+        intent["intent_key"] = "forgiving_performance"
+        intent["allowed_families"] = set(PRIMARY_FAMILY_BY_REQUEST["forgiving_performance"])
+        if (profile.weight_kg or 0) >= 90 and "support" in intent["text"]:
+            intent["allowed_families"].discard("Hybrid Shortboard")
+        allowed_lanes = set(allowed_lanes) | set(FAMILY_LANES.get("hybrid", set()))
     governed_category = requested_category(
         profile.preferred_board_type, profile.goal, profile.desired_feel, profile.wave_power, profile.wave_type
     )
+    if supportive_performance_brief:
+        governed_category = None
+        lanes = [
+            "forgiving_daily_driver", "performance_daily_driver", "hybrid_daily_driver",
+            "one_board_quiver", *lanes,
+        ]
     if governed_category:
         lanes = [governed_category, *lanes]
     taxonomy = taxonomy_by_id()
+    dna_brief = resolve_dna_brief(
+        " ".join(filter(None, [profile.preferred_board_type, profile.desired_feel, profile.goal, profile.wave_type, profile.wave_power])),
+        profile,
+    )
+    if supportive_performance_brief:
+        # Rider readiness can redirect a performance request into the governed
+        # daily-driver family without weakening the family gate globally.
+        if (profile.weight_kg or 0) >= 90 and "support" in intent["text"]:
+            dna_brief["public_family"] = None
+            dna_brief["allowed_public_families"] = ["daily_driver", "performance_shortboard"]
+        else:
+            dna_brief["public_family"] = "daily_driver"
     rows = []
 
     for board in load_matrix():
@@ -682,6 +722,14 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
             reasons.extend(part_reasons)
             exclusions.extend(part_exclusions)
 
+        dna = find_board_dna_by_id(board.get("boardModelId"))
+        dna_fit = score_dna_fit(dna, profile, dna_brief) if dna else None
+        if dna_fit and not dna_fit["valid"]:
+            exclusions.extend(dna_fit["exclusions"])
+        elif dna_fit:
+            score += dna_fit["score"]
+            reasons.append(explain_dna_fit(dna, profile, dna_brief))
+
         age_score, age_reasons = _age_fitness_score(board, profile)
         goal_score, goal_reasons = _goal_score(board, profile, intent)
         priority_score, priority_reasons = _priority_score(board, profile, intent)
@@ -714,6 +762,20 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
             best_by_base_model[base_key] = row
     rows = sorted(best_by_base_model.values(), key=lambda item: (-item[0], item[1]["brand"], item[1]["model"]))
 
+    # Give the first card slot to the strongest model from each brand before
+    # considering a second model from that brand.
+    first_by_brand = []
+    repeated_brands = []
+    seen_brands = set()
+    for row in rows:
+        brand_key = _key(row[1]["brand"])
+        if brand_key in seen_brands:
+            repeated_brands.append(row)
+        else:
+            seen_brands.add(brand_key)
+            first_by_brand.append(row)
+    rows = first_by_brand + repeated_brands
+
     selected: list[SuggestedBoard] = []
     brands: dict[str, int] = {}
 
@@ -730,7 +792,10 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
                 model=board["model"],
                 category=_primary_family(board),
                 confidence=confidence,
-                why_it_fits=_explanation(board, profile, reasons, target, distance),
+                why_it_fits=" ".join(filter(None, [
+                    _explanation(board, profile, reasons, target, distance),
+                    next((reason for reason in reversed(reasons) if "Board DNA" in reason or "governed design" in reason), None),
+                ])),
                 description=board.get("manufacturerDescription"),
                 volume_range=(
                     f"{board['volumeRange']['min']:g}-{board['volumeRange']['max']:g}L"

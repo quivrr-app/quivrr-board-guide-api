@@ -144,6 +144,9 @@ class BoardComparison(BaseModel):
     better_for_board_b: list[str] = Field(default_factory=list)
     rider_specific_conclusion: str | None = None
     evidence_confidence: float = 0.0
+    board_a_dna: dict = Field(default_factory=dict)
+    board_b_dna: dict = Field(default_factory=dict)
+    dna_tradeoffs: list[str] = Field(default_factory=list)
 
 
 class VolumeRecommendation(BaseModel):
@@ -305,6 +308,7 @@ class ConversationState(BaseModel):
     active_region: str | None = Field(default=None, alias="activeRegion")
     availability_constraint: str | None = Field(default=None, alias="availabilityConstraint")
     active_profile: dict = Field(default_factory=dict, alias="activeProfile")
+    active_board_brief: dict = Field(default_factory=dict, alias="activeBoardBrief")
     last_recommendations: list[BodhiRecommendation] = Field(default_factory=list, alias="lastRecommendations")
     mentioned_boards: list[BodhiRecommendation] = Field(default_factory=list, alias="mentionedBoards")
     comparison_boards: list[BodhiRecommendation] = Field(default_factory=list, alias="comparisonBoards")

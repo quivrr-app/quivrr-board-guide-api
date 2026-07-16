@@ -306,7 +306,7 @@ class BodhiIntentApiTests(unittest.TestCase):
         }).json()
         self.assertEqual(body["intent"], "relationship_request")
         self.assertIn("Album Lightbender", body["reply"])
-        self.assertIn("Christenson Ocean Racer", body["reply"])
+        self.assertIn("DHD Nexus", body["reply"])
 
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
         row.model_copy(update={"available_count": 1, "retailer_count": 1, "region": profile.region,

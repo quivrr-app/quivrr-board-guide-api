@@ -1,0 +1,432 @@
+CanonicalModelId,Brand,Model,PublicFamily,PrimaryCategory,Paddle,SpeedGeneration,Drive,Release,Hold,Forgiveness,Stability,Sensitivity,Glide,WeakWaves,PowerfulWaves,BeachBreak,PointBreak,ReefBreak,MinimumAbility,SourceMethod,PhysicalConfidence,BehaviourConfidence,ReviewRequired,ReviewNotes
+8114,Album,Bom Dia,fish,performance_twin,6,9,8,9,7,5,5,9,5,6,7,7,7,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8115,Album,Bullet,daily_driver,hybrid_shortboard,7,7,7,7,6,7,7,7,5,8,6,8,7,6,progressing,manufacturer_inference,medium,medium,False,
+8116,Album,D'boa,fish,performance_fish,9,10,7,8,7,8,8,7,6,10,5,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: flatter rocker. Applied governed evidence rule: single concave.
+8117,Album,Delma,fish,performance_fish,7,10,7,8,8,8,8,8,6,6,7,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: more rocker. Applied governed evidence rule: single concave.
+8118,Album,Disorder,performance_shortboard,performance_shortboard,5,7,8,8,8,4,4,9,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+8119,Album,Fascination,fish,performance_fish,7,9,8,7,7,7,8,7,5,7,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: straighter outline.
+8120,Album,Freewing,performance_shortboard,performance_shortboard,5,8,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+8121,Album,Insanity,performance_shortboard,performance_shortboard,5,9,9,10,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8123,Album,Lightbender,fish,performance_fish,7,8,8,7,7,7,7,8,5,7,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+8124,Album,Moonstone,fish,performance_fish,7,8,7,7,7,7,7,7,5,7,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+8125,Album,Plasmic,fish,performance_fish,7,10,8,8,7,7,7,7,5,7,6,7,6,7,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: single concave.
+8126,Album,ProtoAtypical,performance_shortboard,performance_shortboard,5,9,9,10,8,4,4,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8127,Album,Sunstone,fish,traditional_fish,7,8,7,7,5,7,7,5,7,8,4,7,6,5,progressing,manufacturer_inference,medium,medium,False,
+8128,Album,The End,mid_length,mid_length,10,10,7,7,7,8,9,5,10,8,5,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: flatter rocker. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8129,Album,Townsend,step_up,step_up,6,7,9,5,9,5,6,7,5,3,8,5,8,8,progressing,manufacturer_inference,medium,medium,False,
+8130,Album,Twinsman,fish,performance_twin,6,9,8,9,7,5,5,9,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8131,Album,VBSM,performance_shortboard,performance_shortboard,5,9,9,10,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8132,Album,Veebee,fish,performance_fish,10,10,7,9,7,8,9,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8133,Album,Warp Twin,fish,performance_twin,6,9,7,9,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7714,Channel Islands,average-joe,daily_driver,hybrid_shortboard,8,9,7,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7715,Channel Islands,better-everyday,daily_driver,performance_daily_driver,6,7,7,7,7,7,7,7,5,6,7,9,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7716,Channel Islands,big-happy,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7718,Channel Islands,bobby-quad,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7719,Channel Islands,bunny-chow,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7720,Channel Islands,ci-2-pro,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7721,Channel Islands,ci-fish,fish,traditional_fish,7,8,7,7,5,7,7,5,7,8,4,7,6,5,progressing,manufacturer_inference,medium,medium,False,
+7722,Channel Islands,ci-mid,mid_length,mid_length,8,7,7,5,7,7,8,5,9,6,6,7,8,7,beginner,manufacturer_inference,medium,medium,False,
+7723,Channel Islands,ci-mid-twin,mid_length,mid_length,8,7,7,5,7,7,8,5,9,6,6,7,8,7,beginner,manufacturer_inference,medium,medium,False,
+7724,Channel Islands,ci-pro,daily_driver,hybrid_shortboard,8,8,8,8,6,8,8,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7725,Channel Islands,dumpster-diver,daily_driver,hybrid_shortboard,8,9,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7726,Channel Islands,dumpster-diver-2,groveller,small_wave_shortboard,7,8,7,7,5,7,7,7,5,9,4,8,6,5,progressing,manufacturer_inference,medium,medium,False,
+7728,Channel Islands,fever,performance_shortboard,performance_shortboard,5,7,8,8,8,4,4,9,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7731,Channel Islands,g-skate,fish,performance_twin,6,9,8,9,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow.
+7732,Channel Islands,girabbit,daily_driver,hybrid_shortboard,8,9,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7733,Channel Islands,goldie,daily_driver,hybrid_shortboard,8,8,7,8,7,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7734,Channel Islands,happy,performance_shortboard,performance_shortboard,5,8,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7735,Channel Islands,happy-everyday,daily_driver,performance_daily_driver,6,7,7,7,7,7,7,7,5,6,7,9,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7738,Channel Islands,mavs-gun,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7739,Channel Islands,mikey-february-shorty,performance_shortboard,performance_shortboard,5,8,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7740,Channel Islands,neckbeard-2,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7741,Channel Islands,og-flyer,daily_driver,hybrid_shortboard,8,8,8,8,6,8,8,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7743,Channel Islands,rocket-wide,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7744,Channel Islands,rook-15,daily_driver,hybrid_shortboard,8,9,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7745,Channel Islands,sampler,daily_driver,performance_fish,8,9,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,"Reviewed public-family correction: Sampler is a hybrid shortboard, not a fish."
+7746,Channel Islands,semi-pro-12,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7749,Channel Islands,the-new-flyer,daily_driver,hybrid_shortboard,8,8,8,9,6,8,8,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7750,Channel Islands,the-peregrine,performance_shortboard,performance_shortboard,5,8,10,9,10,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: channels.
+7751,Channel Islands,the-proton,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7752,Channel Islands,the-solution,daily_driver,hybrid_shortboard,10,8,7,8,6,8,9,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power.
+7755,Channel Islands,twin-fin,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7756,Channel Islands,twin-pin,fish,performance_twin,6,8,7,8,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7757,Channel Islands,two-happy,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7759,Channel Islands,weirdo-ripper,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8051,Chemistry Surfboards,B Side,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8053,Chemistry Surfboards,Summertime Pt 2,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8090,Chilli,A2,daily_driver,hybrid_shortboard,8,9,8,8,6,8,8,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8092,Chilli,Blueprint,performance_shortboard,performance_shortboard,5,8,8,8,9,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rails. Applied governed evidence rule: single concave.
+8093,Chilli,Blueprint Grom,performance_shortboard,performance_shortboard,5,9,9,9,9,2,2,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rails. Applied governed evidence rule: single concave.
+8091,Chilli,BV2,groveller,groveller,10,10,7,8,5,9,10,5,6,10,3,8,5,4,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: swallow. Applied governed evidence rule: full nose. Applied governed evidence rule: single concave.
+8094,Chilli,Churro 2,daily_driver,daily_driver,7,7,7,7,7,8,8,7,5,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,
+8095,Chilli,FAD3R,daily_driver,hybrid_shortboard,10,8,8,8,7,8,9,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power.
+8096,Chilli,Faded 2.0,step_up,step_up,9,8,10,5,10,4,6,8,6,3,10,5,9,10,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: rounded pin. Applied governed evidence rule: full nose. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8097,Chilli,Faded 2.0 Gun,step_up,step_up,9,7,10,5,10,6,8,7,6,3,9,5,8,8,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: pin tail. Applied governed evidence rule: paddle power. Applied governed evidence rule: vee.
+8098,Chilli,Faded 2.0 Step Up,step_up,step_up,8,8,10,5,10,5,7,7,5,3,9,5,8,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: pin tail. Applied governed evidence rule: foam under the chest. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8099,Chilli,Full Strength,mid_length,mid_length,10,7,8,4,9,8,10,5,10,6,7,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: rounded pin. Applied governed evidence rule: paddle power.
+8100,Chilli,Grom +,fish,performance_twin,6,8,7,8,7,6,6,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,
+8101,Chilli,HKII,daily_driver,hybrid_shortboard,8,9,8,10,6,8,8,7,6,7,6,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: vee.
+8102,Chilli,Mid Strength,mid_length,mid_length,9,9,7,6,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8103,Chilli,Middy,mid_length,mid_length,8,8,7,5,7,7,8,5,9,6,6,7,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8104,Chilli,Mini Bird,groveller,softboard,10,8,5,5,4,10,10,3,7,10,2,8,5,4,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: paddle power.
+8105,Chilli,Peppa Twin,fish,performance_twin,8,9,8,10,7,5,6,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: paddle power. Applied governed evidence rule: vee.
+8106,Chilli,Piña Colada,groveller,groveller,9,9,7,8,5,8,9,5,5,8,3,8,5,4,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: wide nose.
+8107,Chilli,Rare Bird EVO,daily_driver,hybrid_shortboard,7,7,7,8,6,7,7,7,5,8,6,8,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+8108,Chilli,Rare Bird EVO TT,mid_length,mid_length,9,7,7,6,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+8109,Chilli,SHORTIE,daily_driver,hybrid_shortboard,8,9,9,7,8,8,8,8,6,7,7,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: rounded pin. Applied governed evidence rule: single concave.
+8110,Chilli,SHORTIE SQUASH,performance_shortboard,performance_shortboard,5,9,9,9,8,4,4,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8111,Chilli,SHORTIE YOUTH,performance_shortboard,performance_shortboard,5,9,10,8,10,4,4,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: rounded pin. Applied governed evidence rule: single concave.
+8112,Chilli,Sugar,fish,performance_fish,9,9,8,8,7,7,8,7,5,7,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow. Applied governed evidence rule: paddle power.
+8113,Chilli,Volume II,daily_driver,hybrid_shortboard,9,8,7,7,6,7,8,7,5,7,6,8,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power. Applied governed evidence rule: single concave.
+8134,Christenson,Acid Phish,fish,performance_fish,8,9,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+8135,Christenson,Cafe Racer,daily_driver,performance_daily_driver,6,7,7,8,8,6,6,9,5,6,7,9,7,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rails. Applied governed evidence rule: vee.
+8136,Christenson,Carrera,step_up,step_up,7,7,9,5,9,6,7,7,6,3,8,5,8,8,intermediate,manufacturer_inference,medium,medium,False,
+8137,Christenson,Easy Wind,daily_driver,hybrid_shortboard,9,9,7,9,6,8,8,7,6,9,5,8,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: vee.
+8138,Christenson,Fish,fish,traditional_fish,8,9,7,8,5,8,8,5,8,9,4,7,6,5,progressing,manufacturer_inference,medium,medium,False,
+8139,Christenson,Flat Tracker V2,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+8140,Christenson,Lane Splitter,fish,performance_twin,6,9,8,9,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail.
+8141,Christenson,Lane Splitter Swallow,fish,performance_twin,7,10,8,10,7,6,6,8,6,6,7,8,7,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow.
+8142,Christenson,Long Phish II,mid_length,performance_mid_length,8,8,8,7,8,7,8,7,9,6,8,6,8,8,intermediate,manufacturer_inference,medium,medium,False,
+8143,Christenson,OP2,performance_shortboard,performance_shortboard,5,7,8,8,8,4,4,9,3,4,10,7,8,10,intermediate,governed_archetype_with_modifiers,low,low,True,Archetype-led record requires editorial review.
+8144,Christenson,OP3,performance_shortboard,performance_shortboard,6,8,8,9,8,5,5,9,4,4,8,8,7,8,intermediate,manufacturer_inference,medium,medium,False,
+8145,Christenson,OP4,performance_shortboard,performance_shortboard,6,8,8,9,8,5,5,9,4,4,8,8,7,8,intermediate,governed_archetype_with_modifiers,low,low,True,Archetype-led record requires editorial review.
+8146,Christenson,Osprey,mid_length,performance_mid_length,8,7,8,6,8,7,8,7,9,4,8,6,8,8,intermediate,manufacturer_inference,medium,medium,False,
+8148,Christenson,The Wolverine,mid_length,performance_mid_length,7,8,9,7,8,6,7,7,8,4,8,6,8,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail.
+7824,DHD,Black Diamond,daily_driver,daily_driver,9,7,7,7,7,7,8,7,5,6,6,8,7,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power.
+7823,DHD,Black Diamond EPS,daily_driver,daily_driver,8,7,7,7,7,7,7,7,6,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,
+7807,DHD,Black Diamond Soft Top,daily_driver,daily_driver,10,7,7,7,7,8,9,7,6,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power.
+7812,DHD,EE Juliette,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7809,DHD,EE Juliette Jnr,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7816,DHD,Interceptor,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+7805,DHD,MF Bolt,daily_driver,daily_driver,7,7,7,7,7,8,8,7,5,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,
+7801,DHD,MF DNA,performance_shortboard,performance_shortboard,5,7,8,8,8,4,4,9,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7821,DHD,MF DNA Jnr,performance_shortboard,performance_shortboard,5,8,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7802,DHD,MF Lightning,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7806,DHD,MF Twin,fish,performance_twin,6,8,7,8,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7820,DHD,Mini Twin,fish,twin_pin,7,7,8,6,8,6,6,7,6,5,8,7,8,8,intermediate,manufacturer_inference,medium,medium,False,
+7811,DHD,Mini Twin II,daily_driver,hybrid_shortboard,8,9,9,9,7,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: channels.
+7814,DHD,Nexus,daily_driver,hybrid_shortboard,7,7,7,7,6,7,7,7,5,7,6,8,7,6,progressing,manufacturer_inference,medium,medium,False,
+7813,DHD,Nexus EPS,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7822,DHD,Phoenix,daily_driver,performance_daily_driver,6,7,7,7,7,7,7,7,5,6,7,8,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7817,DHD,Phoenix EPS Swallow Tail,daily_driver,hybrid_shortboard,7,7,7,7,6,7,7,7,5,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7810,DHD,Phoenix Flight EPS,step_up,step_up,7,7,10,5,9,4,5,8,6,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,
+7818,DHD,Sandman,step_up,step_up,6,7,9,5,9,5,6,7,5,4,8,5,8,8,intermediate,manufacturer_inference,medium,medium,False,
+7815,DHD,SG No.8,step_up,step_up,6,7,10,5,9,4,5,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,
+7804,DHD,Sweet Spot 4.0,step_up,step_up,6,7,9,5,9,5,6,7,5,3,8,5,8,8,intermediate,manufacturer_inference,medium,medium,False,
+7819,DHD,The Twin,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7808,DHD,Utopia,performance_shortboard,performance_shortboard,5,7,8,8,8,4,4,9,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+3717,DMS Surfboards,Carny,daily_driver,daily_driver,7,7,7,7,7,7,7,7,5,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,
+3712,DMS Surfboards,Gherkin,daily_driver,hybrid_shortboard,9,9,7,9,6,8,8,7,6,9,5,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: vee.
+3713,DMS Surfboards,Seahawk,daily_driver,hybrid_shortboard,9,9,7,9,6,8,8,7,6,9,5,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: vee.
+3714,DMS Surfboards,Stilnox,daily_driver,hybrid_shortboard,7,8,7,8,8,7,7,10,6,5,7,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: more rocker. Applied governed evidence rule: refined rails.
+3718,DMS Surfboards,Supercell,daily_driver,hybrid_shortboard,8,8,7,9,7,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+3716,DMS Surfboards,Thunderbird,daily_driver,hybrid_shortboard,9,9,7,9,6,8,8,7,6,9,5,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: vee.
+3719,DMS Surfboards,X-Wing,daily_driver,hybrid_shortboard,8,8,8,8,7,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: channels.
+3715,DMS Surfboards,Zephyr,daily_driver,hybrid_shortboard,9,9,7,9,6,8,8,7,6,9,5,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: vee.
+7968,Firewire,Boss Up,mid_length,mid_length,8,7,7,5,7,7,8,5,9,6,6,7,8,7,beginner,manufacturer_inference,medium,medium,False,
+7961,Firewire,Dominator 2.0,daily_driver,daily_driver,7,7,7,8,7,7,7,7,5,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: v out the tail.
+7958,Firewire,Dominator Pro,daily_driver,daily_driver,7,8,7,8,7,7,7,7,5,6,8,8,8,8,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7954,Firewire,DRK,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7959,Firewire,FRK Swallow,daily_driver,hybrid_shortboard,8,9,8,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail.
+7970,Firewire,FRK+,performance_shortboard,performance_shortboard,5,8,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7965,Firewire,Great White Twin,fish,performance_twin,6,8,7,8,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7976,Firewire,Greedy Beaver,mid_length,mid_length,10,7,8,4,9,7,9,5,9,6,7,7,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: rounded pin. Applied governed evidence rule: paddle power.
+7963,Firewire,Groove,performance_shortboard,performance_shortboard,4,8,9,9,9,3,3,10,3,2,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: more rocker.
+7966,Firewire,Machadocado,fish,performance_fish,7,8,7,7,7,7,7,7,5,7,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+7971,Firewire,Mashup,fish,performance_fish,7,8,7,7,7,7,7,7,5,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+7956,Firewire,Mindcraft,fish,performance_twin,6,8,7,8,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7960,Firewire,Neutrino,daily_driver,hybrid_shortboard,8,9,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7964,Firewire,Revo Max,mid_length,mid_length,9,7,7,6,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7967,Firewire,S Boss,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7973,Firewire,Sci-Fi 2.0,performance_shortboard,performance_shortboard,5,8,8,8,8,4,4,9,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7972,Firewire,Seaside,fish,performance_fish,8,9,8,8,7,7,7,7,6,7,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow.
+7978,Firewire,Seaside & Beyond,fish,performance_fish,8,9,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+7979,Firewire,Singleton,longboard,longboard,10,8,7,6,6,9,10,4,10,6,5,6,8,6,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7957,Firewire,Spaceship,daily_driver,hybrid_shortboard,8,8,8,8,6,8,8,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7980,Firewire,Special T,longboard,longboard,10,6,8,5,6,9,10,5,10,6,5,6,8,6,beginner,manufacturer_inference,medium,medium,False,
+7969,Firewire,Sweet Potato,groveller,groveller,7,9,7,8,5,8,8,5,5,8,3,8,5,4,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow.
+7962,Firewire,Taylor Jensen Hull Rider,longboard,longboard,9,6,7,5,6,8,9,4,9,6,5,7,8,6,beginner,manufacturer_inference,medium,medium,False,
+7982,Firewire,Taylor Jensen Pro,longboard,longboard,9,6,7,5,6,8,9,4,9,6,5,7,8,6,beginner,manufacturer_inference,medium,medium,False,
+7974,Firewire,Taylor Jensen Pro Mid,mid_length,mid_length,10,8,7,5,7,8,9,5,10,8,5,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: flat rocker.
+7983,Firewire,Taylor Jensen Pro V,longboard,longboard,10,6,7,6,6,9,10,4,10,6,5,6,8,6,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: v out the tail.
+7975,Firewire,Taylor Jensen Twinzer,step_up,step_up,6,7,10,5,9,4,5,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,
+7981,Firewire,The Gem,longboard,longboard,10,6,7,5,6,9,10,4,10,6,5,6,8,6,beginner,manufacturer_inference,medium,medium,False,
+7955,Firewire,Xtra Cado,mid_length,mid_length,9,9,7,6,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7985,Haydenshapes,Cannon,step_up,step_up,6,7,9,5,9,5,6,7,5,3,8,5,8,8,intermediate,manufacturer_inference,medium,medium,False,
+7995,Haydenshapes,Holy Grail,daily_driver,performance_daily_driver,6,7,7,7,7,7,7,7,5,6,8,8,8,9,intermediate,manufacturer_inference,medium,medium,False,
+7996,Haydenshapes,Holy Hypto,daily_driver,performance_daily_driver,9,8,8,8,7,7,8,7,7,6,7,8,8,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: longer rail. Applied governed evidence rule: paddle power. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7997,Haydenshapes,Holy Hypto FutureFlex,daily_driver,hybrid_shortboard,10,9,9,9,6,8,9,8,8,7,6,9,8,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: longer rail. Applied governed evidence rule: paddle power. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7998,Haydenshapes,Hypto Krypto,daily_driver,hybrid_shortboard,8,7,7,7,6,8,7,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8004,Haydenshapes,Merlot,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8009,Haydenshapes,Nova,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8011,Haydenshapes,Plunder,fish,traditional_fish,7,8,7,7,5,7,7,5,7,8,4,7,6,5,progressing,manufacturer_inference,medium,medium,False,
+8012,Haydenshapes,Psychedelic Germ,daily_driver,hybrid_shortboard,8,9,8,8,6,8,8,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8013,Haydenshapes,Shred Sled,groveller,groveller,7,8,6,7,5,8,8,5,5,8,3,8,5,4,beginner,manufacturer_inference,medium,medium,False,
+8014,Haydenshapes,Shred Sled King,step_up,step_up,6,7,10,5,9,4,5,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,
+8015,Haydenshapes,Untitled,performance_shortboard,performance_shortboard,5,10,10,10,9,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8016,Haydenshapes,Untitled V2,performance_shortboard,performance_shortboard,5,10,10,10,9,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7695,JS Industries,Big Baron,mid_length,mid_length,8,7,7,5,7,7,8,5,9,6,6,7,8,7,beginner,manufacturer_inference,medium,medium,False,
+7704,JS Industries,Big Baron Easy Rider,groveller,softboard,9,7,5,5,4,10,10,3,7,8,3,8,5,4,beginner,manufacturer_inference,medium,medium,False,
+7705,JS Industries,Big Baron Softboard,groveller,softboard,10,8,5,5,4,10,10,3,7,10,2,8,5,4,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: flatter rocker.
+7686,JS Industries,Big Horse,step_up,step_up,6,7,10,5,9,4,5,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,
+7696,JS Industries,Black Baron,fish,performance_fish,7,8,7,7,7,7,7,7,5,7,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+7703,JS Industries,Black Eagle 2,fish,performance_twin,6,8,7,8,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7697,JS Industries,Bull Run,daily_driver,daily_driver,7,7,7,7,7,7,7,7,5,6,6,8,7,7,progressing,manufacturer_inference,medium,medium,False,
+7706,JS Industries,Bull Run Softboard,groveller,softboard,10,7,5,5,4,10,10,3,7,8,3,8,5,4,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: full nose.
+7694,JS Industries,El Baron,fish,performance_twin,5,8,7,8,8,5,5,9,5,4,8,7,7,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: more rocker.
+7699,JS Industries,Flame Fish,fish,traditional_fish,7,8,7,7,5,7,7,5,7,8,4,7,6,5,progressing,manufacturer_inference,medium,medium,False,
+7707,JS Industries,Flame Fish Softboard,groveller,softboard,9,7,5,5,4,10,10,3,7,8,3,8,5,4,beginner,manufacturer_inference,medium,medium,False,
+7688,JS Industries,Forget Me Not 3,step_up,step_up,6,7,9,5,9,5,6,7,5,3,8,5,8,8,intermediate,manufacturer_inference,medium,medium,False,
+7685,JS Industries,Forget Me Not 3 Step Up,step_up,step_up,6,7,9,5,9,5,6,7,5,3,8,5,8,8,intermediate,manufacturer_inference,medium,medium,False,
+7687,JS Industries,Golden Child,daily_driver,performance_daily_driver,6,7,7,7,7,7,7,7,5,6,8,8,8,9,intermediate,manufacturer_inference,medium,medium,False,
+7708,JS Industries,Golden Child Easy Rider,daily_driver,hybrid_shortboard,8,8,7,8,7,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7700,JS Industries,Golden Child Youth,fish,performance_twin,6,8,7,8,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7689,JS Industries,Monsta,performance_shortboard,performance_shortboard,5,7,9,8,8,4,4,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7709,JS Industries,Monsta Easy Rider,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7701,JS Industries,Monsta Youth,fish,performance_twin,6,8,7,8,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7683,JS Industries,Mother Trucker,step_up,step_up,9,7,10,5,9,4,6,8,6,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power.
+7691,JS Industries,Raging Bull,daily_driver,performance_daily_driver,6,7,7,7,7,7,7,7,5,6,7,8,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7712,JS Industries,Raging Bull Easy Rider,daily_driver,hybrid_shortboard,8,8,7,8,7,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7690,JS Industries,Schooner,performance_shortboard,performance_shortboard,5,8,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7684,JS Industries,Step Off,step_up,step_up,6,7,10,5,9,4,5,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,
+7698,JS Industries,Sub Xero,groveller,groveller,8,9,6,7,5,8,8,5,5,10,2,8,5,4,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: flat rocker.
+7693,JS Industries,Xero Fusion,daily_driver,daily_driver,7,7,7,7,7,8,8,7,5,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,
+7711,JS Industries,Xero Fusion Easy Rider,groveller,groveller,8,8,6,7,5,9,9,5,6,10,3,8,5,4,beginner,manufacturer_inference,medium,medium,False,
+7692,JS Industries,Xero Gravity,daily_driver,performance_daily_driver,6,7,7,7,7,7,7,7,5,6,8,9,8,9,intermediate,manufacturer_inference,medium,medium,False,
+7710,JS Industries,Xero Gravity Easy Rider,daily_driver,hybrid_shortboard,7,7,7,7,6,7,7,7,5,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7702,JS Industries,Xero Gravity Youth,fish,performance_twin,6,8,7,8,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7825,Lost,3.0 Stub Driver,daily_driver,hybrid_shortboard,8,8,7,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7826,Lost,3.0 Stub Thumb,performance_shortboard,performance_shortboard,5,8,9,9,8,4,4,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7827,Lost,3.0 Stub Thumb Driver,performance_shortboard,performance_shortboard,5,8,9,9,8,4,4,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7828,Lost,Beach Buggy 2,daily_driver,daily_driver,7,7,8,7,7,8,8,8,5,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,
+7829,Lost,Big Rig Driver,fish,performance_fish,8,10,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7830,Lost,Cali Twin,fish,performance_twin,6,8,7,8,7,5,5,8,5,6,7,7,7,8,intermediate,explicit_manufacturer,high,high,False,
+7831,Lost,Cali Twin Pin,fish,performance_twin,8,9,9,8,9,5,6,8,5,6,8,7,7,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: rounded pin. Applied governed evidence rule: swallow tail. Applied governed evidence rule: paddle power.
+7832,Lost,California Mid,mid_length,mid_length,10,9,9,6,7,8,9,5,10,6,6,6,9,7,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: longer rail. Applied governed evidence rule: single concave.
+7833,Lost,Crowd Killer,mid_length,mid_length,8,7,7,5,7,7,8,5,9,6,6,7,8,7,beginner,manufacturer_inference,medium,medium,False,
+7834,Lost,Crowd Killer Round,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+7835,Lost,Double Up,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+7836,Lost,Driver 2.0,performance_shortboard,performance_shortboard,5,7,8,8,8,5,5,8,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: boxy rails.
+7837,Lost,Driver 2.0 Round,performance_shortboard,performance_shortboard,5,8,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7838,Lost,Driver 2.0 Squash,performance_shortboard,performance_shortboard,5,8,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7839,Lost,Driver 3.0 Grom,fish,performance_twin,9,10,7,9,7,7,8,7,6,6,7,7,7,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: boxy rails. Applied governed evidence rule: paddle power. Applied governed evidence rule: single concave.
+7840,Lost,Driver 3.0 Round,daily_driver,hybrid_shortboard,8,9,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7841,Lost,Driver 3.0 Squash,daily_driver,hybrid_shortboard,8,9,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7842,Lost,El Patron,step_up,performance_fish,10,10,7,9,7,8,9,7,6,8,6,7,6,7,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: wide nose. Applied governed evidence rule: single concave. Applied governed evidence rule: vee. Task-approved public family governance: El Patron is published in Step Ups.
+7843,Lost,Evil Twin,groveller,groveller,9,10,8,7,7,9,10,5,6,10,3,8,5,4,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: flat rocker. Applied governed evidence rule: parallel outline. Applied governed evidence rule: rounded pin. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7844,Lost,Formula 1 Round,daily_driver,hybrid_shortboard,8,8,8,7,8,8,8,7,6,7,7,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: round pin.
+7845,Lost,Formula 1 Squash,daily_driver,hybrid_shortboard,8,9,7,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7846,Lost,Glydra,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+7847,Lost,Hydra,groveller,groveller,8,10,6,7,5,8,8,5,5,10,2,8,5,4,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: single concave.
+7848,Lost,Lazy Toy,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7849,Lost,Little Wing,performance_shortboard,performance_shortboard,5,10,10,9,8,4,5,10,3,4,10,7,8,10,advanced,explicit_manufacturer,high,high,False,Applied governed evidence rule: wide outline. Applied governed evidence rule: deep concave.
+7850,Lost,Maysym Goofy,daily_driver,hybrid_shortboard,9,8,8,8,6,8,8,7,8,7,6,9,8,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: longer rail.
+7851,Lost,Maysym Regular,daily_driver,hybrid_shortboard,9,8,8,8,6,8,8,7,8,7,6,9,8,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: longer rail.
+7852,Lost,Micks Tape Goofy,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7853,Lost,Micks Tape Regular,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7854,Lost,Micks Tape Sym,fish,performance_fish,8,10,9,9,7,8,8,8,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow.
+7855,Lost,Mini Driver (Re Issue),step_up,step_up,6,7,10,4,10,4,5,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: round pin.
+7856,Lost,Mod Quad,performance_shortboard,performance_shortboard,6,10,10,10,8,4,4,10,3,6,9,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: swallow. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7857,Lost,Party Crasher,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7858,Lost,Party Platter,daily_driver,hybrid_shortboard,9,9,7,9,6,9,9,6,6,9,5,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: full rails. Applied governed evidence rule: vee.
+7859,Lost,Pick Up Stick,longboard,longboard,10,6,8,5,6,9,10,5,10,6,5,6,8,6,beginner,manufacturer_inference,medium,medium,False,
+7860,Lost,Pisces,fish,performance_fish,8,10,8,10,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow. Applied governed evidence rule: vee.
+7861,Lost,Pocket Rocket Round,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7862,Lost,Pocket Rocket Squash,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7863,Lost,Psycho Killer,daily_driver,hybrid_shortboard,8,9,8,9,6,8,8,7,6,7,6,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: swallow tail.
+7864,Lost,Puddle Fish,fish,traditional_fish,7,9,8,8,5,7,7,5,7,8,4,7,6,5,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow.
+7865,Lost,Puddle Jumper,daily_driver,hybrid_shortboard,8,8,7,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7866,Lost,Puddle Jumper HP,groveller,groveller,7,9,7,8,6,7,8,7,5,10,3,8,5,4,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: foiled rails. Applied governed evidence rule: wide outline. Applied governed evidence rule: vee.
+7867,Lost,Puddle Jumper Pro,performance_shortboard,performance_shortboard,5,9,9,10,8,4,4,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7868,Lost,Puddle Jumper Sting,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7869,Lost,Quiver Killer,daily_driver,hybrid_shortboard,9,7,8,6,8,7,8,7,5,7,7,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: rounded pin. Applied governed evidence rule: wide nose.
+7870,Lost,Rad Ripper,daily_driver,performance_daily_driver,7,9,7,8,7,7,7,7,5,8,6,8,7,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7871,Lost,Rad Zapper,daily_driver,hybrid_shortboard,8,9,8,9,6,8,8,7,6,7,6,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: swallow.
+7872,Lost,Retro Gun,step_up,step_up,6,8,10,7,9,5,6,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7873,Lost,Retro Ripper,step_up,step_up,6,7,9,5,9,5,6,7,5,3,8,5,8,8,intermediate,manufacturer_inference,medium,medium,False,
+7874,Lost,Retro Tripper,step_up,step_up,7,9,10,6,10,6,8,7,6,4,9,5,8,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: wide outline. Applied governed evidence rule: round pin. Applied governed evidence rule: vee.
+7875,Lost,RNF 96,fish,traditional_fish,6,8,7,7,6,7,7,6,7,6,5,7,6,5,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: increased rocker.
+7876,Lost,RNF 96 King Fish,mid_length,mid_length,9,9,8,7,7,8,9,5,10,6,6,6,8,7,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: swallow. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7877,Lost,RNF 96 Long Toe,fish,performance_fish,8,9,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+7878,Lost,RNF Redux,daily_driver,hybrid_shortboard,8,10,9,10,6,8,9,7,6,7,6,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: parallel outline. Applied governed evidence rule: swallow. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7879,Lost,RNF Retro,fish,traditional_fish,8,10,7,7,5,7,7,5,7,10,3,7,6,5,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: single concave.
+7880,Lost,RNF Twinzer '96Er,fish,performance_fish,8,9,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+7881,Lost,Rocket Redux,step_up,step_up,6,7,9,5,9,5,6,7,5,3,8,5,8,8,intermediate,manufacturer_inference,medium,medium,False,
+7882,Lost,Round Up,step_up,step_up,6,7,10,5,9,6,7,7,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: fuller rails.
+7883,Lost,RV,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7884,Lost,Sabotaj,step_up,step_up,8,7,10,5,9,5,7,8,5,3,10,5,9,10,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: wide nose.
+7885,Lost,Sabotaj Legacy,step_up,step_up,8,7,10,5,9,5,7,8,5,3,10,5,9,10,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: wide nose.
+7886,Lost,Smooth Operator,mid_length,mid_length,9,7,7,5,8,7,8,7,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rails.
+7887,Lost,Smooth Operator Long Toe,mid_length,mid_length,9,7,7,5,8,7,8,7,10,6,6,6,8,7,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: low rails.
+7888,Lost,Speed Demon,daily_driver,hybrid_shortboard,9,10,7,9,6,8,8,7,6,9,5,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: deep concave. Applied governed evidence rule: vee.
+7889,Lost,Step Driver,step_up,step_up,6,8,10,5,9,4,5,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7890,Lost,Sub Driver,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7891,Lost,Sub Driver 2.0,daily_driver,performance_daily_driver,6,7,7,7,7,7,7,7,5,6,8,8,8,9,intermediate,manufacturer_inference,medium,medium,False,
+7892,Lost,Sub Driver 3.0 Swallow,performance_shortboard,performance_shortboard,5,10,10,10,8,3,3,10,3,4,10,7,8,10,advanced,explicit_manufacturer,high,high,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7893,Lost,Sub Driver Swallow Tail,daily_driver,hybrid_shortboard,10,9,8,10,6,9,10,6,6,7,6,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: full rails. Applied governed evidence rule: swallow tail. Applied governed evidence rule: wide nose. Applied governed evidence rule: vee.
+7894,Lost,Sub Scorcher Sting,performance_shortboard,performance_shortboard,7,10,10,10,8,4,4,10,4,6,9,7,8,10,advanced,explicit_manufacturer,high,high,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: swallow. Applied governed evidence rule: vee.
+7895,Lost,Swordfish,fish,performance_fish,8,8,8,7,7,7,7,7,7,7,6,7,7,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: longer rail.
+7896,Lost,Terrapin,daily_driver,daily_driver,9,7,8,7,7,7,7,7,8,6,6,9,8,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: longer rail.
+7897,Lost,The Original Puddle Jumper,groveller,groveller,10,10,6,8,5,9,10,5,6,10,2,8,5,4,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: wide nose. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7898,Lost,The Ripper Round,daily_driver,hybrid_shortboard,8,8,7,8,7,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7899,Lost,The Ripper Squash,daily_driver,hybrid_shortboard,10,10,7,9,7,8,9,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: more rocker. Applied governed evidence rule: paddle power. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7900,Lost,Tube Pig,daily_driver,hybrid_shortboard,10,8,9,7,8,8,9,8,6,7,7,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: rounded pin. Applied governed evidence rule: paddle power.
+7901,Lost,Uber Driver,daily_driver,daily_driver,7,7,7,8,7,8,8,7,5,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7902,Lost,Uber Driver XL,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7903,Lost,V3 Rocket,groveller,small_wave_shortboard,7,8,7,7,5,7,7,7,5,9,4,8,6,5,progressing,manufacturer_inference,medium,medium,False,
+8049,Misfit Shapes,(NEO) SPEED EGG,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+8045,Misfit Shapes,BEACH CLOUD,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8046,Misfit Shapes,BEACH METALL,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8047,Misfit Shapes,BEACH METALL RND,daily_driver,hybrid_shortboard,8,9,8,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow.
+8039,Misfit Shapes,BULL DOVE 2,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8044,Misfit Shapes,DOPE MACHINE,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8040,Misfit Shapes,DRIB,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8042,Misfit Shapes,ERASER HEAD,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8041,Misfit Shapes,FUNGZETTI,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8050,Misfit Shapes,LONGUS,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+8048,Misfit Shapes,SPEED EGG - DIAMOND TWIN,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+8043,Misfit Shapes,YANDINA SPEEDWAY,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8057,Pukas,Pegaso,fish,performance_fish,8,9,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+8059,Pukas,Pukas All-Round Longboard,longboard,longboard,10,6,7,5,6,9,10,4,10,6,5,6,8,6,beginner,manufacturer_inference,medium,medium,False,
+8060,Pukas,Pukas Beachy Mood,daily_driver,hybrid_shortboard,8,9,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8061,Pukas,Pukas Easy Mood,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8062,Pukas,Pukas Fish,fish,performance_fish,8,9,7,8,8,7,7,9,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rails.
+8063,Pukas,Pukas Flying Diamond,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8056,Pukas,Pukas Hyperlink,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8064,Pukas,Pukas Magnetic,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+8065,Pukas,Pukas Mustache,fish,performance_fish,8,10,8,9,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail.
+8058,Pukas,Pukas Performance Mood,daily_driver,hybrid_shortboard,8,8,8,8,7,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: channels.
+8066,Pukas,Pukas Space Oddity,daily_driver,daily_driver,10,7,9,6,9,7,8,8,6,6,7,9,7,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: round pin. Applied governed evidence rule: paddle power.
+8068,Pukas,Pukas Water Lion,step_up,step_up,6,7,10,5,9,4,5,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,
+8067,Pukas,Pukas Water Lion Ultra,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7793,Pyzel,Astro Glider,fish,performance_fish,8,9,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+7762,Pyzel,Astro Pop,fish,performance_fish,9,8,7,8,7,7,8,7,5,7,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power. Applied governed evidence rule: vee.
+7786,Pyzel,Astro Pop XL,groveller,groveller,8,8,6,8,5,9,9,5,6,10,3,9,5,4,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7770,Pyzel,Crisis Twin,mid_length,mid_length,8,7,7,6,7,7,8,5,9,6,6,7,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7761,Pyzel,Ghost,performance_shortboard,performance_shortboard,5,7,8,8,8,4,4,9,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7794,Pyzel,Ghost Pro,performance_shortboard,performance_shortboard,8,10,10,10,9,3,4,10,4,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: paddle power. Applied governed evidence rule: single concave.
+7791,Pyzel,Ghost Swallow,daily_driver,daily_driver,10,10,8,9,7,7,8,7,6,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: paddle power. Applied governed evidence rule: single concave.
+7785,Pyzel,Ghost XL,performance_shortboard,performance_shortboard,7,9,10,9,8,4,5,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: paddle power. Applied governed evidence rule: single concave.
+7768,Pyzel,Gremlin,groveller,groveller,7,8,6,7,5,8,8,5,5,10,3,8,5,4,beginner,manufacturer_inference,medium,medium,False,
+7772,Pyzel,Gremlin XL,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7771,Pyzel,Happy Twin,groveller,groveller,9,10,7,10,5,9,9,5,6,10,2,9,5,4,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: flatter rocker. Applied governed evidence rule: swallow. Applied governed evidence rule: vee.
+7788,Pyzel,Highline,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7790,Pyzel,Mid Length Crisis,mid_length,mid_length,9,8,7,7,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7763,Pyzel,Mini Ghost Round,daily_driver,hybrid_shortboard,10,8,8,8,6,8,9,8,6,7,6,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: foam under the chest.
+7764,Pyzel,Mini Ghost Squash,daily_driver,performance_daily_driver,8,7,7,7,7,7,8,7,5,6,7,8,7,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: foam under the chest.
+7782,Pyzel,Next Step,step_up,step_up,8,7,9,5,10,4,6,9,5,3,8,5,8,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: refined rails. Applied governed evidence rule: paddle power.
+7781,Pyzel,Padillac,step_up,step_up,6,8,10,7,9,5,6,7,5,3,8,5,8,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: swallow. Applied governed evidence rule: vee.
+7787,Pyzel,Phantom,daily_driver,performance_daily_driver,6,8,7,7,7,7,7,7,5,6,8,9,8,9,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7797,Pyzel,Phantom Round,daily_driver,hybrid_shortboard,8,9,7,8,6,7,7,7,6,7,6,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: single concave.
+7798,Pyzel,Phantom Squash,daily_driver,hybrid_shortboard,8,9,7,8,6,7,7,7,6,7,6,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: single concave.
+7773,Pyzel,Phantom XL,daily_driver,performance_daily_driver,6,7,7,7,7,7,7,7,5,6,7,9,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7769,Pyzel,Power Tiger,daily_driver,hybrid_shortboard,8,8,7,8,7,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7765,Pyzel,Power Tiger Grom,step_up,step_up,6,8,9,6,9,5,6,7,5,3,8,5,8,8,intermediate,manufacturer_inference,medium,medium,False,
+7767,Pyzel,Power Tiger XL,performance_shortboard,performance_shortboard,7,9,9,10,8,5,5,10,4,7,7,8,7,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: flat rocker. Applied governed evidence rule: vee.
+7776,Pyzel,Precious,daily_driver,daily_driver,10,8,7,8,7,7,8,7,6,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power.
+7777,Pyzel,Puerto Padi,step_up,step_up,9,8,10,6,9,4,6,8,6,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: paddle power.
+7799,Pyzel,Pyzalien,daily_driver,daily_driver,7,8,7,8,7,7,7,7,5,6,6,9,7,7,progressing,explicit_manufacturer,high,high,False,
+7789,Pyzel,Pyzalien 2,daily_driver,performance_daily_driver,6,9,8,9,8,6,6,9,5,6,7,8,7,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: refined rails. Applied governed evidence rule: swallow tail. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7784,Pyzel,Pyzalien 2 XL,daily_driver,performance_daily_driver,6,10,9,10,8,7,7,10,5,6,7,9,7,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: refined rails. Applied governed evidence rule: swallow tail. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7795,Pyzel,Radius,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7775,Pyzel,Radius Prime Round,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7774,Pyzel,Radius Prime Squash,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7778,Pyzel,Red Tiger,performance_shortboard,performance_shortboard,5,7,8,9,8,4,4,9,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7779,Pyzel,Red Tiger XL,daily_driver,hybrid_shortboard,7,8,7,9,6,7,7,7,5,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7760,Pyzel,Score Lord,daily_driver,hybrid_shortboard,10,7,8,6,8,7,8,7,6,7,7,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: round pin. Applied governed evidence rule: full nose.
+7796,Pyzel,Shadow,performance_shortboard,performance_shortboard,5,8,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7792,Pyzel,Shadow XL,performance_shortboard,performance_shortboard,8,8,9,9,8,3,4,10,4,4,10,7,8,10,advanced,explicit_manufacturer,high,high,False,Applied governed evidence rule: foam under the chest.
+7800,Pyzel,Tank,step_up,step_up,6,7,10,5,9,4,5,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,
+7766,Pyzel,Tiger Twin,fish,performance_twin,6,9,8,10,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail. Applied governed evidence rule: vee.
+7780,Pyzel,White Tiger,daily_driver,hybrid_shortboard,9,7,7,8,6,7,8,7,5,7,6,8,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: full nose. Applied governed evidence rule: vee.
+7783,Pyzel,Wildcat,daily_driver,hybrid_shortboard,9,8,9,7,9,7,8,7,5,7,7,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: rounded pin. Applied governed evidence rule: wide nose. Applied governed evidence rule: channels.
+7904,Rusty,1984,daily_driver,hybrid_shortboard,8,8,7,9,6,9,9,6,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: boxy rails. Applied governed evidence rule: vee.
+7905,Rusty,419 Fish,fish,performance_fish,7,9,7,8,7,7,7,7,5,7,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7906,Rusty,421 Fish,fish,traditional_fish,7,8,7,7,5,7,7,5,7,8,4,7,6,5,progressing,manufacturer_inference,medium,medium,False,
+7907,Rusty,Bali Single,daily_driver,hybrid_shortboard,8,8,8,9,6,8,8,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7908,Rusty,Barking Spider,daily_driver,hybrid_shortboard,8,9,8,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow.
+7909,Rusty,Big Cat,mid_length,mid_length,9,9,8,8,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow. Applied governed evidence rule: vee.
+7910,Rusty,Blackbird,step_up,step_up,6,7,10,5,10,5,6,7,5,3,9,5,8,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: rounded pin. Applied governed evidence rule: vee.
+7911,Rusty,Blade,daily_driver,hybrid_shortboard,8,9,8,8,7,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: channels.
+7912,Rusty,D Min,fish,performance_fish,8,9,8,8,9,8,8,7,6,8,7,7,6,7,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: round pin. Applied governed evidence rule: vee.
+7913,Rusty,Desert Island,mid_length,mid_length,10,7,7,5,7,8,10,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power.
+7914,Rusty,Dozer,performance_shortboard,performance_shortboard,5,8,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7915,Rusty,Dwart,fish,performance_fish,8,10,7,7,7,7,7,7,5,9,5,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: flat rocker. Applied governed evidence rule: single concave.
+7916,Rusty,Dwart Too,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7917,Rusty,Egg,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+7918,Rusty,Egg Not,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+7919,Rusty,El Dorado,longboard,longboard,10,6,7,6,6,9,10,4,10,6,5,6,8,6,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7920,Rusty,Enough Said,performance_shortboard,performance_shortboard,5,9,9,9,9,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7921,Rusty,Express,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+7922,Rusty,Fish Quatro,fish,performance_fish,7,8,7,7,7,7,7,7,5,7,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+7923,Rusty,Hatchet,groveller,groveller,9,10,7,8,5,9,9,6,6,10,2,8,5,4,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7924,Rusty,Heckler,fish,performance_fish,8,9,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+7925,Rusty,Hustler,daily_driver,daily_driver,8,8,7,7,7,7,7,7,5,8,5,8,7,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rocker.
+7926,Rusty,Illuminati,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7927,Rusty,Keg,performance_shortboard,performance_shortboard,5,8,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,
+7928,Rusty,Lowrider,mid_length,mid_length,10,7,7,6,7,8,10,5,10,6,6,6,8,7,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: full nose. Applied governed evidence rule: vee.
+7929,Rusty,Mi Amigo,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+7930,Rusty,Mini Tanker,longboard,longboard,10,6,7,5,6,9,10,4,10,6,5,6,8,6,beginner,manufacturer_inference,medium,medium,False,
+7931,Rusty,Miso,daily_driver,hybrid_shortboard,8,9,7,9,6,8,8,7,6,7,6,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7932,Rusty,Moby Fish,longboard,longboard,9,6,7,5,6,8,9,4,9,6,5,7,8,6,beginner,manufacturer_inference,medium,medium,False,
+7933,Rusty,Model 8,daily_driver,hybrid_shortboard,7,8,7,8,7,8,8,8,6,5,7,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: more rocker.
+7934,Rusty,Neil,performance_shortboard,performance_shortboard,5,9,9,10,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7935,Rusty,New Traveler,step_up,step_up,5,7,9,6,10,5,6,8,5,1,9,5,8,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: more rocker. Applied governed evidence rule: vee.
+7936,Rusty,Not So Moby Fish,fish,performance_fish,8,9,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+7937,Rusty,Panda,daily_driver,hybrid_shortboard,8,9,7,8,7,8,8,7,6,7,6,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: single concave.
+7938,Rusty,SD,daily_driver,hybrid_shortboard,7,9,7,9,7,8,8,8,6,5,7,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: more rocker. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7939,Rusty,SD RT RE,performance_shortboard,performance_shortboard,4,9,9,10,9,3,3,10,3,2,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: more rocker. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7940,Rusty,Shiv,groveller,groveller,8,9,7,7,5,9,9,6,6,10,3,8,5,4,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: deep concave.
+7941,Rusty,Sista Brotha,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7942,Rusty,Slayer,step_up,step_up,7,7,10,5,9,4,5,8,7,3,10,5,10,10,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: longer rail.
+7943,Rusty,Slayer 2,performance_shortboard,performance_shortboard,4,8,8,9,9,4,4,10,3,2,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: more rocker. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7944,Rusty,Smoothie,mid_length,mid_length,9,7,7,6,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+7945,Rusty,So Fuunnn,daily_driver,hybrid_shortboard,8,8,8,8,6,8,8,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7946,Rusty,The Deuce,fish,performance_twin,7,9,7,9,7,6,6,8,6,6,7,8,7,8,progressing,manufacturer_inference,medium,medium,False,
+7947,Rusty,The Rooster,daily_driver,performance_daily_driver,6,7,7,7,7,7,7,7,5,6,7,8,7,8,intermediate,manufacturer_inference,medium,medium,False,
+7948,Rusty,Underdog,daily_driver,hybrid_shortboard,8,8,7,8,7,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+7949,Rusty,Utility,longboard,longboard,10,7,7,6,6,9,10,4,10,6,5,6,8,6,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7950,Rusty,What,performance_shortboard,performance_shortboard,5,9,9,10,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+7951,Rusty,Yeti,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+7952,Rusty,Zeppelin,longboard,longboard,10,6,7,6,6,9,10,4,10,6,5,6,8,6,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+8019,Sharp Eye,#77,performance_shortboard,performance_shortboard,5,9,9,9,9,2,2,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rails. Applied governed evidence rule: single concave.
+8020,Sharp Eye,Cheat Code,groveller,small_wave_shortboard,7,9,7,7,5,7,7,7,5,9,4,8,6,5,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8021,Sharp Eye,Disco,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8022,Sharp Eye,Disco II,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8023,Sharp Eye,Disco Inferno,performance_shortboard,performance_shortboard,5,8,8,8,8,4,4,9,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8024,Sharp Eye,File Fifty,performance_shortboard,performance_shortboard,5,9,9,9,9,2,2,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: low rails. Applied governed evidence rule: single concave.
+8027,Sharp Eye,Holy Toledo,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,explicit_manufacturer,high,high,False,Applied governed evidence rule: single concave.
+8025,Sharp Eye,HT2,performance_shortboard,performance_shortboard,5,9,9,9,8,4,4,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8026,Sharp Eye,HT2.5,performance_shortboard,performance_shortboard,5,8,8,8,8,4,4,9,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8028,Sharp Eye,Inferno 72,daily_driver,performance_daily_driver,6,8,7,7,7,7,7,7,5,6,8,8,8,9,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8029,Sharp Eye,Inferno FT,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8030,Sharp Eye,Maguro,step_up,step_up,6,8,10,7,9,5,6,7,5,3,8,5,8,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: swallow. Applied governed evidence rule: vee.
+8031,Sharp Eye,Modern 2,daily_driver,hybrid_shortboard,8,8,7,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+8032,Sharp Eye,Modern 2.5,fish,performance_fish,7,8,7,7,7,7,7,7,5,7,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+8033,Sharp Eye,Okay,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8034,Sharp Eye,Radar,daily_driver,hybrid_shortboard,10,8,7,9,6,9,10,6,6,7,6,9,7,6,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: full rails. Applied governed evidence rule: full nose. Applied governed evidence rule: vee.
+8035,Sharp Eye,SB-1,performance_shortboard,performance_shortboard,5,9,9,9,8,4,4,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8036,Sharp Eye,Storms,performance_shortboard,performance_shortboard,5,9,9,9,8,3,3,10,3,4,10,7,8,10,advanced,explicit_manufacturer,high,high,False,Applied governed evidence rule: single concave.
+8037,Sharp Eye,Synergy,performance_shortboard,performance_shortboard,5,8,8,8,8,4,4,9,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8038,Sharp Eye,Zipper,groveller,groveller,8,10,6,7,5,9,9,4,5,10,2,8,5,4,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: flat rocker. Applied governed evidence rule: boxy rails. Applied governed evidence rule: single concave.
+8069,Simon Anderson,5 Spark,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8070,Simon Anderson,Alley,daily_driver,hybrid_shortboard,8,9,7,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8071,Simon Anderson,Alley Grom,fish,performance_twin,6,8,8,8,7,5,5,9,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,
+8072,Simon Anderson,Big S,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+8084,Simon Anderson,DSC & DSC VEE,mid_length,mid_length,9,7,7,5,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,
+8073,Simon Anderson,DTS,fish,performance_fish,8,10,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave.
+8074,Simon Anderson,Early Bird,daily_driver,daily_driver,7,7,7,8,7,7,7,7,5,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+8085,Simon Anderson,Face Dancer,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8075,Simon Anderson,Face Dancer Step Up,step_up,step_up,6,8,10,6,9,4,5,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+8076,Simon Anderson,Fusion,daily_driver,daily_driver,7,7,7,7,7,7,7,7,5,6,6,9,7,7,progressing,manufacturer_inference,medium,medium,False,
+8087,Simon Anderson,Mollusc,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8086,Simon Anderson,Mollusc Robo,mid_length,mid_length,9,7,7,6,7,8,9,5,10,6,6,6,8,7,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+8077,Simon Anderson,Nomad,fish,performance_fish,8,9,7,8,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,
+8088,Simon Anderson,Nxfc,daily_driver,hybrid_shortboard,8,8,8,8,6,8,8,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8078,Simon Anderson,Spudnick,fish,performance_fish,8,10,8,9,7,8,8,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow.
+8079,Simon Anderson,Spudster,groveller,groveller,8,8,6,7,5,9,9,5,6,10,3,8,5,4,beginner,manufacturer_inference,medium,medium,False,
+8080,Simon Anderson,SXE3,step_up,step_up,6,7,10,5,9,4,5,8,5,3,10,5,9,10,intermediate,manufacturer_inference,medium,medium,False,
+8082,Simon Anderson,T&T,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8081,Simon Anderson,Three Peat,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+8089,Simon Anderson,Varmit,daily_driver,hybrid_shortboard,8,8,7,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+8083,Simon Anderson,XFC,daily_driver,hybrid_shortboard,8,8,8,8,6,8,8,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,

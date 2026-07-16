@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from app.board_fit_engine import BoardFitResult, score_board_fit
+from app.board_dna import find_board_dna
 from app.board_intelligence import BoardIntelligenceRecord, find_board_record
 from app.models import BoardComparison, BoardReference, RiderProfile
 
@@ -17,6 +18,51 @@ class ComparisonEngineResult:
 
 def _common_values(left: tuple[str, ...], right: tuple[str, ...]) -> list[str]:
     return sorted(set(left).intersection(right))
+
+
+DNA_COMPARISON_METRICS = (
+    "paddle", "speed_generation", "drive", "release", "hold",
+    "forgiveness", "sensitivity",
+)
+
+
+def _dna_summary(board: dict | None, ability: str | None) -> dict:
+    if not board:
+        return {}
+    ability_key = (ability or "").strip().lower()
+    return {
+        "family": board["public_family"],
+        "detailed_category": board["primary_category"],
+        "behaviour": {key: board["behaviour"][key] for key in DNA_COMPARISON_METRICS},
+        "wave_context": dict(board["conditions"]),
+        "ability_fit": board["rider_fit"].get(ability_key),
+        "quiver_roles": list(board.get("quiver_roles") or []),
+        "fin_configurations": list(board["physical_design"].get("fin_configurations") or []),
+        "confidence": board["evidence"]["behaviour_confidence"],
+    }
+
+
+def _dna_tradeoffs(left: dict | None, right: dict | None) -> list[str]:
+    if not left or not right:
+        return []
+    rows = []
+    left_name = f"{left['brand']} {left['model']}"
+    right_name = f"{right['brand']} {right['model']}"
+    deltas = sorted(
+        ((metric, left["behaviour"][metric] - right["behaviour"][metric]) for metric in DNA_COMPARISON_METRICS),
+        key=lambda row: (-abs(row[1]), row[0]),
+    )
+    for metric, delta in deltas[:3]:
+        if delta > 0:
+            rows.append(f"{left_name} offers more {metric.replace('_', ' ')} ({left['behaviour'][metric]} vs {right['behaviour'][metric]}).")
+        elif delta < 0:
+            rows.append(f"{right_name} offers more {metric.replace('_', ' ')} ({right['behaviour'][metric]} vs {left['behaviour'][metric]}).")
+    if left["public_family"] != right["public_family"]:
+        rows.append(
+            f"Family trade-off: {left_name} is {left['public_family'].replace('_', ' ')} while "
+            f"{right_name} is {right['public_family'].replace('_', ' ')}."
+        )
+    return rows
 
 
 def compare_board_models(
@@ -34,6 +80,9 @@ def compare_board_models(
     profile = profile or RiderProfile()
     left_fit = score_board_fit(left, profile)
     right_fit = score_board_fit(right, profile)
+    left_dna = find_board_dna(left.brand, left.model)
+    right_dna = find_board_dna(right.brand, right.model)
+    dna_tradeoffs = _dna_tradeoffs(left_dna, right_dna)
 
     similarities = []
     differences = []
@@ -78,6 +127,7 @@ def compare_board_models(
             f"{left.brand} {left.model} sits in the {left.lane.replace('_', ' ')} lane while "
             f"{right.brand} {right.model} leans {right.lane.replace('_', ' ')}."
         )
+    differences.extend(dna_tradeoffs)
 
     ordered = tuple(
         row[0]
@@ -98,6 +148,9 @@ def compare_board_models(
         better_for_board_b=better_for_right,
         rider_specific_conclusion=rider_specific,
         evidence_confidence=round((left_fit.score.evidence_quality + right_fit.score.evidence_quality) / 2, 2),
+        board_a_dna=_dna_summary(left_dna, profile.ability),
+        board_b_dna=_dna_summary(right_dna, profile.ability),
+        dna_tradeoffs=dna_tradeoffs,
     )
     return ComparisonEngineResult(
         comparison=comparison,

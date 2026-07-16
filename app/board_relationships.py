@@ -7,7 +7,7 @@ from pathlib import Path
 from app.board_intelligence import board_key
 
 
-GRAPH_PATH = Path(__file__).parent / "knowledge" / "generated" / "board_relationship_graph.json"
+GRAPH_PATH = Path(__file__).parent / "knowledge" / "generated" / "board_relationship_graph_v3.json"
 
 RELATIONSHIP_TYPE_MAP = {
     "similar": "similarBoards",
@@ -19,6 +19,10 @@ RELATIONSHIP_TYPE_MAP = {
     "moreForgivingBoards": "moreForgivingBoards",
     "more_paddle": "morePaddleBoards",
     "morePaddleBoards": "morePaddleBoards",
+    "more_hold": "moreHoldBoards",
+    "moreHoldBoards": "moreHoldBoards",
+    "more_release": "moreReleaseBoards",
+    "moreReleaseBoards": "moreReleaseBoards",
     "step_up_from": "stepUpFromBoards",
     "stepUpFromBoards": "stepUpFromBoards",
     "step_down_from": "stepDownFromBoards",
@@ -37,6 +41,8 @@ RELATIONSHIP_TYPE_MAP = {
     "betterReefBoards": "betterReefBoards",
     "better_point_break": "betterPointBreakBoards",
     "betterPointBreakBoards": "betterPointBreakBoards",
+    "mid_length_alternative": "midLengthAlternativeBoards",
+    "midLengthAlternativeBoards": "midLengthAlternativeBoards",
     "upgrade": "upgradeBoards",
     "upgradeBoards": "upgradeBoards",
     "downgrade": "downgradeBoards",

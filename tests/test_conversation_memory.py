@@ -61,6 +61,37 @@ class ConversationMemoryTests(unittest.TestCase):
         self.assertEqual(fourth["conversationProfile"]["weight_kg"], 78)
         self.assertFalse(any("weight_kg:" in item for item in fourth["profileConflicts"]))
 
+    @patch("main.safe_ask_bodhi", return_value=(None, None))
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: rows)
+    def test_fish_brief_survives_correction_explanation_and_indonesia_stock_follow_up(self, _inventory, _llm):
+        first = self.client.post("/api/board-guide/chat", json={
+            "message": "The Sampler is a hybrid shorty, not a fish.",
+        }).json()
+        self.assertEqual(first["conversationState"]["activeBoardBrief"]["public_family"], "daily_driver")
+
+        second = self.client.post("/api/board-guide/chat", json={
+            "message": "Explain what a fish is.",
+            "conversationState": first["conversationState"],
+        }).json()
+        self.assertEqual(second["conversationState"]["activeBoardBrief"]["public_family"], "fish")
+
+        third = self.client.post("/api/board-guide/chat", json={
+            "message": "OK, what is in stock in Indo?",
+            "conversationState": second["conversationState"],
+        }).json()
+        brief = third["conversationState"]["activeBoardBrief"]
+        self.assertEqual(brief["public_family"], "fish")
+        self.assertEqual(brief["region"], "ID")
+        self.assertTrue(brief["stock_required"])
+        self.assertTrue(all(board["category"] in {"Fish", "Performance Fish", "Traditional Fish", "Twin Fin", "Performance Twin"} for board in third["suggested_boards"]))
+
+    def test_classification_correction_uses_governed_dna_without_mutating_it(self):
+        response = self.client.post("/api/board-guide/chat", json={"message": "The El Patron is a step up."})
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertIn("step up", body["reply"].lower())
+        self.assertEqual(body["conversationState"]["activeBoardBrief"]["public_family"], "step_up")
+
 
 if __name__ == "__main__":
     unittest.main()

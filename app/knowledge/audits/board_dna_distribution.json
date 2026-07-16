@@ -1,0 +1,529 @@
+{
+  "model_count": 431,
+  "metrics": {
+    "behaviour.paddle": {
+      "minimum": 4,
+      "maximum": 10,
+      "distinct_values": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.45
+    },
+    "behaviour.wave_entry": {
+      "minimum": 5,
+      "maximum": 10,
+      "distinct_values": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.53
+    },
+    "behaviour.speed_generation": {
+      "minimum": 6,
+      "maximum": 10,
+      "distinct_values": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 8.1
+    },
+    "behaviour.drive": {
+      "minimum": 5,
+      "maximum": 10,
+      "distinct_values": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.7
+    },
+    "behaviour.release": {
+      "minimum": 4,
+      "maximum": 10,
+      "distinct_values": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.53
+    },
+    "behaviour.hold": {
+      "minimum": 4,
+      "maximum": 10,
+      "distinct_values": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.01
+    },
+    "behaviour.forgiveness": {
+      "minimum": 2,
+      "maximum": 10,
+      "distinct_values": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 6.69
+    },
+    "behaviour.stability": {
+      "minimum": 2,
+      "maximum": 10,
+      "distinct_values": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.03
+    },
+    "behaviour.sensitivity": {
+      "minimum": 3,
+      "maximum": 10,
+      "distinct_values": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.21
+    },
+    "behaviour.projection": {
+      "minimum": 4,
+      "maximum": 10,
+      "distinct_values": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.74
+    },
+    "behaviour.pivot": {
+      "minimum": 4,
+      "maximum": 10,
+      "distinct_values": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.39
+    },
+    "behaviour.carve": {
+      "minimum": 4,
+      "maximum": 10,
+      "distinct_values": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 8.23
+    },
+    "behaviour.glide": {
+      "minimum": 3,
+      "maximum": 10,
+      "distinct_values": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 5.81
+    },
+    "behaviour.turning_radius": {
+      "minimum": 3,
+      "maximum": 10,
+      "distinct_values": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 5.85
+    },
+    "conditions.weak_waves": {
+      "minimum": 1,
+      "maximum": 10,
+      "distinct_values": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 6.14
+    },
+    "conditions.average_waves": {
+      "minimum": 5,
+      "maximum": 10,
+      "distinct_values": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.78
+    },
+    "conditions.powerful_waves": {
+      "minimum": 2,
+      "maximum": 10,
+      "distinct_values": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 6.78
+    },
+    "conditions.beach_break": {
+      "minimum": 5,
+      "maximum": 9,
+      "distinct_values": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "average": 7.55
+    },
+    "conditions.point_break": {
+      "minimum": 5,
+      "maximum": 10,
+      "distinct_values": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.24
+    },
+    "conditions.reef_break": {
+      "minimum": 4,
+      "maximum": 10,
+      "distinct_values": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 7.22
+    },
+    "conditions.hollow_waves": {
+      "minimum": 1,
+      "maximum": 10,
+      "distinct_values": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 5.87
+    },
+    "conditions.open_face": {
+      "minimum": 5,
+      "maximum": 9,
+      "distinct_values": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "average": 7.95
+    },
+    "rider_fit.beginner": {
+      "minimum": 1,
+      "maximum": 10,
+      "distinct_values": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        9,
+        10
+      ],
+      "average": 3.47
+    },
+    "rider_fit.progressing": {
+      "minimum": 2,
+      "maximum": 10,
+      "distinct_values": [
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 5.88
+    },
+    "rider_fit.intermediate": {
+      "minimum": 5,
+      "maximum": 10,
+      "distinct_values": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 8.01
+    },
+    "rider_fit.advanced": {
+      "minimum": 4,
+      "maximum": 10,
+      "distinct_values": [
+        4,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 8.65
+    },
+    "rider_fit.expert": {
+      "minimum": 3,
+      "maximum": 10,
+      "distinct_values": [
+        3,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 8.81
+    },
+    "rider_fit.low_paddle_strength": {
+      "minimum": 2,
+      "maximum": 10,
+      "distinct_values": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 6.24
+    },
+    "rider_fit.high_paddle_strength": {
+      "minimum": 4,
+      "maximum": 10,
+      "distinct_values": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "average": 8.36
+    }
+  },
+  "family_averages": {
+    "daily_driver": {
+      "paddle": 7.94,
+      "wave_entry": 7.93,
+      "speed_generation": 8.06,
+      "drive": 7.28,
+      "release": 7.99,
+      "hold": 6.43,
+      "forgiveness": 7.75,
+      "stability": 7.86,
+      "sensitivity": 7.15,
+      "projection": 7.32,
+      "pivot": 7.76,
+      "carve": 8.07,
+      "glide": 5.82,
+      "turning_radius": 5.78
+    },
+    "fish": {
+      "paddle": 7.22,
+      "wave_entry": 7.16,
+      "speed_generation": 8.78,
+      "drive": 7.35,
+      "release": 8.0,
+      "hold": 6.87,
+      "forgiveness": 6.68,
+      "stability": 6.78,
+      "sensitivity": 7.21,
+      "projection": 7.15,
+      "pivot": 7.57,
+      "carve": 7.51,
+      "glide": 5.68,
+      "turning_radius": 5.56
+    },
+    "groveller": {
+      "paddle": 8.36,
+      "wave_entry": 8.92,
+      "speed_generation": 8.68,
+      "drive": 6.28,
+      "release": 7.0,
+      "hold": 4.92,
+      "forgiveness": 8.64,
+      "stability": 8.84,
+      "sensitivity": 4.96,
+      "projection": 5.44,
+      "pivot": 6.68,
+      "carve": 5.32,
+      "glide": 5.76,
+      "turning_radius": 4.84
+    },
+    "longboard": {
+      "paddle": 9.77,
+      "wave_entry": 9.77,
+      "speed_generation": 6.23,
+      "drive": 7.15,
+      "release": 5.38,
+      "hold": 6.0,
+      "forgiveness": 8.77,
+      "stability": 9.77,
+      "sensitivity": 4.15,
+      "projection": 6.31,
+      "pivot": 4.08,
+      "carve": 7.38,
+      "glide": 9.77,
+      "turning_radius": 9.77
+    },
+    "mid_length": {
+      "paddle": 8.91,
+      "wave_entry": 8.86,
+      "speed_generation": 7.42,
+      "drive": 7.23,
+      "release": 5.49,
+      "hold": 7.21,
+      "forgiveness": 7.67,
+      "stability": 8.77,
+      "sensitivity": 5.23,
+      "projection": 7.21,
+      "pivot": 5.21,
+      "carve": 8.44,
+      "glide": 9.72,
+      "turning_radius": 8.81
+    },
+    "performance_shortboard": {
+      "paddle": 5.17,
+      "wave_entry": 5.17,
+      "speed_generation": 8.49,
+      "drive": 8.91,
+      "release": 9.0,
+      "hold": 8.22,
+      "forgiveness": 3.43,
+      "stability": 3.49,
+      "sensitivity": 9.78,
+      "projection": 9.86,
+      "pivot": 9.77,
+      "carve": 9.8,
+      "glide": 3.09,
+      "turning_radius": 3.06
+    },
+    "step_up": {
+      "paddle": 6.69,
+      "wave_entry": 7.44,
+      "speed_generation": 7.36,
+      "drive": 9.62,
+      "release": 5.36,
+      "hold": 9.15,
+      "forgiveness": 4.74,
+      "stability": 5.97,
+      "sensitivity": 7.56,
+      "projection": 9.51,
+      "pivot": 5.15,
+      "carve": 9.28,
+      "glide": 5.26,
+      "turning_radius": 7.67
+    }
+  }
+}

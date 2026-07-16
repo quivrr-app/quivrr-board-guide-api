@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "phrases": {
+    "fast": {"behaviour": {"speed_generation": 9}},
+    "loose": {"behaviour": {"release": 9, "pivot": 8, "hold": 5}},
+    "drivey": {"behaviour": {"drive": 9, "projection": 9}},
+    "cruisey": {"behaviour": {"glide": 9, "paddle": 8, "stability": 8, "sensitivity": 5}},
+    "technical": {"behaviour": {"sensitivity": 9, "forgiveness": 3}},
+    "forgiving": {"behaviour": {"forgiveness": 9, "stability": 8}},
+    "vertical": {"behaviour": {"pivot": 9, "release": 8, "sensitivity": 9}},
+    "carving": {"behaviour": {"drive": 9, "hold": 8, "carve": 9}},
+    "easy paddle": {"behaviour": {"paddle": 9, "wave_entry": 9}},
+    "carries speed": {"behaviour": {"speed_generation": 9, "drive": 8, "glide": 7}},
+    "more hold": {"behaviour": {"hold": 9, "drive": 8}},
+    "stable twin": {"behaviour": {"stability": 8, "hold": 8}, "fin_configurations": ["twin", "twin_plus_trailer"]},
+    "clean point": {"conditions": {"point_break": 9, "open_face": 8}},
+    "bali reef": {"conditions": {"reef_break": 9, "powerful_waves": 8, "hollow_waves": 7}}
+  }
+}

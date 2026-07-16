@@ -11,7 +11,7 @@ class BoardRelationshipsTests(unittest.TestCase):
         rows = relationship_suggestions(hypto, "morePerformanceBoards")
 
         self.assertTrue(rows)
-        self.assertEqual(rows[0].source, "quivrr_board_relationship_graph_v2")
+        self.assertEqual(rows[0].source, "quivrr_board_relationship_graph_v3")
         self.assertTrue(any(row.model == "Phantom" for row in rows))
 
 

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "score_contract": {
+    "poor": [1, 3],
+    "moderate": [4, 6],
+    "strong": [7, 8],
+    "exceptional_or_specialised": [9, 10]
+  },
+  "metric_order": {
+    "behaviour": ["paddle", "wave_entry", "speed_generation", "drive", "release", "hold", "forgiveness", "stability", "sensitivity", "projection", "pivot", "carve", "glide", "turning_radius"],
+    "conditions": ["weak_waves", "average_waves", "powerful_waves", "beach_break", "point_break", "reef_break", "hollow_waves", "open_face"],
+    "rider_fit": ["beginner", "progressing", "intermediate", "advanced", "expert", "low_paddle_strength", "high_paddle_strength"]
+  },
+  "transformation_rules": [
+    {"match": ["low rocker", "flat rocker", "flatter rocker"], "effects": {"paddle": 1, "wave_entry": 1, "speed_generation": 1, "weak_waves": 2, "powerful_waves": -1, "hollow_waves": -1}},
+    {"match": ["high rocker", "more rocker", "increased rocker"], "effects": {"sensitivity": 1, "hold": 1, "pivot": 1, "powerful_waves": 1, "hollow_waves": 2, "weak_waves": -2, "paddle": -1}},
+    {"match": ["full rails", "fuller rails", "boxy rails"], "effects": {"forgiveness": 1, "stability": 1, "sensitivity": -1}},
+    {"match": ["refined rails", "low rails", "thin rails", "foiled rails"], "effects": {"hold": 1, "sensitivity": 2, "forgiveness": -1, "stability": -1}},
+    {"match": ["parallel outline", "straighter outline", "wide outline"], "effects": {"speed_generation": 1, "drive": 1, "stability": 1, "turning_radius": 1, "pivot": -1}},
+    {"match": ["round pin", "rounded pin", "pin tail"], "effects": {"hold": 2, "drive": 1, "powerful_waves": 1, "hollow_waves": 1, "release": -1}},
+    {"match": ["swallow tail", "swallow"], "effects": {"speed_generation": 1, "release": 1, "drive": 1}},
+    {"match": ["long rail", "longer rail", "long rail line"], "effects": {"paddle": 1, "glide": 2, "drive": 1, "point_break": 1, "turning_radius": 1}},
+    {"match": ["wide nose", "full nose", "foam under the chest", "paddle power"], "effects": {"paddle": 2, "wave_entry": 1, "stability": 1, "low_paddle_strength": 1}},
+    {"match": ["deep concave", "single concave"], "effects": {"speed_generation": 1, "projection": 1}},
+    {"match": ["vee", "v out the tail", "v through the tail"], "effects": {"release": 1, "carve": 1}},
+    {"match": ["channels", "channel bottom"], "effects": {"drive": 1, "hold": 1, "projection": 1}}
+  ],
+  "model_overrides": {
+    "channel-islands::sampler": {
+      "public_family": "daily_driver",
+      "notes": ["Reviewed public-family correction: Sampler is a hybrid shortboard, not a fish."]
+    },
+    "lost::el-patron": {
+      "public_family": "step_up",
+      "notes": ["Task-approved public family governance: El Patron is published in Step Ups."]
+    }
+  },
+  "archetypes": {
+    "traditional_fish": {"public_family": "fish", "physical": ["wide_forward", "full", "swallow", "low", "low", "full", "forward", "forward", "single,double", "twin"], "behaviour": [8,8,9,7,8,5,8,8,5,6,6,7,7,6], "conditions": [9,8,4,8,7,5,3,8], "rider_fit": [5,7,8,8,7,8,7], "ranges": [2,10], "tags": ["fast", "flowing", "loose"], "roles": ["small_wave", "alternative_daily_driver"], "incompatible": ["high_rocker", "pointed_nose", "competition_shortboard"]},
+    "performance_fish": {"public_family": "fish", "physical": ["balanced", "medium", "swallow", "medium_low", "medium", "refined", "balanced", "central", "single,double,vee", "twin,quad,five_fin"], "behaviour": [7,7,9,8,8,7,7,7,8,8,8,8,5,5], "conditions": [8,9,7,8,7,8,7,8], "rider_fit": [3,6,8,9,9,6,9], "ranges": [2,10], "tags": ["fast", "drivey", "responsive"], "roles": ["small_wave", "daily_driver", "reef_alternative"], "incompatible": ["soft_rails", "entry_level"]},
+    "performance_twin": {"public_family": "performance_shortboard", "physical": ["narrow", "refined", "round", "medium", "medium_high", "refined", "refined", "balanced", "single,double,channels", "twin,twin_plus_trailer"], "behaviour": [6,6,9,8,9,7,5,5,9,8,9,8,4,4], "conditions": [6,9,8,8,8,9,8,9], "rider_fit": [2,4,7,10,10,4,9], "ranges": [1,10], "tags": ["fast", "technical", "alternative_performance"], "roles": ["performance", "reef_alternative"], "incompatible": ["beginner_board", "softboard"]},
+    "twin_pin": {"public_family": "fish", "physical": ["narrow", "refined", "round_pin", "medium_low", "medium", "refined", "balanced", "central", "single,double,vee", "twin"], "behaviour": [7,7,8,9,6,9,6,6,8,9,6,9,6,7], "conditions": [5,8,9,7,9,9,8,10], "rider_fit": [2,5,8,9,9,5,9], "ranges": [1,10], "tags": ["drivey", "hold", "flowing"], "roles": ["clean_wave", "reef", "point_break"], "incompatible": ["wide_swallow", "weak_wave_only"]},
+    "groveller": {"public_family": "groveller", "physical": ["wide_centre", "full", "squash", "low", "low", "full", "forward", "forward", "single,double,vee", "thruster,five_fin,quad"], "behaviour": [8,9,9,6,8,4,9,9,5,5,8,5,5,3], "conditions": [10,8,2,9,5,3,2,5], "rider_fit": [6,9,9,8,7,9,6], "ranges": [1,10], "tags": ["easy_speed", "forgiving", "playful"], "roles": ["small_wave", "summer"], "incompatible": ["high_rocker", "powerful_wave_specialist"]},
+    "small_wave_shortboard": {"public_family": "groveller", "physical": ["balanced", "medium", "squash", "medium_low", "medium_low", "medium", "forward", "forward", "single,double,vee", "thruster,five_fin"], "behaviour": [7,8,9,7,8,5,8,8,7,7,9,7,4,3], "conditions": [9,9,4,9,6,5,3,7], "rider_fit": [4,7,9,9,8,7,8], "ranges": [1,10], "tags": ["fast", "responsive", "small_wave_performance"], "roles": ["small_wave", "step_down"], "incompatible": ["gun", "longboard"]},
+    "hybrid_shortboard": {"public_family": "daily_driver", "physical": ["balanced", "medium", "squash", "medium_low", "medium", "medium", "balanced", "balanced", "single,double,vee", "thruster,five_fin,quad"], "behaviour": [7,7,8,7,7,6,8,8,7,7,7,8,5,5], "conditions": [8,9,6,9,8,7,5,9], "rider_fit": [4,7,9,9,8,7,8], "ranges": [2,10], "tags": ["versatile", "balanced", "easy_performance"], "roles": ["daily_driver", "one_board_quiver"], "incompatible": ["extreme_specialist"]},
+    "daily_driver": {"public_family": "daily_driver", "physical": ["balanced", "medium", "squash", "medium", "medium", "medium", "balanced", "balanced", "single,double,vee", "thruster,five_fin"], "behaviour": [7,7,7,7,7,7,8,8,7,7,7,8,5,5], "conditions": [7,9,7,9,8,8,6,9], "rider_fit": [4,8,10,9,8,8,8], "ranges": [3,10], "tags": ["versatile", "reliable", "balanced"], "roles": ["daily_driver", "one_board_quiver"], "incompatible": ["competition_only"]},
+    "performance_daily_driver": {"public_family": "daily_driver", "physical": ["balanced", "refined", "squash", "medium", "medium_high", "refined", "balanced", "balanced", "single,double,vee", "thruster,five_fin"], "behaviour": [6,7,8,8,8,8,7,7,8,8,8,9,4,4], "conditions": [6,9,8,9,8,9,7,9], "rider_fit": [2,5,8,10,10,5,9], "ranges": [1,10], "tags": ["responsive", "drivey", "everyday_performance"], "roles": ["daily_driver", "performance"], "incompatible": ["entry_level", "weak_wave_only"]},
+    "performance_shortboard": {"public_family": "performance_shortboard", "physical": ["narrow", "pointed", "squash", "medium_high", "high", "low_performance", "refined", "balanced", "single,double,vee", "thruster,five_fin"], "behaviour": [4,5,7,9,9,9,3,3,10,10,10,10,2,2], "conditions": [3,7,10,8,8,10,10,9], "rider_fit": [1,2,5,10,10,2,10], "ranges": [1,10], "tags": ["technical", "sensitive", "vertical"], "roles": ["performance", "competition"], "incompatible": ["beginner_board", "soft_rails", "wide_outline"]},
+    "step_up": {"public_family": "step_up", "physical": ["narrow", "pointed", "round_pin", "medium_high", "high", "refined", "balanced", "central", "single,double,vee", "thruster,quad,five_fin"], "behaviour": [6,7,7,10,4,10,4,6,8,10,4,10,5,9], "conditions": [2,6,10,5,9,10,10,9], "rider_fit": [1,2,6,10,10,4,10], "ranges": [1,10], "tags": ["hold", "drivey", "powerful_wave"], "roles": ["step_up", "travel", "reef"], "incompatible": ["weak_wave_specialist", "beginner_board"]},
+    "gun": {"public_family": "step_up", "physical": ["narrow", "pointed", "pin", "high", "high", "refined", "balanced", "central", "single,double,vee", "thruster,quad"], "behaviour": [7,8,7,10,3,10,2,6,8,10,2,9,7,10], "conditions": [1,4,10,3,9,10,10,10], "rider_fit": [1,1,3,9,10,3,10], "ranges": [1,10], "tags": ["control", "hold", "big_wave"], "roles": ["gun", "big_wave", "travel"], "incompatible": ["small_wave", "beginner_board"]},
+    "mid_length": {"public_family": "mid_length", "physical": ["curvy", "medium", "round", "medium_low", "medium_low", "medium", "balanced", "balanced", "single,double,vee", "single,two_plus_one,twin"], "behaviour": [9,9,7,8,5,7,8,9,5,7,4,9,10,9], "conditions": [6,9,7,7,10,8,5,10], "rider_fit": [6,9,9,9,8,10,7], "ranges": [2,10], "tags": ["glide", "flowing", "easy_paddle"], "roles": ["mid_length", "cruiser", "point_break"], "incompatible": ["competition_shortboard"]},
+    "performance_mid_length": {"public_family": "mid_length", "physical": ["narrow", "refined", "round_pin", "medium", "medium_high", "refined", "balanced", "central", "single,double,vee", "twin,two_plus_one,thruster"], "behaviour": [8,8,8,9,6,9,6,7,8,9,6,10,9,9], "conditions": [4,8,9,6,10,10,8,10], "rider_fit": [2,5,8,10,10,6,9], "ranges": [1,10], "tags": ["glide", "drivey", "performance"], "roles": ["performance_mid_length", "point_break", "reef"], "incompatible": ["beginner_board", "weak_wave_only"]},
+    "longboard": {"public_family": "longboard", "physical": ["parallel", "full", "square", "low", "low", "soft", "forward", "central", "single,rolled,vee", "single,two_plus_one"], "behaviour": [10,10,6,8,4,6,9,10,3,6,3,8,10,10], "conditions": [7,9,5,7,10,6,3,10], "rider_fit": [9,10,10,9,9,10,5], "ranges": [1,10], "tags": ["glide", "stable", "flowing"], "roles": ["longboard", "cruiser", "small_wave"], "incompatible": ["tight_turning_radius", "high_rocker"]},
+    "softboard": {"public_family": "groveller", "physical": ["wide_centre", "full", "square", "low", "low", "soft", "forward", "forward", "flat,vee", "thruster"], "behaviour": [9,9,7,4,5,3,10,10,2,3,5,3,6,4], "conditions": [9,8,2,9,5,3,1,6], "rider_fit": [10,10,8,5,3,10,4], "ranges": [1,10], "tags": ["forgiving", "stable", "entry_level"], "roles": ["learning", "small_wave"], "incompatible": ["technical", "powerful_wave"]},
+    "alternative": {"public_family": "daily_driver", "physical": ["balanced", "medium", "round", "medium_low", "medium", "medium", "balanced", "balanced", "single,double,vee", "twin,quad,five_fin"], "behaviour": [7,7,8,7,8,6,7,7,8,7,8,8,6,6], "conditions": [7,9,6,8,8,7,5,9], "rider_fit": [3,6,8,9,9,6,8], "ranges": [1,10], "tags": ["alternative", "flowing", "creative"], "roles": ["daily_driver", "alternative"], "incompatible": ["competition_only"]}
+  }
+}

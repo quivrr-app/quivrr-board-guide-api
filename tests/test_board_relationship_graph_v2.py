@@ -34,13 +34,14 @@ class BoardRelationshipGraphV2Tests(unittest.TestCase):
         similar = {(row["brand"], row["model"]) for row in rnf["relationships"]["similarBoards"]}
         points = {(row["brand"], row["model"]) for row in rnf["relationships"]["betterPointBreakBoards"]}
         self.assertIn(("Firewire", "Seaside"), similar)
-        self.assertTrue({("Album", "Lightbender"), ("Christenson", "Ocean Racer")} <= points)
+        self.assertIn(("Album", "Lightbender"), points)
+        self.assertNotIn(("Christenson", "Ocean Racer"), points)
 
     def test_runtime_suggestions_preserve_relationship_evidence(self):
         hypto = find_relationship_board("Haydenshapes", "Hypto Krypto")
         rows = relationship_suggestions(hypto, "morePerformanceBoards")
         self.assertEqual(rows[0].model, "Phantom")
-        self.assertEqual(rows[0].source, "quivrr_board_relationship_graph_v2")
+        self.assertEqual(rows[0].source, "quivrr_board_relationship_graph_v3")
 
     def test_generation_is_deterministic(self):
         before = hashlib.sha256(generator.OUTPUT_PATH.read_bytes()).hexdigest()

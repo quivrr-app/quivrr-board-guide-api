@@ -31,6 +31,7 @@ from app.active_topic import resolve_active_topic
 from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
 from app.intent_router import classify_intent, route_intent
 from app.board_expert_matrix import recommend_from_matrix
+from app.board_dna import find_board_dna, find_board_dna_by_id, load_board_dna, resolve_dna_brief, score_dna_fit
 from app.board_relationship_graph import (
     relationship_reply, relationship_suggestions, relationship_type, source_board_from_message,
 )
@@ -76,6 +77,38 @@ RECOMMENDATION_INTENTS = {
     "alternative_request",
 }
 STOCK_ONLY_CONSTRAINT = "VERIFIED_IN_STOCK"
+
+
+def _model_classification_correction(message: str) -> dict | None:
+    text = message.lower()
+    if not re.search(r"\b(?:is not|isn't|not a|actually (?:a|an)|is (?:a|an))\b", text):
+        return None
+    board = find_requested_board(message)
+    if not board:
+        matches = [
+            row for row in load_board_dna()["models"]
+            if re.search(rf"\b{re.escape(row['model'].lower())}\b", text)
+        ]
+        if matches:
+            matches.sort(key=lambda row: len(row["model"]), reverse=True)
+            board = {"brand": matches[0]["brand"], "model": matches[0]["model"]}
+        else:
+            return None
+    dna = find_board_dna(board["brand"], board["model"])
+    if not dna:
+        return None
+    family_phrases = (
+        ("performance shortboard", "performance_shortboard"), ("daily driver", "daily_driver"),
+        ("step up", "step_up"), ("mid length", "mid_length"), ("longboard", "longboard"),
+        ("groveller", "groveller"), ("hybrid", "daily_driver"), ("fish", "fish"),
+    )
+    asserted = next((
+        family for phrase, family in family_phrases
+        if re.search(rf"\b(?:is|actually)\s+(?:a|an)?\s*{re.escape(phrase)}\b", text)
+    ), None)
+    if asserted is None:
+        asserted = next((family for phrase, family in family_phrases if phrase in text), None)
+    return {"board": board, "dna": dna, "asserted_family": asserted}
 
 
 @dataclass(frozen=True)
@@ -673,11 +706,19 @@ def build_conversation_state(
     if normalized_intent == "BOARD_COMPARISON" and len(public_cards) >= 2:
         comparison_boards = public_cards[:2]
     last_recommendations = public_cards[:6] or previous_recommendations[:6]
+    previous_brief = previous_state.active_board_brief if previous_state else {}
+    active_board_brief = resolve_dna_brief(request.message, profile, previous_brief)
+    if re.search(r"\b(?:reset|start over|new search|clear)\b", request.message.lower()):
+        active_board_brief = resolve_dna_brief(request.message, profile, {})
+    correction = _model_classification_correction(request.message)
+    if correction:
+        active_board_brief["public_family"] = correction["dna"]["public_family"]
     return ConversationState(
         lastIntent=normalized_intent,
         activeRegion=active_region,
         availabilityConstraint=availability_constraint,
         activeProfile=profile.model_dump(exclude={"profile_sources", "profile_conflicts", "field_provenance"}, exclude_none=True),
+        activeBoardBrief=active_board_brief,
         lastRecommendations=last_recommendations,
         mentionedBoards=(last_recommendations or mentioned[:8]),
         comparisonBoards=comparison_boards[:4],
@@ -782,6 +823,12 @@ def board_guide_chat(
     history_profiles = [with_profile_source(extract_profile(item.content, request.region), "conversation_user") for item in request.conversation if item and item.role == "user" and item.content]
     legacy_account_profile = with_profile_source(request.account_profile, "conversation_profile") if request.account_profile else None
     persisted_profile = with_profile_source(request.profile or request.intake_state or extract_profile(""), "conversation_profile")
+    if request.conversation_state and request.conversation_state.active_profile:
+        restored_profile = with_profile_source(
+            type(persisted_profile).model_validate(request.conversation_state.active_profile),
+            "conversation_profile",
+        )
+        persisted_profile = merge_rider_profile(restored_profile, persisted_profile)
     if legacy_account_profile:
         persisted_profile = merge_rider_profile(legacy_account_profile, persisted_profile)
     account_profile = auth_context.profile if auth_context.profile else None
@@ -791,6 +838,15 @@ def board_guide_chat(
     profile = merge_rider_profile(profile, persisted_profile, account_profile=account_profile)
     current_profile = with_profile_source(extract_profile(request.message, request.region), "current_user")
     profile = merge_rider_profile(profile, current_profile, account_profile=account_profile)
+    prior_brief = request.conversation_state.active_board_brief if request.conversation_state else {}
+    if prior_brief.get("public_family") and not current_profile.preferred_board_type:
+        profile = profile.model_copy(update={
+            "preferred_board_type": {
+                "fish": "fish", "groveller": "groveller", "daily_driver": "daily driver",
+                "performance_shortboard": "performance shortboard", "step_up": "step up",
+                "mid_length": "mid length", "longboard": "longboard",
+            }.get(prior_brief["public_family"], profile.preferred_board_type)
+        })
     volume_correction_requested = _volume_correction_requested(request.message)
 
     missing = missing_profile_fields(profile)
@@ -812,6 +868,30 @@ def board_guide_chat(
         allow_follow_up_profile_category=allow_contextual_profile_category,
     )
     category = category_resolution.category
+    prior_dna_brief = request.conversation_state.active_board_brief if request.conversation_state else {}
+    resolved_dna_brief = resolve_dna_brief(request.message, profile, prior_dna_brief)
+    emit_event(
+        "bodhi_dna_brief_resolved",
+        "bodhi_api",
+        region=resolved_dna_brief.get("region"),
+        status="success",
+        public_family=resolved_dna_brief.get("public_family"),
+        requested_feel=resolved_dna_brief.get("desired_feel") or [],
+        requested_wave_context={"type": resolved_dna_brief.get("wave_type"), "power": resolved_dna_brief.get("wave_power")},
+        stock_requirement=resolved_dna_brief.get("stock_required", False),
+        restored=bool(prior_dna_brief),
+        correlation_id=correlation_id,
+    )
+    if prior_dna_brief:
+        emit_event(
+            "bodhi_conversation_brief_restored",
+            "bodhi_api",
+            region=resolved_dna_brief.get("region"),
+            status="success",
+            public_family=resolved_dna_brief.get("public_family"),
+            stock_requirement=resolved_dna_brief.get("stock_required", False),
+            correlation_id=correlation_id,
+        )
     profile, target_volume = _apply_target_volume_context(profile, category)
     missing = missing_profile_fields(profile)
     recommendation = build_recommendation(profile)
@@ -819,6 +899,18 @@ def board_guide_chat(
     questions = intake_questions(profile)
     guidance = volume_guidance(profile)
     requested_board = find_requested_board(request.message)
+    classification_correction = _model_classification_correction(request.message)
+    if classification_correction:
+        correction_dna = classification_correction["dna"]
+        emit_event(
+            "bodhi_model_classification_correction",
+            "bodhi_api",
+            status="success",
+            canonical_model_id=correction_dna["canonical_model_id"],
+            existing_family=correction_dna["public_family"],
+            user_asserted_family=classification_correction["asserted_family"],
+            correlation_id=correlation_id,
+        )
     if legacy_intent == "exact_board_location_request" and not requested_board:
         for item in reversed(request.conversation):
             if item.role == "user":
@@ -958,6 +1050,16 @@ def board_guide_chat(
     elif legacy_intent == "volume_advice_request":
         suggested_boards = []
         reply = volume_advice_reply(profile)
+        questions = []
+    elif classification_correction:
+        suggested_boards = []
+        dna = classification_correction["dna"]
+        reply = (
+            f"You’re right to check the classification. The governed record places "
+            f"{dna['brand']} {dna['model']} in {dna['public_family'].replace('_', ' ')}, "
+            f"with the detailed category {dna['primary_category'].replace('_', ' ')}. "
+            "I’ll use that classification for this conversation without changing the authoritative record at runtime."
+        )
         questions = []
     elif legacy_intent == "general_board_question" and requested_board and "fish" in request.message.lower():
         suggested_boards = []
@@ -1311,6 +1413,36 @@ def board_guide_chat(
     duration = round(time.perf_counter() - started, 3)
     verified_stock_count = sum(1 for board in suggested_boards if (board.available_count or 0) > 0)
     selected_family = suggested_boards[0].category if suggested_boards else (category_resolution.category or category)
+    for suggested in suggested_boards[:6]:
+        dna = find_board_dna_by_id(suggested.board_model_id)
+        if not dna:
+            continue
+        dna_fit = score_dna_fit(dna, profile, resolved_dna_brief)
+        emit_event(
+            "bodhi_dna_fit_scored",
+            "bodhi_api",
+            region=profile.region or request.region,
+            status="success",
+            canonical_model_id=dna["canonical_model_id"],
+            public_family=dna["public_family"],
+            requested_feel=resolved_dna_brief.get("desired_feel") or [],
+            dna_fit_score=dna_fit.get("score"),
+            confidence=dna["evidence"]["behaviour_confidence"],
+            stock_requirement=resolved_dna_brief.get("stock_required", False),
+            exclusion_count=len(dna_fit.get("exclusions") or []),
+            correlation_id=correlation_id,
+        )
+        if dna["evidence"]["review_required"]:
+            emit_event(
+                "bodhi_dna_low_confidence",
+                "bodhi_api",
+                region=profile.region or request.region,
+                status="warning",
+                canonical_model_id=dna["canonical_model_id"],
+                public_family=dna["public_family"],
+                confidence=dna["evidence"]["behaviour_confidence"],
+                correlation_id=correlation_id,
+            )
     emit_event(
         "bodhi_recommendation_generated",
         "bodhi_api",

@@ -11,7 +11,7 @@ from app.models import RiderProfile, SuggestedBoard
 from app.board_reputation import relationship_expert_intro
 
 
-GRAPH_PATH = Path(__file__).parent / "knowledge/generated/board_relationship_graph.json"
+GRAPH_PATH = Path(__file__).parent / "knowledge/generated/board_relationship_graph_v3.json"
 
 
 def _key(value: object) -> str:
@@ -108,7 +108,7 @@ def relationship_suggestions(source: dict, relation: str, limit: int = 8, profil
             confidence={"high": .94, "medium": .78, "low": .58}[edge["confidence"]],
             why_it_fits=edge["reason"], description=matrix.get("manufacturerDescription"),
             volume_range=(f"{matrix['volumeRange']['min']:g}-{matrix['volumeRange']['max']:g}L" if matrix.get("volumeRange", {}).get("min") is not None else None),
-            source="quivrr_board_relationship_graph_v2", board_model_id=matrix.get("boardModelId"),
+            source="quivrr_board_relationship_graph_v3", board_model_id=matrix.get("boardModelId"),
             suggested_size=size_hint,
         ))
     return output
