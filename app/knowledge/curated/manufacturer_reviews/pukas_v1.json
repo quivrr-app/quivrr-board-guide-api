@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "manufacturer": "Pukas",
+  "review_status": "complete",
+  "reviewed_date": "2026-07-17",
+  "authority": "Official Pukas model descriptions and governed Quivrr catalogue records",
+  "governance": {
+    "public_family_reflects": "primary manufacturer design intent",
+    "detailed_category_reflects": "specific construction and performance lane",
+    "dna_role": "behavioural description only"
+  },
+  "models": [
+    {"canonical_model_id":8057,"model":"Pegaso","public_family":"fish","detailed_category":"performance_fish","reason":"Pukas and Christenson position Pegaso as a performance-based twin that retains fish glide and drive while supporting a more vertical approach.","confidence":"high"},
+    {"canonical_model_id":8059,"model":"Pukas All-Round Longboard","public_family":"longboard","detailed_category":"all_round_longboard","reason":"The model is explicitly designed as an easy, versatile longboard across varied conditions, with trim, movement and manoeuvrability as its core role.","confidence":"high"},
+    {"canonical_model_id":8060,"model":"Pukas Beachy Mood","public_family":"daily_driver","detailed_category":"beach_break_daily_driver","reason":"Beachy Mood is expressly positioned as a daily surf companion for easy, versatile performance in small to medium beach breaks.","confidence":"high"},
+    {"canonical_model_id":8061,"model":"Pukas Easy Mood","public_family":"groveller","detailed_category":"forgiving_performance_groveller","reason":"Its step-down sizing, generous nose, wide tail, lazy rocker and softer-wave focus make weak-wave speed and ease the primary design role.","confidence":"high"},
+    {"canonical_model_id":8062,"model":"Pukas Fish","public_family":"fish","detailed_category":"performance_fish","reason":"This is explicitly an old-school fish adapted for modern pocket surfing, retaining fish identity while adding rocker, lower rails and vertical capability.","confidence":"high"},
+    {"canonical_model_id":8063,"model":"Pukas Flying Diamond","public_family":"daily_driver","detailed_category":"alternative_twin_daily_driver","reason":"Flying Diamond is an easy-riding, performance-oriented twin with broad travel and beach-break range rather than a fish-first design identity.","confidence":"high"},
+    {"canonical_model_id":8056,"model":"Pukas Hyperlink","public_family":"daily_driver","detailed_category":"performance_hybrid_daily_driver","reason":"The Biolos collaboration is a racey hybrid-performance board for European waves, balancing paddle support, speed and responsiveness across everyday conditions.","confidence":"high"},
+    {"canonical_model_id":8064,"model":"Pukas Magnetic","public_family":"mid_length","detailed_category":"performance_twin_mid_length","reason":"Magnetic is explicitly a medium-to-long twin-fin platform combining glide, flow and modern performance for moderate to powerful waves.","confidence":"high"},
+    {"canonical_model_id":8065,"model":"Pukas Mustache","public_family":"fish","detailed_category":"performance_fish","reason":"Mustache is a new-school fish concept using twin or two-plus-one setups, fish speed and a winged swallow while adding stronger vertical control.","confidence":"high"},
+    {"canonical_model_id":8058,"model":"Pukas Performance Mood","public_family":"performance_shortboard","detailed_category":"high_performance_shortboard","reason":"Pukas describes Performance Mood as a high-performance surfboard for vertical lines, rail surfing, speed and modern manoeuvres, not a general hybrid fallback.","confidence":"high"},
+    {"canonical_model_id":8066,"model":"Pukas Space Oddity","public_family":"daily_driver","detailed_category":"one_board_quiver_daily_driver","reason":"Space Oddity is explicitly presented as a one-board quiver combining paddle power, ease, broad range and high-performance control.","confidence":"high"},
+    {"canonical_model_id":8068,"model":"Pukas Water Lion","public_family":"step_up","detailed_category":"performance_step_up","reason":"Water Lion is designed for solid European surf and sits deliberately between a performance shortboard and step-up, with hollow-wave control defining the primary role.","confidence":"high"},
+    {"canonical_model_id":8067,"model":"Pukas Water Lion Ultra","public_family":"performance_shortboard","detailed_category":"good_wave_high_performance_shortboard","reason":"The Ultra is the sharper pro-level extension of Water Lion for skilled surfers in serious waves, prioritising refined high-performance response over general step-up paddle support.","confidence":"high"}
+  ],
+  "review_notes": [
+    "All 13 governed Pukas models have an explicit public family and detailed category.",
+    "Easy Mood was moved out of the broad Daily Driver fallback because softer-wave ease and step-down performance are its primary role.",
+    "Performance Mood was moved to Performance Shortboard because Pukas explicitly defines it through high-performance surfing intent.",
+    "Water Lion remains Step Up, while Water Lion Ultra is treated as the sharper good-wave performance shortboard variant.",
+    "Twin-fin configuration alone does not create Fish classification; manufacturer intent and overall design role remain authoritative."
+  ]
+}
