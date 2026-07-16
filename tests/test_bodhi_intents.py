@@ -246,6 +246,22 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertIn("Lost RNF 96", body["reply"])
         self.assertNotIn("Rusty What", body["reply"])
 
+    def test_typo_stock_request_asks_for_board_scope_without_restarting_intake(self):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "whts in stok indo", "region": "ID",
+        }).json()
+        self.assertEqual(body["intent"], "board_search_request")
+        self.assertIn("verified stock in Indonesia", body["reply"])
+        self.assertNotIn("rough weight", body["reply"])
+
+    def test_reset_this_conversation_returns_a_fresh_start(self):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "Reset this conversation", "region": "AU",
+        }).json()
+        self.assertEqual(body["legacyIntent"], "greeting_request")
+        self.assertIn("Fresh start", body["reply"])
+        self.assertEqual(body["recommendations"], [])
+
     @patch("main.locate_exact_board", return_value=([], False))
     def test_unavailable_christenson_fish_is_explained_without_inventing_stock(self, _locate):
         response = self.client.post("/api/board-guide/chat", json={

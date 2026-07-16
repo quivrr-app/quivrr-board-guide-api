@@ -145,7 +145,7 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("GREETING", "greeting_request", 0.96, entities)
     if re.search(r"\b(?:ignore|reveal|show|print)\b.*\b(?:system prompt|developer message|instructions|taxonomy rules?)\b", text):
         return IntentResult("PROMPT_INJECTION", "site_help_question", 0.99, entities)
-    if re.fullmatch(r"(?:reset|start over|new conversation|clear (?:the )?chat|forget this conversation)[!. ]*", text):
+    if re.fullmatch(r"(?:reset(?: this conversation)?|start over|new conversation|clear (?:the )?chat|forget this conversation)[!. ]*", text):
         return IntentResult("CONVERSATION_RESET", "greeting_request", 0.98, entities)
     if re.search(r"\b(?:what(?:'s| is) my name|whats my name|who am i|do you know my name)\b", text):
         return IntentResult("IDENTITY_QUESTION", "site_help_question", 0.99, entities)

@@ -891,6 +891,11 @@ def board_guide_chat(
         comparison_boards_override = state_follow_up.get("comparison_boards")
         reply = state_follow_up["reply"]
         questions = state_follow_up.get("questions", [])
+    elif intent == "AVAILABILITY" and legacy_intent == "board_search_request" and not category and not requested_board:
+        suggested_boards = []
+        region_name = {"AU": "Australia", "EU": "Europe", "ID": "Indonesia", "US": "the United States"}.get(profile.region or request.region, "your region")
+        reply = f"I can check verified stock in {region_name}. Are you after a fish, daily driver, performance shortboard, mid-length, or a specific brand and model?"
+        questions = ["Which board type, brand, or model should I check?"]
     elif legacy_intent == "greeting_request":
         suggested_boards = []
         reply = personalise_opening(greeting_reply(profile.region), profile, is_first_turn=is_first_turn)
