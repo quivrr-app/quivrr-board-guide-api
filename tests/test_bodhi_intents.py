@@ -267,9 +267,9 @@ class BodhiIntentApiTests(unittest.TestCase):
         body = self.client.post("/api/board-guide/chat", json={
             "message": "I want a traditional fish for small waves", "region": "ID",
         }).json()
-        self.assertEqual(body["category"], "fish")
+        self.assertEqual(body["category"], "traditional_fish")
         self.assertTrue(body["recommendations"])
-        self.assertTrue(all(row["category"] in {"Fish", "Performance Fish", "Traditional Fish"} for row in body["recommendations"]))
+        self.assertTrue(all(row["category"] in {"Fish", "Traditional Fish"} for row in body["recommendations"]))
 
     @patch("main.locate_exact_board", return_value=([], False))
     def test_unavailable_christenson_fish_is_explained_without_inventing_stock(self, _locate):

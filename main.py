@@ -168,6 +168,8 @@ def _profile_field_source(profile, field: str) -> str:
 
 
 def _recommendation_lane(category: str | None, profile) -> str | None:
+    if category in {"traditional_fish", "performance_fish"}:
+        return category
     if category == "fish":
         if "reef" in (profile.wave_type or "").lower():
             return "performance_fish"
@@ -225,8 +227,11 @@ def _category_ranking_profile(profile, message: str, category: str | None):
 
     if "performance twin" in lowered or ("twin" in lowered and "performance" in lowered):
         updates["preferred_board_type"] = "Performance Twin"
-    elif category == "fish":
-        updates["preferred_board_type"] = "Fish"
+    elif category in {"fish", "traditional_fish", "performance_fish"}:
+        updates["preferred_board_type"] = {
+            "traditional_fish": "Traditional Fish",
+            "performance_fish": "Performance Fish",
+        }.get(category, "Fish")
     elif category in {"daily_driver", "performance_daily_driver"}:
         updates["preferred_board_type"] = "Performance Daily Driver"
     elif category == "performance_shortboard":
@@ -259,6 +264,10 @@ def _verified_in_stock(boards):
 
 def _shortlist_family_buckets(category: str | None, profile, message: str) -> tuple[set[str], set[str]]:
     lowered = (message or "").lower()
+    if category == "traditional_fish":
+        return {"Fish", "Traditional Fish"}, set()
+    if category == "performance_fish":
+        return {"Performance Fish"}, set()
     if category == "fish":
         if "reef" in lowered or "reef" in (profile.wave_type or "").lower():
             return {"Performance Fish", "Performance Twin", "Fish"}, set()
