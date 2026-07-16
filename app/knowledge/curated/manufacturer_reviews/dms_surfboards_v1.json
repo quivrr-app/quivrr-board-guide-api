@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "manufacturer": "DMS Surfboards",
+  "review_status": "complete",
+  "reviewed_date": "2026-07-17",
+  "authority": "Official DMS catalogue material and governed Quivrr catalogue records",
+  "governance": {
+    "public_family_reflects": "primary manufacturer design intent",
+    "detailed_category_reflects": "specific construction and performance lane",
+    "dna_role": "behavioural description only"
+  },
+  "models": [
+    {
+      "canonical_model_id": 3717,
+      "model": "Carny",
+      "public_family": "daily_driver",
+      "detailed_category": "performance_daily_driver",
+      "reason": "DMS positions the Carny as a high-performance all-rounder for average to better waves, combining easy paddling and everyday range with a sharper performance response.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 3712,
+      "model": "Gherkin",
+      "public_family": "groveller",
+      "detailed_category": "small_wave_performance_groveller",
+      "reason": "The pocket-rocket outline, low rocker, distributed rail volume and quick pivoting tail are explicitly directed at creating speed and manoeuvrability in small surf.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 3713,
+      "model": "Seahawk",
+      "public_family": "daily_driver",
+      "detailed_category": "alternative_twin_daily_driver",
+      "reason": "The Seahawk is a versatile twin-fin platform for one-to-six-foot surf, with speed, flow and easy rotation defining a broad everyday alternative rather than a fish-first identity.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 3714,
+      "model": "Stilnox",
+      "public_family": "groveller",
+      "detailed_category": "mini_simmons_performance_groveller",
+      "reason": "Its mini-Simmons influence, playful pointy-twin layout, speed and compact fun-wave brief place it in the groveller lane despite its more refined rails and added performance range.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 3718,
+      "model": "Supercell",
+      "public_family": "performance_shortboard",
+      "detailed_category": "high_performance_shortboard",
+      "reason": "DMS describes the Supercell as a true high-performance shortboard with stronger rocker, deeper concave and vertical surfing intent for average to better quality waves.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 3716,
+      "model": "Thunderbird",
+      "public_family": "daily_driver",
+      "detailed_category": "all_round_daily_driver",
+      "reason": "The fuller outline, low rocker and broad range from weaker onshore surf to larger waves make the Thunderbird an explicit all-round performance daily driver.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 3719,
+      "model": "X-Wing",
+      "public_family": "daily_driver",
+      "detailed_category": "performance_daily_driver",
+      "reason": "The X-Wing adds a more aggressive channel and flyer concept to Supercell DNA while remaining deliberately more accessible and controllable than an ultra-demanding HPSB.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 3715,
+      "model": "Zephyr",
+      "public_family": "daily_driver",
+      "detailed_category": "alternative_single_fin_daily_driver",
+      "reason": "Its modernised 1970s single-fin design emphasises stable take-offs, trim speed, glide and smooth everyday turns rather than high-performance, fish or mid-length identity.",
+      "confidence": "high"
+    }
+  ],
+  "review_notes": [
+    "All eight governed DMS models have an explicit public family and detailed category.",
+    "Gherkin and Stilnox were moved out of the broad Daily Driver fallback because compact small-wave speed generation is their primary role.",
+    "Supercell was moved to Performance Shortboard because DMS explicitly presents it as a true high-performance design.",
+    "Seahawk remains Daily Driver as an alternative twin because its broad one-to-six-foot versatility is stronger than any fish-specific design identity.",
+    "Construction technology such as Carbon Wrap or Injection Tech may change flex and wave suitability but does not change the underlying board family."
+  ]
+}
