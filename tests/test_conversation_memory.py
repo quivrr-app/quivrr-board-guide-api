@@ -89,8 +89,9 @@ class ConversationMemoryTests(unittest.TestCase):
         response = self.client.post("/api/board-guide/chat", json={"message": "The El Patron is a step up."})
         self.assertEqual(response.status_code, 200)
         body = response.json()
-        self.assertIn("step up", body["reply"].lower())
-        self.assertEqual(body["conversationState"]["activeBoardBrief"]["public_family"], "step_up")
+        self.assertIn("performance shortboard", body["reply"].lower())
+        self.assertIn("large rider high performance shortboard", body["reply"].lower())
+        self.assertEqual(body["conversationState"]["activeBoardBrief"]["public_family"], "performance_shortboard")
 
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: rows)
     def test_tradeoff_uses_active_top_two_and_reset_stops_stale_recommendations(self, _inventory):

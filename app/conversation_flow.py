@@ -310,13 +310,20 @@ def board_family_reply(board: dict, requested_family: str) -> str:
     expert = find_matrix_board(board["brand"], board["model"])
     if not expert:
         return f"I know the {board['brand']} {board['model']}, but its expert classification still needs review."
-    lanes = {expert["primaryLane"], *expert.get("secondaryLanes", []), *expert.get("boardLanes", [])}
-    if requested_family == "fish" and not any("fish" in lane or "twin_fin" in lane for lane in lanes):
+    public_family = expert.get("publicFamily")
+    family_label = (public_family or "unclassified").replace("_", " ").title()
+    detailed = expert.get("detailedCategory") or expert.get("primaryFamily") or "Unclassified"
+    fins = expert.get("finSetup") or []
+    fin_text = f" Its primary fin setup is {fins[0]}." if fins else ""
+    if requested_family == "fish" and public_family != "fish":
         return (
-            f"No. The {board['brand']} {board['model']} is more {expert['primaryLane'].replace('_', ' ')} "
-            "than a true fish. It may share easy speed or versatility, but it does not sit in the proper fish/twin lane."
+            f"No. Quivrr classifies {board['brand']} {board['model']} as {family_label}, "
+            f"with the detailed category {detailed}.{fin_text} Fin setup and public family are separate."
         )
-    return f"Yes. The {board['brand']} {board['model']} sits in the {expert['primaryLane'].replace('_', ' ')} lane."
+    return (
+        f"Yes. Quivrr classifies {board['brand']} {board['model']} as {family_label}, "
+        f"with the detailed category {detailed}.{fin_text}"
+    )
 
 
 def graph_suggestions(profile: RiderProfile, relation: str) -> list[SuggestedBoard]:

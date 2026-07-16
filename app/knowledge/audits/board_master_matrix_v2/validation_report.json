@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "validated_at_utc": "2026-07-16T21:57:32Z",
+  "validated_at_utc": "2026-07-16T22:43:00Z",
   "valid": true,
   "errors": [],
   "model_count": 431,
@@ -37,8 +37,8 @@
   },
   "by_public_family": {
     "daily_driver": 164,
-    "fish": 44,
-    "groveller": 28,
+    "fish": 45,
+    "groveller": 27,
     "longboard": 13,
     "mid_length": 46,
     "performance_shortboard": 99,

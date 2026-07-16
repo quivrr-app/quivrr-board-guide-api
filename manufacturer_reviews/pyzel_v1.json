@@ -1114,7 +1114,8 @@
       "recommendation_lanes": [
         "performance_shortboard",
         "good_wave",
-        "competition"
+        "competition",
+        "competition_hpsb"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -1308,7 +1309,9 @@
       },
       "recommendation_lanes": [
         "daily_driver",
-        "everyday"
+        "everyday",
+        "performance_shortboard",
+        "quality_wave_high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -1329,7 +1332,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "powerful_wave",
@@ -1500,7 +1502,8 @@
       "recommendation_lanes": [
         "performance_shortboard",
         "good_wave",
-        "competition"
+        "competition",
+        "large_rider_high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -1695,7 +1698,8 @@
       "recommendation_lanes": [
         "groveller",
         "small_wave",
-        "weak_wave"
+        "weak_wave",
+        "performance_softboard_groveller"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -4136,7 +4140,9 @@
       "recommendation_lanes": [
         "hybrid_shortboard",
         "daily_driver",
-        "forgiving_shortboard"
+        "forgiving_shortboard",
+        "performance_shortboard",
+        "quality_wave_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -4156,7 +4162,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "powerful_wave",
@@ -4322,7 +4327,9 @@
       "recommendation_lanes": [
         "step_up",
         "powerful_wave",
-        "hollow_wave"
+        "hollow_wave",
+        "performance_shortboard",
+        "youth_quality_wave_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -4344,7 +4351,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "small_wave",

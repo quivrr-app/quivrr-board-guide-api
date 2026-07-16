@@ -6,6 +6,8 @@ from pathlib import Path
 import re
 from typing import Any
 
+from app.board_master import load_board_master, master_dna_record
+
 
 DNA_PATH = Path(__file__).resolve().parent / "knowledge" / "board_dna_v1.json"
 PHRASES_PATH = Path(__file__).resolve().parent / "knowledge" / "curated" / "dna_intent_phrases.json"
@@ -13,15 +15,15 @@ CONFIDENCE_WEIGHT = {"high": 1.0, "medium": 0.94, "low": 0.82}
 
 
 def _key(value: str | None) -> str:
-    return re.sub(r"[^a-z0-9]+", " ", (value or "").lower()).strip()
+    return re.sub(r"[^a-z0-9]+", " ", (value or "").lower().replace("&", " and ")).strip()
 
 
 @lru_cache(maxsize=1)
 def load_board_dna() -> dict:
-    payload = json.loads(DNA_PATH.read_text(encoding="utf-8"))
-    if payload.get("model_count") != len(payload.get("models", [])):
-        raise ValueError("Board DNA model_count does not match models")
-    return payload
+    legacy_payload = json.loads(DNA_PATH.read_text(encoding="utf-8"))
+    legacy = {int(row["canonical_model_id"]): row for row in legacy_payload.get("models", [])}
+    models = [master_dna_record(row, legacy.get(int(row["canonical_model_id"]))) for row in load_board_master()["models"]]
+    return {"schema_version": 2, "model_count": len(models), "authority": "quivrr_board_master_matrix_v2", "models": models}
 
 
 @lru_cache(maxsize=1)

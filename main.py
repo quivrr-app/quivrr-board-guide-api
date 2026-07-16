@@ -1095,6 +1095,21 @@ def board_guide_chat(
         else:
             reply = general_board_reply(request.message)
         questions = []
+    elif legacy_intent == "general_board_question" and requested_board and re.search(r"\b(?:fin|fins|fin setup|thruster|quad|twin)\b", request.message.lower()):
+        suggested_boards = []
+        dna = find_board_dna(requested_board["brand"], requested_board["model"])
+        if dna:
+            alternatives = dna.get("alternative_fin_setup") or []
+            alternative_text = f" It also supports {', '.join(alternatives)}." if alternatives else ""
+            reply = (
+                f"{dna['brand']} {dna['model']} uses {dna['primary_fin_setup']} as its primary fin setup."
+                f"{alternative_text} Quivrr classifies the board as "
+                f"{dna['public_family'].replace('_', ' ').title()}, with the detailed category "
+                f"{dna['primary_category'].replace('_', ' ').title()}; fin setup and family are separate."
+            )
+        else:
+            reply = general_board_reply(request.message)
+        questions = []
     elif legacy_intent == "general_board_question" and requested_board and "fish" in request.message.lower():
         suggested_boards = []
         reply = board_family_reply(requested_board, "fish")

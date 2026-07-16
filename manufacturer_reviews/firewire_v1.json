@@ -1157,15 +1157,17 @@
         "groveller"
       ],
       "unresolved_intent_conflict": false,
-      "public_family": "groveller",
-      "public_family_label": "Groveller",
-      "detailed_category": "Small Wave Performance Twin",
+      "public_family": "fish",
+      "public_family_label": "Fish",
+      "detailed_category": "Performance Fish",
       "secondary_categories": [
         "groveller"
       ],
-      "board_type": "Groveller",
+      "board_type": "Fish",
       "primary_fin_setup": "Twin",
-      "alternative_fin_setup": [],
+      "alternative_fin_setup": [
+        "Twin + Trailer"
+      ],
       "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "round"
@@ -1205,7 +1207,7 @@
         "forgiveness",
         "stability"
       ],
-      "typical_customer": "Intermediate to Expert surfer seeking a small wave performance twin.",
+      "typical_customer": "Intermediate to Expert surfer seeking a performance fish.",
       "board_dna": {
         "physical_design": {
           "outline": "narrow",
@@ -1272,6 +1274,8 @@
       },
       "recommendation_lanes": [
         "performance_twin",
+        "performance_fish",
+        "fish",
         "alternative",
         "daily_driver"
       ],
@@ -1280,7 +1284,6 @@
         "big_wave",
         "competition",
         "everyday",
-        "fish",
         "flow",
         "forgiving_shortboard",
         "good_wave",
@@ -1292,7 +1295,6 @@
         "mid_length",
         "paddle_support",
         "performance_daily_driver",
-        "performance_fish",
         "performance_mid_length",
         "performance_shortboard",
         "point_break",
@@ -1306,8 +1308,7 @@
         "weak_wave"
       ],
       "editorial_notes": [
-        "Curated public-family authority: High-performance grovelling and weak-wave speed generation are the explicit primary role.",
-        "Firewire explicitly describes Great White Twin as a high-performance groveller with hybrid paddle support and shortboard rail performance."
+        "Quivrr classifies Great White Twin as a Performance Fish: its modern fish lineage and twin-fin platform determine identity, while Firewire's high-performance groveller positioning describes its small-wave capability."
       ],
       "confidence": "high",
       "review_required": false,
@@ -1353,7 +1354,7 @@
         "Twin",
         "Two Plus One"
       ],
-      "fin_configuration_source": "governed_dna_fallback",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "pin"
       ],
@@ -1471,7 +1472,8 @@
       "recommendation_lanes": [
         "mid_length",
         "paddle_support",
-        "flow"
+        "flow",
+        "crossover_mid_length"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -2589,7 +2591,8 @@
       "recommendation_lanes": [
         "mid_length",
         "paddle_support",
-        "flow"
+        "flow",
+        "performance_mid_length_step_up_twin"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -5018,7 +5021,9 @@
       "recommendation_lanes": [
         "step_up",
         "powerful_wave",
-        "hollow_wave"
+        "hollow_wave",
+        "mid_length",
+        "performance_mid_length"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -5035,11 +5040,9 @@
         "gun",
         "hybrid_shortboard",
         "longboard",
-        "mid_length",
         "paddle_support",
         "performance_daily_driver",
         "performance_fish",
-        "performance_mid_length",
         "performance_shortboard",
         "performance_twin",
         "point_break",
@@ -5279,7 +5282,7 @@
         "Thruster",
         "Quad"
       ],
-      "fin_configuration_source": "official_manufacturer_text",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "squash"
       ],
@@ -5395,7 +5398,8 @@
       "recommendation_lanes": [
         "mid_length",
         "paddle_support",
-        "flow"
+        "flow",
+        "easy_riding_mid_length"
       ],
       "excluded_recommendation_lanes": [
         "alternative",

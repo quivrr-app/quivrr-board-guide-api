@@ -2945,7 +2945,9 @@
       "recommendation_lanes": [
         "hybrid_shortboard",
         "daily_driver",
-        "forgiving_shortboard"
+        "forgiving_shortboard",
+        "step_up",
+        "reef_and_barrel_step_up"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -2972,7 +2974,6 @@
         "small_wave",
         "small_wave_shortboard",
         "softboard",
-        "step_up",
         "traditional_fish",
         "twin_pin",
         "weak_wave"
@@ -3131,7 +3132,8 @@
       "recommendation_lanes": [
         "performance_shortboard",
         "good_wave",
-        "competition"
+        "competition",
+        "high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -4816,7 +4818,9 @@
       "recommendation_lanes": [
         "hybrid_shortboard",
         "daily_driver",
-        "forgiving_shortboard"
+        "forgiving_shortboard",
+        "performance_shortboard",
+        "forgiving_high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -4836,7 +4840,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "powerful_wave",

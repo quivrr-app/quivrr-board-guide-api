@@ -1723,7 +1723,7 @@
       "board_type": "Mid Length",
       "primary_fin_setup": "Twin",
       "alternative_fin_setup": [],
-      "fin_configuration_source": "manufacturer_intent_category_default",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "swallow"
       ],
@@ -1838,7 +1838,9 @@
         "fish",
         "performance_fish",
         "small_wave",
-        "daily_driver"
+        "daily_driver",
+        "mid_length",
+        "performance_mid_length"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -1854,10 +1856,8 @@
         "hollow_wave",
         "hybrid_shortboard",
         "longboard",
-        "mid_length",
         "paddle_support",
         "performance_daily_driver",
-        "performance_mid_length",
         "performance_shortboard",
         "performance_twin",
         "point_break",
@@ -2674,7 +2674,7 @@
       "board_type": "Mid Length",
       "primary_fin_setup": "Thruster",
       "alternative_fin_setup": [],
-      "fin_configuration_source": "manufacturer_intent_category_default",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "asym"
       ],
@@ -2789,7 +2789,9 @@
       "recommendation_lanes": [
         "step_up",
         "powerful_wave",
-        "hollow_wave"
+        "hollow_wave",
+        "mid_length",
+        "performance_mid_length_step_up"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -2806,7 +2808,6 @@
         "gun",
         "hybrid_shortboard",
         "longboard",
-        "mid_length",
         "paddle_support",
         "performance_daily_driver",
         "performance_fish",

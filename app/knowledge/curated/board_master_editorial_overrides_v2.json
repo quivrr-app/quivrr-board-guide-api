@@ -78,6 +78,10 @@
       "board_type": "Fish",
       "primary_fin_setup": "Twin",
       "alternative_fin_setup": ["Twin + Trailer"],
+      "recommendation_lanes": ["performance_twin", "performance_fish", "fish", "alternative", "daily_driver"],
+      "editorial_notes": [
+        "Quivrr classifies Great White Twin as a Performance Fish: its modern fish lineage and twin-fin platform determine identity, while Firewire's high-performance groveller positioning describes its small-wave capability."
+      ],
       "reason": "The Great White Twin is fundamentally a modern twin-fin fish. Firewire's high-performance groveller wording describes its weak-wave capability and performance range, while its board lineage, twin-fin platform and fish design identity determine the public family."
     },
     {

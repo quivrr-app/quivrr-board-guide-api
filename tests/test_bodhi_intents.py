@@ -234,7 +234,8 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertEqual(body["intent"], "general_board_question")
         self.assertIn("No.", body["reply"])
         self.assertIn("Hypto Krypto", body["reply"])
-        self.assertIn("hybrid daily driver", body["reply"])
+        self.assertIn("daily driver", body["reply"].lower())
+        self.assertIn("hybrid shortboard", body["reply"].lower())
 
     def test_ghost_type_question_uses_governed_public_family(self):
         body = self.client.post("/api/board-guide/chat", json={

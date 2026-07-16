@@ -96,7 +96,7 @@
     "profile": {"age": 43, "weight_kg": 92, "ability": "Advanced", "preferred_board_type": "Performance shortboard", "goal": "More support", "wave_power": "Powerful", "wave_type": "Point Break", "surf_frequency": 1, "fitness": "Average", "paddle_strength": "Average", "target_volume_litres": 33.5},
     "allowed_families": ["Performance Shortboard", "Performance Daily Driver", "High Performance Shortboard"],
     "excluded_families": ["Performance Twin", "Fish"],
-    "required_models": ["Ghost XL"],
+    "required_models": ["Phantom XL"],
     "variant_preference": "prefer_xl"
   },
   {

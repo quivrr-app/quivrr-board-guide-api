@@ -9,6 +9,7 @@ from app.models import RiderProfile, SuggestedBoard
 from app.rider_fit import recommend_rider_fit
 from app.board_taxonomy import allows_category, requested_category, taxonomy_by_id
 from app.board_dna import find_board_dna_by_id, resolve_dna_brief, score_dna_fit, explain_dna_fit
+from app.board_master import overlay_expert_board
 
 
 MATRIX_PATH = Path(__file__).parent / "knowledge/generated/board_expert_matrix.json"
@@ -99,7 +100,7 @@ FIN_COMPATIBILITY = {
 
 
 def _key(value: str | None) -> str:
-    return re.sub(r"[^a-z0-9]+", " ", (value or "").lower()).strip()
+    return re.sub(r"[^a-z0-9]+", " ", (value or "").lower().replace("&", " and ")).strip()
 
 
 def _normalise_text(*values: str | None) -> str:
@@ -164,7 +165,7 @@ def _support_needs(profile: RiderProfile) -> int:
 
 @lru_cache(maxsize=1)
 def load_matrix() -> list[dict]:
-    return json.loads(MATRIX_PATH.read_text(encoding="utf-8-sig")).get("boards", [])
+    return [overlay_expert_board(row) for row in json.loads(MATRIX_PATH.read_text(encoding="utf-8-sig")).get("boards", [])]
 
 
 def find_matrix_board(brand: str, model: str) -> dict | None:
@@ -412,6 +413,9 @@ def _ability_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[fl
             return score, reasons, exclusions
 
     if minimum_rank is not None and surfer_rank < minimum_rank:
+        if minimum_rank - surfer_rank >= 2:
+            exclusions.append("Rider ability is materially below the governed minimum for this model.")
+            return score, reasons, exclusions
         score -= 25
     else:
         score += 18

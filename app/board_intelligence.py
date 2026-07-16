@@ -7,6 +7,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from app.daily_driver_taxonomy import daily_driver_lane
+from app.board_master import category_key, find_master_board, find_master_board_by_id
 
 
 KNOWLEDGE_DIR = Path(__file__).parent / "knowledge"
@@ -52,6 +53,8 @@ class BoardIntelligenceRecord:
     quiver_roles: tuple[str, ...] = ()
     strengths: tuple[str, ...] = ()
     trade_offs: tuple[str, ...] = ()
+    recommendation_lanes: tuple[str, ...] = ()
+    excluded_recommendation_lanes: tuple[str, ...] = ()
     sizes: tuple[BoardSize, ...] = ()
     volume_min_litres: float | None = None
     volume_max_litres: float | None = None
@@ -270,6 +273,7 @@ def _build_records() -> dict[str, BoardIntelligenceRecord]:
         graph = by_key_graph.get(key) or {}
         relationships_row = by_key_relationships.get(key) or {}
         curated = by_key_curated.get(key) or {}
+        master = find_master_board_by_id(board_model_id) or find_master_board(profile.get("brand"), profile.get("model"))
 
         identity = canonical.get("identity") or {}
         description = canonical.get("description") or {}
@@ -290,14 +294,14 @@ def _build_records() -> dict[str, BoardIntelligenceRecord]:
         size_volume_min, size_volume_max = _sizes_volume_range(sizes)
         generated_volume_min, generated_volume_max = _volume_range_from_generated(generated)
 
-        category_value = (
+        category_value = (master.get("board_type") if master else None) or (
             curated.get("category")
             or generated.get("category")
             or category.get("manufacturerCategory")
             or category.get("primaryCategory")
             or profile.get("category")
         )
-        primary_category = category.get("primaryCategory") or graph.get("primaryCategory")
+        primary_category = category_key(master["detailed_category"]) if master else (category.get("primaryCategory") or graph.get("primaryCategory"))
         source_confidence = max(
             _confidence_value(curated.get("confidence")),
             _confidence_value(description.get("descriptionConfidence")),
@@ -316,15 +320,16 @@ def _build_records() -> dict[str, BoardIntelligenceRecord]:
             board_model_id=board_model_id,
             category=category_value,
             primary_category=primary_category,
-            lane=daily_driver_lane(profile.get("brand"), profile.get("model")),
-            description=description_text or None,
+            lane=((master.get("recommendation_lanes") or [None])[0] if master else daily_driver_lane(profile.get("brand"), profile.get("model"))),
+            description=(master.get("manufacturer_intent") if master else description_text) or None,
             short_description=(
                 curated.get("short_description")
                 or generated.get("short_description")
                 or description.get("shortDescription")
             ),
             official_product_url=(
-                curated.get("official_product_url")
+                (master.get("official_url") if master else None)
+                or curated.get("official_product_url")
                 or generated.get("official_product_url")
                 or identity.get("sourceUrl")
                 or profile.get("official_product_url")
@@ -335,7 +340,7 @@ def _build_records() -> dict[str, BoardIntelligenceRecord]:
                 or identity.get("sourceType")
                 or profile.get("description_source_type")
             ),
-            source_confidence=round(source_confidence, 2),
+            source_confidence=1.0 if master and master.get("confidence") == "high" else round(source_confidence, 2),
             curated=bool(curated),
             graph_eligible=bool(graph),
             classified=bool(primary_category or category_value not in {None, "", "Surfboard"}),
@@ -344,16 +349,22 @@ def _build_records() -> dict[str, BoardIntelligenceRecord]:
             model_generation=_metadata_model_generation(profile.get("model") or "", metadata, curated),
             is_current_model=_metadata_current_flag(profile.get("model") or "", description_text, metadata, curated),
             is_discontinued=_metadata_discontinued_flag(description_text, metadata, curated),
-            ability_tags=_text_list(
-                curated.get("ability_tags"),
-                generated.get("ability_tags"),
-                generated.get("skill_level"),
-                surfer.get("surferProfiles"),
-                surfer.get("abilityMin"),
-                surfer.get("abilityMax"),
+            ability_tags=(
+                _text_list(master.get("ability_range"))
+                if master else _text_list(
+                    curated.get("ability_tags"),
+                    generated.get("ability_tags"),
+                    generated.get("skill_level"),
+                    surfer.get("surferProfiles"),
+                    surfer.get("abilityMin"),
+                    surfer.get("abilityMax"),
+                )
             ),
             wave_tags=_text_list(curated.get("wave_tags"), generated.get("wave_tags")),
-            wave_types=_text_list(generated.get("wave_type"), wave.get("waveTypes")),
+            wave_types=(
+                _text_list(master.get("wave_type"))
+                if master else _text_list(generated.get("wave_type"), wave.get("waveTypes"))
+            ),
             feel_tags=_text_list(curated.get("feel_tags"), generated.get("feel_tags")),
             wave_height_min_ft=_coerce_float(wave.get("waveHeightMinFt")),
             wave_height_max_ft=_coerce_float(wave.get("waveHeightMaxFt")),
@@ -363,8 +374,16 @@ def _build_records() -> dict[str, BoardIntelligenceRecord]:
                 if isinstance(value, (int, float))
             },
             quiver_roles=_text_list(graph.get("quiverRole"), curated.get("goal_tags")),
-            strengths=_text_list(graph.get("strengths")),
-            trade_offs=_text_list(curated.get("trade_offs"), generated.get("trade_offs"), graph.get("tradeOffs")),
+            strengths=(
+                _text_list(master.get("strengths"))
+                if master else _text_list(graph.get("strengths"))
+            ),
+            trade_offs=(
+                _text_list(master.get("weaknesses"))
+                if master else _text_list(curated.get("trade_offs"), generated.get("trade_offs"), graph.get("tradeOffs"))
+            ),
+            recommendation_lanes=_text_list(master.get("recommendation_lanes") if master else None),
+            excluded_recommendation_lanes=_text_list(master.get("excluded_recommendation_lanes") if master else None),
             sizes=sizes,
             volume_min_litres=generated_volume_min if generated_volume_min is not None else size_volume_min,
             volume_max_litres=generated_volume_max if generated_volume_max is not None else size_volume_max,

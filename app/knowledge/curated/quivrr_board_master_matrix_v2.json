@@ -1732,7 +1732,7 @@
       "board_type": "Mid Length",
       "primary_fin_setup": "Twin",
       "alternative_fin_setup": [],
-      "fin_configuration_source": "manufacturer_intent_category_default",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "swallow"
       ],
@@ -1847,7 +1847,9 @@
         "fish",
         "performance_fish",
         "small_wave",
-        "daily_driver"
+        "daily_driver",
+        "mid_length",
+        "performance_mid_length"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -1863,10 +1865,8 @@
         "hollow_wave",
         "hybrid_shortboard",
         "longboard",
-        "mid_length",
         "paddle_support",
         "performance_daily_driver",
-        "performance_mid_length",
         "performance_shortboard",
         "performance_twin",
         "point_break",
@@ -2683,7 +2683,7 @@
       "board_type": "Mid Length",
       "primary_fin_setup": "Thruster",
       "alternative_fin_setup": [],
-      "fin_configuration_source": "manufacturer_intent_category_default",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "asym"
       ],
@@ -2798,7 +2798,9 @@
       "recommendation_lanes": [
         "step_up",
         "powerful_wave",
-        "hollow_wave"
+        "hollow_wave",
+        "mid_length",
+        "performance_mid_length_step_up"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -2815,7 +2817,6 @@
         "gun",
         "hybrid_shortboard",
         "longboard",
-        "mid_length",
         "paddle_support",
         "performance_daily_driver",
         "performance_fish",
@@ -6532,7 +6533,9 @@
       "recommendation_lanes": [
         "hybrid_shortboard",
         "daily_driver",
-        "forgiving_shortboard"
+        "forgiving_shortboard",
+        "step_up",
+        "reef_and_barrel_step_up"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -6559,7 +6562,6 @@
         "small_wave",
         "small_wave_shortboard",
         "softboard",
-        "step_up",
         "traditional_fish",
         "twin_pin",
         "weak_wave"
@@ -6718,7 +6720,8 @@
       "recommendation_lanes": [
         "performance_shortboard",
         "good_wave",
-        "competition"
+        "competition",
+        "high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -8403,7 +8406,9 @@
       "recommendation_lanes": [
         "hybrid_shortboard",
         "daily_driver",
-        "forgiving_shortboard"
+        "forgiving_shortboard",
+        "performance_shortboard",
+        "forgiving_high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -8423,7 +8428,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "powerful_wave",
@@ -19439,7 +19443,9 @@
       "recommendation_lanes": [
         "performance_twin",
         "alternative",
-        "daily_driver"
+        "daily_driver",
+        "performance_shortboard",
+        "alternative_performance_twin"
       ],
       "excluded_recommendation_lanes": [
         "beginner",
@@ -19460,7 +19466,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "point_break",
         "powerful_wave",
         "small_wave",
@@ -24355,15 +24360,17 @@
         "groveller"
       ],
       "unresolved_intent_conflict": false,
-      "public_family": "groveller",
-      "public_family_label": "Groveller",
-      "detailed_category": "Small Wave Performance Twin",
+      "public_family": "fish",
+      "public_family_label": "Fish",
+      "detailed_category": "Performance Fish",
       "secondary_categories": [
         "groveller"
       ],
-      "board_type": "Groveller",
+      "board_type": "Fish",
       "primary_fin_setup": "Twin",
-      "alternative_fin_setup": [],
+      "alternative_fin_setup": [
+        "Twin + Trailer"
+      ],
       "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "round"
@@ -24403,7 +24410,7 @@
         "forgiveness",
         "stability"
       ],
-      "typical_customer": "Intermediate to Expert surfer seeking a small wave performance twin.",
+      "typical_customer": "Intermediate to Expert surfer seeking a performance fish.",
       "board_dna": {
         "physical_design": {
           "outline": "narrow",
@@ -24470,6 +24477,8 @@
       },
       "recommendation_lanes": [
         "performance_twin",
+        "performance_fish",
+        "fish",
         "alternative",
         "daily_driver"
       ],
@@ -24478,7 +24487,6 @@
         "big_wave",
         "competition",
         "everyday",
-        "fish",
         "flow",
         "forgiving_shortboard",
         "good_wave",
@@ -24490,7 +24498,6 @@
         "mid_length",
         "paddle_support",
         "performance_daily_driver",
-        "performance_fish",
         "performance_mid_length",
         "performance_shortboard",
         "point_break",
@@ -24504,8 +24511,7 @@
         "weak_wave"
       ],
       "editorial_notes": [
-        "Curated public-family authority: High-performance grovelling and weak-wave speed generation are the explicit primary role.",
-        "Firewire explicitly describes Great White Twin as a high-performance groveller with hybrid paddle support and shortboard rail performance."
+        "Quivrr classifies Great White Twin as a Performance Fish: its modern fish lineage and twin-fin platform determine identity, while Firewire's high-performance groveller positioning describes its small-wave capability."
       ],
       "confidence": "high",
       "review_required": false,
@@ -24551,7 +24557,7 @@
         "Twin",
         "Two Plus One"
       ],
-      "fin_configuration_source": "governed_dna_fallback",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "pin"
       ],
@@ -24669,7 +24675,8 @@
       "recommendation_lanes": [
         "mid_length",
         "paddle_support",
-        "flow"
+        "flow",
+        "crossover_mid_length"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -25787,7 +25794,8 @@
       "recommendation_lanes": [
         "mid_length",
         "paddle_support",
-        "flow"
+        "flow",
+        "performance_mid_length_step_up_twin"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -28216,7 +28224,9 @@
       "recommendation_lanes": [
         "step_up",
         "powerful_wave",
-        "hollow_wave"
+        "hollow_wave",
+        "mid_length",
+        "performance_mid_length"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -28233,11 +28243,9 @@
         "gun",
         "hybrid_shortboard",
         "longboard",
-        "mid_length",
         "paddle_support",
         "performance_daily_driver",
         "performance_fish",
-        "performance_mid_length",
         "performance_shortboard",
         "performance_twin",
         "point_break",
@@ -28477,7 +28485,7 @@
         "Thruster",
         "Quad"
       ],
-      "fin_configuration_source": "official_manufacturer_text",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "squash"
       ],
@@ -28593,7 +28601,8 @@
       "recommendation_lanes": [
         "mid_length",
         "paddle_support",
-        "flow"
+        "flow",
+        "easy_riding_mid_length"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -37423,7 +37432,9 @@
         "fish",
         "performance_fish",
         "small_wave",
-        "daily_driver"
+        "daily_driver",
+        "performance_shortboard",
+        "large_rider_high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -37443,7 +37454,6 @@
         "paddle_support",
         "performance_daily_driver",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "powerful_wave",
@@ -37797,7 +37807,9 @@
       "recommendation_lanes": [
         "performance_twin",
         "alternative",
-        "daily_driver"
+        "daily_driver",
+        "performance_shortboard",
+        "alternative_performance_twin_pin"
       ],
       "excluded_recommendation_lanes": [
         "beginner",
@@ -37818,7 +37830,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "point_break",
         "powerful_wave",
         "small_wave",
@@ -39298,7 +39309,9 @@
       "recommendation_lanes": [
         "performance_twin",
         "alternative",
-        "daily_driver"
+        "daily_driver",
+        "performance_shortboard",
+        "competition_hpsb"
       ],
       "excluded_recommendation_lanes": [
         "beginner",
@@ -39319,7 +39332,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "point_break",
         "powerful_wave",
         "small_wave",
@@ -39865,7 +39877,9 @@
         "fish",
         "performance_fish",
         "small_wave",
-        "daily_driver"
+        "daily_driver",
+        "performance_shortboard",
+        "large_rider_high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -39885,7 +39899,6 @@
         "paddle_support",
         "performance_daily_driver",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "powerful_wave",
@@ -40711,7 +40724,7 @@
       "board_type": "Groveller",
       "primary_fin_setup": "Thruster",
       "alternative_fin_setup": [],
-      "fin_configuration_source": "manufacturer_intent_category_default",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "squash"
       ],
@@ -40827,7 +40840,8 @@
       "recommendation_lanes": [
         "groveller",
         "small_wave",
-        "weak_wave"
+        "weak_wave",
+        "extreme_small_wave_groveller"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -45987,7 +46001,7 @@
       "alternative_fin_setup": [
         "2+1"
       ],
-      "fin_configuration_source": "manufacturer_intent_category_default",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "swallow"
       ],
@@ -46100,7 +46114,8 @@
         "fish",
         "traditional_fish",
         "weak_wave",
-        "flow"
+        "flow",
+        "performance_fish"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -46119,7 +46134,6 @@
         "mid_length",
         "paddle_support",
         "performance_daily_driver",
-        "performance_fish",
         "performance_mid_length",
         "performance_shortboard",
         "performance_twin",
@@ -49114,7 +49128,8 @@
       "recommendation_lanes": [
         "performance_daily_driver",
         "daily_driver",
-        "performance_shortboard"
+        "performance_shortboard",
+        "small_wave_competition_hpsb"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -57193,7 +57208,8 @@
       "recommendation_lanes": [
         "performance_shortboard",
         "good_wave",
-        "competition"
+        "competition",
+        "competition_hpsb"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -57387,7 +57403,9 @@
       },
       "recommendation_lanes": [
         "daily_driver",
-        "everyday"
+        "everyday",
+        "performance_shortboard",
+        "quality_wave_high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -57408,7 +57426,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "powerful_wave",
@@ -57579,7 +57596,8 @@
       "recommendation_lanes": [
         "performance_shortboard",
         "good_wave",
-        "competition"
+        "competition",
+        "large_rider_high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -57774,7 +57792,8 @@
       "recommendation_lanes": [
         "groveller",
         "small_wave",
-        "weak_wave"
+        "weak_wave",
+        "performance_softboard_groveller"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -60215,7 +60234,9 @@
       "recommendation_lanes": [
         "hybrid_shortboard",
         "daily_driver",
-        "forgiving_shortboard"
+        "forgiving_shortboard",
+        "performance_shortboard",
+        "quality_wave_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -60235,7 +60256,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "powerful_wave",
@@ -60401,7 +60421,9 @@
       "recommendation_lanes": [
         "step_up",
         "powerful_wave",
-        "hollow_wave"
+        "hollow_wave",
+        "performance_shortboard",
+        "youth_quality_wave_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -60423,7 +60445,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "small_wave",
@@ -67565,7 +67586,8 @@
       "recommendation_lanes": [
         "groveller",
         "small_wave",
-        "weak_wave"
+        "weak_wave",
+        "performance_groveller"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -68951,7 +68973,7 @@
       "board_type": "Groveller",
       "primary_fin_setup": "Thruster",
       "alternative_fin_setup": [],
-      "fin_configuration_source": "manufacturer_intent_category_default",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "round"
       ],
@@ -69067,7 +69089,9 @@
       "recommendation_lanes": [
         "hybrid_shortboard",
         "daily_driver",
-        "forgiving_shortboard"
+        "forgiving_shortboard",
+        "groveller",
+        "performance_groveller"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -69078,7 +69102,6 @@
         "fish",
         "flow",
         "good_wave",
-        "groveller",
         "gun",
         "hollow_wave",
         "longboard",
@@ -70181,7 +70204,9 @@
       "recommendation_lanes": [
         "hybrid_shortboard",
         "daily_driver",
-        "forgiving_shortboard"
+        "forgiving_shortboard",
+        "performance_shortboard",
+        "large_rider_high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -70201,7 +70226,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "powerful_wave",
@@ -71295,7 +71319,9 @@
       "recommendation_lanes": [
         "performance_shortboard",
         "good_wave",
-        "competition"
+        "competition",
+        "step_up",
+        "modern_step_up"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -71322,7 +71348,6 @@
         "small_wave",
         "small_wave_shortboard",
         "softboard",
-        "step_up",
         "traditional_fish",
         "twin_pin",
         "weak_wave"

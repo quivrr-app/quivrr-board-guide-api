@@ -63,8 +63,8 @@ class BoardTaxonomyV2Tests(unittest.TestCase):
     def test_representative_christenson_comparisons_keep_distinct_design_intent(self):
         pairs = (
             ("Fish", "Carrera", "traditional_fish", "step_up"),
-            ("Lane Splitter", "Acid Phish", "performance_twin", "performance_fish"),
-            ("OP4", "Carrera", "performance_shortboard", "step_up"),
+            ("Lane Splitter", "Acid Phish", "alternative_performance_twin", "performance_fish"),
+            ("OP4", "Carrera", "high_performance_shortboard", "step_up"),
             ("Osprey", "Long Phish II", "performance_mid_length", "performance_mid_length"),
             ("Easy Wind", "Cafe Racer", "hybrid_shortboard", "performance_daily_driver"),
         )

@@ -27,11 +27,12 @@ class BoardExpertMatrixTests(unittest.TestCase):
         hypto = find_matrix_board("Haydenshapes", "Hypto Krypto")
         rnf = find_matrix_board("Lost", "RNF 96")
         self.assertEqual(phantom["primaryLane"], "performance_daily_driver")
-        self.assertIn("one_board_quiver", phantom["secondaryLanes"])
-        self.assertEqual(hypto["primaryLane"], "hybrid_daily_driver")
-        self.assertIn("forgiving_daily_driver", hypto["secondaryLanes"])
-        self.assertEqual(rnf["primaryLane"], "modern_fish")
-        self.assertIn("twin_fin_performance", rnf["secondaryLanes"])
+        self.assertEqual(phantom["publicFamily"], "daily_driver")
+        self.assertEqual(phantom["detailedCategory"], "Performance Daily Driver")
+        self.assertEqual(hypto["primaryLane"], "hybrid_shortboard")
+        self.assertIn("forgiving_shortboard", hypto["secondaryLanes"])
+        self.assertEqual(rnf["primaryLane"], "fish")
+        self.assertIn("performance_fish", rnf["secondaryLanes"])
 
     def test_matrix_supports_every_required_lane(self):
         required = {
@@ -65,12 +66,12 @@ class BoardExpertMatrixTests(unittest.TestCase):
         self.assertGreaterEqual(audit["totalCuratedOverrides"], 100)
         self.assertGreater(audit["highConfidenceOverrides"], 0)
         expectations = {
-            ("Album", "Lightbender"): {"performance_fish", "modern_fish", "point_break_fish"},
-            ("Album", "Twinsman"): {"twin_fin_performance", "modern_fish", "point_break_fish"},
+            ("Album", "Lightbender"): {"fish", "performance_fish", "small_wave"},
+            ("Album", "Twinsman"): {"performance_twin", "alternative", "daily_driver"},
             ("Christenson", "Ocean Racer"): {"traditional_fish", "point_break_fish"},
-            ("Firewire", "Seaside"): {"cruisy_fish", "small_wave_fish"},
-            ("JS Industries", "Black Baron"): {"performance_fish", "small_wave_fish"},
-            ("Lost", "RNF 96"): {"modern_fish", "small_wave_fish"},
+            ("Firewire", "Seaside"): {"fish", "performance_fish", "small_wave"},
+            ("JS Industries", "Black Baron"): {"fish", "performance_fish", "small_wave"},
+            ("Lost", "RNF 96"): {"fish", "traditional_fish", "performance_fish"},
         }
         for identity, required in expectations.items():
             with self.subTest(board=identity):
@@ -145,7 +146,8 @@ class BoardExpertMatrixTests(unittest.TestCase):
             target_volume_litres=33.5,
         )
         rows = recommend_from_matrix(profile, limit=12)
-        self.assertTrue(any(row.model == "Ghost XL" for row in rows))
+        self.assertFalse(any(row.model == "Ghost XL" for row in rows))
+        self.assertTrue(any(row.model == "Phantom XL" for row in rows))
 
     def test_forgiving_performance_request_prefers_daily_drivers(self):
         profile = RiderProfile(

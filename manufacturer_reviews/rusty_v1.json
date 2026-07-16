@@ -3747,7 +3747,8 @@
       "recommendation_lanes": [
         "groveller",
         "small_wave",
-        "weak_wave"
+        "weak_wave",
+        "performance_groveller"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -5133,7 +5134,7 @@
       "board_type": "Groveller",
       "primary_fin_setup": "Thruster",
       "alternative_fin_setup": [],
-      "fin_configuration_source": "manufacturer_intent_category_default",
+      "fin_configuration_source": "editorial_override",
       "tail_shape": [
         "round"
       ],
@@ -5249,7 +5250,9 @@
       "recommendation_lanes": [
         "hybrid_shortboard",
         "daily_driver",
-        "forgiving_shortboard"
+        "forgiving_shortboard",
+        "groveller",
+        "performance_groveller"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -5260,7 +5263,6 @@
         "fish",
         "flow",
         "good_wave",
-        "groveller",
         "gun",
         "hollow_wave",
         "longboard",
@@ -6363,7 +6365,9 @@
       "recommendation_lanes": [
         "hybrid_shortboard",
         "daily_driver",
-        "forgiving_shortboard"
+        "forgiving_shortboard",
+        "performance_shortboard",
+        "large_rider_high_performance_shortboard"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -6383,7 +6387,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "performance_twin",
         "point_break",
         "powerful_wave",
@@ -7477,7 +7480,9 @@
       "recommendation_lanes": [
         "performance_shortboard",
         "good_wave",
-        "competition"
+        "competition",
+        "step_up",
+        "modern_step_up"
       ],
       "excluded_recommendation_lanes": [
         "alternative",
@@ -7504,7 +7509,6 @@
         "small_wave",
         "small_wave_shortboard",
         "softboard",
-        "step_up",
         "traditional_fish",
         "twin_pin",
         "weak_wave"

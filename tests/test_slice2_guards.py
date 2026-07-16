@@ -31,6 +31,7 @@ class Slice2GuardTests(unittest.TestCase):
                 for reason in [
                     "outside the daily-driver lane",
                     "step-up boards are out of scope for weak surf",
+                    "high-performance shortboards are out of scope for a weak-wave daily-driver brief",
                 ]
             )
         )

@@ -2001,7 +2001,9 @@
       "recommendation_lanes": [
         "performance_twin",
         "alternative",
-        "daily_driver"
+        "daily_driver",
+        "performance_shortboard",
+        "alternative_performance_twin"
       ],
       "excluded_recommendation_lanes": [
         "beginner",
@@ -2022,7 +2024,6 @@
         "performance_daily_driver",
         "performance_fish",
         "performance_mid_length",
-        "performance_shortboard",
         "point_break",
         "powerful_wave",
         "small_wave",

@@ -136,6 +136,7 @@ def _hard_exclusions(board: BoardIntelligenceRecord, profile: RiderProfile) -> t
     ability = _normalise(profile.ability)
     wave_power = _normalise(profile.wave_power)
     category_blob = " ".join([_normalise(board.category), _normalise(board.primary_category), _normalise(board.lane)])
+    ability_tags = {_normalise(value) for value in board.ability_tags}
 
     if "daily driver" in preferred and any(token in category_blob for token in ["step_up", "step up", "longboard", "mid_length", "mid length"]):
         exclusions.append("outside the daily-driver lane")
@@ -145,8 +146,12 @@ def _hard_exclusions(board: BoardIntelligenceRecord, profile: RiderProfile) -> t
         exclusions.append("fish lane does not match the stated daily-driver brief")
     if ability == "beginner" and any(token in category_blob for token in ["performance_daily_driver", "high performance", "step_up"]):
         exclusions.append("too demanding for a beginner brief")
+    if ability == "beginner" and ability_tags and not ability_tags.intersection({"beginner", "progressing"}):
+        exclusions.append("below the governed ability range for this model")
     if wave_power == "weak" and "step_up" in category_blob:
         exclusions.append("step-up boards are out of scope for weak surf")
+    if wave_power == "weak" and any(token in category_blob for token in ("high performance shortboard", "high_performance_shortboard")):
+        exclusions.append("high-performance shortboards are out of scope for a weak-wave daily-driver brief")
     return tuple(exclusions)
 
 

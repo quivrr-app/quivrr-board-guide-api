@@ -488,6 +488,71 @@ def record_for(board: dict, expert: dict, override: dict, official: dict) -> dic
     }
 
 
+def apply_review_override(record: dict, override: dict) -> dict:
+    """Apply final editorial authority to a previously reviewed record."""
+    if not override:
+        return record
+
+    model_id = int(record["canonical_model_id"])
+    if model_id != int(override["canonical_model_id"]):
+        raise ValueError(f"Editorial override ID mismatch for {model_id}")
+    if key(override["brand"]) != key(record["manufacturer"]) or key(override["model"]) != key(record["model"]):
+        raise ValueError(f"Editorial override identity mismatch for {model_id}")
+
+    updated = dict(record)
+    previous_family = updated["public_family"]
+    previous_category = updated["detailed_category"]
+    for field in (
+        "public_family",
+        "detailed_category",
+        "board_type",
+        "primary_fin_setup",
+        "alternative_fin_setup",
+        "recommendation_lanes",
+        "excluded_recommendation_lanes",
+    ):
+        if field in override:
+            updated[field] = override[field]
+
+    updated["public_family_label"] = PUBLIC_LABELS[updated["public_family"]]
+    updated["fin_configuration_source"] = "editorial_override"
+    updated["unresolved_intent_conflict"] = False
+    updated["confidence"] = "high"
+    updated["classification_changed"] = (
+        updated["public_family"] != updated.get("previous_public_family")
+        or updated["detailed_category"] != updated.get("previous_detailed_category")
+    )
+
+    lanes = list(dict.fromkeys(updated.get("recommendation_lanes", [])))
+    excluded = list(dict.fromkeys(updated.get("excluded_recommendation_lanes", [])))
+    category_lane = re.sub(r"[^a-z0-9]+", "_", updated["detailed_category"].lower()).strip("_")
+    for lane in (updated["public_family"], category_lane):
+        if lane and lane not in lanes:
+            lanes.append(lane)
+        excluded = [candidate for candidate in excluded if candidate != lane]
+    updated["recommendation_lanes"] = lanes
+    updated["excluded_recommendation_lanes"] = excluded
+
+    if "editorial_notes" in override:
+        updated["editorial_notes"] = override["editorial_notes"]
+    elif override.get("reason"):
+        notes = list(updated.get("editorial_notes", []))
+        if override["reason"] not in notes:
+            notes.append(override["reason"])
+        updated["editorial_notes"] = notes
+
+    abilities = updated.get("ability_range") or ["intermediate"]
+    updated["typical_customer"] = (
+        f"{abilities[0].replace('_', ' ').title()} to "
+        f"{abilities[-1].replace('_', ' ').title()} surfer seeking a "
+        f"{updated['detailed_category'].lower()}."
+    )
+    if updated["public_family"] != previous_family or updated["detailed_category"] != previous_category:
+        updated["reviewed_date"] = "2026-07-17"
+        updated["reviewed_by"] = "QUIVRR"
+    return updated
+
+
 def write_csv(path: Path, headers: list[str], rows: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
@@ -545,17 +610,18 @@ def main() -> int:
     parser.add_argument("--refresh-official", action="store_true", help="Refresh evidence from current official manufacturer websites")
     args = parser.parse_args()
 
+    override_payload = json.loads(OVERRIDES_PATH.read_text(encoding="utf-8"))
+    overrides = {int(row["canonical_model_id"]): row for row in override_payload["overrides"]}
     review_paths = [REVIEW_ROOT / filename for filename in MANUFACTURER_FILES.values()]
     if not args.refresh_official and all(path.exists() for path in review_paths):
         records = []
         for path in review_paths:
-            records.extend(json.loads(path.read_text(encoding="utf-8"))["models"])
+            for record in json.loads(path.read_text(encoding="utf-8"))["models"]:
+                records.append(apply_review_override(record, overrides.get(int(record["canonical_model_id"]), {})))
     else:
         dna = json.loads(DNA_PATH.read_text(encoding="utf-8"))["models"]
         expert_rows = json.loads(EXPERT_PATH.read_text(encoding="utf-8"))["boards"]
         experts = {int(row["boardModelId"]): row for row in expert_rows if row.get("boardModelId") is not None}
-        override_payload = json.loads(OVERRIDES_PATH.read_text(encoding="utf-8"))
-        overrides = {int(row["canonical_model_id"]): row for row in override_payload["overrides"]}
         evidence = OfficialEvidence(args.refresh_official)
         records = []
         for board in dna:
@@ -565,27 +631,23 @@ def main() -> int:
                 raise ValueError(f"Editorial override identity mismatch for {model_id}")
             records.append(record_for(board, experts.get(model_id, {}), override, evidence.fetch(board)))
 
-        records.sort(key=lambda row: (row["manufacturer"].lower(), row["model"].lower(), row["canonical_model_id"]))
-        REVIEW_ROOT.mkdir(parents=True, exist_ok=True)
-        by_manufacturer = defaultdict(list)
-        for record in records:
-            by_manufacturer[record["manufacturer"]].append(record)
-        for manufacturer, filename in MANUFACTURER_FILES.items():
-            payload = {
-                "schema_version": 1,
-                "manufacturer": manufacturer,
-                "authority": "Current official manufacturer website",
-                "reviewed_date": "2026-07-17",
-                "reviewed_by": "QUIVRR",
-                "model_count": len(by_manufacturer[manufacturer]),
-                "models": by_manufacturer[manufacturer],
-            }
-            (REVIEW_ROOT / filename).write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     records.sort(key=lambda row: (row["manufacturer"].lower(), row["model"].lower(), row["canonical_model_id"]))
     by_manufacturer = defaultdict(list)
     for record in records:
         by_manufacturer[record["manufacturer"]].append(record)
+    REVIEW_ROOT.mkdir(parents=True, exist_ok=True)
+    for manufacturer, filename in MANUFACTURER_FILES.items():
+        payload = {
+            "schema_version": 1,
+            "manufacturer": manufacturer,
+            "authority": "Current official manufacturer website",
+            "reviewed_date": "2026-07-17",
+            "reviewed_by": "QUIVRR",
+            "model_count": len(by_manufacturer[manufacturer]),
+            "models": by_manufacturer[manufacturer],
+        }
+        (REVIEW_ROOT / filename).write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     validation = validate(records)
     existing_generated_at = None

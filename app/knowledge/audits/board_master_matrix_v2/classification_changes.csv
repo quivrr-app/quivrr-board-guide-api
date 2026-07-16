@@ -5,7 +5,7 @@ canonical_model_id,manufacturer,model,previous_public_family,public_family,previ
 7734,Channel Islands,happy,performance_shortboard,performance_shortboard,performance_shortboard,High Performance Shortboard,high,False
 7746,Channel Islands,semi-pro-12,daily_driver,performance_shortboard,hybrid_shortboard,Forgiving High Performance Shortboard,high,False
 7806,DHD,MF Twin,performance_shortboard,performance_shortboard,performance_twin,Alternative Performance Twin,high,False
-7965,Firewire,Great White Twin,groveller,groveller,performance_twin,Small Wave Performance Twin,high,False
+7965,Firewire,Great White Twin,groveller,fish,performance_twin,Performance Fish,high,False
 7976,Firewire,Greedy Beaver,mid_length,mid_length,mid_length,Crossover Mid Length,high,False
 7964,Firewire,Revo Max,mid_length,mid_length,mid_length,Performance Mid Length Step-Up Twin,high,False
 7975,Firewire,Taylor Jensen Twinzer,step_up,mid_length,step_up,Performance Mid Length,high,False

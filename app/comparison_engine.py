@@ -132,8 +132,13 @@ def compare_board_models(
     ordered = tuple(
         row[0]
         for row in sorted(
-            [(left, left_fit.score.total), (right, right_fit.score.total)],
-            key=lambda item: (-item[1], item[0].brand.lower(), item[0].model.lower()),
+            [(left, left_fit), (right, right_fit)],
+            key=lambda item: (
+                bool(item[1].hard_exclusions),
+                -item[1].score.total,
+                item[0].brand.lower(),
+                item[0].model.lower(),
+            ),
         )
     )
     top = ordered[0]

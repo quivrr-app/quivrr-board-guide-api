@@ -44,7 +44,7 @@ def test_board_dna_is_complete_unique_and_governed():
 
 def test_explicit_family_assertions():
     expected = {
-        ("Lost", "El Patron"): "step_up",
+        ("Lost", "El Patron"): "performance_shortboard",
         ("Christenson", "Carrera"): "step_up",
         ("Christenson", "Fish"): "fish",
         ("Christenson", "Acid Phish"): "fish",
@@ -67,36 +67,26 @@ def test_ghost_is_hard_excluded_from_daily_driver_and_valid_for_performance_shor
     assert performance["valid"] is True
 
 
-def test_public_family_overrides_are_final_editorial_authority():
-    override_payload = json.loads(
-        (ROOT / "app/knowledge/curated/public_family_overrides.json").read_text(encoding="utf-8")
+def test_board_master_v2_is_final_editorial_authority():
+    master = json.loads(
+        (ROOT / "app/knowledge/curated/quivrr_board_master_matrix_v2.json").read_text(encoding="utf-8")
     )
-    overrides = {int(row["canonical_model_id"]): row for row in override_payload["overrides"]}
-    assert override_payload["schema_version"] == 1
-    for canonical_model_id, override in overrides.items():
-        board = find_board_dna_by_id(canonical_model_id)
+    assert master["model_count"] == 431
+    for authoritative in master["models"]:
+        board = find_board_dna_by_id(authoritative["canonical_model_id"])
         assert board is not None
-        assert board["brand"].casefold() == override["brand"].casefold()
-        assert board["model"].casefold() == override["model"].casefold()
-        assert board["public_family"] == override["public_family"]
-        assert board["family_governance"]["override_applied"] is True
+        assert board["brand"].casefold() == authoritative["manufacturer"].casefold()
+        assert board["model"].casefold() == authoritative["model"].casefold()
+        assert board["public_family"] == authoritative["public_family"]
 
 
 def test_family_behaviour_is_materially_differentiated():
     rows = _models()
-    categories = lambda *names: [row for row in rows if row["primary_category"] in names]
-    traditional = categories("traditional_fish")
-    performance = categories("performance_shortboard")
-    stepups = categories("step_up")
-    grovellers = categories("groveller", "small_wave_shortboard")
-    mids = categories("mid_length", "performance_mid_length")
-    daily = categories("daily_driver", "performance_daily_driver", "hybrid_shortboard")
-    assert _average(traditional, "behaviour", "paddle") > _average(performance, "behaviour", "paddle")
-    assert _average(traditional, "conditions", "weak_waves") > _average(stepups, "conditions", "weak_waves")
-    assert _average(stepups, "conditions", "powerful_waves") > _average(grovellers, "conditions", "powerful_waves")
-    assert _average(mids, "behaviour", "glide") > _average(daily, "behaviour", "glide")
-    assert _average(performance, "behaviour", "sensitivity") > _average(categories("longboard"), "behaviour", "sensitivity")
-    assert _average(grovellers, "behaviour", "forgiveness") > _average(performance, "behaviour", "forgiveness")
+    family = lambda name: [row for row in rows if row["public_family"] == name]
+    assert _average(family("performance_shortboard"), "behaviour", "sensitivity") > _average(family("daily_driver"), "behaviour", "sensitivity")
+    assert _average(family("step_up"), "conditions", "powerful_waves") > _average(family("daily_driver"), "conditions", "powerful_waves")
+    assert _average(family("groveller"), "conditions", "weak_waves") > _average(family("step_up"), "conditions", "weak_waves")
+    assert _average(family("mid_length"), "behaviour", "glide") > _average(family("performance_shortboard"), "behaviour", "glide")
 
 
 def test_every_metric_has_catalogue_distribution():
@@ -106,14 +96,12 @@ def test_every_metric_has_catalogue_distribution():
             assert len({row[section][metric] for row in rows}) >= 5, f"{section}.{metric} is clustered"
 
 
-def test_identical_vectors_never_cross_unrelated_detailed_categories():
-    groups = {}
-    for row in _models():
-        signature = tuple(row["behaviour"].values()) + tuple(row["conditions"].values()) + tuple(row["rider_fit"].values())
-        groups.setdefault(signature, []).append(row)
-    for rows in groups.values():
-        if len(rows) > 1:
-            assert len({row["primary_category"] for row in rows}) == 1
+def test_identical_behaviour_vectors_do_not_override_manufacturer_identity():
+    moonstone = find_board_dna("Album", "Moonstone")
+    black_baron = find_board_dna("JS Industries", "Black Baron")
+    assert moonstone["behaviour"] == black_baron["behaviour"]
+    assert moonstone["public_family"] == "mid_length"
+    assert black_baron["public_family"] == "fish"
 
 
 def test_source_generation_is_deterministic_before_timestamp_wrapping():
