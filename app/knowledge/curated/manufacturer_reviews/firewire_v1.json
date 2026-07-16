@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "manufacturer": "Firewire",
+  "review_status": "complete",
+  "reviewed_date": "2026-07-17",
+  "authority": "Official Firewire and Slater Designs model descriptions and governed Quivrr catalogue records",
+  "governance": {
+    "public_family_reflects": "primary manufacturer design intent",
+    "detailed_category_reflects": "specific construction and performance lane",
+    "dna_role": "behavioural description only"
+  },
+  "models": [
+    {"canonical_model_id":7968,"model":"Boss Up","public_family":"mid_length","detailed_category":"performance_mid_length","reason":"Firewire positions the Boss Up as a versatile utility midlength with one-board-quiver range from weak surf to powerful overhead waves.","confidence":"high"},
+    {"canonical_model_id":7961,"model":"Dominator 2.0","public_family":"daily_driver","detailed_category":"all_round_daily_driver","reason":"The Dominator 2.0 is explicitly designed as a broad-range everyday board with easy speed, paddle support and improved performance rails.","confidence":"high"},
+    {"canonical_model_id":7958,"model":"Dominator Pro","public_family":"performance_shortboard","detailed_category":"accessible_performance_shortboard","reason":"Although derived from the Dominator, the Pro is deliberately refined to compete with a conventional performance shortboard in better waves and on surf trips.","confidence":"high"},
+    {"canonical_model_id":7954,"model":"DRK","public_family":"performance_shortboard","detailed_category":"high_performance_shortboard","reason":"The DRK is a Stab in the Dark winning design built around refined FRK performance DNA for high-performance surfing in good waves.","confidence":"high"},
+    {"canonical_model_id":7959,"model":"FRK Swallow","public_family":"performance_shortboard","detailed_category":"high_performance_shortboard","reason":"The swallow-tail FRK remains a dedicated high-performance shortboard, with the tail variation changing release and hold rather than its primary family.","confidence":"high"},
+    {"canonical_model_id":7970,"model":"FRK+","public_family":"performance_shortboard","detailed_category":"everyday_high_performance_shortboard","reason":"The FRK+ is a squash-tail HPSB tuned for faster rail transitions and broader everyday conditions without leaving the performance-shortboard lane.","confidence":"high"},
+    {"canonical_model_id":7965,"model":"Great White Twin","public_family":"groveller","detailed_category":"high_performance_groveller","reason":"Firewire explicitly calls it a high-performance groveller, combining hybrid paddle and catching with shortboard rail performance in weak and punchy surf.","confidence":"high"},
+    {"canonical_model_id":7976,"model":"Greedy Beaver","public_family":"mid_length","detailed_category":"crossover_mid_length","reason":"Its compressed longboard outline, glide, paddle power and shortboard manoeuvrability make it a true crossover midlength.","confidence":"high"},
+    {"canonical_model_id":7963,"model":"Groove","public_family":"performance_shortboard","detailed_category":"high_performance_shortboard","reason":"Rob Machado describes the Groove as his highest-performance design, with increased rocker and pocket-focused shortboard surfing as its defining role.","confidence":"high"},
+    {"canonical_model_id":7966,"model":"Machadocado","public_family":"fish","detailed_category":"performance_fish","reason":"The Machadocado combines explicit fish DNA, small-wave planing and shortboard performance in a modern performance-fish package.","confidence":"high"},
+    {"canonical_model_id":7971,"model":"Mashup","public_family":"groveller","detailed_category":"performance_groveller","reason":"Firewire describes the Mashup as the ultimate groveller, blending Seaside weak-wave speed with Spitfire vertical performance.","confidence":"high"},
+    {"canonical_model_id":7956,"model":"Mindcraft","public_family":"performance_shortboard","detailed_category":"alternative_performance_shortboard","reason":"The Mindcraft is a precision-focused Tomo and Slater performance design using a minimalist outline and twin-derived speed without fish-first intent.","confidence":"high"},
+    {"canonical_model_id":7960,"model":"Neutrino","public_family":"daily_driver","detailed_category":"small_wave_performance_hybrid","reason":"The Neutrino is a modern planing-hull performance hybrid built to generate speed in small waves while retaining broad everyday usability.","confidence":"high"},
+    {"canonical_model_id":7964,"model":"Revo Max","public_family":"mid_length","detailed_category":"performance_mid_length_step_up","reason":"Firewire presents the Revo Max as a performance midlength and step-up twin in one, with the longer rail line and midlength platform remaining primary.","confidence":"high"},
+    {"canonical_model_id":7967,"model":"S Boss","public_family":"daily_driver","detailed_category":"performance_daily_driver","reason":"The S Boss is explicitly positioned as a universal, user-friendly performance shape for progression across varied conditions and skill levels.","confidence":"high"},
+    {"canonical_model_id":7973,"model":"Sci-Fi 2.0","public_family":"performance_shortboard","detailed_category":"alternative_high_performance_shortboard","reason":"The Sci-Fi 2.0 is a modern planing-hull performance shortboard designed for control, speed and serious wave range.","confidence":"high"},
+    {"canonical_model_id":7972,"model":"Seaside","public_family":"fish","detailed_category":"performance_fish","reason":"The Seaside is Rob Machado's higher-performance evolution of the Go Fish, retaining fish identity while adding tighter turns and more carving control.","confidence":"high"},
+    {"canonical_model_id":7978,"model":"Seaside & Beyond","public_family":"fish","detailed_category":"mid_length_performance_fish","reason":"The Seaside & Beyond is a stretched Seaside built around longer fish glide and flow, so Fish remains the primary family with midlength scale as the subtype.","confidence":"high"},
+    {"canonical_model_id":7979,"model":"Singleton","public_family":"longboard","detailed_category":"modern_noserider_longboard","reason":"The Singleton is a modern noserider developed with Taylor Jensen, with tip stability, nose concave and longboard manoeuvrability as its defining identity.","confidence":"high"},
+    {"canonical_model_id":7957,"model":"Spaceship","public_family":"performance_shortboard","detailed_category":"good_wave_performance_shortboard","reason":"The Spaceship is explicitly a high-performance good-wave board designed for tube hold, rail turns and control in round, powerful wave faces.","confidence":"high"},
+    {"canonical_model_id":7980,"model":"Special T","public_family":"longboard","detailed_category":"traditional_noserider_longboard","reason":"The Special T is Firewire's traditional longboard and noserider, using soft rails, nose concave and added tail flip for classic trim and tip time.","confidence":"high"},
+    {"canonical_model_id":7969,"model":"Sweet Potato","public_family":"groveller","detailed_category":"super_groveller","reason":"Firewire explicitly identifies the Sweet Potato as its high-performance groveller for extremely weak waves.","confidence":"high"},
+    {"canonical_model_id":7962,"model":"Taylor Jensen Hull Rider","public_family":"longboard","detailed_category":"all_round_hull_longboard","reason":"The Hull Rider is an easy-paddling, stable all-round longboard with hull glide and noseriding support.","confidence":"high"},
+    {"canonical_model_id":7982,"model":"Taylor Jensen Pro","public_family":"longboard","detailed_category":"competition_performance_longboard","reason":"The Taylor Jensen Pro is his competition longboard, designed for vertical performance while retaining full longboard functionality.","confidence":"high"},
+    {"canonical_model_id":7974,"model":"Taylor Jensen Pro Mid","public_family":"mid_length","detailed_category":"performance_mid_length","reason":"The TJ Pro Mid is explicitly a fast-paddling performance midlength derived from Taylor Jensen's longboard design language.","confidence":"high"},
+    {"canonical_model_id":7983,"model":"Taylor Jensen Pro V","public_family":"longboard","detailed_category":"everyday_performance_longboard","reason":"The TJ Pro V is an all-conditions performance longboard tuned for average surf without sacrificing longboard manoeuvrability.","confidence":"high"},
+    {"canonical_model_id":7975,"model":"Taylor Jensen Twinzer","public_family":"mid_length","detailed_category":"performance_twinzer_mid_length","reason":"Firewire lists the Twinzer within its crossover and midlength range; its longer platform and twinzer performance make Mid Length the clearest public family.","confidence":"high"},
+    {"canonical_model_id":7981,"model":"The Gem","public_family":"longboard","detailed_category":"one_board_quiver_longboard","reason":"The Gem is explicitly a one-board-quiver longboard balancing trim, turns and all-round versatility.","confidence":"high"},
+    {"canonical_model_id":7977,"model":"Sunday","public_family":"mid_length","detailed_category":"cruiser_mid_length","reason":"The Sunday is Rob Machado's relaxed midlength cruiser, designed around glide, ease and a broad weekend-wave range.","confidence":"high"},
+    {"canonical_model_id":7955,"model":"Xtra Cado","public_family":"mid_length","detailed_category":"cruiser_mid_length","reason":"The Xtra Cado is explicitly the midlength evolution of the Machadocado, designed for glide, easier surfing and longer drawn-out turns.","confidence":"high"}
+  ],
+  "review_notes": [
+    "All thirty governed Firewire models have an explicit public family and detailed category.",
+    "Dominator Pro, DRK, Spaceship and Mindcraft were moved or confirmed in Performance Shortboard because their primary manufacturer intent is high-performance surfing rather than everyday versatility.",
+    "Great White Twin, Mashup and Sweet Potato are governed as Grovellers because weak-wave speed generation is their defining role.",
+    "Taylor Jensen Twinzer is governed as a performance midlength rather than Step Up because Firewire positions it in the crossover and midlength range.",
+    "Seaside & Beyond remains in Fish as a midlength performance fish because the stretched fish identity is stronger than a generic midlength label.",
+    "Construction and lamination variants do not change the underlying family of the model."
+  ]
+}
