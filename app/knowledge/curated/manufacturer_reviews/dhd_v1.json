@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "manufacturer": "DHD",
+  "status": "complete_editorial_review",
+  "reviewed_date": "2026-07-16",
+  "reviewed_by": "QUIVRR",
+  "model_count": 22,
+  "source_policy": "Current official DHD model information and governed canonical profiles are the authority. Public family reflects intended design role. Construction variants retain the same fundamental family unless DHD describes a materially different design.",
+  "family_counts": {
+    "fish": 4,
+    "groveller": 4,
+    "daily_driver": 6,
+    "performance_shortboard": 5,
+    "step_up": 1,
+    "mid_length": 2,
+    "longboard": 0
+  },
+  "models": [
+    {
+      "canonical_model_id": 7824,
+      "model": "Black Diamond",
+      "public_family": "daily_driver",
+      "detailed_category": "all_round_daily_driver",
+      "secondary_categories": ["one_board_quiver"],
+      "manufacturer_intent": "DHD's true all-rounder with easy paddle and entry, broad condition range and enough performance for better waves.",
+      "editorial_reason": "Everyday versatility and one-board-quiver intent are explicit.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7823,
+      "model": "Black Diamond EPS",
+      "public_family": "daily_driver",
+      "detailed_category": "all_round_daily_driver",
+      "secondary_categories": ["one_board_quiver", "eps_construction"],
+      "manufacturer_intent": "EPS construction of the Black Diamond all-rounder.",
+      "editorial_reason": "Construction changes response, not the model's fundamental daily-driver identity.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7807,
+      "model": "Black Diamond Soft Top",
+      "public_family": "daily_driver",
+      "detailed_category": "forgiving_daily_driver",
+      "secondary_categories": ["soft_top", "one_board_quiver"],
+      "manufacturer_intent": "Soft-top version of DHD's all-rounder with extra accessibility and flotation.",
+      "editorial_reason": "It remains an all-round daily driver, with construction increasing forgiveness.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7812,
+      "model": "EE Juliette",
+      "public_family": "performance_shortboard",
+      "detailed_category": "competition_performance_shortboard",
+      "secondary_categories": ["quality_wave_shortboard"],
+      "manufacturer_intent": "Ethan Ewing competition design developed from the DNA family with more rocker for tighter turns and pocket surfing.",
+      "editorial_reason": "World Tour competition intent and technical pocket performance make this a Performance Shortboard, not a Daily Driver.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7809,
+      "model": "EE Juliette Jnr",
+      "public_family": "performance_shortboard",
+      "detailed_category": "junior_competition_shortboard",
+      "secondary_categories": ["quality_wave_shortboard"],
+      "manufacturer_intent": "Junior-scaled version of Ethan Ewing's competition Juliette design.",
+      "editorial_reason": "Scaling and EPS construction do not change the performance-shortboard identity.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7816,
+      "model": "Interceptor",
+      "public_family": "mid_length",
+      "detailed_category": "all_round_mid_length",
+      "secondary_categories": ["forgiving_mid_length"],
+      "manufacturer_intent": "Easy-paddling mid-length for smooth lines, tighter turns and broad one-to-six-foot use.",
+      "editorial_reason": "DHD explicitly defines it as its version of a mid length.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7805,
+      "model": "MF Bolt",
+      "public_family": "daily_driver",
+      "detailed_category": "junior_performance_daily_driver",
+      "secondary_categories": ["all_round_shortboard"],
+      "manufacturer_intent": "Lively, easy-to-surf all-rounder for younger surfers, derived from the MF Lightning.",
+      "editorial_reason": "Versatile everyday performance is the core role.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7801,
+      "model": "MF DNA",
+      "public_family": "performance_shortboard",
+      "detailed_category": "competition_hpsb",
+      "secondary_categories": [],
+      "manufacturer_intent": "Mick Fanning's competition board with performance rocker, drive and precision for rippable quality waves.",
+      "editorial_reason": "It is explicitly DHD's competition performance reference.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7821,
+      "model": "MF DNA Jnr",
+      "public_family": "performance_shortboard",
+      "detailed_category": "junior_competition_hpsb",
+      "secondary_categories": [],
+      "manufacturer_intent": "Junior-scaled MF DNA high-performance shortboard.",
+      "editorial_reason": "The junior format retains the DNA competition role.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7802,
+      "model": "MF Lightning",
+      "public_family": "daily_driver",
+      "detailed_category": "performance_daily_driver",
+      "secondary_categories": ["step_down_shortboard"],
+      "manufacturer_intent": "Faster, more everyday evolution of the MF DNA for smaller and weaker surf while retaining performance.",
+      "editorial_reason": "DHD positions it as the broader everyday companion to the DNA.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7806,
+      "model": "MF Twin",
+      "public_family": "performance_shortboard",
+      "detailed_category": "performance_twin_shortboard",
+      "secondary_categories": ["alternative_performance_shortboard"],
+      "manufacturer_intent": "Modern high-performance twin designed to feel familiar to thruster surfers, with greater control and range than a traditional twin.",
+      "editorial_reason": "DHD explicitly states it is not a retro fish and is built to be pushed like a performance shortboard.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7820,
+      "model": "Mini Twin",
+      "public_family": "fish",
+      "detailed_category": "retro_performance_fish",
+      "secondary_categories": ["small_wave_twin"],
+      "manufacturer_intent": "Short, rounded retro-inspired twin for one-to-four-foot surf with modern control.",
+      "editorial_reason": "Small-wave twin-fin nostalgia and compact outline place it in Fish.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7811,
+      "model": "Mini Twin II",
+      "public_family": "fish",
+      "detailed_category": "small_wave_performance_fish",
+      "secondary_categories": ["summer_twin"],
+      "manufacturer_intent": "Shorter, wider swallow-tail twin with channels, designed for lively summer surfing in one-to-three-foot waves.",
+      "editorial_reason": "Twin-fin fish outline and summer-wave role are primary, rather than generic daily-driver use.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7814,
+      "model": "Nexus",
+      "public_family": "groveller",
+      "detailed_category": "small_wave_performance_groveller",
+      "secondary_categories": ["wave_pool_shortboard"],
+      "manufacturer_intent": "Explosive small-wave design for beach breaks and wave pools, combining easy acceleration with tight pocket response in one-to-four-foot surf.",
+      "editorial_reason": "Weak-wave and wave-pool performance are the explicit primary role.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7813,
+      "model": "Nexus EPS",
+      "public_family": "groveller",
+      "detailed_category": "small_wave_performance_groveller",
+      "secondary_categories": ["wave_pool_shortboard", "eps_construction"],
+      "manufacturer_intent": "EPS construction of the Nexus small-wave and wave-pool design.",
+      "editorial_reason": "Construction does not change the Nexus's groveller identity.",
+      "confidence": "medium"
+    },
+    {
+      "canonical_model_id": 7822,
+      "model": "Phoenix",
+      "public_family": "groveller",
+      "detailed_category": "performance_groveller",
+      "secondary_categories": ["small_wave_shortboard"],
+      "manufacturer_intent": "Shorter, higher-volume board for one-to-four-foot surf, designed to create speed and performance below normal shortboard conditions.",
+      "editorial_reason": "The model is explicitly sized and intended as a small-wave performance board.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7817,
+      "model": "Phoenix EPS Swallow Tail",
+      "public_family": "groveller",
+      "detailed_category": "performance_groveller",
+      "secondary_categories": ["small_wave_shortboard", "swallow_tail", "eps_construction"],
+      "manufacturer_intent": "Swallow-tail EPS Phoenix for one-to-four-foot performance surfing.",
+      "editorial_reason": "The Phoenix small-wave role remains primary.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7810,
+      "model": "Phoenix Flight EPS",
+      "public_family": "daily_driver",
+      "detailed_category": "small_wave_performance_daily_driver",
+      "secondary_categories": ["performance_groveller"],
+      "manufacturer_intent": "Refined Phoenix evolution retaining weak-wave speed while adding a sleeker outline, tighter turns and more control as surf gains push.",
+      "editorial_reason": "It bridges small-wave performance and broader everyday range; it is not a Step Up despite the previous inferred label.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7818,
+      "model": "Sandman",
+      "public_family": "daily_driver",
+      "detailed_category": "forgiving_all_rounder",
+      "secondary_categories": ["semi_step_up"],
+      "manufacturer_intent": "Easy-surfing board for normal surfers with enough range to serve as a semi step-up for more regular surfers.",
+      "editorial_reason": "Ease and all-round use are primary; semi-step-up capability is secondary.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7815,
+      "model": "SG No.8",
+      "public_family": "performance_shortboard",
+      "detailed_category": "all_round_high_performance_shortboard",
+      "secondary_categories": ["quality_wave_shortboard"],
+      "manufacturer_intent": "Stephanie Gilmore high-performance shortboard for speed, flow, precision and two-to-six-foot surf.",
+      "editorial_reason": "DHD calls it an all-round high-performance shortboard; it is not a Step Up.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7804,
+      "model": "Sweet Spot 4.0",
+      "public_family": "step_up",
+      "detailed_category": "travel_step_up",
+      "secondary_categories": ["powerful_wave_shortboard"],
+      "manufacturer_intent": "Travel step-up with refined rails, narrower nose and tail, stronger paddling and control for heavier conditions.",
+      "editorial_reason": "DHD explicitly calls it the ultimate step up and travel board.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 7819,
+      "model": "The Twin",
+      "public_family": "fish",
+      "detailed_category": "modern_twin_fish",
+      "secondary_categories": ["summer_twin"],
+      "manufacturer_intent": "Modern twin-fin design for summer fun across one-to-five-foot beach, point and reef waves.",
+      "editorial_reason": "Twin-fin summer design and small-wave speed place it in Fish rather than generic Daily Driver.",
+      "confidence": "high"
+    }
+  ]
+}
