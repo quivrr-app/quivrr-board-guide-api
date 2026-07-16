@@ -6,6 +6,9 @@ import re
 from collections import Counter
 from pathlib import Path
 
+from scripts.apply_taxonomy_v2 import main as apply_taxonomy_v2
+from scripts.generate_board_taxonomy_v2 import main as generate_taxonomy_v2
+
 
 ROOT = Path(__file__).resolve().parents[1]
 GRAPH_PATH = ROOT / "app/knowledge/generated/board_recommendation_graph.json"
@@ -495,6 +498,8 @@ def main() -> None:
         writer.writeheader()
         for row in override_rows:
             writer.writerow({"brand": row["brand"], "model": row["model"], "primaryLane": row["primaryLane"], "boardLanes": "; ".join(row["boardLanes"]), "confidence": row["confidence"], "notes": row.get("notes")})
+    generate_taxonomy_v2()
+    apply_taxonomy_v2()
     print(json.dumps({
         "totalModels": audit["totalModels"],
         "modelsWithPrimaryLane": audit["modelsWithPrimaryLane"],

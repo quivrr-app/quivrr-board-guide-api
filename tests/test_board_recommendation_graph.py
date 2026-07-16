@@ -31,9 +31,9 @@ class BoardRecommendationGraphTests(unittest.TestCase):
 
     def test_graph_is_canonical_and_has_no_self_edges(self):
         boards = self.graph["boards"]
-        self.assertEqual(len(boards), 513)
+        self.assertEqual(len(boards), 518)
         identities = {board_key(row["brand"], row["model"]) for row in boards}
-        self.assertEqual(len(identities), 513)
+        self.assertEqual(len(identities), 518)
         for board in boards:
             self.assertIn(board["taxonomy"]["primaryCategory"], ALLOWED_CATEGORIES)
             for edges in board["recommendations"].values():

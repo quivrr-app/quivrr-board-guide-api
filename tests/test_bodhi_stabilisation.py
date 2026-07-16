@@ -52,7 +52,7 @@ class BodhiStabilisationTests(unittest.TestCase):
             "I’m 75kg, advanced, surfing Australian beach breaks 2-6ft. I want a performance daily driver, not a hybrid."
         )
         first = [row["model"].replace("-", " ").lower() for row in body["recommendations"][:5]]
-        expected = {"phantom", "xero gravity", "happy everyday", "inferno 72", "rad ripper"}
+        expected = {"phantom", "xero gravity", "happy everyday", "inferno 72", "rad ripper", "cafe racer"}
         self.assertTrue(set(first[:3]).issubset(expected))
         self.assertTrue({"phantom", "xero gravity"}.issubset(first[:3]))
         self.assertNotEqual(first[0], "hypto krypto")

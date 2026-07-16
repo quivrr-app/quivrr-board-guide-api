@@ -76,7 +76,7 @@ class CanonicalIntelligenceHarvestTests(unittest.TestCase):
         self.assertEqual(harvest.main(["--apply"]), 0)
         payload = json.loads(harvest.OUTPUT_PATH.read_text(encoding="utf-8"))
         self.assertEqual(payload["schemaVersion"], "canonical_board_intelligence_v1")
-        self.assertEqual(len(payload["profiles"]), 513)
+        self.assertEqual(len(payload["profiles"]), 518)
         profile = next(row for row in payload["profiles"] if row["identity"]["brand"] == "Sharp Eye" and row["identity"]["model"] == "#77")
         self.assertEqual(profile["description"]["descriptionConfidence"], "high")
         self.assertEqual(profile["category"]["manufacturerCategoryConfidence"], "high")

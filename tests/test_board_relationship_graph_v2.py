@@ -13,7 +13,7 @@ class BoardRelationshipGraphV2Tests(unittest.TestCase):
         cls.payload = json.loads(generator.OUTPUT_PATH.read_text(encoding="utf-8-sig"))
 
     def test_graph_covers_canonical_models_without_self_edges(self):
-        self.assertEqual(len(self.payload["boards"]), 513)
+        self.assertEqual(len(self.payload["boards"]), 518)
         identities = {(row["brand"].lower(), row["model"].lower()) for row in self.payload["boards"]}
         for board in self.payload["boards"]:
             for relation, edges in board["relationships"].items():

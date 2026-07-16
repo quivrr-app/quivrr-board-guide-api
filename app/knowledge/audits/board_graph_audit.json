@@ -1,16 +1,16 @@
 {
   "auditVersion": "bodhi_phase_4_graph_v1",
-  "totalModels": 513,
-  "boardsWithRecommendations": 512,
+  "totalModels": 518,
+  "boardsWithRecommendations": 517,
   "boardsWithoutRecommendations": 1,
   "recommendationCoveragePercent": 99.8,
   "relationCoverage": {
-    "similarBoards": 512,
-    "alternativeBoards": 409,
-    "upgradeBoards": 352,
+    "similarBoards": 517,
+    "alternativeBoards": 410,
+    "upgradeBoards": 357,
     "downgradeBoards": 123
   },
-  "outOfStockCoverage": 512,
+  "outOfStockCoverage": 517,
   "topModelsWithoutEquivalents": [
     {
       "brand": "JS Industries",

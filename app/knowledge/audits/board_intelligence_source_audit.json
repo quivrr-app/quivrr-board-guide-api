@@ -2,9 +2,9 @@
   "auditVersion": "bodhi_phase_2_v1",
   "scope": "global canonical board intelligence; no regional inventory mutation",
   "method": "deterministic read-only analysis of committed generated knowledge files",
-  "distinctModels": 513,
-  "canonicalProfileRows": 573,
-  "constructionVariantRowsCollapsed": 60,
+  "distinctModels": 518,
+  "canonicalProfileRows": 575,
+  "constructionVariantRowsCollapsed": 57,
   "existingClassifierAudit": {
     "totalModels": 513,
     "modelsClassified": 205,
@@ -19,7 +19,7 @@
     "unclassifiedCount": 308
   },
   "descriptionCoverageReconciliation": {
-    "modelsWithDescriptionAfterVariantMerge": 503,
+    "modelsWithDescriptionAfterVariantMerge": 508,
     "modelsMissingDescriptionAfterVariantMerge": 10,
     "legacyAuditMissingDescriptionCount": 11,
     "legacyVariantSelectionFalseMissing": [
@@ -151,20 +151,20 @@
     },
     {
       "brand": "Christenson",
-      "totalModels": 31,
-      "modelsWithDescription": 31,
-      "modelsWithCategory": 7,
+      "totalModels": 36,
+      "modelsWithDescription": 36,
+      "modelsWithCategory": 6,
       "modelsWithWaveRange": 2,
       "modelsWithWaveType": 2,
       "modelsWithWavePower": 4,
-      "modelsWithAbility": 4,
-      "modelsWithDesignMetadata": 18,
-      "modelsWithRecommendationTags": 2,
-      "modelsWithRelatedBoardEvidence": 2,
-      "modelsWithRiderGuidance": 9,
-      "manufacturerPrimaryDescriptions": 31,
+      "modelsWithAbility": 3,
+      "modelsWithDesignMetadata": 20,
+      "modelsWithRecommendationTags": 1,
+      "modelsWithRelatedBoardEvidence": 3,
+      "modelsWithRiderGuidance": 8,
+      "manufacturerPrimaryDescriptions": 30,
       "metadataSourceQuality": "high",
-      "topGaps": "recommendation tags: 29; wave range: 29; wave type: 29",
+      "topGaps": "recommendation tags: 35; wave range: 34; wave type: 34",
       "recommendedNextEnhancement": "Repair description coverage and distinguish fish, mid-length, longboard and performance families."
     },
     {

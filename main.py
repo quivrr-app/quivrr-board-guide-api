@@ -836,7 +836,7 @@ def board_guide_chat(
     comparison_boards_override = None
     is_first_turn = not any(item.role == "assistant" for item in request.conversation if item)
     state_follow_up = _handle_state_follow_up(request, profile)
-    asks_name = request.message.strip().lower() in {"what's my name?", "what's my name", "whats my name?", "whats my name"}
+    asks_name = intent == "IDENTITY_QUESTION"
     allow_recommendations = legacy_intent in RECOMMENDATION_INTENTS
     if legacy_intent in {"greeting_request", "capability_help_request", "site_help_question"}:
         recommendation = None
@@ -846,9 +846,33 @@ def board_guide_chat(
     if asks_name:
         suggested_boards = []
         if auth_context.profile_loaded and profile.display_name:
-            reply = f"You're {profile.display_name}."
+            reply = f"You’re {profile.display_name}. I’ve also got your saved rider profile available for this session."
+        elif auth_context.authenticated:
+            reply = "You’re signed in, but I did not receive a verified display name."
         else:
-            reply = "I don’t have a verified saved identity for this conversation yet."
+            reply = "I can’t verify your name while you’re signed out."
+        questions = []
+    elif intent == "PROFILE_QUESTION":
+        suggested_boards = []
+        if auth_context.profile_loaded:
+            known = [label for value, label in ((profile.ability, "ability"), (profile.target_volume_litres, "volume"), (profile.region, "region"), (profile.home_break, "home break")) if value not in (None, "")]
+            reply = f"I’ve verified your saved rider profile for this session. Available fields include {', '.join(known) if known else 'no completed surfing details yet'}."
+        elif auth_context.authenticated:
+            reply = "You’re signed in, but I couldn’t load your saved rider profile just now."
+        else:
+            reply = "I can’t verify a saved rider profile while you’re signed out."
+        questions = []
+    elif intent == "PROMPT_INJECTION":
+        suggested_boards = []
+        reply = "I can’t reveal or bypass Quivrr’s internal instructions. I can still help you choose a board, compare models or check verified regional stock."
+        questions = []
+    elif intent in {"OFF_TOPIC", "ABUSIVE"}:
+        suggested_boards = []
+        reply = "I’m built for surfboards, board choice and Quivrr stock. I can help you choose a board, compare models or check regional availability."
+        questions = []
+    elif intent == "CONVERSATION_RESET":
+        suggested_boards = []
+        reply = personalise_opening("Fresh start. What are we working on today?", profile, is_first_turn=True)
         questions = []
     elif allow_recommendations and auth_context.authenticated and not auth_context.profile_loaded and not current_profile.ability and not current_profile.weight_kg:
         suggested_boards = []

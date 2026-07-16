@@ -16,8 +16,8 @@ class BoardExpertMatrixTests(unittest.TestCase):
 
     def test_matrix_covers_all_canonical_models_with_primary_lanes(self):
         boards = self.payload["boards"]
-        self.assertEqual(len(boards), 513)
-        self.assertEqual(len({(row["brand"].lower(), row["model"].lower()) for row in boards}), 513)
+        self.assertEqual(len(boards), 518)
+        self.assertEqual(len({(row["brand"].lower(), row["model"].lower()) for row in boards}), 518)
         self.assertTrue(all(row["primaryLane"] for row in boards))
         self.assertTrue(all(row.get("broadFamily") for row in boards))
         self.assertTrue(all(row.get("designSubtype") for row in boards))
@@ -82,7 +82,7 @@ class BoardExpertMatrixTests(unittest.TestCase):
         profile = RiderProfile(preferred_board_type="Fish", wave_type="Point Break", ability="Intermediate")
         self.assertEqual(target_lanes(profile)[0], "point_break_fish")
         rows = recommend_from_matrix(profile, limit=12)
-        self.assertTrue(any(row.model in {"Ocean Racer", "Lightbender", "Twinsman", "RNF 96"} for row in rows))
+        self.assertTrue(any(row.model in {"Fish", "D'boa", "Pukas Fish", "Astro Glider"} for row in rows))
 
     def test_reef_fish_profile_prioritises_performance_fish_and_twin_lanes(self):
         profile = RiderProfile(

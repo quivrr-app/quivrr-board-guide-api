@@ -7,6 +7,7 @@ from pathlib import Path
 
 from app.models import RiderProfile, SuggestedBoard
 from app.rider_fit import recommend_rider_fit
+from app.board_taxonomy import allows_category, requested_category, taxonomy_by_id
 
 
 MATRIX_PATH = Path(__file__).parent / "knowledge/generated/board_expert_matrix.json"
@@ -19,13 +20,15 @@ ABILITY_ORDER = {
 }
 FAMILY_LANES = {
     "performance_shortboard": {
+        "performance_shortboard",
         "high_performance_shortboard",
         "competition_shortboard",
         "performance_daily_driver",
         "performance_step_up",
     },
-    "performance_twin": {"twin_fin_performance", "alternative_performance"},
+    "performance_twin": {"performance_twin", "twin_pin", "twin_fin_performance", "alternative_performance"},
     "fish": {
+        "fish",
         "traditional_fish",
         "performance_fish",
         "modern_fish",
@@ -36,6 +39,7 @@ FAMILY_LANES = {
         "twin_fin_performance",
     },
     "hybrid": {
+        "hybrid_shortboard", "daily_driver",
         "hybrid_daily_driver",
         "forgiving_daily_driver",
         "performance_daily_driver",
@@ -43,6 +47,7 @@ FAMILY_LANES = {
         "fish_hybrid",
     },
     "small_wave": {
+        "small_wave_shortboard",
         "groveller",
         "small_wave_daily_driver",
         "weak_wave_board",
@@ -56,12 +61,14 @@ FAMILY_LANES = {
     },
     "step_up": {
         "step_up",
+        "step_up",
         "performance_step_up",
         "big_wave_step_up",
         "travel_step_up",
         "barrel_board",
     },
     "mid_length": {
+        "mid_length", "performance_mid_length",
         "mid_length",
         "performance_mid_length",
         "cruisy_mid_length",
@@ -155,7 +162,11 @@ def load_matrix() -> list[dict]:
 
 def find_matrix_board(brand: str, model: str) -> dict | None:
     brand_key, model_key = _key(brand), _key(model)
-    return next((row for row in load_matrix() if _key(row.get("brand")) == brand_key and _key(row.get("model")) == model_key), None)
+    return next((
+        row for row in load_matrix()
+        if _key(row.get("brand")) == brand_key
+        and model_key in {_key(row.get("model")), *(_key(alias) for alias in row.get("taxonomyAliases", []))}
+    ), None)
 
 
 def target_lanes(profile: RiderProfile) -> list[str]:
@@ -390,9 +401,9 @@ def _ability_score(board: dict, profile: RiderProfile, intent: dict) -> tuple[fl
     if family == "High Performance Shortboard" and surfer_rank <= ABILITY_ORDER["progressing"]:
         exclusions.append("Beginners and low intermediates should not be pushed onto a true high-performance shortboard.")
         return score, reasons, exclusions
-    if family == "High Performance Shortboard" and surfer_rank <= ABILITY_ORDER["intermediate"] and not intent["strict_hpsb"]:
+    if family in {"High Performance Shortboard", "Performance Shortboard"} and surfer_rank <= ABILITY_ORDER["intermediate"] and not intent["strict_hpsb"]:
         if _support_needs(profile) >= 3 or intent["wants_forgiving"]:
-            exclusions.append("This rider profile needs a more forgiving performance board than a true high-performance shortboard.")
+            exclusions.append("This rider profile needs a more forgiving performance board than a technical performance shortboard.")
             return score, reasons, exclusions
 
     if minimum_rank is not None and surfer_rank < minimum_rank:
@@ -630,10 +641,20 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
     fit = recommend_rider_fit(profile)
     target = profile.target_volume_litres or ((fit.volume_low + fit.volume_high) / 2 if fit else None)
     intent = _intent_profile(profile)
+    governed_category = requested_category(
+        profile.preferred_board_type, profile.goal, profile.desired_feel, profile.wave_power, profile.wave_type
+    )
+    if governed_category:
+        lanes = [governed_category, *lanes]
+    taxonomy = taxonomy_by_id()
     rows = []
 
     for board in load_matrix():
         if profile.requested_brand and _key(board.get("brand")) != _key(profile.requested_brand):
+            continue
+
+        taxonomy_row = taxonomy.get(int(board.get("boardModelId") or -1))
+        if governed_category and (not taxonomy_row or not allows_category(taxonomy_row, governed_category)):
             continue
 
         board_lanes = {board["primaryLane"], *board.get("secondaryLanes", []), *board.get("boardLanes", [])}

@@ -1,17 +1,17 @@
 {
   "auditVersion": "bodhi_phase_4_taxonomy_v1",
-  "totalModels": 513,
-  "modelsWithPrimaryCategory": 513,
+  "totalModels": 518,
+  "modelsWithPrimaryCategory": 518,
   "categoryCoveragePercent": 100.0,
   "categoryCounts": {
     "daily_driver": 38,
-    "fish": 49,
+    "fish": 52,
     "foil": 1,
     "groveller": 20,
     "gun": 4,
-    "hybrid": 197,
+    "hybrid": 198,
     "longboard": 31,
-    "mid_length": 56,
+    "mid_length": 57,
     "performance_shortboard": 72,
     "softboard": 6,
     "step_up": 31,
@@ -19,10 +19,10 @@
   },
   "confidenceDistribution": {
     "high": 8,
-    "low": 238,
-    "medium": 267
+    "low": 239,
+    "medium": 271
   },
-  "lowConfidenceCount": 238,
+  "lowConfidenceCount": 239,
   "topLowConfidenceModels": [
     {
       "brand": "Album",
@@ -596,6 +596,12 @@
     },
     {
       "brand": "Christenson",
+      "model": "Lane Splitter Swallow",
+      "category": "hybrid",
+      "source": "conservative_shortboard_fallback"
+    },
+    {
+      "brand": "Christenson",
       "model": "Nautilus",
       "category": "mid_length",
       "source": "generated_fallback"
@@ -617,12 +623,6 @@
       "model": "OP4",
       "category": "hybrid",
       "source": "conservative_shortboard_fallback"
-    },
-    {
-      "brand": "Christenson",
-      "model": "Osprey",
-      "category": "mid_length",
-      "source": "deterministic_length_taxonomy"
     }
   ]
 }

@@ -19,6 +19,7 @@ RELATIONSHIPS = [
     "similarBoards", "upgradeBoards", "downgradeBoards", "moreForgivingBoards",
     "morePerformanceBoards", "morePaddleBoards", "stepUpFromBoards", "stepDownFromBoards",
     "fishAlternativeBoards", "shortboardAlternativeBoards",
+    "midLengthAlternativeBoards",
     "betterSmallWaveBoards", "betterGoodWaveBoards",
     "betterPointBreakBoards", "betterBeachBreakBoards", "betterReefBoards",
     "closestFishAlternatives", "closestDailyDriverAlternatives",
@@ -84,7 +85,7 @@ def generated_relationships(target: dict, candidates: list[dict], limit: int = 6
         score, shared = similarity(target, candidate)
         candidate_lanes = lanes(candidate)
         conditions = {
-            "similarBoards": bool(shared) and score >= 45,
+            "similarBoards": target.get("primaryLane") == candidate.get("primaryLane") and bool(shared) and score >= 45,
             "upgradeBoards": candidate.get("performanceScore", 0) >= target.get("performanceScore", 0) + 8,
             "downgradeBoards": candidate.get("forgivenessScore", 0) >= target.get("forgivenessScore", 0) + 8,
             "moreForgivingBoards": candidate.get("forgivenessScore", 0) >= target.get("forgivenessScore", 0) + 8,
@@ -94,6 +95,7 @@ def generated_relationships(target: dict, candidates: list[dict], limit: int = 6
             "stepDownFromBoards": (family_match(candidate, "daily_driver") or family_match(candidate, "groveller")) and candidate.get("forgivenessScore", 0) >= target.get("forgivenessScore", 0),
             "fishAlternativeBoards": family_match(candidate, "fish") or any("twin_fin" in lane for lane in candidate_lanes),
             "shortboardAlternativeBoards": family_match(candidate, "daily_driver") or family_match(candidate, "high_performance"),
+            "midLengthAlternativeBoards": family_match(candidate, "mid_length") or family_match(candidate, "performance_mid_length"),
             "betterPointBreakBoards": "point_break_fish" in candidate_lanes or candidate.get("holdScore", 0) >= target.get("holdScore", 0) + 10,
             "betterSmallWaveBoards": candidate.get("smallWaveScore", 0) >= target.get("smallWaveScore", 0) + 10,
             "betterGoodWaveBoards": candidate.get("goodWaveScore", 0) >= target.get("goodWaveScore", 0) + 10,

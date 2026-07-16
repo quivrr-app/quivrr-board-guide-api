@@ -3,30 +3,30 @@
   "mode": "apply",
   "architecture": "global canonical intelligence; regional inventory excluded",
   "outputDecision": "A separate model-level canonical_board_intelligence.json avoids repeating global intelligence across 573 construction rows and does not change runtime recommendations.",
-  "totalModels": 513,
+  "totalModels": 518,
   "brandsWithCoverageGain": 16,
   "before": {
-    "totalModels": 513,
-    "descriptions": 503,
-    "categories": 202,
+    "totalModels": 518,
+    "descriptions": 508,
+    "categories": 201,
     "waveMetadata": 183,
-    "surferMetadata": 69,
-    "designMetadata": 352
+    "surferMetadata": 68,
+    "designMetadata": 354
   },
   "after": {
-    "totalModels": 513,
-    "descriptions": 492,
-    "categories": 282,
+    "totalModels": 518,
+    "descriptions": 497,
+    "categories": 286,
     "waveMetadata": 241,
-    "surferMetadata": 78,
-    "designMetadata": 470
+    "surferMetadata": 77,
+    "designMetadata": 475
   },
   "gains": {
     "descriptions": -11,
-    "categories": 80,
+    "categories": 85,
     "waveMetadata": 58,
     "surferMetadata": 9,
-    "designMetadata": 118
+    "designMetadata": 121
   },
   "brands": [
     {
@@ -115,24 +115,24 @@
     },
     {
       "brand": "Christenson",
-      "models": 31,
-      "descriptions": 30,
-      "categories": 11,
+      "models": 36,
+      "descriptions": 35,
+      "categories": 15,
       "waveMetadata": 8,
-      "surferMetadata": 4,
-      "designMetadata": 26,
+      "surferMetadata": 3,
+      "designMetadata": 31,
       "sourceQuality": "manufacturer_primary",
-      "topMissingFields": "manufacturerCategory: 31; waveHeight: 29; waveTypes: 29",
-      "descriptionsBefore": 31,
+      "topMissingFields": "manufacturerCategory: 36; waveHeight: 34; waveTypes: 34",
+      "descriptionsBefore": 36,
       "descriptionsGain": -1,
-      "categoriesBefore": 7,
-      "categoriesGain": 4,
+      "categoriesBefore": 6,
+      "categoriesGain": 9,
       "waveMetadataBefore": 6,
       "waveMetadataGain": 2,
-      "surferMetadataBefore": 4,
+      "surferMetadataBefore": 3,
       "surferMetadataGain": 0,
-      "designMetadataBefore": 18,
-      "designMetadataGain": 8
+      "designMetadataBefore": 20,
+      "designMetadataGain": 11
     },
     {
       "brand": "DHD",
@@ -387,6 +387,6 @@
       "designMetadataGain": 9
     }
   ],
-  "modelsEnriched": 419,
+  "modelsEnriched": 424,
   "priorityBrandModelsEnriched": 224
 }

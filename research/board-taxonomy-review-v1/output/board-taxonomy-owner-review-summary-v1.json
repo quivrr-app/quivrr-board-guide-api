@@ -1,0 +1,48 @@
+{
+  "generated_utc": "2026-07-16T00:54:52.043605+00:00",
+  "model_count": 425,
+  "manufacturer_count": 17,
+  "manufacturer_counts": {
+    "Album": 19,
+    "Channel Islands": 34,
+    "Chemistry Surfboards": 2,
+    "Chilli": 24,
+    "Christenson": 8,
+    "DHD": 23,
+    "DMS Surfboards": 8,
+    "Firewire": 29,
+    "Haydenshapes": 13,
+    "JS Industries": 30,
+    "Lost": 79,
+    "Misfit Shapes": 12,
+    "Pukas": 13,
+    "Pyzel": 41,
+    "Rusty": 49,
+    "Sharp Eye": 20,
+    "Simon Anderson": 21
+  },
+  "proposed_category_counts": {
+    "daily_driver": 20,
+    "groveller": 17,
+    "hybrid_shortboard": 135,
+    "longboard": 14,
+    "mid_length": 41,
+    "performance_daily_driver": 17,
+    "performance_fish": 36,
+    "performance_shortboard": 67,
+    "performance_twin": 22,
+    "small_wave_shortboard": 3,
+    "softboard": 5,
+    "step_up": 39,
+    "traditional_fish": 8,
+    "twin_pin": 1
+  },
+  "confidence_counts": {
+    "high": 388,
+    "medium": 35,
+    "review_required": 2
+  },
+  "changed_from_current": 41,
+  "owner_review_required": 2,
+  "strict_runtime_gate": "Do not consume this taxonomy in runtime until review_decision is completed and approved."
+}

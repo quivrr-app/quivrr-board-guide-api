@@ -20,12 +20,12 @@ class BoardIntelligenceSourceAuditTests(unittest.TestCase):
         self.assertEqual(first, {path: path.read_bytes() for path in paths})
 
         summary = json.loads(paths[0].read_text(encoding="utf-8"))
-        self.assertEqual(summary["distinctModels"], 513)
-        self.assertEqual(summary["canonicalProfileRows"], 573)
-        self.assertEqual(summary["constructionVariantRowsCollapsed"], 60)
+        self.assertEqual(summary["distinctModels"], 518)
+        self.assertEqual(summary["canonicalProfileRows"], 575)
+        self.assertEqual(summary["constructionVariantRowsCollapsed"], 57)
         self.assertIn("global canonical board intelligence", summary["scope"])
         reconciliation = summary["descriptionCoverageReconciliation"]
-        self.assertEqual(reconciliation["modelsWithDescriptionAfterVariantMerge"], 503)
+        self.assertEqual(reconciliation["modelsWithDescriptionAfterVariantMerge"], 508)
         self.assertEqual(reconciliation["modelsMissingDescriptionAfterVariantMerge"], 10)
         self.assertEqual(reconciliation["legacyVariantSelectionFalseMissing"], ["Lost Puddle Jumper HP"])
 
@@ -36,7 +36,7 @@ class BoardIntelligenceSourceAuditTests(unittest.TestCase):
         with paths[3].open(encoding="utf-8", newline="") as handle:
             priority = list(csv.DictReader(handle))
 
-        self.assertEqual(len(models), 513)
+        self.assertEqual(len(models), 518)
         self.assertEqual(len(brands), 17)
         self.assertEqual(len(priority), 100)
         self.assertNotIn("regionCode", models[0])

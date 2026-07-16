@@ -1,35 +1,36 @@
 {
-  "totalModels": 513,
-  "modelsWithSimilarBoards": 512,
-  "modelsWithUpgradeBoards": 512,
+  "totalModels": 518,
+  "modelsWithSimilarBoards": 509,
+  "modelsWithUpgradeBoards": 517,
   "modelsWithMoreForgivingBoards": 234,
-  "modelsWithMorePerformanceBoards": 512,
-  "modelsWithWaveSpecificRelationships": 513,
+  "modelsWithMorePerformanceBoards": 517,
+  "modelsWithWaveSpecificRelationships": 518,
   "confidenceDistribution": {
     "high": 160,
-    "low": 26299,
-    "medium": 24351
+    "low": 29232,
+    "medium": 24829
   },
   "relationshipCoverage": {
-    "similarBoards": 512,
-    "upgradeBoards": 512,
+    "similarBoards": 509,
+    "upgradeBoards": 517,
     "downgradeBoards": 233,
     "moreForgivingBoards": 234,
-    "morePerformanceBoards": 512,
-    "morePaddleBoards": 224,
-    "stepUpFromBoards": 512,
-    "stepDownFromBoards": 512,
-    "fishAlternativeBoards": 513,
-    "shortboardAlternativeBoards": 513,
-    "betterSmallWaveBoards": 467,
-    "betterGoodWaveBoards": 410,
-    "betterPointBreakBoards": 513,
-    "betterBeachBreakBoards": 513,
-    "betterReefBoards": 478,
-    "closestFishAlternatives": 513,
-    "closestDailyDriverAlternatives": 513,
-    "closestStepUpAlternatives": 513,
-    "closestGrovellerAlternatives": 513
+    "morePerformanceBoards": 517,
+    "morePaddleBoards": 225,
+    "stepUpFromBoards": 517,
+    "stepDownFromBoards": 517,
+    "fishAlternativeBoards": 518,
+    "shortboardAlternativeBoards": 518,
+    "midLengthAlternativeBoards": 518,
+    "betterSmallWaveBoards": 469,
+    "betterGoodWaveBoards": 416,
+    "betterPointBreakBoards": 518,
+    "betterBeachBreakBoards": 518,
+    "betterReefBoards": 484,
+    "closestFishAlternatives": 518,
+    "closestDailyDriverAlternatives": 518,
+    "closestStepUpAlternatives": 518,
+    "closestGrovellerAlternatives": 518
   },
   "curatedSourceBoardsMatched": 26,
   "unmatchedCuratedSourceBoards": [],
@@ -37,252 +38,252 @@
     {
       "brand": "Lost",
       "model": "Micks Tape Sym",
-      "relationshipCount": 74
+      "relationshipCount": 80
     },
     {
       "brand": "Chemistry Surfboards",
       "model": "Holiday",
-      "relationshipCount": 80
+      "relationshipCount": 86
     },
     {
       "brand": "Chemistry Surfboards",
       "model": "Robotwo",
-      "relationshipCount": 80
+      "relationshipCount": 86
     },
     {
       "brand": "Chilli",
       "model": "FAD3R",
-      "relationshipCount": 80
+      "relationshipCount": 86
     },
     {
       "brand": "Christenson",
       "model": "OP1",
-      "relationshipCount": 80
+      "relationshipCount": 86
     },
     {
       "brand": "Pyzel",
       "model": "Power Tiger XL",
-      "relationshipCount": 80
+      "relationshipCount": 86
     },
     {
       "brand": "Rusty",
       "model": "Hatchet",
-      "relationshipCount": 80
+      "relationshipCount": 86
     },
     {
       "brand": "Rusty",
       "model": "Shiv",
-      "relationshipCount": 80
-    },
-    {
-      "brand": "Lost",
-      "model": "Retro Tripper",
-      "relationshipCount": 84
-    },
-    {
-      "brand": "Channel Islands",
-      "model": "ci-pro",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Channel Islands",
-      "model": "m-23",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Channel Islands",
-      "model": "og-flyer",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Channel Islands",
-      "model": "the-new-flyer",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Alchemist Remix",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Beer Fridge",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "D3",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Daisho",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Disk 2",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Flash Point",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "Liquid Sword",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Chemistry Surfboards",
-      "model": "The Zenith",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Chilli",
-      "model": "A2",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Chilli",
-      "model": "Faded 2.0",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Chilli",
-      "model": "SHORTIE",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Firewire",
-      "model": "Spaceship",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Firewire",
-      "model": "Special T",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Haydenshapes",
-      "model": "Holy Hypto FutureFlex",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Haydenshapes",
-      "model": "Psychedelic Germ",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Lost",
-      "model": "Pick Up Stick",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Lost",
-      "model": "Tube Pig",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Pyzel",
-      "model": "Ghost Pro",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Pyzel",
-      "model": "Ghost XL",
-      "relationshipCount": 86
-    },
-    {
-      "brand": "Pyzel",
-      "model": "Mini Ghost Round",
       "relationshipCount": 86
     },
     {
       "brand": "Pyzel",
       "model": "Puerto Padi",
-      "relationshipCount": 86
+      "relationshipCount": 89
+    },
+    {
+      "brand": "Lost",
+      "model": "Retro Tripper",
+      "relationshipCount": 90
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "ci-pro",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "m-23",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "og-flyer",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "the-new-flyer",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Alchemist Remix",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Beer Fridge",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "D3",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Daisho",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Disk 2",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Flash Point",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "Liquid Sword",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "model": "The Zenith",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Chilli",
+      "model": "A2",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Chilli",
+      "model": "Faded 2.0",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Chilli",
+      "model": "SHORTIE",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Firewire",
+      "model": "Spaceship",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Firewire",
+      "model": "Special T",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Haydenshapes",
+      "model": "Holy Hypto FutureFlex",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Haydenshapes",
+      "model": "Psychedelic Germ",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Lost",
+      "model": "Pick Up Stick",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Lost",
+      "model": "Tube Pig",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Ghost Pro",
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Mini Ghost Round",
+      "relationshipCount": 92
     },
     {
       "brand": "Rusty",
       "model": "Bali Single",
-      "relationshipCount": 86
+      "relationshipCount": 92
     },
     {
       "brand": "Rusty",
       "model": "So Fuunnn",
-      "relationshipCount": 86
+      "relationshipCount": 92
     },
     {
       "brand": "Simon Anderson",
       "model": "Nxfc",
-      "relationshipCount": 86
+      "relationshipCount": 92
     },
     {
       "brand": "Simon Anderson",
       "model": "XFC",
-      "relationshipCount": 86
+      "relationshipCount": 92
+    },
+    {
+      "brand": "Lost",
+      "model": "Retro Gun",
+      "relationshipCount": 95
     },
     {
       "brand": "Album",
       "model": "D'boa",
-      "relationshipCount": 90
+      "relationshipCount": 96
     },
     {
       "brand": "Album",
       "model": "Delma",
-      "relationshipCount": 90
+      "relationshipCount": 96
     },
     {
       "brand": "Album",
       "model": "Veebee",
-      "relationshipCount": 90
+      "relationshipCount": 96
     },
     {
       "brand": "Channel Islands",
       "model": "goldie",
-      "relationshipCount": 90
+      "relationshipCount": 96
     },
     {
       "brand": "Channel Islands",
       "model": "sampler",
-      "relationshipCount": 90
+      "relationshipCount": 96
     },
     {
       "brand": "Chemistry Surfboards",
       "model": "Alchemist",
-      "relationshipCount": 90
+      "relationshipCount": 96
     },
     {
       "brand": "Chemistry Surfboards",
       "model": "Chem Zen",
-      "relationshipCount": 90
+      "relationshipCount": 96
     },
     {
       "brand": "Chemistry Surfboards",
       "model": "Zen3",
-      "relationshipCount": 90
+      "relationshipCount": 96
     },
     {
       "brand": "Chilli",
       "model": "BV2",
-      "relationshipCount": 90
+      "relationshipCount": 96
     },
     {
       "brand": "Chilli",
       "model": "Faded 2.0 Gun",
-      "relationshipCount": 90
+      "relationshipCount": 96
     },
     {
       "brand": "Christenson",
-      "model": "Submariner",
-      "relationshipCount": 90
+      "model": "Acid Phish",
+      "relationshipCount": 96
     },
     {
       "brand": "Christenson",
-      "model": "Waterlion",
-      "relationshipCount": 90
+      "model": "Fish",
+      "relationshipCount": 96
     }
   ]
 }

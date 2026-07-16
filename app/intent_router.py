@@ -18,6 +18,8 @@ NORMALIZED_INTENTS = {
     "CONSTRUCTION_GUIDANCE", "FIN_GUIDANCE", "WAVE_GUIDANCE",
     "BOARD_CATEGORY_EDUCATION", "BRAND_QUESTION", "RETAILER_QUESTION",
     "FOLLOW_UP", "SMALL_TALK", "UNKNOWN",
+    "IDENTITY_QUESTION", "PROFILE_QUESTION", "OFF_TOPIC", "ABUSIVE", "PROMPT_INJECTION",
+    "CONVERSATION_RESET",
 }
 
 
@@ -141,6 +143,18 @@ def classify_intent(message: str) -> IntentResult:
 
     if not text:
         return IntentResult("GREETING", "greeting_request", 0.96, entities)
+    if re.search(r"\b(?:ignore|reveal|show|print)\b.*\b(?:system prompt|developer message|instructions|taxonomy rules?)\b", text):
+        return IntentResult("PROMPT_INJECTION", "site_help_question", 0.99, entities)
+    if re.fullmatch(r"(?:reset|start over|new conversation|clear (?:the )?chat|forget this conversation)[!. ]*", text):
+        return IntentResult("CONVERSATION_RESET", "greeting_request", 0.98, entities)
+    if re.search(r"\b(?:what(?:'s| is) my name|whats my name|who am i|do you know my name)\b", text):
+        return IntentResult("IDENTITY_QUESTION", "site_help_question", 0.99, entities)
+    if re.search(r"\b(?:what profile do you have|what do you know about my profile|show my (?:rider )?profile)\b", text):
+        return IntentResult("PROFILE_QUESTION", "site_help_question", 0.98, entities)
+    if re.search(r"\b(?:fuck|shit|idiot|useless)\b", text) and not re.search(r"\b(?:board|fish|twin|stock|surf|wave|volume|litre)\b", text):
+        return IntentResult("ABUSIVE", "site_help_question", 0.95, entities)
+    if re.search(r"\b(?:weather forecast|capital of|tell me a joke|politics|recipe|football score)\b", text):
+        return IntentResult("OFF_TOPIC", "site_help_question", 0.94, entities)
     if _is_greeting_or_small_talk(message) or re.fullmatch(r"(?:hey|hi|hello|gday|g'day|yo|morning|afternoon|evening|good morning|good afternoon|good evening|hi bodhi|hey bodhi|hello bodhi)[!. ]*", text):
         return IntentResult("GREETING", "greeting_request", 0.98, entities)
     if re.fullmatch(r"(?:thanks|thank you|cheers|nice one|legend)[!. ]*", text):
@@ -199,6 +213,11 @@ def classify_intent(message: str) -> IntentResult:
         needs = not entities["boardCategory"] and entities["targetVolumeLitres"] is None and entities["waveType"] is None
         legacy = "surfer_fit_request" if "help" in text and "board" in text else "board_search_request"
         return IntentResult("BOARD_RECOMMENDATION", legacy, 0.91, entities, needs_clarification=needs)
+    if re.search(r"\b(?:wat|what|wht)\b.*\bfish\b.*\b(?:shuld|should|get|buy)\b", text):
+        return IntentResult("BOARD_RECOMMENDATION", "board_search_request", 0.88, entities)
+    if re.search(r"\b(?:whts|whats|what is)\b.*\b(?:stok|stock)\b", text):
+        entities["availabilityConstraint"] = "VERIFIED_IN_STOCK"
+        return IntentResult("AVAILABILITY", "board_search_request", 0.9, entities, needs_region=entities["region"] is None)
     if re.search(r"\b(?:dimensions|length|width|thickness)\b", text):
         return IntentResult("DIMENSION_GUIDANCE", "general_board_question", 0.82, entities)
     if re.search(r"\b(?:eps|pu|construction|hyfi|carbon|epoxy)\b", text):

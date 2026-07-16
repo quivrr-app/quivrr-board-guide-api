@@ -261,14 +261,15 @@ class BodhiApiTests(unittest.TestCase):
             headers={"Authorization": "Bearer token-123"},
         )
         body = response.json()
-        self.assertEqual(body["reply"], "You're Nathan Dunn.")
+        self.assertIn("You’re Nathan Dunn", body["reply"])
+        self.assertIn("saved rider profile", body["reply"])
         self.assertTrue(body["profileLoaded"])
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
     def test_anonymous_whats_my_name_does_not_invent_identity(self, _inventory, _azure):
         body = self.client.post("/api/board-guide/chat", json={"message": "What's my name?"}).json()
-        self.assertIn("verified saved identity", body["reply"])
+        self.assertIn("while you’re signed out", body["reply"])
         self.assertFalse(body["profileLoaded"])
 
     @patch("main.is_azure_openai_configured", return_value=False)

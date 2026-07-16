@@ -9563,15 +9563,15 @@
   },
   {
     "brand": "Christenson",
-    "model": "Cafe Racer 2.0",
-    "model_family": "Cafe Racer 2.0",
+    "model": "Cafe Racer",
+    "model_family": "Cafe Racer",
     "construction": "PU",
     "category": "Hybrid",
     "fin_system": null,
     "tail_shape": null,
     "official_product_url": "https://christensonsurfboards.com/cafe-racer",
     "official_image_url": null,
-    "description": "Cafe Racer 2.0 The Cafe Racer has been a staple in the Christenson model line up since 2004. Its spiral vee and double concave combo bottom, and signature cc low rails allow this board to plane gracefully yet shoot off sparks as soon as this board is set on rail. The new 2025 upgrades include: Removed beak nose which allows for more nose rocker. Refined curves and deepened the concave in the tail Overall improved performance & esthetic of the board. With these updates, this model is now tuned as a daily driver for both the expert and novice as seen in the below video of team rider Oscar Langburne. To get the proper feel, the recommended length is 1-3 inches below your height. We recommend this ridden as a quad or thruster using the Christenson 5 fin sets in either FCS2 or Futures.",
+    "description": "The Cafe Racer 2.0 combines low rails, spiral vee and double concave with updated rocker and tail curves as a performance-minded daily driver.",
     "recommended_wave_range": null,
     "recommended_surfer_weight": null,
     "source": "https://christensonsurfboards.com/cafe-racer",
@@ -9655,7 +9655,7 @@
         "volume_litres": 38.6
       }
     ],
-    "board_model_id": null,
+    "board_model_id": 8135,
     "description_source_type": "manufacturer",
     "description_source_url": "https://christensonsurfboards.com/cafe-racer",
     "description_last_scraped_utc": "2026-06-24T08:42:51.185425+00:00"
@@ -10433,81 +10433,6 @@
   },
   {
     "brand": "Christenson",
-    "model": "OP2",
-    "model_family": "OP2",
-    "construction": "Standard",
-    "category": "Ocean Pro Series",
-    "fin_system": null,
-    "tail_shape": null,
-    "official_product_url": "https://christensonsurfboards.com/op2new",
-    "official_image_url": null,
-    "description": "Built for waves 2-4 foot. Recommended to ride the same as your height or 1-2 inches shorter.",
-    "recommended_wave_range": null,
-    "recommended_surfer_weight": null,
-    "source": "https://christensonsurfboards.com/op2new",
-    "sizes": [
-      {
-        "length": "5'10",
-        "width": "19 1/2",
-        "thickness": "2 7/16",
-        "volume_litres": 28.74
-      },
-      {
-        "length": "5'11",
-        "width": "19 3/4",
-        "thickness": "2",
-        "volume_litres": null
-      },
-      {
-        "length": "5'6",
-        "width": "18 3/4",
-        "thickness": "2 3/16",
-        "volume_litres": 23.34
-      },
-      {
-        "length": "5'7",
-        "width": "19",
-        "thickness": "2 1/4",
-        "volume_litres": 24.71
-      },
-      {
-        "length": "5'8",
-        "width": "19 1/4",
-        "thickness": "2 5/16",
-        "volume_litres": 26.11
-      },
-      {
-        "length": "5'9",
-        "width": "19 3/8",
-        "thickness": "2 3/8",
-        "volume_litres": 27.4
-      },
-      {
-        "length": "6'0",
-        "width": "20",
-        "thickness": "2 9/16",
-        "volume_litres": 31.85
-      },
-      {
-        "length": "6'1",
-        "width": "20 1/4",
-        "thickness": "2 5/8",
-        "volume_litres": 33.5
-      },
-      {
-        "length": "6'2",
-        "width": "20 1/2",
-        "thickness": "2 11/16",
-        "volume_litres": 35.21
-      }
-    ],
-    "board_model_id": 8143,
-    "description_source_type": "manufacturer",
-    "description_source_url": "https://christensonsurfboards.com/op2new",
-    "description_last_scraped_utc": "2026-06-24T08:42:51.185425+00:00"
-  },
-  {
-    "brand": "Christenson",
     "model": "OP3",
     "model_family": "OP3",
     "construction": "Performance",
@@ -10583,93 +10508,6 @@
   },
   {
     "brand": "Christenson",
-    "model": "OP3",
-    "model_family": "OP3",
-    "construction": "Standard",
-    "category": "Ocean Pro Series",
-    "fin_system": null,
-    "tail_shape": null,
-    "official_product_url": "https://christensonsurfboards.com/op3new",
-    "official_image_url": null,
-    "description": "Designed to be ridden in waves 3-6 feet. Recommended same as your height or shortboard Please note: These are second-hand boards. They may have pressures dings or small cracks consistent with use. All sales are final - no returns or exchanges.",
-    "recommended_wave_range": null,
-    "recommended_surfer_weight": null,
-    "source": "https://christensonsurfboards.com/op3new",
-    "sizes": [
-      {
-        "length": "5'10",
-        "width": "19 1/4",
-        "thickness": "2 7/16",
-        "volume_litres": 28.45
-      },
-      {
-        "length": "5'11",
-        "width": "19 1/2",
-        "thickness": "2 1/2",
-        "volume_litres": 29.87
-      },
-      {
-        "length": "5'6",
-        "width": "18 1/2",
-        "thickness": "2 3/16",
-        "volume_litres": 23.0
-      },
-      {
-        "length": "5'7",
-        "width": "18 5/8",
-        "thickness": "2 1/4",
-        "volume_litres": 24.19
-      },
-      {
-        "length": "5'8",
-        "width": "18 3/4",
-        "thickness": "2 5/16",
-        "volume_litres": 25.41
-      },
-      {
-        "length": "5'9",
-        "width": "19",
-        "thickness": "2 3/8",
-        "volume_litres": 26.84
-      },
-      {
-        "length": "6'0",
-        "width": "19 3/4",
-        "thickness": "2 9/16",
-        "volume_litres": 31.44
-      },
-      {
-        "length": "6'1",
-        "width": "20",
-        "thickness": "2 5/8",
-        "volume_litres": 33.06
-      },
-      {
-        "length": "6'2",
-        "width": "20 1/4",
-        "thickness": "2 11/16",
-        "volume_litres": 34.5
-      },
-      {
-        "length": "6'3",
-        "width": "20 1/2",
-        "thickness": "2 3/4",
-        "volume_litres": 36.0
-      },
-      {
-        "length": "6'4",
-        "width": "20 5/8",
-        "thickness": "2 3/4",
-        "volume_litres": 37.2
-      }
-    ],
-    "board_model_id": 8144,
-    "description_source_type": "manufacturer",
-    "description_source_url": "https://christensonsurfboards.com/op3new",
-    "description_last_scraped_utc": "2026-06-24T08:42:51.185425+00:00"
-  },
-  {
-    "brand": "Christenson",
     "model": "OP4",
     "model_family": "OP4",
     "construction": "Performance",
@@ -10736,93 +10574,6 @@
         "width": "19 1/8",
         "thickness": "2 9/16",
         "volume_litres": 30.96
-      }
-    ],
-    "board_model_id": 8145,
-    "description_source_type": "manufacturer",
-    "description_source_url": "https://christensonsurfboards.com/op4",
-    "description_last_scraped_utc": "2026-06-24T08:42:51.185425+00:00"
-  },
-  {
-    "brand": "Christenson",
-    "model": "OP4",
-    "model_family": "OP4",
-    "construction": "Standard",
-    "category": "Ocean Pro Series",
-    "fin_system": null,
-    "tail_shape": null,
-    "official_product_url": "https://christensonsurfboards.com/op4",
-    "official_image_url": null,
-    "description": "Best to ride this board 1-2 inches longer than your standard board or height",
-    "recommended_wave_range": null,
-    "recommended_surfer_weight": null,
-    "source": "https://christensonsurfboards.com/op4",
-    "sizes": [
-      {
-        "length": "5'10",
-        "width": "19 1/2",
-        "thickness": "2 1/2",
-        "volume_litres": 28.82
-      },
-      {
-        "length": "5'11",
-        "width": "19 3/4",
-        "thickness": "2 9/16",
-        "volume_litres": 30.12
-      },
-      {
-        "length": "5'6",
-        "width": "18 1/2",
-        "thickness": "2 1/4",
-        "volume_litres": 23.2
-      },
-      {
-        "length": "5'7",
-        "width": "18 3/4",
-        "thickness": "2 5/16",
-        "volume_litres": 24.57
-      },
-      {
-        "length": "5'8",
-        "width": "19",
-        "thickness": "2 3/8",
-        "volume_litres": 25.96
-      },
-      {
-        "length": "5'9",
-        "width": "19 1/4",
-        "thickness": "2 7/16",
-        "volume_litres": 27.34
-      },
-      {
-        "length": "6'0",
-        "width": "20",
-        "thickness": "2 5/8",
-        "volume_litres": 31.78
-      },
-      {
-        "length": "6'1",
-        "width": "20 1/4",
-        "thickness": "2 11/16",
-        "volume_litres": 33.36
-      },
-      {
-        "length": "6'2",
-        "width": "20 1/2",
-        "thickness": "2 3/4",
-        "volume_litres": 35.04
-      },
-      {
-        "length": "6'3",
-        "width": "20 3/4",
-        "thickness": "2 3/4",
-        "volume_litres": 36.11
-      },
-      {
-        "length": "6'4",
-        "width": "21",
-        "thickness": "2 7/8",
-        "volume_litres": 38.59
       }
     ],
     "board_model_id": 8145,
@@ -52661,5 +52412,212 @@
     "description_source_type": "manufacturer",
     "description_source_url": "https://simonandersonsurfboards.com/surfboards/custom-only-boards/xfc/",
     "description_last_scraped_utc": "2026-06-19T17:15:46.149222+00:00"
+  },
+  {
+    "brand": "Christenson",
+    "model": "Acid Phish",
+    "model_family": "Acid Phish",
+    "construction": "PU",
+    "category": "Performance Fish",
+    "fin_system": "twin",
+    "tail_shape": null,
+    "official_product_url": "https://christensonsurfboards.com/acid-phish",
+    "official_image_url": null,
+    "description": "The Acid Phish is the performance-oriented evolution of Christenson's classic fish, with a rounder outline and slimmer nose intended for more vertical surfing in the pocket.",
+    "recommended_wave_range": null,
+    "recommended_surfer_weight": null,
+    "source": "https://christensonsurfboards.com/acid-phish",
+    "sizes": [
+      {
+        "length": "5'6",
+        "width": "20 1/4",
+        "thickness": "2 3/8",
+        "volume_litres": 28.36
+      },
+      {
+        "length": "5'7",
+        "width": "20 3/8",
+        "thickness": "2 7/16",
+        "volume_litres": 29.74
+      },
+      {
+        "length": "5'9",
+        "width": "20 5/8",
+        "thickness": "2 9/16",
+        "volume_litres": 32.54
+      },
+      {
+        "length": "5'11",
+        "width": "20 7/8",
+        "thickness": "2 11/16",
+        "volume_litres": 35.44
+      },
+      {
+        "length": "6'0",
+        "width": "21",
+        "thickness": "2 3/4",
+        "volume_litres": 36.99
+      }
+    ],
+    "board_model_id": 8134,
+    "description_source_type": "manufacturer",
+    "description_source_url": "https://christensonsurfboards.com/acid-phish",
+    "description_last_scraped_utc": "2026-07-16T00:00:00Z"
+  },
+  {
+    "brand": "Christenson",
+    "model": "Fish",
+    "model_family": "Fish",
+    "construction": "PU",
+    "category": "Fish",
+    "fin_system": "twin",
+    "tail_shape": null,
+    "official_product_url": "https://christensonsurfboards.com/fish",
+    "official_image_url": null,
+    "description": "Christenson describes the Fish as a highly versatile traditional fish design focused on speed, flow and a timeless twin-fin approach.",
+    "recommended_wave_range": null,
+    "recommended_surfer_weight": null,
+    "source": "https://christensonsurfboards.com/fish",
+    "sizes": [
+      {
+        "length": "5'2",
+        "width": "20 1/2",
+        "thickness": "2 5/16",
+        "volume_litres": 28.86
+      },
+      {
+        "length": "5'10",
+        "width": "21 1/4",
+        "thickness": "2 5/8",
+        "volume_litres": 38.27
+      }
+    ],
+    "board_model_id": 8138,
+    "description_source_type": "manufacturer",
+    "description_source_url": "https://christensonsurfboards.com/fish",
+    "description_last_scraped_utc": "2026-07-16T00:00:00Z"
+  },
+  {
+    "brand": "Christenson",
+    "model": "Flat Tracker V2",
+    "model_family": "Flat Tracker V2",
+    "construction": "PU",
+    "category": "Mid Length",
+    "fin_system": "single, twin, twinzer",
+    "tail_shape": null,
+    "official_product_url": "https://christensonsurfboards.com/ultra-tracker",
+    "official_image_url": null,
+    "description": "The Flat Tracker lineage is an alternative mid-length platform focused on trim, speed and versatile rail-driven surfing; Christenson's current Ultra Tracker documents its updated progression.",
+    "recommended_wave_range": null,
+    "recommended_surfer_weight": null,
+    "source": "https://christensonsurfboards.com/ultra-tracker",
+    "sizes": [
+      {
+        "length": "7'6",
+        "width": "21 1/4",
+        "thickness": "2 7/8",
+        "volume_litres": 48.6
+      }
+    ],
+    "board_model_id": 8139,
+    "description_source_type": "manufacturer",
+    "description_source_url": "https://christensonsurfboards.com/ultra-tracker",
+    "description_last_scraped_utc": "2026-07-16T00:00:00Z"
+  },
+  {
+    "brand": "Christenson",
+    "model": "Lane Splitter Swallow",
+    "model_family": "Lane Splitter Swallow",
+    "construction": "PU",
+    "category": "Performance Twin",
+    "fin_system": "twin",
+    "tail_shape": null,
+    "official_product_url": "https://christensonsurfboards.com/lanesplitter",
+    "official_image_url": null,
+    "description": "The Lane Splitter Swallow is the governed swallow-tail model identity for Christenson's full-throttle performance twin, built for speed from beach breaks to Indonesian reefs.",
+    "recommended_wave_range": null,
+    "recommended_surfer_weight": null,
+    "source": "https://christensonsurfboards.com/lanesplitter",
+    "sizes": [
+      {
+        "length": "5'7",
+        "width": "19 5/8",
+        "thickness": "2 1/2",
+        "volume_litres": 29.3
+      },
+      {
+        "length": "5'8",
+        "width": "19 3/4",
+        "thickness": "2 9/16",
+        "volume_litres": 31.1
+      },
+      {
+        "length": "5'10",
+        "width": "20",
+        "thickness": "2 11/16",
+        "volume_litres": 33.94
+      },
+      {
+        "length": "5'11",
+        "width": "20 1/8",
+        "thickness": "2 3/4",
+        "volume_litres": 35.44
+      },
+      {
+        "length": "6'0",
+        "width": "20 1/4",
+        "thickness": "2 3/4",
+        "volume_litres": 36.16
+      },
+      {
+        "length": "6'2",
+        "width": "20 1/2",
+        "thickness": "2 3/4",
+        "volume_litres": 37.61
+      }
+    ],
+    "board_model_id": 8141,
+    "description_source_type": "manufacturer",
+    "description_source_url": "https://christensonsurfboards.com/lanesplitter",
+    "description_last_scraped_utc": "2026-07-16T00:00:00Z"
+  },
+  {
+    "brand": "Christenson",
+    "model": "Long Phish II",
+    "model_family": "Long Phish II",
+    "construction": "PU",
+    "category": "Performance Mid Length",
+    "fin_system": "twin",
+    "tail_shape": null,
+    "official_product_url": "https://christensonsurfboards.com/longphish2",
+    "official_image_url": null,
+    "description": "The Long Phish 2.0 is a long-railed performance fish designed for high lines, speed, trim and accelerating turns across waist-high to double-overhead surf.",
+    "recommended_wave_range": null,
+    "recommended_surfer_weight": null,
+    "source": "https://christensonsurfboards.com/longphish2",
+    "sizes": [
+      {
+        "length": "6'8",
+        "width": "20 7/8",
+        "thickness": "2 11/16",
+        "volume_litres": 39.58
+      },
+      {
+        "length": "6'10",
+        "width": "21",
+        "thickness": "2 3/4",
+        "volume_litres": 41.86
+      },
+      {
+        "length": "7'0",
+        "width": "21 1/8",
+        "thickness": "2 13/16",
+        "volume_litres": 44.04
+      }
+    ],
+    "board_model_id": 8142,
+    "description_source_type": "manufacturer",
+    "description_source_url": "https://christensonsurfboards.com/longphish2",
+    "description_last_scraped_utc": "2026-07-16T00:00:00Z"
   }
 ]

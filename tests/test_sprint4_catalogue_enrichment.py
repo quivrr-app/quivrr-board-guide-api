@@ -26,7 +26,7 @@ class Sprint4CatalogueEnrichmentTests(unittest.TestCase):
             by_brand_model[brand][model] = bool(_clean(row.get("description")))
 
         expected_models = {
-            "Christenson": 31,
+            "Christenson": 36,
             "Album": 19,
             "JS Industries": 30,
             "Pukas": 13,
