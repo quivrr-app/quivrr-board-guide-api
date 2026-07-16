@@ -1,6 +1,6 @@
 {
   "schema_version": "quivrr_board_taxonomy_owner_review_v1",
-  "generated_utc": "2026-07-16T00:51:58.185064+00:00",
+  "generated_utc": "2026-07-16T00:54:52.043605+00:00",
   "status": "OWNER_REVIEW_REQUIRED_NOT_RUNTIME_APPROVED",
   "source_authority": "https://quivrr.surf/seo-data/knowledge/board-reviews.json",
   "source_rule": "Current GitHub and running generated files are authoritative. Architecture/source documents are excluded from classification authority.",
