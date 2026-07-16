@@ -65,10 +65,12 @@ def compare_board_models(
         better_for_right.append("Better aligned with current ability.")
 
     if left_fit.size_match.size and right_fit.size_match.size:
-        if left_fit.size_match.size.volume_litres != right_fit.size_match.size.volume_litres:
+        left_volume = left_fit.size_match.size.volume_litres
+        right_volume = right_fit.size_match.size.volume_litres
+        if left_volume is not None and right_volume is not None and left_volume != right_volume:
             differences.append(
-                f"Best matched size lands around {left_fit.size_match.size.volume_litres:g}L for {left.brand} {left.model} "
-                f"versus {right_fit.size_match.size.volume_litres:g}L for {right.brand} {right.model}."
+                f"Best matched size lands around {left_volume:g}L for {left.brand} {left.model} "
+                f"versus {right_volume:g}L for {right.brand} {right.model}."
             )
 
     if left.lane and right.lane and left.lane != right.lane:

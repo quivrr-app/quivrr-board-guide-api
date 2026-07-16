@@ -7,10 +7,53 @@ from app.models import BodhiRecommendation, RiderProfile, SuggestedBoard, Volume
 from app.rider_fit import recommend_rider_fit
 from app.daily_driver_taxonomy import daily_driver_lane
 from app.board_expert_matrix import find_matrix_board
+from app.board_taxonomy import find_taxonomy
 from app.volume_engine_v2 import build_target_volume_context, fish_volume_bands, recommend_volume_v2
 
 
 REGION_NAMES = {"AU": "Australian", "EU": "European", "ID": "Indonesian"}
+
+
+def _comparison_label(value: str | None) -> str:
+    return (value or "Unclassified").replace("_", " ").title()
+
+
+def _governed_display_board(board: dict) -> str:
+    taxonomy = find_taxonomy(board["brand"], board["model"])
+    if taxonomy:
+        return f"{taxonomy['brand']} {taxonomy['model']}"
+    return _display_board(board)
+
+
+def _comparison_taxonomy_note(board: dict) -> str | None:
+    taxonomy = find_taxonomy(board["brand"], board["model"])
+    if not taxonomy:
+        return None
+    matrix = find_matrix_board(board["brand"], board["model"]) or {}
+    category = _comparison_label(taxonomy.get("primary_category"))
+    waves = [_comparison_label(value) for value in taxonomy.get("wave_types", [])]
+    power = [_comparison_label(value) for value in taxonomy.get("wave_power", [])]
+    fins = matrix.get("finSetup") or taxonomy.get("fin_setup") or []
+    if isinstance(fins, str):
+        fins = [fins]
+    wave_text = ", ".join([*waves, *power]) or "condition range should be matched to the rider brief"
+    fin_text = ", ".join(_comparison_label(value) for value in fins) or "fin setup varies by configuration"
+    return f"{category}; wave intent: {wave_text}; fin setup: {fin_text}"
+
+
+def _governed_comparison_summary(left: dict, right: dict) -> str:
+    left_taxonomy = find_taxonomy(left["brand"], left["model"])
+    right_taxonomy = find_taxonomy(right["brand"], right["model"])
+    if not left_taxonomy or not right_taxonomy:
+        return ""
+    left_category = _comparison_label(left_taxonomy.get("primary_category"))
+    right_category = _comparison_label(right_taxonomy.get("primary_category"))
+    return (
+        f" Category difference: {_governed_display_board(left)} is governed as {left_category}, while "
+        f"{_governed_display_board(right)} is governed as {right_category}. "
+        f"Trade-off: choose the {left_category.lower()} direction for that design intent; choose the "
+        f"{right_category.lower()} direction when that better matches the waves and feel you want."
+    )
 
 
 def greeting_reply(region: str | None = None) -> str:
@@ -577,13 +620,13 @@ def comparison_reply(message: str, boards: list[dict] | None = None, profile: Ri
     for index, board in enumerate(ranked, 1):
         key = board["model"].replace("-", " ").lower()
         matrix = find_matrix_board(board["brand"], board["model"])
-        note = notes.get(key)
+        note = _comparison_taxonomy_note(board) or notes.get(key)
         if not note:
             lane = daily_driver_lane(board["brand"], board["model"]) or board.get("taxonomy", {}).get("primaryCategory") or "shortboard"
             note = f"a {lane.replace('_', ' ')} option"
             if matrix:
                 note += f" with {matrix.get('performanceScore', 60)}/100 performance emphasis"
-        lines.append(f"{index}. {_display_board(board)} — {note}.")
+        lines.append(f"{index}. {_governed_display_board(board)} — {note}.")
     compared = {board["model"].replace("-", " ").lower() for board in boards}
     trio = {"happy everyday", "phantom", "xero gravity"}.issubset(compared)
     closing = (
@@ -603,7 +646,7 @@ def comparison_reply(message: str, boards: list[dict] | None = None, profile: Ri
         )
     else:
         closing += " Tell me if you want me to check live stock for these boards."
-    return intro + " ".join(lines) + lane_note + expert_note + closing
+    return intro + " ".join(lines) + _governed_comparison_summary(left, right) + lane_note + expert_note + closing
 
 
 def everyday_pushback_reply(region: str | None, boards: list[dict], live: list[SuggestedBoard]) -> str:
