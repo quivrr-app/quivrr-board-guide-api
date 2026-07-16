@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "manufacturer": "Chemistry Surfboards",
+  "status": "complete_editorial_review",
+  "reviewed_date": "2026-07-16",
+  "reviewed_by": "QUIVRR",
+  "model_count": 2,
+  "source_policy": "Current official Chemistry Surfboards model descriptions and governed canonical profiles are authoritative. Public family reflects manufacturer design intent. Board DNA describes behaviour but does not determine identity.",
+  "family_counts": {
+    "fish": 0,
+    "groveller": 0,
+    "daily_driver": 1,
+    "performance_shortboard": 1,
+    "step_up": 0,
+    "mid_length": 0,
+    "longboard": 0
+  },
+  "models": [
+    {
+      "canonical_model_id": 8051,
+      "model": "B Side",
+      "public_family": "performance_shortboard",
+      "detailed_category": "high_performance_shortboard",
+      "secondary_categories": [],
+      "official_source_url": null,
+      "manufacturer_intent": "Chemistry identifies the B Side as the highest-performance shortboard in its range, with its deepest single concave and most accelerated rocker.",
+      "editorial_reason": "The board is explicitly designed as Chemistry's most technical and performance-oriented shortboard.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8053,
+      "model": "Summertime Pt 2",
+      "public_family": "daily_driver",
+      "detailed_category": "small_wave_daily_driver",
+      "secondary_categories": ["hybrid_shortboard"],
+      "official_source_url": null,
+      "manufacturer_intent": "Accessible, versatile board intended to make everyday and weaker surf enjoyable while retaining responsive shortboard performance.",
+      "editorial_reason": "Its broad usability and everyday small-wave role are primary, rather than competition performance or pure grovelling.",
+      "confidence": "medium"
+    }
+  ]
+}
