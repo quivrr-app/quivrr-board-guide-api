@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "reviewed_date": "2026-07-17",
+  "reviewed_by": "QUIVRR",
+  "overrides": [
+    {
+      "canonical_model_id": 7842,
+      "brand": "Lost",
+      "model": "El Patron",
+      "public_family": "performance_shortboard",
+      "detailed_category": "Large-Rider High Performance Shortboard",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "Lost describes El Patron as a responsive, forgiving performance shortboard scaled for larger or older surfers, not a step-up or fish."
+    },
+    {
+      "canonical_model_id": 7829,
+      "brand": "Lost",
+      "model": "Big Rig Driver",
+      "detailed_category": "Large-Rider High Performance Shortboard",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "Lost explicitly calls Big Rig Driver a high-volume Pro-Formance Series shortboard for larger or aging shortboard riders."
+    },
+    {
+      "canonical_model_id": 7839,
+      "brand": "Lost",
+      "model": "Driver 3.0 Grom",
+      "detailed_category": "Competition HPSB",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "The official description identifies the model as the grom-sized Driver 3.0 for top-tier performance surfing."
+    },
+    {
+      "canonical_model_id": 7875,
+      "brand": "Lost",
+      "model": "RNF 96",
+      "detailed_category": "Performance Fish",
+      "board_type": "Fish",
+      "reason": "Lost presents RNF 96 as the modern performance continuation of the Round Nose Fish rather than a purely traditional fish."
+    },
+    {
+      "canonical_model_id": 7791,
+      "brand": "Pyzel",
+      "model": "Ghost Swallow",
+      "public_family": "performance_shortboard",
+      "detailed_category": "Quality-Wave High Performance Shortboard",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "Pyzel designed Ghost Swallow for high-performance surfing in hollow, powerful reef, beach and point-break waves from about four feet."
+    },
+    {
+      "canonical_model_id": 7769,
+      "brand": "Pyzel",
+      "model": "Power Tiger",
+      "public_family": "performance_shortboard",
+      "detailed_category": "Quality-Wave Performance Shortboard",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "Pyzel positions Power Tiger between Red Tiger and Ghost, with refined rails, added curve and hold for stronger, more powerful surf."
+    },
+    {
+      "canonical_model_id": 7765,
+      "brand": "Pyzel",
+      "model": "Power Tiger Grom",
+      "public_family": "performance_shortboard",
+      "detailed_category": "Youth Quality-Wave Performance Shortboard",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "This is the official grom-sized Power Tiger and retains the parent model's performance-shortboard identity."
+    },
+    {
+      "canonical_model_id": 7965,
+      "brand": "Firewire",
+      "model": "Great White Twin",
+      "detailed_category": "Small Wave Performance Twin",
+      "board_type": "Groveller",
+      "primary_fin_setup": "Twin",
+      "reason": "Firewire explicitly describes Great White Twin as a high-performance groveller with hybrid paddle support and shortboard rail performance."
+    },
+    {
+      "canonical_model_id": 7975,
+      "brand": "Firewire",
+      "model": "Taylor Jensen Twinzer",
+      "public_family": "mid_length",
+      "detailed_category": "Performance Mid Length",
+      "board_type": "Mid Length",
+      "primary_fin_setup": "Twinzer",
+      "reason": "The official 6'8 to 7'4 design is a performance mid length using a twinzer arrangement, not a step-up."
+    },
+    {
+      "canonical_model_id": 8124,
+      "brand": "Album",
+      "model": "Moonstone",
+      "public_family": "mid_length",
+      "detailed_category": "Performance Mid Length",
+      "board_type": "Mid Length",
+      "reason": "Album describes Moonstone as a dynamic mid length evolved from a stretched fish platform, with the longer design role remaining primary."
+    },
+    {
+      "canonical_model_id": 8129,
+      "brand": "Album",
+      "model": "Townsend",
+      "public_family": "mid_length",
+      "detailed_category": "Performance Mid Length Step-Up",
+      "board_type": "Mid Length",
+      "reason": "Album explicitly calls Townsend a hybrid mid length and step-up with egg-like paddle and appearance; the mid-length identity is primary."
+    },
+    {
+      "canonical_model_id": 7733,
+      "brand": "Channel Islands",
+      "model": "goldie",
+      "public_family": "step_up",
+      "detailed_category": "Reef and Barrel Step Up",
+      "board_type": "Step Up",
+      "primary_fin_setup": "Thruster",
+      "reason": "Channel Islands designed Goldie to maximise barrel time in steep, heavy waves and identifies it as a proven heavy-wave barrel board."
+    },
+    {
+      "canonical_model_id": 7734,
+      "brand": "Channel Islands",
+      "model": "happy",
+      "public_family": "performance_shortboard",
+      "detailed_category": "High Performance Shortboard",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "Channel Islands explicitly introduces Happy as a performance shortboard; tube capability is part of its range, not a step-up identity."
+    },
+    {
+      "canonical_model_id": 7746,
+      "brand": "Channel Islands",
+      "model": "semi-pro-12",
+      "public_family": "performance_shortboard",
+      "detailed_category": "Forgiving High Performance Shortboard",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "The official design retains performance-board intent while adding forward volume for easier paddling and wave entry."
+    },
+    {
+      "canonical_model_id": 7806,
+      "brand": "DHD",
+      "model": "MF Twin",
+      "public_family": "performance_shortboard",
+      "detailed_category": "Alternative Performance Twin",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Twin",
+      "reason": "DHD calls MF Twin a modern high-performance twin and explicitly states that it is not a retro fish."
+    },
+    {
+      "canonical_model_id": 7976,
+      "brand": "Firewire",
+      "model": "Greedy Beaver",
+      "public_family": "mid_length",
+      "detailed_category": "Crossover Mid Length",
+      "board_type": "Mid Length",
+      "reason": "Firewire presents Greedy Beaver as a crossover with mid-length glide and shortboard manoeuvrability; longboard outline influence is secondary."
+    },
+    {
+      "canonical_model_id": 7964,
+      "brand": "Firewire",
+      "model": "Revo Max",
+      "public_family": "mid_length",
+      "detailed_category": "Performance Mid Length Step-Up Twin",
+      "board_type": "Mid Length",
+      "primary_fin_setup": "Twin",
+      "reason": "Firewire explicitly combines a step-up twin with a performance mid length; its planing-hull mid-length platform remains the public identity."
+    },
+    {
+      "canonical_model_id": 7955,
+      "brand": "Firewire",
+      "model": "Xtra Cado",
+      "public_family": "mid_length",
+      "detailed_category": "Easy-Riding Mid Length",
+      "board_type": "Mid Length",
+      "reason": "Firewire calls Xtra Cado a mid-length evolution of Machadocado; longboard references describe glide rather than identity."
+    },
+    {
+      "canonical_model_id": 7831,
+      "brand": "Lost",
+      "model": "Cali Twin Pin",
+      "public_family": "performance_shortboard",
+      "detailed_category": "Alternative Performance Twin Pin",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Twin",
+      "reason": "Lost explicitly says Cali Twin Pin is not a true step-up and positions it as a performance bridge between fish and shortboard."
+    },
+    {
+      "canonical_model_id": 7847,
+      "brand": "Lost",
+      "model": "Hydra",
+      "public_family": "groveller",
+      "detailed_category": "Extreme Small-Wave Groveller",
+      "board_type": "Groveller",
+      "reason": "Lost calls Hydra the ultimate minuscule-wave weapon; fish design influences support its groveller identity rather than replace it."
+    },
+    {
+      "canonical_model_id": 7891,
+      "brand": "Lost",
+      "model": "Sub Driver 2.0",
+      "public_family": "performance_shortboard",
+      "detailed_category": "Small-Wave Competition HPSB",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "Lost identifies Sub Driver 2.0 as a small-wave competition and pro-formance shortboard that is accessible enough for everyday surfers."
+    },
+    {
+      "canonical_model_id": 7762,
+      "brand": "Pyzel",
+      "model": "Astro Pop",
+      "public_family": "fish",
+      "detailed_category": "Performance Fish",
+      "board_type": "Fish",
+      "primary_fin_setup": "Quad",
+      "alternative_fin_setup": ["Thruster"],
+      "reason": "Pyzel develops Astro Pop from Astro Glider as a short, fast performance fish; everyday-shortboard wording only describes comparative sizing."
+    },
+    {
+      "canonical_model_id": 7794,
+      "brand": "Pyzel",
+      "model": "Ghost Pro",
+      "public_family": "performance_shortboard",
+      "detailed_category": "Competition HPSB",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "Ghost Pro is the John John Florence competition-derived Ghost; broad usability does not change its performance-shortboard identity."
+    },
+    {
+      "canonical_model_id": 7785,
+      "brand": "Pyzel",
+      "model": "Ghost XL",
+      "public_family": "performance_shortboard",
+      "detailed_category": "Large-Rider High Performance Shortboard",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "Ghost XL retains Ghost's quality-wave performance design with fuller dimensions; one-board-quiver language describes versatility, not identity."
+    },
+    {
+      "canonical_model_id": 7768,
+      "brand": "Pyzel",
+      "model": "Gremlin",
+      "public_family": "groveller",
+      "detailed_category": "Performance Softboard Groveller",
+      "board_type": "Groveller",
+      "primary_fin_setup": "5 Fin",
+      "reason": "This official Gremlin softboard keeps the Gremlin small-wave performance role; longboard wording describes rider progression only."
+    },
+    {
+      "canonical_model_id": 7923,
+      "brand": "Rusty",
+      "model": "Hatchet",
+      "public_family": "groveller",
+      "detailed_category": "Performance Groveller",
+      "board_type": "Groveller",
+      "primary_fin_setup": "5 Fin",
+      "reason": "Rusty explicitly calls Hatchet a groveller with high-performance characteristics; its semi-fishy outline is a design influence."
+    },
+    {
+      "canonical_model_id": 7931,
+      "brand": "Rusty",
+      "model": "Miso",
+      "public_family": "groveller",
+      "detailed_category": "Performance Groveller",
+      "board_type": "Groveller",
+      "reason": "Rusty positions Miso as a fast performance-oriented groveller with fish influence and broader range than a traditional fish."
+    },
+    {
+      "canonical_model_id": 7937,
+      "brand": "Rusty",
+      "model": "Panda",
+      "public_family": "performance_shortboard",
+      "detailed_category": "Large-Rider High Performance Shortboard",
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "reason": "Rusty explicitly describes Panda as an HPSB for heavier surfers, with performance rocker, rails and vertical-turn intent."
+    },
+    {
+      "canonical_model_id": 7943,
+      "brand": "Rusty",
+      "model": "Slayer 2",
+      "public_family": "step_up",
+      "detailed_category": "Modern Step Up",
+      "board_type": "Step Up",
+      "primary_fin_setup": "Thruster",
+      "reason": "Rusty explicitly identifies Slayer 2 as a modern step-up and recommends riding it longer than a daily performance shortboard."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+canonical_model_id,manufacturer,model,official_url,retrieval_method,http_status,identity_match,confidence
+8093,Chilli,Blueprint Grom,https://www.chillisurfboards.com/surfboards/detail.php?id=25279&direct=1&region=aus,official_html_with_snapshot_extract,200,False,low
+8136,Christenson,Carrera,https://christensonsurfboards.com/carrera,stored_snapshot_after_live_failure,200,True,low
+8137,Christenson,Easy Wind,https://christensonsurfboards.com/easy-wind,stored_snapshot_after_live_failure,200,True,low
+8139,Christenson,Flat Tracker V2,https://christensonsurfboards.com/ultra-tracker,official_html_with_snapshot_extract,200,False,low
+8140,Christenson,Lane Splitter,https://christensonsurfboards.com/lanesplitter,stored_snapshot_after_live_failure,200,True,low
+8142,Christenson,Long Phish II,https://christensonsurfboards.com/longphish2,official_html_metadata,200,False,low
+8143,Christenson,OP2,https://christensonsurfboards.com/op2new,stored_snapshot_after_live_failure,200,True,low
+8144,Christenson,OP3,https://christensonsurfboards.com/op3new,stored_snapshot_after_live_failure,200,True,low
+8145,Christenson,OP4,https://christensonsurfboards.com/op4,stored_snapshot_after_live_failure,200,True,low
+8146,Christenson,Osprey,https://christensonsurfboards.com/osprey,stored_snapshot_after_live_failure,200,True,low
+8148,Christenson,The Wolverine,https://christensonsurfboards.com/thewolverine,stored_snapshot_after_live_failure,200,True,low
+3714,DMS Surfboards,Stilnox,https://www.dmshapes.jp/blog/dms-carbon-wrap-stilnox%E3%83%A2%E3%83%87%E3%83%AB-%E3%82%AF%E3%83%A9%E3%82%B7%E3%83%83%E3%82%AF%E3%83%9F%E3%83%8B%E3%83%BB%E3%82%B7%E3%83%A2%E3%83%B3%E3%82%BA%E3%81%A8%E3%83%95%E3%82%A3%E3%83%83/,official_html_metadata,200,False,low
+7855,Lost,Mini Driver (Re Issue),https://lostsurfboards.com.au/products/mini-driver-2,shopify_bulk_product,200,False,low
+7899,Lost,The Ripper Squash,https://lostsurfboards.com.au/products/the-ripper-black-sheep-1,shopify_bulk_product,200,False,low
+8071,Simon Anderson,Alley Grom,https://simonandersonsurfboards.com/surfboards/custom-only-boards/alley-grom/,stored_snapshot_after_live_failure,,True,low
+8084,Simon Anderson,DSC & DSC VEE,https://simonandersonsurfboards.com/surfboards/dsc-dsc-vee/,stored_snapshot_after_live_failure,,True,low
+8073,Simon Anderson,DTS,https://simonandersonsurfboards.com/surfboards/custom-only-boards/dts5/,stored_snapshot_after_live_failure,,True,low
+8078,Simon Anderson,Spudnick,https://simonandersonsurfboards.com/surfboards/custom-only-boards/spudnick/,stored_snapshot_after_live_failure,,True,low
+8082,Simon Anderson,T&T,https://simonandersonsurfboards.com/surfboards/custom-only-boards/tt/,stored_snapshot_after_live_failure,,False,low
+8081,Simon Anderson,Three Peat,https://simonandersonsurfboards.com/surfboards/custom-only-boards/three-peat/,stored_snapshot_after_live_failure,,True,low

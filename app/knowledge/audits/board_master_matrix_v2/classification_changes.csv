@@ -1,0 +1,30 @@
+canonical_model_id,manufacturer,model,previous_public_family,public_family,previous_detailed_category,detailed_category,confidence,review_required
+8124,Album,Moonstone,fish,mid_length,performance_fish,Performance Mid Length,high,False
+8129,Album,Townsend,step_up,mid_length,step_up,Performance Mid Length Step-Up,high,False
+7733,Channel Islands,goldie,daily_driver,step_up,hybrid_shortboard,Reef and Barrel Step Up,high,False
+7734,Channel Islands,happy,performance_shortboard,performance_shortboard,performance_shortboard,High Performance Shortboard,high,False
+7746,Channel Islands,semi-pro-12,daily_driver,performance_shortboard,hybrid_shortboard,Forgiving High Performance Shortboard,high,False
+7806,DHD,MF Twin,performance_shortboard,performance_shortboard,performance_twin,Alternative Performance Twin,high,False
+7965,Firewire,Great White Twin,groveller,groveller,performance_twin,Small Wave Performance Twin,high,False
+7976,Firewire,Greedy Beaver,mid_length,mid_length,mid_length,Crossover Mid Length,high,False
+7964,Firewire,Revo Max,mid_length,mid_length,mid_length,Performance Mid Length Step-Up Twin,high,False
+7975,Firewire,Taylor Jensen Twinzer,step_up,mid_length,step_up,Performance Mid Length,high,False
+7955,Firewire,Xtra Cado,mid_length,mid_length,mid_length,Easy-Riding Mid Length,high,False
+7829,Lost,Big Rig Driver,performance_shortboard,performance_shortboard,performance_fish,Large-Rider High Performance Shortboard,high,False
+7831,Lost,Cali Twin Pin,performance_shortboard,performance_shortboard,performance_twin,Alternative Performance Twin Pin,high,False
+7839,Lost,Driver 3.0 Grom,performance_shortboard,performance_shortboard,performance_twin,Competition HPSB,high,False
+7842,Lost,El Patron,step_up,performance_shortboard,performance_fish,Large-Rider High Performance Shortboard,high,False
+7847,Lost,Hydra,groveller,groveller,groveller,Extreme Small-Wave Groveller,high,False
+7875,Lost,RNF 96,fish,fish,traditional_fish,Performance Fish,high,False
+7891,Lost,Sub Driver 2.0,performance_shortboard,performance_shortboard,performance_daily_driver,Small-Wave Competition HPSB,high,False
+7762,Pyzel,Astro Pop,fish,fish,performance_fish,Performance Fish,high,False
+7794,Pyzel,Ghost Pro,performance_shortboard,performance_shortboard,performance_shortboard,Competition HPSB,high,False
+7791,Pyzel,Ghost Swallow,daily_driver,performance_shortboard,daily_driver,Quality-Wave High Performance Shortboard,high,False
+7785,Pyzel,Ghost XL,performance_shortboard,performance_shortboard,performance_shortboard,Large-Rider High Performance Shortboard,high,False
+7768,Pyzel,Gremlin,groveller,groveller,groveller,Performance Softboard Groveller,high,False
+7769,Pyzel,Power Tiger,daily_driver,performance_shortboard,hybrid_shortboard,Quality-Wave Performance Shortboard,high,False
+7765,Pyzel,Power Tiger Grom,step_up,performance_shortboard,step_up,Youth Quality-Wave Performance Shortboard,high,False
+7923,Rusty,Hatchet,groveller,groveller,groveller,Performance Groveller,high,False
+7931,Rusty,Miso,daily_driver,groveller,hybrid_shortboard,Performance Groveller,high,False
+7937,Rusty,Panda,daily_driver,performance_shortboard,hybrid_shortboard,Large-Rider High Performance Shortboard,high,False
+7943,Rusty,Slayer 2,performance_shortboard,step_up,performance_shortboard,Modern Step Up,high,False

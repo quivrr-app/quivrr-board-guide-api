@@ -1,0 +1,4255 @@
+{
+  "schema_version": 1,
+  "manufacturer": "DHD",
+  "authority": "Current official manufacturer website",
+  "reviewed_date": "2026-07-17",
+  "reviewed_by": "QUIVRR",
+  "model_count": 23,
+  "models": [
+    {
+      "canonical_model_id": 7824,
+      "canonical_key": "dhd::black-diamond",
+      "manufacturer": "DHD",
+      "model": "Black Diamond",
+      "official_url": "https://dhdsurf.com/products/black-diamond",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/black-diamond",
+        "resolved_url": "https://dhdsurf.com/products/black-diamond",
+        "retrieved_at_utc": "2026-07-16T21:54:58Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "d61ea329e561cc177cb223655afe8bcdca0532d65445d55678915d62955d2458",
+        "description_word_count": 121,
+        "official_intent_excerpt": "Info The Black Diamond is DHD’s true all-rounder — a genuine one-board quiver designed to handle almost anything you’re likely to surf. With extra..."
+      },
+      "manufacturer_intent": "Info The Black Diamond is DHD’s true all-rounder — a genuine one-board quiver designed to handle almost anything you’re likely to surf. With extra...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Everyday Daily Driver",
+      "secondary_categories": [],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "diamond"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 6.0
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "stability"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a everyday daily driver.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "diamond"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 9,
+          "wave_entry": 8,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 7,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 5,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 7,
+          "powerful_waves": 6,
+          "beach_break": 8,
+          "point_break": 7,
+          "reef_break": 7,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 8,
+          "intermediate": 10,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 9,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "reliable",
+          "balanced",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "daily_driver",
+        "everyday"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: paddle power."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "daily_driver",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7823,
+      "canonical_key": "dhd::black-diamond-eps",
+      "manufacturer": "DHD",
+      "model": "Black Diamond EPS",
+      "official_url": "https://dhdsurf.com/products/black-diamond-eps",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/black-diamond-eps",
+        "resolved_url": "https://dhdsurf.com/products/black-diamond-eps",
+        "retrieved_at_utc": "2026-07-16T21:54:58Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "01eb585b20708c7d2146e826771930a6110d244bbecdf0a86f72b3369ee3dec7",
+        "description_word_count": 59,
+        "official_intent_excerpt": "The Black Diamond is our favourite all-rounder that can do a bit of everything. Packed with extra flotation for easy paddling and entries but..."
+      },
+      "manufacturer_intent": "The Black Diamond is our favourite all-rounder that can do a bit of everything. Packed with extra flotation for easy paddling and entries but...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Everyday Daily Driver",
+      "secondary_categories": [
+        "hybrid_shortboard"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "diamond"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 6.0
+      },
+      "wave_power": [
+        "average"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "turning radius",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a everyday daily driver.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "diamond"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 7,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 6,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 7,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 8,
+          "intermediate": 10,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 8,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "reliable",
+          "balanced"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "daily_driver",
+        "everyday"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "daily_driver",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7807,
+      "canonical_key": "dhd::black-diamond-soft-top",
+      "manufacturer": "DHD",
+      "model": "Black Diamond Soft Top",
+      "official_url": "https://dhdsurf.com/products/black-diamond-soft-top",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/black-diamond-soft-top",
+        "resolved_url": "https://dhdsurf.com/products/black-diamond-soft-top",
+        "retrieved_at_utc": "2026-07-16T21:54:58Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "7959a64d755ccf2bb72580af0c6983afe8dfd33f3dc8c3f6ffa53761ae5dae46",
+        "description_word_count": 130,
+        "official_intent_excerpt": "Info The Black Diamond is DHD’s true all-rounder - a genuine one-board quiver designed to handle almost anything you’re likely to surf, and it's..."
+      },
+      "manufacturer_intent": "Info The Black Diamond is DHD’s true all-rounder - a genuine one-board quiver designed to handle almost anything you’re likely to surf, and it's...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Everyday Daily Driver",
+      "secondary_categories": [],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "diamond"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 6.0
+      },
+      "wave_power": [
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "stability"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a everyday daily driver.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "diamond"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 10,
+          "wave_entry": 9,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 7,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 8,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 7,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 8,
+          "intermediate": 10,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 9,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "reliable",
+          "balanced",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "daily_driver",
+        "everyday"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: paddle power."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "daily_driver",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7812,
+      "canonical_key": "dhd::ee-juliette",
+      "manufacturer": "DHD",
+      "model": "EE Juliette",
+      "official_url": "https://dhdsurf.com/products/ee-juliette-eps",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/ee-juliette-eps",
+        "resolved_url": "https://dhdsurf.com/products/ee-juliette-eps",
+        "retrieved_at_utc": "2026-07-16T21:54:58Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "dccf8d642e5a9b1869011a5c3aa935535f0a65c1b9c34a61379f1f7c29977234",
+        "description_word_count": 72,
+        "official_intent_excerpt": "The Juliette is Ethan Ewing's update file that he rode to success at his historical win at Bells in 2023 and showed off its..."
+      },
+      "manufacturer_intent": "The Juliette is Ethan Ewing's update file that he rode to success at his historical win at Bells in 2023 and showed off its...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "hold",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 10,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7809,
+      "canonical_key": "dhd::ee-juliette-jnr",
+      "manufacturer": "DHD",
+      "model": "EE Juliette Jnr",
+      "official_url": "https://dhdsurf.com/products/ee-juliette-eps-jnr",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/ee-juliette-eps-jnr",
+        "resolved_url": "https://dhdsurf.com/products/ee-juliette-eps-jnr",
+        "retrieved_at_utc": "2026-07-16T21:54:58Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "da5b858618bd60794b3ccd8819fd40ee251699a7505e6c4fc7cd4c8fbc5b55ce",
+        "description_word_count": 96,
+        "official_intent_excerpt": "The Juliette Jnr EPS is simply a smaller version of the Stab in the Dark winning board, The Juliette, in our Stringered EPS Construction...."
+      },
+      "manufacturer_intent": "The Juliette Jnr EPS is simply a smaller version of the Stab in the Dark winning board, The Juliette, in our Stringered EPS Construction....",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "hold",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 10,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7816,
+      "canonical_key": "dhd::interceptor",
+      "manufacturer": "DHD",
+      "model": "Interceptor",
+      "official_url": "https://dhdsurf.com/products/interceptor",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/interceptor",
+        "resolved_url": "https://dhdsurf.com/products/interceptor",
+        "retrieved_at_utc": "2026-07-16T21:54:58Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "2317bc3861b60669b16aeb3ed9c6d3523717f30f5d7b197202af0bafb4bf2b9a",
+        "description_word_count": 52,
+        "official_intent_excerpt": "The DHD Interceptor is Darren's version of a mid length, it's designed for the surfer who wants an easy paddle, smooth line's and tighter..."
+      },
+      "manufacturer_intent": "The DHD Interceptor is Darren's version of a mid length, it's designed for the surfer who wants an easy paddle, smooth line's and tighter...",
+      "manufacturer_intent_signals": [
+        "mid_length"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "mid_length",
+      "public_family_label": "Mid Length",
+      "detailed_category": "Mid Length",
+      "secondary_categories": [],
+      "board_type": "Mid Length",
+      "primary_fin_setup": "Single",
+      "alternative_fin_setup": [
+        "2+1",
+        "Twin",
+        "Two Plus One"
+      ],
+      "fin_configuration_source": "governed_dna_fallback",
+      "tail_shape": [
+        "round"
+      ],
+      "outline": "curvy",
+      "bottom_contours": [
+        "double"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium_low",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 6.0
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "reef break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "glide",
+        "paddle",
+        "wave entry"
+      ],
+      "weaknesses": [
+        "release",
+        "sensitivity"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a mid length.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "curvy",
+          "nose": "medium",
+          "tail": [
+            "round"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium_low",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "double"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one",
+            "twin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 9,
+          "wave_entry": 9,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 5,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 5,
+          "projection": 7,
+          "pivot": 5,
+          "carve": 8,
+          "glide": 10,
+          "turning_radius": 9
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 8,
+          "powerful_waves": 6,
+          "beach_break": 6,
+          "point_break": 8,
+          "reef_break": 7,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 6,
+          "progressing": 9,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 7
+        },
+        "style_tags": [
+          "glide",
+          "flowing",
+          "easy_paddle",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "mid_length",
+          "cruiser",
+          "point_break"
+        ]
+      },
+      "recommendation_lanes": [
+        "mid_length",
+        "paddle_support",
+        "flow"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Fin configuration was not explicit in the retrieved manufacturer text and remains a governed fallback requiring future confirmation."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "mid_length",
+      "previous_detailed_category": "mid_length",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7805,
+      "canonical_key": "dhd::mf-bolt",
+      "manufacturer": "DHD",
+      "model": "MF Bolt",
+      "official_url": "https://dhdsurf.com/products/ziggy-mackenzie-mf-bolt-53-118336",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/ziggy-mackenzie-mf-bolt-53-118336",
+        "resolved_url": "https://dhdsurf.com/products/ziggy-mackenzie-mf-bolt-53-118336",
+        "retrieved_at_utc": "2026-07-16T21:54:58Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "c19dd5dd63ed27439d2055c5302e97eb347056398c5ca1ab40e235c432eaaaee",
+        "description_word_count": 114,
+        "official_intent_excerpt": "This is one of Ziggy MacKenzie's MF Bolts from her 2026 Junior Season . Lightly used, specs are: 5'3 x 17 1/8 x 2..."
+      },
+      "manufacturer_intent": "This is one of Ziggy MacKenzie's MF Bolts from her 2026 Junior Season . Lightly used, specs are: 5'3 x 17 1/8 x 2...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Everyday Daily Driver",
+      "secondary_categories": [],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "forgiveness",
+        "stability",
+        "paddle"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a everyday daily driver.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 7,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 5,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 7,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 8,
+          "intermediate": 10,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 8,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "reliable",
+          "balanced",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "daily_driver",
+        "everyday"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "daily_driver",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7801,
+      "canonical_key": "dhd::mf-dna",
+      "manufacturer": "DHD",
+      "model": "MF DNA",
+      "official_url": "https://dhdsurf.com/products/ziggy-mackenzie-mf-dna-53-112274",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/ziggy-mackenzie-mf-dna-53-112274",
+        "resolved_url": "https://dhdsurf.com/products/ziggy-mackenzie-mf-dna-53-112274",
+        "retrieved_at_utc": "2026-07-16T21:54:58Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "9bf31c2615ed36ecf28ba7fc6b693bdda5f0ed2032ecb6bb3759bcaaa09643da",
+        "description_word_count": 137,
+        "official_intent_excerpt": "This is one of Ziggy MacKenzie's DNA surfboards from her 2025 Junior Season. Lightly used, s pecs are: 5'3 x 17 1/8 x 2..."
+      },
+      "manufacturer_intent": "This is one of Ziggy MacKenzie's DNA surfboards from her 2025 Junior Season. Lightly used, s pecs are: 5'3 x 17 1/8 x 2...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "High Performance Shortboard",
+      "secondary_categories": [],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single",
+        "double"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "low_performance",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 3.0,
+        "maximum_ft": 6.0
+      },
+      "wave_power": [
+        "powerful",
+        "average"
+      ],
+      "wave_type": [
+        "reef break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "sensitivity",
+        "projection",
+        "pivot"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a high performance shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "low_performance",
+          "foil": "refined",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double"
+          ],
+          "fin_configurations": [
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 5,
+          "wave_entry": 5,
+          "speed_generation": 7,
+          "drive": 8,
+          "release": 8,
+          "hold": 8,
+          "forgiveness": 4,
+          "stability": 4,
+          "sensitivity": 9,
+          "projection": 9,
+          "pivot": 9,
+          "carve": 9,
+          "glide": 3,
+          "turning_radius": 3
+        },
+        "conditions": {
+          "weak_waves": 4,
+          "average_waves": 7,
+          "powerful_waves": 10,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 10,
+          "hollow_waves": 8,
+          "open_face": 9
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 5,
+          "advanced": 10,
+          "expert": 10,
+          "low_paddle_strength": 2,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "technical",
+          "sensitive",
+          "vertical",
+          "drivey"
+        ],
+        "quiver_roles": [
+          "performance",
+          "competition"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_shortboard",
+        "good_wave",
+        "competition"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "performance_shortboard",
+      "previous_detailed_category": "performance_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7821,
+      "canonical_key": "dhd::mf-dna-jnr",
+      "manufacturer": "DHD",
+      "model": "MF DNA Jnr",
+      "official_url": "https://dhdsurf.com/products/mf-dna-jnr",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/mf-dna-jnr",
+        "resolved_url": "https://dhdsurf.com/products/mf-dna-jnr",
+        "retrieved_at_utc": "2026-07-16T21:54:58Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "390d84a4c2619768f01cda5bfa51d24a2341fbc1b77bb87b36d5f7fe67ab11a3",
+        "description_word_count": 92,
+        "official_intent_excerpt": "Info The MF DNA is Mick Fanning’s proven high-performance shortboard for quality waves. Built for control, flow, and precision, it’s the board Mick relied..."
+      },
+      "manufacturer_intent": "Info The MF DNA is Mick Fanning’s proven high-performance shortboard for quality waves. Built for control, flow, and precision, it’s the board Mick relied...",
+      "manufacturer_intent_signals": [
+        "performance_shortboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "High Performance Shortboard",
+      "secondary_categories": [],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "low_performance",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 3.0,
+        "maximum_ft": 6.0
+      },
+      "wave_power": [
+        "powerful",
+        "average"
+      ],
+      "wave_type": [
+        "reef break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "sensitivity",
+        "projection",
+        "pivot"
+      ],
+      "weaknesses": [
+        "forgiveness",
+        "stability"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a high performance shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "low_performance",
+          "foil": "refined",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 5,
+          "wave_entry": 5,
+          "speed_generation": 8,
+          "drive": 9,
+          "release": 9,
+          "hold": 8,
+          "forgiveness": 3,
+          "stability": 3,
+          "sensitivity": 10,
+          "projection": 10,
+          "pivot": 10,
+          "carve": 10,
+          "glide": 3,
+          "turning_radius": 3
+        },
+        "conditions": {
+          "weak_waves": 4,
+          "average_waves": 6,
+          "powerful_waves": 10,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 10,
+          "hollow_waves": 8,
+          "open_face": 9
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 5,
+          "advanced": 10,
+          "expert": 10,
+          "low_paddle_strength": 2,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "technical",
+          "sensitive",
+          "vertical",
+          "fast",
+          "drivey"
+        ],
+        "quiver_roles": [
+          "performance",
+          "competition"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_shortboard",
+        "good_wave",
+        "competition"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "performance_shortboard",
+      "previous_detailed_category": "performance_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7802,
+      "canonical_key": "dhd::mf-lightning",
+      "manufacturer": "DHD",
+      "model": "MF Lightning",
+      "official_url": "https://dhdsurf.com/products/francisca-velekos-mf-lightning-57-122335",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/francisca-velekos-mf-lightning-57-122335",
+        "resolved_url": "https://dhdsurf.com/products/mf-lightning",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_identity_match",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "e367f1e58bb46ddf561d783300c85d4e4fbb6a3cd41346b0ebfa35bd72cd0a0f",
+        "description_word_count": 114,
+        "official_intent_excerpt": "Info The MF Lightning is one of those once-in-a-lifetime boards that earns a permanent place in the rack. Born from Mick Fanning’s original CT-winning..."
+      },
+      "manufacturer_intent": "Info The MF Lightning is one of those once-in-a-lifetime boards that earns a permanent place in the rack. Born from Mick Fanning’s original CT-winning...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "hold",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 8,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7806,
+      "canonical_key": "dhd::mf-twin",
+      "manufacturer": "DHD",
+      "model": "MF Twin",
+      "official_url": "https://dhdsurf.com/products/owen-wright-mf-twin-511-117315",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/owen-wright-mf-twin-511-117315",
+        "resolved_url": "https://dhdsurf.com/products/owen-wright-mf-twin-511-117315",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "7bb1331de7db911762fad8355fd2d3ed48bd4b5c773914cb300cb5347128ec76",
+        "description_word_count": 160,
+        "official_intent_excerpt": "This is one of Owen Wright's MF Twin Fin's from 2026. Basically new, lightly ridden, specs are: 5'11 x 19 3/8 x 2 1/2..."
+      },
+      "manufacturer_intent": "This is one of Owen Wright's MF Twin Fin's from 2026. Basically new, lightly ridden, specs are: 5'11 x 19 3/8 x 2 1/2...",
+      "manufacturer_intent_signals": [
+        "fish"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "Alternative Performance Twin",
+      "secondary_categories": [
+        "traditional_fish",
+        "performance_shortboard"
+      ],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Twin",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "editorial_override",
+      "tail_shape": [
+        "round"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single",
+        "double",
+        "channels"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium_high",
+      "rail_type": "refined",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 2.0,
+        "maximum_ft": 6.0
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "reef break",
+        "open face",
+        "beach break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "release",
+        "sensitivity"
+      ],
+      "weaknesses": [
+        "forgiveness",
+        "stability"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a alternative performance twin.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "refined",
+          "tail": [
+            "round"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium_high",
+          "rails": "refined",
+          "foil": "refined",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "channels"
+          ],
+          "fin_configurations": [
+            "twin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 6,
+          "wave_entry": 6,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 7,
+          "forgiveness": 5,
+          "stability": 5,
+          "sensitivity": 8,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 7,
+          "glide": 5,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 8,
+          "powerful_waves": 7,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 2,
+          "progressing": 4,
+          "intermediate": 8,
+          "advanced": 9,
+          "expert": 10,
+          "low_paddle_strength": 4,
+          "high_paddle_strength": 9
+        },
+        "style_tags": [
+          "fast",
+          "technical",
+          "alternative_performance"
+        ],
+        "quiver_roles": [
+          "performance",
+          "reef_alternative"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_twin",
+        "alternative",
+        "daily_driver"
+      ],
+      "excluded_recommendation_lanes": [
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "DHD calls MF Twin a modern high-performance twin and explicitly states that it is not a retro fish."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": "performance_shortboard",
+      "previous_detailed_category": "performance_twin",
+      "classification_changed": true,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7820,
+      "canonical_key": "dhd::mini-twin",
+      "manufacturer": "DHD",
+      "model": "Mini Twin",
+      "official_url": "https://dhdsurf.com/products/mini-twin-summer-series",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/mini-twin-summer-series",
+        "resolved_url": "https://dhdsurf.com/products/mini-twin-summer-series",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "bbf748e4a1c13bb643e7196a7e375d411281109e2fd175b28c91baf33dd453a3",
+        "description_word_count": 90,
+        "official_intent_excerpt": "The DHD Mini Twin adds a little nostalgia with a modern day twist to your twin fin adventures. Perfect for 1 to 4ft surf..."
+      },
+      "manufacturer_intent": "The DHD Mini Twin adds a little nostalgia with a modern day twist to your twin fin adventures. Perfect for 1 to 4ft surf...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "fish",
+      "public_family_label": "Fish",
+      "detailed_category": "Twin Pin",
+      "secondary_categories": [],
+      "board_type": "Fish",
+      "primary_fin_setup": "Twin",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "round_pin"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "refined",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 4.0
+      },
+      "wave_power": [
+        "powerful",
+        "average"
+      ],
+      "wave_type": [
+        "point break",
+        "reef break",
+        "open face"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "drive",
+        "hold",
+        "projection"
+      ],
+      "weaknesses": [
+        "release",
+        "forgiveness"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a twin pin.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "refined",
+          "tail": [
+            "round_pin"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "refined",
+          "foil": "balanced",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "twin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 8,
+          "release": 6,
+          "hold": 8,
+          "forgiveness": 6,
+          "stability": 6,
+          "sensitivity": 7,
+          "projection": 8,
+          "pivot": 6,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 5,
+          "average_waves": 7,
+          "powerful_waves": 8,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 8,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 2,
+          "progressing": 5,
+          "intermediate": 8,
+          "advanced": 9,
+          "expert": 9,
+          "low_paddle_strength": 5,
+          "high_paddle_strength": 9
+        },
+        "style_tags": [
+          "drivey",
+          "hold",
+          "flowing"
+        ],
+        "quiver_roles": [
+          "clean_wave",
+          "reef",
+          "point_break"
+        ]
+      },
+      "recommendation_lanes": [
+        "twin_pin",
+        "performance_twin",
+        "point_break",
+        "alternative"
+      ],
+      "excluded_recommendation_lanes": [
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Curated public-family authority: The short, rounded retro-inspired twin is designed primarily for one-to-four-foot surf."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "fish",
+      "previous_detailed_category": "twin_pin",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7811,
+      "canonical_key": "dhd::mini-twin-ii",
+      "manufacturer": "DHD",
+      "model": "Mini Twin II",
+      "official_url": "https://dhdsurf.com/products/mini-twin-ii",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/mini-twin-ii",
+        "resolved_url": "https://dhdsurf.com/products/mini-twin-ii",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "50eb47107d5ab81abe9c89c8c71b3be5c2edbca3684cb6848ac919048b7343d7",
+        "description_word_count": 94,
+        "official_intent_excerpt": "Just a heads-up if you're ordering this model: we don’t keep it in stock, so it’ll take 3-4 weeks to deliver while we craft..."
+      },
+      "manufacturer_intent": "Just a heads-up if you're ordering this model: we don’t keep it in stock, so it’ll take 3-4 weeks to deliver while we craft...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "swallow"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "channels"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 3.0
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach_break",
+        "point_break",
+        "reef_break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "drive",
+        "release"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "swallow"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "channels"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 9,
+          "drive": 9,
+          "release": 9,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 8,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 8,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "drivey",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: swallow tail.",
+        "Applied governed evidence rule: channels."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7814,
+      "canonical_key": "dhd::nexus",
+      "manufacturer": "DHD",
+      "model": "Nexus",
+      "official_url": "https://dhdsurf.com/products/nexus",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/nexus",
+        "resolved_url": "https://dhdsurf.com/products/nexus",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "79aac9852f400a7b0526f5881028fbd1a367952602cc68756ba89934903437d1",
+        "description_word_count": 116,
+        "official_intent_excerpt": "Info The Nexus is where innovation meets versatility - a hybrid design combining the rail-to-rail ease of the 3DV with the unmatched speed of..."
+      },
+      "manufacturer_intent": "Info The Nexus is where innovation meets versatility - a hybrid design combining the rail-to-rail ease of the 3DV with the unmatched speed of...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "small_wave_shortboard",
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "flat"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 4.0
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "flat"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 7,
+          "hold": 6,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 5,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 8,
+          "powerful_waves": 6,
+          "beach_break": 8,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 4,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7813,
+      "canonical_key": "dhd::nexus-eps",
+      "manufacturer": "DHD",
+      "model": "Nexus EPS",
+      "official_url": "https://dhdsurf.com/products/sheldon-simkus-nexus-eps-59-113352",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/sheldon-simkus-nexus-eps-59-113352",
+        "resolved_url": "https://dhdsurf.com/products/nexus-eps",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_identity_match",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "e81394f6558550784df084d006c1f318aa8d27d4bf396a95c6d110a4fac4a843",
+        "description_word_count": 160,
+        "official_intent_excerpt": "Introducing the Nexus – where innovation meets versatility. By combining the best of our 3DV and Utopia models, our Nexus model delivers a high-performance..."
+      },
+      "manufacturer_intent": "Introducing the Nexus – where innovation meets versatility. By combining the best of our 3DV and Utopia models, our Nexus model delivers a high-performance...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "round"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "hold",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "round"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7822,
+      "canonical_key": "dhd::phoenix",
+      "manufacturer": "DHD",
+      "model": "Phoenix",
+      "official_url": "https://dhdsurf.com/products/phoenix",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/phoenix",
+        "resolved_url": "https://dhdsurf.com/products/phoenix",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "e672b0631a410ac11b7c2fc4b2f8b1fe93c907f8978c9f087234027f913c5431",
+        "description_word_count": 28,
+        "official_intent_excerpt": "Surf the ‘Phoenix’ 2 to 3 inches shorter and 1 to 3 litres more than your everyday shortboard. Ability — Intermediate - Expert Ideal..."
+      },
+      "manufacturer_intent": "Surf the ‘Phoenix’ 2 to 3 inches shorter and 1 to 3 litres more than your everyday shortboard. Ability — Intermediate - Expert Ideal...",
+      "manufacturer_intent_signals": [
+        "daily_driver"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Performance Daily Driver",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium_high",
+      "rail_type": "refined",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 4.0
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "beach break",
+        "reef break",
+        "open face"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "carve",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a performance daily driver.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "refined",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium_high",
+          "rails": "refined",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 6,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 7,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 8,
+          "glide": 5,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 8,
+          "powerful_waves": 7,
+          "beach_break": 8,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 2,
+          "progressing": 5,
+          "intermediate": 8,
+          "advanced": 9,
+          "expert": 10,
+          "low_paddle_strength": 5,
+          "high_paddle_strength": 9
+        },
+        "style_tags": [
+          "responsive",
+          "drivey",
+          "everyday_performance"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "performance"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_daily_driver",
+        "daily_driver",
+        "performance_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "performance_daily_driver",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7817,
+      "canonical_key": "dhd::phoenix-eps-swallow-tail",
+      "manufacturer": "DHD",
+      "model": "Phoenix EPS Swallow Tail",
+      "official_url": "https://dhdsurf.com/products/phoenix-eps-swallow-tail",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/phoenix-eps-swallow-tail",
+        "resolved_url": "https://dhdsurf.com/products/phoenix-eps-swallow-tail",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "afa2a24d84f85faf9fb5dbd5be545fcbb75025ac08ffd64505fad021158e8894",
+        "description_word_count": 28,
+        "official_intent_excerpt": "Surf the ‘PHOENIX’ 2 to 3 inches shorter and 1 to 3 litres more than your everyday shortboard. Ability — Intermediate - Expert Ideal..."
+      },
+      "manufacturer_intent": "Surf the ‘PHOENIX’ 2 to 3 inches shorter and 1 to 3 litres more than your everyday shortboard. Ability — Intermediate - Expert Ideal...",
+      "manufacturer_intent_signals": [
+        "daily_driver"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 4.0
+      },
+      "wave_power": [
+        "average"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 7,
+          "hold": 6,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 5,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7810,
+      "canonical_key": "dhd::phoenix-flight-eps",
+      "manufacturer": "DHD",
+      "model": "Phoenix Flight EPS",
+      "official_url": "https://dhdsurf.com/products/phoenix-flight-eps",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/phoenix-flight-eps",
+        "resolved_url": "https://dhdsurf.com/products/phoenix-flight-eps",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "e4df5ee3a97870af2fef4d896cb6e13ebe051ffe0cb124a30bd05734dd6f9621",
+        "description_word_count": 118,
+        "official_intent_excerpt": "Info The Phoenix – Flight is the refined evolution of our best-selling small-wave model, built to make weak surf faster, sharper, and more dynamic...."
+      },
+      "manufacturer_intent": "Info The Phoenix – Flight is the refined evolution of our best-selling small-wave model, built to make weak surf faster, sharper, and more dynamic....",
+      "manufacturer_intent_signals": [
+        "step_up"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "step_up",
+      "public_family_label": "Step Up",
+      "detailed_category": "Step Up",
+      "secondary_categories": [],
+      "board_type": "Step Up",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [
+        "Quad"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "round_pin"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "refined",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 3.0
+      },
+      "wave_power": [
+        "weak"
+      ],
+      "wave_type": [
+        "reef break",
+        "hollow waves",
+        "point break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "drive",
+        "projection",
+        "hold"
+      ],
+      "weaknesses": [
+        "forgiveness",
+        "release"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a step up.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "round_pin"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "refined",
+          "foil": "balanced",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "single"
+          ],
+          "fin_configurations": [
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 8,
+          "speed_generation": 7,
+          "drive": 10,
+          "release": 5,
+          "hold": 9,
+          "forgiveness": 4,
+          "stability": 5,
+          "sensitivity": 8,
+          "projection": 10,
+          "pivot": 5,
+          "carve": 9,
+          "glide": 6,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 3,
+          "average_waves": 5,
+          "powerful_waves": 10,
+          "beach_break": 5,
+          "point_break": 9,
+          "reef_break": 10,
+          "hollow_waves": 10,
+          "open_face": 9
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 6,
+          "advanced": 10,
+          "expert": 10,
+          "low_paddle_strength": 4,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "hold",
+          "drivey",
+          "powerful_wave"
+        ],
+        "quiver_roles": [
+          "step_up",
+          "travel",
+          "reef"
+        ]
+      },
+      "recommendation_lanes": [
+        "step_up",
+        "powerful_wave",
+        "hollow_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "step_up",
+      "previous_detailed_category": "step_up",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7818,
+      "canonical_key": "dhd::sandman",
+      "manufacturer": "DHD",
+      "model": "Sandman",
+      "official_url": "https://dhdsurf.com/products/sandman",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/sandman",
+        "resolved_url": "https://dhdsurf.com/products/sandman",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "367d69b98fe9f01e56ce2072c383040ff2f07561b5402c6b3b1434eb209b280a",
+        "description_word_count": 54,
+        "official_intent_excerpt": "Our goal for the sandman project was to develop a board that would make surfing easier for the 'normal' person, but also have some..."
+      },
+      "manufacturer_intent": "Our goal for the sandman project was to develop a board that would make surfing easier for the 'normal' person, but also have some...",
+      "manufacturer_intent_signals": [
+        "step_up"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "step_up",
+      "public_family_label": "Step Up",
+      "detailed_category": "Step Up",
+      "secondary_categories": [
+        "small_wave_shortboard"
+      ],
+      "board_type": "Step Up",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "round_pin"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "refined",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 6.0
+      },
+      "wave_power": [
+        "powerful",
+        "average"
+      ],
+      "wave_type": [
+        "point break",
+        "reef break",
+        "hollow waves"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "drive",
+        "hold",
+        "projection"
+      ],
+      "weaknesses": [
+        "release",
+        "forgiveness"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a step up.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "round_pin"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "refined",
+          "foil": "balanced",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 6,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 9,
+          "release": 5,
+          "hold": 9,
+          "forgiveness": 5,
+          "stability": 6,
+          "sensitivity": 7,
+          "projection": 9,
+          "pivot": 5,
+          "carve": 9,
+          "glide": 5,
+          "turning_radius": 8
+        },
+        "conditions": {
+          "weak_waves": 4,
+          "average_waves": 5,
+          "powerful_waves": 8,
+          "beach_break": 5,
+          "point_break": 8,
+          "reef_break": 8,
+          "hollow_waves": 8,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 8,
+          "advanced": 9,
+          "expert": 10,
+          "low_paddle_strength": 4,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "hold",
+          "drivey",
+          "powerful_wave"
+        ],
+        "quiver_roles": [
+          "step_up",
+          "travel",
+          "reef"
+        ]
+      },
+      "recommendation_lanes": [
+        "step_up",
+        "powerful_wave",
+        "hollow_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "step_up",
+      "previous_detailed_category": "step_up",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7815,
+      "canonical_key": "dhd::sg-no-8",
+      "manufacturer": "DHD",
+      "model": "SG No.8",
+      "official_url": "https://dhdsurf.com/products/sg-number-8",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/sg-number-8",
+        "resolved_url": "https://dhdsurf.com/products/sg-number-8",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "8935a8744dcea582fe80fcf759abe945629e672174922c7bf4866def5b539ca2",
+        "description_word_count": 129,
+        "official_intent_excerpt": "Built to celebrate Steph’s eighth World Title, the Number 8 is her refined high-performance shortboard — a board shaped from the exact elements she..."
+      },
+      "manufacturer_intent": "Built to celebrate Steph’s eighth World Title, the Number 8 is her refined high-performance shortboard — a board shaped from the exact elements she...",
+      "manufacturer_intent_signals": [
+        "performance_shortboard",
+        "step_up",
+        "daily_driver"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "step_up",
+      "public_family_label": "Step Up",
+      "detailed_category": "Step Up",
+      "secondary_categories": [
+        "performance_shortboard"
+      ],
+      "board_type": "Step Up",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "round"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "refined",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": 2.0,
+        "maximum_ft": 6.0
+      },
+      "wave_power": [
+        "average"
+      ],
+      "wave_type": [
+        "reef break",
+        "hollow waves",
+        "point break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "drive",
+        "projection",
+        "hold"
+      ],
+      "weaknesses": [
+        "forgiveness",
+        "release"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a step up.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "round"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "refined",
+          "foil": "balanced",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "single"
+          ],
+          "fin_configurations": [
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 6,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 10,
+          "release": 5,
+          "hold": 9,
+          "forgiveness": 4,
+          "stability": 5,
+          "sensitivity": 8,
+          "projection": 10,
+          "pivot": 5,
+          "carve": 9,
+          "glide": 5,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 3,
+          "average_waves": 6,
+          "powerful_waves": 10,
+          "beach_break": 5,
+          "point_break": 9,
+          "reef_break": 10,
+          "hollow_waves": 10,
+          "open_face": 9
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 6,
+          "advanced": 10,
+          "expert": 10,
+          "low_paddle_strength": 4,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "hold",
+          "drivey",
+          "powerful_wave"
+        ],
+        "quiver_roles": [
+          "step_up",
+          "travel",
+          "reef"
+        ]
+      },
+      "recommendation_lanes": [
+        "step_up",
+        "powerful_wave",
+        "hollow_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "step_up",
+      "previous_detailed_category": "step_up",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7804,
+      "canonical_key": "dhd::sweet-spot-4-0",
+      "manufacturer": "DHD",
+      "model": "Sweet Spot 4.0",
+      "official_url": "https://dhdsurf.com/products/ziggy-mackenzie-sweet-spot-511-97503",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/ziggy-mackenzie-sweet-spot-511-97503",
+        "resolved_url": "https://dhdsurf.com/products/ziggy-mackenzie-sweet-spot-511-97503",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "47d2ffbc7093a3b8dcea731ba167a4210c3ca77abfb15f5de2f0d4dc2581e88a",
+        "description_word_count": 157,
+        "official_intent_excerpt": "This is one of Ziggy MacKenzie's Sweet Spot step up boards from her 2025 Season. Moderately used, specs are: 5'11 x 16 9/16 x..."
+      },
+      "manufacturer_intent": "This is one of Ziggy MacKenzie's Sweet Spot step up boards from her 2025 Season. Moderately used, specs are: 5'11 x 16 9/16 x...",
+      "manufacturer_intent_signals": [
+        "step_up"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "step_up",
+      "public_family_label": "Step Up",
+      "detailed_category": "Step Up",
+      "secondary_categories": [],
+      "board_type": "Step Up",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "round_pin"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "rolled"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "refined",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "powerful",
+        "average"
+      ],
+      "wave_type": [
+        "point break",
+        "reef break",
+        "hollow waves"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "drive",
+        "hold",
+        "projection"
+      ],
+      "weaknesses": [
+        "release",
+        "forgiveness"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a step up.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "round_pin"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "refined",
+          "foil": "balanced",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "rolled"
+          ],
+          "fin_configurations": [
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 6,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 9,
+          "release": 5,
+          "hold": 9,
+          "forgiveness": 5,
+          "stability": 6,
+          "sensitivity": 7,
+          "projection": 9,
+          "pivot": 5,
+          "carve": 9,
+          "glide": 5,
+          "turning_radius": 8
+        },
+        "conditions": {
+          "weak_waves": 3,
+          "average_waves": 6,
+          "powerful_waves": 8,
+          "beach_break": 5,
+          "point_break": 8,
+          "reef_break": 8,
+          "hollow_waves": 8,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 6,
+          "advanced": 10,
+          "expert": 10,
+          "low_paddle_strength": 4,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "hold",
+          "drivey",
+          "powerful_wave"
+        ],
+        "quiver_roles": [
+          "step_up",
+          "travel",
+          "reef"
+        ]
+      },
+      "recommendation_lanes": [
+        "step_up",
+        "powerful_wave",
+        "hollow_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "step_up",
+      "previous_detailed_category": "step_up",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7819,
+      "canonical_key": "dhd::the-twin",
+      "manufacturer": "DHD",
+      "model": "The Twin",
+      "official_url": "https://dhdsurf.com/products/twin-fin-summer-series",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/twin-fin-summer-series",
+        "resolved_url": "https://dhdsurf.com/products/twin-fin-summer-series",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "8c3332a9134becef58126718a70092c73ced1afcb155f918d285b13d6ae588de",
+        "description_word_count": 44,
+        "official_intent_excerpt": "The Twin Fin has been Designed for Summer Fun! A little nostalgia with a modern day twist makes this perfect for 1 to 4ft..."
+      },
+      "manufacturer_intent": "The Twin Fin has been Designed for Summer Fun! A little nostalgia with a modern day twist makes this perfect for 1 to 4ft...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [
+        "Twin"
+      ],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 4.0
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach_break",
+        "point_break",
+        "reef_break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "hold",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7808,
+      "canonical_key": "dhd::utopia",
+      "manufacturer": "DHD",
+      "model": "Utopia",
+      "official_url": "https://dhdsurf.com/products/brax-waters-utopia-510-113955",
+      "official_evidence": {
+        "official_url": "https://dhdsurf.com/products/brax-waters-utopia-510-113955",
+        "resolved_url": "https://dhdsurf.com/products/brax-waters-utopia-510-113955",
+        "retrieved_at_utc": "2026-07-16T21:54:59Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "fa55fb0412beabdb9a785be9021f589ef92c905680f51fcb11069efa11a27550",
+        "description_word_count": 130,
+        "official_intent_excerpt": "This is one of Brax Waters' Utopia shortboard from his 2024 Junior Season. Heavily used, with several fixed dings (see photos). Specs are: 5'7..."
+      },
+      "manufacturer_intent": "This is one of Brax Waters' Utopia shortboard from his 2024 Junior Season. Heavily used, with several fixed dings (see photos). Specs are: 5'7...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "High Performance Shortboard",
+      "secondary_categories": [],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "low_performance",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 1.0,
+        "maximum_ft": 6.0
+      },
+      "wave_power": [
+        "powerful",
+        "average"
+      ],
+      "wave_type": [
+        "reef break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "sensitivity",
+        "projection",
+        "pivot"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a high performance shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "low_performance",
+          "foil": "refined",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 5,
+          "wave_entry": 5,
+          "speed_generation": 7,
+          "drive": 8,
+          "release": 8,
+          "hold": 8,
+          "forgiveness": 4,
+          "stability": 4,
+          "sensitivity": 9,
+          "projection": 9,
+          "pivot": 9,
+          "carve": 9,
+          "glide": 3,
+          "turning_radius": 3
+        },
+        "conditions": {
+          "weak_waves": 4,
+          "average_waves": 7,
+          "powerful_waves": 10,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 10,
+          "hollow_waves": 8,
+          "open_face": 9
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 5,
+          "advanced": 10,
+          "expert": 10,
+          "low_paddle_strength": 2,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "technical",
+          "sensitive",
+          "vertical",
+          "drivey"
+        ],
+        "quiver_roles": [
+          "performance",
+          "competition"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_shortboard",
+        "good_wave",
+        "competition"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "performance_shortboard",
+      "previous_detailed_category": "performance_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    }
+  ]
+}

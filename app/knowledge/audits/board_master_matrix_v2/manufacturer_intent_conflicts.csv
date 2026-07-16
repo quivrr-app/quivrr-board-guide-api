@@ -1,0 +1,20 @@
+canonical_model_id,manufacturer,model,public_family,manufacturer_intent_signals,unresolved_intent_conflict,official_url
+7734,Channel Islands,happy,performance_shortboard,step_up,False,https://cisurfboards.com/products/happy
+7746,Channel Islands,semi-pro-12,performance_shortboard,step_up,False,https://cisurfboards.com/products/semi-pro-12
+7806,DHD,MF Twin,performance_shortboard,fish,False,https://dhdsurf.com/products/owen-wright-mf-twin-511-117315
+7976,Firewire,Greedy Beaver,mid_length,longboard,False,https://www.firewiresurfboards.com/products/prestige-greedy-beaver
+7964,Firewire,Revo Max,mid_length,step_up,False,https://www.firewiresurfboards.com/products/prestige-revo-max
+7974,Firewire,Taylor Jensen Pro Mid,mid_length,longboard|step_up,False,https://www.firewiresurfboards.com/products/taylor-jensen-pro-mid
+7975,Firewire,Taylor Jensen Twinzer,mid_length,step_up,False,https://www.firewiresurfboards.com/products/taylor-jensen-twinzer
+7955,Firewire,Xtra Cado,mid_length,longboard,False,https://www.firewiresurfboards.com/products/xtra-cado
+7831,Lost,Cali Twin Pin,performance_shortboard,step_up,False,https://lostsurfboards.com.au/products/calitwinpin
+7847,Lost,Hydra,groveller,fish,False,https://lostsurfboards.com.au/products/hydra
+7891,Lost,Sub Driver 2.0,performance_shortboard,daily_driver,False,https://lostsurfboards.com.au/products/sub-driver-20-blacksheep
+7762,Pyzel,Astro Pop,fish,daily_driver,False,https://pyzelsurf.com.au/products/astropopelectraliteepoxy
+7786,Pyzel,Astro Pop XL,groveller,daily_driver|fish,False,https://pyzelsurf.com.au/products/astropopxl
+7794,Pyzel,Ghost Pro,performance_shortboard,daily_driver,False,https://pyzelsurf.com.au/products/pyzelproject12ghost-62
+7791,Pyzel,Ghost Swallow,performance_shortboard,daily_driver,False,https://pyzelsurf.com.au/products/ghostswallowtail
+7785,Pyzel,Ghost XL,performance_shortboard,daily_driver,False,https://pyzelsurf.com.au/products/ghostxl
+7768,Pyzel,Gremlin,groveller,longboard,False,https://pyzelsurf.com.au/products/gremlin-softboard
+7923,Rusty,Hatchet,groveller,fish,False,https://rustysurfboards.com/collections/hatchet
+7931,Rusty,Miso,groveller,fish,False,https://rustysurfboards.com/collections/miso

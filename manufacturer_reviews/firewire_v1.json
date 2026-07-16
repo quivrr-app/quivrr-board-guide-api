@@ -1,0 +1,5443 @@
+{
+  "schema_version": 1,
+  "manufacturer": "Firewire",
+  "authority": "Current official manufacturer website",
+  "reviewed_date": "2026-07-17",
+  "reviewed_by": "QUIVRR",
+  "model_count": 29,
+  "models": [
+    {
+      "canonical_model_id": 7968,
+      "canonical_key": "firewire::boss-up",
+      "manufacturer": "Firewire",
+      "model": "Boss Up",
+      "official_url": "https://www.firewiresurfboards.com/products/prestige-boss-up",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/prestige-boss-up",
+        "resolved_url": "https://www.firewiresurfboards.com/products/prestige-boss-up",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "0088bd1f7c2aaad5b6ca7780a81e24557f991930226b6dde432b3dde7fd68fc0",
+        "description_word_count": 156,
+        "official_intent_excerpt": "The Boss up is the bigger brother of the S Boss, Kelly's first-ever midlength. Designed by Dan Mann in partnership with Kelly Slater and..."
+      },
+      "manufacturer_intent": "The Boss up is the bigger brother of the S Boss, Kelly's first-ever midlength. Designed by Dan Mann in partnership with Kelly Slater and...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "mid_length",
+      "public_family_label": "Mid Length",
+      "detailed_category": "Mid Length",
+      "secondary_categories": [
+        "performance_mid_length"
+      ],
+      "board_type": "Mid Length",
+      "primary_fin_setup": "5 Fin",
+      "alternative_fin_setup": [
+        "Quad"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "round"
+      ],
+      "outline": "curvy",
+      "bottom_contours": [
+        "rolled"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium_low",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "beach break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "glide",
+        "paddle",
+        "wave entry"
+      ],
+      "weaknesses": [
+        "release",
+        "sensitivity"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a mid length.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "curvy",
+          "nose": "medium",
+          "tail": [
+            "round"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium_low",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "rolled"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one",
+            "twin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 5,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 8,
+          "sensitivity": 5,
+          "projection": 7,
+          "pivot": 5,
+          "carve": 8,
+          "glide": 9,
+          "turning_radius": 8
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 7,
+          "hollow_waves": 4,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 6,
+          "progressing": 9,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 7
+        },
+        "style_tags": [
+          "glide",
+          "flowing",
+          "easy_paddle",
+          "stable"
+        ],
+        "quiver_roles": [
+          "mid_length",
+          "cruiser",
+          "point_break"
+        ]
+      },
+      "recommendation_lanes": [
+        "mid_length",
+        "paddle_support",
+        "flow"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "mid_length",
+      "previous_detailed_category": "mid_length",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7961,
+      "canonical_key": "firewire::dominator-2-0",
+      "manufacturer": "Firewire",
+      "model": "Dominator 2.0",
+      "official_url": "https://www.firewiresurfboards.com/products/dominator-2-0-2026",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/dominator-2-0-2026",
+        "resolved_url": "https://www.firewiresurfboards.com/products/dominator-2-0-2026",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "f9f6038f555c7dd2b2a7b355d131b10fecb47f2b147cd66e43aa8484f4f0ce55",
+        "description_word_count": 201,
+        "official_intent_excerpt": "The Dominator II is a revisited version that I’m super excited about. The Dominator has been a staple in my quiver, and the Firewire..."
+      },
+      "manufacturer_intent": "The Dominator II is a revisited version that I’m super excited about. The Dominator has been a staple in my quiver, and the Firewire...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Everyday Daily Driver",
+      "secondary_categories": [],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash",
+        "round"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "double",
+        "vee",
+        "single",
+        "rolled"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "release",
+        "carve",
+        "paddle"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a everyday daily driver.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash",
+            "round"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "double",
+            "vee",
+            "single",
+            "rolled"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 8,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 8,
+          "glide": 5,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 10,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 7,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 8,
+          "intermediate": 10,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 8,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "reliable",
+          "balanced"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "daily_driver",
+        "everyday"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: v out the tail."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "daily_driver",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7958,
+      "canonical_key": "firewire::dominator-pro",
+      "manufacturer": "Firewire",
+      "model": "Dominator Pro",
+      "official_url": "https://www.firewiresurfboards.com/products/dominator-pro",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/dominator-pro",
+        "resolved_url": "https://www.firewiresurfboards.com/products/dominator-pro",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "e4eb530e6f07c044ca35ca669d91c192f85bc02ed5f5acd4868cef1a7f9dbfbd",
+        "description_word_count": 271,
+        "official_intent_excerpt": "This is the shortboard that fans of the Dominator have been asking Dan Mann to build for years, designed to go toe to toe..."
+      },
+      "manufacturer_intent": "This is the shortboard that fans of the Dominator have been asking Dan Mann to build for years, designed to go toe to toe...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Everyday Daily Driver",
+      "secondary_categories": [
+        "step_up",
+        "performance_daily_driver",
+        "performance_shortboard"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [
+        "Quad"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee",
+        "rolled"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "open face",
+        "beach break",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "release",
+        "projection"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a everyday daily driver.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee",
+            "rolled"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 8,
+          "pivot": 7,
+          "carve": 8,
+          "glide": 5,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 9,
+          "powerful_waves": 8,
+          "beach_break": 8,
+          "point_break": 8,
+          "reef_break": 8,
+          "hollow_waves": 5,
+          "open_face": 9
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 8,
+          "intermediate": 10,
+          "advanced": 9,
+          "expert": 8,
+          "low_paddle_strength": 8,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "reliable",
+          "balanced",
+          "fast"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "daily_driver",
+        "everyday"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: single concave.",
+        "Applied governed evidence rule: vee."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "daily_driver",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7954,
+      "canonical_key": "firewire::drk",
+      "manufacturer": "Firewire",
+      "model": "DRK",
+      "official_url": "https://www.firewiresurfboards.com/products/drk",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/drk",
+        "resolved_url": "https://www.firewiresurfboards.com/products/drk",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "46bffd557e1155e5f105d0441c989a2193353caf0e1eaa62aac820747c5b1b0a",
+        "description_word_count": 411,
+        "official_intent_excerpt": "Introducing the winning design of Stab In The Dark X starring Kelly Slater, the DRK in I-Bolic 2.0 Technology by Dan Mann. Dan drew..."
+      },
+      "manufacturer_intent": "Introducing the winning design of Stab In The Dark X starring Kelly Slater, the DRK in I-Bolic 2.0 Technology by Dan Mann. Dan drew...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [
+        "Quad"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "wide_forward",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "hold",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "wide_forward",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7959,
+      "canonical_key": "firewire::frk-swallow",
+      "manufacturer": "Firewire",
+      "model": "FRK Swallow",
+      "official_url": "https://www.firewiresurfboards.com/products/frk-swallow-2026",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/frk-swallow-2026",
+        "resolved_url": "https://www.firewiresurfboards.com/products/frk-swallow-2026",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "aba9c42f6814564c9c31601632fc6af5b14abf4d7af899d04a8ef6a8246d4bdf",
+        "description_word_count": 240,
+        "official_intent_excerpt": "Meet the newest addition to the FRK quiver. Crafted to unlock performance in waves 5' and under, Dan Mann designed the FRK Swallow to..."
+      },
+      "manufacturer_intent": "Meet the newest addition to the FRK quiver. Crafted to unlock performance in waves 5' and under, Dan Mann designed the FRK Swallow to...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "swallow"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "rolled",
+        "flat"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "release",
+        "paddle"
+      ],
+      "weaknesses": [
+        "hold",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "swallow"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "rolled",
+            "flat"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 9,
+          "drive": 8,
+          "release": 9,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "drivey",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: swallow tail."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7970,
+      "canonical_key": "firewire::frk",
+      "manufacturer": "Firewire",
+      "model": "FRK+",
+      "official_url": "https://www.firewiresurfboards.com/products/frk-2026",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/frk-2026",
+        "resolved_url": "https://www.firewiresurfboards.com/products/frk-2026",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "71f0e22bbe636dd5b7c4cf511b603c1c2d294b2e73d53f1d4bb3141a9a8c7a60",
+        "description_word_count": 204,
+        "official_intent_excerpt": "Dan Mann's FRK+ is a classic squash tail high-performance shortboard, an enhanced version of the FRK for everyday conditions. The FRK+ is meant to..."
+      },
+      "manufacturer_intent": "Dan Mann's FRK+ is a classic squash tail high-performance shortboard, an enhanced version of the FRK for everyday conditions. The FRK+ is meant to...",
+      "manufacturer_intent_signals": [
+        "performance_shortboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "High Performance Shortboard",
+      "secondary_categories": [],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash",
+        "round"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single",
+        "rolled"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "low_performance",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average"
+      ],
+      "wave_type": [
+        "reef break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "sensitivity",
+        "projection",
+        "pivot"
+      ],
+      "weaknesses": [
+        "forgiveness",
+        "stability"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a high performance shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "squash",
+            "round"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "low_performance",
+          "foil": "refined",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "rolled"
+          ],
+          "fin_configurations": [
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 5,
+          "wave_entry": 5,
+          "speed_generation": 8,
+          "drive": 9,
+          "release": 9,
+          "hold": 8,
+          "forgiveness": 3,
+          "stability": 3,
+          "sensitivity": 10,
+          "projection": 10,
+          "pivot": 10,
+          "carve": 10,
+          "glide": 3,
+          "turning_radius": 3
+        },
+        "conditions": {
+          "weak_waves": 4,
+          "average_waves": 6,
+          "powerful_waves": 10,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 10,
+          "hollow_waves": 8,
+          "open_face": 9
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 5,
+          "advanced": 10,
+          "expert": 10,
+          "low_paddle_strength": 2,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "technical",
+          "sensitive",
+          "vertical",
+          "fast",
+          "drivey"
+        ],
+        "quiver_roles": [
+          "performance",
+          "competition"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_shortboard",
+        "good_wave",
+        "competition"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "performance_shortboard",
+      "previous_detailed_category": "performance_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7965,
+      "canonical_key": "firewire::great-white-twin",
+      "manufacturer": "Firewire",
+      "model": "Great White Twin",
+      "official_url": "https://www.firewiresurfboards.com/products/prestige-great-white-twin",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/prestige-great-white-twin",
+        "resolved_url": "https://www.firewiresurfboards.com/products/prestige-great-white-twin",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "fd5c81836faa69a86ce787310f11648e56288187c34746c98ef306281762dc1c",
+        "description_word_count": 183,
+        "official_intent_excerpt": "Inspired by the outline of the Great White Shark, Kelly Slater designed the ‘Great White Twin’ in I-Bolic Technology with Volcanic Lamination alongside Bali-based..."
+      },
+      "manufacturer_intent": "Inspired by the outline of the Great White Shark, Kelly Slater designed the ‘Great White Twin’ in I-Bolic Technology with Volcanic Lamination alongside Bali-based...",
+      "manufacturer_intent_signals": [
+        "groveller"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "groveller",
+      "public_family_label": "Groveller",
+      "detailed_category": "Small Wave Performance Twin",
+      "secondary_categories": [
+        "groveller"
+      ],
+      "board_type": "Groveller",
+      "primary_fin_setup": "Twin",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "editorial_override",
+      "tail_shape": [
+        "round"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "rolled"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium_high",
+      "rail_type": "refined",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "reef break",
+        "open face",
+        "beach break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "release",
+        "sensitivity"
+      ],
+      "weaknesses": [
+        "forgiveness",
+        "stability"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a small wave performance twin.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "refined",
+          "tail": [
+            "round"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium_high",
+          "rails": "refined",
+          "foil": "refined",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "rolled"
+          ],
+          "fin_configurations": [
+            "twin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 6,
+          "wave_entry": 6,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 7,
+          "forgiveness": 5,
+          "stability": 5,
+          "sensitivity": 8,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 7,
+          "glide": 5,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 9,
+          "powerful_waves": 7,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 2,
+          "progressing": 4,
+          "intermediate": 8,
+          "advanced": 9,
+          "expert": 10,
+          "low_paddle_strength": 4,
+          "high_paddle_strength": 9
+        },
+        "style_tags": [
+          "fast",
+          "technical",
+          "alternative_performance"
+        ],
+        "quiver_roles": [
+          "performance",
+          "reef_alternative"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_twin",
+        "alternative",
+        "daily_driver"
+      ],
+      "excluded_recommendation_lanes": [
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Curated public-family authority: High-performance grovelling and weak-wave speed generation are the explicit primary role.",
+        "Firewire explicitly describes Great White Twin as a high-performance groveller with hybrid paddle support and shortboard rail performance."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": "groveller",
+      "previous_detailed_category": "performance_twin",
+      "classification_changed": true,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7976,
+      "canonical_key": "firewire::greedy-beaver",
+      "manufacturer": "Firewire",
+      "model": "Greedy Beaver",
+      "official_url": "https://www.firewiresurfboards.com/products/prestige-greedy-beaver",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/prestige-greedy-beaver",
+        "resolved_url": "https://www.firewiresurfboards.com/products/prestige-greedy-beaver",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "1a35ee2e2a38b410feab905486b61445d050253355a0a612d4bc21d6d57e1ac2",
+        "description_word_count": 168,
+        "official_intent_excerpt": "The Greedy Beaver has a real shortboard feel with a compressed longboard outline, a true crossover board with midlength retro glide and shortboard maneuverability...."
+      },
+      "manufacturer_intent": "The Greedy Beaver has a real shortboard feel with a compressed longboard outline, a true crossover board with midlength retro glide and shortboard maneuverability....",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "mid_length",
+      "public_family_label": "Mid Length",
+      "detailed_category": "Crossover Mid Length",
+      "secondary_categories": [
+        "longboard"
+      ],
+      "board_type": "Mid Length",
+      "primary_fin_setup": "Single",
+      "alternative_fin_setup": [
+        "2+1",
+        "Twin",
+        "Two Plus One"
+      ],
+      "fin_configuration_source": "governed_dna_fallback",
+      "tail_shape": [
+        "pin"
+      ],
+      "outline": "curvy",
+      "bottom_contours": [
+        "single",
+        "double",
+        "rolled"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium_low",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "beach break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "hold"
+      ],
+      "weaknesses": [
+        "release",
+        "sensitivity"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a crossover mid length.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "curvy",
+          "nose": "medium",
+          "tail": [
+            "pin"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium_low",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "rolled"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one",
+            "twin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 10,
+          "wave_entry": 9,
+          "speed_generation": 7,
+          "drive": 8,
+          "release": 4,
+          "hold": 9,
+          "forgiveness": 7,
+          "stability": 9,
+          "sensitivity": 5,
+          "projection": 7,
+          "pivot": 5,
+          "carve": 8,
+          "glide": 9,
+          "turning_radius": 8
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 8,
+          "powerful_waves": 7,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 7,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 6,
+          "progressing": 9,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 7
+        },
+        "style_tags": [
+          "glide",
+          "flowing",
+          "easy_paddle",
+          "drivey",
+          "stable"
+        ],
+        "quiver_roles": [
+          "mid_length",
+          "cruiser",
+          "point_break"
+        ]
+      },
+      "recommendation_lanes": [
+        "mid_length",
+        "paddle_support",
+        "flow"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: rounded pin.",
+        "Applied governed evidence rule: paddle power.",
+        "Firewire presents Greedy Beaver as a crossover with mid-length glide and shortboard manoeuvrability; longboard outline influence is secondary.",
+        "Fin configuration was not explicit in the retrieved manufacturer text and remains a governed fallback requiring future confirmation."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": "mid_length",
+      "previous_detailed_category": "mid_length",
+      "classification_changed": true,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7963,
+      "canonical_key": "firewire::groove",
+      "manufacturer": "Firewire",
+      "model": "Groove",
+      "official_url": "https://www.firewiresurfboards.com/products/groove-2026",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/groove-2026",
+        "resolved_url": "https://www.firewiresurfboards.com/products/groove-2026",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "43bca8566151ae4e715fe1cb393d3940dccfbde2699c7c3d1a374f08ed603068",
+        "description_word_count": 373,
+        "official_intent_excerpt": "When everything goes your way. Find your Groove. Meet the highest-performance board Rob Machado's ever designed. This shape still has the hybrid DNA Rob's..."
+      },
+      "manufacturer_intent": "When everything goes your way. Find your Groove. Meet the highest-performance board Rob Machado's ever designed. This shape still has the hybrid DNA Rob's...",
+      "manufacturer_intent_signals": [
+        "performance_shortboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "High Performance Shortboard",
+      "secondary_categories": [],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [
+        "2+1",
+        "Quad"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "squash",
+        "square"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "low_performance",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak"
+      ],
+      "wave_type": [
+        "reef break",
+        "hollow waves",
+        "open face"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "sensitivity",
+        "projection",
+        "pivot"
+      ],
+      "weaknesses": [
+        "forgiveness",
+        "stability"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a high performance shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "squash",
+            "square"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "low_performance",
+          "foil": "refined",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single"
+          ],
+          "fin_configurations": [
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 4,
+          "wave_entry": 5,
+          "speed_generation": 8,
+          "drive": 9,
+          "release": 9,
+          "hold": 9,
+          "forgiveness": 3,
+          "stability": 3,
+          "sensitivity": 10,
+          "projection": 10,
+          "pivot": 10,
+          "carve": 10,
+          "glide": 3,
+          "turning_radius": 3
+        },
+        "conditions": {
+          "weak_waves": 2,
+          "average_waves": 5,
+          "powerful_waves": 10,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 10,
+          "hollow_waves": 10,
+          "open_face": 9
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 5,
+          "advanced": 10,
+          "expert": 10,
+          "low_paddle_strength": 2,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "technical",
+          "sensitive",
+          "vertical",
+          "fast",
+          "drivey"
+        ],
+        "quiver_roles": [
+          "performance",
+          "competition"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_shortboard",
+        "good_wave",
+        "competition"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: more rocker."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "performance_shortboard",
+      "previous_detailed_category": "performance_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7966,
+      "canonical_key": "firewire::machadocado",
+      "manufacturer": "Firewire",
+      "model": "Machadocado",
+      "official_url": "https://www.firewiresurfboards.com/products/machadocado",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/machadocado",
+        "resolved_url": "https://www.firewiresurfboards.com/products/machadocado",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "78f5c35dcf349cf8ecae056c4fc5bd9aa3c04a4a8171e91cb8ef25958348dd44",
+        "description_word_count": 268,
+        "official_intent_excerpt": "Meet your new favorite summertime shape, designed by Rob Machado inspired by the outline of an avocado mixed with the DNA of a fish..."
+      },
+      "manufacturer_intent": "Meet your new favorite summertime shape, designed by Rob Machado inspired by the outline of an avocado mixed with the DNA of a fish...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "fish",
+      "public_family_label": "Fish",
+      "detailed_category": "Performance Fish",
+      "secondary_categories": [],
+      "board_type": "Fish",
+      "primary_fin_setup": "Twin",
+      "alternative_fin_setup": [
+        "2+1",
+        "Thruster"
+      ],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "rolled"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "refined",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "reef break",
+        "open face"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "paddle",
+        "wave entry"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a performance fish.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "refined",
+          "foil": "balanced",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "rolled"
+          ],
+          "fin_configurations": [
+            "twin",
+            "quad"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 7,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 5,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 7,
+          "point_break": 6,
+          "reef_break": 7,
+          "hollow_waves": 6,
+          "open_face": 7
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 6,
+          "intermediate": 8,
+          "advanced": 9,
+          "expert": 10,
+          "low_paddle_strength": 6,
+          "high_paddle_strength": 9
+        },
+        "style_tags": [
+          "fast",
+          "drivey",
+          "responsive"
+        ],
+        "quiver_roles": [
+          "small_wave",
+          "daily_driver",
+          "reef_alternative"
+        ]
+      },
+      "recommendation_lanes": [
+        "fish",
+        "performance_fish",
+        "small_wave",
+        "daily_driver"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "fish",
+      "previous_detailed_category": "performance_fish",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7971,
+      "canonical_key": "firewire::mashup",
+      "manufacturer": "Firewire",
+      "model": "Mashup",
+      "official_url": "https://www.firewiresurfboards.com/products/mashup-2026",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/mashup-2026",
+        "resolved_url": "https://www.firewiresurfboards.com/products/mashup-2026",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "152b870f4271ec845c3663bb652ea8356cd81452ae1e666a758025adb4dd6bea",
+        "description_word_count": 157,
+        "official_intent_excerpt": "Two minds combined. Rob Machado and Dan Mann have created the Mashup: a melding of each of their most popular designs, the Seaside and..."
+      },
+      "manufacturer_intent": "Two minds combined. Rob Machado and Dan Mann have created the Mashup: a melding of each of their most popular designs, the Seaside and...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "fish",
+      "public_family_label": "Fish",
+      "detailed_category": "Performance Fish",
+      "secondary_categories": [
+        "groveller"
+      ],
+      "board_type": "Fish",
+      "primary_fin_setup": "Twin",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "swallow"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "rolled"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "refined",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "beach break",
+        "reef break",
+        "open face"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "paddle",
+        "wave entry"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a performance fish.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "swallow"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "refined",
+          "foil": "balanced",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "rolled"
+          ],
+          "fin_configurations": [
+            "twin",
+            "quad"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 7,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 5,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 7,
+          "powerful_waves": 6,
+          "beach_break": 7,
+          "point_break": 6,
+          "reef_break": 7,
+          "hollow_waves": 6,
+          "open_face": 7
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 6,
+          "intermediate": 8,
+          "advanced": 9,
+          "expert": 10,
+          "low_paddle_strength": 6,
+          "high_paddle_strength": 9
+        },
+        "style_tags": [
+          "fast",
+          "drivey",
+          "responsive"
+        ],
+        "quiver_roles": [
+          "small_wave",
+          "daily_driver",
+          "reef_alternative"
+        ]
+      },
+      "recommendation_lanes": [
+        "fish",
+        "performance_fish",
+        "small_wave",
+        "daily_driver"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "fish",
+      "previous_detailed_category": "performance_fish",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7956,
+      "canonical_key": "firewire::mindcraft",
+      "manufacturer": "Firewire",
+      "model": "Mindcraft",
+      "official_url": "https://www.firewiresurfboards.com/products/mindcraft",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/mindcraft",
+        "resolved_url": "https://www.firewiresurfboards.com/products/mindcraft",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "a29054a357552a830871b1ce5b395e26f688d9d0673587ee2258bef4a7e4bdbe",
+        "description_word_count": 294,
+        "official_intent_excerpt": "Introducing the Mindcraft designed by Kelly Slater and Daniel Thomson, a minimalist shape designed for pure function. Built in our patented I-Bolic 2.0 Technology,..."
+      },
+      "manufacturer_intent": "Introducing the Mindcraft designed by Kelly Slater and Daniel Thomson, a minimalist shape designed for pure function. Built in our patented I-Bolic 2.0 Technology,...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "Alternative Performance Twin",
+      "secondary_categories": [],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Twin",
+      "alternative_fin_setup": [
+        "Thruster",
+        "Quad"
+      ],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "round"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single",
+        "double",
+        "rolled"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium_high",
+      "rail_type": "refined",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 2.0,
+        "maximum_ft": 6.0
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "reef break",
+        "open face",
+        "beach break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "release",
+        "sensitivity"
+      ],
+      "weaknesses": [
+        "forgiveness",
+        "stability"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a alternative performance twin.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "refined",
+          "tail": [
+            "round"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium_high",
+          "rails": "refined",
+          "foil": "refined",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "rolled"
+          ],
+          "fin_configurations": [
+            "twin",
+            "quad"
+          ]
+        },
+        "behaviour": {
+          "paddle": 6,
+          "wave_entry": 6,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 7,
+          "forgiveness": 5,
+          "stability": 5,
+          "sensitivity": 8,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 7,
+          "glide": 5,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 8,
+          "powerful_waves": 7,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 7,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 2,
+          "progressing": 4,
+          "intermediate": 8,
+          "advanced": 9,
+          "expert": 10,
+          "low_paddle_strength": 4,
+          "high_paddle_strength": 9
+        },
+        "style_tags": [
+          "fast",
+          "technical",
+          "alternative_performance"
+        ],
+        "quiver_roles": [
+          "performance",
+          "reef_alternative"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_twin",
+        "alternative",
+        "daily_driver"
+      ],
+      "excluded_recommendation_lanes": [
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "performance_shortboard",
+      "previous_detailed_category": "performance_twin",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7960,
+      "canonical_key": "firewire::neutrino",
+      "manufacturer": "Firewire",
+      "model": "Neutrino",
+      "official_url": "https://www.firewiresurfboards.com/products/neutrino",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/neutrino",
+        "resolved_url": "https://www.firewiresurfboards.com/products/neutrino",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "b1d7ddc42756c67f60e48e85a65c670b54e1cffcc2826635e46fde0816c80eb8",
+        "description_word_count": 311,
+        "official_intent_excerpt": "Introducing the Neutrino in I-Bolic 2.0 Technology designed by Daniel Thomson, Tomo's latest Modern Planing Hull and performance hybrid. Inspired by the Nano, one..."
+      },
+      "manufacturer_intent": "Introducing the Neutrino in I-Bolic 2.0 Technology designed by Daniel Thomson, Tomo's latest Modern Planing Hull and performance hybrid. Inspired by the Nano, one...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [
+        "Quad"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "parallel",
+      "bottom_contours": [
+        "single",
+        "rolled"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "paddle",
+        "wave entry"
+      ],
+      "weaknesses": [
+        "hold",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "parallel",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "rolled"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 9,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 8,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 8,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: single concave."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7964,
+      "canonical_key": "firewire::revo-max",
+      "manufacturer": "Firewire",
+      "model": "Revo Max",
+      "official_url": "https://www.firewiresurfboards.com/products/prestige-revo-max",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/prestige-revo-max",
+        "resolved_url": "https://www.firewiresurfboards.com/products/prestige-revo-max",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "a4adfae50b6f278f2f16b27affe98992bdb7bc4a8c1f259601c6c2a1e7f601a4",
+        "description_word_count": 102,
+        "official_intent_excerpt": "The Revo Max is Tomo's latest Modern Planing Hull shape featuring his innovative Vee Quad Concave. It's a step up twin and performance midlength..."
+      },
+      "manufacturer_intent": "The Revo Max is Tomo's latest Modern Planing Hull shape featuring his innovative Vee Quad Concave. It's a step up twin and performance midlength...",
+      "manufacturer_intent_signals": [
+        "step_up"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "mid_length",
+      "public_family_label": "Mid Length",
+      "detailed_category": "Performance Mid Length Step-Up Twin",
+      "secondary_categories": [
+        "step_up",
+        "performance_mid_length"
+      ],
+      "board_type": "Mid Length",
+      "primary_fin_setup": "Twin",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "editorial_override",
+      "tail_shape": [
+        "round"
+      ],
+      "outline": "curvy",
+      "bottom_contours": [
+        "vee",
+        "single",
+        "rolled"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium_low",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "reef break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "glide",
+        "paddle",
+        "wave entry"
+      ],
+      "weaknesses": [
+        "sensitivity",
+        "pivot"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a performance mid length step-up twin.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "curvy",
+          "nose": "medium",
+          "tail": [
+            "round"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium_low",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "vee",
+            "single",
+            "rolled"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one",
+            "twin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 9,
+          "wave_entry": 9,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 6,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 5,
+          "projection": 7,
+          "pivot": 5,
+          "carve": 9,
+          "glide": 10,
+          "turning_radius": 9
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 6,
+          "point_break": 8,
+          "reef_break": 7,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 6,
+          "progressing": 9,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 7
+        },
+        "style_tags": [
+          "glide",
+          "flowing",
+          "easy_paddle",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "mid_length",
+          "cruiser",
+          "point_break"
+        ]
+      },
+      "recommendation_lanes": [
+        "mid_length",
+        "paddle_support",
+        "flow"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: vee.",
+        "Firewire explicitly combines a step-up twin with a performance mid length; its planing-hull mid-length platform remains the public identity."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": "mid_length",
+      "previous_detailed_category": "mid_length",
+      "classification_changed": true,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7967,
+      "canonical_key": "firewire::s-boss",
+      "manufacturer": "Firewire",
+      "model": "S Boss",
+      "official_url": "https://www.firewiresurfboards.com/products/prestige-s-boss",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/prestige-s-boss",
+        "resolved_url": "https://www.firewiresurfboards.com/products/prestige-s-boss",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "f8eba33de2a4cd7d2d9a8e126860871c7f55785fb242288b049e62a86688ef09",
+        "description_word_count": 193,
+        "official_intent_excerpt": "Our most user-friendly, pure performance shape. Ever. The S Boss combines Kelly Slater’s pursuit of high-performance progression with Dan Mann’s mission to make performance..."
+      },
+      "manufacturer_intent": "Our most user-friendly, pure performance shape. Ever. The S Boss combines Kelly Slater’s pursuit of high-performance progression with Dan Mann’s mission to make performance...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [
+        "Quad"
+      ],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "rolled"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "hold",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "rolled"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7973,
+      "canonical_key": "firewire::sci-fi-2-0",
+      "manufacturer": "Firewire",
+      "model": "Sci-Fi 2.0",
+      "official_url": "https://www.firewiresurfboards.com/products/sci-fi-2-0",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/sci-fi-2-0",
+        "resolved_url": "https://www.firewiresurfboards.com/products/sci-fi-2-0",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "5b34b957af3c085ea12165613fde3fb312aa10f80be1f18b3e9b180790311196",
+        "description_word_count": 238,
+        "official_intent_excerpt": "A re-release of the classic Sci-Fi designed by Daniel 'Tomo' Thomson in collaboration with Kelly Slater, newly updated in I-Bolic Technology from Slater Designs...."
+      },
+      "manufacturer_intent": "A re-release of the classic Sci-Fi designed by Daniel 'Tomo' Thomson in collaboration with Kelly Slater, newly updated in I-Bolic Technology from Slater Designs....",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "High Performance Shortboard",
+      "secondary_categories": [],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [
+        "Quad"
+      ],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single",
+        "double",
+        "rolled",
+        "flat"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "low_performance",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "powerful",
+        "average"
+      ],
+      "wave_type": [
+        "reef break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "projection",
+        "sensitivity",
+        "pivot"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a high performance shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "low_performance",
+          "foil": "refined",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "rolled",
+            "flat"
+          ],
+          "fin_configurations": [
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 5,
+          "wave_entry": 5,
+          "speed_generation": 8,
+          "drive": 8,
+          "release": 8,
+          "hold": 8,
+          "forgiveness": 4,
+          "stability": 4,
+          "sensitivity": 9,
+          "projection": 10,
+          "pivot": 9,
+          "carve": 9,
+          "glide": 3,
+          "turning_radius": 3
+        },
+        "conditions": {
+          "weak_waves": 4,
+          "average_waves": 8,
+          "powerful_waves": 10,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 10,
+          "hollow_waves": 8,
+          "open_face": 9
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 5,
+          "advanced": 10,
+          "expert": 10,
+          "low_paddle_strength": 2,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "technical",
+          "sensitive",
+          "vertical",
+          "fast",
+          "drivey"
+        ],
+        "quiver_roles": [
+          "performance",
+          "competition"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_shortboard",
+        "good_wave",
+        "competition"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: single concave."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "performance_shortboard",
+      "previous_detailed_category": "performance_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7972,
+      "canonical_key": "firewire::seaside",
+      "manufacturer": "Firewire",
+      "model": "Seaside",
+      "official_url": "https://www.firewiresurfboards.com/products/seaside",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/seaside",
+        "resolved_url": "https://www.firewiresurfboards.com/products/seaside",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "eae70e2eade56683a492b5ae31487f0296597e2dddacac97793bb359fbb2990c",
+        "description_word_count": 337,
+        "official_intent_excerpt": "Rob Machado on the Seaside, \"just evolving the Go Fish to something new, really. The Go Fish goes fast and feels skatey and loose..."
+      },
+      "manufacturer_intent": "Rob Machado on the Seaside, \"just evolving the Go Fish to something new, really. The Go Fish goes fast and feels skatey and loose...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "fish",
+      "public_family_label": "Fish",
+      "detailed_category": "Performance Fish",
+      "secondary_categories": [],
+      "board_type": "Fish",
+      "primary_fin_setup": "Twin",
+      "alternative_fin_setup": [
+        "Quad"
+      ],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "swallow"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "rolled"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "refined",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "beach break",
+        "reef break",
+        "open face"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "paddle",
+        "wave entry"
+      ],
+      "weaknesses": [
+        "turning radius",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a performance fish.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "swallow"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "refined",
+          "foil": "balanced",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "single",
+            "rolled"
+          ],
+          "fin_configurations": [
+            "twin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 9,
+          "drive": 8,
+          "release": 8,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 6,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 7,
+          "powerful_waves": 6,
+          "beach_break": 7,
+          "point_break": 6,
+          "reef_break": 7,
+          "hollow_waves": 6,
+          "open_face": 7
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 6,
+          "intermediate": 8,
+          "advanced": 9,
+          "expert": 9,
+          "low_paddle_strength": 6,
+          "high_paddle_strength": 9
+        },
+        "style_tags": [
+          "fast",
+          "drivey",
+          "responsive"
+        ],
+        "quiver_roles": [
+          "small_wave",
+          "daily_driver",
+          "reef_alternative"
+        ]
+      },
+      "recommendation_lanes": [
+        "fish",
+        "performance_fish",
+        "small_wave",
+        "daily_driver"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: swallow."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "fish",
+      "previous_detailed_category": "performance_fish",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7978,
+      "canonical_key": "firewire::seaside-beyond",
+      "manufacturer": "Firewire",
+      "model": "Seaside & Beyond",
+      "official_url": "https://www.firewiresurfboards.com/products/prestige-seaside-beyond",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/prestige-seaside-beyond",
+        "resolved_url": "https://www.firewiresurfboards.com/products/prestige-seaside-beyond",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "e103c406f75fc01326bec8d64bbac44bdd48cfc7669bf85e3b71ffb5e34dd2b1",
+        "description_word_count": 195,
+        "official_intent_excerpt": "Rob Machado on the Seaside & Beyond, \"I’ve really been wanting to play around with some longer fishy kind of boards for a while..."
+      },
+      "manufacturer_intent": "Rob Machado on the Seaside & Beyond, \"I’ve really been wanting to play around with some longer fishy kind of boards for a while...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "fish",
+      "public_family_label": "Fish",
+      "detailed_category": "Performance Fish",
+      "secondary_categories": [],
+      "board_type": "Fish",
+      "primary_fin_setup": "Twin",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "swallow"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "rolled"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "refined",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average"
+      ],
+      "wave_type": [
+        "beach break",
+        "reef break",
+        "open face"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "paddle",
+        "wave entry"
+      ],
+      "weaknesses": [
+        "glide",
+        "turning radius"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a performance fish.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "swallow"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "refined",
+          "foil": "balanced",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "rolled"
+          ],
+          "fin_configurations": [
+            "twin",
+            "quad"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 9,
+          "drive": 7,
+          "release": 8,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 6,
+          "beach_break": 7,
+          "point_break": 6,
+          "reef_break": 7,
+          "hollow_waves": 6,
+          "open_face": 7
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 6,
+          "intermediate": 8,
+          "advanced": 9,
+          "expert": 10,
+          "low_paddle_strength": 6,
+          "high_paddle_strength": 9
+        },
+        "style_tags": [
+          "fast",
+          "drivey",
+          "responsive",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "small_wave",
+          "daily_driver",
+          "reef_alternative"
+        ]
+      },
+      "recommendation_lanes": [
+        "fish",
+        "performance_fish",
+        "small_wave",
+        "daily_driver"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "fish",
+      "previous_detailed_category": "performance_fish",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7979,
+      "canonical_key": "firewire::singleton",
+      "manufacturer": "Firewire",
+      "model": "Singleton",
+      "official_url": "https://www.firewiresurfboards.com/products/prestige-singleton",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/prestige-singleton",
+        "resolved_url": "https://www.firewiresurfboards.com/products/prestige-singleton",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "3181a69fc56bf1c9ed1cdcf5514e85940e5a5ff0f742942d08e89296faad5ac9",
+        "description_word_count": 203,
+        "official_intent_excerpt": "A collaboration between past Icons of Foam Shaping Champion Stu Kenson and 4x World Longboard Champion Taylor Jensen. With a blessing and introduction from..."
+      },
+      "manufacturer_intent": "A collaboration between past Icons of Foam Shaping Champion Stu Kenson and 4x World Longboard Champion Taylor Jensen. With a blessing and introduction from...",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "longboard",
+      "public_family_label": "Longboard",
+      "detailed_category": "Longboard",
+      "secondary_categories": [],
+      "board_type": "Longboard",
+      "primary_fin_setup": "Single",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "square"
+      ],
+      "outline": "parallel",
+      "bottom_contours": [
+        "single",
+        "rolled",
+        "flat"
+      ],
+      "entry_rocker": "low",
+      "exit_rocker": "low",
+      "rail_type": "soft",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "beach break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "stability"
+      ],
+      "weaknesses": [
+        "sensitivity",
+        "pivot"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a longboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "parallel",
+          "nose": "full",
+          "tail": [
+            "square"
+          ],
+          "rocker_entry": "low",
+          "rocker_tail": "low",
+          "rails": "soft",
+          "foil": "forward",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "single",
+            "rolled",
+            "flat"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one"
+          ]
+        },
+        "behaviour": {
+          "paddle": 10,
+          "wave_entry": 10,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 6,
+          "hold": 6,
+          "forgiveness": 9,
+          "stability": 10,
+          "sensitivity": 4,
+          "projection": 7,
+          "pivot": 5,
+          "carve": 8,
+          "glide": 10,
+          "turning_radius": 10
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 6,
+          "point_break": 8,
+          "reef_break": 6,
+          "hollow_waves": 4,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 9,
+          "progressing": 10,
+          "intermediate": 10,
+          "advanced": 7,
+          "expert": 9,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 5
+        },
+        "style_tags": [
+          "glide",
+          "stable",
+          "flowing",
+          "fast",
+          "forgiving"
+        ],
+        "quiver_roles": [
+          "longboard",
+          "cruiser",
+          "small_wave"
+        ]
+      },
+      "recommendation_lanes": [
+        "longboard",
+        "paddle_support",
+        "small_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "mid_length",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: single concave."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "longboard",
+      "previous_detailed_category": "longboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7957,
+      "canonical_key": "firewire::spaceship",
+      "manufacturer": "Firewire",
+      "model": "Spaceship",
+      "official_url": "https://www.firewiresurfboards.com/products/spaceship",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/spaceship",
+        "resolved_url": "https://www.firewiresurfboards.com/products/spaceship",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "115b4efe757bb02336347183cb3f0c756c6cb4728d72dbe20e582b93e44c0c00",
+        "description_word_count": 277,
+        "official_intent_excerpt": "The board ridden by the 11x World Champion during his memorable Kirra sessions in March 2024, meet the Spaceship by Mike Woo and Kelly..."
+      },
+      "manufacturer_intent": "The board ridden by the 11x World Champion during his memorable Kirra sessions in March 2024, meet the Spaceship by Mike Woo and Kelly...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "round"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "rolled"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach_break",
+        "point_break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "hold",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "round"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "rolled"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 8,
+          "drive": 8,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 8,
+          "projection": 8,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "drivey",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7980,
+      "canonical_key": "firewire::special-t",
+      "manufacturer": "Firewire",
+      "model": "Special T",
+      "official_url": "https://www.firewiresurfboards.com/products/prestige-special-t",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/prestige-special-t",
+        "resolved_url": "https://www.firewiresurfboards.com/products/prestige-special-t",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "c3f795bb7328c7a842f91e74bb362038d79e8a63cc7f19c3385ca6a9d03c7977",
+        "description_word_count": 165,
+        "official_intent_excerpt": "Dann Mann on the Special T, “despite his preference for high performance longboarding, Taylor is an accomplished noserider so he wanted his Firewire models..."
+      },
+      "manufacturer_intent": "Dann Mann on the Special T, “despite his preference for high performance longboarding, Taylor is an accomplished noserider so he wanted his Firewire models...",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "longboard",
+      "public_family_label": "Longboard",
+      "detailed_category": "Longboard",
+      "secondary_categories": [],
+      "board_type": "Longboard",
+      "primary_fin_setup": "Single",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "square"
+      ],
+      "outline": "parallel",
+      "bottom_contours": [
+        "single"
+      ],
+      "entry_rocker": "low",
+      "exit_rocker": "low",
+      "rail_type": "soft",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "beach break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "stability"
+      ],
+      "weaknesses": [
+        "pivot",
+        "release"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a longboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "parallel",
+          "nose": "full",
+          "tail": [
+            "square"
+          ],
+          "rocker_entry": "low",
+          "rocker_tail": "low",
+          "rails": "soft",
+          "foil": "forward",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "single"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one"
+          ]
+        },
+        "behaviour": {
+          "paddle": 10,
+          "wave_entry": 10,
+          "speed_generation": 6,
+          "drive": 8,
+          "release": 5,
+          "hold": 6,
+          "forgiveness": 9,
+          "stability": 10,
+          "sensitivity": 5,
+          "projection": 7,
+          "pivot": 4,
+          "carve": 7,
+          "glide": 10,
+          "turning_radius": 10
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 7,
+          "powerful_waves": 5,
+          "beach_break": 6,
+          "point_break": 8,
+          "reef_break": 6,
+          "hollow_waves": 4,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 9,
+          "progressing": 10,
+          "intermediate": 10,
+          "advanced": 7,
+          "expert": 9,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 5
+        },
+        "style_tags": [
+          "glide",
+          "stable",
+          "flowing",
+          "drivey",
+          "forgiving"
+        ],
+        "quiver_roles": [
+          "longboard",
+          "cruiser",
+          "small_wave"
+        ]
+      },
+      "recommendation_lanes": [
+        "longboard",
+        "paddle_support",
+        "small_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "mid_length",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "longboard",
+      "previous_detailed_category": "longboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7969,
+      "canonical_key": "firewire::sweet-potato",
+      "manufacturer": "Firewire",
+      "model": "Sweet Potato",
+      "official_url": "https://www.firewiresurfboards.com/products/sweet-potato-2026",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/sweet-potato-2026",
+        "resolved_url": "https://www.firewiresurfboards.com/products/sweet-potato-2026",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "2750f5ffd1181bf67a4ced6a183648daf859b2b5a00f1a4910e9d4fda21bc550",
+        "description_word_count": 260,
+        "official_intent_excerpt": "Dan Mann's high performance groveler. Think small wave grovel, fast and fun. No-paddle takeoffs, buttery floaters. The Sweet Potato is probably the widest, flattest,..."
+      },
+      "manufacturer_intent": "Dan Mann's high performance groveler. Think small wave grovel, fast and fun. No-paddle takeoffs, buttery floaters. The Sweet Potato is probably the widest, flattest,...",
+      "manufacturer_intent_signals": [
+        "groveller",
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "groveller",
+      "public_family_label": "Groveller",
+      "detailed_category": "Groveller",
+      "secondary_categories": [
+        "longboard"
+      ],
+      "board_type": "Groveller",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "wide_centre",
+      "bottom_contours": [
+        "double",
+        "single",
+        "rolled",
+        "flat"
+      ],
+      "entry_rocker": "low",
+      "exit_rocker": "low",
+      "rail_type": "full",
+      "volume_philosophy": "forward",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "beach break",
+        "point break",
+        "open face"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "speed generation",
+        "wave entry",
+        "release"
+      ],
+      "weaknesses": [
+        "turning radius",
+        "hold"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a groveller.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "wide_centre",
+          "nose": "full",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "low",
+          "rocker_tail": "low",
+          "rails": "full",
+          "foil": "forward",
+          "volume_distribution": "forward",
+          "bottom_contours": [
+            "double",
+            "single",
+            "rolled",
+            "flat"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 8,
+          "speed_generation": 9,
+          "drive": 7,
+          "release": 8,
+          "hold": 5,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 5,
+          "projection": 5,
+          "pivot": 7,
+          "carve": 5,
+          "glide": 5,
+          "turning_radius": 4
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 3,
+          "beach_break": 8,
+          "point_break": 5,
+          "reef_break": 4,
+          "hollow_waves": 2,
+          "open_face": 5
+        },
+        "rider_fit": {
+          "beginner": 6,
+          "progressing": 9,
+          "intermediate": 9,
+          "advanced": 9,
+          "expert": 7,
+          "low_paddle_strength": 9,
+          "high_paddle_strength": 6
+        },
+        "style_tags": [
+          "easy_speed",
+          "forgiving",
+          "playful",
+          "fast",
+          "stable"
+        ],
+        "quiver_roles": [
+          "small_wave",
+          "summer"
+        ]
+      },
+      "recommendation_lanes": [
+        "groveller",
+        "small_wave",
+        "weak_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: swallow."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "groveller",
+      "previous_detailed_category": "groveller",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7962,
+      "canonical_key": "firewire::taylor-jensen-hull-rider",
+      "manufacturer": "Firewire",
+      "model": "Taylor Jensen Hull Rider",
+      "official_url": "https://www.firewiresurfboards.com/products/taylor-jensen-hull-rider",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/taylor-jensen-hull-rider",
+        "resolved_url": "https://www.firewiresurfboards.com/products/taylor-jensen-hull-rider",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "f469523b91d416d54f3d24b5514de42628a66e2dc29d9b6bb69900b165ae087b",
+        "description_word_count": 205,
+        "official_intent_excerpt": "Easy to ride, easy to paddle, and super fun. The TJ Hull Rider is an all-around longboard with incredible stability and a gentle hull..."
+      },
+      "manufacturer_intent": "Easy to ride, easy to paddle, and super fun. The TJ Hull Rider is an all-around longboard with incredible stability and a gentle hull...",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "longboard",
+      "public_family_label": "Longboard",
+      "detailed_category": "Longboard",
+      "secondary_categories": [],
+      "board_type": "Longboard",
+      "primary_fin_setup": "Single",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "square"
+      ],
+      "outline": "parallel",
+      "bottom_contours": [
+        "single",
+        "flat"
+      ],
+      "entry_rocker": "low",
+      "exit_rocker": "low",
+      "rail_type": "soft",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "beach break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "stability"
+      ],
+      "weaknesses": [
+        "sensitivity",
+        "pivot"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a longboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "parallel",
+          "nose": "full",
+          "tail": [
+            "square"
+          ],
+          "rocker_entry": "low",
+          "rocker_tail": "low",
+          "rails": "soft",
+          "foil": "forward",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "single",
+            "flat"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one"
+          ]
+        },
+        "behaviour": {
+          "paddle": 9,
+          "wave_entry": 9,
+          "speed_generation": 6,
+          "drive": 7,
+          "release": 5,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 4,
+          "projection": 6,
+          "pivot": 4,
+          "carve": 7,
+          "glide": 9,
+          "turning_radius": 9
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 6,
+          "hollow_waves": 3,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 9,
+          "progressing": 10,
+          "intermediate": 10,
+          "advanced": 7,
+          "expert": 9,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 5
+        },
+        "style_tags": [
+          "glide",
+          "stable",
+          "flowing",
+          "forgiving"
+        ],
+        "quiver_roles": [
+          "longboard",
+          "cruiser",
+          "small_wave"
+        ]
+      },
+      "recommendation_lanes": [
+        "longboard",
+        "paddle_support",
+        "small_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "mid_length",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "longboard",
+      "previous_detailed_category": "longboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7982,
+      "canonical_key": "firewire::taylor-jensen-pro",
+      "manufacturer": "Firewire",
+      "model": "Taylor Jensen Pro",
+      "official_url": "https://www.firewiresurfboards.com/products/prestige-taylor-jensen-pro",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/prestige-taylor-jensen-pro",
+        "resolved_url": "https://www.firewiresurfboards.com/products/prestige-taylor-jensen-pro",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "df0584df5f67a027c16bf12c0dca1876fbc046d83b24f47eeb50a7ed4d60c949",
+        "description_word_count": 107,
+        "official_intent_excerpt": "Taylor and Dan Mann developed the TJP with slightly more aggressive bottom contours and a touch more kick in the tail than the stock..."
+      },
+      "manufacturer_intent": "Taylor and Dan Mann developed the TJP with slightly more aggressive bottom contours and a touch more kick in the tail than the stock...",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "longboard",
+      "public_family_label": "Longboard",
+      "detailed_category": "Longboard",
+      "secondary_categories": [],
+      "board_type": "Longboard",
+      "primary_fin_setup": "Single",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "square"
+      ],
+      "outline": "parallel",
+      "bottom_contours": [
+        "rolled"
+      ],
+      "entry_rocker": "low",
+      "exit_rocker": "low",
+      "rail_type": "soft",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "beach break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "stability"
+      ],
+      "weaknesses": [
+        "sensitivity",
+        "pivot"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a longboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "parallel",
+          "nose": "full",
+          "tail": [
+            "square"
+          ],
+          "rocker_entry": "low",
+          "rocker_tail": "low",
+          "rails": "soft",
+          "foil": "forward",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "rolled"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one"
+          ]
+        },
+        "behaviour": {
+          "paddle": 9,
+          "wave_entry": 9,
+          "speed_generation": 6,
+          "drive": 7,
+          "release": 5,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 4,
+          "projection": 6,
+          "pivot": 4,
+          "carve": 7,
+          "glide": 9,
+          "turning_radius": 9
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 6,
+          "hollow_waves": 3,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 9,
+          "progressing": 10,
+          "intermediate": 10,
+          "advanced": 7,
+          "expert": 9,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 5
+        },
+        "style_tags": [
+          "glide",
+          "stable",
+          "flowing",
+          "forgiving"
+        ],
+        "quiver_roles": [
+          "longboard",
+          "cruiser",
+          "small_wave"
+        ]
+      },
+      "recommendation_lanes": [
+        "longboard",
+        "paddle_support",
+        "small_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "mid_length",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "longboard",
+      "previous_detailed_category": "longboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7974,
+      "canonical_key": "firewire::taylor-jensen-pro-mid",
+      "manufacturer": "Firewire",
+      "model": "Taylor Jensen Pro Mid",
+      "official_url": "https://www.firewiresurfboards.com/products/taylor-jensen-pro-mid",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/taylor-jensen-pro-mid",
+        "resolved_url": "https://www.firewiresurfboards.com/products/taylor-jensen-pro-mid",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "0039249aeea03a8f6e80c9a5e7ce53daf4cf76c702602e24bf202daa9e299362",
+        "description_word_count": 265,
+        "official_intent_excerpt": "Introducing the Taylor Jensen Pro Mid, a shape designed by Dan Mann & Taylor Jensen. The TJ Pro Mid is a fast-paddling, easy-riding performance..."
+      },
+      "manufacturer_intent": "Introducing the Taylor Jensen Pro Mid, a shape designed by Dan Mann & Taylor Jensen. The TJ Pro Mid is a fast-paddling, easy-riding performance...",
+      "manufacturer_intent_signals": [
+        "longboard",
+        "step_up"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "mid_length",
+      "public_family_label": "Mid Length",
+      "detailed_category": "Mid Length",
+      "secondary_categories": [
+        "step_up",
+        "longboard",
+        "performance_mid_length"
+      ],
+      "board_type": "Mid Length",
+      "primary_fin_setup": "2+1",
+      "alternative_fin_setup": [
+        "5 Fin",
+        "Quad",
+        "Single"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "round"
+      ],
+      "outline": "curvy",
+      "bottom_contours": [
+        "single",
+        "double",
+        "rolled",
+        "flat"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium_low",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "reef break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "glide"
+      ],
+      "weaknesses": [
+        "release",
+        "sensitivity"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a mid length.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "curvy",
+          "nose": "medium",
+          "tail": [
+            "round"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium_low",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "rolled",
+            "flat"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one"
+          ]
+        },
+        "behaviour": {
+          "paddle": 10,
+          "wave_entry": 10,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 5,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 5,
+          "projection": 7,
+          "pivot": 5,
+          "carve": 8,
+          "glide": 10,
+          "turning_radius": 9
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 6,
+          "point_break": 8,
+          "reef_break": 7,
+          "hollow_waves": 4,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 6,
+          "progressing": 9,
+          "intermediate": 9,
+          "advanced": 7,
+          "expert": 8,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 7
+        },
+        "style_tags": [
+          "glide",
+          "flowing",
+          "easy_paddle",
+          "fast",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "mid_length",
+          "cruiser",
+          "point_break"
+        ]
+      },
+      "recommendation_lanes": [
+        "mid_length",
+        "paddle_support",
+        "flow"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: flat rocker."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "mid_length",
+      "previous_detailed_category": "mid_length",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7983,
+      "canonical_key": "firewire::taylor-jensen-pro-v",
+      "manufacturer": "Firewire",
+      "model": "Taylor Jensen Pro V",
+      "official_url": "https://www.firewiresurfboards.com/products/prestige-taylor-jensen-pro-v",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/prestige-taylor-jensen-pro-v",
+        "resolved_url": "https://www.firewiresurfboards.com/products/prestige-taylor-jensen-pro-v",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "10806296e1a5f69fe5e6dcb3570dfb370975b124cf1b7005d37bc3ef76e6e9a6",
+        "description_word_count": 218,
+        "official_intent_excerpt": "The TJ Pro V is Taylor Jensen's longboard designed to excel in everyday conditions. When Taylor and Dan Mann started the design process, the..."
+      },
+      "manufacturer_intent": "The TJ Pro V is Taylor Jensen's longboard designed to excel in everyday conditions. When Taylor and Dan Mann started the design process, the...",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "longboard",
+      "public_family_label": "Longboard",
+      "detailed_category": "Longboard",
+      "secondary_categories": [],
+      "board_type": "Longboard",
+      "primary_fin_setup": "Single",
+      "alternative_fin_setup": [
+        "2+1",
+        "Quad"
+      ],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "parallel",
+      "bottom_contours": [
+        "vee",
+        "rolled",
+        "flat"
+      ],
+      "entry_rocker": "low",
+      "exit_rocker": "low",
+      "rail_type": "soft",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "beach break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "stability"
+      ],
+      "weaknesses": [
+        "sensitivity",
+        "pivot"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a longboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "parallel",
+          "nose": "full",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "low",
+          "rocker_tail": "low",
+          "rails": "soft",
+          "foil": "forward",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "vee",
+            "rolled",
+            "flat"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one"
+          ]
+        },
+        "behaviour": {
+          "paddle": 10,
+          "wave_entry": 10,
+          "speed_generation": 6,
+          "drive": 7,
+          "release": 6,
+          "hold": 6,
+          "forgiveness": 9,
+          "stability": 10,
+          "sensitivity": 4,
+          "projection": 6,
+          "pivot": 4,
+          "carve": 8,
+          "glide": 10,
+          "turning_radius": 10
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 7,
+          "powerful_waves": 5,
+          "beach_break": 6,
+          "point_break": 8,
+          "reef_break": 6,
+          "hollow_waves": 4,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 9,
+          "progressing": 10,
+          "intermediate": 10,
+          "advanced": 7,
+          "expert": 9,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 5
+        },
+        "style_tags": [
+          "glide",
+          "stable",
+          "flowing",
+          "forgiving"
+        ],
+        "quiver_roles": [
+          "longboard",
+          "cruiser",
+          "small_wave"
+        ]
+      },
+      "recommendation_lanes": [
+        "longboard",
+        "paddle_support",
+        "small_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "mid_length",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: v out the tail."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "longboard",
+      "previous_detailed_category": "longboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7975,
+      "canonical_key": "firewire::taylor-jensen-twinzer",
+      "manufacturer": "Firewire",
+      "model": "Taylor Jensen Twinzer",
+      "official_url": "https://www.firewiresurfboards.com/products/taylor-jensen-twinzer",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/taylor-jensen-twinzer",
+        "resolved_url": "https://www.firewiresurfboards.com/products/taylor-jensen-twinzer",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "27e0a16373b8ff5317401cf8c06074b70306c6e1dedd38e358fc83b668bd50fb",
+        "description_word_count": 309,
+        "official_intent_excerpt": "Meet the Taylor Jensen Twinzer, a collaboration between Stu Kenson & Taylor Jensen. An iteration on the iconic design from the San Diegan shaper:..."
+      },
+      "manufacturer_intent": "Meet the Taylor Jensen Twinzer, a collaboration between Stu Kenson & Taylor Jensen. An iteration on the iconic design from the San Diegan shaper:...",
+      "manufacturer_intent_signals": [
+        "step_up"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "mid_length",
+      "public_family_label": "Mid Length",
+      "detailed_category": "Performance Mid Length",
+      "secondary_categories": [],
+      "board_type": "Mid Length",
+      "primary_fin_setup": "Twinzer",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "editorial_override",
+      "tail_shape": [
+        "round_pin"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single",
+        "rolled"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "refined",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "powerful"
+      ],
+      "wave_type": [
+        "reef break",
+        "hollow waves",
+        "point break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "drive",
+        "projection",
+        "hold"
+      ],
+      "weaknesses": [
+        "forgiveness",
+        "release"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a performance mid length.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "round_pin"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "refined",
+          "foil": "balanced",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "single",
+            "rolled"
+          ],
+          "fin_configurations": [
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 6,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 10,
+          "release": 5,
+          "hold": 9,
+          "forgiveness": 4,
+          "stability": 5,
+          "sensitivity": 8,
+          "projection": 10,
+          "pivot": 5,
+          "carve": 9,
+          "glide": 5,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 3,
+          "average_waves": 7,
+          "powerful_waves": 10,
+          "beach_break": 5,
+          "point_break": 9,
+          "reef_break": 10,
+          "hollow_waves": 10,
+          "open_face": 9
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 6,
+          "advanced": 10,
+          "expert": 10,
+          "low_paddle_strength": 4,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "hold",
+          "drivey",
+          "powerful_wave"
+        ],
+        "quiver_roles": [
+          "step_up",
+          "travel",
+          "reef"
+        ]
+      },
+      "recommendation_lanes": [
+        "step_up",
+        "powerful_wave",
+        "hollow_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "The official 6'8 to 7'4 design is a performance mid length using a twinzer arrangement, not a step-up."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": "step_up",
+      "previous_detailed_category": "step_up",
+      "classification_changed": true,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7981,
+      "canonical_key": "firewire::the-gem",
+      "manufacturer": "Firewire",
+      "model": "The Gem",
+      "official_url": "https://www.firewiresurfboards.com/products/prestige-the-gem",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/prestige-the-gem",
+        "resolved_url": "https://www.firewiresurfboards.com/products/prestige-the-gem",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "fd4ec6aba969fef843cfa8eb379c5f3f587214069096979cb2e6f1d7383d8b70",
+        "description_word_count": 188,
+        "official_intent_excerpt": "The Gem is a collaboration between Dan Mann and 3x World Longboard Champion, Taylor Jensen. Earlier this year Taylor asked Dan to consider a..."
+      },
+      "manufacturer_intent": "The Gem is a collaboration between Dan Mann and 3x World Longboard Champion, Taylor Jensen. Earlier this year Taylor asked Dan to consider a...",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "longboard",
+      "public_family_label": "Longboard",
+      "detailed_category": "Longboard",
+      "secondary_categories": [],
+      "board_type": "Longboard",
+      "primary_fin_setup": "Single",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "diamond"
+      ],
+      "outline": "parallel",
+      "bottom_contours": [
+        "single"
+      ],
+      "entry_rocker": "low",
+      "exit_rocker": "low",
+      "rail_type": "soft",
+      "volume_philosophy": "central",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "beach break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "stability"
+      ],
+      "weaknesses": [
+        "sensitivity",
+        "pivot"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a longboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "parallel",
+          "nose": "full",
+          "tail": [
+            "diamond"
+          ],
+          "rocker_entry": "low",
+          "rocker_tail": "low",
+          "rails": "soft",
+          "foil": "forward",
+          "volume_distribution": "central",
+          "bottom_contours": [
+            "single"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one"
+          ]
+        },
+        "behaviour": {
+          "paddle": 10,
+          "wave_entry": 10,
+          "speed_generation": 6,
+          "drive": 7,
+          "release": 5,
+          "hold": 6,
+          "forgiveness": 9,
+          "stability": 10,
+          "sensitivity": 4,
+          "projection": 6,
+          "pivot": 4,
+          "carve": 7,
+          "glide": 10,
+          "turning_radius": 10
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 6,
+          "point_break": 8,
+          "reef_break": 6,
+          "hollow_waves": 4,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 9,
+          "progressing": 10,
+          "intermediate": 10,
+          "advanced": 7,
+          "expert": 9,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 5
+        },
+        "style_tags": [
+          "glide",
+          "stable",
+          "flowing",
+          "forgiving"
+        ],
+        "quiver_roles": [
+          "longboard",
+          "cruiser",
+          "small_wave"
+        ]
+      },
+      "recommendation_lanes": [
+        "longboard",
+        "paddle_support",
+        "small_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "mid_length",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "longboard",
+      "previous_detailed_category": "longboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 7955,
+      "canonical_key": "firewire::xtra-cado",
+      "manufacturer": "Firewire",
+      "model": "Xtra Cado",
+      "official_url": "https://www.firewiresurfboards.com/products/xtra-cado",
+      "official_evidence": {
+        "official_url": "https://www.firewiresurfboards.com/products/xtra-cado",
+        "resolved_url": "https://www.firewiresurfboards.com/products/xtra-cado",
+        "retrieved_at_utc": "2026-07-16T21:55:10Z",
+        "retrieval_method": "shopify_bulk_product",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "f2c09a0b45631d8489777462bc4b1a7df9c98288e755bd2b179456f9ee0136cb",
+        "description_word_count": 435,
+        "official_intent_excerpt": "Introducing the Xtra Cado by Rob Machado, a midlength evolution of his best-selling Machadocado. Who doesn't like a little 'xtra 'cado on anything? \"I..."
+      },
+      "manufacturer_intent": "Introducing the Xtra Cado by Rob Machado, a midlength evolution of his best-selling Machadocado. Who doesn't like a little 'xtra 'cado on anything? \"I...",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "mid_length",
+      "public_family_label": "Mid Length",
+      "detailed_category": "Easy-Riding Mid Length",
+      "secondary_categories": [
+        "longboard"
+      ],
+      "board_type": "Mid Length",
+      "primary_fin_setup": "2+1",
+      "alternative_fin_setup": [
+        "5 Fin",
+        "Thruster",
+        "Quad"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "curvy",
+      "bottom_contours": [
+        "single",
+        "double"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium_low",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "point break",
+        "open face",
+        "reef break"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "glide",
+        "paddle",
+        "wave entry"
+      ],
+      "weaknesses": [
+        "sensitivity",
+        "release"
+      ],
+      "typical_customer": "Beginner to Expert surfer seeking a easy-riding mid length.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "curvy",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium_low",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double"
+          ],
+          "fin_configurations": [
+            "single",
+            "two_plus_one"
+          ]
+        },
+        "behaviour": {
+          "paddle": 9,
+          "wave_entry": 9,
+          "speed_generation": 9,
+          "drive": 7,
+          "release": 6,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 5,
+          "projection": 8,
+          "pivot": 6,
+          "carve": 9,
+          "glide": 10,
+          "turning_radius": 9
+        },
+        "conditions": {
+          "weak_waves": 6,
+          "average_waves": 8,
+          "powerful_waves": 6,
+          "beach_break": 6,
+          "point_break": 8,
+          "reef_break": 7,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 6,
+          "progressing": 9,
+          "intermediate": 9,
+          "advanced": 7,
+          "expert": 8,
+          "low_paddle_strength": 10,
+          "high_paddle_strength": 7
+        },
+        "style_tags": [
+          "glide",
+          "flowing",
+          "easy_paddle",
+          "fast",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "mid_length",
+          "cruiser",
+          "point_break"
+        ]
+      },
+      "recommendation_lanes": [
+        "mid_length",
+        "paddle_support",
+        "flow"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "forgiving_shortboard",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: single concave.",
+        "Firewire calls Xtra Cado a mid-length evolution of Machadocado; longboard references describe glide rather than identity."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": "mid_length",
+      "previous_detailed_category": "mid_length",
+      "classification_changed": true,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    }
+  ]
+}

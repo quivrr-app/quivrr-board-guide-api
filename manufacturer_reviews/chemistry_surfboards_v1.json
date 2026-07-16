@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "manufacturer": "Chemistry Surfboards",
+  "authority": "Current official manufacturer website",
+  "reviewed_date": "2026-07-17",
+  "reviewed_by": "QUIVRR",
+  "model_count": 2,
+  "models": [
+    {
+      "canonical_model_id": 8051,
+      "canonical_key": "chemistry-surfboards::b-side",
+      "manufacturer": "Chemistry Surfboards",
+      "model": "B Side",
+      "official_url": "https://www.chemistrysurfboards.com/shop/surfboards/b-side",
+      "official_evidence": {
+        "official_url": "https://www.chemistrysurfboards.com/shop/surfboards/b-side",
+        "resolved_url": "https://www.chemistrysurfboards.com/shop/surfboards/b-side",
+        "retrieved_at_utc": "2026-07-16T21:54:37Z",
+        "retrieval_method": "official_html_metadata",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "bc84a1e41d849ccab620b0c50ce29c84640963cba82c474da856c1d76d159f13",
+        "description_word_count": 29,
+        "official_intent_excerpt": "The B-Side is our most high performance shortboard in our line. It also has the deepest single concave, and most accelerated rocker of any..."
+      },
+      "manufacturer_intent": "The B-Side is our most high performance shortboard in our line. It also has the deepest single concave, and most accelerated rocker of any...",
+      "manufacturer_intent_signals": [
+        "performance_shortboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "High Performance Shortboard",
+      "secondary_categories": [],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "narrow",
+      "bottom_contours": [
+        "single"
+      ],
+      "entry_rocker": "medium_high",
+      "exit_rocker": "high",
+      "rail_type": "low_performance",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "powerful",
+        "average"
+      ],
+      "wave_type": [
+        "reef break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "sensitivity",
+        "projection",
+        "pivot"
+      ],
+      "weaknesses": [
+        "forgiveness",
+        "stability"
+      ],
+      "typical_customer": "Intermediate to Expert surfer seeking a high performance shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "narrow",
+          "nose": "pointed",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_high",
+          "rocker_tail": "high",
+          "rails": "low_performance",
+          "foil": "refined",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single"
+          ],
+          "fin_configurations": [
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 5,
+          "wave_entry": 5,
+          "speed_generation": 9,
+          "drive": 9,
+          "release": 9,
+          "hold": 8,
+          "forgiveness": 3,
+          "stability": 3,
+          "sensitivity": 10,
+          "projection": 10,
+          "pivot": 10,
+          "carve": 10,
+          "glide": 3,
+          "turning_radius": 3
+        },
+        "conditions": {
+          "weak_waves": 4,
+          "average_waves": 6,
+          "powerful_waves": 10,
+          "beach_break": 7,
+          "point_break": 8,
+          "reef_break": 10,
+          "hollow_waves": 8,
+          "open_face": 9
+        },
+        "rider_fit": {
+          "beginner": 1,
+          "progressing": 2,
+          "intermediate": 5,
+          "advanced": 10,
+          "expert": 10,
+          "low_paddle_strength": 2,
+          "high_paddle_strength": 10
+        },
+        "style_tags": [
+          "technical",
+          "sensitive",
+          "vertical",
+          "fast",
+          "drivey"
+        ],
+        "quiver_roles": [
+          "performance",
+          "competition"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_shortboard",
+        "good_wave",
+        "competition"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "daily_driver",
+        "everyday",
+        "fish",
+        "flow",
+        "forgiving_shortboard",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "hybrid_shortboard",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [
+        "Applied governed evidence rule: single concave."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "performance_shortboard",
+      "previous_detailed_category": "performance_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    },
+    {
+      "canonical_model_id": 8053,
+      "canonical_key": "chemistry-surfboards::summertime-pt-2",
+      "manufacturer": "Chemistry Surfboards",
+      "model": "Summertime Pt 2",
+      "official_url": "https://www.chemistrysurfboards.com/shop/surfboards/summertime-pt-2",
+      "official_evidence": {
+        "official_url": "https://www.chemistrysurfboards.com/shop/surfboards/summertime-pt-2",
+        "resolved_url": "https://www.chemistrysurfboards.com/shop/surfboards/summertime-pt-2",
+        "retrieved_at_utc": "2026-07-16T21:54:37Z",
+        "retrieval_method": "official_html_metadata",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "content_sha256": "e6d653ada62f400f508591232d2b4017faedb622319833f95a7697887ca8494d",
+        "description_word_count": 40,
+        "official_intent_excerpt": "Remember 2020? Yeah, we do too. Amidst the chaos and uncertainty, we sought solace in the one thing that always brings us joy: surfing...."
+      },
+      "manufacturer_intent": "Remember 2020? Yeah, we do too. Amidst the chaos and uncertainty, we sought solace in the one thing that always brings us joy: surfing....",
+      "manufacturer_intent_signals": [],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Hybrid Shortboard",
+      "secondary_categories": [
+        "daily_driver"
+      ],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "manufacturer_intent_category_default",
+      "tail_shape": [
+        "squash"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "vee"
+      ],
+      "entry_rocker": "medium_low",
+      "exit_rocker": "medium",
+      "rail_type": "medium",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face",
+        "point break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "wave entry",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "hold",
+        "glide"
+      ],
+      "typical_customer": "Progressing to Expert surfer seeking a hybrid shortboard.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "medium",
+          "tail": [
+            "squash"
+          ],
+          "rocker_entry": "medium_low",
+          "rocker_tail": "medium",
+          "rails": "medium",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "vee"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "five_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 6
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 9,
+          "powerful_waves": 6,
+          "beach_break": 9,
+          "point_break": 7,
+          "reef_break": 6,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 4,
+          "progressing": 7,
+          "intermediate": 9,
+          "advanced": 8,
+          "expert": 8,
+          "low_paddle_strength": 7,
+          "high_paddle_strength": 8
+        },
+        "style_tags": [
+          "versatile",
+          "balanced",
+          "easy_performance",
+          "fast",
+          "forgiving",
+          "stable"
+        ],
+        "quiver_roles": [
+          "daily_driver",
+          "one_board_quiver"
+        ]
+      },
+      "recommendation_lanes": [
+        "hybrid_shortboard",
+        "daily_driver",
+        "forgiving_shortboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "alternative",
+        "beginner",
+        "big_wave",
+        "competition",
+        "everyday",
+        "fish",
+        "flow",
+        "good_wave",
+        "groveller",
+        "gun",
+        "hollow_wave",
+        "longboard",
+        "mid_length",
+        "paddle_support",
+        "performance_daily_driver",
+        "performance_fish",
+        "performance_mid_length",
+        "performance_shortboard",
+        "performance_twin",
+        "point_break",
+        "powerful_wave",
+        "small_wave",
+        "small_wave_shortboard",
+        "softboard",
+        "step_up",
+        "traditional_fish",
+        "twin_pin",
+        "weak_wave"
+      ],
+      "editorial_notes": [],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": "daily_driver",
+      "previous_detailed_category": "hybrid_shortboard",
+      "classification_changed": false,
+      "reviewed_date": "2026-07-17",
+      "reviewed_by": "QUIVRR"
+    }
+  ]
+}
