@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "manufacturer": "Christenson",
+  "status": "complete_editorial_review",
+  "reviewed_date": "2026-07-16",
+  "reviewed_by": "QUIVRR",
+  "model_count": 14,
+  "source_policy": "Current official Christenson model information and governed canonical profiles are the authority. Public family reflects the model's intended design role. Board DNA describes behaviour but does not determine identity.",
+  "family_counts": {
+    "fish": 2,
+    "groveller": 1,
+    "daily_driver": 1,
+    "performance_shortboard": 4,
+    "step_up": 1,
+    "mid_length": 5,
+    "longboard": 0
+  },
+  "models": [
+    {
+      "canonical_model_id": 8134,
+      "model": "Acid Phish",
+      "public_family": "fish",
+      "detailed_category": "performance_fish",
+      "secondary_categories": ["performance_twin"],
+      "manufacturer_intent": "Performance-oriented evolution of Christenson's classic fish with a slimmer nose and more vertical pocket-surfing capability.",
+      "editorial_reason": "Fish design intent remains primary despite the stronger performance bias.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8135,
+      "model": "Cafe Racer",
+      "public_family": "daily_driver",
+      "detailed_category": "performance_daily_driver",
+      "secondary_categories": ["hybrid_shortboard"],
+      "manufacturer_intent": "Performance-minded everyday shortboard combining low rails, spiral vee, double concave and updated rocker and tail curves.",
+      "editorial_reason": "Its core role is broad everyday performance rather than specialist competition or step-up surfing.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8136,
+      "model": "Carrera",
+      "public_family": "step_up",
+      "detailed_category": "performance_step_up",
+      "secondary_categories": ["performance_shortboard"],
+      "manufacturer_intent": "Narrower, refined performance board for stronger, faster and more consequential surf.",
+      "editorial_reason": "Powerful-wave hold and control are the primary design purpose.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8137,
+      "model": "Easy Wind",
+      "public_family": "groveller",
+      "detailed_category": "small_wave_hybrid",
+      "secondary_categories": ["forgiving_daily_driver"],
+      "manufacturer_intent": "Easy-speed, forgiving small-wave design with broad planing area and accessible performance.",
+      "editorial_reason": "Weak-wave ease and wave-count intent are stronger than its all-round daily-driver role.",
+      "confidence": "medium"
+    },
+    {
+      "canonical_model_id": 8138,
+      "model": "Fish",
+      "public_family": "fish",
+      "detailed_category": "traditional_fish",
+      "secondary_categories": [],
+      "manufacturer_intent": "Traditional twin-fin fish focused on speed, flow, trim and timeless fish lines.",
+      "editorial_reason": "This is the reference traditional fish in the Christenson range.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8139,
+      "model": "Flat Tracker V2",
+      "public_family": "mid_length",
+      "detailed_category": "alternative_mid_length",
+      "secondary_categories": ["single_fin_mid_length"],
+      "manufacturer_intent": "Alternative mid-length platform focused on trim, speed, glide and rail-driven surfing.",
+      "editorial_reason": "Longer rail line and mid-length surfing style are fundamental to the design.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8140,
+      "model": "Lane Splitter",
+      "public_family": "performance_shortboard",
+      "detailed_category": "performance_twin_shortboard",
+      "secondary_categories": ["alternative_performance_shortboard"],
+      "manufacturer_intent": "Full-throttle performance twin built for speed, drive and quality-wave surfing rather than retro fish lines.",
+      "editorial_reason": "Performance shortboard intent is primary; twin-fin configuration does not make it a fish.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8141,
+      "model": "Lane Splitter Swallow",
+      "public_family": "performance_shortboard",
+      "detailed_category": "performance_twin_shortboard",
+      "secondary_categories": ["swallow_tail_performance_twin"],
+      "manufacturer_intent": "Swallow-tail version of the Lane Splitter performance twin for speed from beach breaks through Indonesian reefs.",
+      "editorial_reason": "Quality-wave performance and control remain primary.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8142,
+      "model": "Long Phish II",
+      "public_family": "mid_length",
+      "detailed_category": "performance_mid_length_fish",
+      "secondary_categories": ["performance_fish"],
+      "manufacturer_intent": "Long-railed performance fish designed for high lines, speed, trim and accelerating turns across a broad wave range.",
+      "editorial_reason": "Its length, glide and rail-line role make Mid Length the clearest public family while fish identity remains visible in the subtype.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8143,
+      "model": "OP2",
+      "public_family": "performance_shortboard",
+      "detailed_category": "performance_shortboard",
+      "secondary_categories": [],
+      "manufacturer_intent": "Performance shortboard within the OP progression, governed as the more technical and quality-wave-oriented end of the range.",
+      "editorial_reason": "Current canonical evidence supports Performance Shortboard and contains no credible fish, mid-length or daily-driver identity.",
+      "confidence": "low",
+      "review_required": true,
+      "review_note": "Current governed source lacks a complete official manufacturer description. Family is retained from the OP range evidence pending a stronger official source."
+    },
+    {
+      "canonical_model_id": 8144,
+      "model": "OP3",
+      "public_family": "performance_shortboard",
+      "detailed_category": "accessible_performance_shortboard",
+      "secondary_categories": ["performance_daily_driver"],
+      "manufacturer_intent": "Performance shortboard with a somewhat broader, more accessible operating range than the most specialised OP variants.",
+      "editorial_reason": "Performance shortboard remains the primary identity even where everyday usability improves.",
+      "confidence": "medium"
+    },
+    {
+      "canonical_model_id": 8145,
+      "model": "OP4",
+      "public_family": "performance_shortboard",
+      "detailed_category": "powerful_wave_performance_shortboard",
+      "secondary_categories": ["step_up"],
+      "manufacturer_intent": "Performance shortboard with stronger-wave and step-up relevance.",
+      "editorial_reason": "Its primary identity remains a performance shortboard; step-up capability is secondary and it is never a fish.",
+      "confidence": "low",
+      "review_required": true,
+      "review_note": "Current governed source lacks a complete official manufacturer description. Family is retained from the OP range evidence pending a stronger official source."
+    },
+    {
+      "canonical_model_id": 8146,
+      "model": "Osprey",
+      "public_family": "mid_length",
+      "detailed_category": "performance_mid_length",
+      "secondary_categories": ["powerful_wave_mid_length"],
+      "manufacturer_intent": "Refined performance mid-length for stronger waves, longer lines and controlled rail surfing.",
+      "editorial_reason": "Mid-length rail line, paddle and glide remain fundamental despite its performance focus.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8148,
+      "model": "The Wolverine",
+      "public_family": "mid_length",
+      "detailed_category": "performance_mid_length_twin",
+      "secondary_categories": ["step_up_mid_length"],
+      "manufacturer_intent": "Fast, drive-oriented performance mid-length with twin-fin and stronger-wave capability.",
+      "editorial_reason": "The board's longer rail line and performance mid-length role are primary; twin and step-up traits are secondary.",
+      "confidence": "high"
+    }
+  ]
+}
