@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "manufacturer": "Haydenshapes",
+  "review_status": "complete",
+  "reviewed_date": "2026-07-16",
+  "authority": "Official Haydenshapes model descriptions and governed Quivrr catalogue records",
+  "governance": {
+    "public_family_reflects": "primary manufacturer design intent",
+    "detailed_category_reflects": "specific construction and performance lane",
+    "dna_role": "behavioural description only"
+  },
+  "models": [
+    {"canonical_model_id":7985,"model":"Cannon","public_family":"step_up","detailed_category":"single_fin_step_up","reason":"Modernised single-fin platform proven in powerful surf, with hold and control as the defining role.","confidence":"high"},
+    {"canonical_model_id":7995,"model":"Holy Grail","public_family":"daily_driver","detailed_category":"performance_daily_driver","reason":"Everyday performance model positioned above the Hypto Krypto while retaining broad usability and paddle support.","confidence":"high"},
+    {"canonical_model_id":7996,"model":"Holy Hypto","public_family":"daily_driver","detailed_category":"performance_daily_driver","reason":"Explicit everyday-driver intent with Hypto speed and added performance rocker.","confidence":"high"},
+    {"canonical_model_id":7997,"model":"Holy Hypto FutureFlex","public_family":"daily_driver","detailed_category":"performance_daily_driver","reason":"Construction variant of the Holy Hypto; construction does not change the underlying family.","confidence":"high"},
+    {"canonical_model_id":7998,"model":"Hypto Krypto","public_family":"daily_driver","detailed_category":"one_board_quiver_hybrid","reason":"Haydenshapes explicitly positions it as a versatile one-board quiver from small beach breaks to solid barrels.","confidence":"high"},
+    {"canonical_model_id":8004,"model":"Merlot","public_family":"groveller","detailed_category":"small_wave_performance_shortboard","reason":"Small-wave performance is the primary design role despite broader everyday usability.","confidence":"high"},
+    {"canonical_model_id":8009,"model":"Nova","public_family":"daily_driver","detailed_category":"small_wave_daily_driver","reason":"High-speed everyday small-wave driver designed around wave count, flow and accessible performance.","confidence":"high"},
+    {"canonical_model_id":8011,"model":"Plunder","public_family":"fish","detailed_category":"performance_fish","reason":"Full-plan fish-derived shape focused on trim, speed and fun in weak surf.","confidence":"high"},
+    {"canonical_model_id":8012,"model":"Psychedelic Germ","public_family":"daily_driver","detailed_category":"alternative_hybrid_shortboard","reason":"Shorter, wider progressive hybrid with broad everyday usability rather than fish-first intent.","confidence":"high"},
+    {"canonical_model_id":8013,"model":"Shred Sled","public_family":"groveller","detailed_category":"small_wave_performance_groveller","reason":"Fish-derived but explicitly designed as a compact small-wave performance board.","confidence":"high"},
+    {"canonical_model_id":8014,"model":"Shred Sled King","public_family":"step_up","detailed_category":"compact_step_up","reason":"Explicit step-up design for 5–12ft+ surf with paddle support and hold.","confidence":"high"},
+    {"canonical_model_id":8015,"model":"Untitled","public_family":"performance_shortboard","detailed_category":"small_wave_performance_shortboard","reason":"High-performance shortboard with added speed in weaker conditions.","confidence":"high"},
+    {"canonical_model_id":8016,"model":"Untitled V2","public_family":"performance_shortboard","detailed_category":"small_wave_performance_shortboard","reason":"Updated team-spec high-performance shortboard for progressive surfing across varied conditions.","confidence":"high"}
+  ],
+  "review_notes": [
+    "Construction variants retain the design family of their base model.",
+    "Merlot was moved from the broad hybrid lane to Groveller because small-wave performance is its primary manufacturer intent.",
+    "Plunder remains Fish because trim, planing area and fish-derived speed define the model more strongly than general daily use."
+  ]
+}
