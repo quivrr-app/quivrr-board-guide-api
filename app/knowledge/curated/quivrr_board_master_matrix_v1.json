@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "status": "editorial_authority",
+  "reviewed_date": "2026-07-16",
+  "reviewed_by": "QUIVRR",
+  "governance_contract": "Manufacturer design intent determines public family and detailed category. Board DNA describes behaviour and may refine recommendation ranking, but it must not infer or override the board's fundamental identity.",
+  "model_count": 431,
+  "baseline": {
+    "family_review": "app/knowledge/audits/public_family_review_v2.json",
+    "board_dna": "app/knowledge/board_dna_v1.json",
+    "taxonomy": "app/knowledge/board_taxonomy_v2.json"
+  },
+  "public_families": [
+    "fish",
+    "groveller",
+    "daily_driver",
+    "performance_shortboard",
+    "step_up",
+    "mid_length",
+    "longboard"
+  ],
+  "editorial_rules": [
+    "A board is classified by the manufacturer's intended role, not by how frequently an owner may ride it.",
+    "Daily Driver is never a fallback for unknown or ambiguous records.",
+    "Performance twins are assigned model by model: fish-derived designs remain Fish, versatile hybrids may be Daily Driver, and narrow quality-wave designs are Performance Shortboards.",
+    "Board DNA augments family and category; it does not create them.",
+    "Low-confidence records remain review-required and must not be promoted by inference."
+  ],
+  "model_overrides": [
+    {
+      "brand": "Lost",
+      "model": "El Patron",
+      "canonical_model_id": 7842,
+      "public_family": "step_up",
+      "detailed_category": "performance_step_up",
+      "reason": "High-volume performance step-up intended for larger and stronger surf; it is not a fish.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Lost",
+      "model": "Big Rig Driver",
+      "canonical_model_id": 7829,
+      "public_family": "performance_shortboard",
+      "detailed_category": "high_volume_performance_shortboard",
+      "reason": "Scaled Driver lineage for larger surfers; the design remains a performance shortboard rather than a fish.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Lost",
+      "model": "3.0 Stub Driver",
+      "canonical_model_id": 7825,
+      "public_family": "performance_shortboard",
+      "detailed_category": "small_wave_performance_shortboard",
+      "reason": "Stepped-down Driver design for low-end high-performance surfing, not an all-round hybrid.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Lost",
+      "model": "Driver 3.0 Round",
+      "canonical_model_id": 7840,
+      "public_family": "performance_shortboard",
+      "detailed_category": "competition_hpsb",
+      "reason": "Elite-team Driver development establishes a competition performance role.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Lost",
+      "model": "Driver 3.0 Squash",
+      "canonical_model_id": 7841,
+      "public_family": "performance_shortboard",
+      "detailed_category": "competition_hpsb",
+      "reason": "Elite-team Driver development establishes a competition performance role.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Lost",
+      "model": "Sub Driver 2.0",
+      "canonical_model_id": 7891,
+      "public_family": "performance_shortboard",
+      "detailed_category": "small_wave_competition_shortboard",
+      "reason": "Competition-focused small-wave shortboard; not a generic daily driver.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Lost",
+      "model": "Micks Tape Sym",
+      "public_family": "performance_shortboard",
+      "detailed_category": "alternative_performance_shortboard",
+      "reason": "Performance-oriented symmetrical alternative design; it is not fish-first.",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Lost",
+      "model": "Retro Ripper",
+      "public_family": "daily_driver",
+      "detailed_category": "performance_daily_driver",
+      "reason": "Retro performance daily-driver role does not meet Step Up intent.",
+      "confidence": "medium"
+    },
+    {
+      "brand": "Lost",
+      "model": "RNF 96 King Fish",
+      "public_family": "fish",
+      "detailed_category": "mid_length_performance_fish",
+      "reason": "Longer RNF 96 expression remains fish-led despite its mid-length rail line.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Lost",
+      "model": "RNF 96",
+      "public_family": "fish",
+      "detailed_category": "performance_fish",
+      "reason": "Modern performance fish; public and detailed labels must not contradict each other.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Lost",
+      "model": "Cali Twin",
+      "canonical_model_id": 7830,
+      "public_family": "fish",
+      "detailed_category": "performance_fish",
+      "reason": "Modern small-wave twin derived from established fish design lineage.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Ghost",
+      "canonical_model_id": 7761,
+      "public_family": "performance_shortboard",
+      "detailed_category": "performance_shortboard",
+      "reason": "Quality-wave performance design; everyday usage does not make it a Daily Driver.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Phantom",
+      "canonical_model_id": 7787,
+      "public_family": "daily_driver",
+      "detailed_category": "performance_daily_driver",
+      "reason": "Broader-range daily driver with a performance edge.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Pyzel",
+      "model": "Gremlin",
+      "canonical_model_id": 7768,
+      "public_family": "groveller",
+      "detailed_category": "small_wave_shortboard",
+      "reason": "Weak-wave speed and forgiving small-wave performance are the core role.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "sampler",
+      "canonical_model_id": 7745,
+      "public_family": "daily_driver",
+      "detailed_category": "hybrid_shortboard",
+      "reason": "Versatile hybrid shortboard, not a fish.",
+      "confidence": "high"
+    },
+    {
+      "brand": "Channel Islands",
+      "model": "two-happy",
+      "canonical_model_id": 7757,
+      "public_family": "performance_shortboard",
+      "detailed_category": "performance_shortboard",
+      "reason": "High-performance role remains primary despite improved accessibility.",
+      "confidence": "high"
+    }
+  ],
+  "review_required": [
+    {
+      "brand": "Christenson",
+      "model": "OP2",
+      "reason": "Current governed source record lacks a detailed manufacturer description."
+    },
+    {
+      "brand": "Christenson",
+      "model": "OP4",
+      "reason": "Current governed source record lacks a detailed manufacturer description."
+    },
+    {
+      "brand": "Lost",
+      "model": "Retro Tripper",
+      "reason": "Current live labels conflict between Step Up and Performance Fish; retain outside automatic publication changes until the stored manufacturer evidence is reconciled."
+    }
+  ]
+}
