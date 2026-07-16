@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "manufacturer": "Album",
+  "status": "complete_editorial_review",
+  "reviewed_date": "2026-07-16",
+  "reviewed_by": "QUIVRR",
+  "model_count": 19,
+  "source_policy": "Official Album Surf model pages and the current governed canonical profiles are the authority. Public family reflects manufacturer design intent. Board DNA describes behaviour but does not determine identity.",
+  "family_counts": {
+    "fish": 7,
+    "groveller": 0,
+    "daily_driver": 1,
+    "performance_shortboard": 8,
+    "step_up": 0,
+    "mid_length": 3,
+    "longboard": 0
+  },
+  "models": [
+    {
+      "canonical_model_id": 8114,
+      "model": "Bom Dia",
+      "public_family": "performance_shortboard",
+      "detailed_category": "alternative_performance_shortboard",
+      "secondary_categories": ["performance_twin"],
+      "official_source_url": "https://albumsurf.com/collections/bom-dia-concept",
+      "manufacturer_intent": "Alternative performance board combining modern shortboard performance with added paddle and speed.",
+      "editorial_reason": "Narrow outline, performance rocker and critical surfing intent make this a performance shortboard, not a fish.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8115,
+      "model": "Bullet",
+      "public_family": "daily_driver",
+      "detailed_category": "hybrid_shortboard",
+      "secondary_categories": ["one_board_quiver"],
+      "official_source_url": "https://albumsurf.com/collections/bullet",
+      "manufacturer_intent": "Versatile shape that can be ridden short in small surf or at normal shortboard dimensions as a daily driver.",
+      "editorial_reason": "Everyday versatility is the explicit core role.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8116,
+      "model": "D'boa",
+      "public_family": "fish",
+      "detailed_category": "performance_fish",
+      "secondary_categories": ["asymmetrical_fish"],
+      "official_source_url": "https://albumsurf.com/collections/dboa-1",
+      "manufacturer_intent": "Fish-derived step-down with easy speed, flow and more aggressive rail-to-rail performance.",
+      "editorial_reason": "Album explicitly describes fish speed and flow with added performance capability.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8117,
+      "model": "Delma",
+      "public_family": "fish",
+      "detailed_category": "performance_fish",
+      "secondary_categories": ["stretched_fish"],
+      "official_source_url": "https://albumsurf.com/collections/delma",
+      "manufacturer_intent": "Stretched fish concept with easy paddle and speed, refined for larger and better waves.",
+      "editorial_reason": "Fish identity remains primary despite greater range and length.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8118,
+      "model": "Disorder",
+      "public_family": "performance_shortboard",
+      "detailed_category": "asymmetrical_performance_shortboard",
+      "secondary_categories": ["alternative_performance_shortboard"],
+      "official_source_url": "https://albumsurf.com/collections/disorder",
+      "manufacturer_intent": "High-performance asymmetrical design for technical surfing in quality waves.",
+      "editorial_reason": "Performance rocker, refined rails and critical surfing purpose clearly place it in Performance Shortboards.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8119,
+      "model": "Fascination",
+      "public_family": "fish",
+      "detailed_category": "asymmetrical_performance_fish",
+      "secondary_categories": ["traditional_fish"],
+      "official_source_url": "https://albumsurf.com/collections/fascination",
+      "manufacturer_intent": "Classic fish converted to an asymmetrical design with greater hold and control.",
+      "editorial_reason": "Album explicitly anchors the design in classic fish identity.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8120,
+      "model": "Freewing",
+      "public_family": "performance_shortboard",
+      "detailed_category": "performance_shortboard",
+      "secondary_categories": ["alternative_performance_shortboard"],
+      "official_source_url": "https://albumsurf.com/collections/freewing",
+      "manufacturer_intent": "Performance shortboard balancing critical surfing with alternative design influence.",
+      "editorial_reason": "Critical surfing and performance intent remain primary.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8121,
+      "model": "Insanity",
+      "public_family": "performance_shortboard",
+      "detailed_category": "performance_shortboard",
+      "secondary_categories": [],
+      "official_source_url": "https://albumsurf.com/collections/insanity",
+      "manufacturer_intent": "Modern performance board with relaxed entry, added exit rocker and critical-wave capability.",
+      "editorial_reason": "Technical, sensitive, quality-wave shortboard by design.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8123,
+      "model": "Lightbender",
+      "public_family": "fish",
+      "detailed_category": "performance_fish",
+      "secondary_categories": ["daily_driver_fish"],
+      "official_source_url": "https://albumsurf.com/collections/lightbender",
+      "manufacturer_intent": "Daily-driver fish that retains fish speed and flow while adding tighter-pocket performance.",
+      "editorial_reason": "Album explicitly calls it a performance fish; daily-driver language describes range, not family identity.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8124,
+      "model": "Moonstone",
+      "public_family": "mid_length",
+      "detailed_category": "performance_mid_length_fish",
+      "secondary_categories": ["stretched_fish"],
+      "official_source_url": "https://albumsurf.com/collections/moonstone",
+      "manufacturer_intent": "Dynamic mid-length developed from a stretched fish platform, with added hold and better-wave range.",
+      "editorial_reason": "Album leads with mid-length identity and sizing, while fish DNA remains a secondary design influence.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8125,
+      "model": "Plasmic",
+      "public_family": "fish",
+      "detailed_category": "performance_fish",
+      "secondary_categories": [],
+      "official_source_url": "https://albumsurf.com/collections/plasmic",
+      "manufacturer_intent": "Flat, fast fish combining paddle and planing with stronger performance.",
+      "editorial_reason": "Fish identity is explicit and central.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8126,
+      "model": "ProtoAtypical",
+      "public_family": "performance_shortboard",
+      "detailed_category": "alternative_performance_shortboard",
+      "secondary_categories": ["asymmetrical_performance_shortboard"],
+      "official_source_url": "https://albumsurf.com/collections/protoatypical",
+      "manufacturer_intent": "Performance-oriented shortboard with asymmetrical advantages and high-performance capability.",
+      "editorial_reason": "Album explicitly describes a high-performance shortboard.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8127,
+      "model": "Sunstone",
+      "public_family": "fish",
+      "detailed_category": "traditional_fish",
+      "secondary_categories": [],
+      "official_source_url": "https://albumsurf.com/collections/sunstone",
+      "manufacturer_intent": "Refined classic Southern California fish focused on trim, speed and fluid carves.",
+      "editorial_reason": "Album calls it the purest classic fish in the range.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8128,
+      "model": "The End",
+      "public_family": "mid_length",
+      "detailed_category": "all_round_mid_length",
+      "secondary_categories": ["performance_mid_length"],
+      "official_source_url": "https://albumsurf.com/collections/the-end",
+      "manufacturer_intent": "All-round mid-length balancing glide, flow and surprising performance.",
+      "editorial_reason": "Longer rail line, glide and mid-length role are primary.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8129,
+      "model": "Townsend",
+      "public_family": "mid_length",
+      "detailed_category": "performance_mid_length_step_up",
+      "secondary_categories": ["step_up"],
+      "official_source_url": "https://albumsurf.com/collections/townsend",
+      "manufacturer_intent": "Hybrid mid-length and step-up with egg-like paddle, broad range and performance in stronger waves.",
+      "editorial_reason": "Mid-length identity and sizing are primary; step-up capability is a secondary role rather than the public family.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8130,
+      "model": "Twinsman",
+      "public_family": "performance_shortboard",
+      "detailed_category": "performance_twin_shortboard",
+      "secondary_categories": ["alternative_performance_shortboard"],
+      "official_source_url": "https://albumsurf.com/collections/twinsman",
+      "manufacturer_intent": "Shortboard-level performance with twin-fin speed, pivot and drive without traditional twin limitations.",
+      "editorial_reason": "Album explicitly compares it with shortboard performance and removes traditional twin limitations.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8131,
+      "model": "VBSM",
+      "public_family": "performance_shortboard",
+      "detailed_category": "high_performance_shortboard",
+      "secondary_categories": [],
+      "official_source_url": "https://albumsurf.com/collections/vbsm",
+      "manufacturer_intent": "Traditional high-performance thruster outline with Album speed, flow and hidden foam.",
+      "editorial_reason": "Explicit high-performance thruster identity.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8132,
+      "model": "Veebee",
+      "public_family": "fish",
+      "detailed_category": "performance_fish",
+      "secondary_categories": ["traditional_fish"],
+      "official_source_url": "https://albumsurf.com/collections/veebee",
+      "manufacturer_intent": "Performance fish with classic fish outline, modern rails and additional speed and grip.",
+      "editorial_reason": "Manufacturer explicitly identifies it as a performance fish.",
+      "confidence": "high"
+    },
+    {
+      "canonical_model_id": 8133,
+      "model": "Warp Twin",
+      "public_family": "performance_shortboard",
+      "detailed_category": "performance_twin_shortboard",
+      "secondary_categories": ["alternative_performance_shortboard"],
+      "official_source_url": "https://albumsurf.com/collections/warp-twin",
+      "manufacturer_intent": "Performance twin using a modern shortboard rocker, refined rails and quality-wave control.",
+      "editorial_reason": "Narrow outline, performance rocker and quality-wave intent make it a Performance Shortboard rather than Fish.",
+      "confidence": "high"
+    }
+  ]
+}
