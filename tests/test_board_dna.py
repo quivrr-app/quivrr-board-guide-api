@@ -51,11 +51,35 @@ def test_explicit_family_assertions():
         ("Christenson", "Osprey"): "mid_length",
         ("Firewire", "Seaside"): "fish",
         ("Pyzel", "Ghost"): "performance_shortboard",
+        ("Pyzel", "Phantom"): "daily_driver",
         ("Pyzel", "Gremlin"): "groveller",
     }
     for identity, family in expected.items():
         assert find_board_dna(*identity)["public_family"] == family
     assert find_board_dna("Christenson", "OP4")["public_family"] in {"performance_shortboard", "step_up"}
+
+
+def test_ghost_is_hard_excluded_from_daily_driver_and_valid_for_performance_shortboard():
+    ghost = find_board_dna("Pyzel", "Ghost")
+    daily = score_dna_fit(ghost, RiderProfile(ability="Advanced"), {"public_family": "daily_driver"})
+    performance = score_dna_fit(ghost, RiderProfile(ability="Advanced"), {"public_family": "performance_shortboard"})
+    assert daily["valid"] is False
+    assert performance["valid"] is True
+
+
+def test_public_family_overrides_are_final_editorial_authority():
+    override_payload = json.loads(
+        (ROOT / "app/knowledge/curated/public_family_overrides.json").read_text(encoding="utf-8")
+    )
+    overrides = {int(row["canonical_model_id"]): row for row in override_payload["overrides"]}
+    assert override_payload["schema_version"] == 1
+    for canonical_model_id, override in overrides.items():
+        board = find_board_dna_by_id(canonical_model_id)
+        assert board is not None
+        assert board["brand"].casefold() == override["brand"].casefold()
+        assert board["model"].casefold() == override["model"].casefold()
+        assert board["public_family"] == override["public_family"]
+        assert board["family_governance"]["override_applied"] is True
 
 
 def test_family_behaviour_is_materially_differentiated():
@@ -135,6 +159,10 @@ def test_generation_audits_expose_review_queue():
     assert sum(audit["by_public_family"].values()) == 431
     assert distribution["model_count"] == 431
     assert (ROOT / "app/knowledge/audits/board_dna_review_required.csv").exists()
+    family_review = json.loads((ROOT / "app/knowledge/audits/public_family_review_v2.json").read_text(encoding="utf-8"))
+    assert family_review["model_count"] == 431
+    assert sum(family_review["proposed_family_counts"].values()) == 431
+    assert len(family_review["records"]) == 431
 
 
 def test_active_brief_inherits_family_region_and_stock_requirement():

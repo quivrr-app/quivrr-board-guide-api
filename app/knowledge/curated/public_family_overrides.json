@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "governance_contract": "Public family reflects the manufacturer's intended design role and the board's core design DNA. It does not reflect how frequently an owner may choose to ride it. Daily Driver is never a fallback for unknown or ambiguous records.",
+  "reviewed_date": "2026-07-16",
+  "reviewed_by": "QUIVRR",
+  "overrides": [
+    {
+      "canonical_model_id": 7761,
+      "brand": "Pyzel",
+      "model": "Ghost",
+      "public_family": "performance_shortboard",
+      "reason": "Manufacturer design intent is quality-wave high-performance surfing.",
+      "evidence": "Current manufacturer description and governed DNA."
+    },
+    {
+      "canonical_model_id": 7787,
+      "brand": "Pyzel",
+      "model": "Phantom",
+      "public_family": "daily_driver",
+      "reason": "Manufacturer positions the Phantom as a daily driver with a high-performance edge.",
+      "evidence": "Current manufacturer description and governed DNA."
+    },
+    {
+      "canonical_model_id": 7768,
+      "brand": "Pyzel",
+      "model": "Gremlin",
+      "public_family": "groveller",
+      "reason": "Weak-wave speed and forgiving small-wave performance are the core design role.",
+      "evidence": "Current manufacturer description and governed DNA."
+    },
+    {
+      "canonical_model_id": 7745,
+      "brand": "Channel Islands",
+      "model": "sampler",
+      "public_family": "daily_driver",
+      "reason": "The Sampler is a hybrid shortboard intended for versatile everyday performance, not a fish.",
+      "evidence": "Governed taxonomy correction and current manufacturer evidence."
+    },
+    {
+      "canonical_model_id": 7842,
+      "brand": "Lost",
+      "model": "El Patron",
+      "public_family": "step_up",
+      "reason": "The model is a high-volume performance step-up for larger or stronger surf.",
+      "evidence": "Governed taxonomy correction and current manufacturer evidence."
+    },
+    {
+      "canonical_model_id": 7757,
+      "brand": "Channel Islands",
+      "model": "two-happy",
+      "public_family": "performance_shortboard",
+      "reason": "Its primary role remains high-performance surfing despite increased accessibility.",
+      "evidence": "Manufacturer describes high-performance speed, flow and sensitivity for a broader range of surfers."
+    },
+    {
+      "canonical_model_id": 7731,
+      "brand": "Channel Islands",
+      "model": "g-skate",
+      "public_family": "daily_driver",
+      "reason": "The fast, skatey hybrid is a versatile alternative shortboard rather than a fish-first design.",
+      "evidence": "Manufacturer describes a responsive swallow-tail hybrid design."
+    },
+    {
+      "canonical_model_id": 8105,
+      "brand": "Chilli",
+      "model": "Peppa Twin",
+      "public_family": "daily_driver",
+      "reason": "Its user-friendly 2-to-6-foot range and wave-count focus make versatility the primary role.",
+      "evidence": "Manufacturer describes a broad-range, easy-to-ride performance twin."
+    },
+    {
+      "canonical_model_id": 7702,
+      "brand": "JS Industries",
+      "model": "Xero Gravity Youth",
+      "public_family": "daily_driver",
+      "reason": "The youth variant retains the Xero Gravity's all-round 2-to-6-foot role.",
+      "evidence": "Manufacturer describes it as an all-rounder across wave types."
+    },
+    {
+      "canonical_model_id": 7965,
+      "brand": "Firewire",
+      "model": "Great White Twin",
+      "public_family": "groveller",
+      "reason": "High-performance grovelling and weak-wave speed generation are the explicit primary role.",
+      "evidence": "Manufacturer explicitly calls it a high-performance groveller."
+    },
+    {
+      "canonical_model_id": 7766,
+      "brand": "Pyzel",
+      "model": "Tiger Twin",
+      "public_family": "groveller",
+      "reason": "The design blends two smaller-wave models and prioritises easy speed in weaker surf.",
+      "evidence": "Manufacturer describes a fast, responsive, user-friendly smaller-wave twin."
+    },
+    {
+      "canonical_model_id": 7830,
+      "brand": "Lost",
+      "model": "Cali Twin",
+      "public_family": "fish",
+      "reason": "The Mark Richards twin lineage, wide-forward planing area and small-wave speed keep fish DNA primary.",
+      "evidence": "Manufacturer describes a modern twin-fin small-wave weapon derived from the SuperTwin."
+    },
+    {
+      "canonical_model_id": 7820,
+      "brand": "DHD",
+      "model": "Mini Twin",
+      "public_family": "fish",
+      "reason": "The short, rounded retro-inspired twin is designed primarily for one-to-four-foot surf.",
+      "evidence": "Manufacturer description and governed fish-style design DNA."
+    },
+    {
+      "canonical_model_id": 7825,
+      "brand": "Lost",
+      "model": "3.0 Stub Driver",
+      "public_family": "performance_shortboard",
+      "reason": "It is a stepped-down Driver 3.0 built for low-end high-performance surfing, not general-purpose versatility.",
+      "evidence": "Manufacturer describes elite Driver lineage and high-performance surfing."
+    },
+    {
+      "canonical_model_id": 7829,
+      "brand": "Lost",
+      "model": "Big Rig Driver",
+      "public_family": "performance_shortboard",
+      "reason": "The model is explicitly a scaled high-performance Driver for larger surfers and not a fish.",
+      "evidence": "Manufacturer calls it a high-volume Pro-Formance Series shortboard derived from Driver 3.0 and 2.0."
+    },
+    {
+      "canonical_model_id": 7840,
+      "brand": "Lost",
+      "model": "Driver 3.0 Round",
+      "public_family": "performance_shortboard",
+      "reason": "Elite-team competition development is the core design role.",
+      "evidence": "Manufacturer describes the Driver 3.0 as the Ultimate Driver Machine developed with elite team riders."
+    },
+    {
+      "canonical_model_id": 7841,
+      "brand": "Lost",
+      "model": "Driver 3.0 Squash",
+      "public_family": "performance_shortboard",
+      "reason": "Elite-team competition development is the core design role.",
+      "evidence": "Manufacturer describes continued Driver 2.0 evolution for the world's best surfers."
+    },
+    {
+      "canonical_model_id": 7891,
+      "brand": "Lost",
+      "model": "Sub Driver 2.0",
+      "public_family": "performance_shortboard",
+      "reason": "Its primary identity is a small-wave competition shortboard rather than an everyday fallback.",
+      "evidence": "Manufacturer explicitly describes its competition history and small-wave performance role."
+    },
+    {
+      "canonical_model_id": 7779,
+      "brand": "Pyzel",
+      "model": "Red Tiger XL",
+      "public_family": "performance_shortboard",
+      "reason": "The supportive XL variant retains the Red Tiger's high-performance shortboard identity.",
+      "evidence": "Manufacturer describes it as a wider high-performance surfboard for bigger or progressing riders."
+    },
+    {
+      "canonical_model_id": 7948,
+      "brand": "Rusty",
+      "model": "Underdog",
+      "public_family": "performance_shortboard",
+      "reason": "Competition performance in versatile and powerful waves is the primary purpose.",
+      "evidence": "Manufacturer describes Caio Ibelli's WSL high-performance competition board."
+    }
+  ]
+}
