@@ -1,0 +1,55 @@
+name: Build board taxonomy owner review
+
+on:
+  push:
+    branches:
+      - research/board-taxonomy-review-v1
+    paths:
+      - "research/board-taxonomy-review-v1/**"
+      - ".github/workflows/board-taxonomy-review.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build review package
+        run: python research/board-taxonomy-review-v1/build_review.py
+
+      - name: Validate output
+        run: |
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          root = Path('research/board-taxonomy-review-v1/output')
+          data = json.loads((root / 'board-taxonomy-owner-review-v1.json').read_text(encoding='utf-8'))
+          assert data['model_count'] == 425, data['model_count']
+          assert len(data['models']) == 425
+          assert len({(row['manufacturer'], row['model']) for row in data['models']}) == 425
+          with (root / 'board-taxonomy-owner-review-v1.csv').open(encoding='utf-8-sig') as handle:
+              assert sum(1 for _ in csv.DictReader(handle)) == 425
+          print('Board taxonomy owner review package validated.')
+          PY
+
+      - name: Commit generated review package
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/board-taxonomy-review-v1/output
+          if git diff --cached --quiet; then
+            echo "No generated changes."
+          else
+            git commit -m "Generate board taxonomy owner review package"
+            git push
+          fi
