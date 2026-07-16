@@ -73,10 +73,12 @@
       "canonical_model_id": 7965,
       "brand": "Firewire",
       "model": "Great White Twin",
-      "detailed_category": "Small Wave Performance Twin",
-      "board_type": "Groveller",
+      "public_family": "fish",
+      "detailed_category": "Performance Fish",
+      "board_type": "Fish",
       "primary_fin_setup": "Twin",
-      "reason": "Firewire explicitly describes Great White Twin as a high-performance groveller with hybrid paddle support and shortboard rail performance."
+      "alternative_fin_setup": ["Twin + Trailer"],
+      "reason": "The Great White Twin is fundamentally a modern twin-fin fish. Firewire's high-performance groveller wording describes its weak-wave capability and performance range, while its board lineage, twin-fin platform and fish design identity determine the public family."
     },
     {
       "canonical_model_id": 7975,
