@@ -14,7 +14,6 @@ FAMILY_CATEGORIES = {
     "performance_shortboard": {
         "high performance shortboard",
         "performance shortboard",
-        "performance daily driver",
         "competition shortboard",
     },
     "fish": {
@@ -64,6 +63,8 @@ def assert_family(recommendations: list[dict[str, Any]], family: str) -> None:
     assert_true(bool(actual), f"No recommendation categories returned for {family}")
     unexpected = sorted(actual - allowed)
     assert_true(not unexpected, f"Incoherent {family} shortlist categories: {unexpected}")
+    governed = {item.get("authoritativePublicFamily") for item in recommendations}
+    assert_true(governed == {family}, f"Wrong authoritative public families: {sorted(governed)}")
 
 
 def assert_only_verified_stock(recommendations: list[dict[str, Any]]) -> None:
@@ -339,6 +340,60 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
         assert_true("catalogue model" not in correction.get("reply", "").lower(), "Correction repeated catalogue-only wording")
 
     scenario("15. Indonesia reef-fish availability returns verified stock and preserves correction", indonesia_reef_fish_stock)
+
+    def public_family_correction_contract() -> None:
+        transcript: list[dict[str, str]] = []
+        state: dict[str, Any] = {}
+        profile = {
+            "weight_kg": 75, "ability": "Advanced", "target_volume_litres": 29,
+            "region": "ID", "wave_type": "Reef Break", "wave_power": "Average to Powerful",
+        }
+
+        def turn(message: str) -> dict[str, Any]:
+            nonlocal state
+            data = call_chat(session, base_url, {
+                "message": message, "region": "ID", "profile": profile,
+                "conversation": transcript, "conversationState": state,
+            })
+            transcript.extend([
+                {"role": "user", "content": message},
+                {"role": "assistant", "content": data.get("reply", "")},
+            ])
+            state = data.get("conversationState") or state
+            return data
+
+        assert_true(turn("G'day").get("recommendations") == [], "Greeting returned cards")
+        fish = turn("I'm looking for some performance fish in my size and in stock.")
+        assert_family(fish.get("recommendations", []), "fish")
+
+        performance = turn("Nice. What about a performance shortboard?")
+        assert_family(performance.get("recommendations", []), "performance_shortboard")
+        hpsb = turn("High performance shortboards?")
+        assert_family(hpsb.get("recommendations", []), "performance_shortboard")
+
+        corrected = turn("No, high performance boards. These are daily drivers.")
+        assert_family(corrected.get("recommendations", []), "performance_shortboard")
+        corrected_state = corrected.get("conversationState") or {}
+        assert_true("daily_driver" in corrected_state.get("excludedPublicFamilies", []), "Correction did not retain Daily Driver exclusion")
+        assert_true("daily drivers" in corrected.get("reply", "").lower(), "Correction was not acknowledged")
+
+        stock = turn("Only in stock.")
+        assert_family(stock.get("recommendations", []), "performance_shortboard")
+        assert_only_verified_stock(stock.get("recommendations", []))
+        paddle = turn("Give me something with more paddle.")
+        assert_family(paddle.get("recommendations", []), "performance_shortboard")
+        comparison = turn("Compare the top two.")
+        assert_true(len((comparison.get("conversationState") or {}).get("comparisonBoards", [])) == 2, "Top-two comparison failed")
+
+        twin = turn("Actually, show me a twin that isn't a fish.")
+        assert_true(all(item.get("authoritativePublicFamily") != "fish" for item in twin.get("recommendations", [])), "Twin-not-fish returned Fish")
+        assert_true(all("twin" in " ".join(filter(None, [item.get("primaryFinSetup"), *(item.get("alternativeFinSetup") or [])])).lower() for item in twin.get("recommendations", [])), "Twin constraint was not retained")
+
+        step_up = turn("Start again. I want a proper step-up for hollow reef waves.")
+        assert_true((step_up.get("conversationState") or {}).get("requestedPublicFamily") == "step_up", "Reset did not establish Step Up family")
+        assert_true(all(item.get("authoritativePublicFamily") == "step_up" for item in step_up.get("recommendations", [])), "Step-up returned another family")
+
+    scenario("16. Public-family corrections survive stock, paddle, comparison, fin and reset turns", public_family_correction_contract)
 
     return results
 

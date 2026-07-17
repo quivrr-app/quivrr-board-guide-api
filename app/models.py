@@ -150,6 +150,14 @@ class SuggestedBoard(BaseModel):
     region_code: str | None = None
     source: str = "quivrr_controlled_knowledge"
     board_model_id: int | None = Field(default=None, exclude=True)
+    authoritative_public_family: str | None = None
+    detailed_category: str | None = None
+    primary_fin_setup: str | None = None
+    alternative_fin_setup: list[str] = Field(default_factory=list)
+    recommendation_lanes: list[str] = Field(default_factory=list)
+    excluded_recommendation_lanes: list[str] = Field(default_factory=list)
+    match_reason: str | None = None
+    recommendation_role: str = "primary"
 
 
 class RecommendationScore(BaseModel):
@@ -304,6 +312,14 @@ class BodhiRecommendation(BaseModel):
     selected_size_reason: str | None = Field(default=None, alias="selectedSizeReason")
     volume_compatibility: str | None = Field(default=None, alias="volumeCompatibility")
     confidence: float = 0.0
+    authoritative_public_family: str | None = Field(default=None, alias="authoritativePublicFamily")
+    detailed_category: str | None = Field(default=None, alias="detailedCategory")
+    primary_fin_setup: str | None = Field(default=None, alias="primaryFinSetup")
+    alternative_fin_setup: list[str] = Field(default_factory=list, alias="alternativeFinSetup")
+    recommendation_lanes: list[str] = Field(default_factory=list, alias="recommendationLanes")
+    excluded_recommendation_lanes: list[str] = Field(default_factory=list, alias="excludedRecommendationLanes")
+    match_reason: str | None = Field(default=None, alias="matchReason")
+    recommendation_role: str = Field(default="primary", alias="recommendationRole")
 
     @model_validator(mode="before")
     @classmethod
@@ -367,6 +383,17 @@ class ConversationState(BaseModel):
     goals: list[str] = Field(default_factory=list)
     pain_points: list[str] = Field(default_factory=list, alias="painPoints")
     budget: str | None = None
+    requested_public_family: str | None = Field(default=None, alias="requestedPublicFamily")
+    requested_detailed_category: str | None = Field(default=None, alias="requestedDetailedCategory")
+    requested_fin_setup: str | None = Field(default=None, alias="requestedFinSetup")
+    excluded_public_families: list[str] = Field(default_factory=list, alias="excludedPublicFamilies")
+    excluded_detailed_categories: list[str] = Field(default_factory=list, alias="excludedDetailedCategories")
+    excluded_fin_setups: list[str] = Field(default_factory=list, alias="excludedFinSetups")
+    allow_adjacent_alternatives: bool = Field(default=False, alias="allowAdjacentAlternatives")
+    last_rejected_models: list[BoardReference] = Field(default_factory=list, alias="lastRejectedModels")
+    last_rejected_family: str | None = Field(default=None, alias="lastRejectedFamily")
+    family_correction_reason: str | None = Field(default=None, alias="familyCorrectionReason")
+    family_intent_confidence: float = Field(default=0.0, alias="familyIntentConfidence")
 
 
 class FollowUpAction(BaseModel):

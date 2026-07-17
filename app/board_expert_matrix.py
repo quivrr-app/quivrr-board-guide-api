@@ -10,6 +10,7 @@ from app.rider_fit import recommend_rider_fit
 from app.board_taxonomy import allows_category, requested_category, taxonomy_by_id
 from app.board_dna import find_board_dna_by_id, resolve_dna_brief, score_dna_fit, explain_dna_fit
 from app.board_master import overlay_expert_board
+from app.family_intent import FamilyIntent
 
 
 MATRIX_PATH = Path(__file__).parent / "knowledge/generated/board_expert_matrix.json"
@@ -80,6 +81,8 @@ FAMILY_LANES = {
 }
 PRIMARY_FAMILY_BY_REQUEST = {
     "true_hpsb": {"High Performance Shortboard", "Performance Shortboard"},
+    # Legacy profile-only requests retain the supportive lane. Explicit family
+    # intent is independently hard-gated by Board Master public_family below.
     "performance_shortboard": {"High Performance Shortboard", "Performance Shortboard", "Performance Daily Driver"},
     "performance_daily_driver": {"Performance Daily Driver", "High Performance Shortboard"},
     "forgiving_performance": {"Performance Daily Driver", "Daily Driver", "Hybrid Shortboard", "Performance Shortboard"},
@@ -645,13 +648,45 @@ def _explanation(board: dict, profile: RiderProfile, reasons: list[str], target:
     return f"{family} fit with {reason_text}."
 
 
-def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[SuggestedBoard]:
+def _intent_fin_label(value: str | None) -> str | None:
+    return {
+        "twin": "Twin", "quad": "Quad", "thruster": "Thruster", "five_fin": "Five Fin",
+        "two_plus_one": "Two Plus One", "single": "Single",
+    }.get(value or "")
+
+
+def _matches_detailed_category(actual: str | None, requested: str | None) -> bool:
+    if not requested:
+        return True
+    actual_key = _key(actual)
+    requested_key = _key(requested)
+    if requested_key in {"competition hpsb", "high performance shortboard"}:
+        return any(token in actual_key for token in ("high performance shortboard", "competition", "hpsb"))
+    return requested_key in actual_key or actual_key in requested_key
+
+
+def recommend_from_matrix(
+    profile: RiderProfile,
+    limit: int = 12,
+    family_intent: FamilyIntent | None = None,
+) -> list[SuggestedBoard]:
     lanes = target_lanes(profile)
     family = resolve_target_family(profile)
     allowed_lanes = FAMILY_LANES.get(family, set())
+    family_open_fin_request = bool(
+        family_intent
+        and family_intent.requested_fin_setup
+        and not family_intent.requested_public_family
+    )
+    if family_open_fin_request:
+        allowed_lanes = set()
     fit = recommend_rider_fit(profile)
     target = profile.target_volume_litres or ((fit.volume_low + fit.volume_high) / 2 if fit else None)
     intent = _intent_profile(profile)
+    if family_open_fin_request:
+        intent = dict(intent)
+        intent["allowed_families"] = set()
+        intent["strict_hpsb"] = False
     supportive_performance_brief = (
         family == "performance_shortboard"
         and (
@@ -660,7 +695,7 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
             or _ability_rank(profile.ability) <= ABILITY_ORDER["beginner"]
         )
     )
-    if supportive_performance_brief:
+    if supportive_performance_brief and not (family_intent and family_intent.explicit):
         intent = dict(intent)
         intent["intent_key"] = "forgiving_performance"
         intent["allowed_families"] = set(PRIMARY_FAMILY_BY_REQUEST["forgiving_performance"])
@@ -670,7 +705,7 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
     governed_category = requested_category(
         profile.preferred_board_type, profile.goal, profile.desired_feel, profile.wave_power, profile.wave_type
     )
-    if supportive_performance_brief:
+    if supportive_performance_brief and not (family_intent and family_intent.explicit):
         governed_category = None
         lanes = [
             "forgiving_daily_driver", "performance_daily_driver", "hybrid_daily_driver",
@@ -683,7 +718,9 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
         " ".join(filter(None, [profile.preferred_board_type, profile.desired_feel, profile.goal, profile.wave_type, profile.wave_power])),
         profile,
     )
-    if supportive_performance_brief:
+    if family_open_fin_request:
+        dna_brief["public_family"] = None
+    if supportive_performance_brief and not (family_intent and family_intent.explicit):
         # Rider readiness can redirect a performance request into the governed
         # daily-driver family without weakening the family gate globally.
         if (profile.weight_kg or 0) >= 90 and "support" in intent["text"]:
@@ -697,6 +734,24 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
         if profile.requested_brand and _key(board.get("brand")) != _key(profile.requested_brand):
             continue
 
+        if family_intent:
+            public_family = board.get("publicFamily")
+            if family_intent.requested_public_family and public_family != family_intent.requested_public_family:
+                continue
+            if public_family in family_intent.excluded_public_families:
+                continue
+            if not _matches_detailed_category(board.get("detailedCategory"), family_intent.requested_detailed_category):
+                continue
+            if _key(board.get("detailedCategory")) in {_key(item) for item in family_intent.excluded_detailed_categories}:
+                continue
+            fins = _normalise_fin_setup(board.get("finSetup"))
+            required_fin = _intent_fin_label(family_intent.requested_fin_setup)
+            excluded_fins = {_intent_fin_label(item) for item in family_intent.excluded_fin_setups}
+            if required_fin and required_fin not in fins:
+                continue
+            if fins & {item for item in excluded_fins if item}:
+                continue
+
         taxonomy_row = taxonomy.get(int(board.get("boardModelId") or -1))
         if governed_category and (not taxonomy_row or not allows_category(taxonomy_row, governed_category)):
             continue
@@ -705,7 +760,10 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
         if allowed_lanes and not (board_lanes & allowed_lanes):
             continue
 
-        lane_rank = next((len(lanes) - index for index, lane in enumerate(lanes) if lane in board_lanes), 0)
+        lane_rank = (
+            1 if family_open_fin_request
+            else next((len(lanes) - index for index, lane in enumerate(lanes) if lane in board_lanes), 0)
+        )
         if lane_rank == 0:
             continue
 
@@ -814,6 +872,14 @@ def recommend_from_matrix(profile: RiderProfile, limit: int = 12) -> list[Sugges
                 skill_fit=" to ".join(filter(None, [board.get("abilityMin"), board.get("abilityMax")])) or None,
                 source="quivrr_board_expert_matrix",
                 board_model_id=board.get("boardModelId"),
+                authoritative_public_family=board.get("publicFamily"),
+                detailed_category=board.get("detailedCategory"),
+                primary_fin_setup=(board.get("finSetup") or [None])[0],
+                alternative_fin_setup=list((board.get("finSetup") or [])[1:]),
+                recommendation_lanes=list(board.get("recommendationLanes") or board.get("boardLanes") or []),
+                excluded_recommendation_lanes=list(board.get("excludedRecommendationLanes") or board.get("excludedLanes") or []),
+                match_reason="explicit_public_family" if family_intent and family_intent.requested_public_family else "rider_fit",
+                recommendation_role="primary",
             )
         )
         if len(selected) >= limit:

@@ -495,6 +495,17 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
             volumeDeltaLitres=board.volume_delta_litres,
             selectedSizeReason=board.selected_size_reason,
             volumeCompatibility=board.volume_compatibility,
+            authoritativePublicFamily=board.authoritative_public_family or master.get("public_family"),
+            detailedCategory=board.detailed_category or master.get("detailed_category"),
+            primaryFinSetup=board.primary_fin_setup or master.get("primary_fin_setup"),
+            alternativeFinSetup=board.alternative_fin_setup or list(master.get("alternative_fin_setup") or []),
+            recommendationLanes=board.recommendation_lanes or list(master.get("recommendation_lanes") or []),
+            excludedRecommendationLanes=(
+                board.excluded_recommendation_lanes
+                or list(master.get("excluded_recommendation_lanes") or [])
+            ),
+            matchReason=board.match_reason or "rider_fit",
+            recommendationRole=board.recommendation_role,
         ))
     return output
 

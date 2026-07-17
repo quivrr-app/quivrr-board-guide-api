@@ -179,9 +179,9 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertEqual(body["recommendations"], [])
 
     @patch("main.search_live_category", return_value=[SuggestedBoard(
-        brand="JS Industries", model="Monsta", category="Performance Daily Driver", confidence=.95,
+        brand="Pyzel", model="Phantom", category="Performance Daily Driver", confidence=.95,
         why_it_fits="matches your carbon/epoxy construction preference", suggested_size="5'11 | 28L",
-        available_count=2, retailer_count=2, region="AU", example_live_source_url="https://example.test/au/monsta",
+        available_count=2, retailer_count=2, region="AU", example_live_source_url="https://example.test/au/phantom",
     )])
     def test_carbon_epoxy_daily_driver_stock_search_returns_results(self, _search):
         response = self.client.post("/api/board-guide/chat", json={
@@ -192,7 +192,7 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertEqual(body["intent"], "board_search_request")
         self.assertEqual(body["intakeState"]["target_volume_litres"], 28)
         self.assertEqual(body["intakeState"]["construction_preference"], "carbon_or_epoxy")
-        self.assertEqual(body["recommendations"][0]["model"], "Monsta")
+        self.assertEqual(body["recommendations"][0]["model"], "Phantom")
         self.assertEqual(body["recommendations"][0]["region"], "AU")
 
     @patch("main.recommend_from_matrix", return_value=[
@@ -355,7 +355,7 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertTrue(body["recommendations"])
         self.assertNotIn("rough weight", body["reply"].lower())
         self.assertNotIn("describe your surfing level", body["reply"].lower())
-        self.assertIn("performance daily drivers", body["reply"].lower())
+        self.assertIn("daily driver", body["reply"].lower())
         self.assertEqual(body["intakeState"]["region"], "EU")
 
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [

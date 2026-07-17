@@ -14,6 +14,12 @@ class BodhiApiTests(unittest.TestCase):
 
     @staticmethod
     def _seed_recommendations(count: int, category: str, region: str = "AU"):
+        public_family = (
+            "fish" if "fish" in category.lower()
+            else "performance_shortboard" if "performance shortboard" in category.lower()
+            else "daily_driver" if category.lower() in {"daily driver", "performance daily driver", "hybrid"}
+            else None
+        )
         return [
             SuggestedBoard(
                 brand=f"Brand {index // 2}",
@@ -24,6 +30,7 @@ class BodhiApiTests(unittest.TestCase):
                 fit_score=90 - index,
                 region=region,
                 region_code=region,
+                authoritative_public_family=public_family,
             )
             for index in range(count)
         ]

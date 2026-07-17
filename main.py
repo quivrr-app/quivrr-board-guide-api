@@ -32,6 +32,8 @@ from app.catalogue_search import extract_category, inventory_snapshot_reply, sea
 from app.intent_router import classify_intent, route_intent
 from app.conversation_controller import ConversationDirective, control_conversation
 from app.board_expert_matrix import recommend_from_matrix
+from app.board_master import find_master_board
+from app.family_intent import FamilyIntent, PUBLIC_FAMILY_LABELS, correction_acknowledgement, resolve_family_intent
 from app.board_dna import find_board_dna, find_board_dna_by_id, load_board_dna, resolve_dna_brief, score_dna_fit
 from app.board_relationship_graph import (
     relationship_reply, relationship_suggestions, relationship_type, source_board_from_message,
@@ -85,10 +87,19 @@ def _model_classification_correction(message: str) -> dict | None:
     if not re.search(r"\b(?:is not|isn't|not a|actually (?:a|an)|is (?:a|an))\b", text):
         return None
     board = find_requested_board(message)
+    if board and board["model"].lower() in {"fish", "twin", "shortboard"}:
+        # Generic family/fin language can collide with canonically named models.
+        # Treat it as family intent unless the user also named the manufacturer.
+        if board["brand"].lower() not in text:
+            return None
     if not board:
         matches = [
             row for row in load_board_dna()["models"]
             if re.search(rf"\b{re.escape(row['model'].lower())}\b", text)
+            and (
+                row["model"].lower() not in {"fish", "twin", "shortboard"}
+                or row["brand"].lower() in text
+            )
         ]
         if matches:
             matches.sort(key=lambda row: len(row["model"]), reverse=True)
@@ -353,7 +364,37 @@ def _shortlist_family_buckets(category: str | None, profile, message: str) -> tu
     return set(), set()
 
 
-def _enforce_shortlist_coherence(boards, category: str | None, profile, message: str, limit: int | None = None):
+def _enforce_shortlist_coherence(
+    boards,
+    category: str | None,
+    profile,
+    message: str,
+    limit: int | None = None,
+    family_intent: FamilyIntent | None = None,
+):
+    if family_intent and (family_intent.requested_public_family or family_intent.excluded_public_families):
+        chosen = []
+        for board in boards:
+            master = find_master_board(board.brand, board.model) or {}
+            public_family = board.authoritative_public_family or master.get("public_family")
+            if family_intent.requested_public_family and public_family != family_intent.requested_public_family:
+                continue
+            if public_family in family_intent.excluded_public_families:
+                continue
+            board.authoritative_public_family = public_family
+            board.detailed_category = board.detailed_category or master.get("detailed_category")
+            board.primary_fin_setup = board.primary_fin_setup or master.get("primary_fin_setup")
+            board.alternative_fin_setup = board.alternative_fin_setup or list(master.get("alternative_fin_setup") or [])
+            board.recommendation_lanes = board.recommendation_lanes or list(master.get("recommendation_lanes") or [])
+            board.excluded_recommendation_lanes = (
+                board.excluded_recommendation_lanes
+                or list(master.get("excluded_recommendation_lanes") or [])
+            )
+            board.match_reason = board.match_reason or "explicit_public_family"
+            board.recommendation_role = "primary"
+            chosen.append(board)
+        return chosen if limit is None else chosen[:limit]
+
     primary, secondary = _shortlist_family_buckets(category, profile, message)
     if not boards or not primary:
         return boards if limit is None else boards[:limit]
@@ -376,6 +417,28 @@ def _enforce_shortlist_coherence(boards, category: str | None, profile, message:
     if not chosen:
         return boards if limit is None else boards[:limit]
     return chosen if limit is None else chosen[:limit]
+
+
+def _family_education_reply(message: str) -> str | None:
+    lowered = message.lower()
+    if "difference" in lowered and "daily driver" in lowered and ("high performance" in lowered or "hpsb" in lowered):
+        return (
+            "Quivrr classifies Daily Drivers around everyday consistency: a broader usable wave range, more paddle support, "
+            "and more accessible volume distribution. Performance Shortboards generally trade some of that forgiveness for "
+            "more precise rails, rocker and responsiveness in better waves. Those are design-intent distinctions, not universal absolutes."
+        )
+    if not lowered.startswith("why"):
+        return None
+    board = find_requested_board(message)
+    if not board:
+        return None
+    master = find_master_board(board["brand"], board["model"])
+    if not master:
+        return None
+    family = master["public_family_label"]
+    detail = master["detailed_category"]
+    intent = master.get("manufacturer_intent") or "its governed manufacturer and design intent"
+    return f"Quivrr classifies the {master['manufacturer']} {master['model']} as {family}, specifically {detail}, based on {intent}."
 
 
 def _stock_only_reply(label: str, region: str | None, boards, candidate_count: int | None = None) -> str:
@@ -551,6 +614,14 @@ def _card_to_suggested_board(card) -> SuggestedBoard:
         availability_status=card.availability_status,
         inventory_source=card.inventory_source,
         inventory_match_count=card.inventory_match_count,
+        authoritative_public_family=card.authoritative_public_family,
+        detailed_category=card.detailed_category,
+        primary_fin_setup=card.primary_fin_setup,
+        alternative_fin_setup=card.alternative_fin_setup,
+        recommendation_lanes=card.recommendation_lanes,
+        excluded_recommendation_lanes=card.excluded_recommendation_lanes,
+        match_reason=card.match_reason,
+        recommendation_role=card.recommendation_role,
     )
 
 
@@ -782,6 +853,7 @@ def build_conversation_state(
     comparison_boards_override: list | None = None,
     directive: ConversationDirective | None = None,
     authenticated: bool = False,
+    family_intent: FamilyIntent | None = None,
 ) -> ConversationState:
     active_region = profile.region or request.region
     last_question = questions[0] if questions else None
@@ -846,6 +918,23 @@ def build_conversation_state(
         preferredFinSetups=fin_setups,
         goals=[profile.goal] if profile.goal else [],
         painPoints=[profile.current_board_feedback] if profile.current_board_feedback else [],
+        requestedPublicFamily=family_intent.requested_public_family if family_intent else None,
+        requestedDetailedCategory=family_intent.requested_detailed_category if family_intent else None,
+        requestedFinSetup=family_intent.requested_fin_setup if family_intent else None,
+        excludedPublicFamilies=list(family_intent.excluded_public_families) if family_intent else [],
+        excludedDetailedCategories=list(family_intent.excluded_detailed_categories) if family_intent else [],
+        excludedFinSetups=list(family_intent.excluded_fin_setups) if family_intent else [],
+        allowAdjacentAlternatives=family_intent.allow_adjacent_alternatives if family_intent else False,
+        lastRejectedModels=[
+            BoardReference(brand=item["brand"], model=item["model"])
+            for item in rejected[-6:]
+        ],
+        lastRejectedFamily=(
+            family_intent.excluded_public_families[-1]
+            if family_intent and family_intent.excluded_public_families else None
+        ),
+        familyCorrectionReason=family_intent.correction_reason if family_intent else None,
+        familyIntentConfidence=family_intent.confidence if family_intent else 0.0,
     )
 
 
@@ -944,6 +1033,11 @@ def board_guide_chat(
     auth_context = load_authenticated_profile_context(authorization, correlation_id=correlation_id)
     intent_result = classify_intent(request.message)
     directive = control_conversation(request.message, intent_result.intent, request.conversation_state)
+    family_intent = resolve_family_intent(
+        request.message,
+        request.conversation_state,
+        reset=directive.clears_rider_brief,
+    )
     preserve_prior_rider = not directive.clears_rider_brief
     history_profiles = [
         with_profile_source(extract_profile(item.content, request.region), "conversation_user")
@@ -953,8 +1047,9 @@ def board_guide_chat(
         with_profile_source(request.account_profile, "conversation_profile")
         if request.account_profile and preserve_prior_rider else None
     )
+    retain_supplied_profile = preserve_prior_rider or directive.target_surfer == "account_holder"
     persisted_profile = with_profile_source(
-        (request.profile or request.intake_state or extract_profile("")) if preserve_prior_rider else extract_profile(""),
+        (request.profile or request.intake_state or extract_profile("")) if retain_supplied_profile else extract_profile(""),
         "conversation_profile",
     )
     if preserve_prior_rider and request.conversation_state and request.conversation_state.active_profile:
@@ -966,7 +1061,7 @@ def board_guide_chat(
     if legacy_account_profile:
         persisted_profile = merge_rider_profile(legacy_account_profile, persisted_profile)
     account_profile = auth_context.profile if auth_context.profile else None
-    if directive.clears_rider_brief:
+    if directive.clears_rider_brief and directive.target_surfer == "different_surfer":
         profile = extract_profile("").model_copy(update={
             "display_name": account_profile.display_name if account_profile else None,
             "region": request.region or (account_profile.region if account_profile else None),
@@ -987,6 +1082,9 @@ def board_guide_chat(
         account_profile=account_profile if preserve_prior_rider else None,
     )
     reset_requested = directive.clears_rider_brief
+    if family_intent.requested_public_family:
+        preferred_type = family_intent.requested_detailed_category or PUBLIC_FAMILY_LABELS[family_intent.requested_public_family]
+        profile = profile.model_copy(update={"preferred_board_type": preferred_type})
     dna_probe = resolve_dna_brief(request.message, profile, {})
     if (
         not reset_requested
@@ -1009,8 +1107,16 @@ def board_guide_chat(
     missing = missing_profile_fields(profile)
     legacy_intent = intent_result.legacy_intent
     intent = intent_result.intent
+    if reset_requested and family_intent.explicit and directive.target_surfer == "account_holder":
+        legacy_intent = "board_search_request"
+        intent = "BOARD_RECOMMENDATION"
+    if family_intent.correction and not _family_education_reply(request.message):
+        legacy_intent = "board_search_request"
+        intent = "BOARD_RECOMMENDATION"
     stock_constraint_removed = _message_removes_stock_constraint(request.message)
     availability_constraint = _resolve_availability_constraint(request, intent_result)
+    if reset_requested:
+        availability_constraint = None
     active_topic = resolve_active_topic(request, profile, legacy_intent)
     if active_topic.kind == "comparison" and active_topic.is_follow_up:
         legacy_intent = "comparison_request"
@@ -1023,9 +1129,28 @@ def board_guide_chat(
         profile,
         allow_follow_up_profile_category=allow_contextual_profile_category,
     )
+    if family_intent.requested_public_family:
+        detailed_category_route = {
+            "Traditional Fish": "traditional_fish",
+            "Performance Fish": "performance_fish",
+            "Performance Daily Driver": "performance_daily_driver",
+            "Competition HPSB": "performance_shortboard",
+        }.get(family_intent.requested_detailed_category or "")
+        category_resolution = CategoryResolution(
+            category=detailed_category_route or family_intent.requested_public_family,
+            confidence=family_intent.confidence,
+            source="family_correction" if family_intent.correction else (
+                "explicit_user_request" if family_intent.explicit else "conversation_follow_up"
+            ),
+        )
     category = category_resolution.category
     prior_dna_brief = request.conversation_state.active_board_brief if request.conversation_state and preserve_prior_rider else {}
     resolved_dna_brief = resolve_dna_brief(request.message, profile, prior_dna_brief)
+    if family_intent.requested_public_family:
+        resolved_dna_brief["public_family"] = family_intent.requested_public_family
+    resolved_dna_brief["excluded_public_families"] = list(family_intent.excluded_public_families)
+    if family_intent.requested_fin_setup:
+        resolved_dna_brief["fin_configurations"] = [family_intent.requested_fin_setup]
     emit_event(
         "bodhi_dna_brief_resolved",
         "bodhi_api",
@@ -1093,6 +1218,7 @@ def board_guide_chat(
     comparison_boards_override = None
     is_first_turn = not any(item.role == "assistant" for item in request.conversation if item)
     state_follow_up = _handle_state_follow_up(request, profile, directive)
+    education_reply = _family_education_reply(request.message)
     asks_name = intent == "IDENTITY_QUESTION"
     allow_recommendations = legacy_intent in RECOMMENDATION_INTENTS
     if legacy_intent in {"greeting_request", "capability_help_request", "site_help_question"}:
@@ -1135,6 +1261,10 @@ def board_guide_chat(
         else:
             reply = personalise_opening("Fresh start. What are we working on today?", profile, is_first_turn=True)
             questions = []
+    elif education_reply:
+        suggested_boards = []
+        reply = education_reply
+        questions = []
     elif allow_recommendations and auth_context.authenticated and not auth_context.profile_loaded and not current_profile.ability and not current_profile.weight_kg:
         suggested_boards = []
         recommendation = None
@@ -1278,7 +1408,12 @@ def board_guide_chat(
         suggested_boards = []
         reply = general_board_reply(request.message)
         questions = []
-    elif allow_recommendations and legacy_intent in {"board_search_request", "surfer_fit_request"} and _should_clarify_category(request.message, category, requested_board, intent_result):
+    elif (
+        allow_recommendations
+        and legacy_intent in {"board_search_request", "surfer_fit_request"}
+        and not family_intent.requested_fin_setup
+        and _should_clarify_category(request.message, category, requested_board, intent_result)
+    ):
         suggested_boards = []
         recommendation = None
         volume_recommendation = None
@@ -1415,7 +1550,7 @@ def board_guide_chat(
     elif category == "fish" and legacy_intent in {"board_search_request", "surfer_fit_request"}:
         recommendation_path = "fish_family_request"
         ranking_profile = _category_ranking_profile(profile, request.message, category)
-        canonical_boards = recommend_from_matrix(ranking_profile, limit=12)
+        canonical_boards = recommend_from_matrix(ranking_profile, limit=12, family_intent=family_intent)
         candidate_source = "matrix"
         ranking_engine_used = RECOMMENDATION_ENGINE_NAME
         candidate_count_before_inventory = len(canonical_boards)
@@ -1430,14 +1565,14 @@ def board_guide_chat(
         if brand_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             inventory_stage = "post_ranking"
-            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence([board for board in checked if board.available_count > 0], category, ranking_profile, request.message))
+            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence([board for board in checked if board.available_count > 0], category, ranking_profile, request.message, family_intent=family_intent))
             if suggested_boards:
                 reply = f"I found verified {profile.region} fish stock from {profile.requested_brand}: " + ", ".join(f"{row.model}" for row in suggested_boards[:5]) + "."
             else:
                 alternative_profile = ranking_profile.model_copy(update={"requested_brand": None})
-                alternatives = recommend_from_matrix(alternative_profile, limit=8)
+                alternatives = recommend_from_matrix(alternative_profile, limit=8, family_intent=family_intent)
                 checked_alternatives = enrich_suggestions_with_inventory(alternatives, alternative_profile)
-                suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence([board for board in checked_alternatives if board.available_count > 0], category, alternative_profile, request.message))
+                suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence([board for board in checked_alternatives if board.available_count > 0], category, alternative_profile, request.message, family_intent=family_intent))
                 reply = f"I can’t see verified live {profile.region} fish stock from {profile.requested_brand} right now. "
                 if suggested_boards:
                     reply += "The closest live fish alternatives are " + ", ".join(f"{row.brand} {row.model}" for row in suggested_boards[:5]) + "."
@@ -1445,7 +1580,7 @@ def board_guide_chat(
         elif direct_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             inventory_stage = "post_ranking"
-            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(_verified_in_stock(checked), category, ranking_profile, request.message))
+            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(_verified_in_stock(checked), category, ranking_profile, request.message, family_intent=family_intent))
             reply = _stock_only_reply("fish", profile.region, suggested_boards, candidate_count=len(canonical_boards))
             questions = []
         elif not profile.region or (
@@ -1465,7 +1600,7 @@ def board_guide_chat(
         else:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             inventory_stage = "post_ranking"
-            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(checked, category, ranking_profile, request.message))
+            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(checked, category, ranking_profile, request.message, family_intent=family_intent))
             reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
             if volume_correction_requested and target_volume and target_volume.minimum_litres is not None and target_volume.maximum_litres is not None:
                 reply = (
@@ -1486,10 +1621,10 @@ def board_guide_chat(
             inventory_stage = "live_search"
         else:
             ranking_profile = _category_ranking_profile(profile, request.message, category)
-            canonical_boards = recommend_from_matrix(ranking_profile, limit=12)
+            canonical_boards = recommend_from_matrix(ranking_profile, limit=12, family_intent=family_intent)
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             suggested_boards = _verified_in_stock(checked) if availability_constraint == STOCK_ONLY_CONSTRAINT else checked
-            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(suggested_boards, category, ranking_profile, request.message))
+            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(suggested_boards, category, ranking_profile, request.message, family_intent=family_intent))
             candidate_count_before_inventory = len(canonical_boards)
             candidate_source = "matrix"
             ranking_engine_used = RECOMMENDATION_ENGINE_NAME
@@ -1585,7 +1720,7 @@ def board_guide_chat(
         wants_performance = "performance" in " ".join(filter(None, [profile.desired_feel, profile.goal])).lower()
         if profile.current_board and wants_performance:
             performance_profile = profile.model_copy(update={"preferred_board_type": "Daily Driver"})
-            expert_lane = recommend_from_matrix(performance_profile, limit=8)
+            expert_lane = recommend_from_matrix(performance_profile, limit=8, family_intent=family_intent)
             graph_lane = graph_suggestions(profile, "upgradeBoards")
             candidate_source = "matrix_plus_graph"
             ranking_engine_used = "matrix_plus_graph"
@@ -1600,7 +1735,7 @@ def board_guide_chat(
             suggested_boards = enrich_suggestions_with_inventory(suggested_boards, profile)
             inventory_stage = "post_ranking"
         else:
-            suggested_boards = recommend_from_matrix(profile)
+            suggested_boards = recommend_from_matrix(profile, family_intent=family_intent)
             suggested_boards = enrich_suggestions_with_inventory(suggested_boards, profile)
             candidate_source = "matrix"
             ranking_engine_used = RECOMMENDATION_ENGINE_NAME
@@ -1627,6 +1762,28 @@ def board_guide_chat(
             board for board in suggested_boards
             if (board.brand.lower(), board.model.lower()) not in rejected_keys
         ]
+    # Final fail-closed contract: no inventory or recommendation path may render
+    # a primary result outside the user's explicit Board Master family.
+    suggested_boards = _enforce_shortlist_coherence(
+        suggested_boards,
+        category,
+        profile,
+        request.message,
+        family_intent=family_intent,
+    )
+    correction_text = correction_acknowledgement(family_intent)
+    if correction_text:
+        if suggested_boards:
+            reply = f"{correction_text} {reply}"
+        else:
+            family_label = PUBLIC_FAMILY_LABELS.get(
+                family_intent.requested_public_family or "",
+                "requested family",
+            )
+            reply = (
+                f"{correction_text} I couldn’t find a matching {family_label} result for the remaining stock, "
+                "volume and region constraints, so I haven’t substituted another family."
+            )
     source = "deterministic_intake_engine"
     duration = round(time.perf_counter() - started, 3)
     verified_stock_count = sum(1 for board in suggested_boards if (board.available_count or 0) > 0)
@@ -1715,7 +1872,13 @@ def board_guide_chat(
         official_recommendation_context=build_official_recommendation_context(recommendation),
     )
     # Stock-constrained prose must derive from the same enriched boards as the cards.
-    final_reply = reply if availability_constraint == STOCK_ONLY_CONSTRAINT else (llm_reply or reply)
+    if auth_context.authenticated and is_first_turn:
+        reply = personalise_opening(reply, profile, is_first_turn=True)
+    final_reply = (
+        reply
+        if availability_constraint == STOCK_ONLY_CONSTRAINT or family_intent.correction
+        else (llm_reply or reply)
+    )
     public_cards = public_recommendations(suggested_boards)
     _set_debug_headers(response, recommendation_path=recommendation_path, ranking_engine=ranking_engine_used)
     conversation_state = build_conversation_state(
@@ -1728,6 +1891,7 @@ def board_guide_chat(
         comparison_boards_override=comparison_boards_override,
         directive=directive,
         authenticated=auth_context.authenticated,
+        family_intent=family_intent,
     )
     follow_up_actions = build_follow_up_actions(intent, public_cards)
     response = BoardGuideResponse(
