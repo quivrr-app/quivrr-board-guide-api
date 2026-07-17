@@ -137,6 +137,10 @@ class Phase4ConversationEvaluation(unittest.TestCase):
         self.assertIn("Pyzel Phantom", reply)
         self.assertIn("Trade-off", reply)
 
+    def test_explicit_family_question_outranks_fin_words_in_model_name(self):
+        result = classify_intent("Is the Great White Twin a fish?")
+        self.assertEqual(result.intent, "BOARD_CATEGORY_EDUCATION")
+
 
 class Phase4EndpointAssurance(unittest.TestCase):
     def setUp(self):

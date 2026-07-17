@@ -199,6 +199,8 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("BOARD_DETAILS", "general_board_question", 0.9, entities)
     if re.search(r"\bwhy (?:is|isn't|is not)\b.*\b(?:fish|daily driver|groveller|groveler|step[ -]?up|mid[ -]?length|twin)\b", text):
         return IntentResult("BOARD_CATEGORY_EDUCATION", "general_board_question", 0.94, entities)
+    if re.search(r"\bis .+\b(?:a |an )?(?:fish|daily driver|groveller|groveler|step[ -]?up|mid[ -]?length)\b", text):
+        return IntentResult("BOARD_CATEGORY_EDUCATION", "general_board_question", 0.94, entities)
     if entities.get("availabilityConstraint") == "VERIFIED_IN_STOCK" and re.search(
         r"\b(?:available|buy|in stock|live stock|unavailable)\b", text
     ):
@@ -247,8 +249,6 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("WAVE_GUIDANCE", "general_board_question", 0.86, entities)
     if re.search(r"^(?:what|which|how)\b", text) and re.search(r"\b(?:reef waves|beach breaks|point breaks|wave size|weak waves)\b", text):
         return IntentResult("WAVE_GUIDANCE", "general_board_question", 0.8, entities)
-    if re.search(r"\bis .+\b(?:a |an )?(?:fish|daily driver|groveller|step[ -]?up)\b", text):
-        return IntentResult("BOARD_CATEGORY_EDUCATION", "general_board_question", 0.86, entities)
     if re.search(r"\b(?:what is a|what does|explain)\b", text) and re.search(r"\b(?:fish|daily driver|groveller|step up|rocker|rails?|concave|tail)\b", text):
         return IntentResult("BOARD_CATEGORY_EDUCATION", "general_board_question", 0.88, entities)
     if re.search(r"\b(?:which pyzel|which lost|which js|brand)\b", text):
