@@ -375,7 +375,11 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
         assert_family(corrected.get("recommendations", []), "performance_shortboard")
         corrected_state = corrected.get("conversationState") or {}
         assert_true("daily_driver" in corrected_state.get("excludedPublicFamilies", []), "Correction did not retain Daily Driver exclusion")
-        assert_true("daily drivers" in corrected.get("reply", "").lower(), "Correction was not acknowledged")
+        correction_reply = corrected.get("reply", "").lower()
+        assert_true(
+            "you’re right" in correction_reply and "daily driver" in correction_reply,
+            "Correction was not acknowledged",
+        )
 
         stock = turn("Only in stock.")
         assert_family(stock.get("recommendations", []), "performance_shortboard")
