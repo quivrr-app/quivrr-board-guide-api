@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 
 import requests
 
-from app.models import RiderProfile, SuggestedBoard
+from app.models import RetailerOffer, RiderProfile, SuggestedBoard
 from app.rider_fit import recommend_rider_fit
 from app.volume_engine_v2 import build_target_volume_context
 
@@ -195,10 +195,21 @@ def _summarise_stock(payloads: list[dict], region: str, construction_preference:
     exact_retailer_rows = {}
     close_retailer_rows = {}
     checked = False
+    offers = {}
     for payload in payloads:
         if normalise_region(payload.get("regionCode")) != region:
             continue
         checked = True
+        for offer in (payload.get("offerIntelligence") or {}).get("offers") or payload.get("offers") or []:
+            if normalise_region(offer.get("region")) != region or not offer.get("inStock"):
+                continue
+            if construction_preference and not construction_matches_preference(
+                offer.get("construction"), construction_preference
+            ):
+                continue
+            offer_key = offer.get("offerId") or offer.get("productUrl")
+            if offer_key:
+                offers[offer_key] = RetailerOffer.model_validate(offer)
         direct = [row for row in payload.get("directManufacturerMatches", []) if row.get("isAvailable") is not False]
         exact_retailers = [row for row in payload.get("exactRetailerMatches", []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"}]
         close_retailers = [row for row in payload.get("closeRetailerMatches", []) if row.get("stockStatus") not in {"out_of_stock", "unavailable"}]
@@ -259,6 +270,7 @@ def _summarise_stock(payloads: list[dict], region: str, construction_preference:
         "inventory_source": inventory_source_label(direct_count, retailer_count),
         "example_live_source_url": urls[0] if urls else None,
         "price_range": price_range,
+        "offers": list(offers.values()),
     }
 
 
@@ -303,6 +315,7 @@ def enrich_suggestions_with_inventory(
             "model_level_stock": False,
             "example_live_source_url": None,
             "price_range": None,
+            "offers": [],
         }
         selected_size = None
         selected_size_data = None
@@ -361,6 +374,7 @@ def enrich_suggestions_with_inventory(
             "volume_delta_litres": volume_delta,
             "selected_size_reason": size_reason,
             "volume_compatibility": volume_compatibility,
+            "offers": stock.get("offers", []),
         }))
 
     # Exact fit first, then actual regional availability, manufacturer direct, retailer, confidence.
@@ -474,6 +488,7 @@ def locate_exact_board(
             "board_size_id": size.get("boardSizeId"), "selected_construction": size.get("construction"),
             "selected_volume_litres": size.get("volumeLitres"),
             "price_range": price, "region": region, "region_code": region,
+            "offers": [RetailerOffer.model_validate(row["offer"])] if row.get("offer") else [],
             "suggested_size": " | ".join(filter(None, [row.get("length"), f"{row.get('volumeLitres'):g}L" if row.get("volumeLitres") is not None else None, row.get("construction")])),
         }))
         if len(output) >= 8:

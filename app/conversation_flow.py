@@ -491,7 +491,7 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
             quivrrSearchUrl=safe_search_url,
             sourceProductUrl=board.source_product_url or board.example_live_source_url,
             sourceType=source_type,
-            priceRange=board.price_range, confidence=board.confidence,
+            priceRange=board.price_range, offers=board.offers, confidence=board.confidence,
             volumeDeltaLitres=board.volume_delta_litres,
             selectedSizeReason=board.selected_size_reason,
             volumeCompatibility=board.volume_compatibility,

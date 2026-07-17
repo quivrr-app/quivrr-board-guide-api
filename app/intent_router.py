@@ -210,6 +210,9 @@ def classify_intent(message: str) -> IntentResult:
     if re.search(r"\b(?:find .* stock|which retailers have|check regional availability|wots in stock|got any .* stock|stock near me|only stuff i can buy)\b", text):
         entities["availabilityConstraint"] = "VERIFIED_IN_STOCK"
         return IntentResult("AVAILABILITY", "board_search_request", 0.92, entities, needs_region=entities["region"] is None)
+    if re.search(r"\b(?:lowest observed|compare offers?|compare prices?|listed price|how much|price for|sponsored offer|why is .* sponsored|sponsorship affect)\b", text):
+        legacy = "exact_board_location_request" if re.search(r"\b(?:price|offer|how much)\b", text) else "site_help_question"
+        return IntentResult("AVAILABILITY", legacy, 0.94, entities, needs_region=entities["region"] is None)
     if "where is this exact board" in text:
         return IntentResult("AVAILABILITY", "exact_board_location_request", 0.88, entities)
     if re.search(r"\b(?:search|open .* region|regional search)\b", text):

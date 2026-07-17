@@ -76,6 +76,38 @@ class BoardRecommendation(BaseModel):
     adjustment_factors: list[str] = Field(default_factory=list)
 
 
+class RetailerOffer(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+    offer_id: str = Field(alias="offerId")
+    canonical_model_id: int | None = Field(default=None, alias="canonicalModelId")
+    canonical_board_size_id: int | None = Field(default=None, alias="canonicalBoardSizeId")
+    brand: str | None = None
+    model: str | None = None
+    construction: str | None = None
+    length: str | None = None
+    volume_litres: float | None = Field(default=None, alias="volumeLitres")
+    retailer_id: int | None = Field(default=None, alias="retailerId")
+    retailer_name: str | None = Field(default=None, alias="retailerName")
+    region: str
+    currency: str | None = None
+    observed_price: float | None = Field(default=None, alias="observedPrice")
+    stock_status: str | None = Field(default=None, alias="stockStatus")
+    in_stock: bool = Field(default=False, alias="inStock")
+    product_url: str | None = Field(default=None, alias="productUrl")
+    source_type: str = Field(alias="sourceType")
+    observed_timestamp: str | None = Field(default=None, alias="observedTimestamp")
+    match_quality: str = Field(alias="matchQuality")
+    match_label: str = Field(alias="matchLabel")
+    sponsored: bool = False
+    sponsor_campaign_id: str | None = Field(default=None, alias="sponsorCampaignId")
+    sponsor_disclosure: str | None = Field(default=None, alias="sponsorDisclosure")
+    impression_id: str | None = Field(default=None, alias="impressionId")
+    click_id: str | None = Field(default=None, alias="clickId")
+    sponsor_destination_url: str | None = Field(default=None, alias="sponsorDestinationUrl")
+    sponsor_priority: int | None = Field(default=None, alias="sponsorPriority")
+
+
 class SuggestedBoard(BaseModel):
     brand: str
     model: str
@@ -113,6 +145,7 @@ class SuggestedBoard(BaseModel):
     selected_size_reason: str | None = None
     volume_compatibility: str | None = None
     price_range: str | None = None
+    offers: list[RetailerOffer] = Field(default_factory=list)
     region: str | None = None
     region_code: str | None = None
     source: str = "quivrr_controlled_knowledge"
@@ -266,6 +299,7 @@ class BodhiRecommendation(BaseModel):
     source_product_url: str | None = Field(default=None, alias="sourceProductUrl")
     source_type: str = Field(default="no_verified_live_source", alias="sourceType")
     price_range: str | None = Field(default=None, alias="priceRange")
+    offers: list[RetailerOffer] = Field(default_factory=list)
     volume_delta_litres: float | None = Field(default=None, alias="volumeDeltaLitres")
     selected_size_reason: str | None = Field(default=None, alias="selectedSizeReason")
     volume_compatibility: str | None = Field(default=None, alias="volumeCompatibility")

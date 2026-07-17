@@ -160,6 +160,29 @@ def _message_removes_stock_constraint(message: str) -> bool:
     ))
 
 
+def _sponsorship_explanation(message: str) -> str | None:
+    lowered = message.lower()
+    if not re.search(r"\b(?:sponsor|sponsored|sponsorship|promoted)\b", lowered):
+        return None
+    return (
+        "Sponsored offers are paid placements and are always labelled. Sponsorship does not change Bodhi's "
+        "board suitability, classification, or recommendation order; I recommend the board first, then show "
+        "any region-matched offers separately after the organic options."
+    )
+
+
+def _requests_offer_price(message: str) -> bool:
+    return bool(re.search(r"\b(?:lowest observed|compare offers?|compare prices?|listed price|how much|price for)\b", message.lower()))
+
+
+def _offer_price_sort(board: SuggestedBoard) -> tuple:
+    offer = board.offers[0] if board.offers else None
+    return (
+        offer.observed_price is None if offer else True,
+        offer.observed_price if offer and offer.observed_price is not None else float("inf"),
+    )
+
+
 def _resolve_availability_constraint(request, intent_result) -> str | None:
     if _message_removes_stock_constraint(request.message):
         return None
@@ -1129,6 +1152,10 @@ def board_guide_chat(
         comparison_boards_override = state_follow_up.get("comparison_boards")
         reply = state_follow_up["reply"]
         questions = state_follow_up.get("questions", [])
+    elif _sponsorship_explanation(request.message):
+        suggested_boards = []
+        reply = _sponsorship_explanation(request.message)
+        questions = []
     elif intent == "AVAILABILITY" and legacy_intent == "board_search_request" and not category and not requested_board:
         suggested_boards = []
         region_name = {"AU": "Australia", "EU": "Europe", "ID": "Indonesia", "US": "the United States"}.get(profile.region or request.region, "your region")
@@ -1168,16 +1195,33 @@ def board_guide_chat(
     elif legacy_intent == "exact_board_location_request":
         base = suggestions_for_board(requested_board)[:1]
         suggested_boards, exact = locate_exact_board(base[0], profile) if base else ([], False)
+        if _requests_offer_price(request.message):
+            suggested_boards.sort(key=_offer_price_sort)
         if suggested_boards:
             source_names = []
             if any(board.manufacturer_direct_count for board in suggested_boards):
                 source_names.append("manufacturer-direct")
             if any(board.retailer_count for board in suggested_boards):
                 source_names.append("retailer")
-            reply = (
-                f"I found {len(suggested_boards)} {'exact' if exact else 'close'} verified {profile.region} match(es) "
-                f"for {requested_board['brand']} {requested_board['model']} across {' and '.join(source_names)} stock."
-            )
+            if _requests_offer_price(request.message):
+                priced = [board.offers[0] for board in suggested_boards if board.offers and board.offers[0].observed_price is not None]
+                price_note = ""
+                if priced:
+                    lowest = priced[0]
+                    price_note = (
+                        f" The lowest observed listed price among these matching offers is "
+                        f"{lowest.observed_price:g} {lowest.currency or ''} from {lowest.retailer_name or 'the listed source'}."
+                    )
+                reply = (
+                    f"I found {len(suggested_boards)} {'exact' if exact else 'close'} verified {profile.region} offer(s) "
+                    f"for {requested_board['brand']} {requested_board['model']}.{price_note} "
+                    "Prices are observations and should be confirmed with the retailer."
+                )
+            else:
+                reply = (
+                    f"I found {len(suggested_boards)} {'exact' if exact else 'close'} verified {profile.region} match(es) "
+                    f"for {requested_board['brand']} {requested_board['model']} across {' and '.join(source_names)} stock."
+                )
         else:
             reply = (
                 f"I can’t see that exact {requested_board['brand']} {requested_board['model']} in {profile.region} right now. "
