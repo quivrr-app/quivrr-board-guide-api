@@ -30,6 +30,7 @@ from app.conversation_flow import (
 from app.active_topic import resolve_active_topic
 from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
 from app.intent_router import classify_intent, route_intent
+from app.conversation_controller import ConversationDirective, control_conversation
 from app.board_expert_matrix import recommend_from_matrix
 from app.board_dna import find_board_dna, find_board_dna_by_id, load_board_dna, resolve_dna_brief, score_dna_fit
 from app.board_relationship_graph import (
@@ -586,12 +587,63 @@ def _comparison_follow_up_reply(left_card, right_card, profile: BoardGuideReques
     return " ".join(parts)
 
 
-def _handle_state_follow_up(request: BoardGuideRequest, profile):
+def _handle_state_follow_up(request: BoardGuideRequest, profile, directive: ConversationDirective):
     message = request.message.strip()
     lowered = message.lower()
     cards = _state_cards(request)
     if not cards:
         return None
+
+    if directive.needs_reference_clarification:
+        names = ", ".join(f"{card.brand} {card.model}" for card in cards[:3])
+        return {
+            "reply": f"Which board do you mean: {names}?",
+            "suggested_boards": [],
+            "comparison": None,
+            "questions": ["Which board do you mean?"],
+        }
+
+    if directive.rejected_board:
+        remaining_cards = [
+            card for card in cards
+            if (card.brand.lower(), card.model.lower()) != (
+                directive.rejected_board.brand.lower(), directive.rejected_board.model.lower()
+            )
+        ]
+        if directive.refinement in {"more_paddle", "more_forgiving"}:
+            score_name = "paddle_score" if directive.refinement == "more_paddle" else "forgiveness_score"
+            remaining_cards.sort(
+                key=lambda card: getattr(find_board_record(card.brand, card.model), score_name, 0) or 0,
+                reverse=True,
+            )
+        remaining = [_card_to_suggested_board(card) for card in remaining_cards[:3]]
+        direction = {
+            "more_paddle": " and moved the easier-paddling options up",
+            "more_forgiving": " and moved the more forgiving options up",
+            "more_performance": " and kept the sharper alternatives",
+        }.get(directive.refinement, "")
+        reply = (
+            f"Fair call. I’ve removed {directive.rejected_board.brand} {directive.rejected_board.model}{direction}."
+            if remaining else
+            f"Fair call. I’ve removed {directive.rejected_board.brand} {directive.rejected_board.model}. Tell me what felt wrong and I’ll take a different direction."
+        )
+        return {"reply": reply, "suggested_boards": remaining, "comparison": None, "questions": []}
+
+    if directive.refinement in {"more_paddle", "more_forgiving"}:
+        score_name = "paddle_score" if directive.refinement == "more_paddle" else "forgiveness_score"
+        ordered = sorted(
+            cards,
+            key=lambda card: getattr(find_board_record(card.brand, card.model), score_name, 0) or 0,
+            reverse=True,
+        )
+        suggested = [_card_to_suggested_board(card) for card in ordered[:3]]
+        label = "paddle support" if directive.refinement == "more_paddle" else "forgiveness"
+        return {
+            "reply": f"I’ve reordered the active shortlist around {label} without changing your original wave brief.",
+            "suggested_boards": suggested,
+            "comparison": None,
+            "questions": [],
+        }
 
     index = _state_card_index(message)
     if index is not None and index >= len(cards):
@@ -705,26 +757,49 @@ def build_conversation_state(
     questions: list[str],
     availability_constraint: str | None = None,
     comparison_boards_override: list | None = None,
+    directive: ConversationDirective | None = None,
+    authenticated: bool = False,
 ) -> ConversationState:
     active_region = profile.region or request.region
     last_question = questions[0] if questions else None
     previous_state = request.conversation_state
     previous_turn = previous_state.conversation_turn if previous_state else 0
-    previous_recommendations = previous_state.last_recommendations if previous_state else []
-    mentioned = previous_state.mentioned_boards if previous_state else []
-    comparison_boards = previous_state.comparison_boards if previous_state else []
+    clear_previous = bool(directive and directive.clears_rider_brief)
+    previous_recommendations = previous_state.last_recommendations if previous_state and not clear_previous else []
+    mentioned = previous_state.mentioned_boards if previous_state and not clear_previous else []
+    comparison_boards = previous_state.comparison_boards if previous_state and not clear_previous else []
     if comparison_boards_override:
         comparison_boards = [_normalise_active_recommendation(card) for card in comparison_boards_override]
     if normalized_intent == "BOARD_COMPARISON" and len(public_cards) >= 2:
         comparison_boards = public_cards[:2]
     last_recommendations = public_cards[:6] or previous_recommendations[:6]
-    previous_brief = previous_state.active_board_brief if previous_state else {}
+    previous_brief = previous_state.active_board_brief if previous_state and not clear_previous else {}
     active_board_brief = resolve_dna_brief(request.message, profile, previous_brief)
     if re.search(r"\b(?:reset|start over|new search|clear)\b", request.message.lower()):
         active_board_brief = {}
     correction = _model_classification_correction(request.message)
     if correction:
         active_board_brief["public_family"] = correction["dna"]["public_family"]
+    discussed = [] if clear_previous else list(previous_state.boards_discussed if previous_state else [])
+    for card in last_recommendations:
+        reference = BoardReference(brand=card.brand, model=card.model)
+        if not any(item.brand.lower() == reference.brand.lower() and item.model.lower() == reference.model.lower() for item in discussed):
+            discussed.append(reference)
+    rejected = [] if clear_previous else list(previous_state.rejected_recommendations if previous_state else [])
+    if directive and directive.rejected_board:
+        rejected.append({
+            "brand": directive.rejected_board.brand,
+            "model": directive.rejected_board.model,
+            "reason": directive.rejection_reason or "user_rejected",
+        })
+    rejected = list({(item["brand"].lower(), item["model"].lower()): item for item in rejected}.values())
+    preferred_families = [] if clear_previous else list(previous_state.preferred_families if previous_state else [])
+    if active_board_brief.get("public_family") and active_board_brief["public_family"] not in preferred_families:
+        preferred_families.append(active_board_brief["public_family"])
+    fin_setups = [] if clear_previous else list(previous_state.preferred_fin_setups if previous_state else [])
+    for fin in ("twin", "thruster", "quad", "2+1"):
+        if re.search(rf"\b{re.escape(fin)}\b", request.message.lower()) and fin not in fin_setups:
+            fin_setups.append(fin)
     return ConversationState(
         lastIntent=normalized_intent,
         activeRegion=active_region,
@@ -736,6 +811,18 @@ def build_conversation_state(
         comparisonBoards=comparison_boards[:4],
         lastQuestion=last_question,
         conversationTurn=previous_turn + 1,
+        phase=directive.phase if directive else "DISCOVERY",
+        currentTopic=active_board_brief.get("public_family") or normalized_intent.lower(),
+        targetSurfer=directive.target_surfer if directive else "account_holder",
+        authenticated=authenticated,
+        preferredName=(profile.display_name.split()[0] if authenticated and profile.display_name else None),
+        boardsDiscussed=discussed[:20],
+        rejectedRecommendations=rejected[:20],
+        lastUnresolvedQuestion=last_question,
+        preferredFamilies=preferred_families,
+        preferredFinSetups=fin_setups,
+        goals=[profile.goal] if profile.goal else [],
+        painPoints=[profile.current_board_feedback] if profile.current_board_feedback else [],
     )
 
 
@@ -832,10 +919,22 @@ def board_guide_chat(
         correlation_id=correlation_id,
     )
     auth_context = load_authenticated_profile_context(authorization, correlation_id=correlation_id)
-    history_profiles = [with_profile_source(extract_profile(item.content, request.region), "conversation_user") for item in request.conversation if item and item.role == "user" and item.content]
-    legacy_account_profile = with_profile_source(request.account_profile, "conversation_profile") if request.account_profile else None
-    persisted_profile = with_profile_source(request.profile or request.intake_state or extract_profile(""), "conversation_profile")
-    if request.conversation_state and request.conversation_state.active_profile:
+    intent_result = classify_intent(request.message)
+    directive = control_conversation(request.message, intent_result.intent, request.conversation_state)
+    preserve_prior_rider = not directive.clears_rider_brief
+    history_profiles = [
+        with_profile_source(extract_profile(item.content, request.region), "conversation_user")
+        for item in request.conversation if preserve_prior_rider and item and item.role == "user" and item.content
+    ]
+    legacy_account_profile = (
+        with_profile_source(request.account_profile, "conversation_profile")
+        if request.account_profile and preserve_prior_rider else None
+    )
+    persisted_profile = with_profile_source(
+        (request.profile or request.intake_state or extract_profile("")) if preserve_prior_rider else extract_profile(""),
+        "conversation_profile",
+    )
+    if preserve_prior_rider and request.conversation_state and request.conversation_state.active_profile:
         restored_profile = with_profile_source(
             type(persisted_profile).model_validate(request.conversation_state.active_profile),
             "conversation_profile",
@@ -844,13 +943,27 @@ def board_guide_chat(
     if legacy_account_profile:
         persisted_profile = merge_rider_profile(legacy_account_profile, persisted_profile)
     account_profile = auth_context.profile if auth_context.profile else None
-    profile = account_profile or extract_profile("")
+    if directive.clears_rider_brief:
+        profile = extract_profile("").model_copy(update={
+            "display_name": account_profile.display_name if account_profile else None,
+            "region": request.region or (account_profile.region if account_profile else None),
+        })
+    else:
+        profile = account_profile or extract_profile("")
     for historical in history_profiles:
         profile = merge_rider_profile(profile, historical)
-    profile = merge_rider_profile(profile, persisted_profile, account_profile=account_profile)
+    profile = merge_rider_profile(
+        profile,
+        persisted_profile,
+        account_profile=account_profile if preserve_prior_rider else None,
+    )
     current_profile = with_profile_source(extract_profile(request.message, request.region), "current_user")
-    profile = merge_rider_profile(profile, current_profile, account_profile=account_profile)
-    reset_requested = bool(re.search(r"\b(?:reset|start over|new search|clear)\b", request.message.lower()))
+    profile = merge_rider_profile(
+        profile,
+        current_profile,
+        account_profile=account_profile if preserve_prior_rider else None,
+    )
+    reset_requested = directive.clears_rider_brief
     dna_probe = resolve_dna_brief(request.message, profile, {})
     if (
         not reset_requested
@@ -859,7 +972,7 @@ def board_guide_chat(
         and re.search(r"\b(?:board|something)\b", request.message.lower())
     ):
         profile = profile.model_copy(update={"preferred_board_type": "Daily Driver"})
-    prior_brief = request.conversation_state.active_board_brief if request.conversation_state else {}
+    prior_brief = request.conversation_state.active_board_brief if request.conversation_state and preserve_prior_rider else {}
     if prior_brief.get("public_family") and not current_profile.preferred_board_type:
         profile = profile.model_copy(update={
             "preferred_board_type": {
@@ -871,7 +984,6 @@ def board_guide_chat(
     volume_correction_requested = _volume_correction_requested(request.message)
 
     missing = missing_profile_fields(profile)
-    intent_result = classify_intent(request.message)
     legacy_intent = intent_result.legacy_intent
     intent = intent_result.intent
     stock_constraint_removed = _message_removes_stock_constraint(request.message)
@@ -889,7 +1001,7 @@ def board_guide_chat(
         allow_follow_up_profile_category=allow_contextual_profile_category,
     )
     category = category_resolution.category
-    prior_dna_brief = request.conversation_state.active_board_brief if request.conversation_state else {}
+    prior_dna_brief = request.conversation_state.active_board_brief if request.conversation_state and preserve_prior_rider else {}
     resolved_dna_brief = resolve_dna_brief(request.message, profile, prior_dna_brief)
     emit_event(
         "bodhi_dna_brief_resolved",
@@ -957,7 +1069,7 @@ def board_guide_chat(
     comparison = None
     comparison_boards_override = None
     is_first_turn = not any(item.role == "assistant" for item in request.conversation if item)
-    state_follow_up = _handle_state_follow_up(request, profile)
+    state_follow_up = _handle_state_follow_up(request, profile, directive)
     asks_name = intent == "IDENTITY_QUESTION"
     allow_recommendations = legacy_intent in RECOMMENDATION_INTENTS
     if legacy_intent in {"greeting_request", "capability_help_request", "site_help_question"}:
@@ -994,8 +1106,12 @@ def board_guide_chat(
         questions = []
     elif reset_requested or intent == "CONVERSATION_RESET":
         suggested_boards = []
-        reply = personalise_opening("Fresh start. What are we working on today?", profile, is_first_turn=True)
-        questions = []
+        if directive.target_surfer == "different_surfer":
+            reply = "Got it. I’ve cleared the previous rider brief. What is their ability, approximate weight or usual volume, and the waves they normally surf?"
+            questions = ["What is their ability and approximate weight or usual volume?", "What waves do they normally surf?"]
+        else:
+            reply = personalise_opening("Fresh start. What are we working on today?", profile, is_first_turn=True)
+            questions = []
     elif allow_recommendations and auth_context.authenticated and not auth_context.profile_loaded and not current_profile.ability and not current_profile.weight_kg:
         suggested_boards = []
         recommendation = None
@@ -1458,6 +1574,15 @@ def board_guide_chat(
     else:
         suggested_boards = []
         reply = "Nice. " + " ".join(questions)
+    rejected_keys = {
+        (item.get("brand", "").lower(), item.get("model", "").lower())
+        for item in (request.conversation_state.rejected_recommendations if request.conversation_state else [])
+    }
+    if rejected_keys and not reset_requested:
+        suggested_boards = [
+            board for board in suggested_boards
+            if (board.brand.lower(), board.model.lower()) not in rejected_keys
+        ]
     source = "deterministic_intake_engine"
     duration = round(time.perf_counter() - started, 3)
     verified_stock_count = sum(1 for board in suggested_boards if (board.available_count or 0) > 0)
@@ -1521,6 +1646,19 @@ def board_guide_chat(
         recommendation_brands=list(dict.fromkeys(board.brand for board in suggested_boards[:6])),
         availability_check_count=sum(1 for board in suggested_boards if board.availability_checked),
         recommendation_source="authenticated_profile" if auth_context.profile_loaded else "conversation_only",
+        reasoning_trace={
+            "request_interpretation": intent,
+            "public_family": selected_family,
+            "fin_requirement_present": bool(resolved_dna_brief.get("fin_configurations")),
+            "hard_exclusions_applied": ranking_engine_used != "none",
+            "candidate_pool_count": candidate_count_before_inventory,
+            "rider_fit_applied": bool(profile.ability or profile.weight_kg or profile.target_volume_litres),
+            "wave_fit_applied": bool(profile.wave_type or profile.wave_power or profile.wave_size),
+            "ability_fit_applied": bool(profile.ability),
+            "paddle_volume_fit_applied": bool(profile.target_volume_litres or profile.weight_kg),
+            "availability_applied": inventory_stage != "not_run",
+            "final_order_count": len(suggested_boards),
+        },
         duration_seconds=duration,
         top_recommendation=(f"{suggested_boards[0].brand} {suggested_boards[0].model}" if suggested_boards else None),
         correlation_id=correlation_id,
@@ -1544,6 +1682,8 @@ def board_guide_chat(
         questions,
         availability_constraint=availability_constraint,
         comparison_boards_override=comparison_boards_override,
+        directive=directive,
+        authenticated=auth_context.authenticated,
     )
     follow_up_actions = build_follow_up_actions(intent, public_cards)
     response = BoardGuideResponse(

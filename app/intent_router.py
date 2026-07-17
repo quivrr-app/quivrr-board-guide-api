@@ -100,7 +100,7 @@ def _extract_entities(text: str) -> dict[str, object]:
     if volume_match:
         entities["targetVolumeLitres"] = float(volume_match.group(1))
 
-    if re.search(r"\breef\b", text):
+    if re.search(r"\breefs?\b", text):
         entities["waveType"] = "Reef Break"
     elif re.search(r"\bpoint\b", text):
         entities["waveType"] = "Point Break"
@@ -145,7 +145,11 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("GREETING", "greeting_request", 0.96, entities)
     if re.search(r"\b(?:ignore|reveal|show|print)\b.*\b(?:system prompt|developer message|instructions|taxonomy rules?)\b", text):
         return IntentResult("PROMPT_INJECTION", "site_help_question", 0.99, entities)
-    if re.fullmatch(r"(?:reset(?: this conversation)?|start over|new conversation|clear (?:the )?chat|forget this conversation)[!. ]*", text):
+    if re.search(r"\b(?:different surfer|this is for my (?:wife|husband|partner|friend|son|daughter)|not for me)\b", text):
+        entities["resetScope"] = "surfer"
+        return IntentResult("CONVERSATION_RESET", "surfer_fit_request", 0.99, entities)
+    if re.fullmatch(r"(?:reset(?: this conversation)?|start over|start again|new board|new conversation|new search|clear (?:the )?chat|forget (?:this conversation|that))[!. ]*", text):
+        entities["resetScope"] = "brief"
         return IntentResult("CONVERSATION_RESET", "greeting_request", 0.98, entities)
     if re.search(r"\b(?:what(?:'s| is) my name|whats my name|who am i|do you know my name)\b", text):
         return IntentResult("IDENTITY_QUESTION", "site_help_question", 0.99, entities)
@@ -163,30 +167,47 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("FOLLOW_UP", "surfer_fit_request", 0.78, entities)
     if re.fullmatch(r"(?:point breaks?|reef breaks?|beach breaks?|weak waves?)", text):
         return IntentResult("FOLLOW_UP", "surfer_fit_request", 0.8, entities)
-    if re.search(r"\b(?:what can you do|can you help me|help me|what should i ask|what can you help me with)\b", text):
+    if re.search(r"\b(?:help choosing a board|need help choosing a board|what should i ride next)\b", text):
+        return IntentResult("BOARD_RECOMMENDATION", "surfer_fit_request", 0.88, entities, needs_clarification=True)
+    if re.search(r"\b(?:what can you do|can you help me|help me|i need help|what should i ask|what can you help me with|show me how quivrr works)\b", text):
         return IntentResult("GENERAL_HELP", "capability_help_request", 0.96, entities)
     if re.search(r"\b(?:how do i use the site|how do i use quivrr|how do i use this site|how can i use the site)\b", text):
         return IntentResult("GENERAL_HELP", "site_help_question", 0.96, entities)
     if re.search(r"\b(?:how many boards do you know about|how many boards are there|how many boards do you have)\b", text):
         return IntentResult("AVAILABILITY", "inventory_count_question", 0.9, entities)
-    if re.search(r"\b(?:what volume|volume should i|how many litres)\b", text):
+    if re.search(r"\b(?:what volume|volume should i|how many litres|wat litres|how many ltrs|volume for \d+\s*kg|keep it near \d+(?:\.\d+)?\s*l)\b", text):
         return IntentResult("VOLUME_GUIDANCE", "volume_advice_request", 0.97, entities)
+    if re.search(r"\b(?:recommend|recomend|pick|choose)\b", text) and re.search(r"\b(?:board|shortboard|fish|fsh|groveller|daily driver|step[ -]?up|mid[ -]?length|twin|reefs?)\b", text):
+        return IntentResult("BOARD_RECOMMENDATION", "board_search_request", 0.94, entities, needs_clarification=not bool(entities.get("boardCategory") or entities.get("waveType")))
+    if re.search(r"\b(?:need a fish|fish for mush|fsh for weak waves|find a twin)\b", text):
+        return IntentResult("BOARD_RECOMMENDATION", "board_search_request", 0.9, entities)
     if re.search(r"\b(?:best|top|favourite|favorite|what would you ride)\b", text) and re.search(r"\b(?:shortboard|fish|groveller|daily driver|step up|board)\b", text):
         return IntentResult("BOARD_RECOMMENDATION", "expert_board_question", 0.82, entities)
     if re.search(r"\b(?:instead of|alternative|what else is similar|out of stock)\b", text):
         return IntentResult("FOLLOW_UP", "alternative_request", 0.9, entities)
-    if re.search(r"\b(?:compare|comparison|versus|vs\.?|difference between|trade offs?)\b", text):
+    if re.search(r"\b(?:i (?:do not|don't) like|not keen on|rubbish recommendation|bad recommendation|show me something easier|more paddle|easier to paddle)\b", text):
+        return IntentResult("FOLLOW_UP", "alternative_request", 0.96, entities)
+    if re.search(r"\b(?:how does it|would (?:that|it)|what about the xl|is there a twin version|that one|this one)\b", text):
+        return IntentResult("FOLLOW_UP", "relationship_request", 0.9, entities)
+    if re.search(r"\b(?:compare|comparison|versus|vs\.?|difference between|difference\s+\w+\s+\w+|trade offs?|\w+\s+v\s+\w+)\b", text):
         return IntentResult("BOARD_COMPARISON", "comparison_request", 0.97, entities, needs_board_pair=True)
+    if re.search(r"\bwhich is better\b", text) or re.search(r"\b(?:ghost|phantom|monsta|seaside|rnf 96)\s+or\s+(?:ghost|phantom|monsta|seaside|rnf 96)\b", text):
+        return IntentResult("BOARD_COMPARISON", "comparison_request", 0.92, entities, needs_board_pair=True)
     if re.search(r"\bbetter\b.+\bthan\b", text):
         return IntentResult("BOARD_COMPARISON", "comparison_request", 0.9, entities, needs_board_pair=True)
     if re.search(r"\b(?:tell me about|what is the .* like|explain the)\b", text):
         return IntentResult("BOARD_DETAILS", "general_board_question", 0.9, entities)
+    if re.search(r"\bwhy (?:is|isn't|is not)\b.*\b(?:fish|daily driver|groveller|groveler|step[ -]?up|mid[ -]?length|twin)\b", text):
+        return IntentResult("BOARD_CATEGORY_EDUCATION", "general_board_question", 0.94, entities)
     if entities.get("availabilityConstraint") == "VERIFIED_IN_STOCK" and re.search(
         r"\b(?:available|buy|in stock|live stock|unavailable)\b", text
     ):
         return IntentResult("AVAILABILITY", "board_search_request", 0.97, entities, needs_region=entities["region"] is None)
-    if re.search(r"\b(?:where can i buy|is .* available|who has|manufacturer stock|retailer stock)\b", text):
+    if re.search(r"\b(?:where can i buy|can i buy|is .* available|who has|manufacturer stock|retailer stock)\b", text):
         return IntentResult("AVAILABILITY", "exact_board_location_request", 0.95, entities, needs_region=entities["region"] is None)
+    if re.search(r"\b(?:find .* stock|which retailers have|check regional availability|wots in stock|got any .* stock|stock near me|only stuff i can buy)\b", text):
+        entities["availabilityConstraint"] = "VERIFIED_IN_STOCK"
+        return IntentResult("AVAILABILITY", "board_search_request", 0.92, entities, needs_region=entities["region"] is None)
     if "where is this exact board" in text:
         return IntentResult("AVAILABILITY", "exact_board_location_request", 0.88, entities)
     if re.search(r"\b(?:search|open .* region|regional search)\b", text):
@@ -197,8 +218,6 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("QUIVER_GAP", "relationship_request", 0.88, entities)
     if re.search(r"\b(?:improve turns|help me progress|ready for|reduce volume)\b", text):
         return IntentResult("PROGRESSION", "surfer_fit_request", 0.86, entities)
-    if re.search(r"\b(?:help choosing a board|need help choosing a board|what should i ride next)\b", text):
-        return IntentResult("BOARD_RECOMMENDATION", "surfer_fit_request", 0.88, entities, needs_clarification=True)
     if re.search(r"\b(?:show catalogue options too|show catalog options too|ignore stock for now|include catalogue options|include catalog options)\b", text):
         return IntentResult("BOARD_RECOMMENDATION", "board_search_request", 0.9, entities, needs_clarification=False)
     if re.search(r"\b(?:do you have any boards|boards in stock|show me .* in stock)\b", text):
@@ -209,7 +228,7 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("FOLLOW_UP", "relationship_request", 0.9, entities)
     if re.search(r"\b\d{2,3}\s*kg\b", text) and re.search(r"\b(?:shortboard|fish|daily driver|step up|hybrid|groveller|groveler)\b", text):
         return IntentResult("BOARD_RECOMMENDATION", "surfer_fit_request", 0.9, entities)
-    if re.search(r"\b(?:show me|find me|looking for|i need|i want|want a|chasing)\b", text):
+    if re.search(r"\b(?:show me|find me|give me|looking for|i need|i want|want a|chasing)\b", text):
         needs = not entities["boardCategory"] and entities["targetVolumeLitres"] is None and entities["waveType"] is None
         legacy = "surfer_fit_request" if "help" in text and "board" in text else "board_search_request"
         return IntentResult("BOARD_RECOMMENDATION", legacy, 0.91, entities, needs_clarification=needs)
@@ -222,8 +241,10 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("DIMENSION_GUIDANCE", "general_board_question", 0.82, entities)
     if re.search(r"\b(?:eps|pu|construction|hyfi|carbon|epoxy)\b", text):
         return IntentResult("CONSTRUCTION_GUIDANCE", "general_board_question", 0.84, entities)
-    if re.search(r"\b(?:fin|thruster|quad|twin fin|twin)\b", text):
+    if re.search(r"\b(?:fin|fins|wot fins|thruster|quad|twin fin|twin|2\+1)\b", text):
         return IntentResult("FIN_GUIDANCE", "general_board_question", 0.84, entities)
+    if re.search(r"\b(?:would|will|does|can)\b.*\b(?:work|suit|handle)\b.*\b(?:reefs?|waves?|weak|powerful|hollow)\b", text):
+        return IntentResult("WAVE_GUIDANCE", "general_board_question", 0.86, entities)
     if re.search(r"^(?:what|which|how)\b", text) and re.search(r"\b(?:reef waves|beach breaks|point breaks|wave size|weak waves)\b", text):
         return IntentResult("WAVE_GUIDANCE", "general_board_question", 0.8, entities)
     if re.search(r"\bis .+\b(?:a |an )?(?:fish|daily driver|groveller|step[ -]?up)\b", text):

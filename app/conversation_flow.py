@@ -8,6 +8,7 @@ from app.rider_fit import recommend_rider_fit
 from app.daily_driver_taxonomy import daily_driver_lane
 from app.board_expert_matrix import find_matrix_board
 from app.board_taxonomy import find_taxonomy
+from app.board_master import find_master_board
 from app.volume_engine_v2 import build_target_volume_context, fish_volume_bands, recommend_volume_v2
 
 
@@ -420,7 +421,19 @@ def suggestions_for_board(board: dict, relations: list[str] | None = None) -> li
 
 def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommendation]:
     output = []
-    for board in boards[:6]:
+    roles = ("Best overall fit", "More forgiving direction", "More performance-oriented direction")
+    for index, board in enumerate(boards[:3]):
+        master = find_master_board(board.brand, board.model) or {}
+        dna = master.get("board_dna") or {}
+        behaviour = dna.get("behaviour") or {}
+        fins = [master.get("primary_fin_setup"), *(master.get("alternative_fin_setup") or [])]
+        fins = [str(fin) for fin in fins if fin]
+        paddle = behaviour.get("paddle") or behaviour.get("wave_entry")
+        forgiveness = behaviour.get("forgiveness")
+        support = (
+            f"Paddle {paddle}/10 and forgiveness {forgiveness}/10."
+            if paddle is not None and forgiveness is not None else None
+        )
         safe_search_url = quivrr_model_search_url(board, board.region_code or board.region or "AU")
         if board.manufacturer_direct_count and board.retailer_count:
             source_type = "manufacturer_direct_and_retailer"
@@ -440,6 +453,10 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
             else "Good option" if (board.fit_score or 0) >= 65
             else "Worth considering"
         )
+        selection_rationale = (
+            f"Selected as the {roles[index].lower()} because {board.why_it_fits.rstrip('.').lower()}."
+            if board.why_it_fits else f"Selected as the {roles[index].lower()} from the compatible shortlist."
+        )
         output.append(BodhiRecommendation(
             brand=board.brand, model=board.model, category=board.category,
             fitLabel=fit_label,
@@ -448,6 +465,12 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
             availabilityLabel=availability_label,
             searchUrl=safe_search_url,
             whyItFits=board.why_it_fits,
+            designIntent=master.get("detailed_category") or board.category,
+            finCharacter=", ".join(fins) or None,
+            paddleAndForgiveness=support,
+            tradeOff=board.trade_offs or "; ".join(master.get("weaknesses") or []) or None,
+            selectionRole=roles[index],
+            selectionRationale=selection_rationale,
             suggestedVolumeOrSizeRange=board.suggested_size or board.volume_range,
             waveRange=board.wave_range, skillFit=board.skill_fit,
             availableCount=board.available_count, region=board.region,
@@ -620,7 +643,12 @@ def comparison_reply(message: str, boards: list[dict] | None = None, profile: Ri
     preferred = {"happy everyday": 30, "phantom": 20, "xero gravity": 10}
     ranked = boards[:2]
     if engine_result:
-        ranked = [{"brand": row.brand, "model": row.model} for row in engine_result.ordered_boards]
+        ranked_pair = [{"brand": row.brand, "model": row.model} for row in engine_result.ordered_boards]
+        ranked_keys = {(row["brand"].lower(), row["model"].lower()) for row in ranked_pair}
+        ranked = ranked_pair + [
+            board for board in boards
+            if (board["brand"].lower(), board["model"].lower()) not in ranked_keys
+        ]
     else:
         ranked = sorted(boards, key=lambda board: -preferred.get(board["model"].replace("-", " ").lower(), 0))
     notes = {
@@ -643,8 +671,11 @@ def comparison_reply(message: str, boards: list[dict] | None = None, profile: Ri
     compared = {board["model"].replace("-", " ").lower() for board in boards}
     trio = {"happy everyday", "phantom", "xero gravity"}.issubset(compared)
     closing = (
-        " If you want easier every day, take Happy Everyday; if you want sharper, lean Phantom or Xero Gravity."
-        if trio else " The best pick depends on whether you value forgiveness or sharper performance."
+        " If you want easier every day, choose Happy Everyday; if you want sharper performance, choose Xero Gravity."
+        if trio else (
+            f" Choose {_governed_display_board(ranked[0])} for the stronger overall fit; "
+            f"choose {_governed_display_board(ranked[1])} if its different design intent better matches the feel you want."
+        )
     )
     if engine_result and engine_result.comparison.rider_specific_conclusion:
         closing = f" {engine_result.comparison.rider_specific_conclusion}" + closing

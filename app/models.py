@@ -237,6 +237,12 @@ class BodhiRecommendation(BaseModel):
     availability_label: str | None = Field(default=None, alias="availabilityLabel")
     search_url: str | None = Field(default=None, alias="searchUrl")
     why_it_fits: str | None = Field(default=None, alias="whyItFits")
+    design_intent: str | None = Field(default=None, alias="designIntent")
+    fin_character: str | None = Field(default=None, alias="finCharacter")
+    paddle_and_forgiveness: str | None = Field(default=None, alias="paddleAndForgiveness")
+    trade_off: str | None = Field(default=None, alias="tradeOff")
+    selection_role: str | None = Field(default=None, alias="selectionRole")
+    selection_rationale: str | None = Field(default=None, alias="selectionRationale")
     suggested_volume_or_size_range: str | None = Field(default=None, alias="suggestedVolumeOrSizeRange")
     wave_range: str | None = Field(default=None, alias="waveRange")
     skill_fit: str | None = Field(default=None, alias="skillFit")
@@ -314,6 +320,19 @@ class ConversationState(BaseModel):
     comparison_boards: list[BodhiRecommendation] = Field(default_factory=list, alias="comparisonBoards")
     last_question: str | None = Field(default=None, alias="lastQuestion")
     conversation_turn: int = Field(default=0, alias="conversationTurn")
+    phase: str = "OPEN"
+    current_topic: str | None = Field(default=None, alias="currentTopic")
+    target_surfer: str = Field(default="account_holder", alias="targetSurfer")
+    authenticated: bool = False
+    preferred_name: str | None = Field(default=None, alias="preferredName")
+    boards_discussed: list[BoardReference] = Field(default_factory=list, alias="boardsDiscussed")
+    rejected_recommendations: list[dict[str, str]] = Field(default_factory=list, alias="rejectedRecommendations")
+    last_unresolved_question: str | None = Field(default=None, alias="lastUnresolvedQuestion")
+    preferred_families: list[str] = Field(default_factory=list, alias="preferredFamilies")
+    preferred_fin_setups: list[str] = Field(default_factory=list, alias="preferredFinSetups")
+    goals: list[str] = Field(default_factory=list)
+    pain_points: list[str] = Field(default_factory=list, alias="painPoints")
+    budget: str | None = None
 
 
 class FollowUpAction(BaseModel):

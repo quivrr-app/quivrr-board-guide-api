@@ -124,6 +124,8 @@ class BodhiApiTests(unittest.TestCase):
         self.assertTrue(body["reply"].startswith("Hey Nathan."))
         self.assertEqual(body["conversationProfile"]["region"], "ID")
         self.assertEqual(body["conversationProfile"]["ability"], "Advanced")
+        self.assertTrue(body["conversationState"]["authenticated"])
+        self.assertEqual(body["conversationState"]["preferredName"], "Nathan")
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
@@ -498,7 +500,7 @@ class BodhiApiTests(unittest.TestCase):
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.recommend_from_matrix")
     @patch("main.enrich_suggestions_with_inventory")
-    def test_broad_request_caps_public_cards_at_six(self, inventory, recommend_from_matrix, _azure):
+    def test_broad_request_returns_three_role_based_public_cards(self, inventory, recommend_from_matrix, _azure):
         seeded = self._seed_recommendations(8, "Fish")
         recommend_from_matrix.return_value = seeded
         inventory.side_effect = lambda rows, profile: [
@@ -509,13 +511,17 @@ class BodhiApiTests(unittest.TestCase):
             "message": "I need a fish for weak waves",
             "profile": {"weight_kg": 75, "ability": "Intermediate", "region": "AU", "wave_type": "Beach Break", "wave_power": "Weak"},
         }).json()
-        self.assertEqual(len(body["recommendations"]), 6)
-        self.assertLessEqual(len(body["recommendations"]), 6)
+        self.assertEqual(len(body["recommendations"]), 3)
+        self.assertEqual(
+            [card["selectionRole"] for card in body["recommendations"]],
+            ["Best overall fit", "More forgiving direction", "More performance-oriented direction"],
+        )
+        self.assertTrue(all(card["selectionRationale"] for card in body["recommendations"]))
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.recommend_from_matrix")
     @patch("main.enrich_suggestions_with_inventory")
-    def test_broad_hybrid_and_performance_requests_normally_return_six(self, inventory, recommend_from_matrix, _azure):
+    def test_broad_hybrid_and_performance_requests_return_three_diverse_cards(self, inventory, recommend_from_matrix, _azure):
         recommend_from_matrix.side_effect = [
             self._seed_recommendations(8, "Hybrid"),
             self._seed_recommendations(8, "Performance shortboard"),
@@ -531,8 +537,8 @@ class BodhiApiTests(unittest.TestCase):
         for message in cases:
             with self.subTest(message=message):
                 body = self.client.post("/api/board-guide/chat", json={"message": message, "region": "AU"}).json()
-                self.assertEqual(len(body["recommendations"]), 6)
-                self.assertGreaterEqual(len({card["brand"] for card in body["recommendations"]}), 3)
+                self.assertEqual(len(body["recommendations"]), 3)
+                self.assertGreaterEqual(len({card["brand"] for card in body["recommendations"]}), 2)
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.recommend_from_matrix")
