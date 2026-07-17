@@ -169,6 +169,22 @@ class Phase4EndpointAssurance(unittest.TestCase):
         self.assertFalse(body["conversationState"]["authenticated"])
         self.assertIsNone(body["conversationState"]["preferredName"])
 
+    @patch("main.is_azure_openai_configured", return_value=False)
+    def test_reset_and_new_request_continue_in_the_same_turn(self, _azure):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "Start again. I want a step-up for hollow reef waves.",
+            "region": "ID",
+            "conversationState": {
+                "activeProfile": {"weight_kg": 75, "ability": "Advanced", "target_volume_litres": 28.6},
+                "activeBoardBrief": {"public_family": "fish"},
+                "conversationTurn": 3,
+            },
+        }).json()
+        self.assertEqual(body["normalizedIntent"], "BOARD_RECOMMENDATION")
+        self.assertEqual(body["conversationState"]["phase"], "RECOMMENDATION")
+        self.assertNotEqual(body["conversationState"]["activeBoardBrief"].get("public_family"), "fish")
+        self.assertNotEqual(body["profile"].get("target_volume_litres"), 28.6)
+
 
 if __name__ == "__main__":
     unittest.main()

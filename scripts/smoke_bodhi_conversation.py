@@ -234,12 +234,12 @@ def run(base_url: str, token: str | None) -> list[tuple[str, bool, str]]:
         state_after_detail = detail.get("conversationState", {}).get("lastRecommendations", [])
         assert_true(len(state_after_detail) >= 3, "Detail follow-up did not preserve the active recommendation set")
 
-        compare = turn("Compare number 1 and number 4.")
+        compare = turn("Compare number 1 and number 3.")
         first = recommendations[0]
-        fourth = recommendations[3]
+        third = recommendations[2]
         compare_reply = compare.get("reply", "")
         assert_true(first["brand"] in compare_reply and first["model"] in compare_reply, "Comparison did not reference first board")
-        assert_true(fourth["brand"] in compare_reply and fourth["model"] in compare_reply, "Comparison did not reference fourth board")
+        assert_true(third["brand"] in compare_reply and third["model"] in compare_reply, "Comparison did not reference third board")
         comparison_boards = compare.get("conversationState", {}).get("comparisonBoards", [])
         assert_true(len(comparison_boards) == 2, "Comparison context was not persisted")
 

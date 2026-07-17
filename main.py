@@ -1104,7 +1104,7 @@ def board_guide_chat(
         suggested_boards = []
         reply = "I’m built for surfboards, board choice and Quivrr stock. I can help you choose a board, compare models or check regional availability."
         questions = []
-    elif reset_requested or intent == "CONVERSATION_RESET":
+    elif intent == "CONVERSATION_RESET":
         suggested_boards = []
         if directive.target_surfer == "different_surfer":
             reply = "Got it. I’ve cleared the previous rider brief. What is their ability, approximate weight or usual volume, and the waves they normally surf?"
