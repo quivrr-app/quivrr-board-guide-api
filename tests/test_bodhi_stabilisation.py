@@ -57,7 +57,8 @@ class BodhiStabilisationTests(unittest.TestCase):
         self.assertTrue({"phantom", "xero gravity"}.issubset(first[:3]))
         self.assertNotEqual(first[0], "hypto krypto")
         self.assertFalse(any(model in first[:3] for model in ["hypto krypto", "churro 2", "rare bird evo"]))
-        self.assertTrue(all(row["region"] == "AU" for row in body["recommendations"]))
+        self.assertTrue(all(row["region"] is None for row in body["recommendations"]))
+        _inventory.assert_not_called()
 
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
         row.model_copy(update={"available_count": 1, "retailer_count": 1, "region": profile.region})

@@ -71,6 +71,13 @@ def test_same_turn_corrections(message, family, detail, excluded):
     assert intent.correction is True
 
 
+def test_classic_fish_excludes_performance_fish_detail():
+    intent = resolve_family_intent("I'm looking for a fish, not a performance fish—a classic one.")
+    assert intent.requested_public_family == "fish"
+    assert intent.requested_detailed_category == "Traditional Fish"
+    assert "Performance Fish" in intent.excluded_detailed_categories
+
+
 def test_new_explicit_family_replaces_stale_family_and_preserves_rejection():
     previous = ConversationState(
         requestedPublicFamily="fish",

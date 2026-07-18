@@ -394,6 +394,12 @@ class ConversationState(BaseModel):
     last_rejected_family: str | None = Field(default=None, alias="lastRejectedFamily")
     family_correction_reason: str | None = Field(default=None, alias="familyCorrectionReason")
     family_intent_confidence: float = Field(default=0.0, alias="familyIntentConfidence")
+    stock_filter_requested: bool = Field(default=False, alias="stockFilterRequested")
+    stock_check_offered: bool = Field(default=False, alias="stockCheckOffered")
+    stock_check_accepted: bool = Field(default=False, alias="stockCheckAccepted")
+    last_presented_category: str | None = Field(default=None, alias="lastPresentedCategory")
+    last_presented_models: list[BoardReference] = Field(default_factory=list, alias="lastPresentedModels")
+    correction_detected: bool = Field(default=False, alias="correctionDetected")
 
 
 class FollowUpAction(BaseModel):

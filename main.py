@@ -152,6 +152,7 @@ def _message_requests_stock_only(message: str) -> bool:
     return bool(re.search(
         r"\b(?:what(?:'s| is) available|show me what(?:'s| is) available|available in my (?:size|volume)|"
         r"available in (?:indonesia|indo|bali)|what can i (?:buy|get)|boards? i can buy now|"
+        r"(?:do you have|have you got|show me|find me)?[^.?!]{0,40}\bin stock\b|"
         r"show me boards? in stock|i asked for (?:you to show me )?boards? in stock|"
         r"i only want available boards?|why are you showing unavailable boards?|remove (?:anything|boards?) not in stock|"
         r"remove unavailable boards?|only show what i can buy(?: now)?|only show available boards?|"
@@ -935,6 +936,20 @@ def build_conversation_state(
         ),
         familyCorrectionReason=family_intent.correction_reason if family_intent else None,
         familyIntentConfidence=family_intent.confidence if family_intent else 0.0,
+        stockFilterRequested=availability_constraint == STOCK_ONLY_CONSTRAINT,
+        stockCheckOffered=bool(
+            last_recommendations and active_region and availability_constraint != STOCK_ONLY_CONSTRAINT
+        ),
+        stockCheckAccepted=availability_constraint == STOCK_ONLY_CONSTRAINT,
+        lastPresentedCategory=(
+            family_intent.requested_detailed_category or family_intent.requested_public_family
+            if family_intent else active_board_brief.get("public_family")
+        ),
+        lastPresentedModels=[
+            BoardReference(brand=item.brand, model=item.model)
+            for item in last_recommendations[:6]
+        ],
+        correctionDetected=bool(family_intent and family_intent.correction),
     )
 
 
@@ -1012,6 +1027,10 @@ def board_guide_chat(
 ):
     started = time.perf_counter()
     correlation_id = http_request.headers.get("X-Correlation-ID") or str(uuid.uuid4())
+    try:
+        request_attempt = max(1, int(http_request.headers.get("X-Bodhi-Attempt", "1")))
+    except ValueError:
+        request_attempt = 1
     http_request.state.correlation_id = correlation_id
     response.headers["X-Correlation-ID"] = correlation_id
     recommendation_path = "unresolved"
@@ -1028,10 +1047,21 @@ def board_guide_chat(
         build=BUILD_SHA,
         conversation_turn_count=len(request.conversation),
         authenticated=bool(authorization),
+        request_attempt=request_attempt,
         correlation_id=correlation_id,
     )
     auth_context = load_authenticated_profile_context(authorization, correlation_id=correlation_id)
     intent_result = classify_intent(request.message)
+    if request_attempt > 1:
+        emit_event(
+            "bodhi_request_retry",
+            "bodhi_api",
+            region=request.region,
+            status="retry",
+            request_attempt=request_attempt,
+            intent=intent_result.intent,
+            correlation_id=correlation_id,
+        )
     directive = control_conversation(request.message, intent_result.intent, request.conversation_state)
     family_intent = resolve_family_intent(
         request.message,
@@ -1117,6 +1147,13 @@ def board_guide_chat(
     availability_constraint = _resolve_availability_constraint(request, intent_result)
     if reset_requested:
         availability_constraint = None
+    if (
+        availability_constraint == STOCK_ONLY_CONSTRAINT
+        and _message_requests_stock_only(request.message)
+        and family_intent.requested_public_family
+    ):
+        legacy_intent = "board_search_request"
+        intent = "BOARD_RECOMMENDATION"
     active_topic = resolve_active_topic(request, profile, legacy_intent)
     if active_topic.kind == "comparison" and active_topic.is_follow_up:
         legacy_intent = "comparison_request"
@@ -1293,7 +1330,11 @@ def board_guide_chat(
         questions = ["Which board type, brand, or model should I check?"]
     elif legacy_intent == "greeting_request":
         suggested_boards = []
-        reply = personalise_opening(greeting_reply(profile.region), profile, is_first_turn=is_first_turn)
+        if auth_context.authenticated and request.conversation_state and request.conversation_state.conversation_turn > 0:
+            first_name = (profile.display_name or "").split()[0].strip(" ,.!?")
+            reply = f"Welcome back, {first_name}. Where should we pick up?" if first_name else "Welcome back. Where should we pick up?"
+        else:
+            reply = personalise_opening(greeting_reply(profile.region), profile, is_first_turn=is_first_turn)
         questions = []
     elif legacy_intent == "capability_help_request":
         suggested_boards = []
@@ -1560,8 +1601,8 @@ def board_guide_chat(
             candidate_source = "live_category_search"
             ranking_engine_used = "catalogue_search"
             candidate_count_before_inventory = len(canonical_boards)
-        brand_stock_request = bool(profile.requested_brand and profile.region and legacy_intent == "board_search_request")
         direct_stock_request = availability_constraint == STOCK_ONLY_CONSTRAINT and bool(profile.region)
+        brand_stock_request = bool(profile.requested_brand and direct_stock_request)
         if brand_stock_request:
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             inventory_stage = "post_ranking"
@@ -1583,25 +1624,28 @@ def board_guide_chat(
             suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(_verified_in_stock(checked), category, ranking_profile, request.message, family_intent=family_intent))
             reply = _stock_only_reply("fish", profile.region, suggested_boards, candidate_count=len(canonical_boards))
             questions = []
-        elif not profile.region or (
-            not (profile.wave_type or profile.wave_size or profile.wave_power)
-            and not (legacy_intent == "board_search_request" and profile.target_volume_litres)
-        ):
-            if stock_constraint_removed and profile.region:
-                suggested_boards = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
-                inventory_stage = "post_ranking"
-                suggested_boards = _filter_volume_compatible(suggested_boards)
-                reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
-                questions = []
-            else:
-                suggested_boards = []
-                reply = fish_advice_reply(profile, canonical_boards)
-                questions = ["Which region should I search: Australia, Europe, or Indonesia?"] if not profile.region else ["Are your waves mostly weak beach breaks, points, or reefs?"]
         else:
-            checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
-            inventory_stage = "post_ranking"
-            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(checked, category, ranking_profile, request.message, family_intent=family_intent))
-            reply = fish_advice_reply(profile, canonical_boards, suggested_boards)
+            suggested_boards = canonical_boards[:3]
+            detail = (family_intent.requested_detailed_category or "fish").lower()
+            if detail == "traditional fish":
+                reply = "A traditional fish sounds right: fuller, faster and more relaxed. These three are the best catalogue matches for that feel."
+            else:
+                reply = "A fish sounds right. These are the strongest catalogue matches for what you described."
+            if target_volume and target_volume.minimum_litres is not None and target_volume.maximum_litres is not None:
+                if profile.target_volume_source == "saved_profile":
+                    reply += f" Using your saved {target_volume.target_litres:g}L target keeps the sizing focused."
+                else:
+                    reply += f" A sensible starting range is {target_volume.minimum_litres:g} to {target_volume.maximum_litres:g}L."
+            reef_context = "reef" in " ".join(filter(None, [profile.wave_type, profile.home_break_type, profile.desired_feel])).lower()
+            if reef_context and any("performance fish" in (board.category or "").lower() for board in canonical_boards):
+                reply += "; performance fish and reef-capable twin designs are the right lane here."
+            if profile.region and not (profile.wave_type or profile.wave_size or profile.wave_power):
+                reply += " Are your waves mostly weak beach breaks, points, or reefs?"
+            elif profile.region:
+                reply += f" I haven't filtered them by live stock yet. Want me to check what is available in {profile.region}?"
+            else:
+                reply += " Which region should I check if you want a live-stock overlay?"
+            questions = []
             if volume_correction_requested and target_volume and target_volume.minimum_litres is not None and target_volume.maximum_litres is not None:
                 reply = (
                     f"You’re right. That range is too broad for your {target_volume.target_litres:g}L target. "
@@ -1611,54 +1655,45 @@ def board_guide_chat(
             questions = []
     elif legacy_intent == "board_search_request" and category and profile.region and not requested_board:
         recommendation_path = "explicit_category_request"
-        use_live_category_search = bool(profile.construction_preference) or category == "step_up"
-        if use_live_category_search:
-            suggested_boards = search_live_category(profile, category)
-            candidate_count = len(suggested_boards)
-            candidate_count_before_inventory = candidate_count
-            candidate_source = "live_category_search"
-            ranking_engine_used = "catalogue_search"
-            inventory_stage = "live_search"
-        else:
-            ranking_profile = _category_ranking_profile(profile, request.message, category)
-            canonical_boards = recommend_from_matrix(ranking_profile, limit=12, family_intent=family_intent)
-            checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
-            suggested_boards = _verified_in_stock(checked) if availability_constraint == STOCK_ONLY_CONSTRAINT else checked
-            suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(suggested_boards, category, ranking_profile, request.message, family_intent=family_intent))
-            candidate_count_before_inventory = len(canonical_boards)
-            candidate_source = "matrix"
-            ranking_engine_used = RECOMMENDATION_ENGINE_NAME
-            inventory_stage = "post_ranking"
-            if requested_limit := _requested_card_limit(request.message):
-                suggested_boards = suggested_boards[:requested_limit]
-            candidate_count = len(canonical_boards)
-            if not canonical_boards:
-                suggested_boards = search_live_category(profile, category)
-                candidate_count = len(suggested_boards)
-                recommendation_path = "explicit_category_fallback_live_search"
-                candidate_count_before_inventory = candidate_count
+        ranking_profile = _category_ranking_profile(profile, request.message, category)
+        canonical_boards = recommend_from_matrix(ranking_profile, limit=12, family_intent=family_intent)
+        candidate_count_before_inventory = len(canonical_boards)
+        candidate_source = "matrix"
+        ranking_engine_used = RECOMMENDATION_ENGINE_NAME
+        candidate_count = len(canonical_boards)
+        if availability_constraint == STOCK_ONLY_CONSTRAINT:
+            if profile.construction_preference and category in {"performance_daily_driver", "performance_shortboard"}:
+                stock_matches = search_live_category(profile, category)
+                inventory_stage = "live_search"
                 candidate_source = "live_category_search"
                 ranking_engine_used = "catalogue_search"
-                inventory_stage = "live_search"
+            else:
+                checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
+                inventory_stage = "post_ranking"
+                stock_matches = _filter_volume_compatible(_enforce_shortlist_coherence(
+                    _verified_in_stock(checked), category, ranking_profile, request.message,
+                    family_intent=family_intent,
+                ))
+            suggested_boards = stock_matches or canonical_boards[:3]
+        else:
+            suggested_boards = canonical_boards[:3]
+        if requested_limit := _requested_card_limit(request.message):
+            suggested_boards = suggested_boards[:requested_limit]
         label = _category_label(category)
         target = f" around {profile.target_volume_litres:g}L" if profile.target_volume_litres else ""
         if availability_constraint == STOCK_ONLY_CONSTRAINT:
-            reply = _stock_only_reply(label, profile.region, suggested_boards, candidate_count=candidate_count)
-        elif suggested_boards:
-            count = sum(board.available_count for board in suggested_boards)
-            brands = ", ".join(dict.fromkeys(board.brand for board in suggested_boards))
-            construction_note = ""
-            if profile.construction_preference:
-                exact = sum("matches your carbon/epoxy" in board.why_it_fits for board in suggested_boards)
-                construction_note = (
-                    f" {exact} model group(s) match the requested carbon/epoxy construction."
-                    + (" I found a few close non-carbon/epoxy options too." if exact < len(suggested_boards) else "")
+            if stock_matches:
+                reply = _stock_only_reply(label, profile.region, stock_matches, candidate_count=candidate_count)
+            else:
+                reply = (
+                    f"I couldn't verify any live {label} stock{target} in {profile.region} right now. "
+                    "These are still the best catalogue matches for what you described. "
+                    "I can broaden the size or region if you want."
                 )
-            reply = (
-                f"I found {count} verified live {label} or {label}-style listings{target} in {profile.region}. "
-                f"The live brand groups are {brands}.{construction_note} Here are the strongest matching models. "
-                "Want me to narrow them by ability, waves, brand, or how forgiving you want the board to feel?"
-            )
+        elif suggested_boards:
+            reply = f"A {label} sounds right. These are the strongest catalogue matches for what you described."
+            if profile.region:
+                reply += f" I haven't filtered them by live stock yet. Want me to check what is available in {profile.region}?"
             if volume_correction_requested and target_volume and target_volume.minimum_litres is not None and target_volume.maximum_litres is not None:
                 reply = (
                     f"You’re right. That range is too broad for your {target_volume.target_litres:g}L target. "
@@ -1667,8 +1702,8 @@ def board_guide_chat(
                 )
         else:
             reply = (
-                f"I can’t verify a live {label} option{target} in {profile.region} right now. "
-                "Tell me whether you want more paddle help, performance, or small-wave speed and I’ll check the closest category."
+                f"I couldn't find a governed {label} catalogue match{target}. "
+                "Tell me whether you want more paddle help, performance, or small-wave speed and I'll check the closest category."
             )
         questions = []
     elif legacy_intent == "board_search_request" and category and not profile.region and not requested_board:

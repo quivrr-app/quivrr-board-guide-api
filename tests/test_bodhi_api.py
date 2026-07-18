@@ -95,13 +95,13 @@ class BodhiApiTests(unittest.TestCase):
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
     def test_opening_greeting(self, _inventory, _azure):
         response = self.client.post("/api/board-guide/chat", json={"message": ""})
-        self.assertIn("live board availability across Quivrr", response.json()["reply"])
+        self.assertEqual(response.json()["reply"], "Hey. What are you looking for today?")
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
     def test_region_aware_opening_greeting(self, _inventory, _azure):
         response = self.client.post("/api/board-guide/chat", json={"message": "", "region": "EU"})
-        self.assertIn("live European board availability", response.json()["reply"])
+        self.assertEqual(response.json()["reply"], "Hey. What are you looking for today?")
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
@@ -228,11 +228,7 @@ class BodhiApiTests(unittest.TestCase):
         self.assertIn("Using your saved 28.6L target", body["reply"])
         self.assertIn("performance fish and reef-capable twin designs", body["reply"])
         self.assertTrue(body["recommendations"])
-        self.assertTrue(all(card["volumeCompatibility"] in {"excellent", "good"} for card in body["recommendations"]))
-        selected_volumes = [card["selected_volume_litres"] for card in body["suggested_boards"] if card["selected_volume_litres"] is not None]
-        self.assertTrue(selected_volumes)
-        self.assertGreaterEqual(min(selected_volumes), 27.0)
-        self.assertLessEqual(max(selected_volumes), 31.0)
+        _inventory.assert_not_called()
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
@@ -333,6 +329,20 @@ class BodhiApiTests(unittest.TestCase):
         self.assertTrue(body["reply"].startswith("Hey Nathan."))
         recommend_from_matrix.assert_not_called()
         inventory.assert_not_called()
+
+    @patch("main.load_authenticated_profile_context")
+    @patch("main.is_azure_openai_configured", return_value=False)
+    def test_resumed_authenticated_greeting_is_single_and_concise(self, _azure, auth_loader):
+        auth_loader.return_value = AuthenticatedProfileContext(
+            authenticated=True, profile_loaded=True, user_id="user-123",
+            profile=RiderProfile(display_name="Nathan Dunn", region="ID"), status="loaded",
+        )
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "Hey",
+            "conversationState": {"conversationTurn": 2},
+        }, headers={"Authorization": "Bearer good"}).json()
+        self.assertEqual(body["reply"], "Welcome back, Nathan. Where should we pick up?")
+        self.assertEqual(body["reply"].count("Nathan"), 1)
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: rows)
@@ -482,11 +492,11 @@ class BodhiApiTests(unittest.TestCase):
             "message": "point breaks", "intakeState": second["intakeState"],
         }).json()
         self.assertEqual(third["intakeState"]["preferred_board_type"], "Fish")
-        self.assertIn("down-the-line fish", third["reply"])
-        self.assertIn("Christenson Fish/Ocean Racer", third["reply"])
-        self.assertIn("Album Lightbender", third["reply"])
-        self.assertTrue(all(row["region"] == "AU" for row in third["recommendations"]))
-        self.assertTrue(any(row["availableCount"] > 0 for row in third["recommendations"]))
+        self.assertIn("catalogue matches", third["reply"])
+        self.assertIn("haven't filtered", third["reply"])
+        self.assertTrue(all(row["authoritativePublicFamily"] == "fish" for row in third["recommendations"]))
+        self.assertTrue(all(row["availableCount"] == 0 for row in third["recommendations"]))
+        _inventory.assert_not_called()
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
@@ -500,9 +510,10 @@ class BodhiApiTests(unittest.TestCase):
         body = self.client.post("/api/board-guide/chat", json={
             "message": "76kg intermediate looking for a fish for point breaks in Australia",
         }).json()
-        self.assertIn("canonical boards", body["reply"])
-        self.assertIn("verified AU stock", body["reply"])
+        self.assertIn("catalogue matches", body["reply"])
+        self.assertIn("haven't filtered", body["reply"])
         self.assertTrue(any(row["availableCount"] == 0 for row in body["recommendations"]))
+        _inventory.assert_not_called()
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.recommend_from_matrix")
@@ -696,6 +707,55 @@ class BodhiApiTests(unittest.TestCase):
             {"Step Up", "Powerful Wave Board", "Semi Gun", "Travel Step Up"},
         )
         self.assertEqual(body["category"], "step_up")
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_classic_fish_is_catalogue_first_and_excludes_performance_fish(self, inventory, _azure):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I'm looking for a fish, not a performance fish—a classic one.",
+            "profile": {"weight_kg": 75, "ability": "Advanced", "region": "ID", "target_volume_litres": 29},
+            "region": "ID",
+        }).json()
+        self.assertGreaterEqual(len(body["recommendations"]), 1)
+        self.assertTrue(all(item["detailedCategory"] == "Traditional Fish" for item in body["recommendations"]))
+        self.assertEqual(body["conversationState"]["requestedDetailedCategory"], "Traditional Fish")
+        self.assertIn("Performance Fish", body["conversationState"]["excludedDetailedCategories"])
+        self.assertFalse(body["conversationState"]["stockFilterRequested"])
+        self.assertIn("haven't filtered", body["reply"])
+        inventory.assert_not_called()
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: [
+        row.model_copy(update={
+            "available_count": 1,
+            "retailer_count": 1,
+            "availability_checked": True,
+            "availability_status": "retailer_stock",
+            "region": profile.region,
+            "region_code": profile.region,
+        }) for row in rows
+    ])
+    def test_classic_fish_stock_consent_retains_traditional_category(self, inventory, _azure):
+        first = self.client.post("/api/board-guide/chat", json={
+            "message": "I want a classic fish.",
+            "profile": {"weight_kg": 75, "ability": "Advanced", "region": "ID", "target_volume_litres": 29},
+            "region": "ID",
+        }).json()
+        inventory.assert_not_called()
+        second = self.client.post("/api/board-guide/chat", json={
+            "message": "Yes, only what's in stock.",
+            "profile": first["conversationProfile"],
+            "conversationState": first["conversationState"],
+            "conversation": [
+                {"role": "user", "content": "I want a classic fish."},
+                {"role": "assistant", "content": first["reply"]},
+            ],
+            "region": "ID",
+        }).json()
+        self.assertTrue(second["recommendations"])
+        self.assertTrue(all(item["detailedCategory"] == "Traditional Fish" for item in second["recommendations"]))
+        self.assertTrue(second["conversationState"]["stockFilterRequested"])
+        self.assertEqual(second["conversationState"]["requestedDetailedCategory"], "Traditional Fish")
 
     @patch("main.is_azure_openai_configured", return_value=False)
     @patch("main.enrich_suggestions_with_inventory")

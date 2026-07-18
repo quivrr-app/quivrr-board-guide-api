@@ -19,7 +19,10 @@ FAMILY_PATTERNS: tuple[tuple[str, str | None, tuple[str, ...]], ...] = (
     ("fish", "Performance Fish", (
         r"\b(?:high\s+)?perform\w*\s+fish\b", r"\bmodern\s+fish\b",
     )),
-    ("fish", "Traditional Fish", (r"\btraditional\s+fish\b", r"\bretro\s+fish\b")),
+    ("fish", "Traditional Fish", (
+        r"\btraditional\s+fish\b", r"\bretro\s+fish\b", r"\bclassic\s+fish\b",
+        r"\bold[ -]school\s+fish\b", r"\bclassic\s+one\b",
+    )),
     ("performance_shortboard", "Competition HPSB", (
         r"\bh\s*p\s*s\s*b\b", r"\bcompetition\s+shortboard\b", r"\bpro\s+board\b",
         r"\bproper\s+short(?:board|y)\b", r"\bhigh\s+perf\w*\s+(?:short)?boards?\b",
@@ -113,6 +116,8 @@ def resolve_family_intent(message: str, previous_state: Any = None, *, reset: bo
         if _matches(patterns, text):
             excluded.add(family)
             new_exclusions.add(family)
+    if re.search(r"\b(?:no|not|isn['’]?t|aren['’]?t)\s+(?:a\s+)?performance\s+fish\b", text):
+        excluded_details.add("Performance Fish")
 
     requested_family = None
     requested_detail = None
@@ -121,6 +126,8 @@ def resolve_family_intent(message: str, previous_state: Any = None, *, reset: bo
         if _matches(patterns, text):
             # Negated family mentions describe exclusions, not the requested family.
             if family in new_exclusions:
+                continue
+            if detail and detail in excluded_details:
                 continue
             requested_family = family
             requested_detail = detail
@@ -153,6 +160,8 @@ def resolve_family_intent(message: str, previous_state: Any = None, *, reset: bo
 
     if requested_family and requested_family not in new_exclusions:
         excluded.discard(requested_family)
+    if requested_detail:
+        excluded_details.discard(requested_detail)
     if correction and previous_family and requested_family and previous_family != requested_family:
         excluded.add(previous_family)
 
