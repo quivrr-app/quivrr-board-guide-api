@@ -152,13 +152,16 @@ def _message_requests_stock_only(message: str) -> bool:
     return bool(re.search(
         r"\b(?:what(?:'s| is) available|show me what(?:'s| is) available|available in my (?:size|volume)|"
         r"available in (?:indonesia|indo|bali)|what can i (?:buy|get)|boards? i can buy now|"
+        r"do any (?:of )?(?:these|them|those) have stock(?: in (?:indonesia|indo|bali))?|"
+        r"(?:have|has|check|show|find) stock in (?:indonesia|indo|bali)|"
         r"(?:do you have|have you got|show me|find me)?[^.?!]{0,40}\bin stock\b|"
         r"show me boards? in stock|i asked for (?:you to show me )?boards? in stock|"
         r"i only want available boards?|why are you showing unavailable boards?|remove (?:anything|boards?) not in stock|"
         r"remove unavailable boards?|only show what i can buy(?: now)?|only show available boards?|"
         r"only in stock|just show me ones in stock|show available boards|available now|currently available|"
         r"currently in stock|is in stock|ones i can buy|in stock in indo|in stock in indonesia|live stock(?: only)?|"
-        r"only boards with stock|just show me .* in stock|only show .* in stock)\b",
+        r"only boards with stock|only show stock if (?:there is|there's|any)|"
+        r"just show me .* in stock|only show .* in stock)\b",
         lowered,
     ))
 
@@ -740,6 +743,17 @@ def _handle_state_follow_up(request: BoardGuideRequest, profile, directive: Conv
             "questions": [],
         }
 
+    if re.search(r"\bwhy (?:do|would) (?:these|they) (?:suit|fit|work)", lowered):
+        detailed_category = next((card.detailed_category for card in cards if card.detailed_category), None)
+        family_label = detailed_category or cards[0].category
+        target = f" Around {profile.target_volume_litres:g}L," if profile.target_volume_litres else ""
+        reply = (
+            f"They stay inside the {family_label} category you asked for."
+            f"{target} the closest viable sizes preserve that design's intended feel; "
+            "the card notes explain each board's specific trade-off."
+        )
+        return {"reply": reply, "suggested_boards": [], "comparison": None, "questions": []}
+
     index = _state_card_index(message)
     if index is not None and index >= len(cards):
         return {
@@ -807,19 +821,23 @@ def _handle_state_follow_up(request: BoardGuideRequest, profile, directive: Conv
         reply = "I’ve taken Pyzel out of the active set." if remaining else "Taking Pyzel out leaves no active boards in this set."
         return {"reply": reply, "suggested_boards": remaining, "comparison": None, "questions": []}
 
-    if "only show" in lowered and ("available" in lowered or "in stock" in lowered):
+    if _message_requests_stock_only(message):
         target_region = profile.region or request.region
         verified = [_card_to_suggested_board(card) for card in cards]
         inventory_profile = profile if profile.region else profile.model_copy(update={"region": target_region})
         checked = enrich_suggestions_with_inventory(verified, inventory_profile) if target_region and verified else []
         filtered = [row for row in checked if row.available_count > 0]
         region_name = _region_display_name(target_region)
-        reply = (
-            f"I filtered the active set to boards with verified current availability in {region_name}."
-            if filtered else
-            f"I couldn’t verify live {region_name} stock for those boards right now. I can keep the best-fitting catalogue options or search a wider set of boards currently in stock."
-        )
-        return {"reply": reply, "suggested_boards": filtered, "comparison": None, "questions": []}
+        if filtered:
+            reply = f"I filtered the active set to boards with verified current availability in {region_name}."
+            suggested = filtered
+        else:
+            reply = (
+                f"I couldn’t verify live {region_name} stock for those boards right now. "
+                "These remain the best catalogue matches for the category you asked for."
+            )
+            suggested = verified[:3]
+        return {"reply": reply, "suggested_boards": suggested, "comparison": None, "questions": []}
 
     return None
 
@@ -1657,6 +1675,33 @@ def board_guide_chat(
         recommendation_path = "explicit_category_request"
         ranking_profile = _category_ranking_profile(profile, request.message, category)
         canonical_boards = recommend_from_matrix(ranking_profile, limit=12, family_intent=family_intent)
+        if not canonical_boards and family_intent.requested_public_family:
+            # A saved home-break profile can conflict with a user's current,
+            # explicit family correction. Keep the authoritative family gate,
+            # but retry the catalogue ranking without inherited wave constraints
+            # so the current request is not erased by stale profile context.
+            current_message_mentions_waves = bool(re.search(
+                r"\b(?:wave|reef|point|beach|hollow|weak|powerful|small surf|big surf)\b",
+                request.message,
+                re.I,
+            ))
+            if not current_message_mentions_waves:
+                family_first_profile = ranking_profile.model_copy(update={
+                    "home_break_type": None,
+                    "wave_type": None,
+                    "wave_size": None,
+                    "wave_size_min_ft": None,
+                    "wave_size_max_ft": None,
+                    "wave_power": None,
+                    "wave_quality": None,
+                })
+                canonical_boards = recommend_from_matrix(
+                    family_first_profile,
+                    limit=12,
+                    family_intent=family_intent,
+                )
+                if canonical_boards:
+                    ranking_profile = family_first_profile
         candidate_count_before_inventory = len(canonical_boards)
         candidate_source = "matrix"
         ranking_engine_used = RECOMMENDATION_ENGINE_NAME

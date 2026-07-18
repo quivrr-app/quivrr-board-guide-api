@@ -129,6 +129,7 @@ class BodhiApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         body = response.json()
         self.assertTrue(body["reply"].startswith("Hey Nathan."))
+        self.assertEqual(body["reply"].lower().count("hey"), 1)
         self.assertEqual(body["conversationProfile"]["region"], "ID")
         self.assertEqual(body["conversationProfile"]["ability"], "Advanced")
         self.assertTrue(body["conversationState"]["authenticated"])
@@ -722,6 +723,64 @@ class BodhiApiTests(unittest.TestCase):
         self.assertIn("Performance Fish", body["conversationState"]["excludedDetailedCategories"])
         self.assertFalse(body["conversationState"]["stockFilterRequested"])
         self.assertIn("haven't filtered", body["reply"])
+        inventory.assert_not_called()
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_classic_fish_explicit_correction_overrides_saved_wave_conflict(self, inventory, _azure):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "I'm looking for a fish, not a performance fish—a classic one.",
+            "profile": {
+                "weight_kg": 75,
+                "ability": "Advanced",
+                "region": "ID",
+                "target_volume_litres": 29,
+                "wave_type": "Reef Break",
+                "wave_power": "Powerful",
+            },
+            "region": "ID",
+        }).json()
+        self.assertGreaterEqual(len(body["recommendations"]), 1)
+        self.assertTrue(all(item["detailedCategory"] == "Traditional Fish" for item in body["recommendations"]))
+        self.assertNotIn("performance fish lane", body["reply"].lower())
+        inventory.assert_not_called()
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, _profile: [])
+    def test_natural_stock_follow_ups_keep_requested_family(self, inventory, _azure):
+        first = self.client.post("/api/board-guide/chat", json={
+            "message": "I want a classic fish.",
+            "profile": {"weight_kg": 75, "ability": "Advanced", "region": "ID", "target_volume_litres": 29},
+            "region": "ID",
+        }).json()
+        for prompt in ("Do any of these have stock in Indonesia?", "Only show stock if there is any."):
+            response = self.client.post("/api/board-guide/chat", json={
+                "message": prompt,
+                "profile": first["conversationProfile"],
+                "conversationState": first["conversationState"],
+                "region": "ID",
+            }).json()
+            self.assertTrue(response["conversationState"]["stockFilterRequested"])
+            self.assertEqual(response["conversationState"]["requestedDetailedCategory"], "Traditional Fish")
+        self.assertGreaterEqual(inventory.call_count, 2)
+
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.enrich_suggestions_with_inventory")
+    def test_why_follow_up_explains_active_traditional_fish_cards(self, inventory, _azure):
+        first = self.client.post("/api/board-guide/chat", json={
+            "message": "I want a classic fish.",
+            "profile": {"weight_kg": 75, "ability": "Advanced", "region": "ID", "target_volume_litres": 29},
+            "region": "ID",
+        }).json()
+        second = self.client.post("/api/board-guide/chat", json={
+            "message": "Why do these suit me?",
+            "profile": first["conversationProfile"],
+            "conversationState": first["conversationState"],
+            "region": "ID",
+        }).json()
+        self.assertIn("Traditional Fish", second["reply"])
+        self.assertNotIn("performance fish lane", second["reply"].lower())
+        self.assertEqual(second["conversationState"]["requestedDetailedCategory"], "Traditional Fish")
         inventory.assert_not_called()
 
     @patch("main.is_azure_openai_configured", return_value=False)

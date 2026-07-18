@@ -125,6 +125,9 @@ def personalise_opening(reply: str, profile: RiderProfile, *, is_first_turn: boo
         return reply.replace("Hey mate. ", f"Hey {first_name}. ", 1)
     if reply.lower().startswith("hey mate, "):
         return reply.replace("Hey mate, ", f"Hey {first_name}, ", 1)
+    if re.match(r"^hey[.!?](?:\s+|$)", reply, re.I):
+        remainder = re.sub(r"^hey[.!?]\s*", "", reply, count=1, flags=re.I)
+        return f"Hey {first_name}. {remainder}" if remainder else f"Hey {first_name}."
     if reply.lower().startswith("hey "):
         remainder = reply[4:].lstrip(". ,")
         return f"Hey {first_name}. {remainder}"
