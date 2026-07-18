@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from app.board_graph_engine import board_key, compare_boards, find_board, load_graph
 from app.comparison_engine import compare_board_models
 from app.inventory_client import normalise_region, quivrr_model_search_url
@@ -64,16 +66,7 @@ def _governed_comparison_summary(left: dict, right: dict) -> str:
 
 
 def greeting_reply(region: str | None = None) -> str:
-    code = normalise_region(region)
-    availability = (
-        "Indonesian board availability where feeds exist" if code == "ID"
-        else f"live {REGION_NAMES[code]} board availability" if code
-        else "live board availability across Quivrr"
-    )
-    return (
-        "Hey. What are we working on today? I can help you compare boards, work out volume, "
-        f"check live stock, review quiver gaps, or narrow down the right board type using {availability}."
-    )
+    return "Hey. What are you looking for today?"
 
 
 def expert_board_question_reply(message: str) -> str:
@@ -126,12 +119,15 @@ def personalise_opening(reply: str, profile: RiderProfile, *, is_first_turn: boo
     first_name = display_name.split()[0].strip(" ,.!?")
     if not first_name:
         return reply
+    if re.match(rf"^(?:hey|hello|welcome back|good to see you)[, ]+{re.escape(first_name)}\b", reply, re.I):
+        return reply
     if reply.lower().startswith("hey mate. "):
         return reply.replace("Hey mate. ", f"Hey {first_name}. ", 1)
     if reply.lower().startswith("hey mate, "):
         return reply.replace("Hey mate, ", f"Hey {first_name}, ", 1)
     if reply.lower().startswith("hey "):
-        return reply.replace("Hey ", f"Hey {first_name}. ", 1)
+        remainder = reply[4:].lstrip(". ,")
+        return f"Hey {first_name}. {remainder}"
     return f"Hey {first_name}. {reply}"
 
 

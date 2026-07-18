@@ -19,7 +19,7 @@ class NaturalConversationEntryTests(unittest.TestCase):
             with self.subTest(greeting=greeting):
                 body = self.ask(greeting)
                 self.assertEqual(body["intent"], "greeting_request")
-                self.assertIn("What are we working on today?", body["reply"])
+                self.assertIn("What are you looking for today?", body["reply"])
                 self.assertNotIn("Tell me your weight", body["reply"])
 
     def test_best_shortboard_answers_before_intake(self):
