@@ -22,10 +22,10 @@ EXPECTED = {
 }
 
 
-def test_all_431_master_records_load_into_unique_runtime_indexes():
-    assert load_board_master()["model_count"] == 431
+def test_all_458_master_records_load_into_unique_runtime_indexes():
+    assert load_board_master()["model_count"] == 458
     by_id, _ = board_master_indexes()
-    assert len(by_id) == 431
+    assert len(by_id) == 458
 
 
 def test_acceptance_classifications_are_consistent_across_runtime_consumers():

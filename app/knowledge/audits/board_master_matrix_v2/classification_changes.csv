@@ -1,6 +1,19 @@
 canonical_model_id,manufacturer,model,previous_public_family,public_family,previous_detailed_category,detailed_category,confidence,review_required
+93001,AIPA Surf,Big Boy Sting,,performance_shortboard,,Large-Rider Performance Shortboard,high,False
+93002,AIPA Surf,Big Brother Sting - Tuflite,,longboard,,Performance Longboard,high,False
+93003,AIPA Surf,Bone Fish,,fish,,Performance Fish,high,False
+93004,AIPA Surf,Dark Horse,,performance_shortboard,,Performance Shortboard,high,False
+93005,AIPA Surf,Super Nova,,groveller,,High Performance Groveller,high,False
 8124,Album,Moonstone,fish,mid_length,performance_fish,Performance Mid Length,high,False
 8129,Album,Townsend,step_up,mid_length,step_up,Performance Mid Length Step-Up,high,False
+93006,Aloha Surfboards,ALOHA LOPEZ NEW FISH,,fish,,Performance Fish,medium,False
+93007,Aloha Surfboards,ALOHA LUNA,,fish,,Performance Fish,high,False
+93008,Aloha Surfboards,ALOHA SKIPPER,,daily_driver,,Performance Daily Driver,high,False
+93009,Aloha Surfboards,ALOHA WING MAN,,groveller,,Small Wave Performance Twin,medium,False
+93010,Aloha Surfboards,ALOHA x LOPEZ H2,,daily_driver,,Everyday Daily Driver,low,True
+93011,Aloha Surfboards,EZ Mid,,mid_length,,Performance Mid Length,high,False
+93012,Aloha Surfboards,FUN DIVISION MID,,mid_length,,Mid Length,low,True
+93013,Aloha Surfboards,JALAPENO,,performance_shortboard,,Performance Daily Driver,high,False
 7733,Channel Islands,goldie,daily_driver,step_up,hybrid_shortboard,Reef and Barrel Step Up,high,False
 7734,Channel Islands,happy,performance_shortboard,performance_shortboard,performance_shortboard,High Performance Shortboard,high,False
 7746,Channel Islands,semi-pro-12,daily_driver,performance_shortboard,hybrid_shortboard,Forgiving High Performance Shortboard,high,False
@@ -28,3 +41,17 @@ canonical_model_id,manufacturer,model,previous_public_family,public_family,previ
 7931,Rusty,Miso,daily_driver,groveller,hybrid_shortboard,Performance Groveller,high,False
 7937,Rusty,Panda,daily_driver,performance_shortboard,hybrid_shortboard,Large-Rider High Performance Shortboard,high,False
 7943,Rusty,Slayer 2,performance_shortboard,step_up,performance_shortboard,Modern Step Up,high,False
+93014,Torq Surfboards,24/7,,longboard,,All Round Longboard,high,False
+93015,Torq Surfboards,Bigboy 23,,daily_driver,,High Volume Daily Driver,medium,False
+93016,Torq Surfboards,Bigboy Fish,,fish,,High Volume Fish,high,False
+93017,Torq Surfboards,Chopper,,mid_length,,Performance Mid Length,high,False
+93018,Torq Surfboards,Comp2,,performance_shortboard,,Performance Shortboard,medium,False
+93019,Torq Surfboards,Delpero Pro,,longboard,,Performance Longboard,high,False
+93020,Torq Surfboards,Fish,,fish,,Performance Fish,high,False
+93021,Torq Surfboards,Go-Kart,,daily_driver,,Performance Daily Driver,medium,False
+93022,Torq Surfboards,Multiplier,,daily_driver,,Performance Daily Driver,high,False
+93023,Torq Surfboards,PG-R,,groveller,,Performance Groveller,high,False
+93024,Torq Surfboards,Summer Fish,,fish,,Small Wave Fish,high,False
+93025,Torq Surfboards,The Don HP,,longboard,,Performance Longboard,high,False
+93026,Torq Surfboards,The Don NR,,longboard,,Noserider Longboard,high,False
+93027,Torq Surfboards,V+,,mid_length,,High Volume Mid Length,high,False

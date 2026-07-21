@@ -16,10 +16,10 @@ def load_master():
 
 def test_master_matrix_has_complete_unique_governed_coverage():
     models = load_master()
-    assert len(models) == 431
-    assert len({model["canonical_model_id"] for model in models}) == 431
-    assert len({model["canonical_key"] for model in models}) == 431
-    assert len({model["manufacturer"] for model in models}) == 17
+    assert len(models) == 458
+    assert len({model["canonical_model_id"] for model in models}) == 458
+    assert len({model["canonical_key"] for model in models}) == 458
+    assert len({model["manufacturer"] for model in models}) == 20
     assert {model["public_family"] for model in models} == {
         "fish", "groveller", "daily_driver", "performance_shortboard", "step_up", "mid_length", "longboard"
     }
@@ -39,7 +39,7 @@ def test_every_manufacturer_review_matches_the_master_matrix():
         assert payload["authority"] == "Current official manufacturer website"
         assert payload["model_count"] == len(payload["models"])
         review_models.extend(payload["models"])
-    assert len(review_models) == 431
+    assert len(review_models) == 458
     assert {row["canonical_model_id"] for row in review_models} == {row["canonical_model_id"] for row in models}
 
 
@@ -113,6 +113,6 @@ def test_phase_one_outputs_do_not_replace_runtime_sources():
     assert "not yet consumed by runtime applications" in payload["phase"]
     validation = json.loads((AUDITS / "validation_report.json").read_text(encoding="utf-8"))
     assert validation["valid"] is True
-    assert validation["model_count"] == 431
-    assert validation["manufacturer_count"] == 17
+    assert validation["model_count"] == 458
+    assert validation["manufacturer_count"] == 20
     assert validation["public_family_count"] == 7

@@ -136,7 +136,7 @@ def test_matrix_fin_only_request_excludes_fish_without_reclassifying_twins():
 
 
 def test_board_master_authority_is_unchanged():
-    assert hashlib.sha256(Path(MASTER_PATH).read_bytes()).hexdigest() == "0330adf012c5e6d67f307db7fdc4b309779d0e6b7c473f482a2ad33cee742899"
+    assert hashlib.sha256(Path(MASTER_PATH).read_bytes()).hexdigest() == "1e778f62ad86ce5d00036f55e7f63a83e4dfec716f79ebebef1bac872fc3fe91"
 
 
 @patch("main.safe_ask_bodhi", return_value=(None, None))

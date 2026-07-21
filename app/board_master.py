@@ -10,7 +10,7 @@ import re
 MASTER_PATH = Path(__file__).resolve().parent / "knowledge" / "curated" / "quivrr_board_master_matrix_v2.json"
 LEGACY_DNA_PATH = Path(__file__).resolve().parent / "knowledge" / "board_dna_v1.json"
 LEGACY_TAXONOMY_PATH = Path(__file__).resolve().parent / "knowledge" / "board_taxonomy_v2.json"
-EXPECTED_MODEL_COUNT = 431
+EXPECTED_MODEL_COUNT = 458
 PUBLIC_FAMILIES = {
     "fish", "groveller", "daily_driver", "performance_shortboard",
     "step_up", "mid_length", "longboard",
@@ -66,7 +66,7 @@ def load_board_master() -> dict:
     payload = _load_json(MASTER_PATH)
     rows = payload.get("models") or []
     if payload.get("model_count") != EXPECTED_MODEL_COUNT or len(rows) != EXPECTED_MODEL_COUNT:
-        raise ValueError("Board Intelligence v2 must contain exactly 431 models")
+        raise ValueError("Board Intelligence v2 must contain exactly 458 models")
 
     ids = [int(row["canonical_model_id"]) for row in rows]
     keys = [row["canonical_key"] for row in rows]

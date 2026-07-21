@@ -1,8 +1,10 @@
 primary_fin_setup,model_count
-2+1,5
-5 Fin,7
-Quad,1
-Single,40
-Thruster,307
-Twin,70
+2+1,6
+5 Fin,12
+Not published,13
+Quad,3
+Single,41
+Thruster,310
+Twin,71
+Twin + Trailer,1
 Twinzer,1

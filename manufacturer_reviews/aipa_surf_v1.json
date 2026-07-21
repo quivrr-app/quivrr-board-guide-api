@@ -1,0 +1,1100 @@
+{
+  "schema_version": 1,
+  "manufacturer": "AIPA Surf",
+  "authority": "Current official manufacturer website",
+  "reviewed_date": "2026-07-17",
+  "reviewed_by": "QUIVRR",
+  "model_count": 5,
+  "models": [
+    {
+      "canonical_model_id": 93001,
+      "canonical_key": "aipa-surf::big-boy-sting",
+      "manufacturer": "AIPA Surf",
+      "model": "Big Boy Sting",
+      "official_url": "https://www.aipasurf.com/products/big-boy-sting-1",
+      "official_image_url": "https://cdn.shopify.com/s/files/1/0061/5150/3990/files/2023_AIPA_BIGBOYSTING_BOTH.jpg?v=1770147186",
+      "official_evidence": {
+        "official_url": "https://www.aipasurf.com/products/big-boy-sting-1",
+        "resolved_url": "https://www.aipasurf.com/products/big-boy-sting-1",
+        "retrieved_at_utc": "2026-07-21T07:36:15Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 242,
+        "official_intent_excerpt": "A favored model for the 210 pounds plus surfer, the Big Boy Sting is designed for the big boys and girls who want to maximize power without giving up maneuverability. Proven to perform by Ben Aipa on the south shore on Oahu,...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "A favored model for the 210 pounds plus surfer, the Big Boy Sting is designed for the big boys and girls who want to maximize power without giving up maneuverability. Proven to perform by Ben Aipa on the south shore on Oahu, The Big Boy Sting was designed by Ben in the late ‘90s and underwent heavy testing through the ‘2000s. After minor refinements and 100’s of boards built, the Big Boy Sting is now considered the most iconic Aipa design. Thickness where it counts and tapered rails combined with a pulled-in nose and tail allow the Big Boy Sting to turn tight and fast in the pocket. The Big Boy Sting is no puffed-up old guy board; instead, it is a high-performance power surfer’s precision weapon with extra bulk added only where it is needed. We’ve added a swallow tail for extra control when stomping on the tail through powerful sections and decreased drag when driving off the bottom. To ensure the board works in multiple conditions, we’ve included a 4+1 fin setup (7'0\"and above) and a 5-Fin Setup (6'8\" and below). Riders can go with a quad fin setup when they need to skate across flat sections or a 2 + 1 when they need extra control in powerful waves. For the first time, the Big Boy Sting is now available in Surftech’s Fusion HD construction. A lightweight, durable epoxy build that adds extra liveliness to an already energetic design",
+      "manufacturer_intent_signals": [
+        "performance_shortboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "Large-Rider Performance Shortboard",
+      "secondary_categories": [],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "5 Fin",
+      "alternative_fin_setup": [
+        "Quad",
+        "2+1"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "swallow",
+        "pin"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "open face",
+        "reef break"
+      ],
+      "ability_range": [
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "release",
+        "hold",
+        "forgiveness"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: advanced to expert surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "balanced",
+          "tail": [
+            "swallow",
+            "pin"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": [
+            "5_fin",
+            "quad",
+            "2+1"
+          ]
+        },
+        "behaviour": {
+          "paddle": 6,
+          "wave_entry": 6,
+          "speed_generation": 7,
+          "drive": 8,
+          "release": 8,
+          "hold": 8,
+          "forgiveness": 5,
+          "stability": 5,
+          "sensitivity": 9,
+          "projection": 8,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 4,
+          "average_waves": 7,
+          "powerful_waves": 9,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 7,
+          "hollow_waves": 8,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 3,
+          "advanced": 8,
+          "expert": 8
+        },
+        "style_tags": [
+          "performance_shortboard",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "performance_shortboard"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_shortboard",
+        "large-rider-performance-shortboard",
+        "high_performance_shortboard",
+        "performance_daily_driver"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "daily_driver",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy positions Big Boy Sting as a high-performance power-surfer design and publishes 4+1/5-fin options.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "Fusion-HD"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "Fusion-HD",
+          "length": "6'0",
+          "width": "20",
+          "thickness": "2 7/8",
+          "volume_litres": 36.2
+        },
+        {
+          "construction": "Fusion-HD",
+          "length": "6'4",
+          "width": "21",
+          "thickness": "3",
+          "volume_litres": 41.75
+        },
+        {
+          "construction": "Fusion-HD",
+          "length": "6'8",
+          "width": "22",
+          "thickness": "3 1/8",
+          "volume_litres": 47.9
+        },
+        {
+          "construction": "Fusion-HD",
+          "length": "7'0",
+          "width": "23.25",
+          "thickness": "3.5",
+          "volume_litres": 59.53
+        },
+        {
+          "construction": "Fusion-HD",
+          "length": "7'4",
+          "width": "23.63",
+          "thickness": "3.63",
+          "volume_litres": 66.36
+        },
+        {
+          "construction": "Fusion-HD",
+          "length": "7'8",
+          "width": "23.5",
+          "thickness": "3.75",
+          "volume_litres": 71.03
+        },
+        {
+          "construction": "Fusion-HD",
+          "length": "8'0",
+          "width": "23.38",
+          "thickness": "3.81",
+          "volume_litres": 74.95
+        },
+        {
+          "construction": "Fusion-HD",
+          "length": "8'4",
+          "width": "23.25",
+          "thickness": "3.88",
+          "volume_litres": 79.02
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93002,
+      "canonical_key": "aipa-surf::big-brother-sting-tuflite",
+      "manufacturer": "AIPA Surf",
+      "model": "Big Brother Sting - Tuflite",
+      "official_url": "https://www.aipasurf.com/products/big-brother-sting-tuflite",
+      "official_image_url": "https://cdn.shopify.com/s/files/1/0061/5150/3990/files/2024_bigbrothersting_tuflite_main.jpg?v=1770147186",
+      "official_evidence": {
+        "official_url": "https://www.aipasurf.com/products/big-brother-sting-tuflite",
+        "resolved_url": "https://www.aipasurf.com/products/big-brother-sting-tuflite",
+        "retrieved_at_utc": "2026-07-21T07:36:15Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 137,
+        "official_intent_excerpt": "Big boards equal big guy fun! Ben Aipa’s staple longboard, The Big Brother Sting is a high-performance tank designed to power through the mushiest of conditions. Extra thickness in the center of the board with a nicely foiled rail gives the perfect...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "Big boards equal big guy fun! Ben Aipa’s staple longboard, The Big Brother Sting is a high-performance tank designed to power through the mushiest of conditions. Extra thickness in the center of the board with a nicely foiled rail gives the perfect balance of float and performance. Riders will be able to catch any wave without sacrificing maneuverability. A wider outline up in the front of the board increases stability, and a pulled in tail allows quick directional changes. The iconic AIPA wing joins the front of the board, where float and stability reign supreme, with the back of the board where big turns and precision control are possible. Big stoke comes guaranteed with the Big Brother Sting; finally, a board that makes less than ideal conditions just as fun as the best day of the year.",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "longboard",
+      "public_family_label": "Longboard",
+      "detailed_category": "Performance Longboard",
+      "secondary_categories": [],
+      "board_type": "Longboard",
+      "primary_fin_setup": "Not published",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "not_published_by_official_source",
+      "tail_shape": [
+        "not_published"
+      ],
+      "outline": "full",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "open face"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "paddle",
+        "speed generation",
+        "sensitivity"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "full",
+          "nose": "balanced",
+          "tail": [
+            "not_published"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": []
+        },
+        "behaviour": {
+          "paddle": 9,
+          "wave_entry": 8,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 6,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 6,
+          "projection": 6,
+          "pivot": 6,
+          "carve": 7,
+          "glide": 10,
+          "turning_radius": 9
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "longboard",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "longboard"
+        ]
+      },
+      "recommendation_lanes": [
+        "longboard",
+        "performance-longboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "mid_length"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy calls Big Brother Sting Ben Aipa's staple longboard and describes float with manoeuvrability.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "Tuflite"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "Tuflite",
+          "length": "8'0",
+          "width": "22.75",
+          "thickness": "3.38",
+          "volume_litres": 68.71
+        },
+        {
+          "construction": "Tuflite",
+          "length": "9'0",
+          "width": "23.5",
+          "thickness": "3.88",
+          "volume_litres": 91.33
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93003,
+      "canonical_key": "aipa-surf::bone-fish",
+      "manufacturer": "AIPA Surf",
+      "model": "Bone Fish",
+      "official_url": "https://www.aipasurf.com/products/bone-fish",
+      "official_image_url": "https://cdn.shopify.com/s/files/1/0061/5150/3990/files/2024_AIPA_BONEFISH_BOTH.webp?v=1770147186",
+      "official_evidence": {
+        "official_url": "https://www.aipasurf.com/products/bone-fish",
+        "resolved_url": "https://www.aipasurf.com/products/bone-fish",
+        "retrieved_at_utc": "2026-07-21T07:36:15Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 155,
+        "official_intent_excerpt": "The Bonefish is the fastest fish in the ocean that loves shallow waters.. The BONE FISH was designed to be that hyper-reactive and speedy design that fits in tight pockets and excels in punchy shorebreaks or reef breaks. As the next step...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "The Bonefish is the fastest fish in the ocean that loves shallow waters.. The BONE FISH was designed to be that hyper-reactive and speedy design that fits in tight pockets and excels in punchy shorebreaks or reef breaks. As the next step in the evolution of the fish, our goal with the BONEFISH was to harness the curves of the proven concept and create a more aggressive fish inspired performance driven shape for when you want to have that shortboard feel in a smaller fish-like package. Wave Range: Proven in hollowed out Newport, spitting Sandy Beach, Bali type barreling sections, and Waco Wave pool’s tight pockets. If the wave has a bowl the BONEFISH will light it up. Fin Configuration: 5 fin/Tight cluster. A carefully thought out fin position to harness every aspect of the boards abilities. Suggested Fins: Primary/(NVS) Sequencer Quads, Secondary/(NVS) Ahi Twin+trailer., Auxilary/(NVS)Hook Thrusters Target Sizing: In between fish and standard shortboard.",
+      "manufacturer_intent_signals": [
+        "fish"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "fish",
+      "public_family_label": "Fish",
+      "detailed_category": "Performance Fish",
+      "secondary_categories": [],
+      "board_type": "Fish",
+      "primary_fin_setup": "5 Fin",
+      "alternative_fin_setup": [
+        "Quad",
+        "Twin + Trailer",
+        "Thruster"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "not_published"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "beach break",
+        "reef break",
+        "wave pool"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "drive",
+        "hold",
+        "paddle"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "balanced",
+          "tail": [
+            "not_published"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": [
+            "5_fin",
+            "quad",
+            "twin_+_trailer",
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 7,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 8,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "fish",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "fish"
+        ]
+      },
+      "recommendation_lanes": [
+        "fish",
+        "performance-fish",
+        "performance_fish",
+        "small_wave_fish"
+      ],
+      "excluded_recommendation_lanes": [
+        "groveller",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy calls Bone Fish an aggressive fish-inspired performance design and publishes its five-fin options.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "Carbon"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "Carbon",
+          "length": "5'2",
+          "width": "18.4",
+          "thickness": "2.25",
+          "volume_litres": 23.3
+        },
+        {
+          "construction": "Carbon",
+          "length": "5'4",
+          "width": "19",
+          "thickness": "2.38",
+          "volume_litres": 26.25
+        },
+        {
+          "construction": "Carbon",
+          "length": "5'6",
+          "width": "19.5",
+          "thickness": "2.45",
+          "volume_litres": 28.6
+        },
+        {
+          "construction": "Carbon",
+          "length": "5'8",
+          "width": "20",
+          "thickness": "2.52",
+          "volume_litres": 31.1
+        },
+        {
+          "construction": "Carbon",
+          "length": "5'10",
+          "width": "20.5",
+          "thickness": "2.59",
+          "volume_litres": 33.7
+        },
+        {
+          "construction": "Carbon",
+          "length": "6'0",
+          "width": "21",
+          "thickness": "2.66",
+          "volume_litres": 36.6
+        },
+        {
+          "construction": "Carbon",
+          "length": "6'2",
+          "width": "21.5",
+          "thickness": "2.74",
+          "volume_litres": 39.6
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93004,
+      "canonical_key": "aipa-surf::dark-horse",
+      "manufacturer": "AIPA Surf",
+      "model": "Dark Horse",
+      "official_url": "https://www.aipasurf.com/products/dark-horse-1",
+      "official_image_url": "https://cdn.shopify.com/s/files/1/0061/5150/3990/files/2023_AIPA_DARKHORSE_CAD_BOTH.jpg?v=1770147186",
+      "official_evidence": {
+        "official_url": "https://www.aipasurf.com/products/dark-horse-1",
+        "resolved_url": "https://www.aipasurf.com/products/dark-horse-1",
+        "retrieved_at_utc": "2026-07-21T07:36:15Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 314,
+        "official_intent_excerpt": "During the testing phase of the Dark Twinn, Duke wanted to feel the point of difference if it was reconfigured for a quad arrangement. As a fraternal sibling of the Dark Twinn, The Dark Horse was developed as the quad specific adaptation...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "During the testing phase of the Dark Twinn, Duke wanted to feel the point of difference if it was reconfigured for a quad arrangement. As a fraternal sibling of the Dark Twinn, The Dark Horse was developed as the quad specific adaptation of the design with every element of the 2 designs being identical , except for shifting the wing forward to correlate with the quad forward fins. The result was a more controlled/predictable response on rail with an intense precision feeling/ reaction in the pocket and increased stability to handle bigger surf than its predecessor. The Dark Horses sleek / active outline, winged thumb tail rear section, moderate rocker, full-lower apex rail, and staged bottom contour create a lively yet controlled planning surface, while the combination of wing to fin placement,wing flute and heavy vee with double concave out the tail creates an intuitive tipping point for your backfoot to transfer rail to rail effortlessly with minimal pressure for tight in the pocket reactions or long drawn out carves. These design elements and Quad specific fin set up translate seamlessly for surfers at intermediate to professional level and gives surfers the ability to tap into a precision side of high performance surfing.This became a trusty board for the difficult conditions in the North American WQS, from East to West Coast for AIPA Team rider, Sage Guinaldo. He made his way through many heats in his 2021 QS tour with this blade in his quiver. Wave range: Average to above average/ shoulder high to well overhead. Use in conditions you would either use your standard shortboard or groveler. Fin Configuration: Twin+trailer/ Suggest Twin only up to shoulder high and add trailer for over shoulder high.. Suggested Fins: Primary/(NVS) Horsemen Quads, Alternative(FUTURES)AIPA x MAYHEM “Torches”. Design Range: 5’0” to 6’4” Target Sizing: 1-2” below standard shortboard with 1/2L to1L added volume depending on skill level.",
+      "manufacturer_intent_signals": [
+        "performance_shortboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "Performance Shortboard",
+      "secondary_categories": [],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Quad",
+      "alternative_fin_setup": [
+        "Twin + Trailer"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "pin",
+        "thumb"
+      ],
+      "outline": "full",
+      "bottom_contours": [
+        "double",
+        "vee",
+        "concave"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "beach break",
+        "reef break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "release",
+        "hold",
+        "forgiveness"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: intermediate to advanced to expert surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "full",
+          "nose": "balanced",
+          "tail": [
+            "pin",
+            "thumb"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "double",
+            "vee",
+            "concave"
+          ],
+          "fin_configurations": [
+            "quad",
+            "twin_+_trailer"
+          ]
+        },
+        "behaviour": {
+          "paddle": 6,
+          "wave_entry": 6,
+          "speed_generation": 7,
+          "drive": 8,
+          "release": 8,
+          "hold": 8,
+          "forgiveness": 5,
+          "stability": 5,
+          "sensitivity": 9,
+          "projection": 8,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 4,
+          "average_waves": 7,
+          "powerful_waves": 9,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 7,
+          "hollow_waves": 8,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 8
+        },
+        "style_tags": [
+          "performance_shortboard",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "performance_shortboard"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_shortboard",
+        "performance-shortboard",
+        "high_performance_shortboard",
+        "performance_daily_driver"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "daily_driver",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy calls Dark Horse a quad-specific, high-performance design for intermediate to professional surfers.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "Dual-Core"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "Dual-Core",
+          "length": "5'3",
+          "width": "18-7/8",
+          "thickness": "2 7/16",
+          "volume_litres": 24.88
+        },
+        {
+          "construction": "Dual-Core",
+          "length": "5'4",
+          "width": "19-1/4",
+          "thickness": "2 1/2",
+          "volume_litres": 26.44
+        },
+        {
+          "construction": "Dual-Core",
+          "length": "5'6",
+          "width": "19-3/8",
+          "thickness": "2 5/8",
+          "volume_litres": 28.8
+        },
+        {
+          "construction": "Dual-Core",
+          "length": "5'8",
+          "width": "19-3/4",
+          "thickness": "2 11/16",
+          "volume_litres": 31.08
+        },
+        {
+          "construction": "Dual-Core",
+          "length": "5'10",
+          "width": "20",
+          "thickness": "2 3/4",
+          "volume_litres": 33.05
+        },
+        {
+          "construction": "Dual-Core",
+          "length": "6'0",
+          "width": "20-1/2",
+          "thickness": "2 13/16",
+          "volume_litres": 35.61
+        },
+        {
+          "construction": "Dual-Core",
+          "length": "6'2",
+          "width": "21",
+          "thickness": "2 7/8",
+          "volume_litres": 38.4
+        },
+        {
+          "construction": "Dual-Core",
+          "length": "6'4",
+          "width": "21-1/2",
+          "thickness": "3 1/8",
+          "volume_litres": 43.8
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93005,
+      "canonical_key": "aipa-surf::super-nova",
+      "manufacturer": "AIPA Surf",
+      "model": "Super Nova",
+      "official_url": "https://www.aipasurf.com/products/super-nova",
+      "official_image_url": "https://cdn.shopify.com/s/files/1/0061/5150/3990/files/AIPA_SUPERNOVA_0511_FUSIONPRO_topbottom2.png?v=1770400211",
+      "official_evidence": {
+        "official_url": "https://www.aipasurf.com/products/super-nova",
+        "resolved_url": "https://www.aipasurf.com/products/super-nova",
+        "retrieved_at_utc": "2026-07-21T07:36:15Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 151,
+        "official_intent_excerpt": "The Supernova, co-designed by Aipa Surfboards and Noel Salas of Surf n’ Show, is a next-generation high-performance groveler built to ignite small waves and wave pools alike. Engineered to thrive in 1’–3’ surf, the Supernova isn’t a fish or a hybrid—it’s a...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "The Supernova, co-designed by Aipa Surfboards and Noel Salas of Surf n’ Show, is a next-generation high-performance groveler built to ignite small waves and wave pools alike. Engineered to thrive in 1’–3’ surf, the Supernova isn’t a fish or a hybrid—it’s a true high-performance groveler designed for speed, precision, and explosive responsiveness. The outline is compact and refined, built for quick rail-to-rail action and tight turns in the pocket. A subtle single to double concave bottom generates lift and drive, while the tail design adds control and snap even in soft or mushy conditions. Whether you’re carving through a local beach break or threading a modern wave pool, the Supernova lights up weak waves with true high-performance flair.. If you’re chasing a board that surfs like a shortboard but dominates in gutless surf, the Aipa Supernova is your go-to small-wave weapon. *Fins not included. Recommended fin - F4 Legacy Neutral 5-Fin",
+      "manufacturer_intent_signals": [
+        "groveller"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "groveller",
+      "public_family_label": "Groveller",
+      "detailed_category": "High Performance Groveller",
+      "secondary_categories": [],
+      "board_type": "Groveller",
+      "primary_fin_setup": "5 Fin",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "not_published"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "single",
+        "double",
+        "concave"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": 1,
+        "maximum_ft": 3
+      },
+      "wave_power": [
+        "weak"
+      ],
+      "wave_type": [
+        "beach break",
+        "wave pool"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "drive",
+        "paddle",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "balanced",
+          "tail": [
+            "not_published"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "single",
+            "double",
+            "concave"
+          ],
+          "fin_configurations": [
+            "5_fin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 9,
+          "drive": 7,
+          "release": 7,
+          "hold": 5,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 6,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 7,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 10,
+          "average_waves": 7,
+          "powerful_waves": 4,
+          "beach_break": 8,
+          "point_break": 8,
+          "reef_break": 7,
+          "hollow_waves": 5,
+          "open_face": 7
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "groveller",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "groveller"
+        ]
+      },
+      "recommendation_lanes": [
+        "groveller",
+        "high-performance-groveller",
+        "performance_groveller",
+        "small_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy explicitly calls Super Nova a high-performance groveler for 1–3 foot surf and says it is not a fish or hybrid.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "Fusion Pro"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "Fusion Pro",
+          "length": "5'4",
+          "width": "19.13",
+          "thickness": "2.35",
+          "volume_litres": 25.5
+        },
+        {
+          "construction": "Fusion Pro",
+          "length": "5'5",
+          "width": "19.25",
+          "thickness": "2.38",
+          "volume_litres": 26.5
+        },
+        {
+          "construction": "Fusion Pro",
+          "length": "5'6",
+          "width": "19.38",
+          "thickness": "2.42",
+          "volume_litres": 27.5
+        },
+        {
+          "construction": "Fusion Pro",
+          "length": "5'7",
+          "width": "19.63",
+          "thickness": "2.50",
+          "volume_litres": 29.2
+        },
+        {
+          "construction": "Fusion Pro",
+          "length": "5'8",
+          "width": "19.75",
+          "thickness": "2.55",
+          "volume_litres": 30.5
+        },
+        {
+          "construction": "Fusion Pro",
+          "length": "5'9",
+          "width": "20.00",
+          "thickness": "2.61",
+          "volume_litres": 32.0
+        },
+        {
+          "construction": "Fusion Pro",
+          "length": "5'10",
+          "width": "20.13",
+          "thickness": "2.68",
+          "volume_litres": 33.5
+        },
+        {
+          "construction": "Fusion Pro",
+          "length": "5'11",
+          "width": "20.25",
+          "thickness": "2.75",
+          "volume_litres": 35.0
+        },
+        {
+          "construction": "Fusion Pro",
+          "length": "6'0",
+          "width": "20.50",
+          "thickness": "2.79",
+          "volume_litres": 36.5
+        },
+        {
+          "construction": "Fusion Pro",
+          "length": "6'1",
+          "width": "20.75",
+          "thickness": "2.83",
+          "volume_litres": 38.0
+        },
+        {
+          "construction": "Fusion Pro",
+          "length": "6'2",
+          "width": "20.88",
+          "thickness": "2.88",
+          "volume_litres": 39.5
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    }
+  ]
+}

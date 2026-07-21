@@ -1,7 +1,9 @@
 {
-  "model_count": 431,
+  "model_count": 458,
   "by_manufacturer": {
+    "AIPA Surf": 5,
     "Album": 19,
+    "Aloha Surfboards": 8,
     "Channel Islands": 34,
     "Chemistry Surfboards": 2,
     "Chilli": 24,
@@ -17,27 +19,28 @@
     "Pyzel": 41,
     "Rusty": 49,
     "Sharp Eye": 20,
-    "Simon Anderson": 21
+    "Simon Anderson": 21,
+    "Torq Surfboards": 14
   },
   "by_public_family": {
-    "daily_driver": 170,
-    "fish": 45,
-    "groveller": 27,
-    "longboard": 13,
-    "mid_length": 43,
-    "performance_shortboard": 94,
+    "daily_driver": 175,
+    "fish": 51,
+    "groveller": 30,
+    "longboard": 18,
+    "mid_length": 47,
+    "performance_shortboard": 98,
     "step_up": 39
   },
   "by_primary_category": {
     "daily_driver": 20,
-    "groveller": 17,
+    "groveller": 20,
     "hybrid_shortboard": 135,
-    "longboard": 13,
+    "longboard": 18,
     "mid_length": 40,
-    "performance_daily_driver": 18,
-    "performance_fish": 37,
-    "performance_mid_length": 3,
-    "performance_shortboard": 69,
+    "performance_daily_driver": 23,
+    "performance_fish": 43,
+    "performance_mid_length": 7,
+    "performance_shortboard": 73,
     "performance_twin": 23,
     "small_wave_shortboard": 3,
     "softboard": 5,
@@ -46,17 +49,17 @@
     "twin_pin": 1
   },
   "by_confidence": {
-    "high": 53,
+    "high": 60,
     "low": 2,
-    "medium": 376
+    "medium": 396
   },
   "by_source_method": {
-    "explicit_manufacturer": 53,
+    "explicit_manufacturer": 60,
     "governed_archetype_with_modifiers": 2,
-    "manufacturer_inference": 376
+    "manufacturer_inference": 396
   },
   "by_review_required": {
-    "false": 429,
+    "false": 456,
     "true": 2
   }
 }

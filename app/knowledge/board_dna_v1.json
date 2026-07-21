@@ -1,8 +1,475 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-07-16T10:31:43.573940+00:00",
-  "model_count": 431,
+  "generated_at_utc": "2026-07-21T09:18:53.914138+00:00",
+  "model_count": 458,
   "models": [
+    {
+      "canonical_model_id": 93001,
+      "canonical_key": "aipa-surf::big-boy-sting",
+      "brand": "AIPA Surf",
+      "model": "Big Boy Sting",
+      "public_family": "performance_shortboard",
+      "primary_category": "performance_shortboard",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "narrow",
+        "nose": "pointed",
+        "tail": [
+          "swallow"
+        ],
+        "rocker_entry": "medium_high",
+        "rocker_tail": "high",
+        "rails": "low_performance",
+        "foil": "refined",
+        "volume_distribution": "balanced",
+        "bottom_contours": [
+          "flat"
+        ],
+        "fin_configurations": [
+          "5_fin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 4,
+        "wave_entry": 5,
+        "speed_generation": 8,
+        "drive": 10,
+        "release": 10,
+        "hold": 9,
+        "forgiveness": 3,
+        "stability": 3,
+        "sensitivity": 10,
+        "projection": 10,
+        "pivot": 10,
+        "carve": 10,
+        "glide": 2,
+        "turning_radius": 2
+      },
+      "conditions": {
+        "weak_waves": 3,
+        "average_waves": 8,
+        "powerful_waves": 10,
+        "beach_break": 8,
+        "point_break": 8,
+        "reef_break": 10,
+        "hollow_waves": 10,
+        "open_face": 9
+      },
+      "rider_fit": {
+        "beginner": 1,
+        "progressing": 2,
+        "intermediate": 5,
+        "advanced": 10,
+        "expert": 10,
+        "low_paddle_strength": 2,
+        "high_paddle_strength": 10
+      },
+      "style_tags": [
+        "technical",
+        "sensitive",
+        "vertical",
+        "fast",
+        "drivey"
+      ],
+      "quiver_roles": [
+        "performance",
+        "competition"
+      ],
+      "family_governance": {
+        "previous_public_family": "performance_shortboard",
+        "base_public_family": "performance_shortboard",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_shortboard."
+      },
+      "evidence": {
+        "official_source_url": "https://www.aipasurf.com/products/big-boy-sting-1",
+        "manufacturer_description": "A favored model for the 210 pounds plus surfer, the Big Boy Sting is designed for the big boys and girls who want to maximize power without giving up maneuverability. Proven to perform by Ben Aipa on the south shore on Oahu, The Big Boy Sting was designed by Ben in the late \u201890s and underwent heavy testing through the \u20182000s. After minor refinements and 100\u2019s of boards built, the Big Boy Sting is now considered the most iconic Aipa design. Thickness where it counts and tapered rails combined with a pulled-in nose and tail allow the Big Boy Sting to turn tight and fast in the pocket. The Big Boy Sting is no puffed-up old guy board; instead, it is a high-performance power surfer\u2019s precision weapon with extra bulk added only where it is needed. We\u2019ve added a swallow tail for extra control when stomping on the tail through powerful sections and decreased drag when driving off the bottom. To ensure the board works in multiple conditions, we\u2019ve included a 4+1 fin setup (7'0\"and above) and a 5-Fin Setup (6'8\" and below). Riders can go with a quad fin setup when they need to skate across flat sections or a 2 + 1 when they need extra control in powerful waves. For the first time, the Big Boy Sting is now available in Surftech\u2019s Fusion HD construction. A lightweight, durable epoxy build that adds extra liveliness to an already energetic design",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: swallow tail."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93002,
+      "canonical_key": "aipa-surf::big-brother-sting-tuflite",
+      "brand": "AIPA Surf",
+      "model": "Big Brother Sting - Tuflite",
+      "public_family": "longboard",
+      "primary_category": "longboard",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "parallel",
+        "nose": "full",
+        "tail": [
+          "square"
+        ],
+        "rocker_entry": "low",
+        "rocker_tail": "low",
+        "rails": "soft",
+        "foil": "forward",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "single",
+          "rolled",
+          "vee"
+        ],
+        "fin_configurations": [
+          "single",
+          "two_plus_one"
+        ]
+      },
+      "behaviour": {
+        "paddle": 10,
+        "wave_entry": 10,
+        "speed_generation": 6,
+        "drive": 8,
+        "release": 4,
+        "hold": 6,
+        "forgiveness": 9,
+        "stability": 10,
+        "sensitivity": 3,
+        "projection": 6,
+        "pivot": 3,
+        "carve": 8,
+        "glide": 10,
+        "turning_radius": 10
+      },
+      "conditions": {
+        "weak_waves": 7,
+        "average_waves": 8,
+        "powerful_waves": 5,
+        "beach_break": 7,
+        "point_break": 10,
+        "reef_break": 6,
+        "hollow_waves": 3,
+        "open_face": 10
+      },
+      "rider_fit": {
+        "beginner": 9,
+        "progressing": 10,
+        "intermediate": 10,
+        "advanced": 9,
+        "expert": 9,
+        "low_paddle_strength": 10,
+        "high_paddle_strength": 5
+      },
+      "style_tags": [
+        "glide",
+        "stable",
+        "flowing",
+        "drivey",
+        "forgiving"
+      ],
+      "quiver_roles": [
+        "longboard",
+        "cruiser",
+        "small_wave"
+      ],
+      "family_governance": {
+        "previous_public_family": "longboard",
+        "base_public_family": "longboard",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category longboard."
+      },
+      "evidence": {
+        "official_source_url": "https://www.aipasurf.com/products/big-brother-sting-tuflite",
+        "manufacturer_description": "Big boards equal big guy fun! Ben Aipa\u2019s staple longboard, The Big Brother Sting is a high-performance tank designed to power through the mushiest of conditions. Extra thickness in the center of the board with a nicely foiled rail gives the perfect balance of float and performance. Riders will be able to catch any wave without sacrificing maneuverability. A wider outline up in the front of the board increases stability, and a pulled in tail allows quick directional changes. The iconic AIPA wing joins the front of the board, where float and stability reign supreme, with the back of the board where big turns and precision control are possible. Big stoke comes guaranteed with the Big Brother Sting; finally, a board that makes less than ideal conditions just as fun as the best day of the year.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93003,
+      "canonical_key": "aipa-surf::bone-fish",
+      "brand": "AIPA Surf",
+      "model": "Bone Fish",
+      "public_family": "fish",
+      "primary_category": "performance_fish",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "balanced",
+        "nose": "medium",
+        "tail": [
+          "swallow"
+        ],
+        "rocker_entry": "medium_low",
+        "rocker_tail": "medium",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "single",
+          "double",
+          "vee"
+        ],
+        "fin_configurations": [
+          "5_fin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 7,
+        "wave_entry": 7,
+        "speed_generation": 9,
+        "drive": 8,
+        "release": 8,
+        "hold": 7,
+        "forgiveness": 7,
+        "stability": 7,
+        "sensitivity": 8,
+        "projection": 8,
+        "pivot": 8,
+        "carve": 8,
+        "glide": 5,
+        "turning_radius": 5
+      },
+      "conditions": {
+        "weak_waves": 8,
+        "average_waves": 10,
+        "powerful_waves": 7,
+        "beach_break": 8,
+        "point_break": 7,
+        "reef_break": 8,
+        "hollow_waves": 7,
+        "open_face": 8
+      },
+      "rider_fit": {
+        "beginner": 3,
+        "progressing": 6,
+        "intermediate": 8,
+        "advanced": 9,
+        "expert": 9,
+        "low_paddle_strength": 6,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "fast",
+        "drivey",
+        "responsive"
+      ],
+      "quiver_roles": [
+        "small_wave",
+        "daily_driver",
+        "reef_alternative"
+      ],
+      "family_governance": {
+        "previous_public_family": "fish",
+        "base_public_family": "fish",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_fish."
+      },
+      "evidence": {
+        "official_source_url": "https://www.aipasurf.com/products/bone-fish",
+        "manufacturer_description": "The Bonefish is the fastest fish in the ocean that loves shallow waters.. The BONE FISH was designed to be that hyper-reactive and speedy design that fits in tight pockets and excels in punchy shorebreaks or reef breaks. As the next step in the evolution of the fish, our goal with the BONEFISH was to harness the curves of the proven concept and create a more aggressive fish inspired performance driven shape for when you want to have that shortboard feel in a smaller fish-like package. Wave Range: Proven in hollowed out Newport, spitting Sandy Beach, Bali type barreling sections, and Waco Wave pool\u2019s tight pockets. If the wave has a bowl the BONEFISH will light it up. Fin Configuration: 5 fin/Tight cluster. A carefully thought out fin position to harness every aspect of the boards abilities. Suggested Fins: Primary/(NVS) Sequencer Quads, Secondary/(NVS) Ahi Twin+trailer., Auxilary/(NVS)Hook Thrusters Target Sizing: In between fish and standard shortboard.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93004,
+      "canonical_key": "aipa-surf::dark-horse",
+      "brand": "AIPA Surf",
+      "model": "Dark Horse",
+      "public_family": "performance_shortboard",
+      "primary_category": "performance_shortboard",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "narrow",
+        "nose": "pointed",
+        "tail": [
+          "thumb"
+        ],
+        "rocker_entry": "medium_high",
+        "rocker_tail": "high",
+        "rails": "low_performance",
+        "foil": "refined",
+        "volume_distribution": "balanced",
+        "bottom_contours": [
+          "double",
+          "vee",
+          "single",
+          "rolled"
+        ],
+        "fin_configurations": [
+          "quad"
+        ]
+      },
+      "behaviour": {
+        "paddle": 4,
+        "wave_entry": 5,
+        "speed_generation": 7,
+        "drive": 9,
+        "release": 10,
+        "hold": 9,
+        "forgiveness": 3,
+        "stability": 3,
+        "sensitivity": 10,
+        "projection": 10,
+        "pivot": 10,
+        "carve": 10,
+        "glide": 2,
+        "turning_radius": 2
+      },
+      "conditions": {
+        "weak_waves": 3,
+        "average_waves": 8,
+        "powerful_waves": 10,
+        "beach_break": 8,
+        "point_break": 8,
+        "reef_break": 10,
+        "hollow_waves": 10,
+        "open_face": 9
+      },
+      "rider_fit": {
+        "beginner": 1,
+        "progressing": 2,
+        "intermediate": 8,
+        "advanced": 9,
+        "expert": 10,
+        "low_paddle_strength": 2,
+        "high_paddle_strength": 10
+      },
+      "style_tags": [
+        "technical",
+        "sensitive",
+        "vertical",
+        "drivey"
+      ],
+      "quiver_roles": [
+        "performance",
+        "competition"
+      ],
+      "family_governance": {
+        "previous_public_family": "performance_shortboard",
+        "base_public_family": "performance_shortboard",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_shortboard."
+      },
+      "evidence": {
+        "official_source_url": "https://www.aipasurf.com/products/dark-horse-1",
+        "manufacturer_description": "During the testing phase of the Dark Twinn, Duke wanted to feel the point of difference if it was reconfigured for a quad arrangement. As a fraternal sibling of the Dark Twinn, The Dark Horse was developed as the quad specific adaptation of the design with every element of the 2 designs being identical , except for shifting the wing forward to correlate with the quad forward fins. The result was a more controlled/predictable response on rail with an intense precision feeling/ reaction in the pocket and increased stability to handle bigger surf than its predecessor. The Dark Horses sleek / active outline, winged thumb tail rear section, moderate rocker, full-lower apex rail, and staged bottom contour create a lively yet controlled planning surface, while the combination of wing to fin placement,wing flute and heavy vee with double concave out the tail creates an intuitive tipping point for your backfoot to transfer rail to rail effortlessly with minimal pressure for tight in the pocket reactions or long drawn out carves. These design elements and Quad specific fin set up translate seamlessly for surfers at intermediate to professional level and gives surfers the ability to tap into a precision side of high performance surfing.This became a trusty board for the difficult conditions in the North American WQS, from East to West Coast for AIPA Team rider, Sage Guinaldo. He made his way through many heats in his 2021 QS tour with this blade in his quiver. Wave range: Average to above average/ shoulder high to well overhead. Use in conditions you would either use your standard shortboard or groveler. Fin Configuration: Twin+trailer/ Suggest Twin only up to shoulder high and add trailer for over shoulder high.. Suggested Fins: Primary/(NVS) Horsemen Quads, Alternative(FUTURES)AIPA x MAYHEM \u201cTorches\u201d. Design Range: 5\u20190\u201d to 6\u20194\u201d Target Sizing: 1-2\u201d below standard shortboard with 1/2L to1L added volume depending on skill level.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: vee."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93005,
+      "canonical_key": "aipa-surf::super-nova",
+      "brand": "AIPA Surf",
+      "model": "Super Nova",
+      "public_family": "groveller",
+      "primary_category": "groveller",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "wide_centre",
+        "nose": "full",
+        "tail": [
+          "squash"
+        ],
+        "rocker_entry": "low",
+        "rocker_tail": "low",
+        "rails": "full",
+        "foil": "forward",
+        "volume_distribution": "forward",
+        "bottom_contours": [
+          "single",
+          "double"
+        ],
+        "fin_configurations": [
+          "5_fin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 8,
+        "wave_entry": 9,
+        "speed_generation": 9,
+        "drive": 6,
+        "release": 8,
+        "hold": 4,
+        "forgiveness": 9,
+        "stability": 9,
+        "sensitivity": 5,
+        "projection": 5,
+        "pivot": 8,
+        "carve": 5,
+        "glide": 5,
+        "turning_radius": 3
+      },
+      "conditions": {
+        "weak_waves": 10,
+        "average_waves": 7,
+        "powerful_waves": 2,
+        "beach_break": 9,
+        "point_break": 5,
+        "reef_break": 3,
+        "hollow_waves": 2,
+        "open_face": 5
+      },
+      "rider_fit": {
+        "beginner": 6,
+        "progressing": 9,
+        "intermediate": 9,
+        "advanced": 9,
+        "expert": 7,
+        "low_paddle_strength": 9,
+        "high_paddle_strength": 6
+      },
+      "style_tags": [
+        "easy_speed",
+        "forgiving",
+        "playful",
+        "fast",
+        "stable"
+      ],
+      "quiver_roles": [
+        "small_wave",
+        "summer"
+      ],
+      "family_governance": {
+        "previous_public_family": "groveller",
+        "base_public_family": "groveller",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category groveller."
+      },
+      "evidence": {
+        "official_source_url": "https://www.aipasurf.com/products/super-nova",
+        "manufacturer_description": "The Supernova, co-designed by Aipa Surfboards and Noel Salas of Surf n\u2019 Show, is a next-generation high-performance groveler built to ignite small waves and wave pools alike. Engineered to thrive in 1\u2019\u20133\u2019 surf, the Supernova isn\u2019t a fish or a hybrid\u2014it\u2019s a true high-performance groveler designed for speed, precision, and explosive responsiveness. The outline is compact and refined, built for quick rail-to-rail action and tight turns in the pocket. A subtle single to double concave bottom generates lift and drive, while the tail design adds control and snap even in soft or mushy conditions. Whether you\u2019re carving through a local beach break or threading a modern wave pool, the Supernova lights up weak waves with true high-performance flair.. If you\u2019re chasing a board that surfs like a shortboard but dominates in gutless surf, the Aipa Supernova is your go-to small-wave weapon. *Fins not included. Recommended fin - F4 Legacy Neutral 5-Fin",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
     {
       "canonical_model_id": 8114,
       "canonical_key": "album::bom-dia",
@@ -1834,6 +2301,780 @@
         "review_required": false,
         "notes": [
           "Applied governed evidence rule: single concave.",
+          "Applied governed evidence rule: vee."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93006,
+      "canonical_key": "aloha-surfboards::aloha-lopez-new-fish",
+      "brand": "Aloha Surfboards",
+      "model": "ALOHA LOPEZ NEW FISH",
+      "public_family": "fish",
+      "primary_category": "performance_fish",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "balanced",
+        "nose": "medium",
+        "tail": [
+          "swallow",
+          "squash",
+          "round"
+        ],
+        "rocker_entry": "medium_low",
+        "rocker_tail": "medium",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "single",
+          "double"
+        ],
+        "fin_configurations": [
+          "thruster"
+        ]
+      },
+      "behaviour": {
+        "paddle": 7,
+        "wave_entry": 7,
+        "speed_generation": 10,
+        "drive": 9,
+        "release": 9,
+        "hold": 7,
+        "forgiveness": 7,
+        "stability": 7,
+        "sensitivity": 8,
+        "projection": 8,
+        "pivot": 8,
+        "carve": 8,
+        "glide": 5,
+        "turning_radius": 5
+      },
+      "conditions": {
+        "weak_waves": 8,
+        "average_waves": 8,
+        "powerful_waves": 7,
+        "beach_break": 8,
+        "point_break": 7,
+        "reef_break": 8,
+        "hollow_waves": 7,
+        "open_face": 8
+      },
+      "rider_fit": {
+        "beginner": 3,
+        "progressing": 6,
+        "intermediate": 8,
+        "advanced": 9,
+        "expert": 9,
+        "low_paddle_strength": 6,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "fast",
+        "drivey",
+        "responsive"
+      ],
+      "quiver_roles": [
+        "small_wave",
+        "daily_driver",
+        "reef_alternative"
+      ],
+      "family_governance": {
+        "previous_public_family": "fish",
+        "base_public_family": "fish",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_fish."
+      },
+      "evidence": {
+        "official_source_url": "https://aloha.com.au/products/lopez-new-fish-shadow-force",
+        "manufacturer_description": "NEW FISH SHADOW FORCE \u201cI love this design. The new fish helped me solve a major hangup I was having with original fish designs - the swallowtails. I only like a swallow tail if it is built as a quad for fast point breaks or with a tiny swallow on a twin with a trailer for mushy beach breaks. Neither of those is the best suited for today\u2019s surfing or geared towards how I like to ride and shape surfboards. My goal when shaping is to make the experience as fun and easy as possible. Allowing you to surf better and more.\u201c - Corey Lopez. The NEW FISH has a clean curve through the tail and the pulled in squash is best surfed with your normal thruster setup. If you want to ride fast and free in small surf, go a size smaller with the fins. This board flies. For top speed and quickness, nothing is faster on the water than the New Fish. LENGTH x WIDTH x THICKNESS = VOLUME: 5\u20195 x 19 1/2 x 2 1/4\u201d 26.63L 5\u20197 x 19 7/8 x 2 5/16\u201d 28.69L 5\u20199 x 20 3/16 x 2 3/8\u201d 30.40L 5\u201911 x 20 5/8 x 2 7/16\u201d 33.12L 6\u20191 x 21 1/8 x 2 9/16\u201d 36.16L CONSTRUCTION: 36gram EPS + 20MM HD Stringer Lamination: Epoxy w/ 45mm Innegra tape @ top + bottom + 1 x 3oz recycled PET cloth + 1 x 4oz E-cloth deck + 1 x 4oz E - cloth bottom Fin Rocker: Low - Medium Bottom Contours: Single to Double Tail Shape: Round Colour: Clear",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: swallow tail."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93007,
+      "canonical_key": "aloha-surfboards::aloha-luna",
+      "brand": "Aloha Surfboards",
+      "model": "ALOHA LUNA",
+      "public_family": "fish",
+      "primary_category": "performance_fish",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "balanced",
+        "nose": "medium",
+        "tail": [
+          "swallow"
+        ],
+        "rocker_entry": "medium_low",
+        "rocker_tail": "medium",
+        "rails": "low_performance",
+        "foil": "balanced",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "single",
+          "double",
+          "channels",
+          "rolled"
+        ],
+        "fin_configurations": [
+          "quad"
+        ]
+      },
+      "behaviour": {
+        "paddle": 8,
+        "wave_entry": 8,
+        "speed_generation": 10,
+        "drive": 10,
+        "release": 9,
+        "hold": 9,
+        "forgiveness": 6,
+        "stability": 6,
+        "sensitivity": 10,
+        "projection": 9,
+        "pivot": 8,
+        "carve": 8,
+        "glide": 5,
+        "turning_radius": 5
+      },
+      "conditions": {
+        "weak_waves": 10,
+        "average_waves": 8,
+        "powerful_waves": 6,
+        "beach_break": 8,
+        "point_break": 7,
+        "reef_break": 8,
+        "hollow_waves": 6,
+        "open_face": 8
+      },
+      "rider_fit": {
+        "beginner": 3,
+        "progressing": 6,
+        "intermediate": 8,
+        "advanced": 9,
+        "expert": 9,
+        "low_paddle_strength": 6,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "fast",
+        "drivey",
+        "responsive",
+        "sensitive"
+      ],
+      "quiver_roles": [
+        "small_wave",
+        "daily_driver",
+        "reef_alternative"
+      ],
+      "family_governance": {
+        "previous_public_family": "fish",
+        "base_public_family": "fish",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_fish."
+      },
+      "evidence": {
+        "official_source_url": "https://aloha.com.au/products/aloha-luna-shadow-force",
+        "manufacturer_description": "Aloha Luna - Built for speed The Luna is Aloha\u2019s modern take on the small wave fish\u2014fast, loose, and built to fly. Designed with low rocker and full rail volume, it paddles easy, picks up speed fast, and holds momentum through even the weakest sections. Underneath, a single to deep double concave bottom channels water through the board for lift and drive, while the quad fin setup adds control and release. Compact and playful, the Luna is made for surfers who want to have fun and go fast when the waves are anything but perfect. Length x Width x Thickness = Volume: 5'4 x 20 5/8 x 2 71/6 28.74L 5'6 x 21 1/4 x 2 1/2 31.35L 5'8 x 21 15/16 x 2 9/16 34.26L 5'10 x 22 x 2 11/16 36.87L Shadow Force is Aloha\u2019s advanced epoxy construction , designed to deliver traditional flex, feel but with extra pop and durability. Built around a lightweight 36g EPS core with a 20mm PVC stringer for added strength and controlled flex, the board is laminated using low-VOC epoxy resin. The result is a responsive, high-performance ride that feels familiar but offers more speed, spark, and projection through turns. Strong, lively, and built to las. Shadow Force - Lighter, Livelier, Stronger. Features: Material: EPS/Epoxy/Fiberglass Glassing: 6 + 4 x 4 Rocker: Medium/low Rails: Medium/full Tail: Swallow Fin System: Futures",
+        "physical_design_confidence": "high",
+        "behaviour_confidence": "high",
+        "condition_confidence": "high",
+        "rider_fit_confidence": "high",
+        "source_method": "explicit_manufacturer",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: low rocker.",
+          "Applied governed evidence rule: low rails.",
+          "Applied governed evidence rule: swallow.",
+          "Applied governed evidence rule: channels."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93008,
+      "canonical_key": "aloha-surfboards::aloha-skipper",
+      "brand": "Aloha Surfboards",
+      "model": "ALOHA SKIPPER",
+      "public_family": "daily_driver",
+      "primary_category": "performance_daily_driver",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "balanced",
+        "nose": "refined",
+        "tail": [
+          "round_pin",
+          "pin",
+          "round"
+        ],
+        "rocker_entry": "medium",
+        "rocker_tail": "medium_high",
+        "rails": "low_performance",
+        "foil": "balanced",
+        "volume_distribution": "balanced",
+        "bottom_contours": [
+          "rolled"
+        ],
+        "fin_configurations": [
+          "thruster"
+        ]
+      },
+      "behaviour": {
+        "paddle": 6,
+        "wave_entry": 7,
+        "speed_generation": 8,
+        "drive": 9,
+        "release": 7,
+        "hold": 10,
+        "forgiveness": 6,
+        "stability": 6,
+        "sensitivity": 10,
+        "projection": 8,
+        "pivot": 8,
+        "carve": 9,
+        "glide": 4,
+        "turning_radius": 4
+      },
+      "conditions": {
+        "weak_waves": 6,
+        "average_waves": 10,
+        "powerful_waves": 9,
+        "beach_break": 9,
+        "point_break": 8,
+        "reef_break": 9,
+        "hollow_waves": 8,
+        "open_face": 9
+      },
+      "rider_fit": {
+        "beginner": 2,
+        "progressing": 7,
+        "intermediate": 8,
+        "advanced": 8,
+        "expert": 10,
+        "low_paddle_strength": 5,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "responsive",
+        "drivey",
+        "everyday_performance",
+        "fast",
+        "sensitive"
+      ],
+      "quiver_roles": [
+        "daily_driver",
+        "performance"
+      ],
+      "family_governance": {
+        "previous_public_family": "daily_driver",
+        "base_public_family": "daily_driver",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_daily_driver."
+      },
+      "evidence": {
+        "official_source_url": "https://aloha.com.au/products/aloha-skipper-shadow-force",
+        "manufacturer_description": "Aloha Skipper - High volume performance. The Skipper\u2019s built to handle just about anything you throw at it. With a fuller outline, lower entry rocker, and forward wide point, it paddles like a dream and gets you into waves early. The rails are full and forgiving, blending into a foiled round pin tail that gives you hold and flow when it matters. It\u2019s super user-friendly but still performs when the waves turn on. Run it as a thruster for your everyday surf, or switch it to a quad when things get a little more hollow or punchy. If you\u2019re after one board that does a bit of everything \u2014 this is it. Length x Width x Thickness = Volume: 5'10 x 20 x 2 1/2 31.54L 6'0 x 20 1/2 x 2 3/4 36.78L 6'1 x 20 1/2 x 2 3/4 36.88L 6'2 x 21 x 3 42.36L 6'3 x 21 x 3 41.54L 6'5 x 21 1/2 x 3 1/16 45.85L Shadow Force is Aloha\u2019s advanced epoxy construction , designed to deliver traditional flex, feel but with extra pop and durability. Built around a lightweight 36g EPS core with a 20mm PVC stringer for added strength and controlled flex, the board is laminated using low-VOC epoxy resin. The result is a responsive, high-performance ride that feels familiar but offers more speed, spark, and projection through turns. Strong, lively, and built to las. Shadow Force - Lighter, Livelier, Stronger. Features: Material: EPS/Epoxy/Fiberglass Glassing: 6 + 4 x 4 Rocker: Medium/low Rails: Medium/full Tail: Round/pin Fin System: FCSII",
+        "physical_design_confidence": "high",
+        "behaviour_confidence": "high",
+        "condition_confidence": "high",
+        "rider_fit_confidence": "high",
+        "source_method": "explicit_manufacturer",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: low rails.",
+          "Applied governed evidence rule: round pin."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93009,
+      "canonical_key": "aloha-surfboards::aloha-wing-man",
+      "brand": "Aloha Surfboards",
+      "model": "ALOHA WING MAN",
+      "public_family": "groveller",
+      "primary_category": "groveller",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "wide_centre",
+        "nose": "full",
+        "tail": [
+          "swallow"
+        ],
+        "rocker_entry": "low",
+        "rocker_tail": "low",
+        "rails": "low_performance",
+        "foil": "forward",
+        "volume_distribution": "forward",
+        "bottom_contours": [
+          "single",
+          "double"
+        ],
+        "fin_configurations": [
+          "twin_trailer"
+        ]
+      },
+      "behaviour": {
+        "paddle": 8,
+        "wave_entry": 9,
+        "speed_generation": 10,
+        "drive": 7,
+        "release": 9,
+        "hold": 5,
+        "forgiveness": 8,
+        "stability": 8,
+        "sensitivity": 7,
+        "projection": 5,
+        "pivot": 8,
+        "carve": 5,
+        "glide": 5,
+        "turning_radius": 3
+      },
+      "conditions": {
+        "weak_waves": 10,
+        "average_waves": 7,
+        "powerful_waves": 2,
+        "beach_break": 9,
+        "point_break": 5,
+        "reef_break": 3,
+        "hollow_waves": 2,
+        "open_face": 5
+      },
+      "rider_fit": {
+        "beginner": 6,
+        "progressing": 9,
+        "intermediate": 9,
+        "advanced": 9,
+        "expert": 7,
+        "low_paddle_strength": 9,
+        "high_paddle_strength": 6
+      },
+      "style_tags": [
+        "easy_speed",
+        "forgiving",
+        "playful",
+        "fast",
+        "stable"
+      ],
+      "quiver_roles": [
+        "small_wave",
+        "summer"
+      ],
+      "family_governance": {
+        "previous_public_family": "groveller",
+        "base_public_family": "groveller",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category groveller."
+      },
+      "evidence": {
+        "official_source_url": "https://aloha.com.au/products/wing-man-pu-clear",
+        "manufacturer_description": "Aloha Wingman \u2014 Fast, Loose & Made to Fly The Wingman is designed for smooth, fast surfing in knee- to shoulder-high waves. It\u2019s all about effortless speed, tight turns, and flow\u2014ideal for playful conditions or wave pools. The single wing swallow tail and twin + stabiliser setup give it the perfect mix of looseness, drive, and control. With medium rails and a single-to-double concave, it stays quick and responsive while carving or cruising. A great option for intermediate to advanced surfers looking for more performance in smaller surf. Length x Width x Thickness = Volume: 5\u20198 x 19 3/4 x 2 3/8\u201d 29.41L 5\u201910 x 20 x 2 1/2\u201d 32.28L 6\u20190 x 20 1/4 x 2 5/8\u201d 35.33L 6\u20192 x 20 1/2 x 2 7/8\u201d 40.20L Features: Material: PU/Poly/Fiberglass Glassing: Standard 4 + 4 x 4 Rocker: Medium/low Rails: Medium/full Tail: Flyer swallow Fin System: Futures",
+        "physical_design_confidence": "high",
+        "behaviour_confidence": "high",
+        "condition_confidence": "high",
+        "rider_fit_confidence": "high",
+        "source_method": "explicit_manufacturer",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: low rails.",
+          "Applied governed evidence rule: swallow tail."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93010,
+      "canonical_key": "aloha-surfboards::aloha-x-lopez-h2",
+      "brand": "Aloha Surfboards",
+      "model": "ALOHA x LOPEZ H2",
+      "public_family": "daily_driver",
+      "primary_category": "performance_daily_driver",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "balanced",
+        "nose": "refined",
+        "tail": [
+          "squash",
+          "square",
+          "round"
+        ],
+        "rocker_entry": "medium",
+        "rocker_tail": "medium_high",
+        "rails": "low_performance",
+        "foil": "balanced",
+        "volume_distribution": "balanced",
+        "bottom_contours": [
+          "rolled",
+          "flat"
+        ],
+        "fin_configurations": [
+          "thruster",
+          "five_fin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 6,
+        "wave_entry": 8,
+        "speed_generation": 9,
+        "drive": 8,
+        "release": 8,
+        "hold": 10,
+        "forgiveness": 6,
+        "stability": 6,
+        "sensitivity": 10,
+        "projection": 8,
+        "pivot": 9,
+        "carve": 9,
+        "glide": 4,
+        "turning_radius": 4
+      },
+      "conditions": {
+        "weak_waves": 6,
+        "average_waves": 9,
+        "powerful_waves": 8,
+        "beach_break": 9,
+        "point_break": 8,
+        "reef_break": 9,
+        "hollow_waves": 8,
+        "open_face": 9
+      },
+      "rider_fit": {
+        "beginner": 2,
+        "progressing": 5,
+        "intermediate": 8,
+        "advanced": 9,
+        "expert": 10,
+        "low_paddle_strength": 5,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "responsive",
+        "drivey",
+        "everyday_performance",
+        "fast",
+        "sensitive"
+      ],
+      "quiver_roles": [
+        "daily_driver",
+        "performance"
+      ],
+      "family_governance": {
+        "previous_public_family": "daily_driver",
+        "base_public_family": "daily_driver",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_daily_driver."
+      },
+      "evidence": {
+        "official_source_url": "https://aloha.com.au/products/alohaxlopez-h2-shadow-force-clear",
+        "manufacturer_description": "Aloha x Lopez H2 \u2014 Shadow Force Construction The H2, like all my boards, started with a simple goal\u2014make something my friends could ride and have more fun on. That\u2019s always been the heart of it for me: building boards that feel good and make average days feel special. I shaped the H2 to fly across flat sections, with a low rocker and a fuller outline up front that picks up speed quickly and keeps momentum flowing. The tail pulls in with a touch more rocker and a rounded squash, letting you stay loose and in control through steeper sections. It\u2019s easy to ride, super responsive, and smooth through turns. Whether you're pushing progression or just out for a fun session, the H2 delivers. By Corey Lopez. Length x Width x Thickness = Volume 5\u20196 x 19 1/4 x 2 5/16\u201d 25L 5\u20198 x 19 3/4 x 2 3/8\u201d 27L 5\u201910 x 20 1/2 x 2 1/2\u201d 31L 6\u20190 x 20 3/4 x 2 5/8\u201d 36L 6\u20192 x 21 1/4 x 2 3/4\u201d 40L Shadow Force is Aloha\u2019s advanced epoxy construction , designed to deliver traditional flex, feel but with extra pop and durability. Built around a lightweight 36g EPS core with a 20mm PVC stringer for added strength and controlled flex, the board is laminated using low-VOC epoxy resin. The result is a responsive, high-performance ride that feels familiar but offers more speed, spark, and projection through turns. Strong, lively, and built to las. Shadow Force - Lighter, Livelier, Stronger Features: Material: EPS/Epoxy/Fiberglass Glassing: 6 + 4 x 4 Rocker: Medium/low Rails: Medium/full Tail: Round/square Fin System: Futures",
+        "physical_design_confidence": "high",
+        "behaviour_confidence": "high",
+        "condition_confidence": "high",
+        "rider_fit_confidence": "high",
+        "source_method": "explicit_manufacturer",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: low rocker.",
+          "Applied governed evidence rule: more rocker.",
+          "Applied governed evidence rule: low rails."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93011,
+      "canonical_key": "aloha-surfboards::ez-mid",
+      "brand": "Aloha Surfboards",
+      "model": "EZ Mid",
+      "public_family": "mid_length",
+      "primary_category": "performance_mid_length",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "narrow",
+        "nose": "refined",
+        "tail": [
+          "round_pin"
+        ],
+        "rocker_entry": "medium",
+        "rocker_tail": "medium_high",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "single",
+          "double",
+          "vee",
+          "rolled"
+        ],
+        "fin_configurations": [
+          "single"
+        ]
+      },
+      "behaviour": {
+        "paddle": 10,
+        "wave_entry": 9,
+        "speed_generation": 8,
+        "drive": 9,
+        "release": 7,
+        "hold": 9,
+        "forgiveness": 6,
+        "stability": 8,
+        "sensitivity": 8,
+        "projection": 9,
+        "pivot": 6,
+        "carve": 10,
+        "glide": 9,
+        "turning_radius": 9
+      },
+      "conditions": {
+        "weak_waves": 4,
+        "average_waves": 7,
+        "powerful_waves": 9,
+        "beach_break": 6,
+        "point_break": 10,
+        "reef_break": 10,
+        "hollow_waves": 8,
+        "open_face": 10
+      },
+      "rider_fit": {
+        "beginner": 6,
+        "progressing": 7,
+        "intermediate": 8,
+        "advanced": 7,
+        "expert": 10,
+        "low_paddle_strength": 7,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "glide",
+        "drivey",
+        "performance",
+        "fast",
+        "stable"
+      ],
+      "quiver_roles": [
+        "performance_mid_length",
+        "point_break",
+        "reef"
+      ],
+      "family_governance": {
+        "previous_public_family": "mid_length",
+        "base_public_family": "mid_length",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_mid_length."
+      },
+      "evidence": {
+        "official_source_url": "https://aloha.com.au/products/aloha-ez-mid-ecoskin-natural-1",
+        "manufacturer_description": "Aloha EZ MID EcoSkin \u2013 Smooth Trim, Effortless Style & Eco-Minded Construction The EZ MID EcoSkin is your answer to easy-riding mid-length flow, combining smooth lines with eco-friendly materials. With classic trim speed, clean turns, and sustainable construction, it\u2019s the board for anyone who loves style, simplicity, and glide\u2014without the bulk or environmental impact. Why Choose the EZ MID EcoSkin? \u2022 Designed for easy cruising with clean, classic lines\u2014delivers pure trim speed and flowing rail-to-rail transitions \u2022 Medium rocker boosts paddle power and keeps turning lively and precise, so you can catch more waves and link turns with ease \u2022 Single to double concave bottom with slight vee through the tail generates lift, speed, and buttery smooth transitions \u2022 Centred wide point adds stability and reduces swing weight in the nose, offering a balanced, controlled feel in all conditions \u2022 Ride as a single fin for classic glide, or add side bites in bigger or steeper surf for more hold and control \u2022 Constructed using Aloha\u2019s EcoSkin tech\u2014sustainably sourced Paulownia wood, bio-based epoxy resin, and minimised waste for strength, flex, and reduced carbon footprint Sizing and Volumes \u2022 6\u20196\u201d x 20 3/4\u201d x 2 5/8\u201d (38.94L) \u2022 7\u20190\u201d x 21 1/8\u201d x 2 3/4\u201d (44.27L) \u2022 7\u20196\u201d x 21 3/4\u201d x 2 7/8\u201d (51.13L) Key Specs \u2022 Material: EPS/Epoxy/Fiberglass with Paulownia skin, bio-based epoxy \u2022 Glassing: 200g + Paulownia skin + 160g cloth \u2022 Rocker: High/medium for paddle and response \u2022 Rails: Medium/full for stability and forgiveness \u2022 Fin system: Single box with Futures side bites (2+1 or single) Benefits \u2022 Smooth, easy paddling and effortless catching of waves\u2014perfect for classic surf style \u2022 Stable and intuitive ride, without beginner-level bulk or sluggishness \u2022 Versatile fin setup for tailored feel\u2014classic single or extra bite for punchier conditions \u2022 Eco-conscious construction for surfers who want a lighter footprint with high durability \u2022 Ideal board for those wanting simple elegance and functional glide across all conditions Who\u2019s it For? \u2022 Beginners and intermediates wanting an easy, confidence-building mid-length \u2022 Advanced riders seeking trim speed, glide, and classic lines in a greener package \u2022 Surfers who value timeless style, fuss-free design, and reduced environmental impact The Aloha EZ MID EcoSkin makes every session smoother\u2014delivering classic lines, effortless speed, and true sustainability for the mindful modern surfer. The Aloha EZ MID Ecoskin \u2014 Smooth lines, Eco-friendly The EZ MID is built for surfers who want an easy to ride longer board without the bulky feel. It\u2019s all about clean lines, trim speed, and flowing turns\u2014ideal for surfers who appreciate style and simplicity. Designed with a medium rocker for increased paddle power and manoeuvrability, the EZ MID features a single to double concave with a slight vee through the tail. The bottom contour helps generate speed, lift and smooth transitions, The wide point is centered for stability and reduced swing weight up front. Ride it as a single fin for classic flow or add side bites for extra control in steeper conditions Length x Width x Thickness = Volume: 6\u20196\u201c X 20 3/4\u201c X 2 5/8 38.94L 7'0 x 21 1/8 x 2 3/4 44.27L 7'6 x 21 3/4 x 2 7/8 51.13L Ecoskin is Aloha\u2019s eco-conscious construction , engineered to reduce environmental impact while delivering the strength, speed, and responsiveness you expect from a performance board, and the construction process significantly minimises waste. Sustainably sourced Paulownia wood adds natural strength and flex, while a bio-based epoxy resin replaces traditional petroleum-based options\u2014reducing the board\u2019s carbon footprint without compromising durability. Lightweight, tough, and made to last, Ecoskin boards are a smarter choice for surfers who care about the planet and their performance. Features: Material: EPS/Epoxy/Fiberglass Glassing: 200gram + Paulonia Skin + 160gram Cloth Rocker: High/medium Rails: Medium/full Fin System: Single box + Futures",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: paddle power.",
+          "Applied governed evidence rule: vee."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93012,
+      "canonical_key": "aloha-surfboards::fun-division-mid",
+      "brand": "Aloha Surfboards",
+      "model": "FUN DIVISION MID",
+      "public_family": "mid_length",
+      "primary_category": "performance_mid_length",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "narrow",
+        "nose": "refined",
+        "tail": [
+          "round_pin"
+        ],
+        "rocker_entry": "medium",
+        "rocker_tail": "medium_high",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "single",
+          "double",
+          "vee"
+        ],
+        "fin_configurations": [
+          "twin",
+          "two_plus_one",
+          "thruster"
+        ]
+      },
+      "behaviour": {
+        "paddle": 8,
+        "wave_entry": 8,
+        "speed_generation": 8,
+        "drive": 9,
+        "release": 6,
+        "hold": 9,
+        "forgiveness": 6,
+        "stability": 7,
+        "sensitivity": 8,
+        "projection": 9,
+        "pivot": 6,
+        "carve": 10,
+        "glide": 9,
+        "turning_radius": 9
+      },
+      "conditions": {
+        "weak_waves": 4,
+        "average_waves": 8,
+        "powerful_waves": 9,
+        "beach_break": 6,
+        "point_break": 10,
+        "reef_break": 10,
+        "hollow_waves": 8,
+        "open_face": 10
+      },
+      "rider_fit": {
+        "beginner": 2,
+        "progressing": 5,
+        "intermediate": 8,
+        "advanced": 4,
+        "expert": 10,
+        "low_paddle_strength": 6,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "glide",
+        "drivey",
+        "performance",
+        "fast"
+      ],
+      "quiver_roles": [
+        "performance_mid_length",
+        "point_break",
+        "reef"
+      ],
+      "family_governance": {
+        "previous_public_family": "mid_length",
+        "base_public_family": "mid_length",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_mid_length."
+      },
+      "evidence": {
+        "official_source_url": "https://aloha.com.au/products/fun-division-mid-pu-blue",
+        "manufacturer_description": "FUN DIVISION MID PU BLUE Sizing and Volumes 6'8 x 21 1/4 x 2 7/8 45.19L 7'0 x 21 3/4 x 3 50.62L 7'6 X 22 1/4 X 3 55.58 L",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93013,
+      "canonical_key": "aloha-surfboards::jalapeno",
+      "brand": "Aloha Surfboards",
+      "model": "JALAPENO",
+      "public_family": "performance_shortboard",
+      "primary_category": "performance_shortboard",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "curvy",
+        "nose": "pointed",
+        "tail": [
+          "square",
+          "round"
+        ],
+        "rocker_entry": "medium_high",
+        "rocker_tail": "high",
+        "rails": "low_performance",
+        "foil": "refined",
+        "volume_distribution": "balanced",
+        "bottom_contours": [
+          "single",
+          "double",
+          "vee"
+        ],
+        "fin_configurations": [
+          "5_fin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 6,
+        "wave_entry": 6,
+        "speed_generation": 7,
+        "drive": 9,
+        "release": 10,
+        "hold": 10,
+        "forgiveness": 2,
+        "stability": 3,
+        "sensitivity": 10,
+        "projection": 10,
+        "pivot": 10,
+        "carve": 10,
+        "glide": 2,
+        "turning_radius": 2
+      },
+      "conditions": {
+        "weak_waves": 3,
+        "average_waves": 8,
+        "powerful_waves": 10,
+        "beach_break": 8,
+        "point_break": 8,
+        "reef_break": 10,
+        "hollow_waves": 10,
+        "open_face": 9
+      },
+      "rider_fit": {
+        "beginner": 1,
+        "progressing": 2,
+        "intermediate": 8,
+        "advanced": 9,
+        "expert": 10,
+        "low_paddle_strength": 3,
+        "high_paddle_strength": 10
+      },
+      "style_tags": [
+        "technical",
+        "sensitive",
+        "vertical",
+        "drivey"
+      ],
+      "quiver_roles": [
+        "performance",
+        "competition"
+      ],
+      "family_governance": {
+        "previous_public_family": "performance_shortboard",
+        "base_public_family": "performance_shortboard",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_shortboard."
+      },
+      "evidence": {
+        "official_source_url": "https://aloha.com.au/products/jalapeno-pu-1",
+        "manufacturer_description": "Aloha Jalapeno - Best selling Shortboard The Jalapeno is a high-performance all-rounder built for surfers who want one board that can handle it all. Whether you're surfing 2-4 foot beach breaks, tackling overhead hollow waves, or dialing in your turns at a wave pool, this board delivers speed, control, and adaptability\u2014making it our best-selling shortboard of all time. With a wide, curvy outline, the Jalapeno offers extra stability and effortless speed. A single-to-double concave, slight vee in the tail, wider nose, and lower entry rocker provide excellent paddle power and quick acceleration, ensuring you're always in the right spot at the right time. The versatile 5-fin setup gives you options \u2014 ride it as a thruster for pivot and release or as a quad for extra drive and speed. Length x Width x Thickness = Volume: 5\u20196 x 19 1/4 x 2 1/2\u201d 28.12L 5\u20198 x 19 1/2 x 2 9/16\u201d 30.10L 5\u201910 x 19 3/4 x 2 5/8\u201d 32.15L 6\u20190 x 20 1/4 x 2 11/16\u201d 34.75L 6\u20192 x 20 1/2 x 2 3/4\u201d. 36.98L 6\u20194 x 20 3/4 x 2 7/8\u201d 40.11L 6\u20196 x 21 x 3\u201d 43.57L Features: Material: PU/Poly/Fiberglass Glassing: Standard 4 + 4 x 4 Rocker: Medium/low Rails: Medium/full Tail: Round square Fin System: Futures",
+        "physical_design_confidence": "high",
+        "behaviour_confidence": "high",
+        "condition_confidence": "high",
+        "rider_fit_confidence": "high",
+        "source_method": "explicit_manufacturer",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: low rails.",
+          "Applied governed evidence rule: paddle power.",
           "Applied governed evidence rule: vee."
         ]
       }
@@ -41537,6 +42778,1320 @@
       "evidence": {
         "official_source_url": "https://simonandersonsurfboards.com/surfboards/custom-only-boards/xfc/",
         "manufacturer_description": "Inception Simon surfboard model surfed by just about every Surfing World Champion from Shaun Tomson to Kelly Slater. All-round small wave high performance.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93014,
+      "canonical_key": "torq-surfboards::24-7",
+      "brand": "Torq Surfboards",
+      "model": "24/7",
+      "public_family": "longboard",
+      "primary_category": "longboard",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "parallel",
+        "nose": "full",
+        "tail": [
+          "round"
+        ],
+        "rocker_entry": "low",
+        "rocker_tail": "low",
+        "rails": "soft",
+        "foil": "forward",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "flat"
+        ],
+        "fin_configurations": [
+          "single",
+          "two_plus_one"
+        ]
+      },
+      "behaviour": {
+        "paddle": 10,
+        "wave_entry": 10,
+        "speed_generation": 6,
+        "drive": 8,
+        "release": 4,
+        "hold": 6,
+        "forgiveness": 9,
+        "stability": 10,
+        "sensitivity": 3,
+        "projection": 6,
+        "pivot": 3,
+        "carve": 8,
+        "glide": 10,
+        "turning_radius": 10
+      },
+      "conditions": {
+        "weak_waves": 7,
+        "average_waves": 8,
+        "powerful_waves": 5,
+        "beach_break": 7,
+        "point_break": 10,
+        "reef_break": 6,
+        "hollow_waves": 3,
+        "open_face": 10
+      },
+      "rider_fit": {
+        "beginner": 9,
+        "progressing": 10,
+        "intermediate": 10,
+        "advanced": 8,
+        "expert": 9,
+        "low_paddle_strength": 10,
+        "high_paddle_strength": 5
+      },
+      "style_tags": [
+        "glide",
+        "stable",
+        "flowing",
+        "drivey",
+        "forgiving"
+      ],
+      "quiver_roles": [
+        "longboard",
+        "cruiser",
+        "small_wave"
+      ],
+      "family_governance": {
+        "previous_public_family": "longboard",
+        "base_public_family": "longboard",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category longboard."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/longboard/24-7.html",
+        "manufacturer_description": "TET 24/7 PINLINE TET 24/7 POP TET 24/7 LAGUNA TET 24/7 LEGACY The 24/7 is the go to, all round longboard design for every day of the week. It\u2019s a board you can put in the van without checking the webcams; from kneehigh to overhead, for noseriding, cruising or turns, it works. Shape wise, the 24/7 sits right in the middle between the nose riders and pro performers \u2013 a balanced outline with nose width for nose rides, a straight middle section for trim and a pulled in tail for turns and control in the pocket. The rocker matches the outline \u2013 low entry for stability, flat middle for speed and a flip in the tail for turns. There\u2019s a good volume for max paddling, with a foiled rail through the fins and at the tail. The 24/7 is a one board longboard quiver \u2013 a true all rounder. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93015,
+      "canonical_key": "torq-surfboards::bigboy-23",
+      "brand": "Torq Surfboards",
+      "model": "Bigboy 23",
+      "public_family": "daily_driver",
+      "primary_category": "performance_daily_driver",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "balanced",
+        "nose": "refined",
+        "tail": [
+          "squash"
+        ],
+        "rocker_entry": "medium",
+        "rocker_tail": "medium_high",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "balanced",
+        "bottom_contours": [
+          "single",
+          "double",
+          "vee"
+        ],
+        "fin_configurations": [
+          "thruster",
+          "five_fin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 6,
+        "wave_entry": 7,
+        "speed_generation": 8,
+        "drive": 8,
+        "release": 8,
+        "hold": 8,
+        "forgiveness": 7,
+        "stability": 7,
+        "sensitivity": 8,
+        "projection": 8,
+        "pivot": 8,
+        "carve": 9,
+        "glide": 4,
+        "turning_radius": 4
+      },
+      "conditions": {
+        "weak_waves": 6,
+        "average_waves": 8,
+        "powerful_waves": 8,
+        "beach_break": 9,
+        "point_break": 8,
+        "reef_break": 9,
+        "hollow_waves": 7,
+        "open_face": 9
+      },
+      "rider_fit": {
+        "beginner": 2,
+        "progressing": 7,
+        "intermediate": 8,
+        "advanced": 8,
+        "expert": 10,
+        "low_paddle_strength": 5,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "responsive",
+        "drivey",
+        "everyday_performance",
+        "fast"
+      ],
+      "quiver_roles": [
+        "daily_driver",
+        "performance"
+      ],
+      "family_governance": {
+        "previous_public_family": "daily_driver",
+        "base_public_family": "daily_driver",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_daily_driver."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/shortboard/bigboy-23.html",
+        "manufacturer_description": "TET BIGBOY 23 PINLINE TET BIGBOY 23 POP TET BIGBOY 23 LAGUNA TET BIGBOY 23 LEGACY This is a wolf in sheep\u2019s clothing. You think you\u2019re looking at a funboard? Think again. This is a shortboard on steroids. On paper it\u2019s a funboard and if you\u2019re looking to catch green waves and do some turns, the width, volume and length means this board will do it all day long \u2013 it\u2019s perfect for you. But in the hands of a seasoned surfer it\u2019ll come alive. Think of it as a shortboard with a little extra width in the nose but all the performance features to surf hard and fast. For any big guy rippers out there, longboarders wanting a shorter board or intermediates, look no further. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93016,
+      "canonical_key": "torq-surfboards::bigboy-fish",
+      "brand": "Torq Surfboards",
+      "model": "Bigboy Fish",
+      "public_family": "fish",
+      "primary_category": "performance_fish",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "balanced",
+        "nose": "medium",
+        "tail": [
+          "swallow"
+        ],
+        "rocker_entry": "medium_low",
+        "rocker_tail": "medium",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "single",
+          "double",
+          "vee"
+        ],
+        "fin_configurations": [
+          "5_fin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 7,
+        "wave_entry": 7,
+        "speed_generation": 10,
+        "drive": 9,
+        "release": 9,
+        "hold": 7,
+        "forgiveness": 7,
+        "stability": 7,
+        "sensitivity": 8,
+        "projection": 8,
+        "pivot": 8,
+        "carve": 8,
+        "glide": 5,
+        "turning_radius": 5
+      },
+      "conditions": {
+        "weak_waves": 8,
+        "average_waves": 8,
+        "powerful_waves": 7,
+        "beach_break": 8,
+        "point_break": 7,
+        "reef_break": 8,
+        "hollow_waves": 7,
+        "open_face": 8
+      },
+      "rider_fit": {
+        "beginner": 3,
+        "progressing": 7,
+        "intermediate": 8,
+        "advanced": 8,
+        "expert": 9,
+        "low_paddle_strength": 6,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "fast",
+        "drivey",
+        "responsive"
+      ],
+      "quiver_roles": [
+        "small_wave",
+        "daily_driver",
+        "reef_alternative"
+      ],
+      "family_governance": {
+        "previous_public_family": "fish",
+        "base_public_family": "fish",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_fish."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/fish/bigboy-fish.html",
+        "manufacturer_description": "An extension of the classic Fish design, the Bigboy Fish mixes the hidden volume and manoeuvrability of the BigBoy 23 model with the flowy feel of a Fish. With a wide template up front the Bigboy Fish is designed to paddle fast, catch waves and accelerate quickly. The straighter rail and wide swallow tail naturally offers tons of drive and forward projection, to deliver fast down the line speed and powerful rail turns. Available with 5 fin plugs for a Quad or Thruster set up. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: swallow tail."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93017,
+      "canonical_key": "torq-surfboards::chopper",
+      "brand": "Torq Surfboards",
+      "model": "Chopper",
+      "public_family": "mid_length",
+      "primary_category": "performance_mid_length",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "narrow",
+        "nose": "refined",
+        "tail": [
+          "round_pin"
+        ],
+        "rocker_entry": "low",
+        "rocker_tail": "medium_high",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "forward",
+        "bottom_contours": [
+          "single",
+          "double"
+        ],
+        "fin_configurations": [
+          "2_1"
+        ]
+      },
+      "behaviour": {
+        "paddle": 8,
+        "wave_entry": 8,
+        "speed_generation": 8,
+        "drive": 9,
+        "release": 6,
+        "hold": 9,
+        "forgiveness": 6,
+        "stability": 7,
+        "sensitivity": 8,
+        "projection": 9,
+        "pivot": 6,
+        "carve": 10,
+        "glide": 9,
+        "turning_radius": 9
+      },
+      "conditions": {
+        "weak_waves": 4,
+        "average_waves": 8,
+        "powerful_waves": 9,
+        "beach_break": 6,
+        "point_break": 10,
+        "reef_break": 10,
+        "hollow_waves": 8,
+        "open_face": 10
+      },
+      "rider_fit": {
+        "beginner": 2,
+        "progressing": 5,
+        "intermediate": 8,
+        "advanced": 9,
+        "expert": 10,
+        "low_paddle_strength": 6,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "glide",
+        "drivey",
+        "performance",
+        "fast"
+      ],
+      "quiver_roles": [
+        "performance_mid_length",
+        "point_break",
+        "reef"
+      ],
+      "family_governance": {
+        "previous_public_family": "mid_length",
+        "base_public_family": "mid_length",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_mid_length."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/midlength/chopper.html",
+        "manufacturer_description": "The Chopper is a super versatile shape \u2013 it\u2019s got the volume and length to pick up kneehigh waves or to get an early takeoff in well overhead surf. The design has a bit of volume forward and a low entry rocker so it has a nice forward trim feel on an open face or in small conditions. There\u2019s a nice bit of foam under your chest making it paddle well without feeling big and corky. In the tail of the board, the more modern refinement on a classic style egg shows \u2013 the pulled in tail combined with a low rail, single to double concave and smooth exit rocker makes this unexpectedly lively when surfed from the tail. It has a 2+1 fin set up and can be ridden as 2+1, single or twin. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "high",
+        "behaviour_confidence": "high",
+        "condition_confidence": "high",
+        "rider_fit_confidence": "high",
+        "source_method": "explicit_manufacturer",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93018,
+      "canonical_key": "torq-surfboards::comp2",
+      "brand": "Torq Surfboards",
+      "model": "Comp2",
+      "public_family": "performance_shortboard",
+      "primary_category": "performance_shortboard",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "narrow",
+        "nose": "pointed",
+        "tail": [
+          "squash"
+        ],
+        "rocker_entry": "medium_high",
+        "rocker_tail": "high",
+        "rails": "low_performance",
+        "foil": "refined",
+        "volume_distribution": "balanced",
+        "bottom_contours": [
+          "single",
+          "double",
+          "vee"
+        ],
+        "fin_configurations": [
+          "thruster",
+          "five_fin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 4,
+        "wave_entry": 5,
+        "speed_generation": 7,
+        "drive": 9,
+        "release": 9,
+        "hold": 9,
+        "forgiveness": 3,
+        "stability": 3,
+        "sensitivity": 10,
+        "projection": 10,
+        "pivot": 10,
+        "carve": 10,
+        "glide": 2,
+        "turning_radius": 2
+      },
+      "conditions": {
+        "weak_waves": 3,
+        "average_waves": 8,
+        "powerful_waves": 10,
+        "beach_break": 8,
+        "point_break": 8,
+        "reef_break": 10,
+        "hollow_waves": 10,
+        "open_face": 9
+      },
+      "rider_fit": {
+        "beginner": 1,
+        "progressing": 2,
+        "intermediate": 8,
+        "advanced": 9,
+        "expert": 10,
+        "low_paddle_strength": 2,
+        "high_paddle_strength": 10
+      },
+      "style_tags": [
+        "technical",
+        "sensitive",
+        "vertical",
+        "drivey"
+      ],
+      "quiver_roles": [
+        "performance",
+        "competition"
+      ],
+      "family_governance": {
+        "previous_public_family": "performance_shortboard",
+        "base_public_family": "performance_shortboard",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_shortboard."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/shortboard/comp2.html",
+        "manufacturer_description": "For the original Comp we developed a true shortboard that performs in a much wider range of conditions, a board that that generates speed with ease, fast acceleration and quick rail to rail transitions. The Comp2 continues this progression. With increased volume in the larger sizes we\u2019ve improved the speed generation though floatation and planing speed. To make use of the extra speed generation we adjusted the rocker for easier direction changes \u2013 ie. more power, more critical turns. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93019,
+      "canonical_key": "torq-surfboards::delpero-pro",
+      "brand": "Torq Surfboards",
+      "model": "Delpero Pro",
+      "public_family": "longboard",
+      "primary_category": "longboard",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "parallel",
+        "nose": "full",
+        "tail": [
+          "square"
+        ],
+        "rocker_entry": "low",
+        "rocker_tail": "low",
+        "rails": "soft",
+        "foil": "forward",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "single",
+          "rolled",
+          "vee"
+        ],
+        "fin_configurations": [
+          "single",
+          "two_plus_one"
+        ]
+      },
+      "behaviour": {
+        "paddle": 10,
+        "wave_entry": 10,
+        "speed_generation": 6,
+        "drive": 8,
+        "release": 4,
+        "hold": 6,
+        "forgiveness": 9,
+        "stability": 10,
+        "sensitivity": 3,
+        "projection": 6,
+        "pivot": 3,
+        "carve": 8,
+        "glide": 10,
+        "turning_radius": 10
+      },
+      "conditions": {
+        "weak_waves": 7,
+        "average_waves": 10,
+        "powerful_waves": 5,
+        "beach_break": 7,
+        "point_break": 10,
+        "reef_break": 6,
+        "hollow_waves": 3,
+        "open_face": 10
+      },
+      "rider_fit": {
+        "beginner": 9,
+        "progressing": 10,
+        "intermediate": 10,
+        "advanced": 10,
+        "expert": 10,
+        "low_paddle_strength": 10,
+        "high_paddle_strength": 5
+      },
+      "style_tags": [
+        "glide",
+        "stable",
+        "flowing",
+        "drivey",
+        "forgiving"
+      ],
+      "quiver_roles": [
+        "longboard",
+        "cruiser",
+        "small_wave"
+      ],
+      "family_governance": {
+        "previous_public_family": "longboard",
+        "base_public_family": "longboard",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category longboard."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/pro-models/delpero-pro.html",
+        "manufacturer_description": "This is the model Edouard won his 2019 Surf Relik World longboard title on. Edouard and Alain worked on that shape to find the perfect balance of modern and classic surfing on a Longboard. The aggressive outline and rocker will allow you to man\u0153uvre the board at your highest potential while the lift will allow you to hold noserides in critical sections of the waves. This model took Edouard on top of the 2019 Relik World Longboard Tour, 4 WSL European titles and a win at the WSL Cuervo surf Ranch Classic in 2021 with smooth progressive lines and critical noserides. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93020,
+      "canonical_key": "torq-surfboards::fish",
+      "brand": "Torq Surfboards",
+      "model": "Fish",
+      "public_family": "fish",
+      "primary_category": "performance_fish",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "balanced",
+        "nose": "medium",
+        "tail": [
+          "swallow"
+        ],
+        "rocker_entry": "medium_low",
+        "rocker_tail": "medium",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "single",
+          "double",
+          "vee"
+        ],
+        "fin_configurations": [
+          "twin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 7,
+        "wave_entry": 7,
+        "speed_generation": 9,
+        "drive": 8,
+        "release": 8,
+        "hold": 7,
+        "forgiveness": 7,
+        "stability": 7,
+        "sensitivity": 8,
+        "projection": 8,
+        "pivot": 8,
+        "carve": 8,
+        "glide": 5,
+        "turning_radius": 5
+      },
+      "conditions": {
+        "weak_waves": 8,
+        "average_waves": 8,
+        "powerful_waves": 7,
+        "beach_break": 8,
+        "point_break": 7,
+        "reef_break": 8,
+        "hollow_waves": 7,
+        "open_face": 8
+      },
+      "rider_fit": {
+        "beginner": 3,
+        "progressing": 6,
+        "intermediate": 8,
+        "advanced": 9,
+        "expert": 9,
+        "low_paddle_strength": 6,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "fast",
+        "drivey",
+        "responsive"
+      ],
+      "quiver_roles": [
+        "small_wave",
+        "daily_driver",
+        "reef_alternative"
+      ],
+      "family_governance": {
+        "previous_public_family": "fish",
+        "base_public_family": "fish",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_fish."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/fish/fish.html",
+        "manufacturer_description": "In keeping with the original Fish design, this is by far the fastest board in the TEC line. The Fish loves surfing down-the-line waves, highline speed and open face wraps. We have re-worked the design a little with a modern tweak so you can keep all that speed under control with fluid direction changes and smooth rail to rail flow. The twin fin set up is loose enough for tight turns or for drawing long arcs on clean waves. It\u2019s width and volume also makes it a great choice for more intermediate surfers looking for a shorter board. It\u2019s equally at home in average surf, where the large planing area delivers performance in weaker waves. We recommend the upright twin style fins for this over the traditional keel. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93021,
+      "canonical_key": "torq-surfboards::go-kart",
+      "brand": "Torq Surfboards",
+      "model": "Go-Kart",
+      "public_family": "daily_driver",
+      "primary_category": "performance_daily_driver",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "balanced",
+        "nose": "refined",
+        "tail": [
+          "squash"
+        ],
+        "rocker_entry": "medium",
+        "rocker_tail": "medium_high",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "balanced",
+        "bottom_contours": [
+          "single",
+          "double",
+          "vee"
+        ],
+        "fin_configurations": [
+          "thruster",
+          "five_fin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 6,
+        "wave_entry": 7,
+        "speed_generation": 8,
+        "drive": 8,
+        "release": 8,
+        "hold": 8,
+        "forgiveness": 7,
+        "stability": 7,
+        "sensitivity": 8,
+        "projection": 8,
+        "pivot": 8,
+        "carve": 9,
+        "glide": 4,
+        "turning_radius": 4
+      },
+      "conditions": {
+        "weak_waves": 6,
+        "average_waves": 9,
+        "powerful_waves": 8,
+        "beach_break": 9,
+        "point_break": 8,
+        "reef_break": 9,
+        "hollow_waves": 7,
+        "open_face": 9
+      },
+      "rider_fit": {
+        "beginner": 2,
+        "progressing": 5,
+        "intermediate": 8,
+        "advanced": 9,
+        "expert": 10,
+        "low_paddle_strength": 5,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "responsive",
+        "drivey",
+        "everyday_performance",
+        "fast"
+      ],
+      "quiver_roles": [
+        "daily_driver",
+        "performance"
+      ],
+      "family_governance": {
+        "previous_public_family": "daily_driver",
+        "base_public_family": "daily_driver",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_daily_driver."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/shortboard/go-kart.html",
+        "manufacturer_description": "Damien Fahrenfort Like it\u2019s name sake the Go-Kart is super fast, agile and designed for fast acceleration and tight turns. Our team riders tested this in all conditions from windy and waist high to overhead and hollow. It\u2019s a board that does everything and more - airs, turns, barrels and still with a bit of float to skate on the weaker days. If you\u2019re looking for a board that surfs like a shortboard but without the limitations of a normal shortboard, this is for you. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93022,
+      "canonical_key": "torq-surfboards::multiplier",
+      "brand": "Torq Surfboards",
+      "model": "Multiplier",
+      "public_family": "daily_driver",
+      "primary_category": "performance_daily_driver",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "balanced",
+        "nose": "refined",
+        "tail": [
+          "squash"
+        ],
+        "rocker_entry": "medium",
+        "rocker_tail": "medium_high",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "balanced",
+        "bottom_contours": [
+          "single",
+          "double",
+          "vee"
+        ],
+        "fin_configurations": [
+          "thruster",
+          "five_fin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 6,
+        "wave_entry": 7,
+        "speed_generation": 8,
+        "drive": 8,
+        "release": 8,
+        "hold": 8,
+        "forgiveness": 7,
+        "stability": 7,
+        "sensitivity": 8,
+        "projection": 8,
+        "pivot": 8,
+        "carve": 9,
+        "glide": 4,
+        "turning_radius": 4
+      },
+      "conditions": {
+        "weak_waves": 6,
+        "average_waves": 8,
+        "powerful_waves": 8,
+        "beach_break": 9,
+        "point_break": 8,
+        "reef_break": 9,
+        "hollow_waves": 7,
+        "open_face": 9
+      },
+      "rider_fit": {
+        "beginner": 2,
+        "progressing": 5,
+        "intermediate": 8,
+        "advanced": 9,
+        "expert": 10,
+        "low_paddle_strength": 5,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "responsive",
+        "drivey",
+        "everyday_performance",
+        "fast"
+      ],
+      "quiver_roles": [
+        "daily_driver",
+        "performance"
+      ],
+      "family_governance": {
+        "previous_public_family": "daily_driver",
+        "base_public_family": "daily_driver",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_daily_driver."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/shortboard/multiplier.html",
+        "manufacturer_description": "The Multiplier is a performance board designed to multiply your wave count. We blended the tail from our high performance Thruster model with a slightly lower rockered nose, while keeping the rail and foil low. The resulting hybrid catches waves easily, but also gains speed much more quickly than a narrow noised shortboard and with a razor sharp responsive tail to use it! Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93023,
+      "canonical_key": "torq-surfboards::pg-r",
+      "brand": "Torq Surfboards",
+      "model": "PG-R",
+      "public_family": "groveller",
+      "primary_category": "groveller",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "wide_centre",
+        "nose": "full",
+        "tail": [
+          "squash"
+        ],
+        "rocker_entry": "low",
+        "rocker_tail": "low",
+        "rails": "full",
+        "foil": "forward",
+        "volume_distribution": "forward",
+        "bottom_contours": [
+          "flat"
+        ],
+        "fin_configurations": [
+          "thruster",
+          "five_fin",
+          "quad"
+        ]
+      },
+      "behaviour": {
+        "paddle": 8,
+        "wave_entry": 9,
+        "speed_generation": 9,
+        "drive": 6,
+        "release": 8,
+        "hold": 4,
+        "forgiveness": 9,
+        "stability": 9,
+        "sensitivity": 5,
+        "projection": 5,
+        "pivot": 8,
+        "carve": 5,
+        "glide": 5,
+        "turning_radius": 3
+      },
+      "conditions": {
+        "weak_waves": 10,
+        "average_waves": 7,
+        "powerful_waves": 2,
+        "beach_break": 9,
+        "point_break": 5,
+        "reef_break": 3,
+        "hollow_waves": 2,
+        "open_face": 5
+      },
+      "rider_fit": {
+        "beginner": 6,
+        "progressing": 9,
+        "intermediate": 9,
+        "advanced": 9,
+        "expert": 7,
+        "low_paddle_strength": 9,
+        "high_paddle_strength": 6
+      },
+      "style_tags": [
+        "easy_speed",
+        "forgiving",
+        "playful",
+        "fast",
+        "stable"
+      ],
+      "quiver_roles": [
+        "small_wave",
+        "summer"
+      ],
+      "family_governance": {
+        "previous_public_family": "groveller",
+        "base_public_family": "groveller",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category groveller."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/shortboard/pg-r.html",
+        "manufacturer_description": "The PG-R the most important board in your quiver. It\u2019s the board you\u2019ll surf 80% of the time in less than stellar waves so it needs to be excellent. We designed the PG-R to handle average, everyday surf. It\u2019s fast with easy paddling and pick up, intended to be our Performance Groveller \u2013 able to skate over the flats but capable in critical sections. The by-product is a board that lends itself to progression. It\u2019s stable and reassuring so you have the confidence to push harder. It generates and carries speed that converts into big turns or airs. You can lay it on a rail and it gives back tenfold. It\u2019s a board that lets you up your game, no matter the conditions. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": []
+      }
+    },
+    {
+      "canonical_model_id": 93024,
+      "canonical_key": "torq-surfboards::summer-fish",
+      "brand": "Torq Surfboards",
+      "model": "Summer Fish",
+      "public_family": "fish",
+      "primary_category": "performance_fish",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "balanced",
+        "nose": "medium",
+        "tail": [
+          "swallow"
+        ],
+        "rocker_entry": "medium_low",
+        "rocker_tail": "medium",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "flat"
+        ],
+        "fin_configurations": [
+          "twin",
+          "quad",
+          "five_fin"
+        ]
+      },
+      "behaviour": {
+        "paddle": 7,
+        "wave_entry": 7,
+        "speed_generation": 10,
+        "drive": 9,
+        "release": 9,
+        "hold": 7,
+        "forgiveness": 7,
+        "stability": 7,
+        "sensitivity": 8,
+        "projection": 8,
+        "pivot": 8,
+        "carve": 8,
+        "glide": 5,
+        "turning_radius": 5
+      },
+      "conditions": {
+        "weak_waves": 8,
+        "average_waves": 8,
+        "powerful_waves": 7,
+        "beach_break": 8,
+        "point_break": 7,
+        "reef_break": 8,
+        "hollow_waves": 7,
+        "open_face": 8
+      },
+      "rider_fit": {
+        "beginner": 3,
+        "progressing": 7,
+        "intermediate": 8,
+        "advanced": 4,
+        "expert": 9,
+        "low_paddle_strength": 6,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "fast",
+        "drivey",
+        "responsive"
+      ],
+      "quiver_roles": [
+        "small_wave",
+        "daily_driver",
+        "reef_alternative"
+      ],
+      "family_governance": {
+        "previous_public_family": "fish",
+        "base_public_family": "fish",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_fish."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/fish/summer-fish.html",
+        "manufacturer_description": "Our Summer Fish is short and wide with hidden volume; paddling is so easy it feels like you\u2019re cheating. It has a drawn in swallow tail that adds a liveliness and responsiveness in comparison to a traditional wide tailed Fish. Small summer waves become a playground of ramps and little power pockets that connect through little flats and fun bowl sections. It opens your eyes to a whole new skate park in the line-up. It\u2019s such a versatile board \u2013 small waves, onshore days, first shortboard, step down for a longboard. No matter, this is the board that proves the old saying \u2013 there\u2019s no such thing as bad surf. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: swallow tail."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93025,
+      "canonical_key": "torq-surfboards::the-don-hp",
+      "brand": "Torq Surfboards",
+      "model": "The Don HP",
+      "public_family": "longboard",
+      "primary_category": "longboard",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "parallel",
+        "nose": "full",
+        "tail": [
+          "square"
+        ],
+        "rocker_entry": "low",
+        "rocker_tail": "low",
+        "rails": "soft",
+        "foil": "forward",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "single",
+          "rolled",
+          "vee"
+        ],
+        "fin_configurations": [
+          "single",
+          "two_plus_one"
+        ]
+      },
+      "behaviour": {
+        "paddle": 9,
+        "wave_entry": 10,
+        "speed_generation": 6,
+        "drive": 8,
+        "release": 4,
+        "hold": 7,
+        "forgiveness": 9,
+        "stability": 10,
+        "sensitivity": 4,
+        "projection": 6,
+        "pivot": 4,
+        "carve": 8,
+        "glide": 10,
+        "turning_radius": 10
+      },
+      "conditions": {
+        "weak_waves": 5,
+        "average_waves": 10,
+        "powerful_waves": 6,
+        "beach_break": 7,
+        "point_break": 10,
+        "reef_break": 6,
+        "hollow_waves": 5,
+        "open_face": 10
+      },
+      "rider_fit": {
+        "beginner": 9,
+        "progressing": 10,
+        "intermediate": 10,
+        "advanced": 10,
+        "expert": 10,
+        "low_paddle_strength": 10,
+        "high_paddle_strength": 5
+      },
+      "style_tags": [
+        "glide",
+        "stable",
+        "flowing",
+        "drivey",
+        "forgiving"
+      ],
+      "quiver_roles": [
+        "longboard",
+        "cruiser",
+        "small_wave"
+      ],
+      "family_governance": {
+        "previous_public_family": "longboard",
+        "base_public_family": "longboard",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category longboard."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/longboard/the-don-hp.html",
+        "manufacturer_description": "In the Don longboard series, the HP is the high performance model. It has a slimmed down outline and foil, lower rails and slightly more rocker making this razor sharp for dynamic modern longboarding. Still capable on the nose when the right section stands up, the Don HP is a board for experienced longboarders looking for the highest performance. Available in our exclusive ACT Pre-preg technology for the most lightweight, responsive re-flex, or TEC, our vacuum bagged epoxy for lightweight combined with strength. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "medium",
+        "behaviour_confidence": "medium",
+        "condition_confidence": "medium",
+        "rider_fit_confidence": "medium",
+        "source_method": "manufacturer_inference",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: more rocker."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93026,
+      "canonical_key": "torq-surfboards::the-don-nr",
+      "brand": "Torq Surfboards",
+      "model": "The Don NR",
+      "public_family": "longboard",
+      "primary_category": "longboard",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "wide_forward",
+        "nose": "full",
+        "tail": [
+          "round"
+        ],
+        "rocker_entry": "low",
+        "rocker_tail": "low",
+        "rails": "soft",
+        "foil": "forward",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "double",
+          "vee",
+          "single",
+          "rolled"
+        ],
+        "fin_configurations": [
+          "single",
+          "two_plus_one"
+        ]
+      },
+      "behaviour": {
+        "paddle": 10,
+        "wave_entry": 10,
+        "speed_generation": 6,
+        "drive": 8,
+        "release": 5,
+        "hold": 6,
+        "forgiveness": 9,
+        "stability": 10,
+        "sensitivity": 3,
+        "projection": 6,
+        "pivot": 3,
+        "carve": 9,
+        "glide": 10,
+        "turning_radius": 10
+      },
+      "conditions": {
+        "weak_waves": 7,
+        "average_waves": 9,
+        "powerful_waves": 5,
+        "beach_break": 7,
+        "point_break": 10,
+        "reef_break": 6,
+        "hollow_waves": 3,
+        "open_face": 10
+      },
+      "rider_fit": {
+        "beginner": 9,
+        "progressing": 10,
+        "intermediate": 10,
+        "advanced": 9,
+        "expert": 9,
+        "low_paddle_strength": 10,
+        "high_paddle_strength": 5
+      },
+      "style_tags": [
+        "glide",
+        "stable",
+        "flowing",
+        "drivey",
+        "forgiving"
+      ],
+      "quiver_roles": [
+        "longboard",
+        "cruiser",
+        "small_wave"
+      ],
+      "family_governance": {
+        "previous_public_family": "longboard",
+        "base_public_family": "longboard",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category longboard."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/longboard/the-don-nr.html",
+        "manufacturer_description": "TET DON NR PINLINE TET DON NR POP TET DON NR LAGUNA TET DON NR LEGACY The Don Nose Rider is a mix of our all round performance Don model with a more traditional Noserider. Up front is a wide nose, low entry rocker and teardrop concave \u2013 a sure fire combination for stability and tip time. But unlike a traditional noserider with soft rolled rails and vee bottom, the Don NR combines a hard rail and double concave vee in the tail of a more modern longboard. This combination blends the best of a traditional noserider with the best of a modern longboard in a lightweight, super strong epoxy package. Turns out you can please all the people all the time. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+        "physical_design_confidence": "high",
+        "behaviour_confidence": "high",
+        "condition_confidence": "high",
+        "rider_fit_confidence": "high",
+        "source_method": "explicit_manufacturer",
+        "review_required": false,
+        "notes": [
+          "Applied governed evidence rule: wide nose.",
+          "Applied governed evidence rule: vee."
+        ]
+      }
+    },
+    {
+      "canonical_model_id": 93027,
+      "canonical_key": "torq-surfboards::v",
+      "brand": "Torq Surfboards",
+      "model": "V+",
+      "public_family": "mid_length",
+      "primary_category": "performance_mid_length",
+      "secondary_categories": [],
+      "aliases": [],
+      "physical_design": {
+        "outline": "narrow",
+        "nose": "refined",
+        "tail": [
+          "round_pin"
+        ],
+        "rocker_entry": "medium",
+        "rocker_tail": "medium_high",
+        "rails": "refined",
+        "foil": "balanced",
+        "volume_distribution": "central",
+        "bottom_contours": [
+          "single",
+          "double",
+          "vee"
+        ],
+        "fin_configurations": [
+          "thruster"
+        ]
+      },
+      "behaviour": {
+        "paddle": 8,
+        "wave_entry": 8,
+        "speed_generation": 8,
+        "drive": 9,
+        "release": 6,
+        "hold": 9,
+        "forgiveness": 6,
+        "stability": 7,
+        "sensitivity": 8,
+        "projection": 9,
+        "pivot": 6,
+        "carve": 10,
+        "glide": 9,
+        "turning_radius": 9
+      },
+      "conditions": {
+        "weak_waves": 4,
+        "average_waves": 7,
+        "powerful_waves": 9,
+        "beach_break": 6,
+        "point_break": 10,
+        "reef_break": 10,
+        "hollow_waves": 8,
+        "open_face": 10
+      },
+      "rider_fit": {
+        "beginner": 6,
+        "progressing": 7,
+        "intermediate": 8,
+        "advanced": 4,
+        "expert": 10,
+        "low_paddle_strength": 6,
+        "high_paddle_strength": 9
+      },
+      "style_tags": [
+        "glide",
+        "drivey",
+        "performance",
+        "fast"
+      ],
+      "quiver_roles": [
+        "performance_mid_length",
+        "point_break",
+        "reef"
+      ],
+      "family_governance": {
+        "previous_public_family": "mid_length",
+        "base_public_family": "mid_length",
+        "override_applied": false,
+        "reason": "Deterministic mapping from governed primary category performance_mid_length."
+      },
+      "evidence": {
+        "official_source_url": "https://www.torq-surfboards.com/midlength/v-plus.html",
+        "manufacturer_description": "TET V+ POP TET V+ LAGUNA TET V+ LEGACY TET V+ RETROFADE TET V+ CLASSIC BLUE TET V+ CLASSIC COLOR The Volume Plus takes the trend for high volume wide boards into the midlength model, creating a board with the stability and paddle ability of a much longer board, but in a compact, easier to turn package. These boards suit all surfers of all abilities, whether looking for a first board or quiver builder for fun days. The high volume makes it super easy to catch waves while the rocker and bottom contours make this lively and agile underfoot with more performance than you would expect from a larger board. Great for beginners, great for bigger surfers wanting a shorter board.. All sizes come as 3 fin Thruster set up, except the Wood design as 2+1. Protects against cross-site request forgery attacks. Saves the current PHP session.",
         "physical_design_confidence": "medium",
         "behaviour_confidence": "medium",
         "condition_confidence": "medium",

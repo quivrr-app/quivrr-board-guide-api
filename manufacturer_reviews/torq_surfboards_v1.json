@@ -1,0 +1,2958 @@
+{
+  "schema_version": 1,
+  "manufacturer": "Torq Surfboards",
+  "authority": "Current official manufacturer website",
+  "reviewed_date": "2026-07-17",
+  "reviewed_by": "QUIVRR",
+  "model_count": 14,
+  "models": [
+    {
+      "canonical_model_id": 93014,
+      "canonical_key": "torq-surfboards::24-7",
+      "manufacturer": "Torq Surfboards",
+      "model": "24/7",
+      "official_url": "https://www.torq-surfboards.com/longboard/24-7.html",
+      "official_image_url": "https://www.torq-surfboards.com/longboard/files/PRODUCT%20PICS/ACT/247/TQ23_ACT_247_BAMBOO.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/longboard/24-7.html",
+        "resolved_url": "https://www.torq-surfboards.com/longboard/24-7.html",
+        "retrieved_at_utc": "2026-07-21T07:29:36Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 160,
+        "official_intent_excerpt": "TET 24/7 PINLINE TET 24/7 POP TET 24/7 LAGUNA TET 24/7 LEGACY The 24/7 is the go to, all round longboard design for every day of the week. It’s a board you can put in the van without checking the webcams; from...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "TET 24/7 PINLINE TET 24/7 POP TET 24/7 LAGUNA TET 24/7 LEGACY The 24/7 is the go to, all round longboard design for every day of the week. It’s a board you can put in the van without checking the webcams; from kneehigh to overhead, for noseriding, cruising or turns, it works. Shape wise, the 24/7 sits right in the middle between the nose riders and pro performers – a balanced outline with nose width for nose rides, a straight middle section for trim and a pulled in tail for turns and control in the pocket. The rocker matches the outline – low entry for stability, flat middle for speed and a flip in the tail for turns. There’s a good volume for max paddling, with a foiled rail through the fins and at the tail. The 24/7 is a one board longboard quiver – a true all rounder. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "longboard",
+      "public_family_label": "Longboard",
+      "detailed_category": "All Round Longboard",
+      "secondary_categories": [],
+      "board_type": "Longboard",
+      "primary_fin_setup": "Not published",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "not_published_by_official_source",
+      "tail_shape": [
+        "round",
+        "pin"
+      ],
+      "outline": "full",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "open face"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "paddle",
+        "speed generation",
+        "sensitivity"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: progressing to intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "full",
+          "nose": "balanced",
+          "tail": [
+            "round",
+            "pin"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": []
+        },
+        "behaviour": {
+          "paddle": 9,
+          "wave_entry": 8,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 6,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 6,
+          "projection": 6,
+          "pivot": 6,
+          "carve": 7,
+          "glide": 10,
+          "turning_radius": 9
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 8,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "longboard",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "longboard"
+        ]
+      },
+      "recommendation_lanes": [
+        "longboard",
+        "all-round-longboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "mid_length"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy explicitly calls 24/7 an all-round longboard and one-board longboard quiver.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "ACT",
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "ACT",
+          "length": "9'0",
+          "width": "23",
+          "thickness": "3 1/8",
+          "volume_litres": 73.0
+        },
+        {
+          "construction": "TEC",
+          "length": "9'0",
+          "width": "23",
+          "thickness": "3 1/8",
+          "volume_litres": 73.0
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93015,
+      "canonical_key": "torq-surfboards::bigboy-23",
+      "manufacturer": "Torq Surfboards",
+      "model": "Bigboy 23",
+      "official_url": "https://www.torq-surfboards.com/shortboard/bigboy-23.html",
+      "official_image_url": "https://www.torq-surfboards.com/shortboard/files/PRODUCT%20PICS/ACT/BIGBOY%2023/TQ22_ACT_BIGBOY_COLOR.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/shortboard/bigboy-23.html",
+        "resolved_url": "https://www.torq-surfboards.com/shortboard/bigboy-23.html",
+        "retrieved_at_utc": "2026-07-21T07:29:35Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 137,
+        "official_intent_excerpt": "TET BIGBOY 23 PINLINE TET BIGBOY 23 POP TET BIGBOY 23 LAGUNA TET BIGBOY 23 LEGACY This is a wolf in sheep’s clothing. You think you’re looking at a funboard? Think again. This is a shortboard on steroids. On paper it’s a...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "TET BIGBOY 23 PINLINE TET BIGBOY 23 POP TET BIGBOY 23 LAGUNA TET BIGBOY 23 LEGACY This is a wolf in sheep’s clothing. You think you’re looking at a funboard? Think again. This is a shortboard on steroids. On paper it’s a funboard and if you’re looking to catch green waves and do some turns, the width, volume and length means this board will do it all day long – it’s perfect for you. But in the hands of a seasoned surfer it’ll come alive. Think of it as a shortboard with a little extra width in the nose but all the performance features to surf hard and fast. For any big guy rippers out there, longboarders wanting a shorter board or intermediates, look no further. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "daily_driver"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "High Volume Daily Driver",
+      "secondary_categories": [],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Not published",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "not_published_by_official_source",
+      "tail_shape": [
+        "pin"
+      ],
+      "outline": "full",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "open face"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "paddle",
+        "speed generation",
+        "drive"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: progressing to intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "full",
+          "nose": "balanced",
+          "tail": [
+            "pin"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": []
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 7,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 7,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 7,
+          "powerful_waves": 7,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 7,
+          "hollow_waves": 6,
+          "open_face": 7
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 8,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "daily_driver",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "daily_driver"
+        ]
+      },
+      "recommendation_lanes": [
+        "daily_driver",
+        "high-volume-daily-driver",
+        "performance_daily_driver",
+        "one_board_quiver"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "performance_shortboard",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official wording plus conservative editorial governance: Official copy describes a high-volume shortboard/funboard bridge for big riders, longboarders and intermediates.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "ACT",
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "ACT",
+          "length": "6'6",
+          "width": "21 3/4",
+          "thickness": "2 3/4",
+          "volume_litres": 43.5
+        },
+        {
+          "construction": "ACT",
+          "length": "6'10",
+          "width": "22 1/2",
+          "thickness": "2 7/8",
+          "volume_litres": 49.1
+        },
+        {
+          "construction": "ACT",
+          "length": "7'2",
+          "width": "22 3/4",
+          "thickness": "3",
+          "volume_litres": 53.7
+        },
+        {
+          "construction": "ACT",
+          "length": "7'6",
+          "width": "23",
+          "thickness": "3",
+          "volume_litres": 57.5
+        },
+        {
+          "construction": "TEC",
+          "length": "6'6",
+          "width": "21 3/4",
+          "thickness": "2 3/4",
+          "volume_litres": 43.5
+        },
+        {
+          "construction": "TEC",
+          "length": "6'10",
+          "width": "22 1/2",
+          "thickness": "2 7/8",
+          "volume_litres": 49.1
+        },
+        {
+          "construction": "TEC",
+          "length": "7'2",
+          "width": "22 3/4",
+          "thickness": "3",
+          "volume_litres": 53.7
+        },
+        {
+          "construction": "TEC",
+          "length": "7'6",
+          "width": "23",
+          "thickness": "3",
+          "volume_litres": 57.5
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93016,
+      "canonical_key": "torq-surfboards::bigboy-fish",
+      "manufacturer": "Torq Surfboards",
+      "model": "Bigboy Fish",
+      "official_url": "https://www.torq-surfboards.com/fish/bigboy-fish.html",
+      "official_image_url": "https://www.torq-surfboards.com/fish/files/PRODUCT%20PICS/TEC/BIGBOYFISH/TQ22_TEC_BIGBOY_FISH_CLEAR.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/fish/bigboy-fish.html",
+        "resolved_url": "https://www.torq-surfboards.com/fish/bigboy-fish.html",
+        "retrieved_at_utc": "2026-07-21T07:29:36Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 96,
+        "official_intent_excerpt": "An extension of the classic Fish design, the Bigboy Fish mixes the hidden volume and manoeuvrability of the BigBoy 23 model with the flowy feel of a Fish. With a wide template up front the Bigboy Fish is designed to paddle fast,...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "An extension of the classic Fish design, the Bigboy Fish mixes the hidden volume and manoeuvrability of the BigBoy 23 model with the flowy feel of a Fish. With a wide template up front the Bigboy Fish is designed to paddle fast, catch waves and accelerate quickly. The straighter rail and wide swallow tail naturally offers tons of drive and forward projection, to deliver fast down the line speed and powerful rail turns. Available with 5 fin plugs for a Quad or Thruster set up. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "fish"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "fish",
+      "public_family_label": "Fish",
+      "detailed_category": "High Volume Fish",
+      "secondary_categories": [],
+      "board_type": "Fish",
+      "primary_fin_setup": "5 Fin",
+      "alternative_fin_setup": [
+        "Quad",
+        "Thruster"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "swallow"
+      ],
+      "outline": "full",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "open face"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "drive",
+        "hold",
+        "paddle"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: progressing to intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "full",
+          "nose": "balanced",
+          "tail": [
+            "swallow"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": [
+            "5_fin",
+            "quad",
+            "thruster"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 7,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 8,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 8,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "fish",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "fish"
+        ]
+      },
+      "recommendation_lanes": [
+        "fish",
+        "high-volume-fish",
+        "performance_fish",
+        "small_wave_fish"
+      ],
+      "excluded_recommendation_lanes": [
+        "groveller",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy calls Bigboy Fish an extension of the classic Fish and publishes quad or thruster setups.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "TEC",
+          "length": "6'6",
+          "width": "21 3/4",
+          "thickness": "3",
+          "volume_litres": 49.1
+        },
+        {
+          "construction": "TEC",
+          "length": "6'10",
+          "width": "22 1/4",
+          "thickness": "3 1/8",
+          "volume_litres": 54.8
+        },
+        {
+          "construction": "TEC",
+          "length": "7'2",
+          "width": "22 1/2",
+          "thickness": "3 1/4",
+          "volume_litres": 60.3
+        },
+        {
+          "construction": "TEC",
+          "length": "7'6",
+          "width": "22 3/4",
+          "thickness": "3 3/8",
+          "volume_litres": 66.3
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93017,
+      "canonical_key": "torq-surfboards::chopper",
+      "manufacturer": "Torq Surfboards",
+      "model": "Chopper",
+      "official_url": "https://www.torq-surfboards.com/midlength/chopper.html",
+      "official_image_url": "https://www.torq-surfboards.com/midlength/files/PRODUCT%20PICS/ACT/CHOPPER/TQ22_ACT_CHOPPER_BRUSHED.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/midlength/chopper.html",
+        "resolved_url": "https://www.torq-surfboards.com/midlength/chopper.html",
+        "retrieved_at_utc": "2026-07-21T07:29:36Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 146,
+        "official_intent_excerpt": "The Chopper is a super versatile shape – it’s got the volume and length to pick up kneehigh waves or to get an early takeoff in well overhead surf. The design has a bit of volume forward and a low entry rocker...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "The Chopper is a super versatile shape – it’s got the volume and length to pick up kneehigh waves or to get an early takeoff in well overhead surf. The design has a bit of volume forward and a low entry rocker so it has a nice forward trim feel on an open face or in small conditions. There’s a nice bit of foam under your chest making it paddle well without feeling big and corky. In the tail of the board, the more modern refinement on a classic style egg shows – the pulled in tail combined with a low rail, single to double concave and smooth exit rocker makes this unexpectedly lively when surfed from the tail. It has a 2+1 fin set up and can be ridden as 2+1, single or twin. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "mid_length"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "mid_length",
+      "public_family_label": "Mid Length",
+      "detailed_category": "Performance Mid Length",
+      "secondary_categories": [],
+      "board_type": "Mid Length",
+      "primary_fin_setup": "2+1",
+      "alternative_fin_setup": [
+        "Single",
+        "Twin"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "not_published"
+      ],
+      "outline": "full",
+      "bottom_contours": [
+        "single",
+        "double",
+        "concave"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "forward",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "open face"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "paddle",
+        "speed generation",
+        "sensitivity"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "full",
+          "nose": "balanced",
+          "tail": [
+            "not_published"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "forward",
+          "bottom_contours": [
+            "single",
+            "double",
+            "concave"
+          ],
+          "fin_configurations": [
+            "2+1",
+            "single",
+            "twin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 6,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 6,
+          "projection": 6,
+          "pivot": 6,
+          "carve": 7,
+          "glide": 9,
+          "turning_radius": 8
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 6,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "mid_length",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "mid_length"
+        ]
+      },
+      "recommendation_lanes": [
+        "mid_length",
+        "performance-mid-length",
+        "performance_mid_length"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy identifies a modern egg with 2+1, single or twin options and knee-high to overhead range.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "ACT",
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "ACT",
+          "length": "6'10",
+          "width": "20 3/4",
+          "thickness": "2 5/8",
+          "volume_litres": 42.6
+        },
+        {
+          "construction": "ACT",
+          "length": "7'2",
+          "width": "21 1/4",
+          "thickness": "2 3/4",
+          "volume_litres": 47.5
+        },
+        {
+          "construction": "ACT",
+          "length": "7'6",
+          "width": "21 3/4",
+          "thickness": "2 7/8",
+          "volume_litres": 52.5
+        },
+        {
+          "construction": "TEC",
+          "length": "6'10",
+          "width": "20 3/4",
+          "thickness": "2 5/8",
+          "volume_litres": 42.6
+        },
+        {
+          "construction": "TEC",
+          "length": "7'2",
+          "width": "21 1/4",
+          "thickness": "2 3/4",
+          "volume_litres": 47.5
+        },
+        {
+          "construction": "TEC",
+          "length": "7'6",
+          "width": "21 3/4",
+          "thickness": "2 7/8",
+          "volume_litres": 52.5
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93018,
+      "canonical_key": "torq-surfboards::comp2",
+      "manufacturer": "Torq Surfboards",
+      "model": "Comp2",
+      "official_url": "https://www.torq-surfboards.com/shortboard/comp2.html",
+      "official_image_url": "https://www.torq-surfboards.com/shortboard/files/PRODUCT%20PICS/ACT/COMP2/TQ22_ACT_COMP2_BRUSHED.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/shortboard/comp2.html",
+        "resolved_url": "https://www.torq-surfboards.com/shortboard/comp2.html",
+        "retrieved_at_utc": "2026-07-21T07:29:35Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 90,
+        "official_intent_excerpt": "For the original Comp we developed a true shortboard that performs in a much wider range of conditions, a board that that generates speed with ease, fast acceleration and quick rail to rail transitions. The Comp2 continues this progression. With increased volume...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "For the original Comp we developed a true shortboard that performs in a much wider range of conditions, a board that that generates speed with ease, fast acceleration and quick rail to rail transitions. The Comp2 continues this progression. With increased volume in the larger sizes we’ve improved the speed generation though floatation and planing speed. To make use of the extra speed generation we adjusted the rocker for easier direction changes – ie. more power, more critical turns. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "performance_shortboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "performance_shortboard",
+      "public_family_label": "Performance Shortboard",
+      "detailed_category": "Performance Shortboard",
+      "secondary_categories": [],
+      "board_type": "Performance Shortboard",
+      "primary_fin_setup": "Not published",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "not_published_by_official_source",
+      "tail_shape": [
+        "not_published"
+      ],
+      "outline": "full",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "open face"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "release",
+        "hold",
+        "forgiveness"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "full",
+          "nose": "balanced",
+          "tail": [
+            "not_published"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": []
+        },
+        "behaviour": {
+          "paddle": 6,
+          "wave_entry": 6,
+          "speed_generation": 7,
+          "drive": 8,
+          "release": 8,
+          "hold": 8,
+          "forgiveness": 5,
+          "stability": 5,
+          "sensitivity": 9,
+          "projection": 8,
+          "pivot": 8,
+          "carve": 8,
+          "glide": 6,
+          "turning_radius": 5
+        },
+        "conditions": {
+          "weak_waves": 4,
+          "average_waves": 7,
+          "powerful_waves": 9,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 7,
+          "hollow_waves": 8,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "performance_shortboard",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "performance_shortboard"
+        ]
+      },
+      "recommendation_lanes": [
+        "performance_shortboard",
+        "performance-shortboard",
+        "high_performance_shortboard",
+        "performance_daily_driver"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "daily_driver",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official wording plus conservative editorial governance: Official copy calls Comp2 a true shortboard with acceleration and quick rail-to-rail transitions.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "ACT",
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "ACT",
+          "length": "5'10",
+          "width": "18 5/8",
+          "thickness": "2 3/8",
+          "volume_litres": 27.2
+        },
+        {
+          "construction": "ACT",
+          "length": "6'0",
+          "width": "19 1/8",
+          "thickness": "2 1/2",
+          "volume_litres": 29.9
+        },
+        {
+          "construction": "ACT",
+          "length": "6'2",
+          "width": "19 1/2",
+          "thickness": "2 5/8",
+          "volume_litres": 32.4
+        },
+        {
+          "construction": "ACT",
+          "length": "6'4",
+          "width": "19 7/8",
+          "thickness": "2 3/4",
+          "volume_litres": 35.3
+        },
+        {
+          "construction": "TEC",
+          "length": "5'2",
+          "width": "17",
+          "thickness": "2",
+          "volume_litres": 18.5
+        },
+        {
+          "construction": "TEC",
+          "length": "5'4",
+          "width": "17 1/2",
+          "thickness": "2 1/16",
+          "volume_litres": 20.1
+        },
+        {
+          "construction": "TEC",
+          "length": "5'6",
+          "width": "18 1/4",
+          "thickness": "2 1/16",
+          "volume_litres": 22.3
+        },
+        {
+          "construction": "TEC",
+          "length": "5'8",
+          "width": "18 1/4",
+          "thickness": "2 1/4",
+          "volume_litres": 24.6
+        },
+        {
+          "construction": "TEC",
+          "length": "5'10",
+          "width": "18 5/8",
+          "thickness": "2 3/8",
+          "volume_litres": 27.2
+        },
+        {
+          "construction": "TEC",
+          "length": "6'0",
+          "width": "19 1/8",
+          "thickness": "2 1/2",
+          "volume_litres": 29.9
+        },
+        {
+          "construction": "TEC",
+          "length": "6'2",
+          "width": "19 1/2",
+          "thickness": "2 5/8",
+          "volume_litres": 32.4
+        },
+        {
+          "construction": "TEC",
+          "length": "6'4",
+          "width": "19 7/8",
+          "thickness": "2 3/4",
+          "volume_litres": 35.3
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93019,
+      "canonical_key": "torq-surfboards::delpero-pro",
+      "manufacturer": "Torq Surfboards",
+      "model": "Delpero Pro",
+      "official_url": "https://www.torq-surfboards.com/pro-models/delpero-pro.html",
+      "official_image_url": "https://www.torq-surfboards.com/pro-models/files/PRODUCT%20PICS/ACT/ED_PRO/TQ23_ACT_ED_PRO_COLOR.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/pro-models/delpero-pro.html",
+        "resolved_url": "https://www.torq-surfboards.com/pro-models/delpero-pro.html",
+        "retrieved_at_utc": "2026-07-21T07:29:36Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 112,
+        "official_intent_excerpt": "This is the model Edouard won his 2019 Surf Relik World longboard title on. Edouard and Alain worked on that shape to find the perfect balance of modern and classic surfing on a Longboard. The aggressive outline and rocker will allow you...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "This is the model Edouard won his 2019 Surf Relik World longboard title on. Edouard and Alain worked on that shape to find the perfect balance of modern and classic surfing on a Longboard. The aggressive outline and rocker will allow you to manœuvre the board at your highest potential while the lift will allow you to hold noserides in critical sections of the waves. This model took Edouard on top of the 2019 Relik World Longboard Tour, 4 WSL European titles and a win at the WSL Cuervo surf Ranch Classic in 2021 with smooth progressive lines and critical noserides. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "longboard",
+      "public_family_label": "Longboard",
+      "detailed_category": "Performance Longboard",
+      "secondary_categories": [],
+      "board_type": "Longboard",
+      "primary_fin_setup": "Not published",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "not_published_by_official_source",
+      "tail_shape": [
+        "not_published"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "open face"
+      ],
+      "ability_range": [
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "speed generation",
+        "sensitivity"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: advanced to expert surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "balanced",
+          "tail": [
+            "not_published"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": []
+        },
+        "behaviour": {
+          "paddle": 9,
+          "wave_entry": 8,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 6,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 6,
+          "projection": 6,
+          "pivot": 6,
+          "carve": 7,
+          "glide": 10,
+          "turning_radius": 9
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 3,
+          "advanced": 8,
+          "expert": 8
+        },
+        "style_tags": [
+          "longboard",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "longboard"
+        ]
+      },
+      "recommendation_lanes": [
+        "longboard",
+        "performance-longboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "mid_length"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy calls Delpero Pro a longboard balancing modern and classic surfing with critical noserides.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "ACT",
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "ACT",
+          "length": "9'1",
+          "width": "22 1/4",
+          "thickness": "2 3/4",
+          "volume_litres": 63.8
+        },
+        {
+          "construction": "TEC",
+          "length": "9'1",
+          "width": "22 1/4",
+          "thickness": "2 3/4",
+          "volume_litres": 63.8
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93020,
+      "canonical_key": "torq-surfboards::fish",
+      "manufacturer": "Torq Surfboards",
+      "model": "Fish",
+      "official_url": "https://www.torq-surfboards.com/fish/fish.html",
+      "official_image_url": "https://www.torq-surfboards.com/fish/files/PRODUCT%20PICS/TEC/FISH/TQ22_TEC_FISH_CLEAR.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/fish/fish.html",
+        "resolved_url": "https://www.torq-surfboards.com/fish/fish.html",
+        "retrieved_at_utc": "2026-07-21T07:29:36Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 139,
+        "official_intent_excerpt": "In keeping with the original Fish design, this is by far the fastest board in the TEC line. The Fish loves surfing down-the-line waves, highline speed and open face wraps. We have re-worked the design a little with a modern tweak so...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "In keeping with the original Fish design, this is by far the fastest board in the TEC line. The Fish loves surfing down-the-line waves, highline speed and open face wraps. We have re-worked the design a little with a modern tweak so you can keep all that speed under control with fluid direction changes and smooth rail to rail flow. The twin fin set up is loose enough for tight turns or for drawing long arcs on clean waves. It’s width and volume also makes it a great choice for more intermediate surfers looking for a shorter board. It’s equally at home in average surf, where the large planing area delivers performance in weaker waves. We recommend the upright twin style fins for this over the traditional keel. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "fish"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "fish",
+      "public_family_label": "Fish",
+      "detailed_category": "Performance Fish",
+      "secondary_categories": [],
+      "board_type": "Fish",
+      "primary_fin_setup": "Twin",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "pin"
+      ],
+      "outline": "full",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "point break",
+        "open face"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "drive",
+        "hold",
+        "paddle"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "full",
+          "nose": "balanced",
+          "tail": [
+            "pin"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": [
+            "twin"
+          ]
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 7,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 8,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "fish",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "fish"
+        ]
+      },
+      "recommendation_lanes": [
+        "fish",
+        "performance-fish",
+        "performance_fish",
+        "small_wave_fish"
+      ],
+      "excluded_recommendation_lanes": [
+        "groveller",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy identifies the Fish, specifies a twin setup and describes average through weaker-wave range.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "TEC",
+          "length": "5'6",
+          "width": "19 3/4",
+          "thickness": "2 5/16",
+          "volume_litres": 29.4
+        },
+        {
+          "construction": "TEC",
+          "length": "5'8",
+          "width": "20",
+          "thickness": "2 3/8",
+          "volume_litres": 31.5
+        },
+        {
+          "construction": "TEC",
+          "length": "5'10",
+          "width": "20 1/4",
+          "thickness": "2 7/16",
+          "volume_litres": 33.8
+        },
+        {
+          "construction": "TEC",
+          "length": "6'0",
+          "width": "20 1/2",
+          "thickness": "2 1/2",
+          "volume_litres": 36.2
+        },
+        {
+          "construction": "TEC",
+          "length": "6'2",
+          "width": "20 7/8“",
+          "thickness": "2 5/8",
+          "volume_litres": 39.9
+        },
+        {
+          "construction": "TEC",
+          "length": "6'4",
+          "width": "21 1/4“",
+          "thickness": "2 3/4",
+          "volume_litres": 43.7
+        },
+        {
+          "construction": "TEC",
+          "length": "6'6",
+          "width": "21 3/4“",
+          "thickness": "3",
+          "volume_litres": 48.7
+        },
+        {
+          "construction": "TEC",
+          "length": "6'10",
+          "width": "22 1/4“",
+          "thickness": "3 1/8",
+          "volume_litres": 54.8
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93021,
+      "canonical_key": "torq-surfboards::go-kart",
+      "manufacturer": "Torq Surfboards",
+      "model": "Go-Kart",
+      "official_url": "https://www.torq-surfboards.com/shortboard/go-kart.html",
+      "official_image_url": "https://www.torq-surfboards.com/shortboard/files/PRODUCT%20PICS/ACT/GO-KART/TQ22_ACT_GOKART_BRUSHED.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/shortboard/go-kart.html",
+        "resolved_url": "https://www.torq-surfboards.com/shortboard/go-kart.html",
+        "retrieved_at_utc": "2026-07-21T07:29:35Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 96,
+        "official_intent_excerpt": "Damien Fahrenfort Like it’s name sake the Go-Kart is super fast, agile and designed for fast acceleration and tight turns. Our team riders tested this in all conditions from windy and waist high to overhead and hollow. It’s a board that does...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "Damien Fahrenfort Like it’s name sake the Go-Kart is super fast, agile and designed for fast acceleration and tight turns. Our team riders tested this in all conditions from windy and waist high to overhead and hollow. It’s a board that does everything and more - airs, turns, barrels and still with a bit of float to skate on the weaker days. If you’re looking for a board that surfs like a shortboard but without the limitations of a normal shortboard, this is for you. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "daily_driver"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Performance Daily Driver",
+      "secondary_categories": [],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Not published",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "not_published_by_official_source",
+      "tail_shape": [
+        "not_published"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "paddle",
+        "speed generation",
+        "drive"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "balanced",
+          "tail": [
+            "not_published"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": []
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 7,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 7,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 7,
+          "powerful_waves": 7,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 7,
+          "hollow_waves": 6,
+          "open_face": 7
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "daily_driver",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "daily_driver"
+        ]
+      },
+      "recommendation_lanes": [
+        "daily_driver",
+        "performance-daily-driver",
+        "performance_daily_driver",
+        "one_board_quiver"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "performance_shortboard",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official wording plus conservative editorial governance: Official copy says Go-Kart handles airs, turns and barrels while retaining float for weaker days.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "medium",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "ACT",
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "ACT",
+          "length": "5'10",
+          "width": "20",
+          "thickness": "2 1/2",
+          "volume_litres": 31.9
+        },
+        {
+          "construction": "ACT",
+          "length": "6'2",
+          "width": "20 1/2",
+          "thickness": "2 3/4",
+          "volume_litres": 37.3
+        },
+        {
+          "construction": "ACT",
+          "length": "6'6",
+          "width": "21 1/2",
+          "thickness": "2 7/8",
+          "volume_litres": 43.9
+        },
+        {
+          "construction": "TEC",
+          "length": "5'8",
+          "width": "19 1/2",
+          "thickness": "2 3/8",
+          "volume_litres": 29.3
+        },
+        {
+          "construction": "TEC",
+          "length": "5'10",
+          "width": "20",
+          "thickness": "2 1/2",
+          "volume_litres": 31.9
+        },
+        {
+          "construction": "TEC",
+          "length": "6'0",
+          "width": "20 1/4",
+          "thickness": "2 5/8",
+          "volume_litres": 34.9
+        },
+        {
+          "construction": "TEC",
+          "length": "6'2",
+          "width": "20 1/2",
+          "thickness": "2 3/4",
+          "volume_litres": 37.3
+        },
+        {
+          "construction": "TEC",
+          "length": "6'4",
+          "width": "21",
+          "thickness": "2 7/8",
+          "volume_litres": 41.8
+        },
+        {
+          "construction": "TEC",
+          "length": "6'6",
+          "width": "21 1/2",
+          "thickness": "2 7/8",
+          "volume_litres": 43.9
+        },
+        {
+          "construction": "TEC",
+          "length": "6'8",
+          "width": "21 3/4",
+          "thickness": "3",
+          "volume_litres": 47.5
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93022,
+      "canonical_key": "torq-surfboards::multiplier",
+      "manufacturer": "Torq Surfboards",
+      "model": "Multiplier",
+      "official_url": "https://www.torq-surfboards.com/shortboard/multiplier.html",
+      "official_image_url": "https://www.torq-surfboards.com/shortboard/files/PRODUCT%20PICS/ACT/MULTIPLIER/TQ22_ACT_MULITPLIER_BRUSHED.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/shortboard/multiplier.html",
+        "resolved_url": "https://www.torq-surfboards.com/shortboard/multiplier.html",
+        "retrieved_at_utc": "2026-07-21T07:29:35Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 74,
+        "official_intent_excerpt": "The Multiplier is a performance board designed to multiply your wave count. We blended the tail from our high performance Thruster model with a slightly lower rockered nose, while keeping the rail and foil low. The resulting hybrid catches waves easily, but...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "The Multiplier is a performance board designed to multiply your wave count. We blended the tail from our high performance Thruster model with a slightly lower rockered nose, while keeping the rail and foil low. The resulting hybrid catches waves easily, but also gains speed much more quickly than a narrow noised shortboard and with a razor sharp responsive tail to use it! Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "daily_driver"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "daily_driver",
+      "public_family_label": "Daily Driver",
+      "detailed_category": "Performance Daily Driver",
+      "secondary_categories": [],
+      "board_type": "Daily Driver",
+      "primary_fin_setup": "Not published",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "not_published_by_official_source",
+      "tail_shape": [
+        "pin"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "beach break",
+        "open face"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "paddle",
+        "speed generation",
+        "drive"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "balanced",
+          "tail": [
+            "pin"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": []
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 7,
+          "hold": 7,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 7,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 7,
+          "average_waves": 7,
+          "powerful_waves": 7,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 7,
+          "hollow_waves": 6,
+          "open_face": 7
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "daily_driver",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "daily_driver"
+        ]
+      },
+      "recommendation_lanes": [
+        "daily_driver",
+        "performance-daily-driver",
+        "performance_daily_driver",
+        "one_board_quiver"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "performance_shortboard",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy calls Multiplier a performance hybrid with easier wave-catching and a responsive tail.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "ACT",
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "ACT",
+          "length": "5'8",
+          "width": "19 7/8",
+          "thickness": "2 1/4",
+          "volume_litres": 28.8
+        },
+        {
+          "construction": "ACT",
+          "length": "6'0",
+          "width": "20 3/8",
+          "thickness": "2 1/2",
+          "volume_litres": 33.6
+        },
+        {
+          "construction": "ACT",
+          "length": "6'4",
+          "width": "20 7/8",
+          "thickness": "2 3/4",
+          "volume_litres": 38.8
+        },
+        {
+          "construction": "ACT",
+          "length": "6'8",
+          "width": "20 3/4",
+          "thickness": "2 11/16",
+          "volume_litres": 39.6
+        },
+        {
+          "construction": "ACT",
+          "length": "7'0",
+          "width": "21 1/4",
+          "thickness": "2 13/16",
+          "volume_litres": 44.7
+        },
+        {
+          "construction": "ACT",
+          "length": "7'4",
+          "width": "21 3/4",
+          "thickness": "2 7/8",
+          "volume_litres": 49.4
+        },
+        {
+          "construction": "TEC",
+          "length": "5'8",
+          "width": "19 7/8",
+          "thickness": "2 1/4",
+          "volume_litres": 28.8
+        },
+        {
+          "construction": "TEC",
+          "length": "5'10",
+          "width": "20 1/8",
+          "thickness": "2 3/8",
+          "volume_litres": 31.2
+        },
+        {
+          "construction": "TEC",
+          "length": "6'0",
+          "width": "20 3/8",
+          "thickness": "2 1/2",
+          "volume_litres": 33.6
+        },
+        {
+          "construction": "TEC",
+          "length": "6'2",
+          "width": "20 5/8",
+          "thickness": "2 5/8",
+          "volume_litres": 36.3
+        },
+        {
+          "construction": "TEC",
+          "length": "6'4",
+          "width": "20 7/8",
+          "thickness": "2 3/4",
+          "volume_litres": 38.8
+        },
+        {
+          "construction": "TEC",
+          "length": "6'8",
+          "width": "20 3/4",
+          "thickness": "2 11/16",
+          "volume_litres": 39.6
+        },
+        {
+          "construction": "TEC",
+          "length": "7'0",
+          "width": "21 1/4",
+          "thickness": "2 13/16",
+          "volume_litres": 44.7
+        },
+        {
+          "construction": "TEC",
+          "length": "7'4",
+          "width": "21 3/4",
+          "thickness": "2 7/8",
+          "volume_litres": 49.4
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93023,
+      "canonical_key": "torq-surfboards::pg-r",
+      "manufacturer": "Torq Surfboards",
+      "model": "PG-R",
+      "official_url": "https://www.torq-surfboards.com/shortboard/pg-r.html",
+      "official_image_url": "https://www.torq-surfboards.com/shortboard/files/PRODUCT%20PICS/ACT/PG-R/TQ22_ACT_PGR_BRUSHED.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/shortboard/pg-r.html",
+        "resolved_url": "https://www.torq-surfboards.com/shortboard/pg-r.html",
+        "retrieved_at_utc": "2026-07-21T07:29:35Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 134,
+        "official_intent_excerpt": "The PG-R the most important board in your quiver. It’s the board you’ll surf 80% of the time in less than stellar waves so it needs to be excellent. We designed the PG-R to handle average, everyday surf. It’s fast with easy...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "The PG-R the most important board in your quiver. It’s the board you’ll surf 80% of the time in less than stellar waves so it needs to be excellent. We designed the PG-R to handle average, everyday surf. It’s fast with easy paddling and pick up, intended to be our Performance Groveller – able to skate over the flats but capable in critical sections. The by-product is a board that lends itself to progression. It’s stable and reassuring so you have the confidence to push harder. It generates and carries speed that converts into big turns or airs. You can lay it on a rail and it gives back tenfold. It’s a board that lets you up your game, no matter the conditions. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "groveller"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "groveller",
+      "public_family_label": "Groveller",
+      "detailed_category": "Performance Groveller",
+      "secondary_categories": [],
+      "board_type": "Groveller",
+      "primary_fin_setup": "Not published",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "not_published_by_official_source",
+      "tail_shape": [
+        "not_published"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "beach break"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "drive",
+        "paddle",
+        "speed generation"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "balanced",
+          "tail": [
+            "not_published"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": []
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 9,
+          "drive": 7,
+          "release": 7,
+          "hold": 5,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 6,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 7,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 10,
+          "average_waves": 7,
+          "powerful_waves": 4,
+          "beach_break": 8,
+          "point_break": 8,
+          "reef_break": 7,
+          "hollow_waves": 5,
+          "open_face": 7
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "groveller",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "groveller"
+        ]
+      },
+      "recommendation_lanes": [
+        "groveller",
+        "performance-groveller",
+        "performance_groveller",
+        "small_wave"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy explicitly calls PG-R a Performance Groveller for less-than-stellar waves.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "ACT",
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "ACT",
+          "length": "5'6",
+          "width": "20 1/2",
+          "thickness": "2 3/8",
+          "volume_litres": 30.6
+        },
+        {
+          "construction": "ACT",
+          "length": "5'10",
+          "width": "21",
+          "thickness": "2 1/2",
+          "volume_litres": 35.3
+        },
+        {
+          "construction": "ACT",
+          "length": "6'0",
+          "width": "21 1/2",
+          "thickness": "2 5/8",
+          "volume_litres": 38.8
+        },
+        {
+          "construction": "ACT",
+          "length": "6'2",
+          "width": "21 3/4",
+          "thickness": "2 3/4",
+          "volume_litres": 41.3
+        },
+        {
+          "construction": "TEC",
+          "length": "5'8",
+          "width": "20 5/8",
+          "thickness": "2 3/8",
+          "volume_litres": 32.2
+        },
+        {
+          "construction": "TEC",
+          "length": "5'10",
+          "width": "21",
+          "thickness": "2 1/2",
+          "volume_litres": 35.3
+        },
+        {
+          "construction": "TEC",
+          "length": "6'0",
+          "width": "21 1/2",
+          "thickness": "2 5/8",
+          "volume_litres": 38.8
+        },
+        {
+          "construction": "TEC",
+          "length": "6'2",
+          "width": "22",
+          "thickness": "2 3/4",
+          "volume_litres": 42.2
+        },
+        {
+          "construction": "TEC",
+          "length": "6'4",
+          "width": "22 1/2",
+          "thickness": "2 7/8",
+          "volume_litres": 45.5
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93024,
+      "canonical_key": "torq-surfboards::summer-fish",
+      "manufacturer": "Torq Surfboards",
+      "model": "Summer Fish",
+      "official_url": "https://www.torq-surfboards.com/fish/summer-fish.html",
+      "official_image_url": "https://www.torq-surfboards.com/fish/files/PRODUCT%20PICS/TEC/SUMMER%20FISH/TQ22_TEC_SUMMERFISH_CLEAR.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/fish/summer-fish.html",
+        "resolved_url": "https://www.torq-surfboards.com/fish/summer-fish.html",
+        "retrieved_at_utc": "2026-07-21T07:29:35Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 121,
+        "official_intent_excerpt": "Our Summer Fish is short and wide with hidden volume; paddling is so easy it feels like you’re cheating. It has a drawn in swallow tail that adds a liveliness and responsiveness in comparison to a traditional wide tailed Fish. Small summer...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "Our Summer Fish is short and wide with hidden volume; paddling is so easy it feels like you’re cheating. It has a drawn in swallow tail that adds a liveliness and responsiveness in comparison to a traditional wide tailed Fish. Small summer waves become a playground of ramps and little power pockets that connect through little flats and fun bowl sections. It opens your eyes to a whole new skate park in the line-up. It’s such a versatile board – small waves, onshore days, first shortboard, step down for a longboard. No matter, this is the board that proves the old saying – there’s no such thing as bad surf. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "fish"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "fish",
+      "public_family_label": "Fish",
+      "detailed_category": "Small Wave Fish",
+      "secondary_categories": [],
+      "board_type": "Fish",
+      "primary_fin_setup": "Not published",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "not_published_by_official_source",
+      "tail_shape": [
+        "swallow",
+        "round"
+      ],
+      "outline": "full",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak"
+      ],
+      "wave_type": [
+        "beach break"
+      ],
+      "ability_range": [
+        "progressing",
+        "intermediate"
+      ],
+      "strengths": [
+        "drive",
+        "hold",
+        "paddle"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: progressing to intermediate surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "full",
+          "nose": "balanced",
+          "tail": [
+            "swallow",
+            "round"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": []
+        },
+        "behaviour": {
+          "paddle": 7,
+          "wave_entry": 7,
+          "speed_generation": 8,
+          "drive": 7,
+          "release": 8,
+          "hold": 6,
+          "forgiveness": 7,
+          "stability": 7,
+          "sensitivity": 7,
+          "projection": 7,
+          "pivot": 7,
+          "carve": 7,
+          "glide": 7,
+          "turning_radius": 7
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 8,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 8,
+          "intermediate": 8,
+          "advanced": 3,
+          "expert": 3
+        },
+        "style_tags": [
+          "fish",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "fish"
+        ]
+      },
+      "recommendation_lanes": [
+        "fish",
+        "small-wave-fish",
+        "performance_fish",
+        "small_wave_fish"
+      ],
+      "excluded_recommendation_lanes": [
+        "groveller",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "mid_length",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy identifies a short, wide fish for small summer waves and first-shortboard use.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "TEC",
+          "length": "5'6",
+          "width": "20 3/4",
+          "thickness": "2 3/8",
+          "volume_litres": 31.0
+        },
+        {
+          "construction": "TEC",
+          "length": "5'8",
+          "width": "21 1/4",
+          "thickness": "2 1/2",
+          "volume_litres": 34.4
+        },
+        {
+          "construction": "TEC",
+          "length": "5'10",
+          "width": "21 3/4",
+          "thickness": "2 5/8",
+          "volume_litres": 38.0
+        },
+        {
+          "construction": "TEC",
+          "length": "6'0",
+          "width": "22 1/4",
+          "thickness": "2 3/4",
+          "volume_litres": 41.7
+        },
+        {
+          "construction": "TEC",
+          "length": "6'2",
+          "width": "22 1/2“",
+          "thickness": "2 13/16",
+          "volume_litres": 45.0
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93025,
+      "canonical_key": "torq-surfboards::the-don-hp",
+      "manufacturer": "Torq Surfboards",
+      "model": "The Don HP",
+      "official_url": "https://www.torq-surfboards.com/longboard/the-don-hp.html",
+      "official_image_url": "https://www.torq-surfboards.com/longboard/files/PRODUCT%20PICS/ACT/DON%20HP/TQ22_ACT_DONHP_BAMBOO.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/longboard/the-don-hp.html",
+        "resolved_url": "https://www.torq-surfboards.com/longboard/the-don-hp.html",
+        "retrieved_at_utc": "2026-07-21T07:29:36Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 94,
+        "official_intent_excerpt": "In the Don longboard series, the HP is the high performance model. It has a slimmed down outline and foil, lower rails and slightly more rocker making this razor sharp for dynamic modern longboarding. Still capable on the nose when the right...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "In the Don longboard series, the HP is the high performance model. It has a slimmed down outline and foil, lower rails and slightly more rocker making this razor sharp for dynamic modern longboarding. Still capable on the nose when the right section stands up, the Don HP is a board for experienced longboarders looking for the highest performance. Available in our exclusive ACT Pre-preg technology for the most lightweight, responsive re-flex, or TEC, our vacuum bagged epoxy for lightweight combined with strength. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "longboard",
+      "public_family_label": "Longboard",
+      "detailed_category": "Performance Longboard",
+      "secondary_categories": [],
+      "board_type": "Longboard",
+      "primary_fin_setup": "Not published",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "not_published_by_official_source",
+      "tail_shape": [
+        "not_published"
+      ],
+      "outline": "balanced",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average",
+        "powerful"
+      ],
+      "wave_type": [
+        "open face"
+      ],
+      "ability_range": [
+        "advanced",
+        "expert"
+      ],
+      "strengths": [
+        "paddle",
+        "speed generation",
+        "sensitivity"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: advanced to expert surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "balanced",
+          "nose": "balanced",
+          "tail": [
+            "not_published"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": []
+        },
+        "behaviour": {
+          "paddle": 9,
+          "wave_entry": 8,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 6,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 6,
+          "projection": 6,
+          "pivot": 6,
+          "carve": 7,
+          "glide": 10,
+          "turning_radius": 9
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 3,
+          "advanced": 8,
+          "expert": 8
+        },
+        "style_tags": [
+          "longboard",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "longboard"
+        ]
+      },
+      "recommendation_lanes": [
+        "longboard",
+        "performance-longboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "mid_length"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy calls Don HP the high-performance model in the longboard series for experienced longboarders.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "ACT",
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "ACT",
+          "length": "9'1",
+          "width": "21 7/8",
+          "thickness": "2 13/16",
+          "volume_litres": 63.0
+        },
+        {
+          "construction": "TEC",
+          "length": "9'1",
+          "width": "21 7/8",
+          "thickness": "2 13/16",
+          "volume_litres": 63.0
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93026,
+      "canonical_key": "torq-surfboards::the-don-nr",
+      "manufacturer": "Torq Surfboards",
+      "model": "The Don NR",
+      "official_url": "https://www.torq-surfboards.com/longboard/the-don-nr.html",
+      "official_image_url": "https://www.torq-surfboards.com/longboard/files/PRODUCT%20PICS/ACT/DON%20NR/TQ22_ACT_DONNR_BAMBOO.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/longboard/the-don-nr.html",
+        "resolved_url": "https://www.torq-surfboards.com/longboard/the-don-nr.html",
+        "retrieved_at_utc": "2026-07-21T07:29:36Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 133,
+        "official_intent_excerpt": "TET DON NR PINLINE TET DON NR POP TET DON NR LAGUNA TET DON NR LEGACY The Don Nose Rider is a mix of our all round performance Don model with a more traditional Noserider. Up front is a wide nose, low...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "TET DON NR PINLINE TET DON NR POP TET DON NR LAGUNA TET DON NR LEGACY The Don Nose Rider is a mix of our all round performance Don model with a more traditional Noserider. Up front is a wide nose, low entry rocker and teardrop concave – a sure fire combination for stability and tip time. But unlike a traditional noserider with soft rolled rails and vee bottom, the Don NR combines a hard rail and double concave vee in the tail of a more modern longboard. This combination blends the best of a traditional noserider with the best of a modern longboard in a lightweight, super strong epoxy package. Turns out you can please all the people all the time. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "longboard"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "longboard",
+      "public_family_label": "Longboard",
+      "detailed_category": "Noserider Longboard",
+      "secondary_categories": [],
+      "board_type": "Longboard",
+      "primary_fin_setup": "Not published",
+      "alternative_fin_setup": [],
+      "fin_configuration_source": "not_published_by_official_source",
+      "tail_shape": [
+        "round",
+        "pin"
+      ],
+      "outline": "full",
+      "bottom_contours": [
+        "double",
+        "vee",
+        "concave"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "average"
+      ],
+      "wave_type": [
+        "open face"
+      ],
+      "ability_range": [
+        "intermediate",
+        "advanced"
+      ],
+      "strengths": [
+        "paddle",
+        "speed generation",
+        "sensitivity"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: intermediate to advanced surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "full",
+          "nose": "full",
+          "tail": [
+            "round",
+            "pin"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "double",
+            "vee",
+            "concave"
+          ],
+          "fin_configurations": []
+        },
+        "behaviour": {
+          "paddle": 9,
+          "wave_entry": 8,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 6,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 9,
+          "sensitivity": 6,
+          "projection": 6,
+          "pivot": 6,
+          "carve": 7,
+          "glide": 10,
+          "turning_radius": 9
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 5,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 5,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 3,
+          "progressing": 3,
+          "intermediate": 8,
+          "advanced": 8,
+          "expert": 3
+        },
+        "style_tags": [
+          "longboard",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "longboard"
+        ]
+      },
+      "recommendation_lanes": [
+        "longboard",
+        "noserider-longboard"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "mid_length"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy identifies Don NR as a nose-rider blending traditional and modern longboard elements.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "ACT",
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "ACT",
+          "length": "9'1",
+          "width": "23",
+          "thickness": "3 1/8",
+          "volume_litres": 77.0
+        },
+        {
+          "construction": "TEC",
+          "length": "9'1",
+          "width": "23",
+          "thickness": "3 1/8",
+          "volume_litres": 77.0
+        },
+        {
+          "construction": "TEC",
+          "length": "9'6",
+          "width": "23 1/2",
+          "thickness": "3 1/4",
+          "volume_litres": 88.0
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    },
+    {
+      "canonical_model_id": 93027,
+      "canonical_key": "torq-surfboards::v",
+      "manufacturer": "Torq Surfboards",
+      "model": "V+",
+      "official_url": "https://www.torq-surfboards.com/midlength/v-plus.html",
+      "official_image_url": "https://www.torq-surfboards.com/midlength/files/PRODUCT%20PICS/ACT/V%2B/TQ22_ACT_V%2B_BAMBOO.png",
+      "official_evidence": {
+        "official_url": "https://www.torq-surfboards.com/midlength/v-plus.html",
+        "resolved_url": "https://www.torq-surfboards.com/midlength/v-plus.html",
+        "retrieved_at_utc": "2026-07-21T07:29:36Z",
+        "retrieval_method": "phase3_canonical_dry_run_snapshot",
+        "http_status": 200,
+        "live_verified": true,
+        "identity_match": true,
+        "description_word_count": 147,
+        "official_intent_excerpt": "TET V+ POP TET V+ LAGUNA TET V+ LEGACY TET V+ RETROFADE TET V+ CLASSIC BLUE TET V+ CLASSIC COLOR The Volume Plus takes the trend for high volume wide boards into the midlength model, creating a board with the stability and...",
+        "source_scope": "official_manufacturer_canonical_evidence"
+      },
+      "manufacturer_intent": "TET V+ POP TET V+ LAGUNA TET V+ LEGACY TET V+ RETROFADE TET V+ CLASSIC BLUE TET V+ CLASSIC COLOR The Volume Plus takes the trend for high volume wide boards into the midlength model, creating a board with the stability and paddle ability of a much longer board, but in a compact, easier to turn package. These boards suit all surfers of all abilities, whether looking for a first board or quiver builder for fun days. The high volume makes it super easy to catch waves while the rocker and bottom contours make this lively and agile underfoot with more performance than you would expect from a larger board. Great for beginners, great for bigger surfers wanting a shorter board.. All sizes come as 3 fin Thruster set up, except the Wood design as 2+1. Protects against cross-site request forgery attacks. Saves the current PHP session.",
+      "manufacturer_intent_signals": [
+        "mid_length"
+      ],
+      "unresolved_intent_conflict": false,
+      "public_family": "mid_length",
+      "public_family_label": "Mid Length",
+      "detailed_category": "High Volume Mid Length",
+      "secondary_categories": [],
+      "board_type": "Mid Length",
+      "primary_fin_setup": "Thruster",
+      "alternative_fin_setup": [
+        "2+1"
+      ],
+      "fin_configuration_source": "official_manufacturer_text",
+      "tail_shape": [
+        "not_published"
+      ],
+      "outline": "full",
+      "bottom_contours": [
+        "not_published"
+      ],
+      "entry_rocker": "medium",
+      "exit_rocker": "medium",
+      "rail_type": "balanced",
+      "volume_philosophy": "balanced",
+      "wave_size": {
+        "minimum_ft": null,
+        "maximum_ft": null
+      },
+      "wave_power": [
+        "weak",
+        "average"
+      ],
+      "wave_type": [
+        "open face"
+      ],
+      "ability_range": [
+        "beginner",
+        "progressing",
+        "intermediate"
+      ],
+      "strengths": [
+        "paddle",
+        "speed generation",
+        "sensitivity"
+      ],
+      "weaknesses": [
+        "No independent Quivrr ride-test claim is published; guidance is limited to official source evidence."
+      ],
+      "typical_customer": "Official-evidence guidance: beginner to progressing to intermediate surfer; see the manufacturer model page for current specification details.",
+      "board_dna": {
+        "physical_design": {
+          "outline": "full",
+          "nose": "balanced",
+          "tail": [
+            "not_published"
+          ],
+          "rocker_entry": "medium",
+          "rocker_tail": "medium",
+          "rails": "balanced",
+          "foil": "balanced",
+          "volume_distribution": "balanced",
+          "bottom_contours": [
+            "not_published"
+          ],
+          "fin_configurations": [
+            "thruster",
+            "2+1"
+          ]
+        },
+        "behaviour": {
+          "paddle": 8,
+          "wave_entry": 8,
+          "speed_generation": 7,
+          "drive": 7,
+          "release": 6,
+          "hold": 7,
+          "forgiveness": 8,
+          "stability": 8,
+          "sensitivity": 6,
+          "projection": 6,
+          "pivot": 6,
+          "carve": 7,
+          "glide": 9,
+          "turning_radius": 8
+        },
+        "conditions": {
+          "weak_waves": 8,
+          "average_waves": 8,
+          "powerful_waves": 6,
+          "beach_break": 7,
+          "point_break": 7,
+          "reef_break": 8,
+          "hollow_waves": 6,
+          "open_face": 8
+        },
+        "rider_fit": {
+          "beginner": 8,
+          "progressing": 8,
+          "intermediate": 8,
+          "advanced": 3,
+          "expert": 3
+        },
+        "style_tags": [
+          "mid_length",
+          "official_evidence"
+        ],
+        "quiver_roles": [
+          "mid_length"
+        ]
+      },
+      "recommendation_lanes": [
+        "mid_length",
+        "high-volume-mid-length",
+        "performance_mid_length"
+      ],
+      "excluded_recommendation_lanes": [
+        "fish",
+        "groveller",
+        "daily_driver",
+        "performance_shortboard",
+        "step_up",
+        "longboard"
+      ],
+      "editorial_notes": [
+        "Governed from official copy: Official copy explicitly identifies V+ as a high-volume midlength and states Thruster/2+1 configurations.",
+        "No first-hand Quivrr ride-test claim is asserted."
+      ],
+      "confidence": "high",
+      "review_required": false,
+      "previous_public_family": null,
+      "previous_detailed_category": null,
+      "classification_changed": true,
+      "reviewed_date": "2026-07-21",
+      "reviewed_by": "QUIVRR",
+      "canonical_state": "accepted_sql_pending",
+      "identity_scope": "stable_bodhi_governed_key_pending_production_board_model_id",
+      "official_constructions": [
+        "ACT",
+        "TEC"
+      ],
+      "official_standard_sizes": [
+        {
+          "construction": "ACT",
+          "length": "7'4",
+          "width": "22",
+          "thickness": "3",
+          "volume_litres": 55.9
+        },
+        {
+          "construction": "ACT",
+          "length": "7'8",
+          "width": "22 1/2",
+          "thickness": "3 3/16",
+          "volume_litres": 63.9
+        },
+        {
+          "construction": "ACT",
+          "length": "8'0",
+          "width": "22 7/8",
+          "thickness": "3 1/4",
+          "volume_litres": 68.0
+        },
+        {
+          "construction": "TEC",
+          "length": "7'0",
+          "width": "21 1/2",
+          "thickness": "2 7/8",
+          "volume_litres": 49.5
+        },
+        {
+          "construction": "TEC",
+          "length": "7'4",
+          "width": "22",
+          "thickness": "3",
+          "volume_litres": 55.9
+        },
+        {
+          "construction": "TEC",
+          "length": "7'8",
+          "width": "22 1/2",
+          "thickness": "3 3/16",
+          "volume_litres": 63.9
+        },
+        {
+          "construction": "TEC",
+          "length": "8'0",
+          "width": "22 7/8",
+          "thickness": "3 1/4",
+          "volume_litres": 68.0
+        },
+        {
+          "construction": "TEC",
+          "length": "7'4",
+          "width": "22",
+          "thickness": "3",
+          "volume_litres": 56.0
+        },
+        {
+          "construction": "TEC",
+          "length": "7'8",
+          "width": "22 1/2",
+          "thickness": "3 3/16",
+          "volume_litres": 64.0
+        },
+        {
+          "construction": "TEC",
+          "length": "8'2",
+          "width": "22 7/8",
+          "thickness": "3 1/4",
+          "volume_litres": 70.5
+        }
+      ],
+      "sizing_guidance": "Use the preserved official standard size table; Bodhi does not invent a custom size recommendation from this editorial record.",
+      "construction_guidance": "Construction labels are preserved exactly from the official source; no cross-brand material equivalence is asserted."
+    }
+  ]
+}

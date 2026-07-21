@@ -1,4 +1,9 @@
 CanonicalModelId,Brand,Model,PublicFamily,PrimaryCategory,Paddle,SpeedGeneration,Drive,Release,Hold,Forgiveness,Stability,Sensitivity,Glide,WeakWaves,PowerfulWaves,BeachBreak,PointBreak,ReefBreak,MinimumAbility,SourceMethod,PhysicalConfidence,BehaviourConfidence,ReviewRequired,ReviewNotes
+93001,AIPA Surf,Big Boy Sting,performance_shortboard,performance_shortboard,4,8,10,10,9,3,3,10,2,3,10,8,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail.
+93002,AIPA Surf,Big Brother Sting - Tuflite,longboard,longboard,10,6,8,4,6,9,10,3,10,7,5,7,10,6,beginner,manufacturer_inference,medium,medium,False,
+93003,AIPA Surf,Bone Fish,fish,performance_fish,7,9,8,8,7,7,7,8,5,8,7,8,7,8,progressing,manufacturer_inference,medium,medium,False,
+93004,AIPA Surf,Dark Horse,performance_shortboard,performance_shortboard,4,7,9,10,9,3,3,10,2,3,10,8,8,10,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
+93005,AIPA Surf,Super Nova,groveller,groveller,8,9,6,8,4,9,9,5,5,10,2,9,5,3,beginner,manufacturer_inference,medium,medium,False,
 8114,Album,Bom Dia,performance_shortboard,performance_twin,6,9,8,9,7,5,5,9,5,6,7,7,7,8,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
 8115,Album,Bullet,daily_driver,hybrid_shortboard,7,7,7,7,6,7,7,7,5,8,6,8,7,6,progressing,manufacturer_inference,medium,medium,False,
 8116,Album,D'boa,fish,performance_fish,9,10,7,8,7,8,8,7,6,10,5,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: flatter rocker. Applied governed evidence rule: single concave.
@@ -18,6 +23,14 @@ CanonicalModelId,Brand,Model,PublicFamily,PrimaryCategory,Paddle,SpeedGeneration
 8131,Album,VBSM,performance_shortboard,performance_shortboard,5,9,9,10,8,3,3,10,3,4,10,7,8,10,advanced,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
 8132,Album,Veebee,fish,performance_fish,10,10,7,9,7,8,9,7,6,8,6,7,6,7,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power. Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
 8133,Album,Warp Twin,performance_shortboard,performance_twin,6,9,7,9,7,5,5,8,5,6,7,7,7,8,intermediate,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
+93006,Aloha Surfboards,ALOHA LOPEZ NEW FISH,fish,performance_fish,7,10,9,9,7,7,7,8,5,8,7,8,7,8,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail.
+93007,Aloha Surfboards,ALOHA LUNA,fish,performance_fish,8,10,10,9,9,6,6,10,5,10,6,8,7,8,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: low rails. Applied governed evidence rule: swallow. Applied governed evidence rule: channels.
+93008,Aloha Surfboards,ALOHA SKIPPER,daily_driver,performance_daily_driver,6,8,9,7,10,6,6,10,4,6,9,9,8,9,progressing,explicit_manufacturer,high,high,False,Applied governed evidence rule: low rails. Applied governed evidence rule: round pin.
+93009,Aloha Surfboards,ALOHA WING MAN,groveller,groveller,8,10,7,9,5,8,8,7,5,10,2,9,5,3,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: low rails. Applied governed evidence rule: swallow tail.
+93010,Aloha Surfboards,ALOHA x LOPEZ H2,daily_driver,performance_daily_driver,6,9,8,8,10,6,6,10,4,6,8,9,8,9,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: low rocker. Applied governed evidence rule: more rocker. Applied governed evidence rule: low rails.
+93011,Aloha Surfboards,EZ Mid,mid_length,performance_mid_length,10,8,9,7,9,6,8,8,9,4,9,6,10,10,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: paddle power. Applied governed evidence rule: vee.
+93012,Aloha Surfboards,FUN DIVISION MID,mid_length,performance_mid_length,8,8,9,6,9,6,7,8,9,4,9,6,10,10,intermediate,manufacturer_inference,medium,medium,False,
+93013,Aloha Surfboards,JALAPENO,performance_shortboard,performance_shortboard,6,7,9,10,10,2,3,10,2,3,10,8,8,10,intermediate,explicit_manufacturer,high,high,False,Applied governed evidence rule: low rails. Applied governed evidence rule: paddle power. Applied governed evidence rule: vee.
 7714,Channel Islands,average-joe,daily_driver,hybrid_shortboard,8,9,7,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: single concave. Applied governed evidence rule: vee.
 7715,Channel Islands,better-everyday,daily_driver,performance_daily_driver,6,7,7,7,7,7,7,7,5,6,7,9,7,8,intermediate,manufacturer_inference,medium,medium,False,
 7716,Channel Islands,big-happy,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
@@ -430,3 +443,17 @@ CanonicalModelId,Brand,Model,PublicFamily,PrimaryCategory,Paddle,SpeedGeneration
 8081,Simon Anderson,Three Peat,daily_driver,hybrid_shortboard,8,8,7,8,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
 8089,Simon Anderson,Varmit,daily_driver,hybrid_shortboard,8,8,7,9,6,8,8,7,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: vee.
 8083,Simon Anderson,XFC,daily_driver,hybrid_shortboard,8,8,8,8,6,8,8,8,6,7,6,9,7,6,progressing,manufacturer_inference,medium,medium,False,
+93014,Torq Surfboards,24/7,longboard,longboard,10,6,8,4,6,9,10,3,10,7,5,7,10,6,beginner,manufacturer_inference,medium,medium,False,
+93015,Torq Surfboards,Bigboy 23,daily_driver,performance_daily_driver,6,8,8,8,8,7,7,8,4,6,8,9,8,9,progressing,manufacturer_inference,medium,medium,False,
+93016,Torq Surfboards,Bigboy Fish,fish,performance_fish,7,10,9,9,7,7,7,8,5,8,7,8,7,8,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail.
+93017,Torq Surfboards,Chopper,mid_length,performance_mid_length,8,8,9,6,9,6,7,8,9,4,9,6,10,10,intermediate,explicit_manufacturer,high,high,False,
+93018,Torq Surfboards,Comp2,performance_shortboard,performance_shortboard,4,7,9,9,9,3,3,10,2,3,10,8,8,10,intermediate,manufacturer_inference,medium,medium,False,
+93019,Torq Surfboards,Delpero Pro,longboard,longboard,10,6,8,4,6,9,10,3,10,7,5,7,10,6,beginner,manufacturer_inference,medium,medium,False,
+93020,Torq Surfboards,Fish,fish,performance_fish,7,9,8,8,7,7,7,8,5,8,7,8,7,8,progressing,manufacturer_inference,medium,medium,False,
+93021,Torq Surfboards,Go-Kart,daily_driver,performance_daily_driver,6,8,8,8,8,7,7,8,4,6,8,9,8,9,intermediate,manufacturer_inference,medium,medium,False,
+93022,Torq Surfboards,Multiplier,daily_driver,performance_daily_driver,6,8,8,8,8,7,7,8,4,6,8,9,8,9,intermediate,manufacturer_inference,medium,medium,False,
+93023,Torq Surfboards,PG-R,groveller,groveller,8,9,6,8,4,9,9,5,5,10,2,9,5,3,beginner,manufacturer_inference,medium,medium,False,
+93024,Torq Surfboards,Summer Fish,fish,performance_fish,7,10,9,9,7,7,7,8,5,8,7,8,7,8,progressing,manufacturer_inference,medium,medium,False,Applied governed evidence rule: swallow tail.
+93025,Torq Surfboards,The Don HP,longboard,longboard,9,6,8,4,7,9,10,4,10,5,6,7,10,6,beginner,manufacturer_inference,medium,medium,False,Applied governed evidence rule: more rocker.
+93026,Torq Surfboards,The Don NR,longboard,longboard,10,6,8,5,6,9,10,3,10,7,5,7,10,6,beginner,explicit_manufacturer,high,high,False,Applied governed evidence rule: wide nose. Applied governed evidence rule: vee.
+93027,Torq Surfboards,V+,mid_length,performance_mid_length,8,8,9,6,9,6,7,8,9,4,9,6,10,10,beginner,manufacturer_inference,medium,medium,False,
