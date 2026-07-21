@@ -78,6 +78,38 @@ def compare_board_models(
         return None
 
     profile = profile or RiderProfile()
+    # Phase 3 manufacturer-expansion models have official descriptions, images
+    # and standard sizes, but no official public-family evidence.  Preserve
+    # their usefulness for factual comparison without letting generic scoring
+    # turn missing classification into an apparent performance verdict.
+    if (
+        left.source_type == "official_manufacturer_canonical_dry_run"
+        or right.source_type == "official_manufacturer_canonical_dry_run"
+    ):
+        size_note = []
+        if left.volume_min_litres is not None and right.volume_min_litres is not None:
+            size_note.append(
+                f"Published standard-size volume ranges are {left.volume_min_litres:g}-{left.volume_max_litres:g}L "
+                f"for {left.brand} {left.model} and {right.volume_min_litres:g}-{right.volume_max_litres:g}L "
+                f"for {right.brand} {right.model}."
+            )
+        comparison = BoardComparison(
+            board_a=BoardReference(brand=left.brand, model=left.model),
+            board_b=BoardReference(brand=right.brand, model=right.model),
+            similarities=["Both have an official manufacturer description, product URL and staged standard-size evidence."],
+            differences=size_note,
+            rider_specific_conclusion=(
+                "Bodhi will not rank these models for rider fit until official public-family evidence is available."
+            ),
+            evidence_confidence=min(left.source_confidence, right.source_confidence),
+        )
+        return ComparisonEngineResult(
+            comparison=comparison,
+            left_fit=None,
+            right_fit=None,
+            ordered_boards=(left, right),
+        )
+
     left_fit = score_board_fit(left, profile)
     right_fit = score_board_fit(right, profile)
     left_dna = find_board_dna(left.brand, left.model)
