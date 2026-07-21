@@ -35,13 +35,13 @@ SOURCES = (
     (
         "aipa_canonical_dry_run.json",
         "AIPA Surf",
-        "production_import_pending",
+        "production_verified",
         "Owner-approved AIPA official catalogue reconciliation",
     ),
     (
         "timmy_patterson_canonical_dry_run.json",
         "Timmy Patterson Surfboards",
-        "production_import_pending",
+        "production_verified",
         "Owner-approved Timmy Patterson official catalogue reconciliation",
     ),
 )
@@ -72,7 +72,7 @@ def model_record(rows: list[dict]) -> dict:
         "manufacturer": first["brand"],
         "model": first["model"],
         "canonical_key": f"{first['brand'].lower()}::{first['model'].lower()}",
-        "canonical_state": "production_import_pending",
+        "canonical_state": "production_verified",
         "official_product_url": first["official_product_url"],
         "official_image_url": first["official_image_url"],
         "official_description": first["description"],
@@ -119,7 +119,7 @@ def build(canonical_root: Path) -> dict:
     return {
         "schema_version": 1,
         "authority": "Owner-approved Quivrr canonical evidence from official manufacturer sources",
-        "catalogue_state": "production_import_pending",
+        "catalogue_state": "production_verified",
         "family_policy": "Unknown is retained where official public-family evidence is absent; model names are never used to infer a family.",
         "manufacturers": manufacturers,
         "models": models,

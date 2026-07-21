@@ -1,37 +1,25 @@
 {
-  "schema_version": 1,
-  "scope": "Phase 3 staged manufacturer expansion",
-  "authority": "Official manufacturer wording captured by the canonical dry-run catalogue",
-  "editorial_policy": "A model is not assigned a Quivrr public family, Board DNA, performance ranking or relationship merely because its name resembles a known category. Unknown remains the public result until official family evidence exists.",
+  "schema_version": 2,
+  "scope": "Owner-approved production manufacturer expansion",
+  "authority": "Official manufacturer wording captured by the production canonical catalogue",
+  "editorial_policy": "A model is not assigned a Quivrr public family, Board DNA, performance ranking or relationship merely because its name resembles a known category.",
   "manufacturers": [
     {
-      "manufacturer": "Aloha Surfboards",
-      "review_status": "official_evidence_only",
-      "model_count": 8,
-      "summary": "AU, EU and US Shopify storefronts were reconciled into one global staged catalogue. Official descriptions, images, product URLs, construction labels and standard sizes are available."
-    },
-    {
       "manufacturer": "AIPA Surf",
-      "review_status": "official_evidence_only",
-      "model_count": 5,
-      "summary": "Only current-production models qualified by the official Shopify reconciliation are represented; historic, archive, placeholder and $0 products are not promoted as catalogue evidence."
-    },
-    {
-      "manufacturer": "Torq Surfboards",
-      "review_status": "official_evidence_only",
-      "model_count": 14,
-      "summary": "Official model-page descriptions, product URLs, imagery, ACT and TEC construction labels and standard sizes are available in the staged catalogue."
+      "review_status": "production_verified",
+      "model_count": 31,
+      "summary": "Official descriptions, images, product URLs, construction labels and approved standard sizes are published as factual model information."
     },
     {
       "manufacturer": "Timmy Patterson Surfboards",
-      "review_status": "canonical_pending",
-      "model_count": 0,
-      "summary": "Manufacturer-level awareness only: official model pages did not provide sufficient model-specific standard-size evidence, so no model review or catalogue is published."
+      "review_status": "production_verified",
+      "model_count": 39,
+      "summary": "Official descriptions, images, product URLs, construction labels and approved standard sizes are published as factual model information."
     }
   ],
   "relationships": {
     "status": "not_published",
-    "reason": "No source-backed model-to-model relationship evidence was captured for the staged manufacturers."
+    "reason": "No source-backed model-to-model relationship evidence is claimed."
   },
   "comparisons": {
     "status": "evidence_only_no_performance_ranking",

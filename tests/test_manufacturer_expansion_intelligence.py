@@ -22,8 +22,8 @@ class ManufacturerExpansionIntelligenceTests(unittest.TestCase):
         rows = {row["manufacturer"]: row for row in list_manufacturers()}
         self.assertEqual(set(rows), {"AIPA Surf", "Timmy Patterson Surfboards"})
         self.assertEqual((rows["AIPA Surf"]["model_count"], rows["AIPA Surf"]["standard_size_count"]), (31, 799))
-        self.assertEqual(rows["AIPA Surf"]["lifecycle_state"], "production_import_pending")
-        self.assertEqual(rows["Timmy Patterson Surfboards"]["lifecycle_state"], "production_import_pending")
+        self.assertEqual(rows["AIPA Surf"]["lifecycle_state"], "production_verified")
+        self.assertEqual(rows["Timmy Patterson Surfboards"]["lifecycle_state"], "production_verified")
         self.assertEqual((rows["Timmy Patterson Surfboards"]["model_count"], rows["Timmy Patterson Surfboards"]["standard_size_count"]), (39, 640))
 
     def test_approved_catalogues_publish_models_and_constructions(self):
@@ -42,7 +42,7 @@ class ManufacturerExpansionIntelligenceTests(unittest.TestCase):
     def test_api_exposes_release_ready_catalogue_with_non_indexable_metadata(self):
         catalogue = self.client.get("/api/manufacturer-intelligence")
         self.assertEqual(catalogue.status_code, 200)
-        self.assertEqual(catalogue.json()["catalogueState"], "production_import_pending")
+        self.assertEqual(catalogue.json()["catalogueState"], "production_verified")
         models = self.client.get("/api/manufacturer-intelligence/models", params={"brand": "AIPA Surf"})
         self.assertEqual(models.status_code, 200)
         self.assertEqual(len(models.json()["models"]), 31)
