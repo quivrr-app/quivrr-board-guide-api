@@ -1,0 +1,28 @@
+{
+  "schema_version": 2,
+  "scope": "Owner-approved production manufacturer expansion",
+  "authority": "Official manufacturer wording captured by the production canonical catalogue",
+  "editorial_policy": "A model is not assigned a Quivrr public family, Board DNA, performance ranking or relationship merely because its name resembles a known category.",
+  "manufacturers": [
+    {
+      "manufacturer": "AIPA Surf",
+      "review_status": "production_verified",
+      "model_count": 31,
+      "summary": "Official descriptions, images, product URLs, construction labels and approved standard sizes are published as factual model information."
+    },
+    {
+      "manufacturer": "Timmy Patterson Surfboards",
+      "review_status": "production_verified",
+      "model_count": 39,
+      "summary": "Official descriptions, images, product URLs, construction labels and approved standard sizes are published as factual model information."
+    }
+  ],
+  "relationships": {
+    "status": "not_published",
+    "reason": "No source-backed model-to-model relationship evidence is claimed."
+  },
+  "comparisons": {
+    "status": "evidence_only_no_performance_ranking",
+    "available_fields": ["official description", "official product URL", "official image URL", "construction", "standard sizes", "volume range"]
+  }
+}

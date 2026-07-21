@@ -8,6 +8,7 @@ from pathlib import Path
 
 from app.daily_driver_taxonomy import daily_driver_lane
 from app.board_master import category_key, find_master_board, find_master_board_by_id
+from app.manufacturer_intelligence import find_staged_model
 
 
 KNOWLEDGE_DIR = Path(__file__).parent / "knowledge"
@@ -406,7 +407,36 @@ def board_record_lookup() -> dict[str, BoardIntelligenceRecord]:
 
 
 def find_board_record(brand: str | None, model: str | None) -> BoardIntelligenceRecord | None:
-    return board_record_lookup().get(board_key(brand, model))
+    record = board_record_lookup().get(board_key(brand, model))
+    if record:
+        return record
+    staged = find_staged_model(brand, model)
+    if not staged:
+        return None
+    sizes = _sizes_from_profile(staged)
+    volume_min, volume_max = _sizes_volume_range(sizes)
+    return BoardIntelligenceRecord(
+        brand=staged["manufacturer"],
+        model=staged["model"],
+        board_model_id=None,
+        category="Surfboard",
+        primary_category=None,
+        lane=None,
+        description=staged.get("official_description"),
+        short_description=None,
+        official_product_url=staged.get("official_product_url"),
+        source_type="official_manufacturer_canonical_dry_run",
+        source_confidence=0.9,
+        curated=False,
+        graph_eligible=False,
+        classified=False,
+        unclassified=True,
+        is_current_model=True,
+        sizes=sizes,
+        volume_min_litres=volume_min,
+        volume_max_litres=volume_max,
+        metadata_missing_fields=("official_public_family", "governed_board_dna", "editorial_relationships"),
+    )
 
 
 def board_intelligence_baseline() -> dict[str, int]:
