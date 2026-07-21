@@ -39,13 +39,17 @@ class ManufacturerExpansionIntelligenceTests(unittest.TestCase):
         self.assertIsNone(record)
         self.assertIsNotNone(find_board_record("AIPA Surf", "Supernova"))
 
-    def test_api_exposes_release_ready_catalogue_with_non_indexable_metadata(self):
+    def test_api_exposes_live_catalogue_with_indexable_metadata(self):
         catalogue = self.client.get("/api/manufacturer-intelligence")
         self.assertEqual(catalogue.status_code, 200)
         self.assertEqual(catalogue.json()["catalogueState"], "production_verified")
         models = self.client.get("/api/manufacturer-intelligence/models", params={"brand": "AIPA Surf"})
         self.assertEqual(models.status_code, 200)
         self.assertEqual(len(models.json()["models"]), 31)
+        supernova = next(row for row in models.json()["models"] if row["model"] == "Supernova")
+        self.assertTrue(supernova["seo"]["indexable"])
+        self.assertIsNone(supernova["seo"]["reason"])
+        self.assertEqual(supernova["seo"]["canonical_url"], "https://quivrr.surf/reviews/aipa-surf/supernova/")
         comparison = self.client.get("/api/manufacturer-intelligence/compare", params={
             "left_brand": "AIPA Surf", "left_model": "Supernova",
             "right_brand": "AIPA Surf", "right_model": "Dark Horse Pro",

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import re
+import unicodedata
 from functools import lru_cache
 from pathlib import Path
 
@@ -20,6 +21,11 @@ CATALOGUE_PATH = Path(__file__).parent / "knowledge" / "generated" / "manufactur
 
 def _normalise(value: object) -> str:
     return re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
+
+
+def _slug(value: object) -> str:
+    ascii_value = unicodedata.normalize("NFKD", str(value or "")).encode("ascii", "ignore").decode("ascii")
+    return re.sub(r"^-|-$", "", re.sub(r"[^a-z0-9]+", "-", ascii_value.lower()))
 
 
 @lru_cache(maxsize=1)
@@ -62,12 +68,8 @@ def _volume_range(model: dict) -> dict[str, float] | None:
 
 
 def model_summary(model: dict) -> dict:
-    """Return safe public data plus SEO metadata for a release-ready model.
-
-    `indexable` remains false until SQL canonical import confirms the public
-    identity.  The official product URL is intentionally retained as the
-    authority instead of inventing a Quivrr canonical route.
-    """
+    """Return safe public data plus live SEO metadata for a canonical model."""
+    canonical_url = f"https://quivrr.surf/reviews/{_slug(model['manufacturer'])}/{_slug(model['model'])}/"
     return {
         "manufacturer": model["manufacturer"],
         "model": model["model"],
@@ -84,9 +86,9 @@ def model_summary(model: dict) -> dict:
         "comparison_status": model["comparison_status"],
         "seo": {
             "title": f"{model['manufacturer']} {model['model']} official model information | Quivrr",
-            "canonical_url": model["official_product_url"],
-            "indexable": False,
-            "reason": "Owner-approved canonical identity awaits production SQL import.",
+            "canonical_url": canonical_url,
+            "indexable": True,
+            "reason": None,
         },
     }
 
