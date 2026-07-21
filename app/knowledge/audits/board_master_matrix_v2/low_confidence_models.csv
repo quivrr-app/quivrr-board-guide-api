@@ -1,6 +1,4 @@
 canonical_model_id,manufacturer,model,official_url,retrieval_method,http_status,identity_match,confidence
-93010,Aloha Surfboards,ALOHA x LOPEZ H2,https://aloha.com.au/products/alohaxlopez-h2-shadow-force-clear,phase3_canonical_dry_run_snapshot,200,True,low
-93012,Aloha Surfboards,FUN DIVISION MID,https://aloha.com.au/products/fun-division-mid-pu-blue,phase3_canonical_dry_run_snapshot,200,True,low
 8093,Chilli,Blueprint Grom,https://www.chillisurfboards.com/surfboards/detail.php?id=25279&direct=1&region=aus,official_html_with_snapshot_extract,200,False,low
 8136,Christenson,Carrera,https://christensonsurfboards.com/carrera,stored_snapshot_after_live_failure,200,True,low
 8137,Christenson,Easy Wind,https://christensonsurfboards.com/easy-wind,stored_snapshot_after_live_failure,200,True,low

@@ -30,9 +30,9 @@ def _average(rows, section, metric):
 
 def test_board_dna_is_complete_unique_and_governed():
     rows = _models()
-    assert len(rows) == 458
-    assert len({row["canonical_model_id"] for row in rows}) == 458
-    assert len({row["brand"] for row in rows}) == 20
+    assert len(rows) == 431
+    assert len({row["canonical_model_id"] for row in rows}) == 431
+    assert len({row["brand"] for row in rows}) == 17
     assert {row["public_family"] for row in rows} == FAMILIES
     for row in rows:
         assert row["public_family"] in FAMILIES
@@ -71,7 +71,7 @@ def test_board_master_v2_is_final_editorial_authority():
     master = json.loads(
         (ROOT / "app/knowledge/curated/quivrr_board_master_matrix_v2.json").read_text(encoding="utf-8")
     )
-    assert master["model_count"] == 458
+    assert master["model_count"] == 431
     for authoritative in master["models"]:
         board = find_board_dna_by_id(authoritative["canonical_model_id"])
         assert board is not None
@@ -128,7 +128,7 @@ def test_alias_lookup_similarity_and_fit_are_deterministic():
 def test_relationship_graph_v3_is_complete_and_resolved():
     graph = json.loads((ROOT / "app/knowledge/generated/board_relationship_graph_v3.json").read_text(encoding="utf-8"))
     assert graph["schemaVersion"] == 3
-    assert graph["boardCount"] == 458 == len(graph["boards"])
+    assert graph["boardCount"] == 431 == len(graph["boards"])
     ids = {row["boardModelId"] for row in graph["boards"]}
     for row in graph["boards"]:
         assert len(row["relationships"]) == 14
@@ -143,14 +143,14 @@ def test_relationship_graph_v3_is_complete_and_resolved():
 def test_generation_audits_expose_review_queue():
     audit = json.loads((ROOT / "app/knowledge/audits/board_dna_audit.json").read_text(encoding="utf-8"))
     distribution = json.loads((ROOT / "app/knowledge/audits/board_dna_distribution.json").read_text(encoding="utf-8"))
-    assert audit["model_count"] == 458
-    assert sum(audit["by_public_family"].values()) == 458
-    assert distribution["model_count"] == 458
+    assert audit["model_count"] == 431
+    assert sum(audit["by_public_family"].values()) == 431
+    assert distribution["model_count"] == 431
     assert (ROOT / "app/knowledge/audits/board_dna_review_required.csv").exists()
     family_review = json.loads((ROOT / "app/knowledge/audits/public_family_review_v2.json").read_text(encoding="utf-8"))
-    assert family_review["model_count"] == 458
-    assert sum(family_review["proposed_family_counts"].values()) == 458
-    assert len(family_review["records"]) == 458
+    assert family_review["model_count"] == 431
+    assert sum(family_review["proposed_family_counts"].values()) == 431
+    assert len(family_review["records"]) == 431
 
 
 def test_active_brief_inherits_family_region_and_stock_requirement():

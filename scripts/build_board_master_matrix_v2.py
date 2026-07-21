@@ -31,8 +31,6 @@ SHOPIFY_HOSTS = {
 }
 
 MANUFACTURER_FILES = {
-    "AIPA Surf": "aipa_surf_v1.json",
-    "Aloha Surfboards": "aloha_surfboards_v1.json",
     "Album": "album_v1.json",
     "Channel Islands": "channel_islands_v1.json",
     "Chemistry Surfboards": "chemistry_surfboards_v1.json",
@@ -50,7 +48,6 @@ MANUFACTURER_FILES = {
     "Rusty": "rusty_v1.json",
     "Sharp Eye": "sharp_eye_v1.json",
     "Simon Anderson": "simon_anderson_v1.json",
-    "Torq Surfboards": "torq_surfboards_v1.json",
 }
 
 PUBLIC_LABELS = {
@@ -569,8 +566,8 @@ def validate(records: list[dict]) -> dict:
     errors = []
     ids = [record["canonical_model_id"] for record in records]
     keys = [record["canonical_key"] for record in records]
-    if len(records) != 458:
-        errors.append(f"Expected 458 models, found {len(records)}")
+    if len(records) != 431:
+        errors.append(f"Expected 431 models, found {len(records)}")
     if len(set(ids)) != len(ids):
         errors.append("Duplicate canonical model IDs")
     if len(set(keys)) != len(keys):
@@ -725,7 +722,7 @@ def main() -> int:
     } for row in records if row["manufacturer_intent_signals"] and row["public_family"] not in row["manufacturer_intent_signals"]])
 
     print(json.dumps(validation, indent=2))
-    return 0 if validation["valid"] and validation["manufacturer_count"] == 20 and validation["public_family_count"] == 7 else 1
+    return 0 if validation["valid"] and validation["manufacturer_count"] == 17 and validation["public_family_count"] == 7 else 1
 
 
 if __name__ == "__main__":

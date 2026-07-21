@@ -2,14 +2,10 @@ from __future__ import annotations
 
 import json
 import re
-import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-from app.board_master import load_board_master
 SOURCE = ROOT / "research/board-taxonomy-review-v1/output/board-taxonomy-owner-review-v1.json"
 SUPPLEMENT = ROOT / "app/knowledge/curated/christenson_taxonomy_supplement.json"
 OUTPUT = ROOT / "app/knowledge/board_taxonomy_v2.json"
@@ -108,29 +104,6 @@ def main() -> None:
             "classification_status": "approved", "manufacturer_evidence": None,
         }
         records.append({**base, **item})
-    existing_ids = {int(row["canonical_model_id"]) for row in records}
-    category_for_family = {
-        "fish": "performance_fish", "groveller": "groveller", "daily_driver": "performance_daily_driver",
-        "performance_shortboard": "performance_shortboard", "step_up": "step_up",
-        "mid_length": "performance_mid_length", "longboard": "longboard",
-    }
-    for master in load_board_master()["models"]:
-        if int(master["canonical_model_id"]) in existing_ids:
-            continue
-        primary = category_for_family[master["public_family"]]
-        records.append({
-            "brand": master["manufacturer"], "model": master["model"],
-            "canonical_model_id": str(master["canonical_model_id"]), "canonical_key": master["canonical_key"],
-            "aliases": [], "primary_category": primary, "secondary_categories": [],
-            "recommendation_lanes": list(dict.fromkeys(lane for lane in [primary, *master.get("recommendation_lanes", [])] if lane in LANES)),
-            "excluded_lanes": [lane for lane in (master.get("excluded_recommendation_lanes") or []) if lane in LANES],
-            "fin_configuration": [normalise_fin(master["primary_fin_setup"])] if master["primary_fin_setup"] != "Not published" else [],
-            "wave_power": master.get("wave_power") or [], "wave_types": master.get("wave_type") or [],
-            "ability_range": master.get("ability_range") or [], "paddle_profile": None, "performance_profile": None,
-            "source_url": master["official_url"], "manufacturer_evidence": master["manufacturer_intent"],
-            "source_confidence": master["confidence"], "classification_confidence": master["confidence"],
-            "classification_status": "governed_board_master_phase3",
-        })
     records.sort(key=lambda row: (row["brand"].lower(), row["model"].lower()))
     validate(records)
     christenson = {row["model"] for row in records if row["brand"] == "Christenson"}

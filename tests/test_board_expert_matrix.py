@@ -16,8 +16,8 @@ class BoardExpertMatrixTests(unittest.TestCase):
 
     def test_matrix_covers_all_canonical_models_with_primary_lanes(self):
         boards = self.payload["boards"]
-        self.assertEqual(len(boards), 545)
-        self.assertEqual(len({(row["brand"].lower(), row["model"].lower()) for row in boards}), 545)
+        self.assertEqual(len(boards), 518)
+        self.assertEqual(len({(row["brand"].lower(), row["model"].lower()) for row in boards}), 518)
         self.assertTrue(all(row["primaryLane"] for row in boards))
         self.assertTrue(all(row.get("broadFamily") for row in boards))
         self.assertTrue(all(row.get("designSubtype") for row in boards))

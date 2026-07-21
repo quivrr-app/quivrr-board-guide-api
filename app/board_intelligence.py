@@ -413,36 +413,29 @@ def find_board_record(brand: str | None, model: str | None) -> BoardIntelligence
     staged = find_staged_model(brand, model)
     if not staged:
         return None
-    master = find_master_board(staged["manufacturer"], staged["model"])
     sizes = _sizes_from_profile(staged)
     volume_min, volume_max = _sizes_volume_range(sizes)
     return BoardIntelligenceRecord(
         brand=staged["manufacturer"],
         model=staged["model"],
         board_model_id=None,
-        category=master["board_type"] if master else "Surfboard",
-        primary_category=category_key(master["detailed_category"]) if master else None,
-        lane=((master.get("recommendation_lanes") or [None])[0] if master else None),
+        category="Surfboard",
+        primary_category=None,
+        lane=None,
         description=staged.get("official_description"),
         short_description=None,
         official_product_url=staged.get("official_product_url"),
-        source_type="governed_board_master_phase3",
-        source_confidence=1.0 if master and master.get("confidence") == "high" else 0.8,
-        curated=bool(master),
-        graph_eligible=bool(master),
-        classified=bool(master),
-        unclassified=False,
+        source_type="official_manufacturer_canonical_dry_run",
+        source_confidence=0.9,
+        curated=False,
+        graph_eligible=False,
+        classified=False,
+        unclassified=True,
         is_current_model=True,
-        ability_tags=_text_list(master.get("ability_range") if master else None),
-        wave_types=_text_list(master.get("wave_type") if master else None),
-        strengths=_text_list(master.get("strengths") if master else None),
-        trade_offs=_text_list(master.get("weaknesses") if master else None),
-        recommendation_lanes=_text_list(master.get("recommendation_lanes") if master else None),
-        excluded_recommendation_lanes=_text_list(master.get("excluded_recommendation_lanes") if master else None),
         sizes=sizes,
         volume_min_litres=volume_min,
         volume_max_litres=volume_max,
-        metadata_missing_fields=(),
+        metadata_missing_fields=("official_public_family", "governed_board_dna", "editorial_relationships"),
     )
 
 

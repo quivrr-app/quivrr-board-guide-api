@@ -29,11 +29,10 @@ DEFAULT_CANONICAL_ROOT = (
 )
 OUTPUT = ROOT / "app" / "knowledge" / "generated" / "manufacturer_expansion_catalogue.json"
 
-SOURCES = (
-    ("aloha_canonical_dry_run.json", "Aloha Surfboards", "canonical_staged", "Official Aloha AU/EU/US Shopify reconciliation"),
-    ("aipa_canonical_dry_run.json", "AIPA Surf", "canonical_staged", "Official AIPA Shopify current-production reconciliation"),
-    ("torq_canonical_dry_run.json", "Torq Surfboards", "canonical_staged", "Official Torq model-page reconciliation"),
-)
+# Canonical rows are intentionally empty until the corrected AIPA and Timmy
+# official-model reconciliations pass owner review. Reusable deferred adapters
+# remain in the backend but do not feed Board Guide staging.
+SOURCES = ()
 
 
 def load_rows(path: Path) -> list[dict]:
@@ -105,18 +104,22 @@ def build(canonical_root: Path) -> dict:
                 "remain intentionally unpublished until governed official family evidence is captured."
             ),
         })
-    manufacturers.append({
-        "manufacturer": "Timmy Patterson Surfboards",
-        "lifecycle_state": "canonical_pending",
-        "model_count": 0,
-        "standard_size_count": 0,
-        "constructions": [],
-        "source_authority": "Official Timmy Patterson model pages retained during Phase 3",
-        "editorial_summary": (
-            "Manufacturer-level intelligence only. Official model pages did not provide model-specific "
-            "standard-size evidence, so no model catalogue, family, construction or review is published."
-        ),
-    })
+    for manufacturer, authority in (
+        ("AIPA Surf", "Official AIPA model directory reconciliation in progress"),
+        ("Timmy Patterson Surfboards", "Official Timmy Patterson model directory reconciliation in progress"),
+    ):
+        manufacturers.append({
+            "manufacturer": manufacturer,
+            "lifecycle_state": "canonical_pending",
+            "model_count": 0,
+            "standard_size_count": 0,
+            "constructions": [],
+            "source_authority": authority,
+            "editorial_summary": (
+                "Manufacturer-level awareness only. No model, size, construction or review is published "
+                "until the complete official directory is reconciled and owner-approved."
+            ),
+        })
     return {
         "schema_version": 1,
         "authority": "Quivrr Phase 3 canonical dry-run evidence; official manufacturer source wording only",

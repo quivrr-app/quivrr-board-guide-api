@@ -12,10 +12,10 @@ class BoardTaxonomyV2Tests(unittest.TestCase):
         cls.rows = load_taxonomy()
 
     def test_approved_dataset_and_christenson_supplement_are_complete(self):
-        self.assertEqual(len(self.rows), 458)
-        self.assertEqual(len({row["canonical_key"] for row in self.rows}), 458)
-        self.assertEqual(len({row["canonical_model_id"] for row in self.rows}), 458)
-        self.assertEqual(len({row["brand"] for row in self.rows}), 20)
+        self.assertEqual(len(self.rows), 431)
+        self.assertEqual(len({row["canonical_key"] for row in self.rows}), 431)
+        self.assertEqual(len({row["canonical_model_id"] for row in self.rows}), 431)
+        self.assertEqual(len({row["brand"] for row in self.rows}), 17)
 
     def test_christenson_has_exactly_fourteen_canonical_models(self):
         expected = {

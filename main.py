@@ -1026,8 +1026,8 @@ def manufacturer_intelligence(response: Response):
     """Expose Phase 3 evidence without presenting it as production catalogue data."""
     _set_debug_headers(response)
     return {
-        "catalogueState": "accepted_sql_pending",
-        "familyPolicy": "Public families are governed from documented official-source evidence; no first-hand Quivrr ride-test claim is implied.",
+        "catalogueState": "staged_sql_pending",
+        "familyPolicy": "Unknown is retained where official public-family evidence is absent.",
         "manufacturers": list_manufacturers(),
         "constructionSummaries": construction_summaries(),
     }
@@ -1041,7 +1041,7 @@ def manufacturer_intelligence_models(response: Response, brand: str):
         raise HTTPException(status_code=404, detail="No staged manufacturer models found.")
     return {
         "brand": manufacturer_models[0]["manufacturer"],
-        "catalogueState": "accepted_sql_pending",
+        "catalogueState": "staged_sql_pending",
         "models": [model_summary(model) for model in manufacturer_models],
     }
 

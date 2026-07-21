@@ -9,7 +9,7 @@ from app.models import RiderProfile, SuggestedBoard
 from app.rider_fit import recommend_rider_fit
 from app.board_taxonomy import allows_category, requested_category, taxonomy_by_id
 from app.board_dna import find_board_dna_by_id, resolve_dna_brief, score_dna_fit, explain_dna_fit
-from app.board_master import find_master_board, overlay_expert_board
+from app.board_master import overlay_expert_board
 from app.family_intent import FamilyIntent
 
 
@@ -173,28 +173,11 @@ def load_matrix() -> list[dict]:
 
 def find_matrix_board(brand: str, model: str) -> dict | None:
     brand_key, model_key = _key(brand), _key(model)
-    existing = next((
+    return next((
         row for row in load_matrix()
         if _key(row.get("brand")) == brand_key
         and model_key in {_key(row.get("model")), *(_key(alias) for alias in row.get("taxonomyAliases", []))}
     ), None)
-    if existing:
-        return existing
-    # Phase 3 additions are governed by the Board Master before production SQL
-    # identifiers exist, so synthesize the matrix projection from that single
-    # authority rather than retaining a parallel staged matrix.
-    master = find_master_board(brand, model)
-    if not master:
-        return None
-    return overlay_expert_board({
-        "brand": master["manufacturer"], "model": master["model"],
-        "boardModelId": master["canonical_model_id"], "taxonomyAliases": [],
-        "volumeRange": {
-            "min": min((row.get("volume_litres") for row in master.get("official_standard_sizes", []) if row.get("volume_litres") is not None), default=None),
-            "max": max((row.get("volume_litres") for row in master.get("official_standard_sizes", []) if row.get("volume_litres") is not None), default=None),
-        },
-        "source": "quivrr_board_master_matrix_v2",
-    })
 
 
 def target_lanes(profile: RiderProfile) -> list[str]:

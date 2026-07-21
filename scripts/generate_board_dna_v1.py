@@ -6,14 +6,10 @@ import json
 import math
 from pathlib import Path
 import re
-import sys
 from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-from app.board_master import load_board_master
 KNOWLEDGE = ROOT / "app" / "knowledge"
 TAXONOMY_PATH = KNOWLEDGE / "board_taxonomy_v2.json"
 PROFILES_PATH = KNOWLEDGE / "generated" / "canonical_board_profiles.json"
@@ -312,41 +308,6 @@ def build() -> list[dict]:
                 "source_method": method,
                 "review_required": review_required,
                 "notes": notes + (["Archetype-led record requires editorial review."] if review_required else []),
-            },
-        })
-    # Phase 3 models are promoted directly from the governed Board Master.
-    # They intentionally bypass the legacy research taxonomy input so a future
-    # generation cannot silently drop accepted manufacturer evidence.
-    generated_ids = {row["canonical_model_id"] for row in models}
-    for master in load_board_master()["models"]:
-        model_id = int(master["canonical_model_id"])
-        if model_id in generated_ids:
-            continue
-        dna = master["board_dna"]
-        models.append({
-            "canonical_model_id": model_id,
-            "canonical_key": master["canonical_key"],
-            "brand": master["manufacturer"], "model": master["model"],
-            "public_family": master["public_family"],
-            "primary_category": re.sub(r"[^a-z0-9]+", "_", master["detailed_category"].lower()).strip("_"),
-            "secondary_categories": list(master.get("secondary_categories") or []), "aliases": [],
-            "physical_design": dna["physical_design"], "behaviour": dna["behaviour"],
-            "conditions": dna["conditions"], "rider_fit": dna["rider_fit"],
-            "style_tags": dna.get("style_tags") or [], "quiver_roles": dna.get("quiver_roles") or [],
-            "family_governance": {
-                "previous_public_family": master.get("previous_public_family"),
-                "base_public_family": master["public_family"], "override_applied": True,
-                "reason": "; ".join(master.get("editorial_notes") or []),
-            },
-            "evidence": {
-                "official_source_url": master["official_url"],
-                "manufacturer_description": master["manufacturer_intent"],
-                "physical_design_confidence": master["confidence"],
-                "behaviour_confidence": master["confidence"],
-                "condition_confidence": master["confidence"],
-                "rider_fit_confidence": master["confidence"],
-                "source_method": "governed_board_master_phase3", "review_required": master["review_required"],
-                "notes": list(master.get("editorial_notes") or []),
             },
         })
     generated_ids = {row["canonical_model_id"] for row in models}
