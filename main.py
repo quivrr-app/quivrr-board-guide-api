@@ -24,6 +24,7 @@ from app.manufacturer_intelligence import (
     construction_summaries,
     find_staged_model,
     list_manufacturers,
+    load_manufacturer_expansion_catalogue,
     model_summary,
     models_for_manufacturer,
 )
@@ -1023,10 +1024,11 @@ def health(response: Response):
 
 @app.get("/api/manufacturer-intelligence")
 def manufacturer_intelligence(response: Response):
-    """Expose Phase 3 evidence without presenting it as production catalogue data."""
+    """Expose owner-approved evidence without presenting it as imported production data."""
     _set_debug_headers(response)
+    catalogue = load_manufacturer_expansion_catalogue()
     return {
-        "catalogueState": "staged_sql_pending",
+        "catalogueState": catalogue.get("catalogue_state", "unavailable"),
         "familyPolicy": "Unknown is retained where official public-family evidence is absent.",
         "manufacturers": list_manufacturers(),
         "constructionSummaries": construction_summaries(),
@@ -1038,10 +1040,10 @@ def manufacturer_intelligence_models(response: Response, brand: str):
     _set_debug_headers(response)
     manufacturer_models = models_for_manufacturer(brand)
     if not manufacturer_models:
-        raise HTTPException(status_code=404, detail="No staged manufacturer models found.")
+        raise HTTPException(status_code=404, detail="No canonical manufacturer models found.")
     return {
         "brand": manufacturer_models[0]["manufacturer"],
-        "catalogueState": "staged_sql_pending",
+        "catalogueState": load_manufacturer_expansion_catalogue().get("catalogue_state", "unavailable"),
         "models": [model_summary(model) for model in manufacturer_models],
     }
 
@@ -1051,7 +1053,7 @@ def manufacturer_intelligence_model(response: Response, brand: str, model: str):
     _set_debug_headers(response)
     staged = find_staged_model(brand, model)
     if not staged:
-        raise HTTPException(status_code=404, detail="No staged canonical model found.")
+        raise HTTPException(status_code=404, detail="No canonical model found.")
     return {**model_summary(staged), "officialDescription": staged["official_description"], "standardSizes": staged["sizes"]}
 
 
@@ -1067,7 +1069,7 @@ def manufacturer_intelligence_compare(
     left = find_staged_model(left_brand, left_model)
     right = find_staged_model(right_brand, right_model)
     if not left or not right:
-        raise HTTPException(status_code=404, detail="Both staged canonical models are required for comparison.")
+        raise HTTPException(status_code=404, detail="Both canonical models are required for comparison.")
     return compare_staged_models(left, right)
 
 

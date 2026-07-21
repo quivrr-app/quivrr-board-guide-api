@@ -96,7 +96,7 @@ def compare_board_models(
         comparison = BoardComparison(
             board_a=BoardReference(brand=left.brand, model=left.model),
             board_b=BoardReference(brand=right.brand, model=right.model),
-            similarities=["Both have an official manufacturer description, product URL and staged standard-size evidence."],
+            similarities=["Both have an official manufacturer description, product URL and approved standard-size evidence."],
             differences=size_note,
             rider_specific_conclusion=(
                 "Bodhi will not rank these models for rider fit until official public-family evidence is available."

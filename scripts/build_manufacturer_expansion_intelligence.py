@@ -1,4 +1,4 @@
-"""Build the deployable Phase 3 manufacturer-intelligence snapshot.
+"""Build the deployable manufacturer-intelligence snapshot.
 
 The canonical builder is the authority for these rows.  This script deliberately
 does not classify a board into a public family: the Phase 3 family audit marked
@@ -29,10 +29,22 @@ DEFAULT_CANONICAL_ROOT = (
 )
 OUTPUT = ROOT / "app" / "knowledge" / "generated" / "manufacturer_expansion_catalogue.json"
 
-# Canonical rows are intentionally empty until the corrected AIPA and Timmy
-# official-model reconciliations pass owner review. Reusable deferred adapters
-# remain in the backend but do not feed Board Guide staging.
-SOURCES = ()
+# Only the owner-approved AIPA and Timmy Patterson catalogues are in scope.
+# Aloha and Torq remain deliberately deferred.
+SOURCES = (
+    (
+        "aipa_canonical_dry_run.json",
+        "AIPA Surf",
+        "production_import_pending",
+        "Owner-approved AIPA official catalogue reconciliation",
+    ),
+    (
+        "timmy_patterson_canonical_dry_run.json",
+        "Timmy Patterson Surfboards",
+        "production_import_pending",
+        "Owner-approved Timmy Patterson official catalogue reconciliation",
+    ),
+)
 
 
 def load_rows(path: Path) -> list[dict]:
@@ -60,7 +72,7 @@ def model_record(rows: list[dict]) -> dict:
         "manufacturer": first["brand"],
         "model": first["model"],
         "canonical_key": f"{first['brand'].lower()}::{first['model'].lower()}",
-        "canonical_state": "staged_sql_pending",
+        "canonical_state": "production_import_pending",
         "official_product_url": first["official_product_url"],
         "official_image_url": first["official_image_url"],
         "official_description": first["description"],
@@ -99,31 +111,15 @@ def build(canonical_root: Path) -> dict:
             "constructions": sorted({construction for row in brand_models for construction in row["constructions"]}),
             "source_authority": source_note,
             "editorial_summary": (
-                "The staged canonical catalogue is available to Bodhi as official evidence only. "
+                "The owner-approved canonical catalogue is available to Bodhi as official evidence. "
                 "Public-family classification, performance ranking and model-to-model relationships "
                 "remain intentionally unpublished until governed official family evidence is captured."
             ),
         })
-    for manufacturer, authority in (
-        ("AIPA Surf", "Official AIPA model directory reconciliation in progress"),
-        ("Timmy Patterson Surfboards", "Official Timmy Patterson model directory reconciliation in progress"),
-    ):
-        manufacturers.append({
-            "manufacturer": manufacturer,
-            "lifecycle_state": "canonical_pending",
-            "model_count": 0,
-            "standard_size_count": 0,
-            "constructions": [],
-            "source_authority": authority,
-            "editorial_summary": (
-                "Manufacturer-level awareness only. No model, size, construction or review is published "
-                "until the complete official directory is reconciled and owner-approved."
-            ),
-        })
     return {
         "schema_version": 1,
-        "authority": "Quivrr Phase 3 canonical dry-run evidence; official manufacturer source wording only",
-        "catalogue_state": "staged_sql_pending",
+        "authority": "Owner-approved Quivrr canonical evidence from official manufacturer sources",
+        "catalogue_state": "production_import_pending",
         "family_policy": "Unknown is retained where official public-family evidence is absent; model names are never used to infer a family.",
         "manufacturers": manufacturers,
         "models": models,
