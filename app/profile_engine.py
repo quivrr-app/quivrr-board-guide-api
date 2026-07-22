@@ -4,6 +4,7 @@ import re
 
 from app.board_graph_engine import load_graph
 from app.inventory_client import normalise_region
+from app.manufacturer_intelligence import canonical_manufacturer_name
 from app.models import BoardRecommendation, ProfileExtractionResult, RiderProfile
 from app.rider_fit import recommend_rider_fit
 
@@ -327,6 +328,9 @@ def _extract_requested_length(text: str) -> str | None:
 def _extract_requested_brand(text: str) -> str | None:
     if not text.strip():
         return None
+    expansion_brand = canonical_manufacturer_name(text)
+    if expansion_brand:
+        return expansion_brand
     aliases = {"js": "JS Industries", "ci": "Channel Islands", "lost": "Lost"}
     for token, brand in aliases.items():
         if re.search(rf"\b{re.escape(token)}\b", text):

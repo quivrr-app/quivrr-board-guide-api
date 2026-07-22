@@ -5,6 +5,7 @@ import re
 from app.board_graph_engine import board_key, compare_boards, find_board, load_graph
 from app.comparison_engine import compare_board_models
 from app.inventory_client import normalise_region, quivrr_model_search_url
+from app.manufacturer_intelligence import canonical_manufacturer_name, models_for_manufacturer
 from app.models import BodhiRecommendation, RiderProfile, SuggestedBoard, VolumeGuidance
 from app.rider_fit import recommend_rider_fit
 from app.daily_driver_taxonomy import daily_driver_lane
@@ -573,6 +574,18 @@ def find_boards_in_message(message: str) -> list[dict]:
         if board and board_key(brand, model) not in seen:
             output.append(board)
             seen.add(board_key(brand, model))
+    expansion_brand = canonical_manufacturer_name(message)
+    if expansion_brand:
+        expansion_matches = []
+        for model in models_for_manufacturer(expansion_brand):
+            model_key = board_key("", model.get("model"))[1]
+            if model_key and f" {model_key} " in text:
+                expansion_matches.append((len(model_key), {"brand": expansion_brand, "model": model["model"]}))
+        for _, board in sorted(expansion_matches, key=lambda row: -row[0]):
+            key = board_key(board["brand"], board["model"])
+            if key not in seen:
+                output.append(board)
+                seen.add(key)
     return output
 
 

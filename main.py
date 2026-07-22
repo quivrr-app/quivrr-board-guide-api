@@ -20,8 +20,10 @@ from app.azure_openai_client import (
 from app.authenticated_profile import load_authenticated_profile_context
 from app.board_intelligence import find_board_record
 from app.manufacturer_intelligence import (
+    canonical_manufacturer_name,
     compare_staged_models,
     construction_summaries,
+    find_manufacturer,
     find_staged_model,
     list_manufacturers,
     load_manufacturer_expansion_catalogue,
@@ -49,7 +51,7 @@ from app.board_relationship_graph import (
     relationship_reply, relationship_suggestions, relationship_type, source_board_from_message,
 )
 from app.model_recommendation_engine import build_recommendation_context, recommend_models
-from app.inventory_client import enrich_suggestions_with_inventory, locate_exact_board
+from app.inventory_client import available_manufacturer_models, enrich_suggestions_with_inventory, locate_exact_board
 from app.models import BoardComparison, BoardGuideRequest, BoardGuideResponse, BoardReference, BodhiRecommendation, ConversationState, FollowUpAction, SuggestedBoard
 from app.profile_engine import (
     build_recommendation,
@@ -981,6 +983,42 @@ def build_conversation_state(
     )
 
 
+def _customer_manufacturer_name(canonical: str) -> str:
+    return {
+        "AIPA Surf": "AIPA",
+        "Timmy Patterson Surfboards": "Timmy Patterson",
+    }.get(canonical, canonical)
+
+
+def _expansion_catalogue_suggestions(brand: str, category: str | None = None) -> list[SuggestedBoard]:
+    rows = models_for_manufacturer(brand)
+    if category == "fish":
+        rows = [
+            row for row in rows
+            if re.search(r"\bfish\b", f"{row.get('model', '')} {row.get('official_description', '')}", re.I)
+        ]
+    output = []
+    for row in rows:
+        sizes = row.get("sizes") or []
+        volumes = [size.get("volume_litres") for size in sizes if isinstance(size.get("volume_litres"), (int, float))]
+        volume_range = f"{min(volumes):g}-{max(volumes):g}L" if volumes else None
+        output.append(SuggestedBoard(
+            brand=row["manufacturer"],
+            model=row["model"],
+            category="Official model information",
+            confidence=0.9,
+            why_it_fits=(
+                "The official model information references a fish design; Quivrr has not assigned an editorial family"
+                if category == "fish" else
+                "The model is present in the governed manufacturer catalogue"
+            ),
+            description=row.get("official_description"),
+            volume_range=volume_range,
+            source_product_url=row.get("official_product_url"),
+        ))
+    return output
+
+
 def get_allowed_origins() -> list[str]:
     origins = os.getenv("BOARD_GUIDE_ALLOWED_ORIGINS", "")
     return [origin.strip() for origin in origins.split(",") if origin.strip()]
@@ -1337,12 +1375,64 @@ def board_guide_chat(
     education_reply = _family_education_reply(request.message)
     asks_name = intent == "IDENTITY_QUESTION"
     allow_recommendations = legacy_intent in RECOMMENDATION_INTENTS
+    explicit_expansion_manufacturer = canonical_manufacturer_name(request.message)
+    active_expansion_manufacturer = find_manufacturer(profile.requested_brand) if profile.requested_brand else None
+    manufacturer_stock_request = bool(re.search(r"\b(?:stock|available|buy|retailer)\b", request.message, re.I))
     if legacy_intent in {"greeting_request", "capability_help_request", "site_help_question"}:
         recommendation = None
         volume_recommendation = None
         guidance = None
 
-    if asks_name:
+    if active_expansion_manufacturer and intent != "BOARD_COMPARISON" and (explicit_expansion_manufacturer or category):
+        canonical_brand = active_expansion_manufacturer["manufacturer"]
+        customer_brand = _customer_manufacturer_name(canonical_brand)
+        catalogue_models = models_for_manufacturer(canonical_brand)
+        recommendation_path = "explicit_manufacturer_catalogue"
+        candidate_source = "manufacturer_expansion_catalogue"
+        ranking_engine_used = "evidence_limited_catalogue"
+        if manufacturer_stock_request and profile.region:
+            available = available_manufacturer_models(canonical_brand, profile.region)
+            suggested_boards = available[:3]
+            candidate_count_before_inventory = len(available)
+            inventory_stage = "live_manufacturer_summary"
+            total_boards = sum(board.available_count for board in available)
+            if available:
+                reply = (
+                    f"Yes. I found {total_boards} currently available {customer_brand} board listings across "
+                    f"{len(available)} models in {REGION_DISPLAY_NAMES.get(profile.region, profile.region)}. "
+                    "These are the leading live models; I can open the full regional search for any of them."
+                )
+            else:
+                reply = (
+                    f"Quivrr knows {len(catalogue_models)} {customer_brand} models, but I can’t verify current "
+                    f"{REGION_DISPLAY_NAMES.get(profile.region, profile.region)} stock right now."
+                )
+            questions = []
+        elif category:
+            evidence_matches = _expansion_catalogue_suggestions(canonical_brand, category)
+            suggested_boards = evidence_matches[:3]
+            candidate_count_before_inventory = len(evidence_matches)
+            if evidence_matches:
+                names = ", ".join(board.model for board in evidence_matches[:5])
+                reply = (
+                    f"I kept your {customer_brand} constraint. Its official model information references fish design for {names}. "
+                    "Quivrr has not assigned editorial board-family or rider-fit claims to these models, so I’m showing factual catalogue matches rather than inventing a ranking."
+                )
+            else:
+                reply = (
+                    f"I kept your {customer_brand} constraint, but I can’t verify a governed {category.replace('_', ' ')} "
+                    "classification in its current official model information. I haven’t substituted another manufacturer."
+                )
+            questions = ["Would you like me to check current stock in your region?"] if evidence_matches else []
+        else:
+            suggested_boards = []
+            reply = (
+                f"Yes. Quivrr currently knows {len(catalogue_models)} {customer_brand} models. I can help you explore "
+                f"{customer_brand} models, compare two models, or check current stock in your region. "
+                f"Are you looking for a particular {customer_brand} model or board type?"
+            )
+            questions = [f"Are you looking for a particular {customer_brand} model or board type?"]
+    elif asks_name:
         suggested_boards = []
         if auth_context.profile_loaded and profile.display_name:
             reply = f"You’re {profile.display_name}. I’ve also got your saved rider profile available for this session."

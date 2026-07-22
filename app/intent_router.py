@@ -3,6 +3,8 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
+from app.manufacturer_intelligence import canonical_manufacturer_name
+
 
 LEGACY_INTENTS = {
     "inventory_count_question", "board_search_request", "surfer_fit_request",
@@ -122,7 +124,10 @@ def _extract_entities(text: str) -> dict[str, object]:
     ):
         entities["availabilityConstraint"] = "VERIFIED_IN_STOCK"
 
-    if re.search(r"\bpyzel\b", text):
+    expansion_brand = canonical_manufacturer_name(text)
+    if expansion_brand:
+        entities["brand"] = expansion_brand
+    elif re.search(r"\bpyzel\b", text):
         entities["brand"] = "Pyzel"
     elif re.search(r"\bjs\b", text):
         entities["brand"] = "JS Industries"
@@ -175,6 +180,10 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("GENERAL_HELP", "site_help_question", 0.96, entities)
     if re.search(r"\b(?:how many boards do you know about|how many boards are there|how many boards do you have)\b", text):
         return IntentResult("AVAILABILITY", "inventory_count_question", 0.9, entities)
+    if entities.get("brand") and re.search(r"\b(?:do you have|do you know|know about|show me|what .* models|which .* models)\b", text):
+        if re.search(r"\b(?:stock|available|buy|retailer)\b", text):
+            return IntentResult("AVAILABILITY", "board_search_request", 0.97, entities, needs_region=entities["region"] is None)
+        return IntentResult("BRAND_QUESTION", "general_board_question", 0.97, entities)
     if re.search(r"\b(?:what volume|volume should i|how many litres|wat litres|how many ltrs|volume for \d+\s*kg|keep it near \d+(?:\.\d+)?\s*l)\b", text):
         return IntentResult("VOLUME_GUIDANCE", "volume_advice_request", 0.97, entities)
     if re.search(r"\b(?:recommend|recomend|pick|choose)\b", text) and re.search(r"\b(?:board|shortboard|fish|fsh|groveller|daily driver|step[ -]?up|mid[ -]?length|twin|reefs?)\b", text):

@@ -18,6 +18,16 @@ from pathlib import Path
 
 CATALOGUE_PATH = Path(__file__).parent / "knowledge" / "generated" / "manufacturer_expansion_catalogue.json"
 
+MANUFACTURER_ALIASES = {
+    "aipa": "AIPA Surf",
+    "aipa surf": "AIPA Surf",
+    "aipa surfboards": "AIPA Surf",
+    "timmy patterson": "Timmy Patterson Surfboards",
+    "timmy patterson surfboards": "Timmy Patterson Surfboards",
+    "t patterson": "Timmy Patterson Surfboards",
+    "tpatterson": "Timmy Patterson Surfboards",
+}
+
 
 def _normalise(value: object) -> str:
     return re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
@@ -26,6 +36,19 @@ def _normalise(value: object) -> str:
 def _slug(value: object) -> str:
     ascii_value = unicodedata.normalize("NFKD", str(value or "")).encode("ascii", "ignore").decode("ascii")
     return re.sub(r"^-|-$", "", re.sub(r"[^a-z0-9]+", "-", ascii_value.lower()))
+
+
+def canonical_manufacturer_name(value: object) -> str | None:
+    """Resolve governed expansion aliases from a name or customer sentence."""
+    normalised = _normalise(value)
+    if not normalised:
+        return None
+    if normalised in MANUFACTURER_ALIASES:
+        return MANUFACTURER_ALIASES[normalised]
+    for alias, canonical in sorted(MANUFACTURER_ALIASES.items(), key=lambda item: len(item[0]), reverse=True):
+        if re.search(rf"\b{re.escape(alias)}\b", normalised):
+            return canonical
+    return None
 
 
 @lru_cache(maxsize=1)
@@ -41,7 +64,7 @@ def list_manufacturers() -> list[dict]:
 
 
 def find_manufacturer(manufacturer: str | None) -> dict | None:
-    wanted = _normalise(manufacturer)
+    wanted = _normalise(canonical_manufacturer_name(manufacturer) or manufacturer)
     return next((row for row in list_manufacturers() if _normalise(row.get("manufacturer")) == wanted), None)
 
 
@@ -50,7 +73,7 @@ def staged_models() -> list[dict]:
 
 
 def find_staged_model(manufacturer: str | None, model: str | None) -> dict | None:
-    wanted = (_normalise(manufacturer), _normalise(model))
+    wanted = (_normalise(canonical_manufacturer_name(manufacturer) or manufacturer), _normalise(model))
     return next((
         row for row in staged_models()
         if (_normalise(row.get("manufacturer")), _normalise(row.get("model"))) == wanted
@@ -58,7 +81,7 @@ def find_staged_model(manufacturer: str | None, model: str | None) -> dict | Non
 
 
 def models_for_manufacturer(manufacturer: str | None) -> list[dict]:
-    wanted = _normalise(manufacturer)
+    wanted = _normalise(canonical_manufacturer_name(manufacturer) or manufacturer)
     return [row for row in staged_models() if _normalise(row.get("manufacturer")) == wanted]
 
 

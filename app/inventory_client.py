@@ -11,6 +11,7 @@ from urllib.parse import urlparse
 
 import requests
 
+from app.manufacturer_intelligence import canonical_manufacturer_name
 from app.models import RetailerOffer, RiderProfile, SuggestedBoard
 from app.rider_fit import recommend_rider_fit
 from app.volume_engine_v2 import build_target_volume_context
@@ -97,11 +98,62 @@ def _get_json(path: str):
 
 
 def _find_brand_id(brand: str, get_json: Callable[[str], object]) -> int | None:
-    target = BRAND_ALIASES.get(brand.strip().upper(), brand.strip().upper())
+    canonical = canonical_manufacturer_name(brand) or brand
+    target = BRAND_ALIASES.get(canonical.strip().upper(), canonical.strip().upper())
     for row in get_json("/api/brands") or []:
         if row.get("brandName", "").strip().upper() == target:
             return int(row["brandId"])
     return None
+
+
+def available_manufacturer_models(
+    brand: str,
+    region: str,
+    get_json: Callable[[str], object] = _get_json,
+) -> list[SuggestedBoard]:
+    """Return the backend-authoritative regional model summary for one manufacturer."""
+    region_code = normalise_region(region)
+    brand_id = _find_brand_id(brand, get_json)
+    if not region_code or brand_id is None:
+        return []
+    rows = get_json(f"/api/available-models?brandId={brand_id}&regionCode={region_code}&limit=100") or []
+    output = []
+    for row in rows:
+        model = str(row.get("modelName") or "").strip()
+        if not model:
+            continue
+        canonical_brand = str(row.get("brandName") or canonical_manufacturer_name(brand) or brand)
+        direct = int(row.get("manufacturerDirectBoardCount") or row.get("manufacturerAvailableCount") or 0)
+        retailer_boards = int(row.get("retailerBoardCount") or 0)
+        retailer_count = int(row.get("retailerCount") or 0)
+        total = int(row.get("availableBoardCount") or direct + retailer_boards)
+        search_board = SuggestedBoard(
+            brand=canonical_brand,
+            model=model,
+            category="Current regional stock",
+            confidence=0.95,
+            why_it_fits="Current regional inventory",
+        )
+        output.append(SuggestedBoard(
+            brand=canonical_brand,
+            model=model,
+            category="Current regional stock",
+            confidence=0.95,
+            why_it_fits="Current regional inventory for the requested manufacturer",
+            available_count=total,
+            manufacturer_direct_count=direct,
+            retailer_count=retailer_count,
+            availability_checked=True,
+            availability_status=("manufacturer_and_retailer_stock" if direct and retailer_count else "manufacturer_stock" if direct else "retailer_stock"),
+            inventory_source=inventory_source_label(direct, retailer_count),
+            inventory_match_count=total,
+            model_level_stock=total > 0,
+            example_live_source_url=row.get("manufacturerProductUrl") or row.get("retailerProductUrl") or row.get("productUrl"),
+            quivrr_search_url=quivrr_model_search_url(search_board, region_code),
+            region=region_code,
+            region_code=region_code,
+        ))
+    return output
 
 
 def _find_model_id(brand_id: int, model: str, get_json: Callable[[str], object]) -> int | None:
