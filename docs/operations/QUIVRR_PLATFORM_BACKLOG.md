@@ -1,5 +1,11 @@
 # Quivrr Platform Backlog
 
+## 2026-07-24 — Bodhi authenticated profile-update production acceptance
+
+- Affected areas: deployed My Quivrr profile proposal and confirmation flow; no code or data correction was required.
+- Verification: Nathan confirmed Bodhi proposed the saved-profile update after a 70 kg weight statement, used the current conversation value immediately, and the confirmed value persisted in My Quivrr.
+- Outcome: the Sprint 4 authenticated profile-update acceptance scenario is complete. Engineering and architecture documents remain unchanged pending owner approval.
+
 ## 2026-07-23 — Bodhi selected-region model-card correction
 
 - Affected areas: Board Guide API canonical model-card hand-off; no inventory or profile data was changed.
