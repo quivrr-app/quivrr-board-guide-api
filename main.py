@@ -1114,12 +1114,17 @@ def build_conversation_state(
     surfer_stage: str | None = None,
     active_board_override: dict | None = None,
     last_inventory_query: dict | None = None,
+    clear_response_plan: bool = False,
 ) -> ConversationState:
     active_region = profile.region or request.region
     last_question = questions[0] if questions else None
     previous_state = request.conversation_state
     previous_turn = previous_state.conversation_turn if previous_state else 0
-    clear_previous = bool(directive and directive.clears_rider_brief) or normalized_intent.startswith("PLATFORM_")
+    clear_previous = (
+        bool(directive and directive.clears_rider_brief)
+        or normalized_intent.startswith("PLATFORM_")
+        or clear_response_plan
+    )
     previous_recommendations = previous_state.last_recommendations if previous_state and not clear_previous else []
     mentioned = previous_state.mentioned_boards if previous_state and not clear_previous else []
     comparison_boards = previous_state.comparison_boards if previous_state and not clear_previous else []
@@ -2690,6 +2695,7 @@ def board_guide_chat(
         surfer_stage=stage_assessment.stage,
         active_board_override=active_board_override,
         last_inventory_query=active_inventory_query,
+        clear_response_plan=topic_route.correction,
     )
     follow_up_actions = build_follow_up_actions(intent, public_cards)
     if stage_assessment.clarification_required:

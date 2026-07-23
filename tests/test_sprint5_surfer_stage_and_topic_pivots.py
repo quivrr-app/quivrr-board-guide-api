@@ -60,6 +60,18 @@ class Sprint5SurferStageAndTopicPivotTests(unittest.TestCase):
         self.assertEqual(body["recommendations"], [])
         self.assertIn("would not recommend", body["reply"].lower())
 
+    def test_correction_discards_previous_recommendation_plan(self):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "Actually, what are the main differences between a fish and a mid length?",
+            "region": "AU",
+            "conversationState": {
+                "lastIntent": "BOARD_RECOMMENDATION",
+                "lastRecommendations": [{"brand": "Sharp Eye", "model": "Inferno 72", "category": "Performance Daily Driver", "confidence": .9}],
+            },
+        }).json()
+        self.assertEqual(body["conversationState"]["lastRecommendations"], [])
+        self.assertEqual(body["recommendations"], [])
+
 
 if __name__ == "__main__":
     unittest.main()

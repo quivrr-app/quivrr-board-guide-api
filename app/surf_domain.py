@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 from types import MappingProxyType
 
+from jsonschema import Draft202012Validator
+
 
 PACK_ROOT = Path(__file__).parent / "knowledge" / "surf_domain" / "bodhi_surf_knowledge_pack_v1"
 
@@ -46,6 +48,9 @@ class SurfDomainKnowledge:
 def load_surf_domain_knowledge() -> SurfDomainKnowledge:
     manifest_path = PACK_ROOT / "MANIFEST.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    schema_path = PACK_ROOT / "schemas" / "knowledge_document.schema.json"
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    validator = Draft202012Validator(schema)
     documents = {}
     for item in manifest.get("files", []):
         relative = item["path"]
@@ -54,7 +59,13 @@ def load_surf_domain_knowledge() -> SurfDomainKnowledge:
         if digest != item["sha256"] or len(content) != item["bytes"]:
             raise RuntimeError(f"Bodhi surf knowledge pack validation failed: {relative}")
         if relative.startswith("knowledge/") and relative.endswith(".json"):
-            documents[Path(relative).name] = _freeze(json.loads(content.decode("utf-8")))
+            document = json.loads(content.decode("utf-8"))
+            errors = sorted(validator.iter_errors(document), key=lambda error: list(error.path))
+            if errors:
+                raise RuntimeError(
+                    f"Bodhi surf knowledge schema validation failed: {relative}: {errors[0].message}"
+                )
+            documents[Path(relative).name] = _freeze(document)
     metadata = documents.get("00_pack_metadata.json")
     if len(documents) != 20 or not metadata:
         raise RuntimeError("Bodhi surf knowledge pack is incomplete")
