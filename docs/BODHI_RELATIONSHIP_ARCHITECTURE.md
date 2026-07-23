@@ -1,6 +1,6 @@
 # Bodhi Relationship Architecture
 
-Last updated: 2026-06-22 06:35 UTC
+Last updated: 2026-07-23 UTC
 
 ## Purpose
 

@@ -10,6 +10,47 @@ not create different intelligence for the same canonical board model.
 This Phase 2 audit is read-only. It does not alter recommendation behaviour, inventory, SQL,
 scrapers, or Azure jobs.
 
+## Sprint 4 runtime authority and controls
+
+The current runtime universe is **431 active canonical model IDs** in
+`app/knowledge/curated/quivrr_board_master_matrix_v2.json`. The taxonomy, Board DNA, canonical
+profiles and relationship graph all resolve the same 431 IDs. Older 513/518 figures refer to
+legacy name or construction-variant rows and are diagnostic only; they must not be used for runtime
+coverage claims. `scripts/audit_bodhi_model_universe.py` records the reconciliation and any source
+that falls behind the governed master matrix.
+
+`app/board_resolver.py` is the single entry point for named-board recognition. Intent routing runs
+it before generic help and persists the resolved entity in conversation state. It supports full
+brand/model names, reviewed manufacturer aliases, conservative fuzzy correction, and clear
+ambiguity. A fuzzy result never silently selects a close sibling when score separation is unsafe.
+`scripts/audit_board_recognition.py` validates supported exact and normalised forms, reports
+aliases separately, and lists every clarification-required or failed form.
+
+Resolved board replies are deterministic. They may use manufacturer intent, governed category,
+ability and wave fit, Board DNA behaviour, strengths/trade-offs, relationship candidates, and
+explicit profile context. They do not require a rider intake before explaining a valid board, and
+they only request extra facts for a size recommendation. Regional inventory remains a separate,
+explicit read-only lookup.
+
+### Saved profile update lifecycle
+
+The My Quivrr core API owns persistence. It validates an Entra bearer token, derives the user from
+the stable Entra object ID, and exposes authenticated `GET`, `PUT`, and `PATCH`
+`/api/my-quivrr/profile`. Bodhi may use a current-message correction immediately, but proposes a
+saved change only for durable language (for example “I weigh 76 kg now”). The surf client displays
+**Update profile** and **Not now** actions; confirmation calls the core endpoint directly with a
+small allowlist. Board Guide API never receives authority to update arbitrary users. Temporary
+facts such as a trip, today's waves, borrowed equipment, or a friend's board remain session-only.
+
+### Observability, loading, and rollback
+
+Resolver outcomes emit `board_intent_detected` as exact, alias, fuzzy, or ambiguous alongside the
+canonical ID and correlation ID. The client prevents overlapping submissions and aborts timed-out
+requests. Loading copy is conditional: catalogue lookup is always shown, surfer-fit copy appears
+only with rider context, and stock copy appears only for an inventory request. Rollback is the
+previous deployed API/frontend revision; knowledge changes remain global and never mutate regional
+inventory.
+
 ## Board Intelligence Matrix
 
 Each canonical brand-model identity should converge on this schema. Construction and size
@@ -52,6 +93,12 @@ An overall confidence must not hide a low-confidence wave range or surfer level.
 logic should inspect the relevant field confidence.
 
 ## Current knowledge sources
+
+> **Runtime note (2026-07-23):** the Sprint 4 governed runtime source is the 431-ID board master
+> named above. Historical Phase 2 counts later in this document describe legacy profile and
+> classification assets, not the current canonical model universe or the runtime coverage gate.
+> Use `scripts/audit_bodhi_model_universe.py` and
+> `scripts/audit_bodhi_intelligence_coverage.py` for release evidence.
 
 | Source | Role | Safe use | Important limitation |
 | --- | --- | --- | --- |
