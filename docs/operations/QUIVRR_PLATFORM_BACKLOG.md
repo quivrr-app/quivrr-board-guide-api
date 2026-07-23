@@ -1,5 +1,12 @@
 # Quivrr Platform Backlog
 
+## 2026-07-24 — Bodhi Sprint 5 beginner safety and topic-pivot remediation
+
+- Root cause: conversation state restored a prior family and saved volume before independently resolving the current message. Beginner remained a soft ability signal, so daily-driver fallback, volume proximity and available inventory could outrank safety. Aggregate inventory questions also lacked a distinct route and replayed the previous recommendation plan.
+- Change: introduced governed surfer stages, a whitewater-versus-green-wave clarification, guidance-only Stage 1 responses, deterministic pre-ranking stage gates, beginner volume-anchor suppression, current-message topic pivots and correction handling, and controlled premium-hardboard catalogue positioning. Added the read-only regional inventory-summary contract.
+- Safety: true beginners receive no performance cards or search actions; inventory cannot widen into unsafe families; saved shortboard volume is not used as a beginner target; unsupported foamies are acknowledged but never invented.
+- Verification: focused stage, topic-pivot, profile and inventory regressions added. Engineering and architecture documents remain unchanged pending owner approval.
+
 ## 2026-07-24 — Bodhi authenticated profile-update production acceptance
 
 - Affected areas: deployed My Quivrr profile proposal and confirmation flow; no code or data correction was required.

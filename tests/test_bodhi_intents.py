@@ -161,9 +161,9 @@ class BodhiIntentApiTests(unittest.TestCase):
             "message": "How many boards do you know about in Europe?", "region": "Australia",
         })
         body = response.json()
-        self.assertEqual(body["intent"], "inventory_count_question")
+        self.assertEqual(body["intent"], "platform_catalogue_count")
         self.assertEqual(body["intakeState"]["region"], "EU")
-        self.assertIn("retailer listings", body["reply"])
+        self.assertIn("governed premium board models", body["reply"])
         self.assertNotIn("rough weight", body["reply"].lower())
 
     def test_volume_advice_returns_specific_range_without_products(self):
@@ -525,8 +525,9 @@ class BodhiIntentApiTests(unittest.TestCase):
             "message": "yes, you can. you just told me how many boards you know of that are available",
             "region": "ID", "conversationState": first["conversationState"],
         }).json()
-        self.assertIn("you’re right", correction["reply"].lower())
-        self.assertTrue(correction["recommendations"])
+        self.assertEqual(correction["responseMode"], "platform_answer")
+        self.assertEqual(correction["recommendations"], [])
+        self.assertIn("will not guess", correction["reply"])
 
     def test_pro_fish_and_prompt_disclosure_are_policy_routed(self):
         result = main.classify_intent("show me pro fish shapes in stock in indo")

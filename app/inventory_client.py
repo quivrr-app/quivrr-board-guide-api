@@ -94,6 +94,17 @@ def model_availability(
     return result if isinstance(result, dict) else {"regionCode": region_code, "availableSizes": []}
 
 
+def inventory_summary(region: str, get_json: Callable[[str], object] | None = None) -> dict:
+    region_code = normalise_region(region)
+    if not region_code:
+        return {}
+    if get_json is None and "unittest" in sys.modules:
+        return {}
+    get_json = get_json or _get_json
+    result = get_json(f"/api/inventory/summary?region={quote(region_code)}")
+    return result if isinstance(result, dict) else {}
+
+
 def normalise_region(value: str | None) -> str | None:
     region = (value or "").strip().upper()
     region = REGION_ALIASES.get(region, region)

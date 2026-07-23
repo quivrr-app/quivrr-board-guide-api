@@ -10,6 +10,7 @@ class RiderProfile(BaseModel):
     age: int | None = None
     age_band: str | None = None
     ability: str | None = None
+    surfer_stage: str | None = Field(default=None, alias="surferStage")
     surf_frequency_per_week: float | None = Field(default=None, alias="surf_frequency")
     fitness_level: str | None = Field(
         default=None,
@@ -411,6 +412,8 @@ class ConversationState(BaseModel):
     previous_failure_reason: str | None = Field(default=None, alias="previousFailureReason")
     previous_reply_signature: str | None = Field(default=None, alias="previousReplySignature")
     pending_profile_update: dict | None = Field(default=None, alias="pendingProfileUpdate")
+    pending_clarification: dict | None = Field(default=None, alias="pendingClarification")
+    surfer_stage: str | None = Field(default=None, alias="surferStage")
 
 
 class ProfileUpdateProposal(BaseModel):
@@ -484,3 +487,6 @@ class BoardGuideResponse(BaseModel):
     model_deployment: str | None = Field(default=None, alias="modelDeployment")
     recommendation_version: str = Field(default="bodhi-sprint-4", alias="recommendationVersion")
     correlation_id: str | None = Field(default=None, alias="correlationId")
+    response_mode: str = Field(default="recommendations", alias="responseMode")
+    catalogue_match_status: str | None = Field(default=None, alias="catalogueMatchStatus")
+    surfer_stage: str | None = Field(default=None, alias="surferStage")

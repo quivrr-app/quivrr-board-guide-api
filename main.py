@@ -49,14 +49,14 @@ from app.conversation_policy import (
     prompt_disclosure_reply, recovery_opening, response_signature,
 )
 from app.board_expert_matrix import recommend_from_matrix
-from app.board_master import find_master_board
+from app.board_master import find_master_board, load_board_master
 from app.family_intent import FamilyIntent, PUBLIC_FAMILY_LABELS, correction_acknowledgement, resolve_family_intent
 from app.board_dna import find_board_dna, find_board_dna_by_id, load_board_dna, resolve_dna_brief, score_dna_fit
 from app.board_relationship_graph import (
     relationship_reply, relationship_suggestions, relationship_type, source_board_from_message,
 )
 from app.model_recommendation_engine import build_recommendation_context, recommend_models
-from app.inventory_client import available_manufacturer_models, enrich_suggestions_with_inventory, locate_exact_board, model_availability, quivrr_search_url
+from app.inventory_client import available_manufacturer_models, enrich_suggestions_with_inventory, inventory_summary, locate_exact_board, model_availability, quivrr_search_url
 from app.models import BoardComparison, BoardGuideRequest, BoardGuideResponse, BoardReference, BodhiRecommendation, ConversationState, FollowUpAction, ProfileUpdateProposal, SuggestedBoard
 from app.profile_engine import (
     build_recommendation,
@@ -69,6 +69,8 @@ from app.profile_engine import (
 )
 from app.volume_engine_v2 import build_target_volume_context, build_volume_recommendation
 from app.structured_logging import emit_event
+from app.surfer_stage import BEGINNER_QUESTION, PREMIUM_BEGINNER_POSITIONING, STAGE_1, assess_surfer_stage, beginner_guidance, stage_allows_board
+from app.topic_routing import classify_topic_route
 
 
 load_dotenv()
@@ -1106,6 +1108,8 @@ def build_conversation_state(
     previous_failure_reason: str | None = None,
     previous_reply_signature: str | None = None,
     pending_profile_update: dict | None = None,
+    pending_clarification: dict | None = None,
+    surfer_stage: str | None = None,
     active_board_override: dict | None = None,
     last_inventory_query: dict | None = None,
 ) -> ConversationState:
@@ -1113,7 +1117,7 @@ def build_conversation_state(
     last_question = questions[0] if questions else None
     previous_state = request.conversation_state
     previous_turn = previous_state.conversation_turn if previous_state else 0
-    clear_previous = bool(directive and directive.clears_rider_brief)
+    clear_previous = bool(directive and directive.clears_rider_brief) or normalized_intent.startswith("PLATFORM_")
     previous_recommendations = previous_state.last_recommendations if previous_state and not clear_previous else []
     mentioned = previous_state.mentioned_boards if previous_state and not clear_previous else []
     comparison_boards = previous_state.comparison_boards if previous_state and not clear_previous else []
@@ -1217,6 +1221,8 @@ def build_conversation_state(
         previousFailureReason=previous_failure_reason,
         previousReplySignature=previous_reply_signature,
         pendingProfileUpdate=pending_profile_update,
+        pendingClarification=pending_clarification,
+        surferStage=surfer_stage,
     )
 
 
@@ -1407,6 +1413,7 @@ def board_guide_chat(
     )
     auth_context = load_authenticated_profile_context(authorization, correlation_id=correlation_id)
     intent_result = classify_intent(request.message)
+    topic_route = classify_topic_route(request.message)
     language_tone = classify_language_tone(request.message)
     recovery_kind = follow_up_kind(
         request.message,
@@ -1428,7 +1435,9 @@ def board_guide_chat(
         request.conversation_state,
         reset=directive.clears_rider_brief,
     )
-    preserve_prior_rider = not directive.clears_rider_brief
+    # A platform/inventory question is a new object of conversation. Do not let a
+    # previous rider brief regenerate recommendations for it.
+    preserve_prior_rider = not directive.clears_rider_brief and not topic_route.pivot
     history_profiles = [
         with_profile_source(extract_profile(item.content, request.region), "conversation_user")
         for item in request.conversation if preserve_prior_rider and item and item.role == "user" and item.content
@@ -1487,6 +1496,13 @@ def board_guide_chat(
     if profile_update_confirmation_requested:
         profile_update_proposal = ProfileUpdateProposal.model_validate(pending_profile_update)
         pending_profile_update = None
+    stage_assessment = assess_surfer_stage(
+        request.message,
+        profile.ability,
+        request.conversation_state.pending_clarification if request.conversation_state else None,
+    )
+    if stage_assessment.stage:
+        profile = profile.model_copy(update={"surfer_stage": stage_assessment.stage})
     reset_requested = directive.clears_rider_brief
     if family_intent.requested_public_family:
         preferred_type = family_intent.requested_detailed_category or PUBLIC_FAMILY_LABELS[family_intent.requested_public_family]
@@ -1513,6 +1529,9 @@ def board_guide_chat(
     missing = missing_profile_fields(profile)
     legacy_intent = intent_result.legacy_intent
     intent = intent_result.intent
+    if topic_route.kind not in {"CONTINUE_CURRENT_TOPIC", "NEW_GENERAL_TOPIC"}:
+        legacy_intent = topic_route.kind.lower()
+        intent = topic_route.kind
     if recovery_kind:
         # A failed stock search is recoverable context, not a new generic question.
         legacy_intent = "board_search_request"
@@ -1631,7 +1650,8 @@ def board_guide_chat(
         requested_board = {**prior_active_board, **requested_board}
     active_board_override = requested_board if board_resolution.status == "resolved" else prior_active_board
     active_inventory_request = bool(active_board_override and _message_requests_active_board_inventory(request.message))
-    if profile_update_proposal or profile_update_confirmation_requested:
+    mixed_profile_and_board_request = bool(re.search(r"\b(?:show|find|recommend|board)\b", request.message, re.I))
+    if (profile_update_proposal or profile_update_confirmation_requested) and not mixed_profile_and_board_request:
         # An explicit profile mutation request always outranks prior stock or family state.
         legacy_intent = "profile_update_request"
         intent = "PROFILE_UPDATE"
@@ -1733,6 +1753,8 @@ def board_guide_chat(
     education_reply = _family_education_reply(request.message)
     asks_name = intent == "IDENTITY_QUESTION"
     allow_recommendations = legacy_intent in RECOMMENDATION_INTENTS
+    response_mode = "recommendations"
+    catalogue_match_status = None
     explicit_expansion_manufacturer = canonical_manufacturer_name(request.message)
     active_expansion_manufacturer = find_manufacturer(profile.requested_brand) if profile.requested_brand else None
     manufacturer_stock_request = bool(re.search(r"\b(?:stock|available|buy|retailer)\b", request.message, re.I))
@@ -1741,7 +1763,72 @@ def board_guide_chat(
         volume_recommendation = None
         guidance = None
 
-    if legacy_intent == "profile_update_request":
+    if topic_route.kind == "PLATFORM_CATALOGUE_COUNT":
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        count = int(load_board_master().get("model_count") or len(load_board_master().get("models") or []))
+        reply = f"Quivrr's canonical board knowledge is global rather than Australian. I currently know {count} governed premium board models overall; regional inventory is layered onto that catalogue."
+        questions = []
+        force_controlled_reply = True
+        response_mode = "platform_answer"
+    elif topic_route.kind == "REGIONAL_AVAILABLE_BOARD_COUNT":
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        region = topic_route.region or profile.region or request.region
+        summary = inventory_summary(region) if region else {}
+        if summary:
+            reply = (
+                f"{REGION_DISPLAY_NAMES.get(summary.get('regionCode'), summary.get('regionCode'))} currently has "
+                f"{summary.get('availableCanonicalSizeCount', 0):,} distinct canonical board sizes with verified availability across "
+                f"{summary.get('availableCanonicalModelCount', 0):,} models. Behind that are "
+                f"{summary.get('retailerOfferCount', 0):,} retailer offers and {summary.get('manufacturerAvailabilityCount', 0):,} manufacturer-direct records; those raw records can overlap."
+            )
+        elif region:
+            reply = f"I could not retrieve the current {REGION_DISPLAY_NAMES.get(region, region)} inventory summary just now, so I will not guess at the count."
+        else:
+            reply = "Which region should I summarise: Australia, Europe, Indonesia, or the United States?"
+        questions = [] if region else ["Which region should I summarise?"]
+        force_controlled_reply = True
+        response_mode = "platform_answer"
+    elif topic_route.kind == "PLATFORM_BRAND_COUNT":
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        reply = f"Quivrr currently governs {len({row.get('manufacturer') for row in load_board_master().get('models', []) if row.get('manufacturer')})} established premium surfboard manufacturers."
+        questions = []
+        force_controlled_reply = True
+        response_mode = "platform_answer"
+    elif topic_route.kind == "PLATFORM_REGION_LIST":
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        reply = "Quivrr has live regional search and inventory coverage for Australia, Europe, Indonesia and the United States."
+        questions = []
+        force_controlled_reply = True
+        response_mode = "platform_answer"
+    elif topic_route.kind == "PLATFORM_CATALOGUE_SCOPE":
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        reply = PREMIUM_BEGINNER_POSITIONING
+        questions = []
+        force_controlled_reply = True
+        response_mode = "guidance_only"
+    elif stage_assessment.clarification_required:
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        reply = BEGINNER_QUESTION
+        questions = [BEGINNER_QUESTION]
+        force_controlled_reply = True
+        response_mode = "guidance_only"
+        catalogue_match_status = "stage_clarification_required"
+    elif stage_assessment.stage == STAGE_1:
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        saved_volume_ignored = bool(profile.current_volume_litres or profile.target_volume_litres)
+        reply = beginner_guidance(STAGE_1, profile.weight_kg, saved_volume_ignored)
+        questions = []
+        force_controlled_reply = True
+        response_mode = "guidance_only"
+        catalogue_match_status = "no_safe_supported_match"
+    elif legacy_intent == "profile_update_request":
         suggested_boards = []
         recommendation = None
         volume_recommendation = None
@@ -2564,7 +2651,23 @@ def board_guide_chat(
             "I’ll include performance-oriented fish and hybrid shapes with verified regional stock."
         )
         reply_signature = response_signature(final_reply, "RECOVERY")
+    if stage_assessment.stage in {"STAGE_2_PROGRESSING_BEGINNER", "STAGE_3_EARLY_INTERMEDIATE"} and suggested_boards:
+        safe_boards = [board for board in suggested_boards if stage_allows_board(stage_assessment.stage, board)]
+        if not safe_boards:
+            suggested_boards = []
+            reply = beginner_guidance(stage_assessment.stage, profile.weight_kg, bool(profile.current_volume_litres)) + " I could not find a safe supported hardboard match, so I will not widen into performance boards."
+            response_mode = "guidance_only"
+            catalogue_match_status = "no_safe_supported_match"
+        else:
+            suggested_boards = safe_boards
     public_cards = public_recommendations(suggested_boards)
+    if topic_route.pivot or response_mode in {"guidance_only", "platform_answer"}:
+        public_cards = []
+        suggested_boards = []
+    pending_stage_clarification = (
+        {"type": "surfer_stage", "reason": "beginner_ability_ambiguous", "question": BEGINNER_QUESTION}
+        if stage_assessment.clarification_required else None
+    )
     _set_debug_headers(response, recommendation_path=recommendation_path, ranking_engine=ranking_engine_used)
     conversation_state = build_conversation_state(
         request,
@@ -2581,10 +2684,18 @@ def board_guide_chat(
         previous_failure_reason=previous_failure_reason,
         previous_reply_signature=reply_signature,
         pending_profile_update=pending_profile_update,
+        pending_clarification=pending_stage_clarification,
+        surfer_stage=stage_assessment.stage,
         active_board_override=active_board_override,
         last_inventory_query=active_inventory_query,
     )
     follow_up_actions = build_follow_up_actions(intent, public_cards)
+    if stage_assessment.clarification_required:
+        follow_up_actions = [
+            FollowUpAction(id="stage-whitewater", label="Still learning to stand", prompt="I am still learning to stand in the whitewater."),
+            FollowUpAction(id="stage-some-green", label="Catching green waves sometimes", prompt="I can catch green waves sometimes and ride along the face."),
+            FollowUpAction(id="stage-consistent-green", label="Catching green waves consistently", prompt="I catch green waves consistently and can ride along the face."),
+        ]
     response = BoardGuideResponse(
         guide_name="Bodhi, the Core Lord",
         reply=final_reply,
@@ -2626,6 +2737,9 @@ def board_guide_chat(
         modelDeployment=model_deployment,
         recommendationVersion="bodhi-sprint-4",
         correlationId=correlation_id,
+        responseMode=response_mode,
+        catalogueMatchStatus=catalogue_match_status,
+        surferStage=stage_assessment.stage,
     )
     emit_event(
         "bodhi_turn_routing",
@@ -2637,6 +2751,12 @@ def board_guide_chat(
         active_board=active_board_override,
         active_region=profile.region or request.region,
         profile_update_detected=bool(profile_update_proposal or profile_update_confirmation_requested),
+        surfer_stage_resolved=stage_assessment.stage,
+        surfer_stage_source=stage_assessment.source,
+        stage_clarification_requested=stage_assessment.clarification_required,
+        topic_pivot_detected=topic_route.pivot,
+        correction_detected=topic_route.correction,
+        response_mode=response_mode,
         inventory_lookup_performed=inventory_stage == "model_availability",
         inventory_result_count=(active_inventory_query or {}).get("resultCount", 0),
         correlation_id=correlation_id,

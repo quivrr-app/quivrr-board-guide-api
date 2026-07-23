@@ -74,6 +74,10 @@ def infer_volume_lane(profile: RiderProfile, explicit_lane: str | None = None) -
 
 
 def build_target_volume_context(profile: RiderProfile, board_lane: str | None = None) -> TargetVolumeContext | None:
+    if profile.surfer_stage in {"STAGE_1_TRUE_BEGINNER", "STAGE_2_PROGRESSING_BEGINNER"}:
+        # Beginner equipment is selected by stage, dimensions and stability first;
+        # a saved shortboard volume must not become a false precision target.
+        return None
     lane = infer_volume_lane(profile, board_lane)
     source = _source_label(profile.target_volume_source or profile.field_provenance.get("target_volume_litres") or profile.field_provenance.get("current_volume_litres"))
     confidence = profile.target_volume_confidence or ("high" if source in {"saved_profile", "current_message", "conversation_context"} else "medium")
@@ -201,6 +205,8 @@ def fish_volume_bands(profile: RiderProfile) -> dict[str, VolumeFitV2]:
 
 
 def build_volume_recommendation(profile: RiderProfile, board_lane: str | None = None) -> VolumeRecommendation | None:
+    if profile.surfer_stage in {"STAGE_1_TRUE_BEGINNER", "STAGE_2_PROGRESSING_BEGINNER"}:
+        return None
     target_context = build_target_volume_context(profile, board_lane)
     if target_context and target_context.target_litres is not None:
         explanation = (
