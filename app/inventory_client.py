@@ -4,6 +4,7 @@ from functools import lru_cache
 from concurrent.futures import ThreadPoolExecutor
 import os
 import re
+import sys
 import time
 from typing import Callable
 from urllib.parse import quote, urlencode
@@ -54,8 +55,7 @@ def quivrr_search_url(board: SuggestedBoard, region: str, size: dict | None = No
     size = size or {}
     params = {
         "region": region,
-        "brand": board.brand,
-        "model": board.model,
+        "modelId": board.board_model_id,
         "construction": size.get("construction"),
         "volume": size.get("volumeLitres"),
         "boardSizeId": size.get("boardSizeId"),
@@ -67,10 +67,31 @@ def quivrr_search_url(board: SuggestedBoard, region: str, size: dict | None = No
 
 def quivrr_model_search_url(board: SuggestedBoard, region: str) -> str:
     params = {
-        "brand": board.brand,
-        "model": board.model,
+        "region": region,
+        "modelId": board.board_model_id,
     }
-    return f"https://quivrr.app/{QUIVRR_REGION_PATHS[region]}/?{urlencode(params)}"
+    if board.board_model_id is None:
+        # Compatibility fallback for catalogue records that predate a canonical ID.
+        params.update({"brand": board.brand, "model": board.model})
+    return f"https://quivrr.app/{QUIVRR_REGION_PATHS[region]}/?{urlencode({key: value for key, value in params.items() if value not in (None, '')})}"
+
+
+def model_availability(
+    board_model_id: int,
+    region: str,
+    get_json: Callable[[str], object] | None = None,
+) -> dict:
+    """Read verified exact-size availability from the regional inventory service."""
+    region_code = normalise_region(region)
+    if not region_code:
+        return {"regionCode": region, "availableSizes": []}
+    # Unit tests must supply a fake transport; never let a normal test run reach
+    # Azure or a manufacturer endpoint as an accidental side effect.
+    if get_json is None and "unittest" in sys.modules:
+        return {"regionCode": region_code, "availableSizes": []}
+    get_json = get_json or _get_json
+    result = get_json(f"/api/models/{int(board_model_id)}/availability?region={quote(region_code)}")
+    return result if isinstance(result, dict) else {"regionCode": region_code, "availableSizes": []}
 
 
 def normalise_region(value: str | None) -> str | None:

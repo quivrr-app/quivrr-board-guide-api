@@ -56,7 +56,7 @@ from app.board_relationship_graph import (
     relationship_reply, relationship_suggestions, relationship_type, source_board_from_message,
 )
 from app.model_recommendation_engine import build_recommendation_context, recommend_models
-from app.inventory_client import available_manufacturer_models, enrich_suggestions_with_inventory, locate_exact_board
+from app.inventory_client import available_manufacturer_models, enrich_suggestions_with_inventory, locate_exact_board, model_availability, quivrr_search_url
 from app.models import BoardComparison, BoardGuideRequest, BoardGuideResponse, BoardReference, BodhiRecommendation, ConversationState, FollowUpAction, ProfileUpdateProposal, SuggestedBoard
 from app.profile_engine import (
     build_recommendation,
@@ -180,6 +180,16 @@ def _message_requests_stock_only(message: str) -> bool:
         r"only boards with stock|only show stock if (?:there is|there's|any)|"
         r"just show me .* in stock|only show .* in stock)\b",
         lowered,
+    ))
+
+
+def _message_requests_active_board_inventory(message: str) -> bool:
+    """Deterministic inventory follow-up gate, evaluated before historical intent."""
+    return bool(re.search(
+        r"\b(?:available|availability|in stock|stock|what sizes|which sizes|show me sizes|"
+        r"how much|price|where can i buy|who has it|retailers?|manufacturer stock|"
+        r"show me the board|search for it|check if (?:it|that|this) is available)\b",
+        (message or "").lower(),
     ))
 
 
@@ -544,20 +554,44 @@ def _resolved_board_suggestion(board: dict) -> SuggestedBoard:
 
 _PROFILE_UPDATE_FIELDS = {
     "weight_kg": ("weightKg", "weight"),
+    "height_cm": ("heightCm", "height"),
     "ability": ("ability", "ability"),
     "region": ("homeRegion", "home region"),
     "home_break_type": ("homeBreak", "home break"),
+    "wave_type": ("waveType", "normal wave type"),
+    "wave_size": ("waveSize", "normal wave size"),
     "current_board": ("currentBoard", "regular board"),
     "current_volume_litres": ("currentVolumeLitres", "usual volume"),
+    "goal": ("surfingGoal", "surfing goal"),
 }
-_PROFILE_CONFIRMATION = re.compile(r"^\s*(?:yes|yep|yeah|update it|that is right|that's right|please change it)\s*[!.]*\s*$", re.I)
+_PROFILE_CONFIRMATION = re.compile(r"^\s*(?:yes|yep|yeah|do it|update it|that is right|that's right|please change it)\s*[!.]*\s*$", re.I)
 
 
 def _persistent_profile_statement(message: str) -> bool:
     text = (message or "").lower()
     if re.search(r"\b(?:this week|today|borrowed|friend'?s|trip|holiday|for portugal)\b", text):
         return False
-    return bool(re.search(r"\b(?:now|moved|mostly surf|regular board|usual board|from now on|these days)\b", text))
+    return bool(re.search(
+        r"\b(?:change my|update my|save my|set my|in my profile|my profile says|"
+        r"remember that i am|i weigh|i am now|my current volume is|my usual board is|"
+        r"now|moved|mostly surf|regular board|usual board|from now on|these days)\b",
+        text,
+    ))
+
+
+def _explicit_profile_changes(message: str) -> dict[str, object]:
+    """Capture explicit save/change language that is intentionally stricter than general fit extraction."""
+    text = (message or "").lower()
+    if not re.search(r"\b(?:change|update|save|set|profile|remember)\b", text):
+        return {}
+    changes = {}
+    volume = re.search(r"\b(?:volume|litres?|lts?)\s*(?:to|is|at)?\s*(\d+(?:\.\d+)?)\s*(?:l|lt|lts|litres?)\b", text)
+    if volume:
+        changes["current_volume_litres"] = float(volume.group(1))
+    weight = re.search(r"\b(?:weight(?:\s+in\s+my\s+profile)?[^\d]{0,24}|i\s*(?:am|weigh))\s*(\d+(?:\.\d+)?)\s*(?:kg|kgs|kilograms?)\b", text)
+    if weight:
+        changes["weight_kg"] = int(float(weight.group(1)))
+    return changes
 
 
 def _profile_update_proposal(account_profile, current_profile, message: str) -> ProfileUpdateProposal | None:
@@ -581,6 +615,60 @@ def _profile_update_proposal(account_profile, current_profile, message: str) -> 
         currentValues=current_values,
         message=f"I’ll use that change in this chat. Would you like me to update your saved My Quivrr {' and '.join(labels)} too?",
     )
+
+
+def _active_board_inventory_response(board: dict, region: str, profile) -> tuple[list[SuggestedBoard], str, dict]:
+    """Build a size-specific answer from the authoritative regional availability contract."""
+    try:
+        payload = model_availability(int(board["boardModelId"]), region)
+    except Exception:
+        # A failed read must never be represented as checked stock or take down the chat.
+        return [], (
+            f"I could not complete the verified {board['brand']} {board['model']} inventory check just now. "
+            "I have not treated it as in stock."
+        ), {"boardModelId": board["boardModelId"], "regionCode": region, "resultCount": 0}
+    sizes = payload.get("availableSizes") or []
+    display_region = _region_display_name(region)
+    if not sizes:
+        return [], (
+            f"I could not find verified {board['brand']} {board['model']} stock in {display_region} right now. "
+            "I haven’t invented a substitute link. I can show you the closest available alternative if you like."
+        ), {"boardModelId": board["boardModelId"], "regionCode": region, "resultCount": 0}
+
+    suggestions = []
+    lines = []
+    target = profile.current_volume_litres or profile.target_volume_litres
+    for size in sizes[:6]:
+        price = size.get("minimumPrice")
+        currency = size.get("currency")
+        price_text = f"{currency} {price:,.0f}" if price is not None and currency else "Price not listed"
+        offer = next((item for item in size.get("offers", []) if item.get("retailerName") or item.get("manufacturerName")), {})
+        seller = offer.get("retailerName") or offer.get("manufacturerName") or "verified inventory"
+        specs = " x ".join(str(size.get(key) or "—") for key in ("length", "width", "thickness"))
+        volume = size.get("volumeLitres")
+        lines.append(f"{specs} | {volume:g}L | {size.get('construction') or 'construction not listed'} | {price_text} at {seller}" if volume is not None else f"{specs} | {price_text} at {seller}")
+        suggested = SuggestedBoard(
+            brand=board["brand"], model=board["model"], category="Verified regional size",
+            confidence=0.98, why_it_fits="Verified exact-size regional inventory.",
+            suggested_size=specs, board_model_id=board["boardModelId"], board_size_id=size.get("boardSizeId"),
+            selected_construction=size.get("construction"), selected_volume_litres=volume,
+            region=region, region_code=region, availability_checked=True,
+            availability_status="available", available_count=len(size.get("offers") or []),
+            manufacturer_direct_count=1 if size.get("manufacturerAvailable") else 0,
+            retailer_count=int(size.get("retailerCount") or 0), inventory_match_count=len(size.get("offers") or []),
+            exact_size_inventory_count=len(size.get("offers") or []), exact_size_stock=True,
+            model_level_stock=True, price_range=price_text,
+        )
+        suggestions.append(suggested.model_copy(update={
+            "quivrr_search_url": quivrr_search_url(suggested, region, size),
+        }))
+    closest = ""
+    if target is not None:
+        closest_size = min((item for item in sizes if item.get("volumeLitres") is not None), key=lambda item: abs(float(item["volumeLitres"]) - target), default=None)
+        if closest_size:
+            closest = f" Your saved reference is {target:g}L, so {closest_size.get('length') or 'that size'} at {closest_size['volumeLitres']:g}L is the closest match."
+    reply = f"Yes. I found the {board['brand']} {board['model']} in {display_region} in these verified sizes: " + "; ".join(lines) + closest + " Choose a size to open that exact Quivrr search."
+    return suggestions, reply, {"boardModelId": board["boardModelId"], "regionCode": region, "resultCount": len(suggestions)}
 
 
 def _stock_only_reply(label: str, region: str | None, boards, candidate_count: int | None = None, checked=None) -> str:
@@ -1016,6 +1104,8 @@ def build_conversation_state(
     previous_failure_reason: str | None = None,
     previous_reply_signature: str | None = None,
     pending_profile_update: dict | None = None,
+    active_board_override: dict | None = None,
+    last_inventory_query: dict | None = None,
 ) -> ConversationState:
     active_region = profile.region or request.region
     last_question = questions[0] if questions else None
@@ -1031,6 +1121,8 @@ def build_conversation_state(
         comparison_boards = public_cards[:2]
     last_recommendations = public_cards[:6] or previous_recommendations[:6]
     previous_brief = previous_state.active_board_brief if previous_state and not clear_previous else {}
+    active_board = active_board_override or (previous_state.active_board if previous_state and not clear_previous else None)
+    inventory_query = last_inventory_query or (previous_state.last_inventory_query if previous_state and not clear_previous else None)
     active_board_brief = resolve_dna_brief(request.message, profile, previous_brief)
     if re.search(r"\b(?:reset|start over|new search|clear)\b", request.message.lower()):
         active_board_brief = {}
@@ -1063,6 +1155,8 @@ def build_conversation_state(
         availabilityConstraint=availability_constraint,
         activeProfile=profile.model_dump(exclude={"profile_sources", "profile_conflicts", "field_provenance"}, exclude_none=True),
         activeBoardBrief=active_board_brief,
+        activeBoard=active_board,
+        lastInventoryQuery=inventory_query,
         lastRecommendations=last_recommendations,
         mentionedBoards=(last_recommendations or mentioned[:8]),
         comparisonBoards=comparison_boards[:4],
@@ -1296,6 +1390,7 @@ def board_guide_chat(
     candidate_source = "none"
     inventory_stage = "not_run"
     candidate_count_before_inventory = 0
+    active_inventory_query = None
     emit_event(
         "bodhi_request_received",
         "bodhi_api",
@@ -1369,6 +1464,12 @@ def board_guide_chat(
         account_profile=account_profile if preserve_prior_rider else None,
     )
     current_profile = with_profile_source(extract_profile(request.message, request.region), "current_user")
+    explicit_profile_changes = _explicit_profile_changes(request.message)
+    if explicit_profile_changes:
+        current_profile = current_profile.model_copy(update={
+            **explicit_profile_changes,
+            "field_provenance": {**current_profile.field_provenance, **{field: "current_user" for field in explicit_profile_changes}},
+        })
     profile = merge_rider_profile(
         profile,
         current_profile,
@@ -1496,7 +1597,10 @@ def board_guide_chat(
     questions = intake_questions(profile)
     guidance = volume_guidance(profile)
     context_board = None
-    if request.conversation_state and len(request.conversation_state.last_presented_models) == 1:
+    prior_active_board = request.conversation_state.active_board if request.conversation_state else None
+    if prior_active_board and prior_active_board.get("brand") and prior_active_board.get("model"):
+        context_board = (prior_active_board["brand"], prior_active_board["model"])
+    elif request.conversation_state and len(request.conversation_state.last_presented_models) == 1:
         card = request.conversation_state.last_presented_models[0]
         context_board = (card.brand, card.model)
     # A pronoun can safely refer to the last single board. An explicit-looking
@@ -1511,9 +1615,27 @@ def board_guide_chat(
         context_board=context_board if uses_board_pronoun and not names_unknown_model else None,
     )
     requested_board = (
-        {"brand": board_resolution.brand, "model": board_resolution.model, "boardModelId": board_resolution.canonical_model_id}
+        {
+            "brand": board_resolution.brand,
+            "model": board_resolution.model,
+            "boardModelId": board_resolution.canonical_model_id,
+            "canonicalKey": board_resolution.canonical_key,
+        }
         if board_resolution.status == "resolved" else find_requested_board(request.message)
     )
+    if requested_board and not requested_board.get("boardModelId") and prior_active_board and (
+        requested_board.get("brand"), requested_board.get("model")
+    ) == (prior_active_board.get("brand"), prior_active_board.get("model")):
+        requested_board = {**prior_active_board, **requested_board}
+    active_board_override = requested_board if board_resolution.status == "resolved" else prior_active_board
+    active_inventory_request = bool(active_board_override and _message_requests_active_board_inventory(request.message))
+    if profile_update_proposal or profile_update_confirmation_requested:
+        # An explicit profile mutation request always outranks prior stock or family state.
+        legacy_intent = "profile_update_request"
+        intent = "PROFILE_UPDATE"
+    elif active_inventory_request:
+        legacy_intent = "active_board_inventory_request"
+        intent = "AVAILABILITY"
     if board_resolution.status == "resolved":
         match_event = (
             "exact_match" if board_resolution.match_type.startswith("exact")
@@ -1617,7 +1739,31 @@ def board_guide_chat(
         volume_recommendation = None
         guidance = None
 
-    if active_expansion_manufacturer and intent != "BOARD_COMPARISON" and (explicit_expansion_manufacturer or category):
+    if legacy_intent == "profile_update_request":
+        suggested_boards = []
+        recommendation = None
+        volume_recommendation = None
+        guidance = None
+        reply = profile_update_proposal.message if profile_update_proposal else "Your saved profile update is ready to be confirmed."
+        questions = []
+        force_controlled_reply = True
+    elif legacy_intent == "active_board_inventory_request" and active_board_override and active_board_override.get("boardModelId"):
+        recommendation_path = "active_board_exact_availability"
+        candidate_source = "model_availability"
+        ranking_engine_used = "regional_exact_size_inventory"
+        inventory_stage = "model_availability"
+        suggested_boards, reply, active_inventory_query = _active_board_inventory_response(
+            active_board_override, profile.region or request.region, profile,
+        ) if (profile.region or request.region) else ([], "Which region should I check for that board?", None)
+        candidate_count_before_inventory = len(suggested_boards)
+        questions = []
+        force_controlled_reply = True
+    elif legacy_intent == "active_board_inventory_request":
+        suggested_boards = []
+        reply = "Which board should I check? Name the brand and model and I’ll look for verified regional sizes."
+        questions = ["Which board should I check?"]
+        force_controlled_reply = True
+    elif active_expansion_manufacturer and intent != "BOARD_COMPARISON" and (explicit_expansion_manufacturer or category):
         canonical_brand = active_expansion_manufacturer["manufacturer"]
         customer_brand = _customer_manufacturer_name(canonical_brand)
         catalogue_models = models_for_manufacturer(canonical_brand)
@@ -2383,7 +2529,7 @@ def board_guide_chat(
         if availability_constraint == STOCK_ONLY_CONSTRAINT or family_intent.correction or force_controlled_reply
         else (llm_reply or reply)
     )
-    if profile_update_proposal and not profile_update_confirmation_requested:
+    if profile_update_proposal and not profile_update_confirmation_requested and legacy_intent != "profile_update_request":
         final_reply = final_reply.rstrip() + " " + profile_update_proposal.message
     elif profile_update_confirmation_requested:
         final_reply = final_reply.rstrip() + " I’ll update your saved My Quivrr profile now."
@@ -2429,6 +2575,8 @@ def board_guide_chat(
         previous_failure_reason=previous_failure_reason,
         previous_reply_signature=reply_signature,
         pending_profile_update=pending_profile_update,
+        active_board_override=active_board_override,
+        last_inventory_query=active_inventory_query,
     )
     follow_up_actions = build_follow_up_actions(intent, public_cards)
     response = BoardGuideResponse(
@@ -2472,6 +2620,20 @@ def board_guide_chat(
         modelDeployment=model_deployment,
         recommendationVersion="bodhi-sprint-4",
         correlationId=correlation_id,
+    )
+    emit_event(
+        "bodhi_turn_routing",
+        "bodhi_api",
+        status="success",
+        current_message_intent=intent_result.intent,
+        context_intent=(request.conversation_state.last_intent if request.conversation_state else None),
+        resolved_intent=intent,
+        active_board=active_board_override,
+        active_region=profile.region or request.region,
+        profile_update_detected=bool(profile_update_proposal or profile_update_confirmation_requested),
+        inventory_lookup_performed=inventory_stage == "model_availability",
+        inventory_result_count=(active_inventory_query or {}).get("resultCount", 0),
+        correlation_id=correlation_id,
     )
     emit_event(
         "bodhi_response_completed",

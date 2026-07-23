@@ -47,6 +47,30 @@ class ProfileUpdateProposalTests(unittest.TestCase):
         self.assertEqual(response["profile"]["region"], "ID")
         self.assertIsNone(response.get("profileUpdateProposal"))
 
+    @patch("main.is_azure_openai_configured", return_value=False)
+    @patch("main.load_authenticated_profile_context")
+    def test_explicit_volume_change_outranks_previous_inventory_context(self, profile_context, _azure):
+        profile_context.return_value = AuthenticatedProfileContext(
+            authenticated=True,
+            profile_loaded=True,
+            user_id="user-1",
+            status="loaded",
+            profile=RiderProfile(weight_kg=74, ability="Intermediate", region="AU", current_volume_litres=28.6),
+        )
+        response = self.client.post("/api/board-guide/chat", headers={"Authorization": "Bearer test"}, json={
+            "message": "can you change my volume to 31lts please?",
+            "region": "ID",
+            "conversationState": {
+                "lastIntent": "AVAILABILITY",
+                "activeRegion": "ID",
+                "activeBoard": {"brand": "Album", "model": "Plasmic", "boardModelId": 205, "canonicalKey": "album|plasmic"},
+            },
+        }).json()
+        self.assertEqual(response["intent"], "profile_update_request")
+        self.assertEqual(response["profileUpdateProposal"]["fields"], {"currentVolumeLitres": 31.0})
+        self.assertEqual(response["profileUpdateProposal"]["currentValues"], {"currentVolumeLitres": 28.6})
+        self.assertIn("saved My Quivrr", response["reply"])
+
 
 if __name__ == "__main__":
     unittest.main()

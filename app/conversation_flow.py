@@ -432,7 +432,7 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
             f"Paddle {paddle}/10 and forgiveness {forgiveness}/10."
             if paddle is not None and forgiveness is not None else None
         )
-        safe_search_url = quivrr_model_search_url(board, board.region_code or board.region or "AU")
+        safe_search_url = board.quivrr_search_url or quivrr_model_search_url(board, board.region_code or board.region or "AU")
         if board.manufacturer_direct_count and board.retailer_count:
             source_type = "manufacturer_direct_and_retailer"
             availability_label = "Available in your region"
@@ -485,6 +485,10 @@ def public_recommendations(boards: list[SuggestedBoard]) -> list[BodhiRecommenda
             exactSizeStock=board.exact_size_stock,
             modelLevelStock=board.model_level_stock,
             regionCode=board.region_code or board.region,
+            boardModelId=board.board_model_id,
+            boardSizeId=board.board_size_id,
+            selectedConstruction=board.selected_construction,
+            selectedVolumeLitres=board.selected_volume_litres,
             exampleProductUrl=safe_search_url,
             quivrrSearchUrl=safe_search_url,
             sourceProductUrl=board.source_product_url or board.example_live_source_url,

@@ -1,5 +1,13 @@
 # Quivrr Platform Backlog
 
+## 2026-07-23 — Bodhi canonical handoff and active-board inventory remediation
+
+- Affected areas: runtime, search, frontend and Azure deployment; no data-quality mutation or cleanup.
+- Issue: Bodhi dropped canonical board identifiers while rendering regional links, regional pages then tried display-name preselection, and previous family-search context could override an explicit active-board availability or profile-update request.
+- Change: canonical BoardSizeId handoffs now carry region and model identity and only auto-search when an exact size exists; regional pages resolve a BoardSizeId through a read-only core identity contract before selecting dropdowns; the conversation state stores the active canonical board and exact inventory context; explicit profile updates, active-board availability, comparisons and details now precede historical intent.
+- Verification: added exact-size availability and BoardSize identity contracts, active Album Plasmic regression coverage, direct volume-proposal coverage, canonical URL widget tests and all-four-region query handling tests. Unit-test transport guarding prevents the new availability read from contacting Azure without an injected test transport.
+- Follow-up: engineering and architecture documents are unchanged pending owner approval. Production deployment and smoke validation remain required before this entry is closed.
+
 ## 2026-07-23 — Bodhi performance-fish stock recovery
 
 - Issue: a request for a “pro fish” in Indonesia was treated as an exact taxonomy lookup. Empty filtered results were presented as an inventory-verification failure, and follow-up “why?” or correction messages could repeat that failure.
