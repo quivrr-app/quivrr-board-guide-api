@@ -1,5 +1,13 @@
 # Quivrr Platform Backlog
 
+## 2026-07-23 — Bodhi canonical availability regression closure
+
+- Affected areas: Board Guide API active-board inventory response and its regression coverage; no profile or catalogue data was changed.
+- Issue: legacy discovery tests still asserted the retired exact-location route after canonical active-board availability was introduced. Returned exact-size cards also omitted the verified seller source URL.
+- Change: aligned the guard tests to the authoritative per-model regional availability contract and retained the verified offer URL on each exact-size card.
+- Verification: 253-test API discovery suite passed in 68.123 seconds; unit-test transport guarding kept ordinary tests off Azure and external manufacturer endpoints.
+- Follow-up: engineering and architecture documents are unchanged pending owner approval.
+
 ## 2026-07-23 — Bodhi canonical handoff and active-board inventory remediation
 
 - Affected areas: runtime, search, frontend and Azure deployment; no data-quality mutation or cleanup.

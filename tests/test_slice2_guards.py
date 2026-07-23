@@ -63,18 +63,17 @@ class Slice2GuardTests(unittest.TestCase):
         self.assertEqual(body["comparison"]["board_b"]["model"], "Monsta")
         self.assertTrue(body["comparison"]["rider_specific_conclusion"])
 
-    @patch("main.locate_exact_board", return_value=([], False))
-    @patch("main.enrich_suggestions_with_inventory", side_effect=lambda rows, profile: rows)
-    def test_unavailable_exact_board_does_not_invent_links_or_stock(self, _inventory, _locate):
+    @patch("main.model_availability", return_value={"regionCode": "AU", "availableSizes": []})
+    def test_unavailable_exact_board_does_not_invent_links_or_stock(self, _availability):
         response = self.client.post("/api/board-guide/chat", json={
             "message": "Where can I buy a Christenson Fish in Australia?",
             "region": "AU",
         })
         self.assertEqual(response.status_code, 200)
         body = response.json()
-        self.assertEqual(body["intent"], "exact_board_location_request")
+        self.assertEqual(body["intent"], "active_board_inventory_request")
         self.assertEqual(body["recommendations"], [])
-        self.assertIn("can’t see that exact Christenson Fish", body["reply"])
+        self.assertIn("could not find verified Christenson Fish", body["reply"])
 
 
 if __name__ == "__main__":

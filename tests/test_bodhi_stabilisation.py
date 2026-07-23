@@ -144,9 +144,9 @@ class BodhiStabilisationTests(unittest.TestCase):
         public = public_recommendations([enriched])[0]
         self.assertTrue(enriched.quivrr_search_url.startswith("https://quivrr.app/europe?"))
         self.assertIn("boardSizeId=12345", enriched.quivrr_search_url)
-        self.assertEqual(public.example_product_url, "https://quivrr.app/europe/?brand=Pyzel&model=Phantom")
-        self.assertEqual(public.search_url, "https://quivrr.app/europe/?brand=Pyzel&model=Phantom")
-        self.assertNotIn("boardSizeId", public.example_product_url)
+        self.assertIn("boardSizeId=12345", public.example_product_url)
+        self.assertIn("autoSearch=1", public.example_product_url)
+        self.assertEqual(public.search_url, public.example_product_url)
         self.assertEqual(public.source_product_url, "https://retailer.example/phantom")
         self.assertEqual(public.availability_status, "retailer_stock")
         self.assertTrue(public.exact_size_stock)

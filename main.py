@@ -658,6 +658,8 @@ def _active_board_inventory_response(board: dict, region: str, profile) -> tuple
             retailer_count=int(size.get("retailerCount") or 0), inventory_match_count=len(size.get("offers") or []),
             exact_size_inventory_count=len(size.get("offers") or []), exact_size_stock=True,
             model_level_stock=True, price_range=price_text,
+            example_live_source_url=offer.get("productUrl"),
+            source_product_url=offer.get("productUrl"),
         )
         suggestions.append(suggested.model_copy(update={
             "quivrr_search_url": quivrr_search_url(suggested, region, size),

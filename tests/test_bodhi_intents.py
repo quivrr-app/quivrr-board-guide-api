@@ -280,14 +280,14 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertTrue(body["recommendations"])
         self.assertTrue(all(row["category"] in {"Fish", "Traditional Fish"} for row in body["recommendations"]))
 
-    @patch("main.locate_exact_board", return_value=([], False))
-    def test_unavailable_christenson_fish_is_explained_without_inventing_stock(self, _locate):
+    @patch("main.model_availability", return_value={"regionCode": "AU", "availableSizes": []})
+    def test_unavailable_christenson_fish_is_explained_without_inventing_stock(self, _availability):
         response = self.client.post("/api/board-guide/chat", json={
             "message": "Where can I buy a Christenson Fish in Australia?", "region": "AU",
         })
         body = response.json()
-        self.assertEqual(body["intent"], "exact_board_location_request")
-        self.assertIn("can’t see that exact Christenson Fish", body["reply"])
+        self.assertEqual(body["intent"], "active_board_inventory_request")
+        self.assertIn("could not find verified Christenson Fish", body["reply"])
         self.assertEqual(body["recommendations"], [])
 
     @patch("main.enrich_suggestions_with_inventory")
@@ -393,31 +393,31 @@ class BodhiIntentApiTests(unittest.TestCase):
         self.assertIn("matrix favours Pyzel Phantom", body["reply"])
         self.assertEqual(body["suggested_boards"], [])
 
-    @patch("main.locate_exact_board", return_value=([SuggestedBoard(
-        brand="JS Industries", model="Monsta", category="Exact stock", confidence=.94,
-        why_it_fits="Exact verified EU match from 58 Surf", suggested_size="5'11 | 28L | CarboTune",
-        available_count=1, retailer_count=1, region="EU",
-        example_live_source_url="https://58surf.example/monsta",
-        source_product_url="https://58surf.example/monsta",
-        quivrr_search_url="https://quivrr.app/europe?brand=JS+Industries&model=Monsta",
-    )], True))
-    def test_exact_board_location_returns_verified_direct_link(self, _locate):
+    @patch("main.model_availability", return_value={
+        "regionCode": "EU",
+        "availableSizes": [{
+            "boardSizeId": 12345, "length": "5'11", "width": "19 1/2", "thickness": "2 7/16",
+            "volumeLitres": 28.0, "construction": "CarboTune", "retailerCount": 1,
+            "offers": [{"retailerName": "58 Surf", "productUrl": "https://58surf.example/monsta"}],
+        }],
+    })
+    def test_exact_board_location_returns_verified_direct_link(self, _availability):
         response = self.client.post("/api/board-guide/chat", json={
             "message": "Where can I buy a JS Monsta 5'11 CarboTune in Europe?",
         })
         body = response.json()
-        self.assertEqual(body["intent"], "exact_board_location_request")
-        self.assertIn("exact verified EU", body["reply"])
-        self.assertIn("https://quivrr.app/europe/?", body["recommendations"][0]["exampleProductUrl"])
+        self.assertEqual(body["intent"], "active_board_inventory_request")
+        self.assertIn("verified sizes", body["reply"])
+        self.assertIn("https://quivrr.app/europe?", body["recommendations"][0]["exampleProductUrl"])
         self.assertEqual(body["recommendations"][0]["sourceProductUrl"], "https://58surf.example/monsta")
 
-    @patch("main.locate_exact_board", return_value=([], False))
-    def test_exact_board_unavailable_does_not_hallucinate_link(self, _locate):
+    @patch("main.model_availability", return_value={"regionCode": "EU", "availableSizes": []})
+    def test_exact_board_unavailable_does_not_hallucinate_link(self, _availability):
         response = self.client.post("/api/board-guide/chat", json={
             "message": "Where can I buy a JS Monsta 5'11 CarboTune in Europe?",
         })
         body = response.json()
-        self.assertIn("can’t see that exact", body["reply"])
+        self.assertIn("could not find verified", body["reply"])
         self.assertEqual(body["recommendations"], [])
 
     @patch("main.locate_exact_board", return_value=([SuggestedBoard(
