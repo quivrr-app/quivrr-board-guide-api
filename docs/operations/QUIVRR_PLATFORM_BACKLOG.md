@@ -1,5 +1,13 @@
 # Quivrr Platform Backlog
 
+## 2026-07-23 — Bodhi selected-region model-card correction
+
+- Affected areas: Board Guide API canonical model-card hand-off; no inventory or profile data was changed.
+- Issue: a direct canonical board answer could produce a model-only card using the public-card Australia fallback before stock lookup, despite the caller selecting another region.
+- Change: direct board-detail cards now preserve the requested region and canonical model ID; broader recommendation cards retain their deliberate existing behaviour.
+- Verification: direct Album Plasmic Indonesia link regression added; 110 targeted API tests and the 254-test discovery suite passed.
+- Follow-up: engineering and architecture documents are unchanged pending owner approval.
+
 ## 2026-07-23 — Bodhi canonical availability regression closure
 
 - Affected areas: Board Guide API active-board inventory response and its regression coverage; no profile or catalogue data was changed.

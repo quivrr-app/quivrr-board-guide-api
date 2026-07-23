@@ -2002,6 +2002,10 @@ def board_guide_chat(
         questions = []
     elif legacy_intent == "general_board_question" and requested_board:
         suggested_boards = [_resolved_board_suggestion(requested_board)]
+        if profile.region or request.region:
+            suggested_boards[0] = suggested_boards[0].model_copy(
+                update={"region": profile.region or request.region, "region_code": profile.region or request.region}
+            )
         reply = _board_information_reply(requested_board, profile)
         questions = []
         force_controlled_reply = True

@@ -44,6 +44,15 @@ class ActiveBoardInventoryTests(unittest.TestCase):
         self.assertIn("boardSizeId=901", card["searchUrl"])
         self.assertIn("autoSearch=1", card["searchUrl"])
 
+    def test_canonical_model_card_preserves_the_requested_region_before_inventory(self):
+        response = self.client.post("/api/board-guide/chat", json={
+            "message": "what about plasmic?", "region": "ID",
+        })
+        self.assertEqual(response.status_code, 200)
+        card = response.json()["recommendations"][0]
+        self.assertTrue(card["searchUrl"].startswith("https://quivrr.app/indonesia/?"))
+        self.assertIn("region=ID", card["searchUrl"])
+
 
 if __name__ == "__main__":
     unittest.main()
