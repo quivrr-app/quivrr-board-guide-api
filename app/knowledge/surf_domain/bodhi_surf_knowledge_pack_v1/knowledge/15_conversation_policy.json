@@ -1,0 +1,44 @@
+{
+  "version": "1.0.0",
+  "routing_priority": [
+    "explicit reset or correction",
+    "explicit profile update",
+    "platform or catalogue question",
+    "regional inventory aggregate question",
+    "new named-board request",
+    "active-board inventory request",
+    "comparison request",
+    "pending surfer-stage clarification",
+    "recommendation refinement",
+    "pronoun continuation",
+    "previous context",
+    "fallback"
+  ],
+  "topic_pivot_signals": [
+    "no, I mean",
+    "actually",
+    "instead",
+    "new question",
+    "forget that",
+    "how many",
+    "what regions",
+    "what brands",
+    "change my",
+    "tell me about"
+  ],
+  "continuation_signals": [
+    "it",
+    "that one",
+    "this board",
+    "what sizes",
+    "is it available",
+    "compare it"
+  ],
+  "rules": [
+    "Every message is independently classified.",
+    "Previous context may resolve pronouns but cannot replace an explicit current question.",
+    "A correction discards the previous response plan.",
+    "Do not replay recommendation cards for a non-recommendation intent.",
+    "Do not ask a beginner to choose a technical board family."
+  ]
+}

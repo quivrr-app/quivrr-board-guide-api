@@ -1,5 +1,12 @@
 # Quivrr Platform Backlog
 
+## 2026-07-24 — Bodhi Surf Knowledge Pack v1 integration
+
+- Input: imported the authoritative `bodhi_surf_knowledge_pack_v1` governed pack under `app/knowledge/surf_domain/` without replacing canonical model facts, Board DNA, aliases, relationships, stock, price or seller data.
+- Change: added a checksummed immutable pack loader, startup validation and pack-version telemetry. Sprint 5 stage and premium-catalogue decisions now consume the governed pack wording and stage-family exclusions.
+- Compatibility: preserves the Sprint 5 current-message routing, beginner safety, profile proposal, active-board inventory and exact BoardSize handoff behaviour.
+- Follow-up: engineering and architecture documents remain unchanged pending owner approval.
+
 ## 2026-07-24 — Bodhi Sprint 5 beginner safety and topic-pivot remediation
 
 - Root cause: conversation state restored a prior family and saved volume before independently resolving the current message. Beginner remained a soft ability signal, so daily-driver fallback, volume proximity and available inventory could outrank safety. Aggregate inventory questions also lacked a distinct route and replayed the previous recommendation plan.

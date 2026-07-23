@@ -1,0 +1,33 @@
+{
+  "pack_id": "bodhi_surf_knowledge_pack_v1",
+  "version": "1.0.0",
+  "purpose": "Governed general surfing and surfboard-selection knowledge for Bodhi.",
+  "scope": [
+    "surfer stage assessment",
+    "board-family selection",
+    "dimensions and volume reasoning",
+    "wave and condition matching",
+    "construction and fin-system knowledge",
+    "progression, quiver and comparison guidance",
+    "conversation routing and safety constraints",
+    "premium catalogue positioning"
+  ],
+  "exclusions": [
+    "live stock, price or retailer availability",
+    "manufacturer-specific claims not present in Quivrr canonical sources",
+    "medical diagnosis",
+    "guaranteed performance outcomes",
+    "invented softboard catalogue records"
+  ],
+  "governance": {
+    "decision_rule": "Deterministic eligibility and safety rules take precedence over generated prose.",
+    "source_class": "general surf-domain knowledge curated for Quivrr; validate manufacturer-specific data separately",
+    "review_required_for": [
+      "stage thresholds",
+      "volume guidance",
+      "family mappings",
+      "brand voice",
+      "new controlled terms"
+    ]
+  }
+}

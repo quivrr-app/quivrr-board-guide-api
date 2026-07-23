@@ -1,0 +1,29 @@
+{
+  "input": {
+    "message": "I'm still learning to stand and weigh 78 kg.",
+    "region": "ID",
+    "saved_profile": {
+      "ability": "Advanced",
+      "volume_litres": 28.6
+    }
+  },
+  "decision": {
+    "resolved_surfer_stage": "STAGE_1_TRUE_BEGINNER",
+    "stage_source": "current_message",
+    "saved_volume_ignored": true,
+    "allowed_families": [
+      "SOFTBOARD",
+      "MINI_MAL_FUNBOARD",
+      "LONGBOARD"
+    ],
+    "excluded_families": [
+      "PERFORMANCE_DAILY_DRIVER",
+      "PERFORMANCE_SHORTBOARD",
+      "PERFORMANCE_FISH",
+      "STEP_UP"
+    ],
+    "inventory_checked": false,
+    "response_mode": "guidance_only",
+    "catalogue_gap_reason": "Quivrr does not currently catalogue softboards"
+  }
+}

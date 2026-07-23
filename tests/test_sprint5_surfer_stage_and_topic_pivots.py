@@ -31,7 +31,7 @@ class Sprint5SurferStageAndTopicPivotTests(unittest.TestCase):
         self.assertEqual(body["recommendations"], [])
         self.assertNotIn("30 to 35l", body["reply"].lower())
         self.assertIn("softboard", body["reply"].lower())
-        self.assertIn("do not currently catalogue", body["reply"].lower())
+        self.assertIn("does not currently catalogue", body["reply"].lower())
 
     @patch("main.inventory_summary", return_value={
         "regionCode": "AU", "availableCanonicalSizeCount": 12, "availableCanonicalModelCount": 3,

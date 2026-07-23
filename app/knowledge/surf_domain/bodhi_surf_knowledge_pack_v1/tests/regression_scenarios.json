@@ -1,0 +1,95 @@
+{
+  "version": "1.0.0",
+  "scenarios": [
+    {
+      "id": "true_beginner_78kg",
+      "messages": [
+        "I am a beginner and weigh 78 kg.",
+        "I am still learning to stand in the whitewater."
+      ],
+      "expect": {
+        "stage": "STAGE_1_TRUE_BEGINNER",
+        "response_mode": "guidance_only",
+        "forbidden_families": [
+          "PERFORMANCE_DAILY_DRIVER",
+          "PERFORMANCE_SHORTBOARD",
+          "PERFORMANCE_FISH",
+          "STEP_UP"
+        ],
+        "must_not_use_saved_volume_as_target": true
+      }
+    },
+    {
+      "id": "ambiguous_beginner",
+      "messages": [
+        "I want a board for a beginner."
+      ],
+      "expect": {
+        "clarification_type": "surfer_stage",
+        "recommendation_count": 0
+      }
+    },
+    {
+      "id": "progressing_beginner",
+      "messages": [
+        "I catch green waves sometimes and can ride along the face."
+      ],
+      "expect": {
+        "allowed_stage_ids": [
+          "STAGE_2_PROGRESSING_BEGINNER",
+          "STAGE_3_EARLY_INTERMEDIATE"
+        ],
+        "forbidden_families": [
+          "PERFORMANCE_SHORTBOARD",
+          "STEP_UP",
+          "GUN"
+        ]
+      }
+    },
+    {
+      "id": "specific_unsuitable_board",
+      "messages": [
+        "I am still learning in whitewater.",
+        "What about the Sharp Eye Inferno 72?"
+      ],
+      "expect": {
+        "recognise_board": true,
+        "purchase_recommendation": false,
+        "strong_match": false
+      }
+    },
+    {
+      "id": "topic_pivot_inventory_count",
+      "messages": [
+        "Show me boards for a beginner.",
+        "No, how many available boards are there in Australia?"
+      ],
+      "expect": {
+        "correction_detected": true,
+        "intent": "REGIONAL_AVAILABLE_BOARD_COUNT",
+        "recommendation_cards": 0
+      }
+    },
+    {
+      "id": "profile_update_priority",
+      "messages": [
+        "Show me boards in Indonesia.",
+        "Change my weight to 78 kg."
+      ],
+      "expect": {
+        "profile_update_detected": true,
+        "repeat_prior_recommendation": false
+      }
+    },
+    {
+      "id": "advanced_regression",
+      "messages": [
+        "I am an advanced surfer, 78 kg, looking for a performance daily driver in average waves."
+      ],
+      "expect": {
+        "performance_daily_driver_allowed": true,
+        "inventory_handoff_preserved": true
+      }
+    }
+  ]
+}

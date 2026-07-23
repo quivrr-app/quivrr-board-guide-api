@@ -71,9 +71,11 @@ from app.volume_engine_v2 import build_target_volume_context, build_volume_recom
 from app.structured_logging import emit_event
 from app.surfer_stage import BEGINNER_QUESTION, PREMIUM_BEGINNER_POSITIONING, STAGE_1, assess_surfer_stage, beginner_guidance, stage_allows_board
 from app.topic_routing import classify_topic_route
+from app.surf_domain import load_surf_domain_knowledge
 
 
 load_dotenv()
+SURF_DOMAIN_KNOWLEDGE = load_surf_domain_knowledge()
 
 APP_NAME = "Quivrr Board Guide API"
 BUILD_SHA = os.getenv("BODHI_BUILD_SHA") or os.getenv("WEBSITE_COMMIT_ID") or "unknown"
@@ -1807,7 +1809,7 @@ def board_guide_chat(
     elif topic_route.kind == "PLATFORM_CATALOGUE_SCOPE":
         suggested_boards = []
         recommendation = volume_recommendation = guidance = None
-        reply = PREMIUM_BEGINNER_POSITIONING
+        reply = SURF_DOMAIN_KNOWLEDGE.premium_positioning["canonical_statement"] + " " + SURF_DOMAIN_KNOWLEDGE.premium_positioning["beginner_statement"]
         questions = []
         force_controlled_reply = True
         response_mode = "guidance_only"
@@ -2751,6 +2753,7 @@ def board_guide_chat(
         active_board=active_board_override,
         active_region=profile.region or request.region,
         profile_update_detected=bool(profile_update_proposal or profile_update_confirmation_requested),
+        surf_knowledge_pack_version=SURF_DOMAIN_KNOWLEDGE.version,
         surfer_stage_resolved=stage_assessment.stage,
         surfer_stage_source=stage_assessment.source,
         stage_clarification_requested=stage_assessment.clarification_required,

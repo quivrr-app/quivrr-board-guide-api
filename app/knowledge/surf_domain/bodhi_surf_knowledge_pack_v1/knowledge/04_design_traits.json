@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "controlled_traits": {
+    "paddle_support": {
+      "low": "requires efficient paddling and accurate positioning",
+      "balanced": "moderate assistance without feeling oversized",
+      "high": "helps entry, wave count and recovery between waves"
+    },
+    "wave_entry": {
+      "demanding": "needs precise timing and committed positioning",
+      "balanced": "normal entry requirements",
+      "easy": "gets moving early and enters waves with less effort"
+    },
+    "stability": {
+      "low": "sensitive and less forgiving underfoot",
+      "balanced": "responsive without excessive instability",
+      "high": "stable platform for learning, trim and confidence"
+    },
+    "forgiveness": {
+      "low": "punishes poor stance, timing or rail pressure",
+      "balanced": "tolerates moderate errors",
+      "high": "supports imperfect timing and weight distribution"
+    },
+    "glide": {
+      "low": "relies more on wave power and active speed generation",
+      "balanced": "useful carry through normal sections",
+      "high": "maintains momentum and crosses flat sections easily"
+    },
+    "speed_generation": {
+      "low": "needs wave power or active surfing",
+      "balanced": "natural speed in normal surf",
+      "high": "creates speed readily in weak or average waves"
+    },
+    "turning_radius": {
+      "tight": "compact, responsive arcs",
+      "balanced": "moderate arc and control",
+      "drawn_out": "longer, flowing arcs"
+    },
+    "hold": {
+      "low": "loose feel with less security in power",
+      "balanced": "general-purpose control",
+      "high": "confidence through steep or powerful sections"
+    },
+    "projection": {
+      "low": "more pivot and lateral release",
+      "balanced": "mixed pivot and drive",
+      "high": "carries strongly through turns"
+    },
+    "release": {
+      "low": "connected and controlled",
+      "balanced": "predictable release",
+      "high": "easy to break free or redirect"
+    },
+    "sensitivity": {
+      "low": "calm and forgiving",
+      "balanced": "responsive but manageable",
+      "high": "reacts quickly to subtle input"
+    }
+  },
+  "selection_principles": [
+    "Beginners benefit from paddle support, stability, forgiveness and glide before sensitivity or tight turning.",
+    "Advanced surfers may deliberately trade forgiveness for precision, hold, projection or release.",
+    "No single trait is universally best; the correct balance depends on surfer stage, waves and intent."
+  ]
+}

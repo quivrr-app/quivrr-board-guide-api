@@ -1,0 +1,92 @@
+{
+  "version": "1.0.0",
+  "tail_shapes": {
+    "squash": {
+      "feel": [
+        "balanced release",
+        "versatility",
+        "predictable pivot"
+      ],
+      "common_use": [
+        "daily drivers",
+        "performance boards"
+      ]
+    },
+    "round": {
+      "feel": [
+        "smooth control",
+        "hold",
+        "flow"
+      ],
+      "common_use": [
+        "powerful or clean waves",
+        "step-ups"
+      ]
+    },
+    "round_pin": {
+      "feel": [
+        "hold",
+        "drawn-out arcs",
+        "control"
+      ],
+      "common_use": [
+        "larger or steeper waves"
+      ]
+    },
+    "pin": {
+      "feel": [
+        "maximum control",
+        "reduced tail area"
+      ],
+      "common_use": [
+        "serious surf",
+        "guns"
+      ]
+    },
+    "swallow": {
+      "feel": [
+        "speed",
+        "bite",
+        "tail area with split release"
+      ],
+      "common_use": [
+        "fish",
+        "small-wave and performance designs"
+      ]
+    },
+    "diamond": {
+      "feel": [
+        "shortened rail line",
+        "pivot",
+        "release"
+      ],
+      "common_use": [
+        "compact performance designs"
+      ]
+    },
+    "square": {
+      "feel": [
+        "direct release",
+        "pivot"
+      ],
+      "common_use": [
+        "specialised or retro designs"
+      ]
+    },
+    "wide_tail": {
+      "feel": [
+        "lift",
+        "speed",
+        "stability"
+      ],
+      "warning": "can become skatey or hard to control in power"
+    },
+    "narrow_tail": {
+      "feel": [
+        "hold",
+        "control"
+      ],
+      "warning": "less lift in weak surf"
+    }
+  }
+}

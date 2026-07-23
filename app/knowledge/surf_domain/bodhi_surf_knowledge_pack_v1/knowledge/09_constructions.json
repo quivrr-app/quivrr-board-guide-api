@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "constructions": {
+    "PU_POLYESTER": {
+      "description": "Traditional polyurethane foam with polyester resin.",
+      "typical_feel": [
+        "familiar flex",
+        "damped ride",
+        "connected rail feel"
+      ],
+      "trade_offs": [
+        "generally heavier",
+        "can pressure-dent and absorb water after damage"
+      ]
+    },
+    "EPS_EPOXY": {
+      "description": "Expanded polystyrene foam with epoxy resin.",
+      "typical_feel": [
+        "lighter",
+        "livelier",
+        "more buoyant sensation"
+      ],
+      "trade_offs": [
+        "can feel corky or chattery depending on build",
+        "construction varies widely"
+      ]
+    },
+    "STRINGERLESS_COMPOSITE": {
+      "description": "Composite reinforcement replaces or supplements a traditional stringer.",
+      "typical_feel": [
+        "engineered flex",
+        "spring and response"
+      ],
+      "trade_offs": [
+        "brand-specific behaviour",
+        "cannot be inferred from marketing name alone"
+      ]
+    },
+    "WOOD_OR_BAMBOO_SKIN": {
+      "description": "Wood veneer or skin used for reinforcement and flex control.",
+      "typical_feel": [
+        "durability",
+        "spring",
+        "distinct dampening"
+      ],
+      "trade_offs": [
+        "weight and feel vary"
+      ]
+    },
+    "CARBON_REINFORCED": {
+      "description": "Carbon placed strategically for stiffness, recoil or durability.",
+      "typical_feel": [
+        "direct response",
+        "recoil",
+        "controlled flex"
+      ],
+      "trade_offs": [
+        "may feel stiff for some surfers or conditions"
+      ]
+    },
+    "SOFT_TOP": {
+      "description": "Soft deck or full soft construction designed for safety and learning.",
+      "catalogue_supported": false
+    }
+  },
+  "rules": [
+    "Do not reduce construction advice to stronger equals better.",
+    "Construction feel is model- and brand-specific.",
+    "Use official Quivrr construction data where available; general guidance is secondary."
+  ]
+}

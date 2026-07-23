@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0",
+  "ordered_decision_flow": [
+    "resolve whether request is for signed-in user, another surfer or hypothetical scenario",
+    "resolve explicit profile changes and temporary session overrides",
+    "resolve surfer stage",
+    "apply hard family and design exclusions",
+    "resolve rider dimensions, fitness, age and frequency where relevant",
+    "resolve wave type, power, size and consistency",
+    "resolve goal: wave count, progression, speed, manoeuvres, control, travel or quiver gap",
+    "choose board families",
+    "set broad dimension and volume guardrails",
+    "rank canonical models using governed Board DNA",
+    "check exact regional inventory only after suitability",
+    "offer exact canonical size search handoff"
+  ],
+  "ranking_weights": {
+    "stage_safety": 100,
+    "family_fit": 40,
+    "wave_fit": 30,
+    "goal_fit": 25,
+    "paddle_and_stability": 20,
+    "size_fit": 20,
+    "construction_preference": 8,
+    "fin_preference": 8,
+    "inventory": 5
+  },
+  "hard_rules": [
+    "hard exclusions are not weights and cannot be outweighed",
+    "availability is a tie-breaker among suitable boards, not a suitability signal",
+    "no recommendation is better than an unsafe recommendation",
+    "current-message facts override saved profile for the session",
+    "saved profile changes require explicit confirmation"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "terms": {
+    "green_wave": "an unbroken wave face rather than whitewater",
+    "trim": "maintaining an efficient line and speed along the wave",
+    "bottom_turn": "the foundational turn from the lower face back toward the pocket",
+    "cutback": "a turn back toward the breaking part of the wave",
+    "rail_line": "the effective curved edge engaged through the water",
+    "planing_area": "surface area helping the board lift and travel across the water",
+    "wide_point": "the widest part of the outline and its position relative to centre",
+    "rocker": "the board's longitudinal curve from nose to tail",
+    "concave": "inward bottom contour that influences lift and water flow",
+    "vee": "outward bottom angle helping rail-to-rail transition",
+    "glide": "ability to maintain momentum with limited active input",
+    "projection": "drive carried forward through a turn",
+    "release": "ease with which fins or tail free up and redirect",
+    "hold": "security and grip through steep or powerful sections",
+    "forgiveness": "tolerance of imperfect timing, stance or pressure",
+    "duck_dive": "submerging a board under an approaching wave",
+    "step_up": "a longer, more controlled board for larger or more powerful waves",
+    "groveller": "a compact board optimised to generate speed in weak surf"
+  }
+}

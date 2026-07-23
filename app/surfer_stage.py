@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import re
+from app.surf_domain import load_surf_domain_knowledge
 
 
 STAGE_1 = "STAGE_1_TRUE_BEGINNER"
@@ -17,10 +18,8 @@ STAGE_LABELS = {
     STAGE_4: "Intermediate", STAGE_5: "Advanced", STAGE_6: "Expert",
 }
 BEGINNER_QUESTION = "No problem. Are you still learning to stand in the whitewater, or can you already catch green waves and ride along the face?"
-PREMIUM_BEGINNER_POSITIONING = (
-    "Quivrr focuses on premium hardboards from established surfboard manufacturers—boards designed to be surfed regularly and kept in a quiver for years. "
-    "We do not currently catalogue foamies or surf-school softboards, even though one may be the safest first board."
-)
+_PACK = load_surf_domain_knowledge()
+PREMIUM_BEGINNER_POSITIONING = _PACK.premium_positioning["beginner_statement"]
 
 
 @dataclass(frozen=True)
@@ -76,7 +75,8 @@ def stage_allows_board(stage: str | None, board) -> bool:
         getattr(board, "authoritative_public_family", None), getattr(board, "detailed_category", None),
         getattr(board, "category", None), getattr(board, "skill_fit", None),
     ))
-    unsafe = ("performance shortboard", "performance daily", "step up", "semi gun", "gun", "performance fish", "technical fish", "performance twin")
+    governed_exclusions = tuple(value.lower().replace("_", " ") for value in _PACK.stage_matrix["rules"].get(stage, {}).get("excluded", ()))
+    unsafe = ("performance shortboard", "performance daily", "step up", "semi gun", "gun", "performance fish", "technical fish", "performance twin", *governed_exclusions)
     if any(token in family for token in unsafe):
         return False
     if stage == STAGE_2 and any(token in family for token in ("advanced", "expert", "competition", "high performance")):

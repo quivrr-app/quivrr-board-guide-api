@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "wave_types": {
+    "beach_break": {
+      "character": [
+        "variable peaks",
+        "shifting take-off zones",
+        "often punchy or soft"
+      ],
+      "board_needs": [
+        "adaptability",
+        "easy positioning",
+        "appropriate speed and control"
+      ]
+    },
+    "point_break": {
+      "character": [
+        "longer walls",
+        "predictable lines",
+        "flow"
+      ],
+      "board_needs": [
+        "glide",
+        "projection",
+        "rail line appropriate to wave speed"
+      ]
+    },
+    "reef_break": {
+      "character": [
+        "defined take-off",
+        "often steeper or more powerful",
+        "consequence varies"
+      ],
+      "board_needs": [
+        "hold",
+        "control",
+        "reliable entry",
+        "appropriate skill"
+      ]
+    },
+    "river_or_tidal_wave": {
+      "character": [
+        "continuous or unusual flow",
+        "specialised access and etiquette"
+      ],
+      "board_needs": [
+        "local knowledge",
+        "specialised recommendation"
+      ]
+    }
+  },
+  "power": {
+    "weak": [
+      "prioritise planing area, low drag, glide and speed generation"
+    ],
+    "average": [
+      "balanced boards and everyday versatility"
+    ],
+    "powerful": [
+      "hold, control, refined rails and appropriate rocker"
+    ]
+  },
+  "shape": {
+    "mushy": [
+      "easy speed and paddle support"
+    ],
+    "open_face": [
+      "rail line, projection and flow"
+    ],
+    "steep": [
+      "rocker, hold, compact control"
+    ],
+    "barrel": [
+      "entry confidence, hold, speed line and control"
+    ],
+    "choppy": [
+      "dampening, control and forgiving response"
+    ]
+  },
+  "size_bands": {
+    "ankle_to_knee": "very small",
+    "waist_to_chest": "small to average",
+    "head_high": "solid everyday surf",
+    "overhead": "power and consequence increase",
+    "double_overhead_plus": "specialised advanced/expert equipment and judgement"
+  }
+}

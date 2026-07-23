@@ -1,0 +1,66 @@
+{
+  "version": "1.0.0",
+  "paths": [
+    {
+      "from": "STAGE_1_TRUE_BEGINNER",
+      "to": "STAGE_2_PROGRESSING_BEGINNER",
+      "readiness": [
+        "stands consistently",
+        "catches some green waves",
+        "begins angling take-offs",
+        "can trim along the face"
+      ],
+      "equipment_direction": [
+        "softboard",
+        "large mini-mal",
+        "stable longboard"
+      ]
+    },
+    {
+      "from": "STAGE_2_PROGRESSING_BEGINNER",
+      "to": "STAGE_3_EARLY_INTERMEDIATE",
+      "readiness": [
+        "catches green waves independently",
+        "rides both directions",
+        "basic turns",
+        "independent positioning"
+      ],
+      "equipment_direction": [
+        "forgiving mid-length",
+        "funboard",
+        "large stable hybrid"
+      ]
+    },
+    {
+      "from": "STAGE_3_EARLY_INTERMEDIATE",
+      "to": "STAGE_4_INTERMEDIATE",
+      "readiness": [
+        "generates speed",
+        "bottom turns with control",
+        "basic cutbacks",
+        "handles varied take-offs"
+      ],
+      "equipment_direction": [
+        "forgiving daily driver",
+        "hybrid",
+        "fish",
+        "groveller"
+      ]
+    },
+    {
+      "from": "STAGE_4_INTERMEDIATE",
+      "to": "STAGE_5_ADVANCED",
+      "readiness": [
+        "consistent rail control",
+        "manoeuvre intent",
+        "comfort in stronger waves",
+        "understands equipment trade-offs"
+      ],
+      "equipment_direction": [
+        "performance daily driver",
+        "performance shortboard",
+        "specialised quiver"
+      ]
+    }
+  ]
+}
