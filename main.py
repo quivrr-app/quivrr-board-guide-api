@@ -19,6 +19,7 @@ from app.azure_openai_client import (
 )
 from app.authenticated_profile import load_authenticated_profile_context
 from app.board_intelligence import find_board_record
+from app.board_resolver import resolve_board
 from app.manufacturer_intelligence import (
     canonical_manufacturer_name,
     compare_staged_models,
@@ -43,6 +44,10 @@ from app.active_topic import resolve_active_topic
 from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
 from app.intent_router import classify_intent, route_intent
 from app.conversation_controller import ConversationDirective, control_conversation
+from app.conversation_policy import (
+    FOLLOW_UP_CORRECTION, classify_language_tone, follow_up_kind, is_performance_fish_request,
+    prompt_disclosure_reply, recovery_opening, response_signature,
+)
 from app.board_expert_matrix import recommend_from_matrix
 from app.board_master import find_master_board
 from app.family_intent import FamilyIntent, PUBLIC_FAMILY_LABELS, correction_acknowledgement, resolve_family_intent
@@ -52,7 +57,7 @@ from app.board_relationship_graph import (
 )
 from app.model_recommendation_engine import build_recommendation_context, recommend_models
 from app.inventory_client import available_manufacturer_models, enrich_suggestions_with_inventory, locate_exact_board
-from app.models import BoardComparison, BoardGuideRequest, BoardGuideResponse, BoardReference, BodhiRecommendation, ConversationState, FollowUpAction, SuggestedBoard
+from app.models import BoardComparison, BoardGuideRequest, BoardGuideResponse, BoardReference, BodhiRecommendation, ConversationState, FollowUpAction, ProfileUpdateProposal, SuggestedBoard
 from app.profile_engine import (
     build_recommendation,
     extract_profile,
@@ -346,6 +351,16 @@ def _verified_in_stock(boards):
     ]
 
 
+def _unique_boards(boards):
+    output, seen = [], set()
+    for board in boards:
+        key = (board.brand.lower(), board.model.lower())
+        if key not in seen:
+            seen.add(key)
+            output.append(board)
+    return output
+
+
 def _shortlist_family_buckets(category: str | None, profile, message: str) -> tuple[set[str], set[str]]:
     lowered = (message or "").lower()
     if category == "traditional_fish":
@@ -457,7 +472,118 @@ def _family_education_reply(message: str) -> str | None:
     return f"Quivrr classifies the {master['manufacturer']} {master['model']} as {family}, specifically {detail}, based on {intent}."
 
 
-def _stock_only_reply(label: str, region: str | None, boards, candidate_count: int | None = None) -> str:
+def _board_information_reply(board: dict, profile) -> str:
+    """Present only governed intelligence for a resolved model; never defer to generic chat."""
+    record = find_board_record(board["brand"], board["model"])
+    master = find_master_board(board["brand"], board["model"]) or {}
+    brand, model = board["brand"], board["model"]
+    category = master.get("detailed_category") or (record.category if record else None) or "surfboard"
+    parts = [f"{brand} {model} is a {category.replace('_', ' ')}."]
+    if record and record.description:
+        parts.append(record.description.rstrip(".") + ".")
+    if record and record.ability_tags:
+        parts.append(f"It is documented for {', '.join(record.ability_tags)} surfers.")
+    if record and record.wave_types:
+        parts.append(f"Its supported wave direction is {', '.join(record.wave_types)}.")
+    if record and record.strengths:
+        parts.append(f"Strengths: {', '.join(record.strengths)}.")
+    if record and record.trade_offs:
+        parts.append(f"Trade-offs: {', '.join(record.trade_offs)}.")
+    dna = master.get("board_dna") or {}
+    behaviour = dna.get("behaviour") or {}
+    conditions = dna.get("conditions") or {}
+    def character(field: str) -> str | None:
+        value = behaviour.get(field)
+        if not isinstance(value, (int, float)):
+            return None
+        return "high" if value >= 8 else "balanced" if value >= 5 else "limited"
+    attributes = [
+        ("paddle", "paddle character"), ("wave_entry", "wave entry"),
+        ("speed_generation", "speed generation"), ("turning_radius", "turning radius"),
+        ("hold", "hold"), ("forgiveness", "forgiveness"),
+    ]
+    documented = [f"{label}: {character(field)}" for field, label in attributes if character(field)]
+    if documented:
+        parts.append("Governed design signals — " + "; ".join(documented) + ".")
+    wave_fit = [label for field, label in (("weak_waves", "weak surf"), ("average_waves", "average surf"), ("powerful_waves", "powerful surf")) if conditions.get(field, 0) >= 7]
+    if wave_fit:
+        parts.append(f"Its stronger documented wave fit is {', '.join(wave_fit)}.")
+    if profile.ability and record and record.ability_tags:
+        ability = profile.ability.lower()
+        if ability not in {item.lower() for item in record.ability_tags}:
+            parts.append(f"Based on your saved {profile.ability.lower()} profile, I would be cautious: it is not documented as an ideal fit for that ability.")
+        else:
+            parts.append(f"At your {profile.ability.lower()} level, it is a relevant board to consider; I would still need your weight and normal waves for a reliable size call.")
+    if profile.current_volume_litres or profile.target_volume_litres:
+        volume = profile.current_volume_litres or profile.target_volume_litres
+        parts.append(f"Your current {volume:g}L reference is useful context, but it is not enough on its own to prescribe an exact size.")
+    if profile.region:
+        parts.append(f"I have not checked live {profile.region} stock for this model; ask and I’ll run a regional availability check.")
+    return " ".join(parts)
+
+
+def _resolved_board_suggestion(board: dict) -> SuggestedBoard:
+    record = find_board_record(board["brand"], board["model"])
+    master = find_master_board(board["brand"], board["model"]) or {}
+    return SuggestedBoard(
+        brand=board["brand"], model=board["model"],
+        category=master.get("detailed_category") or (record.category if record else None) or "Surfboard",
+        confidence=record.source_confidence if record else .75,
+        why_it_fits="The board you asked about.",
+        description=record.description if record else None,
+        short_description=record.short_description if record else None,
+        skill_fit=", ".join(record.ability_tags) if record and record.ability_tags else None,
+        wave_range=", ".join(record.wave_types) if record and record.wave_types else None,
+        board_model_id=board.get("boardModelId"),
+        authoritative_public_family=master.get("public_family"),
+        detailed_category=master.get("detailed_category"),
+        primary_fin_setup=master.get("primary_fin_setup"),
+        source="quivrr_controlled_knowledge",
+    )
+
+
+_PROFILE_UPDATE_FIELDS = {
+    "weight_kg": ("weightKg", "weight"),
+    "ability": ("ability", "ability"),
+    "region": ("homeRegion", "home region"),
+    "home_break_type": ("homeBreak", "home break"),
+    "current_board": ("currentBoard", "regular board"),
+    "current_volume_litres": ("currentVolumeLitres", "usual volume"),
+}
+_PROFILE_CONFIRMATION = re.compile(r"^\s*(?:yes|yep|yeah|update it|that is right|that's right|please change it)\s*[!.]*\s*$", re.I)
+
+
+def _persistent_profile_statement(message: str) -> bool:
+    text = (message or "").lower()
+    if re.search(r"\b(?:this week|today|borrowed|friend'?s|trip|holiday|for portugal)\b", text):
+        return False
+    return bool(re.search(r"\b(?:now|moved|mostly surf|regular board|usual board|from now on|these days)\b", text))
+
+
+def _profile_update_proposal(account_profile, current_profile, message: str) -> ProfileUpdateProposal | None:
+    if not account_profile or not _persistent_profile_statement(message):
+        return None
+    fields, current_values, labels = {}, {}, []
+    for profile_field, (api_field, label) in _PROFILE_UPDATE_FIELDS.items():
+        if current_profile.field_provenance.get(profile_field) != "current_user":
+            continue
+        incoming = getattr(current_profile, profile_field, None)
+        existing = getattr(account_profile, profile_field, None)
+        if incoming in (None, "", [], {}) or incoming == existing:
+            continue
+        fields[api_field] = incoming
+        current_values[api_field] = existing
+        labels.append(label)
+    if not fields:
+        return None
+    return ProfileUpdateProposal(
+        fields=fields,
+        currentValues=current_values,
+        message=f"I’ll use that change in this chat. Would you like me to update your saved My Quivrr {' and '.join(labels)} too?",
+    )
+
+
+def _stock_only_reply(label: str, region: str | None, boards, candidate_count: int | None = None, checked=None) -> str:
     region_name = _region_display_name(region)
     model_count = len(boards)
     volumes = [board.selected_volume_litres for board in boards if board.selected_volume_litres is not None]
@@ -471,10 +597,11 @@ def _stock_only_reply(label: str, region: str | None, boards, candidate_count: i
         return f"I found one suitable {label} with verified stock in {region_name}{size_note}."
     if model_count > 1:
         return f"I found {model_count} {label} models with verified stock in {region_name}{volume_note} that fit this brief."
-    prefix = f"I couldn’t verify live {region_name} stock for that {label} brief right now."
+    if checked and not any(board.availability_checked for board in checked):
+        return f"I couldn’t verify {region_name} stock because the live inventory check did not return a usable response."
     if candidate_count:
-        return prefix + " I can widen the board type slightly, include catalogue options without confirmed stock, or search a different region."
-    return prefix + " I can widen the board type slightly, include catalogue options without confirmed stock, or search a different region."
+        return f"I found matching {label} models, but none had verified {region_name} stock at this size or volume. I widened the board family before stopping."
+    return f"I didn’t find an exact governed {label} match, so I widened the search rather than treating that as an inventory failure."
 
 
 def _region_display_name(value: str | None) -> str:
@@ -885,6 +1012,10 @@ def build_conversation_state(
     directive: ConversationDirective | None = None,
     authenticated: bool = False,
     family_intent: FamilyIntent | None = None,
+    previous_outcome: str | None = None,
+    previous_failure_reason: str | None = None,
+    previous_reply_signature: str | None = None,
+    pending_profile_update: dict | None = None,
 ) -> ConversationState:
     active_region = profile.region or request.region
     last_question = questions[0] if questions else None
@@ -980,6 +1111,16 @@ def build_conversation_state(
             for item in last_recommendations[:6]
         ],
         correctionDetected=bool(family_intent and family_intent.correction),
+        previousOutcome=previous_outcome,
+        previousSearchConstraints={
+            "region": active_region,
+            "category": family_intent.requested_public_family if family_intent else active_board_brief.get("public_family"),
+            "stockOnly": availability_constraint == STOCK_ONLY_CONSTRAINT,
+            "targetVolumeLitres": profile.target_volume_litres,
+        },
+        previousFailureReason=previous_failure_reason,
+        previousReplySignature=previous_reply_signature,
+        pendingProfileUpdate=pending_profile_update,
     )
 
 
@@ -1169,6 +1310,11 @@ def board_guide_chat(
     )
     auth_context = load_authenticated_profile_context(authorization, correlation_id=correlation_id)
     intent_result = classify_intent(request.message)
+    language_tone = classify_language_tone(request.message)
+    recovery_kind = follow_up_kind(
+        request.message,
+        request.conversation_state.previous_outcome if request.conversation_state else None,
+    )
     if request_attempt > 1:
         emit_event(
             "bodhi_request_retry",
@@ -1228,6 +1374,16 @@ def board_guide_chat(
         current_profile,
         account_profile=account_profile if preserve_prior_rider else None,
     )
+    profile_update_proposal = _profile_update_proposal(account_profile, current_profile, request.message)
+    pending_profile_update = profile_update_proposal.model_dump(by_alias=True) if profile_update_proposal else (
+        request.conversation_state.pending_profile_update if request.conversation_state else None
+    )
+    profile_update_confirmation_requested = bool(
+        pending_profile_update and _PROFILE_CONFIRMATION.fullmatch(request.message or "")
+    )
+    if profile_update_confirmation_requested:
+        profile_update_proposal = ProfileUpdateProposal.model_validate(pending_profile_update)
+        pending_profile_update = None
     reset_requested = directive.clears_rider_brief
     if family_intent.requested_public_family:
         preferred_type = family_intent.requested_detailed_category or PUBLIC_FAMILY_LABELS[family_intent.requested_public_family]
@@ -1254,6 +1410,10 @@ def board_guide_chat(
     missing = missing_profile_fields(profile)
     legacy_intent = intent_result.legacy_intent
     intent = intent_result.intent
+    if recovery_kind:
+        # A failed stock search is recoverable context, not a new generic question.
+        legacy_intent = "board_search_request"
+        intent = "BOARD_RECOMMENDATION"
     if reset_requested and family_intent.explicit and directive.target_surfer == "account_holder":
         legacy_intent = "board_search_request"
         intent = "BOARD_RECOMMENDATION"
@@ -1262,6 +1422,8 @@ def board_guide_chat(
         intent = "BOARD_RECOMMENDATION"
     stock_constraint_removed = _message_removes_stock_constraint(request.message)
     availability_constraint = _resolve_availability_constraint(request, intent_result)
+    if recovery_kind and request.conversation_state and request.conversation_state.previous_search_constraints.get("stockOnly"):
+        availability_constraint = STOCK_ONLY_CONSTRAINT
     if reset_requested:
         availability_constraint = None
     if (
@@ -1333,7 +1495,78 @@ def board_guide_chat(
     volume_recommendation = build_volume_recommendation(profile, _recommendation_lane(category, profile))
     questions = intake_questions(profile)
     guidance = volume_guidance(profile)
-    requested_board = find_requested_board(request.message)
+    context_board = None
+    if request.conversation_state and len(request.conversation_state.last_presented_models) == 1:
+        card = request.conversation_state.last_presented_models[0]
+        context_board = (card.brand, card.model)
+    # A pronoun can safely refer to the last single board. An explicit-looking
+    # unknown model (for example M23) must never be silently replaced by it.
+    message_lower = request.message.lower()
+    uses_board_pronoun = bool(re.search(r"\b(?:it|that|this|one)\b", message_lower))
+    # Deliberately narrow this guard to an uppercase model-style token. Numeric
+    # rider inputs such as 75kg, 28L and 175cm must retain their normal route.
+    names_unknown_model = bool(re.search(r"\b[A-Z]{1,8}\d{1,4}\b", request.message))
+    board_resolution = resolve_board(
+        request.message,
+        context_board=context_board if uses_board_pronoun and not names_unknown_model else None,
+    )
+    requested_board = (
+        {"brand": board_resolution.brand, "model": board_resolution.model, "boardModelId": board_resolution.canonical_model_id}
+        if board_resolution.status == "resolved" else find_requested_board(request.message)
+    )
+    if board_resolution.status == "resolved":
+        match_event = (
+            "exact_match" if board_resolution.match_type.startswith("exact")
+            else "alias_match" if board_resolution.match_type == "alias_match"
+            else "fuzzy_match" if board_resolution.match_type == "fuzzy_model"
+            else board_resolution.match_type
+        )
+        emit_event(
+            "board_intent_detected", "bodhi_api", status="success",
+            resolution=match_event, brand=board_resolution.brand,
+            canonical_model_id=board_resolution.canonical_model_id,
+            confidence=board_resolution.confidence, region=profile.region or request.region,
+            correlation_id=correlation_id,
+        )
+        emit_event(
+            f"board_resolution_{board_resolution.match_type}", "bodhi_api", status="success",
+            brand=board_resolution.brand, canonical_model_id=board_resolution.canonical_model_id,
+            confidence=board_resolution.confidence, region=profile.region or request.region,
+            correlation_id=correlation_id,
+        )
+    elif board_resolution.status == "ambiguous":
+        emit_event("board_intent_detected", "bodhi_api", status="success", resolution="ambiguous_match",
+                   region=profile.region or request.region, correlation_id=correlation_id)
+        emit_event("board_resolution_ambiguous", "bodhi_api", status="success", region=profile.region or request.region,
+                   correlation_id=correlation_id)
+    if board_resolution.status == "resolved" and legacy_intent in {"surfer_fit_request", "greeting_request"}:
+        legacy_intent = "general_board_question"
+        intent = "BOARD_DETAILS"
+    if (
+        legacy_intent == "comparison_request"
+        and len(active_topic.boards) < 2
+        and context_board
+        and requested_board
+        and (requested_board["brand"], requested_board["model"]) != context_board
+    ):
+        # “Compare it with X” is a valid two-board request when the immediately
+        # preceding controlled board detail supplied the pronoun reference.
+        active_topic.kind = "comparison"
+        active_topic.boards = [
+            {"brand": context_board[0], "model": context_board[1]},
+            requested_board,
+        ]
+        active_topic.is_follow_up = True
+    if (
+        board_resolution.status == "resolved"
+        and board_resolution.match_type == "conversation_context"
+        and re.search(r"\b(?:would it suit me|how .*feel|paddle(?: more| better| easily)?)\b", message_lower)
+    ):
+        legacy_intent = "general_board_question"
+        intent = "BOARD_DETAILS"
+    if names_unknown_model and board_resolution.status == "not_found" and not requested_board:
+        legacy_intent = "general_board_question"
+        intent = "BOARD_DETAILS"
     classification_correction = _model_classification_correction(request.message)
     if classification_correction:
         correction_dna = classification_correction["dna"]
@@ -1370,6 +1603,7 @@ def board_guide_chat(
     )
     comparison = None
     comparison_boards_override = None
+    force_controlled_reply = False
     is_first_turn = not any(item.role == "assistant" for item in request.conversation if item)
     state_follow_up = _handle_state_follow_up(request, profile, directive)
     education_reply = _family_education_reply(request.message)
@@ -1453,7 +1687,11 @@ def board_guide_chat(
         questions = []
     elif intent == "PROMPT_INJECTION":
         suggested_boards = []
-        reply = "I can’t reveal or bypass Quivrr’s internal instructions. I can still help you choose a board, compare models or check verified regional stock."
+        reply = prompt_disclosure_reply()
+        questions = []
+    elif language_tone.level == "threatening":
+        suggested_boards = []
+        reply = "I can help with the board search, but I can’t help with threats or harm. If someone may be in immediate danger, contact local emergency services now."
         questions = []
     elif intent in {"OFF_TOPIC", "ABUSIVE"}:
         suggested_boards = []
@@ -1614,6 +1852,24 @@ def board_guide_chat(
         suggested_boards = []
         reply = board_family_reply(requested_board, "fish")
         questions = []
+    elif legacy_intent == "general_board_question" and requested_board:
+        suggested_boards = [_resolved_board_suggestion(requested_board)]
+        reply = _board_information_reply(requested_board, profile)
+        questions = []
+        force_controlled_reply = True
+    elif board_resolution.status == "ambiguous":
+        suggested_boards = []
+        options = [f"{brand} {model}" for brand, model in board_resolution.alternatives]
+        reply = "I found a board name that needs a little more detail. " + (
+            f"Did you mean {', '.join(options)}?" if options else "Which brand and model did you mean?"
+        )
+        questions = ["Which brand and model did you mean?"]
+        force_controlled_reply = True
+    elif legacy_intent == "general_board_question" and re.search(r"\b(?:tell me about|what is|would|is an?)\b", request.message.lower()):
+        suggested_boards = []
+        reply = "I can’t resolve that to a current canonical board model yet. Please share the manufacturer and exact model name so I don’t guess."
+        questions = ["Which manufacturer and model did you mean?"]
+        force_controlled_reply = True
     elif legacy_intent == "general_board_question":
         suggested_boards = []
         reply = general_board_reply(request.message)
@@ -1757,7 +2013,7 @@ def board_guide_chat(
         suggested_boards = []
         reply = inventory_snapshot_reply(profile.region, category)
         questions = []
-    elif category == "fish" and legacy_intent in {"board_search_request", "surfer_fit_request"}:
+    elif category in {"fish", "performance_fish"} and legacy_intent in {"board_search_request", "surfer_fit_request"}:
         recommendation_path = "fish_family_request"
         ranking_profile = _category_ranking_profile(profile, request.message, category)
         canonical_boards = recommend_from_matrix(ranking_profile, limit=12, family_intent=family_intent)
@@ -1791,7 +2047,24 @@ def board_guide_chat(
             checked = enrich_suggestions_with_inventory(canonical_boards, ranking_profile)
             inventory_stage = "post_ranking"
             suggested_boards = _filter_volume_compatible(_enforce_shortlist_coherence(_verified_in_stock(checked), category, ranking_profile, request.message, family_intent=family_intent))
-            reply = _stock_only_reply("fish", profile.region, suggested_boards, candidate_count=len(canonical_boards))
+            performance_request = category == "performance_fish" or is_performance_fish_request(request.message)
+            if not suggested_boards and performance_request:
+                # "Pro fish" is an intent-level design brief, not a public catalogue family.
+                expanded_profile = ranking_profile.model_copy(update={"preferred_board_type": "Fish"})
+                expanded_candidates = recommend_from_matrix(expanded_profile, limit=16)
+                expanded_candidates = _unique_boards([*canonical_boards, *expanded_candidates])
+                expanded_checked = enrich_suggestions_with_inventory(expanded_candidates, expanded_profile)
+                suggested_boards = _filter_volume_compatible(_verified_in_stock(expanded_checked))
+                checked = expanded_checked
+                candidate_count_before_inventory = len(expanded_candidates)
+                recommendation_path = "performance_fish_expanded_stock_search"
+                candidate_source = "matrix_progressive_widening"
+            reply = _stock_only_reply(
+                "performance fish and hybrid", profile.region, suggested_boards,
+                candidate_count=len(canonical_boards), checked=checked,
+            )
+            if performance_request and suggested_boards:
+                reply = "I widened “pro fish” to performance-oriented fish and hybrid shapes. " + reply
             questions = []
         else:
             suggested_boards = canonical_boards[:3]
@@ -2107,9 +2380,38 @@ def board_guide_chat(
         reply = personalise_opening(reply, profile, is_first_turn=True)
     final_reply = (
         reply
-        if availability_constraint == STOCK_ONLY_CONSTRAINT or family_intent.correction
+        if availability_constraint == STOCK_ONLY_CONSTRAINT or family_intent.correction or force_controlled_reply
         else (llm_reply or reply)
     )
+    if profile_update_proposal and not profile_update_confirmation_requested:
+        final_reply = final_reply.rstrip() + " " + profile_update_proposal.message
+    elif profile_update_confirmation_requested:
+        final_reply = final_reply.rstrip() + " I’ll update your saved My Quivrr profile now."
+    previous_outcome = None
+    previous_failure_reason = None
+    if availability_constraint == STOCK_ONLY_CONSTRAINT and inventory_stage != "not_run":
+        if suggested_boards and any(board.available_count > 0 for board in suggested_boards):
+            previous_outcome = "SUCCESS_WITH_RESULTS"
+        elif candidate_count_before_inventory:
+            previous_outcome = "SUCCESS_NO_EXPANDED_MATCH"
+            previous_failure_reason = "matching models had no verified regional stock"
+        else:
+            previous_outcome = "SUCCESS_NO_EXACT_MATCH"
+            previous_failure_reason = "no exact governed category match"
+    if recovery_kind and availability_constraint == STOCK_ONLY_CONSTRAINT:
+        final_reply = recovery_opening(recovery_kind, language_tone) + " " + final_reply
+    if language_tone.level in {"frustrated", "abusive"} and availability_constraint == STOCK_ONLY_CONSTRAINT and not recovery_kind:
+        final_reply = recovery_opening(None, language_tone) + " " + final_reply
+    reply_signature = response_signature(final_reply, previous_outcome or "OTHER")
+    if (
+        previous_outcome and request.conversation_state
+        and request.conversation_state.previous_reply_signature == reply_signature
+    ):
+        final_reply = (
+            "I’m changing the search rather than repeating that result. "
+            "I’ll include performance-oriented fish and hybrid shapes with verified regional stock."
+        )
+        reply_signature = response_signature(final_reply, "RECOVERY")
     public_cards = public_recommendations(suggested_boards)
     _set_debug_headers(response, recommendation_path=recommendation_path, ranking_engine=ranking_engine_used)
     conversation_state = build_conversation_state(
@@ -2123,6 +2425,10 @@ def board_guide_chat(
         directive=directive,
         authenticated=auth_context.authenticated,
         family_intent=family_intent,
+        previous_outcome=previous_outcome,
+        previous_failure_reason=previous_failure_reason,
+        previous_reply_signature=reply_signature,
+        pending_profile_update=pending_profile_update,
     )
     follow_up_actions = build_follow_up_actions(intent, public_cards)
     response = BoardGuideResponse(
@@ -2148,6 +2454,8 @@ def board_guide_chat(
         conversationState=conversation_state,
         profileCompleteness=profile_completeness(profile),
         profileConflicts=profile.profile_conflicts,
+        profileUpdateProposal=profile_update_proposal,
+        profileUpdateConfirmationRequested=profile_update_confirmation_requested,
         volumeRecommendation=volume_recommendation,
         category=category_resolution.category,
         categoryConfidence=category_resolution.confidence,

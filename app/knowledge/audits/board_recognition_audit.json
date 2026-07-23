@@ -1,0 +1,66 @@
+{
+  "auditVersion": "bodhi_board_recognition_v1",
+  "canonicalModels": 431,
+  "testCases": 1456,
+  "resolved": 1453,
+  "recognitionRatePercent": 99.79,
+  "exactSupportedBrandAndModelRatePercent": 100.0,
+  "normalisedBrandAndModelRatePercent": 100.0,
+  "brandAliasRatePercent": 100.0,
+  "explicitBrandAndModelForms": 862,
+  "brandAliasForms": 163,
+  "matchTypes": {
+    "exact_brand_and_model": 1042,
+    "exact_model": 411
+  },
+  "clarificationRequiredRequests": [
+    {
+      "input": "What is Fish like",
+      "expected": "christenson::fish",
+      "status": "ambiguous",
+      "resolved": null,
+      "alternatives": [
+        [
+          "Christenson",
+          "Fish"
+        ]
+      ],
+      "formKind": "model_only",
+      "classification": "genuine_ambiguity"
+    },
+    {
+      "input": "What is The Twin like",
+      "expected": "dhd::the-twin",
+      "status": "ambiguous",
+      "resolved": null,
+      "alternatives": [
+        [
+          "Channel Islands",
+          "twin-fin"
+        ],
+        [
+          "Channel Islands",
+          "twin-pin"
+        ]
+      ],
+      "formKind": "model_only",
+      "classification": "genuine_ambiguity"
+    },
+    {
+      "input": "What is What like",
+      "expected": "rusty::what",
+      "status": "ambiguous",
+      "resolved": null,
+      "alternatives": [
+        [
+          "Rusty",
+          "What"
+        ]
+      ],
+      "formKind": "model_only",
+      "classification": "genuine_ambiguity"
+    }
+  ],
+  "unresolvedRequests": [],
+  "incorrectResolutions": []
+}

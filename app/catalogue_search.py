@@ -36,7 +36,6 @@ VERIFIED_INVENTORY_SNAPSHOT = {
     "EU": {"retailer": 9132, "manufacturer": 2735},
     "ID": {"retailer": 3996, "manufacturer": 184},
 }
-VERIFIED_INVENTORY_SNAPSHOT_DATE = "20 June 2026"
 
 
 def extract_category(message: str, preferred: str | None = None) -> str | None:
@@ -130,8 +129,7 @@ def inventory_snapshot_reply(region: str, category: str | None = None) -> str:
     total = counts["retailer"] + counts["manufacturer"]
     name = {"AU": "Australia", "EU": "Europe", "ID": "Indonesia"}[code]
     return (
-        f"My inventory snapshot verified on {VERIFIED_INVENTORY_SNAPSHOT_DATE} contains roughly {total:,} "
-        f"live board listings in {name}: "
+        f"Quivrr currently has approximately {total:,} listings in the latest verified inventory data for {name}: "
         f"{counts['retailer']:,} retailer listings and {counts['manufacturer']:,} manufacturer-direct listings. "
         "Those totals move as feeds refresh. Give me a board type, litres, brand, or model and I’ll check live matching stock."
     )

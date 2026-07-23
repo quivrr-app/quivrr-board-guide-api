@@ -1,0 +1,70 @@
+{
+  "auditVersion": "bodhi_model_universe_v1",
+  "currentCanonicalModelCount": 431,
+  "activeModelCount": 431,
+  "excludedModelCount": 0,
+  "exclusionCategories": {},
+  "sources": {
+    "governedMasterMatrix": {
+      "rows": 431,
+      "uniqueCanonicalModelIds": 431
+    },
+    "taxonomy": {
+      "rows": 431,
+      "uniqueCanonicalModelIds": 431
+    },
+    "boardDna": {
+      "rows": 431,
+      "uniqueCanonicalModelIds": 431
+    },
+    "canonicalProfiles": {
+      "rows": 575,
+      "uniqueCanonicalModelIds": 431,
+      "legacyNameVariants": 520
+    },
+    "generatedIntelligence": {
+      "rows": 573,
+      "uniqueCanonicalModelIds": 425
+    },
+    "relationshipGraph": {
+      "rows": 518,
+      "uniqueCanonicalModelIds": 431
+    }
+  },
+  "recognitionAuditModelCount": 431,
+  "missingProfileCount": 0,
+  "missingGeneratedIntelligenceCount": 6,
+  "missingGeneratedIntelligenceModels": [
+    {
+      "canonicalModelId": 8134,
+      "brand": "Christenson",
+      "model": "Acid Phish"
+    },
+    {
+      "canonicalModelId": 8135,
+      "brand": "Christenson",
+      "model": "Cafe Racer"
+    },
+    {
+      "canonicalModelId": 8138,
+      "brand": "Christenson",
+      "model": "Fish"
+    },
+    {
+      "canonicalModelId": 8139,
+      "brand": "Christenson",
+      "model": "Flat Tracker V2"
+    },
+    {
+      "canonicalModelId": 8141,
+      "brand": "Christenson",
+      "model": "Lane Splitter Swallow"
+    },
+    {
+      "canonicalModelId": 8142,
+      "brand": "Christenson",
+      "model": "Long Phish II"
+    }
+  ],
+  "reconciliation": "The 513/518 legacy figures count generated name or construction variants. Runtime authority is the 431-ID governed master matrix; no canonical IDs are omitted from profiles, taxonomy, DNA, or the relationship graph."
+}

@@ -1,0 +1,281 @@
+{
+  "auditVersion": "bodhi_governed_intelligence_v1",
+  "canonicalModelCount": 431,
+  "structuredUsableCount": 411,
+  "structuredUsableCoveragePercent": 95.36,
+  "weakIntelligenceCount": 20,
+  "weakIntelligencePercent": 4.64,
+  "sourceTypeFieldCounts": {
+    "curated": 862,
+    "generated_from_canonical_evidence": 2155,
+    "source_backed": 431
+  },
+  "missingStructuredFieldCount": 0,
+  "weakModels": [
+    {
+      "canonicalModelId": 8093,
+      "brand": "Chilli",
+      "model": "Blueprint Grom",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8136,
+      "brand": "Christenson",
+      "model": "Carrera",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8137,
+      "brand": "Christenson",
+      "model": "Easy Wind",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8139,
+      "brand": "Christenson",
+      "model": "Flat Tracker V2",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8140,
+      "brand": "Christenson",
+      "model": "Lane Splitter",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8142,
+      "brand": "Christenson",
+      "model": "Long Phish II",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8143,
+      "brand": "Christenson",
+      "model": "OP2",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8144,
+      "brand": "Christenson",
+      "model": "OP3",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8145,
+      "brand": "Christenson",
+      "model": "OP4",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8146,
+      "brand": "Christenson",
+      "model": "Osprey",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8148,
+      "brand": "Christenson",
+      "model": "The Wolverine",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 3714,
+      "brand": "DMS Surfboards",
+      "model": "Stilnox",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 7855,
+      "brand": "Lost",
+      "model": "Mini Driver (Re Issue)",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 7899,
+      "brand": "Lost",
+      "model": "The Ripper Squash",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8071,
+      "brand": "Simon Anderson",
+      "model": "Alley Grom",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8084,
+      "brand": "Simon Anderson",
+      "model": "DSC & DSC VEE",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8073,
+      "brand": "Simon Anderson",
+      "model": "DTS",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8078,
+      "brand": "Simon Anderson",
+      "model": "Spudnick",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8082,
+      "brand": "Simon Anderson",
+      "model": "T&T",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    },
+    {
+      "canonicalModelId": 8081,
+      "brand": "Simon Anderson",
+      "model": "Three Peat",
+      "missingFields": [],
+      "confidence": "low",
+      "reviewRequired": true
+    }
+  ],
+  "brandGaps": [
+    {
+      "brand": "Album",
+      "models": 19,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "Channel Islands",
+      "models": 34,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "Chemistry Surfboards",
+      "models": 2,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "Chilli",
+      "models": 24,
+      "weak": 1,
+      "gaps": 0
+    },
+    {
+      "brand": "Christenson",
+      "models": 14,
+      "weak": 10,
+      "gaps": 0
+    },
+    {
+      "brand": "DHD",
+      "models": 23,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "DMS Surfboards",
+      "models": 8,
+      "weak": 1,
+      "gaps": 0
+    },
+    {
+      "brand": "Firewire",
+      "models": 29,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "Haydenshapes",
+      "models": 13,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "JS Industries",
+      "models": 30,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "Lost",
+      "models": 79,
+      "weak": 2,
+      "gaps": 0
+    },
+    {
+      "brand": "Misfit Shapes",
+      "models": 12,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "Pukas",
+      "models": 13,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "Pyzel",
+      "models": 41,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "Rusty",
+      "models": 49,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "Sharp Eye",
+      "models": 20,
+      "weak": 0,
+      "gaps": 0
+    },
+    {
+      "brand": "Simon Anderson",
+      "models": 21,
+      "weak": 6,
+      "gaps": 0
+    }
+  ],
+  "definition": "Weak means a required controlled field is missing, confidence is low, or editorial review is required. Medium and high records retain source-backed or generated-from-canonical-evidence labels; no generic prose is counted as strong intelligence."
+}

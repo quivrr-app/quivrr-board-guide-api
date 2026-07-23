@@ -17,7 +17,7 @@ PUBLIC_FAMILY_LABELS = {
 
 FAMILY_PATTERNS: tuple[tuple[str, str | None, tuple[str, ...]], ...] = (
     ("fish", "Performance Fish", (
-        r"\b(?:high\s+)?perform\w*\s+fish\b", r"\bmodern\s+fish\b",
+        r"\bpro\s+fish\b", r"\b(?:high\s+)?perform\w*\s+fish\b", r"\bmodern\s+fish\b",
     )),
     ("fish", "Traditional Fish", (
         r"\btraditional\s+fish\b", r"\bretro\s+fish\b", r"\bclassic\s+fish\b",

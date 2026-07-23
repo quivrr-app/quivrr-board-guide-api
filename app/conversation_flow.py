@@ -12,6 +12,7 @@ from app.daily_driver_taxonomy import daily_driver_lane
 from app.board_expert_matrix import find_matrix_board
 from app.board_taxonomy import find_taxonomy
 from app.board_master import find_master_board
+from app.board_resolver import resolve_board
 from app.volume_engine_v2 import build_target_volume_context, fish_volume_bands, recommend_volume_v2
 
 
@@ -362,30 +363,14 @@ def find_requested_board(message: str) -> dict | None:
     text = board_key("", message)[1]
     if not text or any(phrase in text for phrase in ["i ride", "im riding", "my current board", "currently ride"]):
         return None
-    shorthand = {
-        "hypto": ("Haydenshapes", "Hypto Krypto"),
-        "rnf": ("Lost", "RNF 96"),
-        "seaside": ("Firewire", "Seaside"),
+    resolved = resolve_board(message)
+    if resolved.status != "resolved":
+        return None
+    return find_board(load_graph(), resolved.brand, resolved.model) or {
+        "brand": resolved.brand,
+        "model": resolved.model,
+        "boardModelId": resolved.canonical_model_id,
     }
-    for alias, (brand, model) in shorthand.items():
-        if alias in text.split():
-            board = find_board(load_graph(), brand, model)
-            if board:
-                return board
-    matches = []
-    for board in load_graph().get("boards", []):
-        brand_key, model_key = board_key(board.get("brand"), board.get("model"))
-        model_present = f" {model_key} " in f" {text} "
-        brand_aliases = {
-            "js industries": ["js"], "channel islands": ["ci"],
-            "chemistry surfboards": ["chemistry"], "dms surfboards": ["dms"],
-        }
-        brand_present = f" {brand_key} " in f" {text} " or any(
-            f" {alias} " in f" {text} " for alias in brand_aliases.get(brand_key, [])
-        )
-        if model_key and model_present and (brand_present or len(model_key.split()) >= 2):
-            matches.append((len(model_key), board))
-    return max(matches, key=lambda item: item[0])[1] if matches else None
 
 
 def suggestions_for_board(board: dict, relations: list[str] | None = None) -> list[SuggestedBoard]:
@@ -401,6 +386,19 @@ def suggestions_for_board(board: dict, relations: list[str] | None = None) -> li
         if not candidate or board_key(candidate["brand"], candidate["model"]) in seen:
             continue
         seen.add(board_key(candidate["brand"], candidate["model"]))
+        if "taxonomy" not in candidate:
+            master = find_master_board(candidate["brand"], candidate["model"]) or {}
+            output.append(SuggestedBoard(
+                brand=candidate["brand"], model=candidate["model"],
+                category=master.get("detailed_category") or "Surfboard", confidence=.75,
+                why_it_fits="The board you asked for.",
+                board_model_id=candidate.get("boardModelId") or master.get("canonical_model_id"),
+                authoritative_public_family=master.get("public_family"),
+                detailed_category=master.get("detailed_category"),
+                primary_fin_setup=master.get("primary_fin_setup"),
+                source="quivrr_controlled_knowledge",
+            ))
+            continue
         taxonomy = candidate["taxonomy"]
         dna = candidate["dna"]
         volume = candidate.get("volumeRange", {})

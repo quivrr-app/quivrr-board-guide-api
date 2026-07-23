@@ -148,7 +148,11 @@ def classify_intent(message: str) -> IntentResult:
 
     if not text:
         return IntentResult("GREETING", "greeting_request", 0.96, entities)
-    if re.search(r"\b(?:ignore|reveal|show|print)\b.*\b(?:system prompt|developer message|instructions|taxonomy rules?)\b", text):
+    if re.search(
+        r"\b(?:ignore|reveal|show|print)\b.*\b(?:system prompt|developer message|instructions|taxonomy rules?|hidden context|database credentials|environment variables)\b|"
+        r"\b(?:repeat everything above|enter developer mode|execute arbitrary (?:urls?|sql))\b",
+        text,
+    ):
         return IntentResult("PROMPT_INJECTION", "site_help_question", 0.99, entities)
     if re.search(r"\b(?:different surfer|this is for my (?:wife|husband|partner|friend|son|daughter)|not for me)\b", text):
         entities["resetScope"] = "surfer"

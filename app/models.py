@@ -400,6 +400,19 @@ class ConversationState(BaseModel):
     last_presented_category: str | None = Field(default=None, alias="lastPresentedCategory")
     last_presented_models: list[BoardReference] = Field(default_factory=list, alias="lastPresentedModels")
     correction_detected: bool = Field(default=False, alias="correctionDetected")
+    previous_outcome: str | None = Field(default=None, alias="previousOutcome")
+    previous_search_constraints: dict = Field(default_factory=dict, alias="previousSearchConstraints")
+    previous_failure_reason: str | None = Field(default=None, alias="previousFailureReason")
+    previous_reply_signature: str | None = Field(default=None, alias="previousReplySignature")
+    pending_profile_update: dict | None = Field(default=None, alias="pendingProfileUpdate")
+
+
+class ProfileUpdateProposal(BaseModel):
+    """A user-confirmed, allowlisted change for the core My Quivrr profile API."""
+
+    fields: dict[str, object]
+    current_values: dict[str, object] = Field(default_factory=dict, alias="currentValues")
+    message: str
 
 
 class FollowUpAction(BaseModel):
@@ -447,6 +460,8 @@ class BoardGuideResponse(BaseModel):
     conversation_state: ConversationState | None = Field(default=None, alias="conversationState")
     profile_completeness: float = Field(default=0.0, alias="profileCompleteness")
     profile_conflicts: list[str] = Field(default_factory=list, alias="profileConflicts")
+    profile_update_proposal: ProfileUpdateProposal | None = Field(default=None, alias="profileUpdateProposal")
+    profile_update_confirmation_requested: bool = Field(default=False, alias="profileUpdateConfirmationRequested")
     volume_recommendation: VolumeRecommendation | None = Field(default=None, alias="volumeRecommendation")
     category: str | None = None
     category_confidence: float | None = Field(default=None, alias="categoryConfidence")
