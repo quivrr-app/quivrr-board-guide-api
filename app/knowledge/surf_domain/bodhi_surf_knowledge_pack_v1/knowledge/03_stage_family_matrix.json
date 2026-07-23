@@ -1,0 +1,121 @@
+{
+  "version": "1.0.0",
+  "rules": {
+    "STAGE_1_TRUE_BEGINNER": {
+      "preferred": [
+        "SOFTBOARD",
+        "MINI_MAL_FUNBOARD",
+        "LONGBOARD"
+      ],
+      "conditional": [
+        "MID_LENGTH"
+      ],
+      "excluded": [
+        "HYBRID",
+        "DAILY_DRIVER",
+        "PERFORMANCE_DAILY_DRIVER",
+        "PERFORMANCE_SHORTBOARD",
+        "GROVELLER",
+        "FISH",
+        "PERFORMANCE_FISH",
+        "STEP_UP",
+        "GUN"
+      ],
+      "minimum_traits": {
+        "stability": "high",
+        "paddle_support": "high",
+        "forgiveness": "high",
+        "glide": "high"
+      }
+    },
+    "STAGE_2_PROGRESSING_BEGINNER": {
+      "preferred": [
+        "MINI_MAL_FUNBOARD",
+        "MID_LENGTH",
+        "LONGBOARD"
+      ],
+      "conditional": [
+        "HYBRID",
+        "DAILY_DRIVER"
+      ],
+      "excluded": [
+        "PERFORMANCE_DAILY_DRIVER",
+        "PERFORMANCE_SHORTBOARD",
+        "PERFORMANCE_FISH",
+        "STEP_UP",
+        "GUN"
+      ],
+      "minimum_traits": {
+        "stability": "medium_high",
+        "paddle_support": "high",
+        "forgiveness": "high"
+      }
+    },
+    "STAGE_3_EARLY_INTERMEDIATE": {
+      "preferred": [
+        "MID_LENGTH",
+        "HYBRID",
+        "DAILY_DRIVER",
+        "GROVELLER",
+        "FISH"
+      ],
+      "conditional": [
+        "PERFORMANCE_DAILY_DRIVER",
+        "PERFORMANCE_FISH"
+      ],
+      "excluded": [
+        "GUN"
+      ],
+      "minimum_traits": {
+        "forgiveness": "medium",
+        "paddle_support": "medium"
+      }
+    },
+    "STAGE_4_INTERMEDIATE": {
+      "preferred": [
+        "HYBRID",
+        "DAILY_DRIVER",
+        "GROVELLER",
+        "FISH",
+        "MID_LENGTH"
+      ],
+      "conditional": [
+        "PERFORMANCE_DAILY_DRIVER",
+        "PERFORMANCE_SHORTBOARD",
+        "PERFORMANCE_FISH",
+        "STEP_UP"
+      ],
+      "excluded": [
+        "GUN"
+      ]
+    },
+    "STAGE_5_ADVANCED": {
+      "preferred": [
+        "PERFORMANCE_DAILY_DRIVER",
+        "PERFORMANCE_SHORTBOARD",
+        "PERFORMANCE_FISH",
+        "FISH",
+        "GROVELLER",
+        "STEP_UP",
+        "MID_LENGTH"
+      ],
+      "conditional": [
+        "GUN"
+      ],
+      "excluded": []
+    },
+    "STAGE_6_EXPERT": {
+      "preferred": [
+        "ALL"
+      ],
+      "conditional": [],
+      "excluded": []
+    }
+  },
+  "non_negotiable": [
+    "inventory availability cannot override stage exclusions",
+    "volume proximity cannot override stage exclusions",
+    "a model's marketing claim of all-level suitability cannot override governed design traits",
+    "when no safe candidate exists, return guidance rather than widening into unsafe families"
+  ]
+}

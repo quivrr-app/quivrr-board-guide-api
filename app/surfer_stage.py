@@ -4,6 +4,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 import re
 
+from app.board_dna import find_board_dna, find_board_dna_by_id
+from app.surf_domain import load_surf_domain_knowledge
+
 
 STAGE_1 = "STAGE_1_TRUE_BEGINNER"
 STAGE_2 = "STAGE_2_PROGRESSING_BEGINNER"
@@ -17,10 +20,9 @@ STAGE_LABELS = {
     STAGE_4: "Intermediate", STAGE_5: "Advanced", STAGE_6: "Expert",
 }
 BEGINNER_QUESTION = "No problem. Are you still learning to stand in the whitewater, or can you already catch green waves and ride along the face?"
-PREMIUM_BEGINNER_POSITIONING = (
-    "Quivrr focuses on premium hardboards from established surfboard manufacturers—boards designed to be surfed regularly and kept in a quiver for years. "
-    "We do not currently catalogue foamies or surf-school softboards, even though one may be the safest first board."
-)
+_PACK = load_surf_domain_knowledge()
+PREMIUM_BEGINNER_POSITIONING = _PACK.premium_positioning["beginner_statement"]
+_TRAIT_MINIMUMS = {"medium": 5, "medium_high": 7, "high": 8}
 
 
 @dataclass(frozen=True)
@@ -76,12 +78,32 @@ def stage_allows_board(stage: str | None, board) -> bool:
         getattr(board, "authoritative_public_family", None), getattr(board, "detailed_category", None),
         getattr(board, "category", None), getattr(board, "skill_fit", None),
     ))
-    unsafe = ("performance shortboard", "performance daily", "step up", "semi gun", "gun", "performance fish", "technical fish", "performance twin")
-    if any(token in family for token in unsafe):
+    rule = _PACK.stage_matrix["rules"].get(stage, {})
+    governed_exclusions = tuple(value.lower().replace("_", " ") for value in rule.get("excluded", ()))
+    if any(token in family for token in governed_exclusions):
         return False
+    dna = find_board_dna_by_id(getattr(board, "board_model_id", None)) or find_board_dna(
+        getattr(board, "brand", ""), getattr(board, "model", "")
+    )
+    minimum_traits = rule.get("minimum_traits", {})
+    if minimum_traits:
+        # The safety thresholds need governed Board DNA evidence. A family
+        # label or current stock can never stand in for missing trait evidence.
+        if not dna:
+            return False
+        behaviour = dna.get("behaviour") or {}
+        trait_sources = {"paddle_support": "paddle", "forgiveness": "forgiveness", "stability": "stability", "glide": "glide"}
+        for trait, minimum in minimum_traits.items():
+            score = behaviour.get(trait_sources.get(trait, trait))
+            if score is None or score < _TRAIT_MINIMUMS[minimum]:
+                return False
+    conditional = tuple(value.lower().replace("_", " ") for value in rule.get("conditional", ()))
+    if stage == STAGE_3 and any(token in family for token in conditional):
+        return "advanced" not in family and "expert" not in family
     if stage == STAGE_2 and any(token in family for token in ("advanced", "expert", "competition", "high performance")):
         return False
-    return any(token in family for token in ("hybrid", "daily", "mid", "fish", "groveller", "longboard", "forgiving"))
+    preferred = tuple(value.lower().replace("_", " ") for value in rule.get("preferred", ()))
+    return any(token in family for token in preferred) or "forgiving" in family
 
 
 def beginner_guidance(stage: str, weight_kg: int | None, saved_volume_ignored: bool) -> str:

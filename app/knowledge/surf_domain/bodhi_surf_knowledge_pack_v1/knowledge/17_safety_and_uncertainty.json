@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "surf_safety": [
+    "Recommend lessons and local guidance for true beginners.",
+    "Do not encourage users into waves beyond their demonstrated ability.",
+    "Mention local hazards, currents, reef, crowds and access when relevant.",
+    "Board advice is not a substitute for in-person safety assessment.",
+    "Do not present exact big-wave or reef suitability without ability and local context."
+  ],
+  "equipment_safety": [
+    "Appropriate leash, fin condition and board integrity matter.",
+    "Softboards reduce but do not remove collision risk.",
+    "A larger board can be harder to control in crowds or powerful shorebreak.",
+    "Transport and handling should match the user's physical capability."
+  ],
+  "uncertainty_language": [
+    "likely",
+    "a sensible starting point",
+    "conditional on",
+    "I would confirm",
+    "I would not recommend yet"
+  ],
+  "prohibited_claims": [
+    "guaranteed progression",
+    "guaranteed safety",
+    "exact performance outcome",
+    "medical suitability"
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "version": "1.0.0",
+  "stages": [
+    {
+      "id": "STAGE_1_TRUE_BEGINNER",
+      "label": "True beginner",
+      "capabilities": [
+        "learning basic paddling and balance",
+        "mostly riding whitewater",
+        "cannot consistently stand",
+        "cannot independently catch unbroken waves",
+        "cannot reliably angle take-offs"
+      ],
+      "positive_signals": [
+        "never surfed",
+        "first lesson",
+        "only surfed a few times",
+        "still in whitewater",
+        "learning to stand",
+        "need someone to push me"
+      ],
+      "preferred_equipment": [
+        "large softboard",
+        "surf-school board",
+        "large mini-mal",
+        "stable longboard"
+      ],
+      "hardboard_catalogue_policy": "guidance_only_unless_exceptionally_suitable",
+      "required_guidance": [
+        "prioritise stability, paddle support, glide and wave count",
+        "acknowledge that Quivrr does not currently catalogue foamies",
+        "do not force a premium hardboard recommendation"
+      ]
+    },
+    {
+      "id": "STAGE_2_PROGRESSING_BEGINNER",
+      "label": "Progressing beginner",
+      "capabilities": [
+        "stands consistently",
+        "catches some unbroken waves",
+        "can sometimes angle the take-off",
+        "can trim along the face occasionally",
+        "turning and positioning remain inconsistent"
+      ],
+      "positive_signals": [
+        "catch green waves sometimes",
+        "ride along the face sometimes",
+        "can stand most waves",
+        "starting to turn",
+        "surf independently in easy waves"
+      ],
+      "preferred_equipment": [
+        "mini-mal",
+        "funboard",
+        "forgiving mid-length",
+        "egg",
+        "large stable hybrid"
+      ],
+      "hardboard_catalogue_policy": "conditional_safe_candidates_only"
+    },
+    {
+      "id": "STAGE_3_EARLY_INTERMEDIATE",
+      "label": "Early intermediate",
+      "capabilities": [
+        "catches green waves independently",
+        "trims both directions",
+        "performs basic directional turns",
+        "paddles and positions without regular help",
+        "starting to generate speed"
+      ],
+      "positive_signals": [
+        "catch green waves consistently",
+        "go both ways",
+        "basic bottom turn",
+        "starting cutbacks",
+        "ready to move down from a big board"
+      ],
+      "preferred_equipment": [
+        "forgiving daily driver",
+        "large hybrid",
+        "forgiving groveller",
+        "stable fish",
+        "shorter mid-length",
+        "transition board"
+      ],
+      "hardboard_catalogue_policy": "broad_but_forgiveness_weighted"
+    },
+    {
+      "id": "STAGE_4_INTERMEDIATE",
+      "label": "Intermediate",
+      "capabilities": [
+        "reliable take-offs in varied conditions",
+        "bottom turns and basic cutbacks",
+        "generates speed intentionally",
+        "understands positioning and wave selection",
+        "can adapt stance and line"
+      ],
+      "preferred_equipment": [
+        "daily driver",
+        "hybrid",
+        "fish",
+        "groveller",
+        "mid-length",
+        "selected performance daily drivers"
+      ]
+    },
+    {
+      "id": "STAGE_5_ADVANCED",
+      "label": "Advanced",
+      "capabilities": [
+        "strong rail control",
+        "reliable speed generation",
+        "surfs powerful or technical waves",
+        "can exploit rocker, rail and fin differences",
+        "selects boards for conditions and manoeuvres"
+      ],
+      "preferred_equipment": [
+        "performance daily driver",
+        "performance shortboard",
+        "fish",
+        "groveller",
+        "step-up",
+        "specialised designs"
+      ]
+    },
+    {
+      "id": "STAGE_6_EXPERT",
+      "label": "Expert",
+      "capabilities": [
+        "highly refined timing and rail control",
+        "consistent performance in demanding waves",
+        "understands subtle design trade-offs",
+        "can ride specialised low-forgiveness equipment"
+      ],
+      "preferred_equipment": [
+        "full governed catalogue subject to conditions and intent"
+      ]
+    }
+  ],
+  "clarification": {
+    "ambiguous_beginner_question": "Are you still learning to stand in the whitewater, or can you already catch green waves and ride along the face?",
+    "quick_replies": [
+      "Still learning to stand",
+      "Catching green waves sometimes",
+      "Catching green waves consistently"
+    ]
+  }
+}

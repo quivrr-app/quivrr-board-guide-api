@@ -1,5 +1,18 @@
 # Quivrr Platform Backlog
 
+## 2026-07-24 — Bodhi Surf Knowledge Pack v1 integration
+
+- Input: imported the authoritative `bodhi_surf_knowledge_pack_v1` governed pack under `app/knowledge/surf_domain/` without replacing canonical model facts, Board DNA, aliases, relationships, stock, price or seller data.
+- Change: added a checksummed immutable pack loader, startup validation and pack-version telemetry. Sprint 5 stage and premium-catalogue decisions now consume the governed pack wording and stage-family exclusions.
+- Compatibility: preserves the Sprint 5 current-message routing, beginner safety, profile proposal, active-board inventory and exact BoardSize handoff behaviour.
+
+## 2026-07-24 — Governed pack validation and conditional candidate safety
+
+- Issue: the initial pack import verified file checksums but did not execute the supplied JSON Schema, and early-stage conditional families could not prove their required Board DNA traits.
+- Fix: validate every governed knowledge document against the supplied Draft 2020-12 schema at startup; require governed Board DNA to meet the stage matrix's paddle, stability, forgiveness and glide thresholds before a Stage 2 or Stage 3 candidate can pass.
+- Outcome: corrupt, structurally invalid or evidence-free knowledge/candidates fail closed. An explicit conversational correction now clears the former recommendation plan while retaining the rider profile.
+- Follow-up: engineering and architecture documents remain unchanged pending owner approval.
+
 ## 2026-07-24 — Bodhi Sprint 5 beginner safety and topic-pivot remediation
 
 - Root cause: conversation state restored a prior family and saved volume before independently resolving the current message. Beginner remained a soft ability signal, so daily-driver fallback, volume proximity and available inventory could outrank safety. Aggregate inventory questions also lacked a distinct route and replayed the previous recommendation plan.

@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "principles": [
+    "A quiver should cover distinct conditions or goals rather than duplicate the same role.",
+    "The next board should solve a clear gap: weaker waves, stronger waves, more glide, more performance, travel or progression.",
+    "Board relationships should be expressed as easier, harder, faster, more forgiving, more hold, more glide or different feel."
+  ],
+  "common_quiver_structures": {
+    "one_board": [
+      "versatile daily driver or hybrid matched to normal waves"
+    ],
+    "two_board": [
+      "weak-wave option",
+      "everyday or better-wave option"
+    ],
+    "three_board": [
+      "small-wave board",
+      "daily driver",
+      "step-up or specialised alternative"
+    ],
+    "progression_quiver": [
+      "current forgiving board",
+      "next transition board",
+      "later performance board"
+    ]
+  },
+  "comparison_axes": [
+    "paddle support",
+    "wave entry",
+    "stability",
+    "forgiveness",
+    "speed generation",
+    "turning radius",
+    "hold",
+    "projection",
+    "release",
+    "wave range",
+    "skill demand"
+  ]
+}

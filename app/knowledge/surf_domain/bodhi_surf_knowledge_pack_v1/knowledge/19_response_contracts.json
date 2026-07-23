@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0",
+  "patterns": {
+    "true_beginner_no_safe_catalogue_match": {
+      "response_mode": "guidance_only",
+      "required_points": [
+        "clear judgement",
+        "why performance boards are unsuitable",
+        "appropriate equipment direction",
+        "premium catalogue and softboard limitation",
+        "one capability-based next question"
+      ]
+    },
+    "progressing_beginner_candidates": {
+      "response_mode": "recommendations",
+      "required_points": [
+        "stage assessment",
+        "why each candidate is forgiving",
+        "dimensions and broad volume context",
+        "readiness condition",
+        "inventory only after suitability"
+      ]
+    },
+    "specific_unsuitable_board": {
+      "response_mode": "board_guidance",
+      "required_points": [
+        "recognise and describe the board",
+        "state why it is unsuitable for current stage",
+        "do not present a purchase CTA as a recommendation",
+        "offer progression direction"
+      ]
+    },
+    "platform_inventory_count": {
+      "response_mode": "platform_fact",
+      "required_points": [
+        "answer count first",
+        "distinguish models, sizes and offers",
+        "state region and as-of time",
+        "do not show personal recommendation cards"
+      ]
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "version": "1.0.0",
+  "policy": "Use volume as a broad guardrail after stage and family selection, never as the first decision.",
+  "relative_buoyancy_notes": [
+    "More litres generally add buoyancy and paddle support, but where the foam sits changes stability and response.",
+    "A short wide board can carry many litres while remaining unsuitable for a true beginner.",
+    "A longer board can provide better glide and learning value without an extreme litre number.",
+    "Fitness, age, wetsuit, wave power and frequency influence practical needs."
+  ],
+  "stage_rules": {
+    "STAGE_1_TRUE_BEGINNER": {
+      "precision": "avoid exact litre prescription",
+      "priority": [
+        "length",
+        "width",
+        "stability",
+        "glide",
+        "paddle support"
+      ],
+      "warning": "Do not reuse an advanced saved-volume reference."
+    },
+    "STAGE_2_PROGRESSING_BEGINNER": {
+      "precision": "broad range only",
+      "priority": [
+        "stable dimensions",
+        "foam distribution",
+        "forgiveness",
+        "progression"
+      ]
+    },
+    "STAGE_3_EARLY_INTERMEDIATE": {
+      "precision": "broad range plus model-specific sizing",
+      "priority": [
+        "wave count",
+        "control",
+        "transition goals"
+      ]
+    },
+    "STAGE_4_INTERMEDIATE": {
+      "precision": "model and condition dependent",
+      "priority": [
+        "usual volume reference",
+        "board family",
+        "waves"
+      ]
+    },
+    "STAGE_5_ADVANCED": {
+      "precision": "fine-grained model and condition tuning permitted"
+    },
+    "STAGE_6_EXPERT": {
+      "precision": "user-led specialist tuning"
+    }
+  },
+  "unsafe_patterns": [
+    "weight alone -> exact litres -> closest stocked board",
+    "saved litres -> beginner recommendation",
+    "closest volume -> Strong match without family safety"
+  ]
+}

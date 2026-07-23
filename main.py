@@ -71,9 +71,11 @@ from app.volume_engine_v2 import build_target_volume_context, build_volume_recom
 from app.structured_logging import emit_event
 from app.surfer_stage import BEGINNER_QUESTION, PREMIUM_BEGINNER_POSITIONING, STAGE_1, assess_surfer_stage, beginner_guidance, stage_allows_board
 from app.topic_routing import classify_topic_route
+from app.surf_domain import load_surf_domain_knowledge
 
 
 load_dotenv()
+SURF_DOMAIN_KNOWLEDGE = load_surf_domain_knowledge()
 
 APP_NAME = "Quivrr Board Guide API"
 BUILD_SHA = os.getenv("BODHI_BUILD_SHA") or os.getenv("WEBSITE_COMMIT_ID") or "unknown"
@@ -1112,12 +1114,17 @@ def build_conversation_state(
     surfer_stage: str | None = None,
     active_board_override: dict | None = None,
     last_inventory_query: dict | None = None,
+    clear_response_plan: bool = False,
 ) -> ConversationState:
     active_region = profile.region or request.region
     last_question = questions[0] if questions else None
     previous_state = request.conversation_state
     previous_turn = previous_state.conversation_turn if previous_state else 0
-    clear_previous = bool(directive and directive.clears_rider_brief) or normalized_intent.startswith("PLATFORM_")
+    clear_previous = (
+        bool(directive and directive.clears_rider_brief)
+        or normalized_intent.startswith("PLATFORM_")
+        or clear_response_plan
+    )
     previous_recommendations = previous_state.last_recommendations if previous_state and not clear_previous else []
     mentioned = previous_state.mentioned_boards if previous_state and not clear_previous else []
     comparison_boards = previous_state.comparison_boards if previous_state and not clear_previous else []
@@ -1807,7 +1814,7 @@ def board_guide_chat(
     elif topic_route.kind == "PLATFORM_CATALOGUE_SCOPE":
         suggested_boards = []
         recommendation = volume_recommendation = guidance = None
-        reply = PREMIUM_BEGINNER_POSITIONING
+        reply = SURF_DOMAIN_KNOWLEDGE.premium_positioning["canonical_statement"] + " " + SURF_DOMAIN_KNOWLEDGE.premium_positioning["beginner_statement"]
         questions = []
         force_controlled_reply = True
         response_mode = "guidance_only"
@@ -2688,6 +2695,7 @@ def board_guide_chat(
         surfer_stage=stage_assessment.stage,
         active_board_override=active_board_override,
         last_inventory_query=active_inventory_query,
+        clear_response_plan=topic_route.correction,
     )
     follow_up_actions = build_follow_up_actions(intent, public_cards)
     if stage_assessment.clarification_required:
@@ -2751,6 +2759,7 @@ def board_guide_chat(
         active_board=active_board_override,
         active_region=profile.region or request.region,
         profile_update_detected=bool(profile_update_proposal or profile_update_confirmation_requested),
+        surf_knowledge_pack_version=SURF_DOMAIN_KNOWLEDGE.version,
         surfer_stage_resolved=stage_assessment.stage,
         surfer_stage_source=stage_assessment.source,
         stage_clarification_requested=stage_assessment.clarification_required,

@@ -1,0 +1,103 @@
+{
+  "version": "1.0.0",
+  "setups": {
+    "single": {
+      "feel": [
+        "flow",
+        "trim",
+        "long arcs"
+      ],
+      "best_for": [
+        "longboards",
+        "mid-lengths",
+        "clean open faces"
+      ],
+      "trade_offs": [
+        "less lateral drive and modern pivot"
+      ]
+    },
+    "twin": {
+      "feel": [
+        "speed",
+        "freedom",
+        "flow"
+      ],
+      "best_for": [
+        "fish",
+        "weak to medium waves",
+        "drawn-out lines"
+      ],
+      "trade_offs": [
+        "can feel loose in power or for surfers used to thrusters"
+      ]
+    },
+    "twin_plus_trailer": {
+      "feel": [
+        "twin speed with extra control"
+      ],
+      "best_for": [
+        "modern fish and hybrids"
+      ],
+      "trade_offs": [
+        "less pure twin freedom"
+      ]
+    },
+    "thruster": {
+      "feel": [
+        "predictable control",
+        "pivot",
+        "balanced hold"
+      ],
+      "best_for": [
+        "most shortboards",
+        "varied conditions"
+      ],
+      "trade_offs": [
+        "more drag than a twin or quad"
+      ]
+    },
+    "quad": {
+      "feel": [
+        "speed",
+        "drive",
+        "hold without centre fin drag"
+      ],
+      "best_for": [
+        "fast lines",
+        "barrels",
+        "fish and hybrids"
+      ],
+      "trade_offs": [
+        "different pivot and release from a thruster"
+      ]
+    },
+    "five_fin_convertible": {
+      "feel": [
+        "configuration flexibility"
+      ],
+      "best_for": [
+        "surfers comparing thruster and quad behaviour"
+      ],
+      "trade_offs": [
+        "not a five-fin ride; configuration still needs intention"
+      ]
+    },
+    "two_plus_one": {
+      "feel": [
+        "single-fin flow with side-bite support"
+      ],
+      "best_for": [
+        "mid-lengths and longboards"
+      ],
+      "trade_offs": [
+        "less shortboard-like response"
+      ]
+    }
+  },
+  "sizing_rules": [
+    "Fin area, rake, depth, base, foil and flex all matter.",
+    "Larger or more upright fins can add hold and pivot; more rake tends to draw longer arcs.",
+    "Stiffer fins feel direct; more flex can add smoothness and release.",
+    "Fin advice must consider rider weight, board tail, wave power and desired feel."
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "principles": [
+    "Length contributes to paddle efficiency, glide, rail line and turning arc.",
+    "Width contributes to planing area and stability, but placement of width matters.",
+    "Thickness contributes to foam, but foam distribution matters more than the centre number alone.",
+    "Volume is useful for comparison but cannot describe outline, rails, rocker, bottom contours or foam distribution.",
+    "Two boards with identical litres may feel radically different.",
+    "Beginner selection should not be reduced to a litres-per-kilogram formula."
+  ],
+  "length_guidance": {
+    "more_length": [
+      "earlier wave entry",
+      "greater glide",
+      "longer turning arc",
+      "more rail engagement"
+    ],
+    "less_length": [
+      "more compact turning",
+      "less glide",
+      "greater reliance on positioning and paddling"
+    ]
+  },
+  "width_guidance": {
+    "more_width": [
+      "stability",
+      "planing",
+      "easy speed"
+    ],
+    "less_width": [
+      "rail-to-rail response",
+      "fit in steep pockets",
+      "less passive stability"
+    ],
+    "notes": [
+      "forward width supports paddling",
+      "tail width influences lift, speed and control",
+      "wide-point location changes feel"
+    ]
+  },
+  "thickness_and_rails": {
+    "full_rails": [
+      "float",
+      "forgiveness",
+      "reduced sensitivity"
+    ],
+    "refined_rails": [
+      "engagement",
+      "control",
+      "sensitivity",
+      "less tolerance of poor pressure"
+    ],
+    "warning": "Centre thickness alone does not reveal rail volume."
+  },
+  "volume_use": {
+    "appropriate_uses": [
+      "compare sizes within a model",
+      "sense broad buoyancy",
+      "avoid obviously undersized choices"
+    ],
+    "inappropriate_uses": [
+      "select board family before stage",
+      "declare exact suitability",
+      "compare unlike shapes without context"
+    ]
+  }
+}

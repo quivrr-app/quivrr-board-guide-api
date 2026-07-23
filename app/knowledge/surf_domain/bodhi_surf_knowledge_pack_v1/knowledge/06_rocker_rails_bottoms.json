@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "rocker": {
+    "version": "1.0.0",
+    "entry_rocker": {
+      "low": [
+        "paddles efficiently",
+        "gets into weak waves early",
+        "can catch on steep entries"
+      ],
+      "medium": [
+        "balanced entry and adaptability"
+      ],
+      "high": [
+        "fits steep faces",
+        "reduces pearling in critical drops",
+        "requires more wave power or paddling precision"
+      ]
+    },
+    "tail_rocker": {
+      "low": [
+        "speed and drive",
+        "longer arcs",
+        "less release"
+      ],
+      "medium": [
+        "balanced speed and turning"
+      ],
+      "high": [
+        "pivot and tight turning",
+        "control in power",
+        "less effortless speed"
+      ]
+    },
+    "rules": [
+      "Rocker must be interpreted with outline, rail and bottom contour.",
+      "Low rocker is not automatically beginner-friendly if the board is short, narrow or low volume.",
+      "High rocker performance boards generally demand stronger technique and waves."
+    ]
+  },
+  "rails": {
+    "boxy_full": "stable, buoyant and forgiving but less sensitive",
+    "medium": "balanced hold and forgiveness",
+    "low_refined": "sensitive, engaged and controlled but less forgiving",
+    "pinched": "precise engagement and hold; technically demanding"
+  },
+  "bottom_contours": {
+    "flat": "speed and planing with a direct feel",
+    "single_concave": "lift, speed and channelled flow; can feel powerful on rail",
+    "double_concave": "adds transition and looseness through the rear half",
+    "vee": "helps rail-to-rail transition and control, often through tail",
+    "channels": "additional drive and hold with a more committed line",
+    "hull_or_convex": "flowing trim and smooth rail transitions; specialised feel"
+  }
+}

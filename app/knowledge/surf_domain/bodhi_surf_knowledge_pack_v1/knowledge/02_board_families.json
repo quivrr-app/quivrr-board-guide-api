@@ -1,0 +1,238 @@
+{
+  "version": "1.0.0",
+  "families": [
+    {
+      "id": "SOFTBOARD",
+      "labels": [
+        "softboard",
+        "foamie",
+        "surf-school board"
+      ],
+      "catalogue_supported": false,
+      "design": "high buoyancy, forgiving rails, stable outline and safer construction",
+      "best_for": [
+        "first sessions",
+        "whitewater",
+        "learning take-offs"
+      ],
+      "trade_offs": [
+        "limited precision",
+        "less refined rail response"
+      ]
+    },
+    {
+      "id": "MINI_MAL_FUNBOARD",
+      "labels": [
+        "mini-mal",
+        "funboard"
+      ],
+      "catalogue_supported": "partial",
+      "design": "longer, wider and fuller outline with strong glide and paddle support",
+      "best_for": [
+        "progressing beginners",
+        "easy waves",
+        "wave count",
+        "transition from foam"
+      ],
+      "trade_offs": [
+        "slower rail-to-rail",
+        "less compact turning radius"
+      ]
+    },
+    {
+      "id": "LONGBOARD",
+      "labels": [
+        "longboard",
+        "log",
+        "performance longboard"
+      ],
+      "catalogue_supported": "partial",
+      "design": "substantial length and glide; style varies from traditional logs to performance longboards",
+      "best_for": [
+        "small waves",
+        "glide",
+        "trim",
+        "nose riding where applicable"
+      ],
+      "trade_offs": [
+        "transport",
+        "duck diving",
+        "large turning arc"
+      ]
+    },
+    {
+      "id": "MID_LENGTH",
+      "labels": [
+        "mid-length",
+        "midlength",
+        "egg"
+      ],
+      "catalogue_supported": true,
+      "design": "longer rail line and increased glide with more manoeuvrability than a longboard",
+      "best_for": [
+        "wave count",
+        "flow",
+        "transition",
+        "points and open faces"
+      ],
+      "trade_offs": [
+        "less compact than a shortboard",
+        "varies widely in forgiveness"
+      ]
+    },
+    {
+      "id": "HYBRID",
+      "labels": [
+        "hybrid",
+        "all-rounder"
+      ],
+      "catalogue_supported": true,
+      "design": "mixes paddle-friendly width and volume with shortboard-like response",
+      "best_for": [
+        "everyday surf",
+        "transition",
+        "versatility"
+      ],
+      "trade_offs": [
+        "may compromise top-end precision or pure glide"
+      ]
+    },
+    {
+      "id": "DAILY_DRIVER",
+      "labels": [
+        "daily driver",
+        "everyday shortboard"
+      ],
+      "catalogue_supported": true,
+      "design": "balanced shortboard intended for common day-to-day conditions",
+      "best_for": [
+        "intermediate and above",
+        "varied everyday waves"
+      ],
+      "trade_offs": [
+        "not necessarily beginner-friendly",
+        "less specialised"
+      ]
+    },
+    {
+      "id": "PERFORMANCE_DAILY_DRIVER",
+      "labels": [
+        "performance daily driver",
+        "performance all-rounder"
+      ],
+      "catalogue_supported": true,
+      "design": "performance-oriented shortboard with some added usability",
+      "best_for": [
+        "strong intermediate to advanced surfers",
+        "average to good waves"
+      ],
+      "trade_offs": [
+        "reduced forgiveness and glide compared with wider hybrids"
+      ]
+    },
+    {
+      "id": "PERFORMANCE_SHORTBOARD",
+      "labels": [
+        "performance shortboard",
+        "HPSB",
+        "high-performance shortboard"
+      ],
+      "catalogue_supported": true,
+      "design": "refined rails, responsive rocker and outline for speed, projection and critical turns",
+      "best_for": [
+        "advanced surfing",
+        "quality waves",
+        "technical manoeuvres"
+      ],
+      "trade_offs": [
+        "lower stability",
+        "more demanding paddling and wave entry"
+      ]
+    },
+    {
+      "id": "GROVELLER",
+      "labels": [
+        "groveller",
+        "small-wave shortboard"
+      ],
+      "catalogue_supported": true,
+      "design": "short, wide and efficient with low rocker and concentrated planing area",
+      "best_for": [
+        "weak waves",
+        "small surf",
+        "easy speed"
+      ],
+      "trade_offs": [
+        "less hold and control in powerful surf",
+        "can feel skatey"
+      ]
+    },
+    {
+      "id": "FISH",
+      "labels": [
+        "fish",
+        "twin fish",
+        "retro fish"
+      ],
+      "catalogue_supported": true,
+      "design": "wide outline, low rocker and efficient planing; often twin-fin influenced",
+      "best_for": [
+        "speed, flow, weak to medium waves"
+      ],
+      "trade_offs": [
+        "different turning rhythm",
+        "may lack control in steep power depending on design"
+      ]
+    },
+    {
+      "id": "PERFORMANCE_FISH",
+      "labels": [
+        "performance fish",
+        "modern fish"
+      ],
+      "catalogue_supported": true,
+      "design": "fish-derived speed and width with more refined rails, rocker or tail control",
+      "best_for": [
+        "experienced surfers wanting speed with greater manoeuvrability"
+      ],
+      "trade_offs": [
+        "not automatically forgiving",
+        "can still be technical"
+      ]
+    },
+    {
+      "id": "STEP_UP",
+      "labels": [
+        "step-up"
+      ],
+      "catalogue_supported": true,
+      "design": "extra length, rail line and hold for larger or more powerful surf",
+      "best_for": [
+        "advanced surfers",
+        "overhead waves",
+        "control and confidence"
+      ],
+      "trade_offs": [
+        "less suited to weak surf",
+        "requires committed surfing"
+      ]
+    },
+    {
+      "id": "GUN",
+      "labels": [
+        "gun",
+        "semi-gun"
+      ],
+      "catalogue_supported": "limited",
+      "design": "long, narrow and control-focused for serious surf",
+      "best_for": [
+        "expert surfers",
+        "large powerful waves"
+      ],
+      "trade_offs": [
+        "specialised",
+        "unsuitable for everyday waves or beginners"
+      ]
+    }
+  ]
+}

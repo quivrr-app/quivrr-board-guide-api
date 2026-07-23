@@ -1,0 +1,172 @@
+{
+  "pack": {
+    "pack_id": "bodhi_surf_knowledge_pack_v1",
+    "version": "1.0.0",
+    "purpose": "Governed general surfing and surfboard-selection knowledge for Bodhi.",
+    "scope": [
+      "surfer stage assessment",
+      "board-family selection",
+      "dimensions and volume reasoning",
+      "wave and condition matching",
+      "construction and fin-system knowledge",
+      "progression, quiver and comparison guidance",
+      "conversation routing and safety constraints",
+      "premium catalogue positioning"
+    ],
+    "exclusions": [
+      "live stock, price or retailer availability",
+      "manufacturer-specific claims not present in Quivrr canonical sources",
+      "medical diagnosis",
+      "guaranteed performance outcomes",
+      "invented softboard catalogue records"
+    ],
+    "governance": {
+      "decision_rule": "Deterministic eligibility and safety rules take precedence over generated prose.",
+      "source_class": "general surf-domain knowledge curated for Quivrr; validate manufacturer-specific data separately",
+      "review_required_for": [
+        "stage thresholds",
+        "volume guidance",
+        "family mappings",
+        "brand voice",
+        "new controlled terms"
+      ]
+    }
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 795,
+      "sha256": "5b5b70663f196b260b3cf59d4eeea666784f241f9fd8e0426d7e17095e4e0c49"
+    },
+    {
+      "path": "docs/BODHI_SURF_SHOP_HANDBOOK.md",
+      "bytes": 2336,
+      "sha256": "db4e7985714a80ad264a331d630d8debcbf821443d97da583caf814b60561c58"
+    },
+    {
+      "path": "docs/CODEX_IMPLEMENTATION_BRIEF.md",
+      "bytes": 1507,
+      "sha256": "7e624a5b80123eb373d6bbb08468973aa2c2af7bb786766be12e81b8f95cf095"
+    },
+    {
+      "path": "docs/INTEGRATION_GUIDE.md",
+      "bytes": 1472,
+      "sha256": "a8af8c3bc4e2a0c19b8898d66840e2974fb58b48735143fdf3179408aedebb35"
+    },
+    {
+      "path": "examples/decision_record_true_beginner.json",
+      "bytes": 724,
+      "sha256": "62d183d0b63e84b778bb41b19f3e7ce10392ae60b839f0a8819364eb5b278a29"
+    },
+    {
+      "path": "knowledge/00_pack_metadata.json",
+      "bytes": 1157,
+      "sha256": "48b6258b4c075bbc29da68c4759f0fda20608fa8d968cf7217016ea75875faa8"
+    },
+    {
+      "path": "knowledge/01_surfer_stages.json",
+      "bytes": 4455,
+      "sha256": "269e367cea599565b38b7c3b79a3a86aef0495aea2b690c7ebff3bf3a685579f"
+    },
+    {
+      "path": "knowledge/02_board_families.json",
+      "bytes": 5983,
+      "sha256": "282bb8d00304c733f88a888915ed3285c2b145fe353bb1d9e90f4e017e24d172"
+    },
+    {
+      "path": "knowledge/03_stage_family_matrix.json",
+      "bytes": 2672,
+      "sha256": "aaedff2ba703fb63f126b314f46f57fc5dba4d5bea9c91438e5b43525c68eaaa"
+    },
+    {
+      "path": "knowledge/04_design_traits.json",
+      "bytes": 2503,
+      "sha256": "6d5a7128ffc6180bb297e166402724e88186a8fd0ad62b170080d1d1bab9d93d"
+    },
+    {
+      "path": "knowledge/05_dimensions_and_volume.json",
+      "bytes": 1917,
+      "sha256": "6cffb85b22f8e1d6f5f170f6faf0fa30d95d879db62b7c3f27b99216602c8378"
+    },
+    {
+      "path": "knowledge/06_rocker_rails_bottoms.json",
+      "bytes": 1794,
+      "sha256": "236319842cc2ed1c5e0369d6eac3d7865ee0b70c4f27426b33c53724c8206333"
+    },
+    {
+      "path": "knowledge/07_tail_shapes.json",
+      "bytes": 1643,
+      "sha256": "f57686089134a3ecff21358dc203f0f8562557de849d4c6f346eeaf624f2a232"
+    },
+    {
+      "path": "knowledge/08_fin_systems.json",
+      "bytes": 2282,
+      "sha256": "a61b2b969fcae28b3ef0c0543bd85c4d324510822c060c59ff34f1ff450d024e"
+    },
+    {
+      "path": "knowledge/09_constructions.json",
+      "bytes": 2036,
+      "sha256": "8d4e9ecee41b658d15434550a3fadaaf63d3a27aea6fa6d0d757c4f181b0db55"
+    },
+    {
+      "path": "knowledge/10_wave_conditions.json",
+      "bytes": 1971,
+      "sha256": "e886db74a8a55c33176c19a72589700ca02f6af882616c30eb2f26db702715cd"
+    },
+    {
+      "path": "knowledge/11_selection_engine.json",
+      "bytes": 1373,
+      "sha256": "6598dbc6ce8d86c2e6e2751694ce024fd8c65fa230ddc254d64f459f902cb25d"
+    },
+    {
+      "path": "knowledge/12_volume_policy.json",
+      "bytes": 1858,
+      "sha256": "d83880e0e8e2a2b25e12d000135a8804247b5292a808904a70bc1447cdabb103"
+    },
+    {
+      "path": "knowledge/13_progression_paths.json",
+      "bytes": 1574,
+      "sha256": "8f39c079c70c3bdb309c82542c990effac9f72015e2edd9c84167fcd7f8397fa"
+    },
+    {
+      "path": "knowledge/14_quiver_and_comparison.json",
+      "bytes": 1104,
+      "sha256": "c6934c81d8fd59b7249bb97c1ce0a8e397c579e6d1a767f07b22d300600c10db"
+    },
+    {
+      "path": "knowledge/15_conversation_policy.json",
+      "bytes": 1146,
+      "sha256": "e8c9c136118d701a24f93e12df454ed0f5961f6709f9a9beab51d55ce7e0b62c"
+    },
+    {
+      "path": "knowledge/16_premium_catalogue_positioning.json",
+      "bytes": 1030,
+      "sha256": "8b38b94d785e32fb8fc3d8ad06a86ab01ff3dd98dacd0ee487d37465885fa3da"
+    },
+    {
+      "path": "knowledge/17_safety_and_uncertainty.json",
+      "bytes": 1044,
+      "sha256": "4f6d422adf6e95081b3f79443b2a061be68cf73492250778e1b77600ce2415fc"
+    },
+    {
+      "path": "knowledge/18_glossary.json",
+      "bytes": 1351,
+      "sha256": "79c4395a2d6bcdf8d35d7320234a7a4e5422fa1f5ac1a5bbe9540fce39022508"
+    },
+    {
+      "path": "knowledge/19_response_contracts.json",
+      "bytes": 1311,
+      "sha256": "f5279ff24284bdfa1f40dc50676b117cb107ff35e5dea2d65b390cdf1dd27c30"
+    },
+    {
+      "path": "schemas/knowledge_document.schema.json",
+      "bytes": 315,
+      "sha256": "52e7c31f6379611a3072dae7b7fbbb8b851f6314c612e15f56ea77cb4ea1729d"
+    },
+    {
+      "path": "tests/regression_scenarios.json",
+      "bytes": 2400,
+      "sha256": "3969cd6301d72b7dcac26d5d4188541126e6c331ad6883fb9c4541979a90774b"
+    }
+  ]
+}
