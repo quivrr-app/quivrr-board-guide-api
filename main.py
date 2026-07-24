@@ -1589,7 +1589,7 @@ def board_guide_chat(
         prior_pending_action
         or (request.conversation_state and request.conversation_state.pending_profile_update)
         or re.fullmatch(
-            r"(?:ok(?:ay)?|thanks?|thank you|great|nice|cool|cheers|got it|sounds good|all good)(?:[,.! ]+(?:thanks?|thank you|great|nice|cool|cheers|got it|sounds good|all good))*[!. ]*",
+            r"(?:ok(?:ay)?|thanks?|thank you|great|nice|cool|cheers|got it|sounds good|all good)(?:[,.! ]+(?:thanks?|thank you|great|nice|cool|cheers|got it|sounds good|all good|for|that|makes|sense))*[!. ]*",
             request.message.strip().lower(),
         )
     )
@@ -1893,7 +1893,7 @@ def board_guide_chat(
         reply = (
             "No worries. I’ll keep that profile update ready if you decide you want to save it."
             if pending_action
-            else "I’m not sure what you’d like me to do next. Are you asking about a board, your profile, or something else?"
+            else "No worries. What would you like help with?"
         )
         questions = []
         force_controlled_reply = True

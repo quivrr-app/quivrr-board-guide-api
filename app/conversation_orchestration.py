@@ -63,7 +63,8 @@ def _is_acknowledgement(text: str) -> bool:
     tokens = set(re.findall(r"[a-z']+", text))
     acknowledgement_tokens = {
         "thanks", "thank", "you", "great", "nice", "cool", "okay", "ok", "cheers",
-        "appreciate", "got", "it", "later", "checking", "sounds", "good",
+        "appreciate", "got", "it", "later", "checking", "sounds", "good", "for", "that",
+        "makes", "sense",
     }
     return bool(tokens) and tokens <= acknowledgement_tokens
 

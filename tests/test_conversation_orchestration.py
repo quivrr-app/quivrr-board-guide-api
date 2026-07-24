@@ -79,6 +79,8 @@ class ConversationOrchestrationTests(unittest.TestCase):
                 self._assert_no_recommendations(body)
                 if message == "Why do fish feel so fast?":
                     self.assertIn("wide, fast board", body["reply"])
+                if message == "Thanks, that makes sense.":
+                    self.assertIn("No worries", body["reply"])
         recommend.assert_not_called()
 
 
