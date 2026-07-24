@@ -445,6 +445,10 @@ class BoardGuideRequest(BaseModel):
     conversation_state: ConversationState | None = Field(default=None, alias="conversationState")
     client_capabilities: ClientCapabilities | None = Field(default=None, alias="clientCapabilities")
     event_type: str | None = Field(default=None, alias="eventType")
+    conversation_id: str | None = Field(default=None, alias="conversationId")
+    expected_state_revision: int | None = Field(default=None, alias="expectedStateRevision")
+    message_id: str | None = Field(default=None, alias="messageId")
+    conversation_access_token: str | None = Field(default=None, alias="conversationAccessToken")
 
 
 class BoardGuideResponse(BaseModel):
@@ -470,6 +474,10 @@ class BoardGuideResponse(BaseModel):
     needs_clarification: bool = Field(default=False, alias="needsClarification")
     conversation_profile: RiderProfile | None = Field(default=None, alias="conversationProfile")
     conversation_state: ConversationState | None = Field(default=None, alias="conversationState")
+    conversation_id: str | None = Field(default=None, alias="conversationId")
+    state_revision: int | None = Field(default=None, alias="stateRevision")
+    conversation_access_token: str | None = Field(default=None, alias="conversationAccessToken")
+    state_projection: dict | None = Field(default=None, alias="stateProjection")
     profile_completeness: float = Field(default=0.0, alias="profileCompleteness")
     profile_conflicts: list[str] = Field(default_factory=list, alias="profileConflicts")
     profile_update_proposal: ProfileUpdateProposal | None = Field(default=None, alias="profileUpdateProposal")

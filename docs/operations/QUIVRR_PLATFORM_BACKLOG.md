@@ -1,5 +1,14 @@
 # Quivrr Platform Backlog
 
+## 2026-07-24 — Bodhi Sprint 6 Conversation Intelligence Layer (in progress)
+
+- Objective: replace client-owned, loosely coupled turn context with an authoritative, versioned conversation state and governed state-transition lifecycle.
+- Confirmed root causes: the Surf widget currently persists and resubmits an unsigned `conversationState`, `intakeState`, profile and transcript; the API rebuilds state from these independently on every request. `pendingClarification` is passed into stage assessment but is not a typed transition with a committed resolution/clear operation. Pending actions primarily represent profile proposals, not inventory confirmations. The legacy response plan and derived intent fields can act as surrogate goals, so a short acknowledgement or refinement loses the active consultation strategy.
+- Scope: Board Guide API and Surf frontend are the primary repositories. The core backend will only gain a supporting server-side state contract if required for authoritative persistence. The Quivrr app frontend has unrelated untracked media assets and will not be changed unless a genuine integration need is demonstrated.
+- Documentation: Sprint 6 explicitly authorises the required architecture, engineering, operations and data-contract updates; these will be made alongside the implementation.
+- Implementation: added typed Conversation Intelligence State v1, deterministic legacy migration, durable stage-2 resolution, strategy/refinement/rejection memory and contextual inventory confirmation. Managed requests hydrate the Core snapshot before routing and persist a revisioned safe projection after response composition; browser compatibility fields are ignored after the one-time migration. Core uses parameterised Azure SQL snapshot, turn and event tables with capability/subject access, compare-and-swap, duplicate-message handling, bind and reset endpoints. The feature remains flag-gated until migration and deployment validation complete.
+- Validation: Sprint 6 state transition tests, Sprint 5 conversation/auth regression suite and frontend widget suite are passing. Full API discovery remains subject to its pre-existing slow-discovery timeout and is documented in the final release record.
+
 ## 2026-07-24 — Bodhi conversation-first orchestration uplift
 
 - Issue: general surf questions, acknowledgements and profile context could traverse legacy rider-fit branches and produce recommendation cards or a recommendation-shaped response without a current recommendation request.
