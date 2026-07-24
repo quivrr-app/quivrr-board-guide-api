@@ -14,6 +14,17 @@ from jsonschema import Draft202012Validator
 PACK_ROOT = Path(__file__).parent / "knowledge" / "surf_domain" / "bodhi_surf_knowledge_pack_v1"
 
 
+def _canonical_pack_bytes(content: bytes) -> bytes:
+    """Use the pack's LF bytes for portable manifest validation.
+
+    The authoritative ZIP was authored with LF line endings, while a normal
+    Windows Git checkout may materialise the same governed JSON/Markdown files
+    as CRLF. Canonicalising only CRLF preserves the manifest's semantic bytes
+    and still fails closed for missing or altered content.
+    """
+    return content.replace(b"\r\n", b"\n")
+
+
 def _freeze(value):
     if isinstance(value, dict):
         return MappingProxyType({key: _freeze(item) for key, item in value.items()})
@@ -54,7 +65,7 @@ def load_surf_domain_knowledge() -> SurfDomainKnowledge:
     documents = {}
     for item in manifest.get("files", []):
         relative = item["path"]
-        content = (PACK_ROOT / relative).read_bytes()
+        content = _canonical_pack_bytes((PACK_ROOT / relative).read_bytes())
         digest = hashlib.sha256(content).hexdigest()
         if digest != item["sha256"] or len(content) != item["bytes"]:
             raise RuntimeError(f"Bodhi surf knowledge pack validation failed: {relative}")

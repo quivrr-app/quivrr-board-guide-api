@@ -1,5 +1,20 @@
 # Quivrr Platform Backlog
 
+## 2026-07-24 — Bodhi authenticated-transition recommendation replay remediation
+
+- Issue: after a signed-out identity query, a subsequent signed-in acknowledgement could be classified through prior recommendation context and replay a saved-profile shortboard plan. A correction could then repeat the same cards.
+- Root cause: authentication hydration correctly updated server-side profile context, but acknowledgement/correction messages had no higher-priority non-recommendation intent and stale recommendation state was still eligible for continuation.
+- Fix: added `AUTH_STATE_UPDATE`, `IDENTITY_QUERY`, `NO_REQUEST`, and `ACKNOWLEDGEMENT_ONLY` intents before recommendation continuation; authentication hydration now updates context only. Non-recommendation turns clear recommendation cards, summaries, search CTAs, inventory queries and prior candidates. Corrections discard the prior response plan. Routing telemetry records the raw message, auth hydration status, intent resolution, replay decision and active conversation state by correlation ID.
+- Verification: focused authenticated-transition, router and frontend widget tests cover signed-out identity, signed-in continuation, correction, auth-refresh-without-chat, empty messages, acknowledgement-only turns and an explicit board-request regression. Full production acceptance remains required; GitHub issue #2 stays open.
+- Documentation: engineering and architecture documents remain unchanged pending owner approval.
+
+## 2026-07-24 — Cross-platform Surf Knowledge Pack manifest verification
+
+- Issue: the governed pack manifest stores canonical LF byte checksums. A standard Windows checkout materialized Markdown and JSON files as CRLF, causing valid pack startup verification to fail.
+- Fix: manifest validation canonicalises CRLF to LF before hashing and schema decoding, while still failing closed for missing or altered content. A malformed-pack startup regression test covers the failure path.
+- Verification: pack and Sprint 5 tests pass from the standard Windows checkout; full discovery verification is tracked with this release.
+- Documentation: engineering and architecture documents remain unchanged pending owner approval.
+
 ## 2026-07-24 — Bodhi Surf Knowledge Pack v1 integration
 
 - Input: imported the authoritative `bodhi_surf_knowledge_pack_v1` governed pack under `app/knowledge/surf_domain/` without replacing canonical model facts, Board DNA, aliases, relationships, stock, price or seller data.

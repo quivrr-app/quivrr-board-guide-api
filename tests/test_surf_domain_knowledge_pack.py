@@ -1,6 +1,11 @@
 import unittest
 from types import SimpleNamespace
+from pathlib import Path
+from shutil import copytree
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
+from app import surf_domain
 from app.surf_domain import load_surf_domain_knowledge
 from app.surfer_stage import STAGE_2, STAGE_3, stage_allows_board
 
@@ -35,6 +40,20 @@ class SurfDomainKnowledgePackTests(unittest.TestCase):
             brand="Album", model="Bullet",
         )
         self.assertTrue(stage_allows_board(STAGE_3, governed_daily))
+
+    def test_malformed_required_pack_file_fails_loader_startup(self):
+        with TemporaryDirectory() as temporary_directory:
+            copied_pack = Path(temporary_directory) / "pack"
+            copytree(surf_domain.PACK_ROOT, copied_pack)
+            metadata = copied_pack / "knowledge" / "00_pack_metadata.json"
+            metadata.write_text('{"version":"tampered"}\n', encoding="utf-8")
+            load_surf_domain_knowledge.cache_clear()
+            try:
+                with patch.object(surf_domain, "PACK_ROOT", copied_pack):
+                    with self.assertRaisesRegex(RuntimeError, "validation failed"):
+                        load_surf_domain_knowledge()
+            finally:
+                load_surf_domain_knowledge.cache_clear()
 
 
 if __name__ == "__main__":
