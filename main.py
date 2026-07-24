@@ -44,6 +44,9 @@ from app.active_topic import resolve_active_topic
 from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
 from app.intent_router import IntentResult, classify_intent, route_intent
 from app.conversation_orchestration import ConversationDecision, decide_conversation
+from app.conversation import ConversationIntelligenceState, ConversationManager
+from app.conversation.models import PendingInteraction
+from app.conversation.state_client import ConversationStateClient, StateConflict
 from app.conversation_controller import ConversationDirective, control_conversation
 from app.conversation_policy import (
     FOLLOW_UP_CORRECTION, classify_language_tone, follow_up_kind, is_performance_fish_request,
@@ -70,7 +73,7 @@ from app.profile_engine import (
 )
 from app.volume_engine_v2 import build_target_volume_context, build_volume_recommendation
 from app.structured_logging import emit_event
-from app.surfer_stage import BEGINNER_QUESTION, PREMIUM_BEGINNER_POSITIONING, STAGE_1, assess_surfer_stage, beginner_guidance, stage_allows_board
+from app.surfer_stage import BEGINNER_QUESTION, PREMIUM_BEGINNER_POSITIONING, STAGE_1, StageAssessment, assess_surfer_stage, beginner_guidance, stage_allows_board
 from app.topic_routing import classify_topic_route
 from app.surf_domain import load_surf_domain_knowledge
 
@@ -106,6 +109,39 @@ NON_RECOMMENDATION_GUARD_INTENTS = {
     "GREETING", "SMALL_TALK", "CONVERSATION",
 }
 STOCK_ONLY_CONSTRAINT = "VERIFIED_IN_STOCK"
+CONVERSATION_MANAGER_V1 = os.getenv("BODHI_CONVERSATION_MANAGER_V1", "0").strip().lower() in {"1", "true", "yes", "on"}
+SERVER_STATE_ENABLED = os.getenv("BODHI_SERVER_STATE_ENABLED", "0").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def _legacy_state_from_authoritative(state: ConversationIntelligenceState, fallback: ConversationState | None) -> ConversationState:
+    """Use only server-stored legacy compatibility data after the first turn."""
+    saved = state.conversation_memory.get("legacyState") if isinstance(state.conversation_memory, dict) else None
+    if isinstance(saved, dict):
+        return ConversationState.model_validate(saved)
+    return fallback or ConversationState()
+
+
+def _synchronise_authoritative_state(
+    state: ConversationIntelligenceState,
+    legacy: ConversationState,
+    *,
+    profile,
+    cards: list,
+    response_mode: str,
+    inventory_checked: bool,
+) -> None:
+    """Retain the compatibility state server-side while v1 replaces its callers."""
+    state.conversation_memory["legacyState"] = legacy.model_dump(by_alias=True)
+    state.candidate_set = [card.model_dump(by_alias=True) if hasattr(card, "model_dump") else dict(card) for card in cards[:12]]
+    state.active_region = profile.region or state.active_region
+    if legacy.active_board:
+        state.active_board = legacy.active_board
+    state.conversation_phase = "INVENTORY" if inventory_checked else ("RECOMMENDATION" if cards else "CONVERSATION")
+    state.conversation_memory["summary"] = (
+        f"Active goal: {state.active_goal.type}. Region: {state.active_region or 'unset'}. "
+        f"Stage: {state.surfer_stage.label or state.surfer_stage.stage or 'unresolved'}."
+    )[:1000]
+    state.last_decision["responseMode"] = response_mode
 
 
 def _model_classification_correction(message: str) -> dict | None:
@@ -1425,6 +1461,43 @@ def board_guide_chat(
         request_attempt = 1
     http_request.state.correlation_id = correlation_id
     response.headers["X-Correlation-ID"] = correlation_id
+    authoritative_state: ConversationIntelligenceState | None = None
+    state_transition = None
+    state_client: ConversationStateClient | None = None
+    if CONVERSATION_MANAGER_V1 and SERVER_STATE_ENABLED:
+        # Client fragments are accepted only for the one-time legacy migration.
+        # Every subsequent turn hydrates its compatibility adapter from Core.
+        if not request.message_id:
+            raise HTTPException(status_code=422, detail="messageId is required for a managed conversation.")
+        manager = ConversationManager()
+        state_client = ConversationStateClient()
+        try:
+            if request.conversation_id:
+                authoritative_state = state_client.load(
+                    request.conversation_id, request.conversation_access_token, authorization,
+                )
+            else:
+                authoritative_state = manager.migrate_legacy(
+                    request.conversation_state.model_dump(by_alias=True) if request.conversation_state else {},
+                )
+            request.conversation_state = _legacy_state_from_authoritative(authoritative_state, request.conversation_state)
+            state_transition = manager.apply_turn(authoritative_state, request.message)
+            if state_transition.clarification_resolved:
+                request.conversation_state.pending_clarification = None
+                request.conversation_state.surfer_stage = authoritative_state.surfer_stage.stage
+            if state_transition.action_confirmed and authoritative_state.last_decision.get("action") == "CHECK_INVENTORY":
+                request.conversation_state.availability_constraint = STOCK_ONLY_CONSTRAINT
+                request.conversation_state.stock_check_accepted = True
+        except StateConflict as exc:
+            raise HTTPException(status_code=409, detail={
+                "error": "conversation_revision_conflict", "currentRevision": exc.revision,
+                "stateProjection": exc.state,
+            }) from exc
+        except HTTPException:
+            raise
+        except Exception as exc:
+            emit_event("bodhi_state_load_failed", "bodhi_api", status="failure", correlation_id=correlation_id)
+            raise HTTPException(status_code=503, detail="Bodhi conversation continuity is temporarily unavailable.") from exc
     recommendation_path = "unresolved"
     ranking_engine_used = "none"
     candidate_source = "none"
@@ -1593,6 +1666,19 @@ def board_guide_chat(
             request.message.strip().lower(),
         )
     )
+    if (
+        authoritative_state and authoritative_state.surfer_stage.stage
+        and (not stage_assessment.stage or stage_assessment.clarification_required)
+        and not re.search(r"\b(?:whitewater|white water|still learning to stand|can't catch green|cannot catch green)\b", request.message, re.I)
+    ):
+        # A resolved stage survives ordinary refinements such as "more volume"
+        # or "beginner board". Only explicit contradictory evidence can reopen it.
+        stage_assessment = StageAssessment(
+            authoritative_state.surfer_stage.stage,
+            "authoritative_conversation_state",
+            authoritative_state.surfer_stage.confidence,
+            False,
+        )
     if semantic_decision.interaction_type == "correction":
         # A correction invalidates any earlier response plan.  Other ordinary
         # turns retain their classified intent so stage safety and educational
@@ -1604,6 +1690,11 @@ def board_guide_chat(
         # brief.  Preserve greetings and factual safety statements for their
         # existing specialised response paths.
         legacy_intent = "site_help_question"
+    if state_transition and state_transition.action_confirmed and authoritative_state and authoritative_state.last_decision.get("action") == "CHECK_INVENTORY":
+        # A confirmed, safe inventory action resumes the stored board-search
+        # goal. It is not treated as a generic acknowledgement.
+        legacy_intent = "board_search_request"
+        intent = "BOARD_RECOMMENDATION"
     if recovery_kind and intent not in NON_RECOMMENDATION_GUARD_INTENTS:
         # A failed stock search is recoverable context, not a new generic question.
         legacy_intent = "board_search_request"
@@ -1616,6 +1707,8 @@ def board_guide_chat(
         intent = "BOARD_RECOMMENDATION"
     stock_constraint_removed = _message_removes_stock_constraint(request.message)
     availability_constraint = _resolve_availability_constraint(request, intent_result)
+    if state_transition and state_transition.action_confirmed and authoritative_state and authoritative_state.last_decision.get("action") == "CHECK_INVENTORY":
+        availability_constraint = STOCK_ONLY_CONSTRAINT
     if recovery_kind and request.conversation_state and request.conversation_state.previous_search_constraints.get("stockOnly"):
         availability_constraint = STOCK_ONLY_CONSTRAINT
     if reset_requested:
@@ -2889,6 +2982,57 @@ def board_guide_chat(
         catalogueMatchStatus=catalogue_match_status,
         surferStage=stage_assessment.stage,
     )
+    if authoritative_state and state_client:
+        _synchronise_authoritative_state(
+            authoritative_state,
+            conversation_state,
+            profile=profile,
+            cards=public_cards,
+            response_mode=response_mode,
+            inventory_checked=inventory_stage != "not_run",
+        )
+        # Core compares the pre-write revision, while the durable snapshot
+        # advertises the revision it will have once the atomic turn commits.
+        expected_revision = authoritative_state.state_revision
+        state_to_store = authoritative_state.model_copy(deep=True)
+        state_to_store.state_revision = expected_revision + 1
+        response_summary = {
+            "responseMode": response_mode,
+            "assistantResponse": response.model_dump(by_alias=True, exclude_none=True),
+        }
+        try:
+            revision, access_token, persisted = state_client.persist(
+                state_to_store,
+                message_id=request.message_id or "",
+                raw_message=request.message,
+                response_summary=response_summary,
+                access_token=request.conversation_access_token,
+            authorization=authorization,
+                expected_revision=expected_revision,
+                events=[
+                    {"type": "STATE_MIGRATED"} if expected_revision == 0 else {"type": "TURN_PROCESSED"},
+                    {"type": "STAGE_CLARIFICATION_RESOLVED"} if state_transition and state_transition.clarification_resolved else {"type": "STATE_UPDATED"},
+                    {"type": "ACTION_CONFIRMED", "action": authoritative_state.last_decision.get("action")}
+                    if state_transition and state_transition.action_confirmed else {"type": "RESPONSE_COMPOSED", "mode": response_mode},
+                ],
+            )
+            if persisted.get("duplicate"):
+                prior = (persisted.get("responseSummary") or {}).get("assistantResponse")
+                if isinstance(prior, dict):
+                    return BoardGuideResponse.model_validate(prior)
+            authoritative_state.state_revision = revision
+            response.conversation_id = authoritative_state.conversation_id
+            response.state_revision = revision
+            response.conversation_access_token = access_token or request.conversation_access_token
+            response.state_projection = state_to_store.safe_projection()
+        except StateConflict as exc:
+            raise HTTPException(status_code=409, detail={
+                "error": "conversation_revision_conflict", "currentRevision": exc.revision,
+                "stateProjection": exc.state,
+            }) from exc
+        except Exception as exc:
+            emit_event("bodhi_state_persist_failed", "bodhi_api", status="failure", correlation_id=correlation_id)
+            raise HTTPException(status_code=503, detail="Bodhi conversation continuity could not be saved; please retry.") from exc
     emit_event(
         "bodhi_turn_routing",
         "bodhi_api",
