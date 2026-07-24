@@ -77,6 +77,8 @@ class ConversationOrchestrationTests(unittest.TestCase):
             with self.subTest(message=message):
                 body = self.client.post("/api/board-guide/chat", json={"message": message, "region": "AU"}).json()
                 self._assert_no_recommendations(body)
+                if message == "Why do fish feel so fast?":
+                    self.assertIn("wide, fast board", body["reply"])
         recommend.assert_not_called()
 
 

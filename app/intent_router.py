@@ -215,7 +215,7 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("BOARD_COMPARISON", "comparison_request", 0.9, entities, needs_board_pair=True)
     if re.search(r"\b(?:tell me about|what is the .* like|explain the)\b", text):
         return IntentResult("BOARD_DETAILS", "general_board_question", 0.9, entities)
-    if re.search(r"\bwhy (?:is|isn't|is not)\b.*\b(?:fish|daily driver|groveller|groveler|step[ -]?up|mid[ -]?length|twin)\b", text):
+    if re.search(r"^why\b.*\b(?:fish|daily driver|groveller|groveler|step[ -]?up|mid[ -]?length|twin)\b", text):
         return IntentResult("BOARD_CATEGORY_EDUCATION", "general_board_question", 0.94, entities)
     if re.search(r"\bis .+\b(?:a |an )?(?:fish|daily driver|groveller|groveler|step[ -]?up|mid[ -]?length)\b", text):
         return IntentResult("BOARD_CATEGORY_EDUCATION", "general_board_question", 0.94, entities)
