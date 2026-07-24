@@ -442,6 +442,7 @@ class BoardGuideRequest(BaseModel):
     account_profile: RiderProfile | None = None
     conversation_state: ConversationState | None = Field(default=None, alias="conversationState")
     client_capabilities: ClientCapabilities | None = Field(default=None, alias="clientCapabilities")
+    event_type: str | None = Field(default=None, alias="eventType")
 
 
 class BoardGuideResponse(BaseModel):

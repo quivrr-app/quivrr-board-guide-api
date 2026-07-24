@@ -42,7 +42,7 @@ from app.conversation_flow import (
 )
 from app.active_topic import resolve_active_topic
 from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
-from app.intent_router import classify_intent, route_intent
+from app.intent_router import IntentResult, classify_intent, route_intent
 from app.conversation_controller import ConversationDirective, control_conversation
 from app.conversation_policy import (
     FOLLOW_UP_CORRECTION, classify_language_tone, follow_up_kind, is_performance_fish_request,
@@ -99,6 +99,10 @@ RECOMMENDATION_INTENTS = {
     "board_search_request",
     "surfer_fit_request",
     "alternative_request",
+}
+NON_RECOMMENDATION_GUARD_INTENTS = {
+    "AUTH_STATE_UPDATE", "IDENTITY_QUERY", "PROFILE_QUESTION", "NO_REQUEST", "ACKNOWLEDGEMENT_ONLY",
+    "GREETING", "SMALL_TALK",
 }
 STOCK_ONLY_CONSTRAINT = "VERIFIED_IN_STOCK"
 
@@ -1115,6 +1119,7 @@ def build_conversation_state(
     active_board_override: dict | None = None,
     last_inventory_query: dict | None = None,
     clear_response_plan: bool = False,
+    correction_detected: bool = False,
 ) -> ConversationState:
     active_region = profile.region or request.region
     last_question = questions[0] if questions else None
@@ -1217,7 +1222,7 @@ def build_conversation_state(
             BoardReference(brand=item.brand, model=item.model)
             for item in last_recommendations[:6]
         ],
-        correctionDetected=bool(family_intent and family_intent.correction),
+        correctionDetected=correction_detected or bool(family_intent and family_intent.correction),
         previousOutcome=previous_outcome,
         previousSearchConstraints={
             "region": active_region,
@@ -1420,6 +1425,8 @@ def board_guide_chat(
     )
     auth_context = load_authenticated_profile_context(authorization, correlation_id=correlation_id)
     intent_result = classify_intent(request.message)
+    if request.event_type == "AUTH_STATE_UPDATE":
+        intent_result = IntentResult("AUTH_STATE_UPDATE", "site_help_question", 1.0, {"eventType": request.event_type})
     topic_route = classify_topic_route(request.message)
     language_tone = classify_language_tone(request.message)
     recovery_kind = follow_up_kind(
@@ -1539,14 +1546,14 @@ def board_guide_chat(
     if topic_route.kind not in {"CONTINUE_CURRENT_TOPIC", "NEW_GENERAL_TOPIC"}:
         legacy_intent = topic_route.kind.lower()
         intent = topic_route.kind
-    if recovery_kind:
+    if recovery_kind and intent not in NON_RECOMMENDATION_GUARD_INTENTS:
         # A failed stock search is recoverable context, not a new generic question.
         legacy_intent = "board_search_request"
         intent = "BOARD_RECOMMENDATION"
     if reset_requested and family_intent.explicit and directive.target_surfer == "account_holder":
         legacy_intent = "board_search_request"
         intent = "BOARD_RECOMMENDATION"
-    if family_intent.correction and not _family_education_reply(request.message):
+    if family_intent.correction and intent not in NON_RECOMMENDATION_GUARD_INTENTS and not _family_education_reply(request.message):
         legacy_intent = "board_search_request"
         intent = "BOARD_RECOMMENDATION"
     stock_constraint_removed = _message_removes_stock_constraint(request.message)
@@ -1566,7 +1573,7 @@ def board_guide_chat(
     if active_topic.kind == "comparison" and active_topic.is_follow_up:
         legacy_intent = "comparison_request"
         intent = "BOARD_COMPARISON"
-    allow_contextual_profile_category = legacy_intent in RECOMMENDATION_INTENTS and bool(
+    allow_contextual_profile_category = intent not in NON_RECOMMENDATION_GUARD_INTENTS and legacy_intent in RECOMMENDATION_INTENTS and bool(
         request.profile or request.intake_state or request.conversation_state or request.conversation
     )
     category_resolution = _resolve_request_category(
@@ -1758,8 +1765,10 @@ def board_guide_chat(
     is_first_turn = not any(item.role == "assistant" for item in request.conversation if item)
     state_follow_up = _handle_state_follow_up(request, profile, directive)
     education_reply = _family_education_reply(request.message)
-    asks_name = intent == "IDENTITY_QUESTION"
-    allow_recommendations = legacy_intent in RECOMMENDATION_INTENTS
+    asks_name = intent == "IDENTITY_QUERY"
+    non_recommendation_guard = intent in NON_RECOMMENDATION_GUARD_INTENTS
+    current_message_is_correction = intent == "NO_REQUEST" and bool(request.message.strip())
+    allow_recommendations = legacy_intent in RECOMMENDATION_INTENTS and not non_recommendation_guard
     response_mode = "recommendations"
     catalogue_match_status = None
     explicit_expansion_manufacturer = canonical_manufacturer_name(request.message)
@@ -1770,7 +1779,49 @@ def board_guide_chat(
         volume_recommendation = None
         guidance = None
 
-    if topic_route.kind == "PLATFORM_CATALOGUE_COUNT":
+    if intent == "AUTH_STATE_UPDATE":
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        reply = (
+            f"You’re signed in as {profile.display_name}. I’ve refreshed your saved My Quivrr profile for this chat."
+            if auth_context.profile_loaded and profile.display_name
+            else "You’re signed in. I’ve refreshed your saved My Quivrr context for this chat."
+        )
+        questions = []
+        force_controlled_reply = True
+        response_mode = "conversation_only"
+    elif intent == "IDENTITY_QUERY":
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        reply = (
+            f"You’re {profile.display_name}. I’ve refreshed your saved rider profile from My Quivrr for this chat."
+            if auth_context.profile_loaded and profile.display_name
+            else "You’re signed in, but I did not receive a verified display name."
+            if auth_context.authenticated
+            else "I can’t verify your name while you’re signed out."
+        )
+        questions = []
+        force_controlled_reply = True
+        response_mode = "conversation_only"
+    elif intent == "NO_REQUEST":
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        reply = (
+            "You’re right. I misread that. What would you like help with?"
+            if current_message_is_correction
+            else "Hey. What are you looking for today?"
+        )
+        questions = []
+        force_controlled_reply = True
+        response_mode = "conversation_only"
+    elif intent == "ACKNOWLEDGEMENT_ONLY":
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        reply = "No problem. What would you like help with?"
+        questions = []
+        force_controlled_reply = True
+        response_mode = "conversation_only"
+    elif topic_route.kind == "PLATFORM_CATALOGUE_COUNT":
         suggested_boards = []
         recommendation = volume_recommendation = guidance = None
         count = int(load_board_master().get("model_count") or len(load_board_master().get("models") or []))
@@ -2668,9 +2719,11 @@ def board_guide_chat(
         else:
             suggested_boards = safe_boards
     public_cards = public_recommendations(suggested_boards)
-    if topic_route.pivot or response_mode in {"guidance_only", "platform_answer"}:
+    if non_recommendation_guard or topic_route.pivot or response_mode in {"guidance_only", "platform_answer"}:
         public_cards = []
         suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        active_inventory_query = None
     pending_stage_clarification = (
         {"type": "surfer_stage", "reason": "beginner_ability_ambiguous", "question": BEGINNER_QUESTION}
         if stage_assessment.clarification_required else None
@@ -2695,7 +2748,8 @@ def board_guide_chat(
         surfer_stage=stage_assessment.stage,
         active_board_override=active_board_override,
         last_inventory_query=active_inventory_query,
-        clear_response_plan=topic_route.correction,
+        clear_response_plan=topic_route.correction or non_recommendation_guard,
+        correction_detected=topic_route.correction or current_message_is_correction,
     )
     follow_up_actions = build_follow_up_actions(intent, public_cards)
     if stage_assessment.clarification_required:
@@ -2764,7 +2818,19 @@ def board_guide_chat(
         surfer_stage_source=stage_assessment.source,
         stage_clarification_requested=stage_assessment.clarification_required,
         topic_pivot_detected=topic_route.pivot,
-        correction_detected=topic_route.correction,
+        correction_detected=topic_route.correction or current_message_is_correction,
+        raw_current_message=request.message,
+        authenticated_before_refresh=(request.conversation_state.authenticated if request.conversation_state else False),
+        bearer_present_before_hydration=bool(authorization),
+        auth_state_after_hydration=auth_context.authenticated,
+        previous_intent=(request.conversation_state.last_intent if request.conversation_state else None),
+        current_classified_intent=intent_result.intent,
+        recommendation_engine_invoked=ranking_engine_used != "none",
+        previous_response_plan_reused=bool(
+            request.conversation_state and request.conversation_state.last_recommendations and not (topic_route.correction or non_recommendation_guard)
+        ),
+        saved_profile_hydration_event=auth_context.status,
+        active_conversation_state=(request.conversation_state.model_dump(by_alias=True) if request.conversation_state else {}),
         response_mode=response_mode,
         inventory_lookup_performed=inventory_stage == "model_availability",
         inventory_result_count=(active_inventory_query or {}).get("resultCount", 0),

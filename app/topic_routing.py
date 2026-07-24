@@ -21,7 +21,7 @@ class TopicRoute:
 
 def classify_topic_route(message: str) -> TopicRoute:
     text = (message or "").lower()
-    correction = bool(re.search(r"^\s*(?:no[, ]|nope\b|actually\b|instead\b|forget that\b|new question\b|i mean\b)", text))
+    correction = bool(re.search(r"^\s*(?:no[, ]|nope\b|actually\b|instead\b|forget that\b|new question\b|i mean\b|i (?:didn't|did not) ask|i wasn't asking)", text))
     region = normalise_region(next((name for name in ("australia", "australian", "aus", "europe", "indonesia", "indo", "united states", "usa") if name in text), None))
     if "aus" in text:
         region = "AU"

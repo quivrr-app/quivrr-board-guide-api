@@ -20,7 +20,8 @@ NORMALIZED_INTENTS = {
     "CONSTRUCTION_GUIDANCE", "FIN_GUIDANCE", "WAVE_GUIDANCE",
     "BOARD_CATEGORY_EDUCATION", "BRAND_QUESTION", "RETAILER_QUESTION",
     "FOLLOW_UP", "SMALL_TALK", "UNKNOWN",
-    "IDENTITY_QUESTION", "PROFILE_QUESTION", "OFF_TOPIC", "ABUSIVE", "PROMPT_INJECTION",
+    "IDENTITY_QUERY", "PROFILE_QUESTION", "AUTH_STATE_UPDATE", "NO_REQUEST", "ACKNOWLEDGEMENT_ONLY",
+    "OFF_TOPIC", "ABUSIVE", "PROMPT_INJECTION",
     "CONVERSATION_RESET",
 }
 
@@ -147,7 +148,7 @@ def classify_intent(message: str) -> IntentResult:
     entities = _extract_entities(text)
 
     if not text:
-        return IntentResult("GREETING", "greeting_request", 0.96, entities)
+        return IntentResult("NO_REQUEST", "site_help_question", 0.99, entities)
     if re.search(
         r"\b(?:ignore|reveal|show|print)\b.*\b(?:system prompt|developer message|instructions|taxonomy rules?|hidden context|database credentials|environment variables)\b|"
         r"\b(?:repeat everything above|enter developer mode|execute arbitrary (?:urls?|sql))\b",
@@ -161,7 +162,11 @@ def classify_intent(message: str) -> IntentResult:
         entities["resetScope"] = "brief"
         return IntentResult("CONVERSATION_RESET", "greeting_request", 0.98, entities)
     if re.search(r"\b(?:what(?:'s| is) my name|whats my name|who am i|do you know my name)\b", text):
-        return IntentResult("IDENTITY_QUESTION", "site_help_question", 0.99, entities)
+        return IntentResult("IDENTITY_QUERY", "site_help_question", 0.99, entities)
+    if re.fullmatch(r"(?:ok(?:ay)?[, ]+)?i(?:'m| am)?\s*(?:just )?(?:signed|logged) in[!. ]*", text):
+        return IntentResult("AUTH_STATE_UPDATE", "site_help_question", 0.99, entities)
+    if re.search(r"\b(?:i (?:did not|didn't) ask(?: for (?:that|anything))?|i wasn't asking|that(?:'s| is) not what i asked)\b", text):
+        return IntentResult("NO_REQUEST", "site_help_question", 0.99, entities)
     if re.search(r"\b(?:what profile do you have|what do you know about my profile|show my (?:rider )?profile)\b", text):
         return IntentResult("PROFILE_QUESTION", "site_help_question", 0.98, entities)
     if re.search(r"\b(?:fuck|shit|idiot|useless)\b", text) and not re.search(r"\b(?:board|fish|twin|stock|surf|wave|volume|litre)\b", text):
@@ -170,8 +175,8 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("OFF_TOPIC", "site_help_question", 0.94, entities)
     if _is_greeting_or_small_talk(message) or re.fullmatch(r"(?:hey|hi|hello|gday|g'day|yo|morning|afternoon|evening|good morning|good afternoon|good evening|hi bodhi|hey bodhi|hello bodhi)[!. ]*", text):
         return IntentResult("GREETING", "greeting_request", 0.98, entities)
-    if re.fullmatch(r"(?:thanks|thank you|cheers|nice one|legend)[!. ]*", text):
-        return IntentResult("SMALL_TALK", "greeting_request", 0.93, entities)
+    if re.fullmatch(r"(?:ok|okay|thanks|thank you|cheers|nice one|legend|got it)[!. ]*", text):
+        return IntentResult("ACKNOWLEDGEMENT_ONLY", "site_help_question", 0.96, entities)
     if re.fullmatch(r"(?:australia|europe|indonesia|indo|united states|usa|us|au|eu|id)", text):
         return IntentResult("FOLLOW_UP", "surfer_fit_request", 0.78, entities)
     if re.fullmatch(r"(?:point breaks?|reef breaks?|beach breaks?|weak waves?)", text):
