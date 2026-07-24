@@ -1,0 +1,60 @@
+name: Deploy Board Guide API
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: quivrr-production-board-guide-api
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install runtime and test dependencies
+        run: python -m pip install --upgrade pip && pip install -r requirements.txt
+      - name: Compile runtime
+        run: python -m py_compile main.py $(find app -name '*.py' -print)
+      - name: Run full API discovery
+        run: timeout 300s python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Run focused release gates
+        run: python -m unittest tests.test_conversation_intelligence_state tests.test_auth_transition_routing tests.test_openai_request_audit
+      - name: Audit governed knowledge
+        run: |
+          python scripts/audit_board_recognition.py
+          python scripts/audit_bodhi_intelligence_coverage.py
+          python scripts/audit_bodhi_model_universe.py
+      - name: Build and validate deployment ZIP
+        run: |
+          python build_deploy_zip.py
+          python - <<'PY'
+          from zipfile import ZipFile
+          with ZipFile('board-guide-api.zip') as archive:
+              names = set(archive.namelist())
+          assert 'main.py' in names and 'requirements.txt' in names
+          assert any(name.startswith('app/conversation/') for name in names)
+          assert not any(name.startswith(('.git/', 'venv/', '.venv/', 'tests/')) for name in names)
+          PY
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Deploy ZIP to Board Guide App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: quivrr-board-guide-api
+          package: board-guide-api.zip
+      - name: Verify health and CORS
+        run: |
+          for attempt in {1..12}; do
+            curl --fail --silent --show-error https://quivrr-board-guide-api.azurewebsites.net/api/health && break
+            sleep 10
+          done
+          curl --fail --silent --show-error -I -H 'Origin: https://quivrr.surf' https://quivrr-board-guide-api.azurewebsites.net/api/health
