@@ -1785,7 +1785,9 @@ def board_guide_chat(
         reply = (
             f"You’re signed in as {profile.display_name}. I’ve refreshed your saved My Quivrr profile for this chat."
             if auth_context.profile_loaded and profile.display_name
-            else "You’re signed in. I’ve refreshed your saved My Quivrr context for this chat."
+            else "You’re signed in, but I did not receive a verified display name. I’ve refreshed your saved My Quivrr context for this chat."
+            if auth_context.authenticated
+            else "I can’t see a verified signed-in session yet. Please refresh and try again."
         )
         questions = []
         force_controlled_reply = True

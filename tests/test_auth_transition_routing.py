@@ -106,6 +106,16 @@ class AuthTransitionRoutingTests(unittest.TestCase):
         recommend.assert_not_called()
 
     @patch("main.recommend_from_matrix")
+    def test_unverified_auth_update_never_claims_that_the_user_is_signed_in(self, recommend):
+        body = self.client.post("/api/board-guide/chat", json={
+            "message": "ok i just signed in", "region": "AU",
+        }).json()
+        self.assertEqual(body["normalizedIntent"], "AUTH_STATE_UPDATE")
+        self.assertIn("can’t see a verified signed-in session", body["reply"])
+        self._assert_no_recommendation(body)
+        recommend.assert_not_called()
+
+    @patch("main.recommend_from_matrix")
     def test_empty_message_never_falls_back_to_recommendation(self, recommend):
         body = self.client.post("/api/board-guide/chat", json={"message": "", "region": "AU"}).json()
         self.assertEqual(body["normalizedIntent"], "NO_REQUEST")
