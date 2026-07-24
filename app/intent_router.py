@@ -282,6 +282,9 @@ def classify_intent(message: str) -> IntentResult:
         return IntentResult("FOLLOW_UP", "relationship_request", 0.82, entities)
     if re.search(r"^(?:what|why|how|when)\b", text) and re.search(r"\b(?:surfboard|board|volume|litres?|rocker|rails?|concave|fins?|epoxy|pu|construction)\b", text):
         return IntentResult("BOARD_CATEGORY_EDUCATION", "general_board_question", 0.74, entities)
+    # Compatibility keeps the legacy label for downstream educational and stage
+    # safety paths.  The conversation orchestration guard is the authority that
+    # prevents this unknown input from invoking the recommendation engine.
     return IntentResult("UNKNOWN", "surfer_fit_request", 0.45, entities, needs_clarification=True)
 
 

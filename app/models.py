@@ -412,6 +412,7 @@ class ConversationState(BaseModel):
     previous_failure_reason: str | None = Field(default=None, alias="previousFailureReason")
     previous_reply_signature: str | None = Field(default=None, alias="previousReplySignature")
     pending_profile_update: dict | None = Field(default=None, alias="pendingProfileUpdate")
+    pending_action: dict | None = Field(default=None, alias="pendingAction")
     pending_clarification: dict | None = Field(default=None, alias="pendingClarification")
     surfer_stage: str | None = Field(default=None, alias="surferStage")
 
@@ -419,6 +420,7 @@ class ConversationState(BaseModel):
 class ProfileUpdateProposal(BaseModel):
     """A user-confirmed, allowlisted change for the core My Quivrr profile API."""
 
+    proposal_id: str | None = Field(default=None, alias="proposalId")
     fields: dict[str, object]
     current_values: dict[str, object] = Field(default_factory=dict, alias="currentValues")
     message: str

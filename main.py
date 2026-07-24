@@ -43,6 +43,7 @@ from app.conversation_flow import (
 from app.active_topic import resolve_active_topic
 from app.catalogue_search import extract_category, inventory_snapshot_reply, search_live_category
 from app.intent_router import IntentResult, classify_intent, route_intent
+from app.conversation_orchestration import ConversationDecision, decide_conversation
 from app.conversation_controller import ConversationDirective, control_conversation
 from app.conversation_policy import (
     FOLLOW_UP_CORRECTION, classify_language_tone, follow_up_kind, is_performance_fish_request,
@@ -102,7 +103,7 @@ RECOMMENDATION_INTENTS = {
 }
 NON_RECOMMENDATION_GUARD_INTENTS = {
     "AUTH_STATE_UPDATE", "IDENTITY_QUERY", "PROFILE_QUESTION", "NO_REQUEST", "ACKNOWLEDGEMENT_ONLY",
-    "GREETING", "SMALL_TALK",
+    "GREETING", "SMALL_TALK", "CONVERSATION",
 }
 STOCK_ONLY_CONSTRAINT = "VERIFIED_IN_STOCK"
 
@@ -619,10 +620,27 @@ def _profile_update_proposal(account_profile, current_profile, message: str) -> 
     if not fields:
         return None
     return ProfileUpdateProposal(
+        proposalId=str(uuid.uuid4()),
         fields=fields,
         currentValues=current_values,
         message=f"I’ll use that change in this chat. Would you like me to update your saved My Quivrr {' and '.join(labels)} too?",
     )
+
+
+def _profile_pending_action(proposal: ProfileUpdateProposal | dict | None) -> dict | None:
+    if not proposal:
+        return None
+    parsed = ProfileUpdateProposal.model_validate(proposal)
+    field, new_value = next(iter(parsed.fields.items()), (None, None))
+    return {
+        "type": "profile_update",
+        "proposalId": parsed.proposal_id or str(uuid.uuid4()),
+        "field": field,
+        "oldValue": parsed.current_values.get(field) if field else None,
+        "newValue": new_value,
+        "fields": parsed.fields,
+        "currentValues": parsed.current_values,
+    }
 
 
 def _active_board_inventory_response(board: dict, region: str, profile) -> tuple[list[SuggestedBoard], str, dict]:
@@ -1114,6 +1132,7 @@ def build_conversation_state(
     previous_failure_reason: str | None = None,
     previous_reply_signature: str | None = None,
     pending_profile_update: dict | None = None,
+    pending_action: dict | None = None,
     pending_clarification: dict | None = None,
     surfer_stage: str | None = None,
     active_board_override: dict | None = None,
@@ -1233,6 +1252,7 @@ def build_conversation_state(
         previousFailureReason=previous_failure_reason,
         previousReplySignature=previous_reply_signature,
         pendingProfileUpdate=pending_profile_update,
+        pendingAction=pending_action,
         pendingClarification=pending_clarification,
         surferStage=surfer_stage,
     )
@@ -1504,12 +1524,31 @@ def board_guide_chat(
     pending_profile_update = profile_update_proposal.model_dump(by_alias=True) if profile_update_proposal else (
         request.conversation_state.pending_profile_update if request.conversation_state else None
     )
+    prior_pending_action = request.conversation_state.pending_action if request.conversation_state else None
+    pending_action = (
+        _profile_pending_action(profile_update_proposal)
+        if profile_update_proposal
+        else (prior_pending_action or _profile_pending_action(pending_profile_update))
+    )
+    semantic_decision = decide_conversation(
+        request.message,
+        normalized_intent=intent_result.intent,
+        topic_kind=topic_route.kind,
+        state=request.conversation_state,
+        event_type=request.event_type,
+        profile_change_requested=bool(profile_update_proposal),
+        has_conversation_history=bool(request.conversation or request.intake_state),
+    )
     profile_update_confirmation_requested = bool(
-        pending_profile_update and _PROFILE_CONFIRMATION.fullmatch(request.message or "")
+        pending_profile_update and semantic_decision.candidate_tool == "confirm_profile_update"
     )
     if profile_update_confirmation_requested:
         profile_update_proposal = ProfileUpdateProposal.model_validate(pending_profile_update)
         pending_profile_update = None
+        pending_action = None
+    elif pending_profile_update and semantic_decision.candidate_tool == "reject_profile_update":
+        pending_profile_update = None
+        pending_action = None
     stage_assessment = assess_surfer_stage(
         request.message,
         profile.ability,
@@ -1546,6 +1585,25 @@ def board_guide_chat(
     if topic_route.kind not in {"CONTINUE_CURRENT_TOPIC", "NEW_GENERAL_TOPIC"}:
         legacy_intent = topic_route.kind.lower()
         intent = topic_route.kind
+    acknowledgement_turn = bool(
+        prior_pending_action
+        or (request.conversation_state and request.conversation_state.pending_profile_update)
+        or re.fullmatch(
+            r"(?:ok(?:ay)?|thanks?|thank you|great|nice|cool|cheers|got it|sounds good|all good)(?:[,.! ]+(?:thanks?|thank you|great|nice|cool|cheers|got it|sounds good|all good))*[!. ]*",
+            request.message.strip().lower(),
+        )
+    )
+    if semantic_decision.interaction_type == "correction":
+        # A correction invalidates any earlier response plan.  Other ordinary
+        # turns retain their classified intent so stage safety and educational
+        # replies can still run, while the action guard below prevents cards.
+        legacy_intent = "site_help_question"
+        intent = "NO_REQUEST"
+    elif semantic_decision.interaction_type == "conversation" and acknowledgement_turn:
+        # Acknowledgements close the current turn without creating a new rider
+        # brief.  Preserve greetings and factual safety statements for their
+        # existing specialised response paths.
+        legacy_intent = "site_help_question"
     if recovery_kind and intent not in NON_RECOMMENDATION_GUARD_INTENTS:
         # A failed stock search is recoverable context, not a new generic question.
         legacy_intent = "board_search_request"
@@ -1573,7 +1631,7 @@ def board_guide_chat(
     if active_topic.kind == "comparison" and active_topic.is_follow_up:
         legacy_intent = "comparison_request"
         intent = "BOARD_COMPARISON"
-    allow_contextual_profile_category = intent not in NON_RECOMMENDATION_GUARD_INTENTS and legacy_intent in RECOMMENDATION_INTENTS and bool(
+    allow_contextual_profile_category = semantic_decision.candidate_tool == "recommend_boards" and bool(
         request.profile or request.intake_state or request.conversation_state or request.conversation
     )
     category_resolution = _resolve_request_category(
@@ -1665,7 +1723,10 @@ def board_guide_chat(
     active_board_override = requested_board if board_resolution.status == "resolved" else prior_active_board
     active_inventory_request = bool(active_board_override and _message_requests_active_board_inventory(request.message))
     mixed_profile_and_board_request = bool(re.search(r"\b(?:show|find|recommend|board)\b", request.message, re.I))
-    if (profile_update_proposal or profile_update_confirmation_requested) and not mixed_profile_and_board_request:
+    if semantic_decision.candidate_tool == "reject_profile_update":
+        legacy_intent = "profile_update_reject"
+        intent = "PROFILE_UPDATE_REJECT"
+    elif (profile_update_proposal or profile_update_confirmation_requested) and not mixed_profile_and_board_request:
         # An explicit profile mutation request always outranks prior stock or family state.
         legacy_intent = "profile_update_request"
         intent = "PROFILE_UPDATE"
@@ -1768,8 +1829,8 @@ def board_guide_chat(
     asks_name = intent == "IDENTITY_QUERY"
     non_recommendation_guard = intent in NON_RECOMMENDATION_GUARD_INTENTS
     current_message_is_correction = intent == "NO_REQUEST" and bool(request.message.strip())
-    allow_recommendations = legacy_intent in RECOMMENDATION_INTENTS and not non_recommendation_guard
-    response_mode = "recommendations"
+    allow_recommendations = semantic_decision.candidate_tool in {"recommend_boards", "check_model_availability"} and not non_recommendation_guard
+    response_mode = "recommendations" if allow_recommendations else "conversation"
     catalogue_match_status = None
     explicit_expansion_manufacturer = canonical_manufacturer_name(request.message)
     active_expansion_manufacturer = find_manufacturer(profile.requested_brand) if profile.requested_brand else None
@@ -1819,10 +1880,31 @@ def board_guide_chat(
     elif intent == "ACKNOWLEDGEMENT_ONLY":
         suggested_boards = []
         recommendation = volume_recommendation = guidance = None
-        reply = "No problem. What would you like help with?"
+        reply = (
+            "No worries. I’ll keep that profile update ready if you decide you want to save it."
+            if pending_action else "No problem. What would you like help with?"
+        )
         questions = []
         force_controlled_reply = True
         response_mode = "conversation_only"
+    elif intent == "CONVERSATION" or acknowledgement_turn:
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        reply = (
+            "No worries. I’ll keep that profile update ready if you decide you want to save it."
+            if pending_action
+            else "I’m not sure what you’d like me to do next. Are you asking about a board, your profile, or something else?"
+        )
+        questions = []
+        force_controlled_reply = True
+        response_mode = "conversation"
+    elif intent == "PROFILE_UPDATE_REJECT":
+        suggested_boards = []
+        recommendation = volume_recommendation = guidance = None
+        reply = "No worries. I’ll leave your saved profile unchanged."
+        questions = []
+        force_controlled_reply = True
+        response_mode = "conversation"
     elif topic_route.kind == "PLATFORM_CATALOGUE_COUNT":
         suggested_boards = []
         recommendation = volume_recommendation = guidance = None
@@ -1896,6 +1978,7 @@ def board_guide_chat(
         reply = profile_update_proposal.message if profile_update_proposal else "Your saved profile update is ready to be confirmed."
         questions = []
         force_controlled_reply = True
+        response_mode = "tool_result"
     elif legacy_intent == "active_board_inventory_request" and active_board_override and active_board_override.get("boardModelId"):
         recommendation_path = "active_board_exact_availability"
         candidate_source = "model_availability"
@@ -2312,7 +2395,7 @@ def board_guide_chat(
         suggested_boards = []
         reply = inventory_snapshot_reply(profile.region, category)
         questions = []
-    elif category in {"fish", "performance_fish"} and legacy_intent in {"board_search_request", "surfer_fit_request"}:
+    elif allow_recommendations and category in {"fish", "performance_fish"} and legacy_intent in {"board_search_request", "surfer_fit_request"}:
         recommendation_path = "fish_family_request"
         ranking_profile = _category_ranking_profile(profile, request.message, category)
         canonical_boards = recommend_from_matrix(ranking_profile, limit=12, family_intent=family_intent)
@@ -2394,7 +2477,7 @@ def board_guide_chat(
                     + reply
                 )
             questions = []
-    elif legacy_intent == "board_search_request" and category and profile.region and not requested_board:
+    elif allow_recommendations and legacy_intent == "board_search_request" and category and profile.region and not requested_board:
         recommendation_path = "explicit_category_request"
         ranking_profile = _category_ranking_profile(profile, request.message, category)
         canonical_boards = recommend_from_matrix(ranking_profile, limit=12, family_intent=family_intent)
@@ -2746,6 +2829,7 @@ def board_guide_chat(
         previous_failure_reason=previous_failure_reason,
         previous_reply_signature=reply_signature,
         pending_profile_update=pending_profile_update,
+        pending_action=pending_action,
         pending_clarification=pending_stage_clarification,
         surfer_stage=stage_assessment.stage,
         active_board_override=active_board_override,
@@ -2831,6 +2915,11 @@ def board_guide_chat(
         previous_response_plan_reused=bool(
             request.conversation_state and request.conversation_state.last_recommendations and not (topic_route.correction or non_recommendation_guard)
         ),
+        interaction_type=semantic_decision.interaction_type,
+        requires_tool=semantic_decision.requires_tool,
+        candidate_tool=semantic_decision.candidate_tool,
+        references_pending_action=semantic_decision.references_pending_action,
+        references_active_board=semantic_decision.references_active_board,
         saved_profile_hydration_event=auth_context.status,
         active_conversation_state=(request.conversation_state.model_dump(by_alias=True) if request.conversation_state else {}),
         response_mode=response_mode,

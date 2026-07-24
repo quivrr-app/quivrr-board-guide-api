@@ -1,5 +1,14 @@
 # Quivrr Platform Backlog
 
+## 2026-07-24 — Bodhi conversation-first orchestration uplift
+
+- Issue: general surf questions, acknowledgements and profile context could traverse legacy rider-fit branches and produce recommendation cards or a recommendation-shaped response without a current recommendation request.
+- Root cause: deterministic intent compatibility labels were also serving as execution authority; there was no explicit pending-action object or single decision boundary between ordinary conversation and governed operations.
+- Fix: introduced a conversation-first orchestration decision that selects at most one governed operation from the current message, carries explicit pending profile actions with a stable proposal ID, and gates recommendation execution/cards behind an explicit recommendation or concrete transcript continuation. Educational questions, casual acknowledgements, corrections and authenticated context updates remain card-free. Existing safety, board resolution, availability, profile-confirmation and controlled recommendation paths remain intact.
+- Model audit: the deployed Azure deployment is `bodhi-chat` on `gpt-4.1-mini` version `2025-04-14`. Its request is now reproducibly audited: two prompt messages, no transcript, tool definitions, tool choice or structured-output schema. Deterministic orchestration remains the production decision authority; no stronger model deployment was provisioned or changed in this release.
+- Verification: focused auth-transition, profile-update, conversation, API and request-audit tests passed; complete API discovery passed with 276 tests in 99.085 seconds. Python compilation passed. Recognition audit remains 1,453/1,456 automatic resolutions (three documented clarification-only names), zero incorrect resolutions; governed intelligence is 95.36% structured coverage with 20/431 (4.64%) weak records and no missing controlled fields; model universe remains 431 active canonical models.
+- Documentation: operational backlog updated. Engineering and architecture documents remain unchanged pending owner approval.
+
 ## 2026-07-24 — Bodhi authenticated-transition recommendation replay remediation
 
 - Issue: after a signed-out identity query, a subsequent signed-in acknowledgement could be classified through prior recommendation context and replay a saved-profile shortboard plan. A correction could then repeat the same cards.

@@ -82,19 +82,15 @@ def ask_bodhi(
     user_content = "\n".join(context + [f"User message: {message}"])
     max_attempts = max(1, int(os.getenv("AZURE_OPENAI_RETRY_ATTEMPTS", "2")))
     timeout_seconds = float(os.getenv("AZURE_OPENAI_TIMEOUT_SECONDS", "20"))
+    request_payload = build_bodhi_request_payload(
+        deployment=deployment,
+        user_content=user_content,
+        timeout_seconds=timeout_seconds,
+    )
 
     for attempt in range(1, max_attempts + 1):
         try:
-            response = client.chat.completions.create(
-                model=deployment,
-                messages=[
-                    {"role": "system", "content": BODHI_SYSTEM_PROMPT},
-                    {"role": "user", "content": user_content},
-                ],
-                temperature=0.25,
-                max_tokens=int(os.getenv("AZURE_OPENAI_MAX_OUTPUT_TOKENS", "650")),
-                timeout=timeout_seconds,
-            )
+            response = client.chat.completions.create(**request_payload)
             return clean_llm_text(response.choices[0].message.content or "")
         except Exception as exc:
             if attempt >= max_attempts or not _is_retryable(exc):
@@ -110,6 +106,26 @@ def ask_bodhi(
                 )
                 raise
             time.sleep(0.25 * attempt)
+
+
+def build_bodhi_request_payload(*, deployment: str | None, user_content: str, timeout_seconds: float) -> dict:
+    """Return the complete Azure request for audit and deterministic test coverage.
+
+    This deliberately has no tool definitions, tool choice, structured-output
+    schema, or conversation transcript.  The current model is used only to
+    refine a reply after the deterministic conversation router has selected the
+    operation and its governed data.
+    """
+    return {
+        "model": deployment,
+        "messages": [
+            {"role": "system", "content": BODHI_SYSTEM_PROMPT},
+            {"role": "user", "content": user_content},
+        ],
+        "temperature": 0.25,
+        "max_tokens": int(os.getenv("AZURE_OPENAI_MAX_OUTPUT_TOKENS", "650")),
+        "timeout": timeout_seconds,
+    }
 
 
 def safe_ask_bodhi(**kwargs) -> tuple[str | None, str | None]:
